@@ -13,7 +13,7 @@ import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class GuiInfuser extends GuiContainer {
 	
-	GuiButton startButton;
+	// GuiButton startButton;
 	
 	int guiWidth = 176;
 	int guiHeight = 181;
@@ -49,11 +49,11 @@ public class GuiInfuser extends GuiContainer {
 	
 	@Override public void initGui() {
 		
-		int guiX = (width - guiWidth) / 2;
+/*		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
 		
 		buttonList.clear();
-		buttonList.add(startButton = new GuiButton(1, guiX + 10, guiY + 1, 20, 20, "C"));
+		buttonList.add(startButton = new GuiButton(1, guiX + 10, guiY + 1, 20, 20, "C"));*/
 		
 		super.initGui();
 	}

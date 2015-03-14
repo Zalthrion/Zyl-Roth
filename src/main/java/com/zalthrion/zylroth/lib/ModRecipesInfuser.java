@@ -25,20 +25,89 @@ public class ModRecipesInfuser {
 		this.recipeExperienceMap.put(new InfusionRecipe(input, output, infusionMaterials), experience);
 	}
 	
-	/** Returns the infusing result of an item. */
-	public ItemStack getInfusingResult(ItemStack input, ItemStack... infusionMaterials) {
+	public ItemStack[] getInfusingIngredients(ItemStack input, ItemStack... infusionMaterials) {
+		if (input.getItem() == null) return null;
 		recipe_loop: for (InfusionRecipe ir : recipeExperienceMap.keySet()) {
 			if (ir.getInput().getItem() == input.getItem()) {
 				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
 				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
 					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
 				}
-				for (ItemStack enteredMat : infusionMaterials) {
+				matCheck: for (ItemStack enteredMat : infusionMaterials) {
+					if (enteredMat == null) continue matCheck;
 					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
 					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
 				}
-				return ir.getOutput();
+				for (Item item : reqInfMat.keySet()) {
+					boolean found = false;
+					matCheck: for (ItemStack stack : infusionMaterials) {
+						if (stack == null) continue matCheck;
+						if (stack.getItem() == item) found = true;
+					}
+					if (!found) continue recipe_loop;
+				}
 			}
+			return ir.getInfusionMaterials();
+		}
+		return null;
+	}
+	
+	public int getInfusingIngredientAmount(ItemStack input, ItemStack ing, ItemStack... infusionMaterials) {
+		//TODO Bottom slot does not work
+		if (input.getItem() == null) return 0;
+		recipe_loop: for (InfusionRecipe ir : recipeExperienceMap.keySet()) {
+			if (ir.getInput().getItem() == input.getItem()) {
+				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
+				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
+					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
+				}
+				matCheck: for (ItemStack enteredMat : infusionMaterials) {
+					if (enteredMat == null) continue matCheck;
+					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
+					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
+				}
+				for (Item item : reqInfMat.keySet()) {
+					boolean found = false;
+					matCheck: for (ItemStack stack : infusionMaterials) {
+						if (stack == null) continue matCheck;
+						if (stack.getItem() == item) found = true;
+					}
+					if (!found) continue recipe_loop;
+				}
+			}
+			for (ItemStack stack : ir.getInfusionMaterials()) {
+				if (stack.getItem() == ing.getItem()) {
+					return stack.stackSize;
+				}
+			}
+		}
+		return 0;
+	}
+	
+	/** Returns the infusing result of an item. */
+	public ItemStack getInfusingResult(ItemStack input, ItemStack... infusionMaterials) {
+		if (input.getItem() == null) return null;
+		recipe_loop: for (InfusionRecipe ir : recipeExperienceMap.keySet()) {
+			if (ir.getInput().getItem() == input.getItem()) {
+				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
+				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
+					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
+				}
+				matCheck: for (ItemStack enteredMat : infusionMaterials) {
+					if (enteredMat == null) continue matCheck;
+					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
+					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
+				}
+				for (Item item : reqInfMat.keySet()) {
+					boolean found = false;
+					matCheck: for (ItemStack stack : infusionMaterials) {
+						if (stack == null) continue matCheck;
+						if (stack.getItem() == item) found = true;
+					}
+					if (!found) continue recipe_loop;
+				}
+			}
+			return ir.getOutput();
 		}
 		return null;
 	}

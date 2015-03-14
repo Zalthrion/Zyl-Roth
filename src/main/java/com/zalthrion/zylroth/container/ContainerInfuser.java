@@ -96,7 +96,25 @@ public class ContainerInfuser extends ContainerBase {
 	}
 	
 	@Override public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-		ItemStack stack = null;
+		ItemStack itemstack = null;
+		Slot slot = (Slot) inventorySlots.get(index);
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+			if (index < 4) {
+				if (!mergeItemStack(itemstack1, index, inventorySlots.size(), true)) { return null; }
+			} else if (!slot.isItemValid(itemstack1)) {
+				return null;
+			} else if (!mergeItemStack(itemstack1, 0, 1, false)) { return null; }
+			if (itemstack1.stackSize == 0) {
+				slot.putStack(null);
+			} else {
+				slot.onSlotChanged();
+			}
+		}
+		infuser.markDirty();
+		return itemstack;
+/*		ItemStack stack = null;
 		Slot slot = (Slot) this.inventorySlots.get(index);
 		
 		if (slot != null && slot.getHasStack()) {
@@ -120,7 +138,7 @@ public class ContainerInfuser extends ContainerBase {
 			
 			slot.onPickupFromSlot(player, slotstack);
 		}
-		return stack;
+		return stack;*/
 	}
 	
 	@Override public boolean canInteractWith(EntityPlayer player) {

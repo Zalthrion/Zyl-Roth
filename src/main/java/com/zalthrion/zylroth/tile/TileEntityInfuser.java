@@ -76,8 +76,9 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 				}
 			}
 			
-			if (isBurning() && canInfuse()) {
+			if (/* isBurning() && */canInfuse()) {
 				++ cookTime;
+				System.out.println(cookTime);
 				if (cookTime == 400) {
 					cookTime = 0;
 					infuseItem();
@@ -89,8 +90,6 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			
 			if (flag != isBurning()) {
 				flag1 = true;
-				
-				// System.out.println("Check");
 				InfuserMachine.updateBlockState(this.isBurning(), worldObj, xCoord, yCoord, zCoord);
 			}
 		}
@@ -104,14 +103,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		if (slots[0] == null) return false;
 		if (slots[2] == null && slots[3] == null) return false;
 		ModRecipesInfuser infusionRecipes = ModRecipesInfuser.infusing();
-		ItemStack stack = null;
-		if (slots[2] != null && slots[3] != null) {
-			stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);
-		} else if (slots[2] != null && slots[3] == null) {
-			stack = infusionRecipes.getInfusingResult(slots[0], slots[2]);
-		} else if (slots[2] == null && slots[3] != null) {
-			stack = infusionRecipes.getInfusingResult(slots[0], slots[3]);
-		}
+		ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);;
 		if (stack == null) return false;
 		if (slots[ContainerInfuser.OUTPUT] == null) return true;
 		if (!slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) return false;
@@ -120,9 +112,10 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	}
 	
 	public void infuseItem() {
-		System.out.println("INFUSING");
 		if (canInfuse()) {
-			ItemStack stack = ModRecipesInfuser.infusing().getInfusingResult(slots[ContainerInfuser.INPUT]);
+			ModRecipesInfuser infusionRecipes = ModRecipesInfuser.infusing();
+			ItemStack[] ings = infusionRecipes.getInfusingIngredients(slots[0], slots[2], slots[3]);;
+			ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);
 			if (slots[ContainerInfuser.OUTPUT] == null) {
 				slots[ContainerInfuser.OUTPUT] = stack.copy();
 			} else if (slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) {
@@ -130,10 +123,12 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 			
 			-- slots[ContainerInfuser.INPUT].stackSize;
+			slots[2].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], slots[2], slots[2], slots[3]);
+			slots[3].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], slots[3], slots[2], slots[3]);
 			
-			if (slots[ContainerInfuser.INPUT].stackSize <= 0) {
-				slots[ContainerInfuser.INPUT] = null;
-			}
+			if (slots[0].stackSize <= 0) slots[0] = null;
+			if (slots[2].stackSize <= 0) slots[2] = null;
+			if (slots[3].stackSize <= 0) slots[3] = null;
 		}
 	}
 	
@@ -239,7 +234,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		cookTime = nbt.getShort("CookTime");
 		currentItemBurnTime = getItemBurnTime(slots[1]);
 		
-		NBTTagList list = nbt.getTagList(localizedName, nbt.getId());
+		NBTTagList list = nbt.getTagList("Stacks", nbt.getId());
 		this.slots = new ItemStack[this.getSizeInventory()];
 		
 		for (int i = 0; i < list.tagCount(); i ++) {
@@ -256,9 +251,8 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		cookTime = nbt.getShort("CookTime");
 		currentItemBurnTime = getItemBurnTime(slots[1]);
 		
-		if (nbt.hasKey("CustomName")) {
-			this.localizedName = nbt.getString("CustomName");
-		}
+		/* if (nbt.hasKey("CustomName")) { this.localizedName =
+		 * nbt.getString("CustomName"); } */
 	}
 	
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -279,12 +273,10 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 		}
 		
-		nbt.setTag(localizedName, list);
+		nbt.setTag("Stacks", list);
 		
-		if (this.isInventoryNameLocalized()) {
-			nbt.setString("CustomName", this.localizedName);
-			
-		}
+		/* if (this.isInventoryNameLocalized()) { nbt.setString("CustomName",
+		 * this.localizedName); } */
 	}
 	
 	@SideOnly(Side.CLIENT) public int getCookProgressScaled(int i) {
