@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import com.zalthrion.zylroth.block.*;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -50,6 +51,7 @@ public final class ModBlocks {
         Infuser.setBlockName(Reference.MOD_ID + "_" + "Infuser Machine Active");
         Infuser_Idle.setBlockName(Reference.MOD_ID + "_" + "Infuser Machine");
         
+		GameRegistry.registerTileEntity(TileEntityInfuser.class, "Infuser");
 		GameRegistry.registerBlock(ModBlocks.Infuser, "Infuser Machine Active");
 		GameRegistry.registerBlock(ModBlocks.Infuser_Idle, "Infuser Machine");
 		

@@ -6,7 +6,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-import com.zalthrion.zylroth.ProjectExanimus;
+import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.block.*;
 import com.zalthrion.zylroth.entity.*;
 

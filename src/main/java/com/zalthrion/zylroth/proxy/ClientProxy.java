@@ -51,7 +51,6 @@ public class ClientProxy extends CommonProxy{
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
 		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(new TileEntityInfuser(), RenderIDs.blockInfuserRI));
-		GameRegistry.registerTileEntity(TileEntityInfuser.class, "container.infuser");
 
 	}
 	

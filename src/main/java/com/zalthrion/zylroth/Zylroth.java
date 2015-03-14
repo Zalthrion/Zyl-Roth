@@ -23,11 +23,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /*---------------------------------------------------------------------------*/
 
-public class ProjectExanimus {
+public class Zylroth {
 	
 	@Mod.Instance(Reference.MOD_ID)
 
-	public static ProjectExanimus instance ;
+	public static Zylroth instance ;
 	
 /*---------------------------------------------------------------------------*/
 

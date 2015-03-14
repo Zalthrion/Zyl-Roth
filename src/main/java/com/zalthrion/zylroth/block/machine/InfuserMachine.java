@@ -3,7 +3,7 @@ package com.zalthrion.zylroth.block.machine;
 import java.util.List;
 import java.util.Random;
 
-import com.zalthrion.zylroth.ProjectExanimus;
+import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.gui.inventory.GuiInfuser;
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.lib.*;
@@ -74,7 +74,7 @@ public class InfuserMachine extends BlockBaseContainer {
 			if ((tile == null) || player.isSneaking())
 				return false;
 
-			player.openGui(ProjectExanimus.instance, GuiIDs.INFUSER, world,
+			player.openGui(Zylroth.instance, GuiIDs.INFUSER, world,
 					x, y, z);
 			return true;
 		}
