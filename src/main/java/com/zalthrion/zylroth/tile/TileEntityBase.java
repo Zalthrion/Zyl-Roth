@@ -45,12 +45,6 @@ public class TileEntityBase extends TileEntity implements IInventory
 	}
 
 	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
-
-	@Override
 	public int getInventoryStackLimit()
 	{
 		return 0;
@@ -63,19 +57,22 @@ public class TileEntityBase extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void openInventory()
-	{
-
-	}
-
-	@Override
-	public void closeInventory()
-	{
-
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemStack) {
 		return false;
+	}
+
+	@Override
+	public boolean isCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void openChest() {
+		
+	}
+
+	@Override
+	public void closeChest() {
+		
 	}
 }

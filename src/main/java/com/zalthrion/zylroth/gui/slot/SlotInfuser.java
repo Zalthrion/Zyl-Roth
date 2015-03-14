@@ -1,6 +1,6 @@
 package com.zalthrion.zylroth.gui.slot;
 
-import com.zalthrion.zylroth.lib.ModInfusingRecipes;
+import com.zalthrion.zylroth.lib.ModRecipesInfuser;
 
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,7 +50,7 @@ public class SlotInfuser extends Slot
 		stack.onCrafting(thePlayer.worldObj, thePlayer, amount_crafted);
 		if (!thePlayer.worldObj.isRemote) {
 			int i = amount_crafted;
-			float f = ModInfusingRecipes.infusing().getExperience(stack);
+			float f = ModRecipesInfuser.infusing().getInfusionExperience(stack);
 			int j;
 
 			if (f == 0.0F) {

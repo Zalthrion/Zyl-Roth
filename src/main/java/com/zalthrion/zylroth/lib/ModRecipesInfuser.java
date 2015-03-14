@@ -1,9 +1,12 @@
 package com.zalthrion.zylroth.lib;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.zalthrion.zylroth.handler.CustomRecipeHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -17,7 +20,7 @@ public class ModRecipesInfuser
     private static final ModRecipesInfuser infusingBase = new ModRecipesInfuser();
     /** The list of infusing results. */
     private Map infusingList = new HashMap();
-    private Map experienceInfusingList = new HashMap();
+    private Map experienceList = new HashMap();
     
     /**
      * Used to call methods addInfusing and getInfusingResult.
@@ -26,43 +29,48 @@ public class ModRecipesInfuser
     {
         return infusingBase;
     }
-
-    private ModRecipesInfuser()
-    {
-    	  this.addInfusion(new ItemStack(ModItems.Soul_Essence), new ItemStack(ModItems.Cursed_Soul_Essence), 1, 0.0F);
+    
+    public static void init() {
+    	ArrayList<CustomRecipeHandler> recipes;
     }
+
+	private ArrayList<CustomRecipeHandler> recipes = new ArrayList<CustomRecipeHandler>() {
+		{
+			add(new CustomRecipeHandler(new ItemStack[] {
+					new ItemStack(net.minecraft.init.Items.apple),
+					new ItemStack(net.minecraft.init.Items.potato)
+			}, new ItemStack(net.minecraft.init.Blocks.wool), new int[] {3, 2}));
+		}
+	};
+	
 
     public void addInfusion(ItemStack p_151394_1_, ItemStack p_151394_2_, int quantity, float p_151394_3_)
     {
         this.infusingList.put(p_151394_1_, p_151394_2_);
-        this.experienceInfusingList.put(p_151394_2_, Float.valueOf(p_151394_3_));
+        this.experienceList.put(p_151394_2_, Float.valueOf(p_151394_3_));
     }
 
     /**
      * Returns the infusing result of an item.
      */
-    public ItemStack getInfusingResult(ItemStack slots)
-    {
-        Iterator iterator = this.infusingList.entrySet().iterator();
-        Entry entry;
-
-        do
-        {
-            if (!iterator.hasNext())
-            {
-                return null;
-            }
-
-            entry = (Entry)iterator.next();
-        }
-        while (!this.func_151397_a(slots, (ItemStack)entry.getKey()));
-
-        return (ItemStack)entry.getValue();
-    }
+	public ItemStack getInfusingResult(ItemStack[] input) {
+		ItemStack res = null;
+		recipe_loop: for (CustomRecipeHandler cr : recipes) {
+			int stackNum = 0;
+			for (ItemStack stack : cr.getIngrediants()) {
+				if (stack != input[stackNum]) continue recipe_loop;
+				if (input[stackNum].stackSize >= cr.getAmountForIngrediant(stackNum)) {}
+				else continue recipe_loop;
+				stackNum ++;
+			}
+			res = cr.getOutput();
+		}
+		return res;
+	}
 
     private boolean func_151397_a(ItemStack p_151397_1_, ItemStack p_151397_2_)
     {
-        return p_151397_2_.getItem() == p_151397_1_.getItem() && (p_151397_2_.getItemDamage() == 32767 || p_151397_2_.getItemDamage() == p_151397_1_.getItemDamage());
+        return p_151397_2_.getItem() == p_151397_1_.getItem() && (p_151397_2_.getCurrentDurability() == 32767 || p_151397_2_.getCurrentDurability() == p_151397_1_.getCurrentDurability());
     }
 
     public Map getInfusingList()
@@ -70,12 +78,12 @@ public class ModRecipesInfuser
         return this.infusingList;
     }
 
-    public float func_151398_b(ItemStack p_151398_1_)
+    public float getInfusionExperience(ItemStack stack)
     {
-        float ret = p_151398_1_.getItem().getSmeltingExperience(p_151398_1_);
+        float ret = stack.getItem().getSmeltingExperience(stack);
         if (ret != -1) return ret;
 
-        Iterator iterator = this.experienceInfusingList.entrySet().iterator();
+        Iterator iterator = this.experienceList.entrySet().iterator();
         Entry entry;
 
         do
@@ -87,7 +95,7 @@ public class ModRecipesInfuser
 
             entry = (Entry)iterator.next();
         }
-        while (!this.func_151397_a(p_151398_1_, (ItemStack)entry.getKey()));
+        while (!this.func_151397_a(stack, (ItemStack)entry.getKey()));
 
         return ((Float)entry.getValue()).floatValue();
     }

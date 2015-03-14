@@ -63,7 +63,7 @@ public class Zylroth {
 	
 	ModRecipes.init();
 	
-	ModInfusingRecipes.init();
+	ModRecipesInfuser.init();
 	
 	proxy.registerBlocks();
 	

@@ -33,7 +33,7 @@ public class BeaconBaseItemBlock extends ItemBlock {
 		{
 		    list.remove(StatCollector.translateToLocal("shift.tooltip"));
 		    
-			if(field_150939_a == ModBlocks.Tenebrae_Block)
+			if(blockInstance == ModBlocks.Tenebrae_Block)
 			{
 				list.add(StatCollector.translateToLocal("tenebrae.tooltip"));
 			}

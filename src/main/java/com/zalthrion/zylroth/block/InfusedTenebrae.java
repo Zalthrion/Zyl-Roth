@@ -20,14 +20,14 @@ public class InfusedTenebrae extends Block{
    public InfusedTenebrae(){
 	 
       super(Material.rock);
-      this.setBlockName(Reference.MOD_ID + "_" + name);
+      this.setUnlocalizedName(Reference.MOD_ID + "_" + name);
       this.setCreativeTab(ModTabs.Project_Exanimus);
       this.setHardness(3.0F);
   	  this.setHarvestLevel("pickaxe", 2);
   	  this.setResistance(5.0F);
   	  this.setStepSound(soundTypeMetal);
       GameRegistry.registerBlock(this, TenebraeItemBlock.class, name);
-      setBlockTextureName(Reference.MOD_ID + ":" + name);
+      setTextureName(Reference.MOD_ID + ":" + name);
       
    }
    

@@ -48,8 +48,8 @@ public final class ModBlocks {
         Infuser = new InfuserMachine(true);
         Infuser_Idle = new InfuserMachine(false);
         
-        Infuser.setBlockName(Reference.MOD_ID + "_" + "Infuser Machine Active");
-        Infuser_Idle.setBlockName(Reference.MOD_ID + "_" + "Infuser Machine");
+        Infuser.setUnlocalizedName(Reference.MOD_ID + "_" + "Infuser Machine Active");
+        Infuser_Idle.setUnlocalizedName(Reference.MOD_ID + "_" + "Infuser Machine");
         
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "Infuser");
 		GameRegistry.registerBlock(ModBlocks.Infuser, "Infuser Machine Active");
@@ -58,8 +58,8 @@ public final class ModBlocks {
 		Infuser.setLightLevel(0.9F);
 		Infuser_Idle.setLightLevel(0.2F);
 		
-		Infuser.setBlockTextureName(Reference.MOD_ID + ":" + "Infuser Machine Active");
-		Infuser_Idle.setBlockTextureName(Reference.MOD_ID + ":" + "Infuser Machine");
+		Infuser.setTextureName(Reference.MOD_ID + ":" + "Infuser Machine Active");
+		Infuser_Idle.setTextureName(Reference.MOD_ID + ":" + "Infuser Machine");
         
     }
 }

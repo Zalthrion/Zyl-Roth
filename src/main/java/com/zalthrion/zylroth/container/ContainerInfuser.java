@@ -52,13 +52,13 @@ public class ContainerInfuser extends ContainerBase
 		}
 	
 	@Override
-	public void addCraftingToCrafters(ICrafting icrafting) {
+	public void onCraftGuiOpened(ICrafting icrafting) {
 		
 		icrafting.sendProgressBarUpdate(this, 0, this.infuser.cookTime);
 		icrafting.sendProgressBarUpdate(this, 1, this.infuser.burnTime);
 		icrafting.sendProgressBarUpdate(this, 2, this.infuser.currentItemBurnTime);
 		
-		super.addCraftingToCrafters(icrafting);
+		super.onCraftGuiOpened(icrafting);
 	}
 	
 	@Override

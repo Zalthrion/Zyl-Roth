@@ -232,7 +232,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	};
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
+	public int[] getSlotsForFace(int var1) {
 		return var1 == 0 ? slots_bottom : (var1 == 1 ? slots_top : slots_sides);
 	}
 	
