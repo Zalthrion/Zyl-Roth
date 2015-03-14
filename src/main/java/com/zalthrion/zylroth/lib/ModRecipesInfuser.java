@@ -1,103 +1,60 @@
 package com.zalthrion.zylroth.lib;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 
-import com.zalthrion.zylroth.handler.CustomRecipeHandler;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
 
-public class ModRecipesInfuser
-{
-    private static final ModRecipesInfuser infusingBase = new ModRecipesInfuser();
-    /** The list of infusing results. */
-    private Map infusingList = new HashMap();
-    private Map experienceList = new HashMap();
-    
-    /**
-     * Used to call methods addInfusing and getInfusingResult.
-     */
-    public static ModRecipesInfuser infusing()
-    {
-        return infusingBase;
-    }
-    
-    public static void init() {
-    	ArrayList<CustomRecipeHandler> recipes;
-    }
+import com.zalthrion.zylroth.handler.InfusionRecipe;
 
-	private ArrayList<CustomRecipeHandler> recipes = new ArrayList<CustomRecipeHandler>() {
-		{
-			add(new CustomRecipeHandler(new ItemStack[] {
-					new ItemStack(net.minecraft.init.Items.apple),
-					new ItemStack(net.minecraft.init.Items.potato)
-			}, new ItemStack(net.minecraft.init.Blocks.wool), new int[] {3, 2}));
-		}
-	};
+public class ModRecipesInfuser {
+	private static final ModRecipesInfuser infusingBase = new ModRecipesInfuser();
+	/** The list of infusing results. */
+	private HashMap<InfusionRecipe, Integer> recipeExperienceMap = new HashMap<InfusionRecipe, Integer>();
 	
-
-    public void addInfusion(ItemStack p_151394_1_, ItemStack p_151394_2_, int quantity, float p_151394_3_)
-    {
-        this.infusingList.put(p_151394_1_, p_151394_2_);
-        this.experienceList.put(p_151394_2_, Float.valueOf(p_151394_3_));
-    }
-
-    /**
-     * Returns the infusing result of an item.
-     */
-	public ItemStack getInfusingResult(ItemStack[] input) {
-		ItemStack res = null;
-		recipe_loop: for (CustomRecipeHandler cr : recipes) {
-			int stackNum = 0;
-			for (ItemStack stack : cr.getIngrediants()) {
-				if (stack != input[stackNum]) continue recipe_loop;
-				if (input[stackNum].stackSize >= cr.getAmountForIngrediant(stackNum)) {}
-				else continue recipe_loop;
-				stackNum ++;
-			}
-			res = cr.getOutput();
-		}
-		return res;
+	public static ModRecipesInfuser infusing() {
+		return infusingBase;
 	}
-
-    private boolean func_151397_a(ItemStack p_151397_1_, ItemStack p_151397_2_)
-    {
-        return p_151397_2_.getItem() == p_151397_1_.getItem() && (p_151397_2_.getCurrentDurability() == 32767 || p_151397_2_.getCurrentDurability() == p_151397_1_.getCurrentDurability());
-    }
-
-    public Map getInfusingList()
-    {
-        return this.infusingList;
-    }
-
-    public float getInfusionExperience(ItemStack stack)
-    {
-        float ret = stack.getItem().getSmeltingExperience(stack);
-        if (ret != -1) return ret;
-
-        Iterator iterator = this.experienceList.entrySet().iterator();
-        Entry entry;
-
-        do
-        {
-            if (!iterator.hasNext())
-            {
-                return 0.0F;
-            }
-
-            entry = (Entry)iterator.next();
-        }
-        while (!this.func_151397_a(stack, (ItemStack)entry.getKey()));
-
-        return ((Float)entry.getValue()).floatValue();
-    }
-    
+	
+	public void addInfusion(ItemStack input, ItemStack output, ItemStack... infusionMaterials) {
+		addInfusion(input, output, 0, infusionMaterials);
+	}
+	
+	public void addInfusion(ItemStack input, ItemStack output, int experience, ItemStack... infusionMaterials) {
+		this.recipeExperienceMap.put(new InfusionRecipe(input, output, infusionMaterials), experience);
+	}
+	
+	/** Returns the infusing result of an item. */
+	public ItemStack getInfusingResult(ItemStack input, ItemStack... infusionMaterials) {
+		recipe_loop: for (InfusionRecipe ir : recipeExperienceMap.keySet()) {
+			if (ir.getInput().getItem() == input.getItem()) {
+				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
+				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
+					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
+				}
+				for (ItemStack enteredMat : infusionMaterials) {
+					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
+					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
+				}
+				return ir.getOutput();
+			}
+		}
+		return null;
+	}
+	
+	public Set<InfusionRecipe> getInfusingList() {
+		return this.recipeExperienceMap.keySet();
+	}
+	
+	public float getInfusionExperience(ItemStack stack, ItemStack... infusionMaterials) {
+		/* float ret = stack.getItem().getSmeltingExperience(stack); if (ret !=
+		 * -1) return ret; Iterator iterator =
+		 * this.experienceList.entrySet().iterator(); Entry entry; do { if
+		 * (!iterator.hasNext()) { return 0.0F; } entry =
+		 * (Entry)iterator.next(); } while (!this.compareItemStacks(stack,
+		 * (ItemStack)entry.getKey())); return
+		 * ((Float)entry.getValue()).floatValue(); */
+		return 0F; // TODO Rework this
+	}
 }
