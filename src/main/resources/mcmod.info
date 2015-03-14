@@ -1,0 +1,16 @@
+[
+{
+  "modid": "projectexanimus",
+  "name": "Project Exanimus",
+  "description": "The Undead are coming..",
+  "version": "0.1.0",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Zalthrion"],
+  "credits": "Zalthrion",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

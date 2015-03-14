@@ -1,0 +1,30 @@
+
+itemGroup.Project_Exanimus=Proyecto Exanimus
+
+shift.tooltip=- Presiona la tecla Shift para mas info -
+beacon.tooltip=Puede utilizarse para las bases de los Faros
+core.tooltip=La fuente de vida de una criatura mécanica
+head.tooltip=Se ve como una pieza rara de arquitectura.
+tenebrae.tooltip=Puedes sentir oscuridad salir de el..
+
+tile.projectexanimus_Chiseled_Tenebrae.name=Tenebrae Cincelada
+tile.projectexanimus_Tenebrae_Block.name=Bloque de Tenebrae
+tile.projectexanimus_Tenebrae_Core.name=Núcleo de Tenebrae
+tile.projectexanimus_Infused_Tenebrae.name=Tenebrae Potenciada
+tile.projectexanimus_Tenebrae_Ore.name= Mineral de Tenebrae
+
+entity.Mutant_Tenebrae_Golem.name=Golem de Tenebrae Mutante
+entity.Pyro_Knight.name=Pyro-Caballero
+entity.Tenebrae_Golem.name=Golem de Tenebrae
+entity.Undead_Warrior.name=Guerrero No-muerto
+entity.Undead_Minion.name=Esbirro No-muerto
+entity.Bird.name=Ave
+
+item.projectexanimus_Cursed_Soul_Essence.name=Esencia de Alma Maldita
+item.projectexanimus_Dark_Shard.name=Fragmento Oscuro
+item.projectexanimus_Purified_Tenebrae_Essence.name=Esencia de Tenebrae Purificada
+item.projectexanimus_Raw_Tenebrae.name=Tenebrae Primordial
+item.projectexanimus_Raw_Tenebrae_Ingot.name=Lingote de Tenebrae Primordial
+item.projectexanimus_Soul_Essence.name=Esencia de Alma
+item.projectexanimus_Tenebrae_Ingot.name=Lingote de Tenebrae
+item.projectexanimus_Unstable_Tenebrae_Essence.name=Esencia de Tenebrae Inestable
