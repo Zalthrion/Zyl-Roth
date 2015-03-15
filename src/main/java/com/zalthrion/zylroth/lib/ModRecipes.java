@@ -1,17 +1,16 @@
 package com.zalthrion.zylroth.lib;
 
-import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class ModRecipes {
 	
-	public static void init() {
-		registerSmeltingRecipes();
-		registerShapedRecipes();
-		registerShapelessRecipes();
-		registerInfusionRecipes();
-	}
+    public static void init() {
+        registerSmeltingRecipes();
+        registerShapedRecipes();
+        registerShapelessRecipes();
+    }
 	
 	public static void registerSmeltingRecipes() {
 		
@@ -22,10 +21,10 @@ public final class ModRecipes {
 	}
 	
 	public static void registerShapedRecipes() {
-		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Tenebrae_Block), "III", "III", "III", 'I', ModItems.Tenebrae_Ingot);
-		
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.Raw_Tenebrae_Ingot), "RRR", 'R', ModItems.Raw_Tenebrae);
+	    
+	    GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Tenebrae_Block), "III", "III","III", 'I', ModItems.Tenebrae_Ingot);
+	    
+	    GameRegistry.addShapedRecipe(new ItemStack(ModItems.Raw_Tenebrae_Ingot), "RRR", 'R', ModItems.Raw_Tenebrae);
 		
 	}
 	
@@ -34,8 +33,5 @@ public final class ModRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.Tenebrae_Ingot, 9), new ItemStack(ModBlocks.Tenebrae_Block));
 		
 	}
-	
-	public static void registerInfusionRecipes() {
-		ModRecipesInfuser.infusing().addInfusion(new ItemStack(Items.iron_axe), new ItemStack(Items.iron_horse_armor), new ItemStack(Items.apple, 2, 0), new ItemStack(Items.carrot, 3, 0));
-	}
+
 }

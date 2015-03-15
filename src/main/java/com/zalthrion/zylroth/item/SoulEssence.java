@@ -1,17 +1,22 @@
 package com.zalthrion.zylroth.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.zalthrion.zylroth.lib.*;
+import com.zalthrion.zylroth.reference.Reference;
 
-public class SoulEssence extends ItemBase {
-	
-	private String name = "soulEssence";
-	
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+
+public class SoulEssence extends Item {
+
+	private String name = "Soul_Essence";
+
 	public SoulEssence() {
-		this.setNames(name);
-		// setUnlocalizedName(Reference.MOD_ID + "_" + name);
+
+		setUnlocalizedName(Reference.MOD_ID + "_" + name);
 		GameRegistry.registerItem(this, name);
-		// setCreativeTab(ModTabs.Project_Exanimus);
-		// setTextureName(Reference.MOD_ID + ":" + name);
+		setCreativeTab(ModTabs.Project_Exanimus);
+		setTextureName(Reference.MOD_ID + ":" + name);
 	}
-	
+
 }

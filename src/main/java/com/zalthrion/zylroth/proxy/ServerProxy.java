@@ -5,10 +5,13 @@ public class ServerProxy extends CommonProxy {
 		super.init();
 	}
 	
-	@Override public void registerRenderers() {}
+	@Override public void registerRenderers() {
+	}
 	
-	@Override public void registerItems() {}
+	@Override public void registerItems() {
+	}
 	
-	@Override public void registerBlocks() {}
+	@Override public void registerBlocks(){	
+	}
 	
 }
