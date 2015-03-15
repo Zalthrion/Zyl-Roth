@@ -1,43 +1,55 @@
 package com.zalthrion.zylroth.block;
 
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.reference.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBase extends Block
-{
-	public BlockBase()
-	{
-		super(Material.rock);
-		this.setCreativeTab(ModTabs.Project_Exanimus);
+public class BlockBase extends Block {
+	public BlockBase() {
+		this(Material.rock);
 	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
+	
+	public BlockBase(boolean setCreativeTab) {
+		this(Material.rock, setCreativeTab);
+	}
+	
+	public BlockBase(Material material) {
+		this(material, true);
+	}
+	
+	public BlockBase(Material material, boolean setCreativeTab) {
+		super(material);
+		if (setCreativeTab) this.setCreativeTab(ModTabs.Project_Exanimus);
+	}
+	
+	@Override public boolean renderAsNormalBlock() {
 		return false;
 	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
+	
+	@Override public boolean isOpaqueCube() {
 		return false;
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
+	
+	@Override @SideOnly(Side.CLIENT) public void registerIcons(IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
 	}
-
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-	{
+	
+	@Override public String getUnlocalizedName() {
+		return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
+	
+	public String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+	
+	protected void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setTextureName(Reference.MOD_ID + ":" + name);
 	}
 }
