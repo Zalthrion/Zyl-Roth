@@ -6,29 +6,28 @@ import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.render.BlockTESRRenderer;
 import com.zalthrion.zylroth.render.entity.*;
 import com.zalthrion.zylroth.render.tile.*;
-import com.zalthrion.zylroth.tile.*;
+import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraftforge.client.MinecraftForgeClient;
 
-public class ClientProxy extends CommonProxy{
+public class ClientProxy extends CommonProxy {
 	
-	@Override 
+	@Override
 	public void init() {
 		super.init();
 		this.registerRenderers();
 		this.registerBlockRenderers();
 	}
-
-	public void registerRenderInformation(){
-	}
 	
-	public void registerRenderers(){
+	@Override
+	public void registerRenderInformation() {}
+	
+	@Override
+	public void registerRenderers() {
 		float shadowSize = 0.5F;
-
-		//MOBS
+		
+		// MOBS
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityMutantTenebraeGolem.class, new RenderMutantTenebraeGolem(new ModelMutantTenebraeGolem(), shadowSize));
 		
@@ -42,16 +41,18 @@ public class ClientProxy extends CommonProxy{
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGolem.class, new RenderTenebraeGolem(new ModelTenebraeGolem(), shadowSize));
 		
-		}
+		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(new ModelRainbowPig(), shadowSize));
+		
+	}
 	
-	public void registerBlockRenderers(){
+	public void registerBlockRenderers() {
 		RenderIDs.setIDs();
 		
-		//BLOCKS
+		// BLOCKS
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
 		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(new TileEntityInfuser(), RenderIDs.blockInfuserRI));
-
+		
 	}
 	
 }

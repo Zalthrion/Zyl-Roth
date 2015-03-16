@@ -1,0 +1,33 @@
+
+itemGroup.ZylRoth=Zyl'roth
+
+shift.tooltip=- Hold Shift for more info -
+beacon.tooltip=Can be used for Beacon bases
+core.tooltip=The life source of a mechanical creature.
+head.tooltip=It seems just like an odd piece of architecture.
+tenebrae.tooltip=You can feel darkness coming out from it...
+
+tile.zylroth:tenebraeOre.name=Tenebrae Ore
+tile.zylroth:tenebraeBlock.name=Tenebrae Block
+tile.zylroth:tenebraeCore.name=Tenebrae Core
+tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
+tile.zylroth:infuserMachine.name=Infuser
+tile.zylroth:infuserMachineActive.name=Active Infuser
+tile.zylroth:infusedTenebrae.name=Infused Tenebrae
+
+entity.Mutant_Tenebrae_Golem.name=Mutant Tenebrae Golem
+entity.Pyro_Knight.name=Pyro Knight
+entity.Tenebrae_Golem.name=Tenebrae Golem
+entity.Undead_Warrior.name=Undead Warrior
+entity.Undead_Minion.name=Undead Minion
+entity.Bird.name=Bird
+
+item.zylroth:rawTenebrae.name=Raw Tenebrae
+item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
+item.zylroth:tenebraeIngot.name=Tenebrae Ingot
+item.zylroth:purifiedTenebraeEssence.name=Purified Tenebrae Essence
+item.zylroth:unstableTenebraeEssence.name=Unstable Tenebrae Essence
+item.zylroth:soulEssence.name=Soul Essence
+item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
+item.zylroth:darkShard.name=Dark Shard
+item.zylroth:testItem.name=Test Item

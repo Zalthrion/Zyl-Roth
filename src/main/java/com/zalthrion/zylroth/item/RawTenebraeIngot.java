@@ -1,22 +1,21 @@
 package com.zalthrion.zylroth.item;
 
-import com.zalthrion.zylroth.lib.*;
-import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.lib.ModItems;
 
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 
-public class RawTenebraeIngot extends Item{
+public class RawTenebraeIngot extends ItemBase {
 	
-	private String name = "Raw_Tenebrae_Ingot";
+	private String name = "rawTenebraeIngot";
 	
 	public RawTenebraeIngot() {
-		
-	setUnlocalizedName(Reference.MOD_ID + "_" + name);
-	GameRegistry.registerItem(this, name);
-	setCreativeTab(ModTabs.Project_Exanimus);
-    setTextureName(Reference.MOD_ID + ":" + "Tenebrae_Ingot");
+		this.setNames(name);
+		GameRegistry.registerItem(this, name);
 	}
-
+	
+	@Override
+	public IIcon getIconFromDamage(int meta) {
+		return ModItems.Tenebrae_Ingot.getIconFromDamage(meta);
+	}
 }
