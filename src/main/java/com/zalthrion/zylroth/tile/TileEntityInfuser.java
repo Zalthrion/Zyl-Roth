@@ -64,15 +64,15 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		if (!worldObj.isRemote) {// && GuiInfuser.craftEnable == true) {
 		
 			if (burnTime == 0 && canInfuse()) {
-				currentItemBurnTime = burnTime = getItemBurnTime(slots[ContainerInfuser.FUEL]);
+				currentItemBurnTime = burnTime = getItemBurnTime(slots[ContainerInfuser.FIRST_FUEL]);
 				
 				if (isBurning()) {
 					flag1 = true;
 					
-					if (slots[ContainerInfuser.FUEL] != null) {
-						-- slots[ContainerInfuser.FUEL].stackSize;
-						if (slots[ContainerInfuser.FUEL].stackSize == 0) {
-							slots[ContainerInfuser.FUEL] = slots[ContainerInfuser.FUEL].getItem().getContainerItem(slots[ContainerInfuser.FUEL]);
+					if (slots[ContainerInfuser.FIRST_FUEL] != null) {
+						-- slots[ContainerInfuser.FIRST_FUEL].stackSize;
+						if (slots[ContainerInfuser.FIRST_FUEL].stackSize == 0) {
+							slots[ContainerInfuser.FIRST_FUEL] = slots[ContainerInfuser.FIRST_FUEL].getItem().getContainerItem(slots[ContainerInfuser.FIRST_FUEL]);
 						}
 					}
 				}

@@ -24,6 +24,11 @@ public final class ModItems {
 	
 	public static Item Test_Item;
 	
+	public static Item Test_Item_2;
+	
+	public static Item Void_Gem;
+	
+	
 	public static void init() {
 		
 		Raw_Tenebrae = new RawTenebrae();
@@ -43,6 +48,11 @@ public final class ModItems {
 		Dark_Shard = new DarkShard();
 		
 		Test_Item = new TestItem();
+		
+		Test_Item_2 = new TestItem2();
+		
+		Void_Gem = new VoidGem();
+		
 	}
 	
 }

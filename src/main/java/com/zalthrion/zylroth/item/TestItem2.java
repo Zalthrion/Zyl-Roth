@@ -10,28 +10,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import com.zalthrion.zylroth.gui.inventory.GuiInfuser;
-import com.zalthrion.zylroth.lib.ModDimension;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TestItem extends ItemBase {
+public class TestItem2 extends ItemBase {
 	
-	private String name = "testItem";
-	private InventoryPlayer inventory;
-	private TileEntityInfuser tile = new TileEntityInfuser();
+	private String name = "testItem2";
 	
-	public TestItem() {
+	public TestItem2() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}
-	
-	/* @Override public ItemStack onItemRightClick(ItemStack item, World world,
-	 * EntityPlayer player) { if (!world.isRemote)
-	 * Minecraft.getMinecraft().displayGuiScreen(new GuiInfuser(inventory,
-	 * tile)); return super.onItemRightClick(item, world, player); } */
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
@@ -41,18 +33,18 @@ public class TestItem extends ItemBase {
 				
 				EntityPlayerMP playerMP = (EntityPlayerMP) player;
 				
-				WorldServer ws = playerMP.mcServer.worldServerForDimension(47);
+				WorldServer ws = playerMP.mcServer.worldServerForDimension(48);
 				
 				WorldServer ows = playerMP.mcServer.worldServerForDimension(0);
 				
 				Teleporter teleporter = new SpecialTeleporter(ws);
 				
-				if (!(player.dimension == 47)) {
-					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
+				if (!(player.dimension == 48)) {
+					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 48, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}
 				
-				else if (player.dimension == 47) {
+				else if (player.dimension == 48) {
 					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}

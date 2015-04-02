@@ -21,15 +21,15 @@ public class ContainerInfuser extends ContainerBase {
 	
 	private int lastItemBurnTime;
 	
-	public static final int INPUT = 0, OUTPUT = 1, FUEL = 2, RESIDUE = 3;
+	public static final int INPUT = 0, OUTPUT = 1, FIRST_FUEL = 2, SECOND_FUEL = 3;
 	
 	public ContainerInfuser(InventoryPlayer inventoryPlayer, TileEntityInfuser tile) {
 		this.infuser = tile;
 		
 		this.addSlotToContainer(new Slot(tile, INPUT, 34, 27)); // Input
 		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 27)); // Output
-		this.addSlotToContainer(new Slot(tile, FUEL, 80, 1)); // Fuel
-		this.addSlotToContainer(new Slot(tile, RESIDUE, 80, 55)); // Residue
+		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 1)); // First Fuel
+		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 55)); // Second Fuel
 		
 		bindPlayerInventory(inventoryPlayer);
 	}
@@ -104,14 +104,14 @@ public class ContainerInfuser extends ContainerBase {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) inventorySlots.get(index);
 		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
+			ItemStack stack = slot.getStack();
+			itemstack = stack.copy();
 			if (index < 4) {
-				if (!mergeItemStack(itemstack1, index, inventorySlots.size(), true)) { return null; }
-			} else if (!slot.isItemValid(itemstack1)) {
+				if (!mergeItemStack(stack, index, inventorySlots.size(), true)) { return null; }
+			} else if (!slot.isItemValid(stack)) {
 				return null;
-			} else if (!mergeItemStack(itemstack1, 0, 1, false)) { return null; }
-			if (itemstack1.stackSize == 0) {
+			} else if (!mergeItemStack(stack, 0, 1, false)) { return null; }
+			if (stack.stackSize == 0) {
 				slot.putStack(null);
 			} else {
 				slot.onSlotChanged();

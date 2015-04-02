@@ -79,11 +79,16 @@ public class ModEntity {
 		registerEntity(EntityTenebraeGolem.class, "Tenebrae_Golem", 0xeaeae9, 0xc99a03);
 		
 		
-		for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i ++) {
+		//Spawns
+		
+//		EntityRegistry.addSpawn(EntityRainbowPig.class, 2, 1,2, EnumCreatureType.ambient, ModBiomes.RainbowPlains);
+		
+/*		for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i ++) {
 			if (BiomeGenBase.getBiomeGenArray()[i] != null) {
 				EntityRegistry.addSpawn(EntityPyroKnight.class, 1, 1, 1, EnumCreatureType.monster, BiomeGenBase.hell);
 				EntityRegistry.addSpawn(EntityUndeadWarrior.class, 1, 1, 1, EnumCreatureType.monster, BiomeGenBase.getBiomeGenArray()[i]);
+				EntityRegistry.addSpawn(EntityRainbowPig.class, 1, 2, 4, EnumCreatureType.ambient, ModBiomes.RainbowPlains);
 			}
-		}
+		}*/
 	}
 }

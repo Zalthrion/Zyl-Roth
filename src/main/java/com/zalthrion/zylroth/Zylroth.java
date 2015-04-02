@@ -1,11 +1,14 @@
 package com.zalthrion.zylroth;
 
+import net.minecraft.world.WorldType;
+
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
 import com.zalthrion.zylroth.lib.*;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
+//import com.zalthrion.zylroth.world.WorldTypeZylroth;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -37,7 +40,11 @@ public class Zylroth {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		
+		ModBiomes.init();
+		
 		ModBlocks.init();
+		
+		ModDimension.init();
 		
 		ModItems.init();
 		
@@ -70,6 +77,8 @@ public class Zylroth {
 	
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		
+//		WorldType ZylRoth = new WorldTypeZylroth(3, "zylroth");
 		
 	}
 	

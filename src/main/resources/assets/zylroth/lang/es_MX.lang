@@ -13,12 +13,13 @@ tile.zylroth:Tenebrae_Core.name=Núcleo de Tenebrae
 tile.zylroth:Infused_Tenebrae.name=Tenebrae Potenciada
 tile.zylroth:Tenebrae_Ore.name= Mineral de Tenebrae
 
+entity.Bird.name=Ave
 entity.Mutant_Tenebrae_Golem.name=Golem de Tenebrae Mutante
 entity.Pyro_Knight.name=Pyro-Caballero
-entity.Tenebrae_Golem.name=Golem de Tenebrae
-entity.Undead_Warrior.name=Guerrero No-muerto
+entity.Rainbow_Pig.name=Cerdo Arcoiris
 entity.Undead_Minion.name=Esbirro No-muerto
-entity.Bird.name=Ave
+entity.Undead_Warrior.name=Guerrero No-muerto
+entity.Tenebrae_Golem.name=Golem de Tenebrae
 
 item.zylroth:Cursed_Soul_Essence.name=Esencia de Alma Maldita
 item.zylroth:Dark_Shard.name=Fragmento Oscuro

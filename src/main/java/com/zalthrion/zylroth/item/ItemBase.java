@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 public class ItemBase extends Item {
 	public ItemBase() {
 		super();
-		setMaxStackSize(64);
 		setCreativeTab(ModTabs.ZylRoth);
+		setMaxStackSize(64);
 		setNoRepair();
 	}
 	

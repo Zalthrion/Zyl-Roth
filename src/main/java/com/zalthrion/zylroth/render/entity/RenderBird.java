@@ -12,10 +12,7 @@ import com.zalthrion.zylroth.entity.EntityBird;
 import com.zalthrion.zylroth.model.entity.ModelBird;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class RenderBird extends RenderLiving
-
-{
-	
+public class RenderBird extends RenderLiving {
 	private static final ResourceLocation birdTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Bird.png");
 	
 	private int renderedBirdSize;

@@ -15,12 +15,13 @@ tile.zylroth:infuserMachine.name=Infuser
 tile.zylroth:infuserMachineActive.name=Active Infuser
 tile.zylroth:infusedTenebrae.name=Infused Tenebrae
 
+entity.Bird.name=Bird
 entity.Mutant_Tenebrae_Golem.name=Mutant Tenebrae Golem
 entity.Pyro_Knight.name=Pyro Knight
-entity.Tenebrae_Golem.name=Tenebrae Golem
-entity.Undead_Warrior.name=Undead Warrior
+entity.Rainbow_Pig.name=Rainbow Pig
 entity.Undead_Minion.name=Undead Minion
-entity.Bird.name=Bird
+entity.Undead_Warrior.name=Undead Warrior
+entity.Tenebrae_Golem.name=Tenebrae Golem
 
 item.zylroth:rawTenebrae.name=Raw Tenebrae
 item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot

@@ -4,11 +4,11 @@ import com.zalthrion.zylroth.lib.ModTabs;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class PurifiedTenebraeEssence extends ItemBase {
+public class VoidGem extends ItemBase {
 	
-	private String name = "purifiedTenebraeEssence";
+	private String name = "voidGem";
 	
-	public PurifiedTenebraeEssence() {
+	public VoidGem() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}
