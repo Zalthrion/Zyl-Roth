@@ -10,9 +10,9 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 
+import com.zalthrion.zylroth.reference.Reference;
+
 public class HeadItemBlock extends ItemBlock {
-	
-	private String name = "HeadItemBlock";
 	
 	public HeadItemBlock(Block b) {
 		super(b);
@@ -21,11 +21,11 @@ public class HeadItemBlock extends ItemBlock {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(StatCollector.translateToLocal("shift.tooltip"));
+		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "shift"));
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.add(StatCollector.translateToLocal("head.tooltip"));
-			list.remove(StatCollector.translateToLocal("shift.tooltip"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "head"));
+			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "shift"));
 		}
 	}
 	

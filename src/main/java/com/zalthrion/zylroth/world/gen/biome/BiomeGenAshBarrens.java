@@ -1,42 +1,32 @@
 package com.zalthrion.zylroth.world.gen.biome;
 
-import java.util.List;
-
-import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.lib.ModBlocks;
+import com.zalthrion.zylroth.reference.Reference;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.ColorizerGrass;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeGenAshBarrens extends BiomeGenBase {
-	
-	public final Material blockMaterial;
 	
 	public BiomeGenAshBarrens(int id) {
 		super(id);
 
-		this.blockMaterial = Material.sand;
+		this.enableRain = false;
+		this.enableSnow = false;
+		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.flowers.clear();
 		
+		this.theBiomeDecorator.flowersPerChunk = -999;
 		this.theBiomeDecorator.treesPerChunk = -999;
 		this.theBiomeDecorator.grassPerChunk = 8;
-        this.theBiomeDecorator.deadBushPerChunk = 2;
 		
 		this.topBlock = (ModBlocks.Ash_Block);
 		this.fillerBlock = (ModBlocks.Ash_Block);
 		
 		this.setHeight(height_Default);
-		
-		this.setBiomeName("Ash Barrens");
+		this.setBiomeName(StatCollector.translateToLocal("biome" + "." + Reference.MOD_ID + ":" + "ashBarrens"));
 		
 		this.waterColorMultiplier = 0xE42D17;
 	}

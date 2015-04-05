@@ -8,7 +8,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesIridis extends GenLayer {
 	
-	protected BiomeGenBase[] allowedBiomes = {ModBiomes.JadePlains};
+	protected BiomeGenBase[] allowedBiomes = {ModBiomes.JadePlains, ModBiomes.AutumnForest, ModBiomes.SapphireOcean, ModBiomes.RainbowForest};
 	
 	public GenLayerBiomesIridis(long seed) {
 		super(seed);

@@ -6,33 +6,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-/**
- * 
- * A Teleporter that can be used without creating a portal.
- * 
- * Be sure to set the y position afterward, either manually or using {@link #adjustPosY}
- * 
- * NOTE: Does NOT work when teleporting FROM the End (to is okay).
- *
- */
 public class SpecialTeleporter extends Teleporter
 {
-	/** Teleporter's WorldServer instance is private */
 	protected final WorldServer worldServer;
 
-	/**
-	 * Sends the entity to the same coordinates as its current position in the new dimension, if possible.
-	 * Be sure to set the y position afterward, either manually or using {@link #adjustPosY}
-	 * NOTE: Does NOT work when teleporting FROM the End (to is okay)
-	 */
 	public SpecialTeleporter(WorldServer worldServer) {
 		super(worldServer);
 		this.worldServer = worldServer;
 	}
 
-	/**
-	 * Call this method after transferring dimensions to adjust the entity.posY appropriately
-	 */
 	public static void adjustPosY(Entity entity) {
 		int x = MathHelper.floor_double(entity.posX);
 		int z = MathHelper.floor_double(entity.posZ);
@@ -72,5 +54,3 @@ public class SpecialTeleporter extends Teleporter
 		return true;
 	}
 }
-
-//Special thanks to CoolAlias for this class.

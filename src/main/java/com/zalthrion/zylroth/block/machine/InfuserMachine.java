@@ -6,16 +6,13 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.Zylroth;
@@ -29,10 +26,6 @@ public class InfuserMachine extends BlockBaseContainer {
 	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
 	
-	private InventoryPlayer inventory;
-	private TileEntityInfuser tile;
-	
-	private final boolean isActive;
 	private static boolean keepInventory;
 	
 	public InfuserMachine(boolean isActive) {
@@ -45,7 +38,6 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
 		this.setStepSound(soundTypeMetal);
-		this.isActive = isActive;
 	}
 	
 	public TileEntity createNewTileEntity(World world, int meta) {

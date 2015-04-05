@@ -1,7 +1,6 @@
 package com.zalthrion.zylroth.item;
 
 import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.lib.ModTabs;
 
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.common.registry.GameRegistry;

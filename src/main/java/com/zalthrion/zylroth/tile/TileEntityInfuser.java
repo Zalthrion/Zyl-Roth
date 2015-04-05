@@ -115,6 +115,8 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	public void infuseItem() {
 		if (canInfuse()) {
 			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.infusing();
+			
+			@SuppressWarnings("unused")
 			ItemStack[] ings = infusionRecipes.getInfusingIngredients(slots[0], slots[2], slots[3]);;
 			ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);
 			if (slots[ContainerInfuser.OUTPUT] == null) {

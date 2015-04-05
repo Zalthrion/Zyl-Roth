@@ -1,7 +1,5 @@
 package com.zalthrion.zylroth.item;
 
-import com.zalthrion.zylroth.lib.ModTabs;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class UnstableTenebraeEssence extends ItemBase {

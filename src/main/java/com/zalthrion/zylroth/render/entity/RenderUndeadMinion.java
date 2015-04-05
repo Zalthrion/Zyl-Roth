@@ -19,11 +19,10 @@ public class RenderUndeadMinion extends RenderBiped {
 	private static final ResourceLocation undeadminionTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
 	
 	/** Scale of the model to use */
-	private float scale;
+	private float scale = 0.8F;
 	
 	public RenderUndeadMinion(ModelBiped par1ModelBase, float par2, float par3) {
 		super(par1ModelBase, par2 * par3);
-		this.scale = 0.8F;
 	}
 	
 	public void doRenderUndeadMinion(EntityUndeadMinion par1EntityUndeadMinion, double par2, double par4, double par6, float par8, float par9) {
@@ -32,7 +31,7 @@ public class RenderUndeadMinion extends RenderBiped {
 	
 	/** Applies the scale to the transform matrix */
 	protected void preRenderScale(EntityUndeadMinion par1EntityUndeadMinion, float par2) {
-		GL11.glScalef(this.scale = 0.8F, this.scale = 0.8F, this.scale = 0.8F);
+		GL11.glScalef(scale, scale, scale);
 	}
 	
 	protected ResourceLocation getUndeadMinionTextures(EntityUndeadMinion par1EntityUndeadMinion) {

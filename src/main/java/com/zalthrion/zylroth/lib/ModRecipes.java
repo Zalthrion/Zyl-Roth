@@ -2,7 +2,6 @@ package com.zalthrion.zylroth.lib;
 
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 

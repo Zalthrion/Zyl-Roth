@@ -47,6 +47,7 @@ public class EntityUndeadMinion extends EntityMob {
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true));
 	}
 	
 	@Override
@@ -67,33 +68,38 @@ public class EntityUndeadMinion extends EntityMob {
 	
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		this.attackTimer = 10;
-		this.worldObj.setEntityState(this, (byte) 4);
-		
-		double meleeDistance = 8;
-		double dx = this.posX - posX;
-		double dz = this.posZ - posZ;
-		boolean isInMeleeDistance = dx * dx + dz * dz <= meleeDistance * meleeDistance;
-		
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
-		
-		if (flag) {
-			entity.motionY += 0.1D;
+		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
+
+		if(!KyrulMinions) {
+			this.attackTimer = 10;
+			this.worldObj.setEntityState(this, (byte) 4);
+			
+			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+			
+			if (flag) {
+				entity.motionY += 0.1D;
+			}
+			
+			if(entity instanceof EntityPlayer){
+				
+				double meleeDistance = 8;
+				double dx = this.posX - posX;
+				double dz = this.posZ - posZ;
+				boolean isInMeleeDistance = dx * dx + dz * dz <= meleeDistance * meleeDistance;
+				
+				if (isInMeleeDistance) {
+					this.playSound("mob.blaze.hit", 1.0F, 1.0F);
+				}
+			}
 		}
 		
-		if (isInMeleeDistance)
-		
-		{
-			this.playSound("mob.blaze.hit", 1.0F, 1.0F);
-		}
-		
-		return flag;
+		return KyrulMinions;
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public int getAttackTimer() {
 		return this.attackTimer;
-	} // TODO What was this?
+	}
 	
 	/** Returns the sound this mob makes while it's alive. */
 	@Override
@@ -115,7 +121,9 @@ public class EntityUndeadMinion extends EntityMob {
 	
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0) {
+		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
+
+		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(KyrulMinions)) {
 			this.setAttackTarget((EntityLivingBase) entity);
 		}
 		
@@ -158,4 +166,11 @@ public class EntityUndeadMinion extends EntityMob {
 			this.entityDropItem(new ItemStack(ModItems.Dark_Shard, 1, 6), 0f);
 		}
 	}
+	
+	@Override
+	@SuppressWarnings("rawtypes")
+	public boolean canAttackClass(Class par1Class) {
+		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class;
+	}
+	
 }

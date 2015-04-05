@@ -2,6 +2,9 @@ package com.zalthrion.zylroth.block;
 
 import java.util.Random;
 
+import com.zalthrion.zylroth.lib.ModTabs;
+
+import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -10,13 +13,13 @@ public class TenebraeOre extends BlockBase {
 	private String name = "tenebraeOre";
 	
 	public TenebraeOre() {
-		
-		super();
+		super(Material.rock);
 		this.setNames(name);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
+		this.setCreativeTab(ModTabs.ZylRoth);
 		GameRegistry.registerBlock(this, name);
 	}
 	

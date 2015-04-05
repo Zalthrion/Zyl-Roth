@@ -19,11 +19,10 @@ public class RenderPyroKnight extends RenderBiped {
 	private static final ResourceLocation pyroknightTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Pyro_Knight.png");
 	
 	/** Scale of the model to use */
-	private float scale;
+	private float scale = 1.1F;
 	
 	public RenderPyroKnight(ModelBiped par1ModelBase, float par2, float par3) {
 		super(par1ModelBase, par2 * par3);
-		this.scale = 1.1F;
 	}
 	
 	public void doRenderPyroKnight(EntityPyroKnight par1EntityPyroKnight, double par2, double par4, double par6, float par8, float par9) {
@@ -32,7 +31,7 @@ public class RenderPyroKnight extends RenderBiped {
 	
 	/** Applies the scale to the transform matrix */
 	protected void preRenderScale(EntityPyroKnight par1EntityPyroKnight, float par2) {
-		GL11.glScalef(this.scale = 1.1F, this.scale = 1.1F, this.scale = 1.1F);
+		GL11.glScalef(scale, scale, scale);
 	}
 	
 	protected ResourceLocation getPyroKnightTextures(EntityPyroKnight par1EntityPyroKnight) {

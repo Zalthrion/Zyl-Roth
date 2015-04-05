@@ -34,9 +34,13 @@ public class WorldOreGenerator implements IWorldGenerator {
 		
 	}
 	
-	private void GenerateNether(Random random, int x, int z, World world) {}
+	private void GenerateNether(Random random, int x, int z, World world) {
+		
+	}
 	
-	private void GenerateEnd(Random random, int x, int z, World world) {}
+	private void GenerateEnd(Random random, int x, int z, World world) {
+		
+	}
 	
 	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
 		WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)), Blocks.stone);

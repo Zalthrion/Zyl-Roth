@@ -17,9 +17,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderMutantTenebraeGolem extends RenderLiving {
+	
 	private static final ResourceLocation MTgolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Mutant_Tenebrae_Golem.png");
 	
 	/** Iron Golem's Model. */
+	@SuppressWarnings("unused")
 	private final ModelMutantTenebraeGolem mutant_tenebrae_golemModel;
 	
 	public RenderMutantTenebraeGolem(ModelMutantTenebraeGolem modelMutantTenebraeGolem, float shadowSize) {

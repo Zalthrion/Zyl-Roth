@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.block;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraft.world.World;
 import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
 import com.zalthrion.zylroth.itemblock.HeadItemBlock;
 import com.zalthrion.zylroth.lib.ModBlocks;
+import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -20,12 +22,13 @@ public class ChiseledTenebrae extends BlockBase {
 	private String name = "chiseledTenebrae";
 	
 	public ChiseledTenebrae() {
-		super();
+		super(Material.rock);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypeMetal);
 		this.setNames(name);
+		this.setCreativeTab(ModTabs.ZylRoth);
 		GameRegistry.registerBlock(this, HeadItemBlock.class, name);
 	}
 	

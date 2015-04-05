@@ -11,7 +11,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBase extends Block {
-	public BlockBase() {
+	
+	public BlockBase(Material material) {
+		super(material);
+	}
+
+/*	public BlockBase() {
 		this(Material.rock);
 	}
 	
@@ -21,7 +26,7 @@ public class BlockBase extends Block {
 	
 	public BlockBase(Material material) {
 		this(material, true);
-	}
+	}*/
 	
 	public BlockBase(Material material, boolean setCreativeTab) {
 		super(material);

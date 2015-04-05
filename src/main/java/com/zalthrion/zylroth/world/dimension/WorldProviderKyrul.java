@@ -1,25 +1,24 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import com.zalthrion.zylroth.lib.ModBiomes;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.zalthrion.zylroth.lib.ModDimension;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.biome.WorldChunkManagerHell;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderGenerate;
 
 public class WorldProviderKyrul extends WorldProvider{
 	
 	public void registerWorldChunkManager(){
 		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), terrainType);
 		this.dimensionId = ModDimension.dimensionId_Kyrul;
+		this.hasNoSky = true;
 	}
-	
+
 	public IChunkProvider createChunkGenerator(){
         return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true);
 	}
@@ -27,6 +26,11 @@ public class WorldProviderKyrul extends WorldProvider{
 	@Override
 	public String getDimensionName() {
 		return "Ky'rul";
+	}
+	
+	@Override
+	public void setWorldTime(long time) {
+		worldObj.getWorldInfo().setWorldTime(16000);
 	}
 	
     @SideOnly(Side.CLIENT)
@@ -68,6 +72,22 @@ public class WorldProviderKyrul extends WorldProvider{
         return false;
     }
     
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getCloudHeight() {
+		return 8.0F;
+	}
+	
+	@Override
+	public boolean canDoRainSnowIce(Chunk chunk) {
+		return false;
+	}
+	
+	@Override
+	public boolean canDoLightning(Chunk chunk) {
+		return false;
+	}
+    
     /**
      * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
      */
@@ -85,4 +105,23 @@ public class WorldProviderKyrul extends WorldProvider{
         return null;
     }
     
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean isSkyColored() {
+		return true;
+	}
+    
+	/**
+	 * Lightness of the dimension
+	 */
+	@Override
+	protected void generateLightBrightnessTable() {
+		float f = 0.05F;
+
+		for (int i = 0; i <= 15; ++i) {
+			float f1 = 1.0F - i / 15.0F;
+			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+		}
+	}
+	
 }

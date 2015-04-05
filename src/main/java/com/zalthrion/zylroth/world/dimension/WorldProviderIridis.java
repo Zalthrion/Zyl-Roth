@@ -1,12 +1,9 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import com.zalthrion.zylroth.lib.ModBiomes;
-import com.zalthrion.zylroth.lib.ModDimension;
-
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderGenerate;
+
+import com.zalthrion.zylroth.lib.ModDimension;
 
 public class WorldProviderIridis extends WorldProvider{
 

@@ -1,14 +1,16 @@
 package com.zalthrion.zylroth;
 
-import net.minecraft.world.WorldType;
+//import net.minecraft.world.WorldType;
 
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
 import com.zalthrion.zylroth.lib.*;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.world.WorldStructureGenerator;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
 //import com.zalthrion.zylroth.world.WorldTypeZylroth;
+
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -49,6 +51,8 @@ public class Zylroth {
 		ModItems.init();
 		
 		GameRegistry.registerWorldGenerator(new WorldOreGenerator(), 12);
+		
+		GameRegistry.registerWorldGenerator(new WorldStructureGenerator(), 12);
 		
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		

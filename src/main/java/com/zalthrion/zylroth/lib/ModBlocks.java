@@ -4,7 +4,9 @@ import net.minecraft.block.Block;
 
 import com.zalthrion.zylroth.block.*;
 import com.zalthrion.zylroth.block.machine.*;
+import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -17,6 +19,8 @@ public final class ModBlocks {
 	public static Block Infused_Tenebrae;
 	
 	public static Block Ash_Block;
+	
+	public static Block Spawner_VoidDragon;
 	
 	public static Block Infuser;
 	public static Block Infuser_Idle;
@@ -39,6 +43,13 @@ public final class ModBlocks {
 		//Ambient
 		
 		Ash_Block = new AshBlock();
+		
+		
+		//Spawners
+		
+		Spawner_VoidDragon = new SpawnerVoidDragon();
+		GameRegistry.registerBlock(ModBlocks.Spawner_VoidDragon, "spawnerVoidDragon");
+		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "Spawner Void Dragon");
 		
 		
 		// Infuser

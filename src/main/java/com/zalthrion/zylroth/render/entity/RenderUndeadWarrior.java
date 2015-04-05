@@ -19,11 +19,10 @@ public class RenderUndeadWarrior extends RenderBiped {
 	private static final ResourceLocation undeadwarriorTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
 	
 	/** Scale of the model to use */
-	private float scale;
+	private float scale = 0.8F;
 	
 	public RenderUndeadWarrior(ModelBiped par1ModelBase, float par2, float par3) {
 		super(par1ModelBase, par2 * par3);
-		this.scale = 0.8F;
 	}
 	
 	public void doRenderUndeadWarrior(EntityUndeadWarrior par1EntityUndeadWarrior, double par2, double par4, double par6, float par8, float par9) {
@@ -32,7 +31,7 @@ public class RenderUndeadWarrior extends RenderBiped {
 	
 	/** Applies the scale to the transform matrix */
 	protected void preRenderScale(EntityUndeadWarrior par1EntityUndeadWarrior, float par2) {
-		GL11.glScalef(this.scale = 0.8F, this.scale = 0.8F, this.scale = 0.8F);
+		GL11.glScalef(scale, scale, scale);
 	}
 	
 	protected ResourceLocation getUndeadWarriorTextures(EntityUndeadWarrior par1EntityUndeadWarrior) {

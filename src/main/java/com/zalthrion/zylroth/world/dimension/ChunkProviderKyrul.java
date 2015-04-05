@@ -55,6 +55,7 @@ public class ChunkProviderKyrul implements IChunkProvider
     private MapGenBase caveGenerator = new MapGenCaves();
     /** Holds Mineshaft Generator */
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
+//    private DragonNest dragonNestGenerator = new DragonNest();
     /** Holds ravine generator */
     private MapGenBase ravineGenerator = new MapGenRavine();
     /** The biomes that are used to generate the chunk */
@@ -64,7 +65,6 @@ public class ChunkProviderKyrul implements IChunkProvider
     double[] field_147425_f;
     double[] field_147426_g;
     int[][] field_73219_j = new int[32][32];
-    private static final String __OBFID = "CL_00000396";
 
     {
         caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
@@ -246,19 +246,12 @@ public class ChunkProviderKyrul implements IChunkProvider
 
     private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_)
     {
-        double d0 = 684.412D;
-        double d1 = 684.412D;
-        double d2 = 512.0D;
-        double d3 = 512.0D;
         this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, 200.0D, 200.0D, 0.5D);
         this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
         this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
         this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-        boolean flag1 = false;
-        boolean flag = false;
         int l = 0;
         int i1 = 0;
-        double d4 = 8.5D;
 
         for (int j1 = 0; j1 < 5; ++j1)
         {
@@ -501,13 +494,24 @@ public class ChunkProviderKyrul implements IChunkProvider
         return "RandomLevelSource";
     }
 
-    /**
+    /*
+     * TODO: Replaced, this is the original.
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
-    public List getPossibleCreatures(EnumCreatureType p_73155_1_, int p_73155_2_, int p_73155_3_, int p_73155_4_)
+ /*   public List getPossibleCreatures(EnumCreatureType p_73155_1_, int p_73155_2_, int p_73155_3_, int p_73155_4_)
     {
         BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(p_73155_2_, p_73155_4_);
         return null;
+    }*/
+    
+    /**
+     * Returns a list of creatures of the specified type that can spawn at the given location.
+     */
+    @SuppressWarnings("rawtypes")
+	public List getPossibleCreatures(EnumCreatureType creaturetype, int x, int y, int z)
+    {
+    	BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(x, z);
+    	return biomegenbase == null ? null : biomegenbase.getSpawnableList(creaturetype);
     }
 
     public ChunkPosition findClosestStructure(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_)

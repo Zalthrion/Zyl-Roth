@@ -1,27 +1,30 @@
 
-itemGroup.ZylRoth=Zyl'roth
+itemGroup.Zyl'Roth=Zyl'Roth
 
-shift.tooltip=- Hold Shift for more info -
-beacon.tooltip=Can be used for Beacon bases
-core.tooltip=The life source of a mechanical creature.
-head.tooltip=It seems just like an odd piece of architecture.
-tenebrae.tooltip=You can feel darkness coming out from it...
+tooltip.zylroth:shift=- Hold Shift for more info -
+tooltip.zylroth:beacon=Can be used for Beacon bases
+tooltip.zylroth:core=The life source of a mechanical creature.
+tooltip.zylroth:head=It seems just like an odd piece of architecture.
+tooltip.zylroth:tenebrae=You can feel darkness coming out from it...
 
-tile.zylroth:tenebraeOre.name=Tenebrae Ore
+tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
+tile.zylroth:infusedTenebrae.name=Infused Tenebrae
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
 tile.zylroth:tenebraeCore.name=Tenebrae Core
-tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
-tile.zylroth:infuserMachine.name=Infuser
-tile.zylroth:infuserMachineActive.name=Active Infuser
-tile.zylroth:infusedTenebrae.name=Infused Tenebrae
+tile.zylroth:infuserMachine.name=Tenebrae Infuser
+tile.zylroth:infuserMachineActive.name=Tenebrae Infuser [Active]
+tile.zylroth:tenebraeOre.name=Tenebrae Ore
 
-entity.Bird.name=Bird
-entity.Mutant_Tenebrae_Golem.name=Mutant Tenebrae Golem
-entity.Pyro_Knight.name=Pyro Knight
-entity.Rainbow_Pig.name=Rainbow Pig
-entity.Undead_Minion.name=Undead Minion
-entity.Undead_Warrior.name=Undead Warrior
-entity.Tenebrae_Golem.name=Tenebrae Golem
+tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
+
+entity.zylroth:Bird.name=Bird
+entity.zylroth:Mutant_Tenebrae_Golem.name=Mutant Tenebrae Golem
+entity.zylroth:Pyro_Knight.name=Pyro Knight
+entity.zylroth:Rainbow_Pig.name=Rainbow Pig
+entity.zylroth:Undead_Minion.name=Undead Minion
+entity.zylroth:Undead_Warrior.name=Undead Warrior
+entity.zylroth:Tenebrae_Golem.name=Tenebrae Golem
+entity.zylroth:Void_Dragon.name=Void Dragon
 
 item.zylroth:rawTenebrae.name=Raw Tenebrae
 item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
@@ -32,3 +35,13 @@ item.zylroth:soulEssence.name=Soul Essence
 item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
 item.zylroth:darkShard.name=Dark Shard
 item.zylroth:testItem.name=Test Item
+item.zylroth:testItem2.name=Test Item 2
+
+biome.zylroth:ashBarrens=Ash Barrens
+biome.zylroth:autumnForest=Autumn Forest
+biome.zylroth:dreadWastes=Dread Wastes
+biome.zylroth:hauntedForest=Haunted Forest
+biome.zylroth:jadePlains=Jade Plains
+biome.zylroth:rainbowForest=Rainbow Forest
+biome.zylroth:sapphireOcean=Sapphire Ocean
+biome.zylroth:voidMountains=Void Mountains

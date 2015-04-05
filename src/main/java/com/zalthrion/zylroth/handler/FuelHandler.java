@@ -13,6 +13,7 @@ public class FuelHandler implements IFuelHandler {
 	@Override
 	public int getBurnTime(ItemStack fuel) {
 		
+		@SuppressWarnings("unused")
 		Block blockFuel = Block.getBlockFromItem(fuel.getItem());
 		Item itemFuel = fuel.getItem();
 		

@@ -1,9 +1,8 @@
 package com.zalthrion.zylroth.block;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.world.IBlockAccess;
 
-import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
+import com.zalthrion.zylroth.lib.ModTabs;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -16,6 +15,8 @@ public class AshBlock extends BlockBase {
 		this.setNames(name);
 		this.setHardness(0.5F);
 		this.setStepSound(soundTypeSand);
+		this.setCreativeTab(ModTabs.ZylRoth);
+		GameRegistry.registerBlock(this, name);
 	}
 	
 }

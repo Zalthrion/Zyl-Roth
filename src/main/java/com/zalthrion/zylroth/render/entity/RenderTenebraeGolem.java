@@ -21,6 +21,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 	private static final ResourceLocation tenebrae_golemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Tenebrae_Golem.png");
 	
 	/** Iron Golem's Model. */
+	@SuppressWarnings("unused")
 	private final ModelTenebraeGolem tenebrae_golemModel;
 	
 	public RenderTenebraeGolem(ModelTenebraeGolem ModelTenebraeGolem, float shadowSize) {
