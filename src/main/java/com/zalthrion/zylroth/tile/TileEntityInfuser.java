@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.tile;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -10,6 +12,8 @@ import net.minecraft.nbt.NBTTagList;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.container.ContainerInfuser;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
+import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
+import com.zalthrion.zylroth.handler.recipe.InfusionRecipeLib;
 import com.zalthrion.zylroth.lib.ModItems;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -103,9 +107,10 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	private boolean canInfuse() {
 		if (slots[0] == null) return false;
 		if (slots[2] == null && slots[3] == null) return false;
-		InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.infusing();
-		ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);;
-		if (stack == null) return false;
+		InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
+		InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
+		if (recipe == null) return false;
+		ItemStack stack = recipe.getOutput();
 		if (slots[ContainerInfuser.OUTPUT] == null) return true;
 		if (!slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) return false;
 		int result = slots[ContainerInfuser.OUTPUT].stackSize + stack.stackSize;
@@ -114,11 +119,13 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	
 	public void infuseItem() {
 		if (canInfuse()) {
-			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.infusing();
+			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
 			
-			@SuppressWarnings("unused")
-			ItemStack[] ings = infusionRecipes.getInfusingIngredients(slots[0], slots[2], slots[3]);;
-			ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);
+			InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
+			if (recipe == null) return;
+			ArrayList<ItemStack> ingsArrayList = recipe.getInfusionMaterials();
+			ItemStack[] ings = ingsArrayList.toArray(new ItemStack[ingsArrayList.size()]); //TODO I still don't know what this was supposed to be. Perhaps for determining stack size?
+			ItemStack stack = recipe.getOutput();
 			if (slots[ContainerInfuser.OUTPUT] == null) {
 				slots[ContainerInfuser.OUTPUT] = stack.copy();
 			} else if (slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) {
@@ -130,8 +137,9 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			ItemStack temp3 = null;
 			if (slots[2] != null) temp2 = slots[2].copy();
 			if (slots[3] != null) temp3 = slots[3].copy();
-			if (slots[2] != null) slots[2].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], temp2, temp2, temp3);
-			if (slots[3] != null) slots[3].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], temp3, temp2, temp3);
+			//TODO Work that out
+			// if (slots[2] != null) slots[2].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], temp2, temp2, temp3);
+			// if (slots[3] != null) slots[3].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], temp3, temp2, temp3);
 			
 			if (slots[0].stackSize <= 0) slots[0] = null;
 			if (slots[2] != null) {
