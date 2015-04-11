@@ -1,130 +1,97 @@
 package com.zalthrion.zylroth.handler.recipe;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.ArrayList;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class InfusionRecipeHandler {
-	private static final InfusionRecipeHandler infusingBase = new InfusionRecipeHandler();
-	/** The list of infusing results. */
-	private HashMap<InfusionRecipeLib, Integer> recipeExperienceMap = new HashMap<InfusionRecipeLib, Integer>();
+	/** Instance of this class **/
+	private static final InfusionRecipeHandler instance = new InfusionRecipeHandler();
+	/** List of recipes **/
+	private ArrayList<InfusionRecipeLib> recipes = new ArrayList<InfusionRecipeLib>();
 	
-	public static InfusionRecipeHandler infusing() {
-		return infusingBase;
-	}
-	
-	public void addInfusion(ItemStack input, ItemStack output, ItemStack... infusionMaterials) {
-		addInfusion(input, output, 0, infusionMaterials);
-	}
-	
+	/**
+	 * Gets the instance of the class, this is where new {@link InfusionRecipeLib}'s are registered.
+	 * @return Instance of {@link InfusionRecipeHandler}
+	 */
+	public static InfusionRecipeHandler instance() { return instance; }
+	/**
+	 * Registers an infusion recipe.
+	 * @param input - Input ItemStack.
+	 * @param output - Output ItemStack.
+	 * @param experience - Experience for performing infusion.
+	 * @param infusionMaterials - Maximum of two, Item Stacks that you infuse the input with to get the output. Supports stack sizes.
+	 */
 	public void addInfusion(ItemStack input, ItemStack output, int experience, ItemStack... infusionMaterials) {
-		this.recipeExperienceMap.put(new InfusionRecipeLib(input, output, infusionMaterials), experience);
+		this.recipes.add(new InfusionRecipeLib(input, output, experience, infusionMaterials));
 	}
 	
-	public ItemStack[] getInfusingIngredients(ItemStack input, ItemStack... infusionMaterials) {
-		if (input.getItem() == null) return null;
-		recipe_loop: for (InfusionRecipeLib ir : recipeExperienceMap.keySet()) {
-			if (ir.getInput().getItem() == input.getItem()) {
-				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
-				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
-					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
-				}
-				matCheck: for (ItemStack enteredMat : infusionMaterials) {
-					if (enteredMat == null) continue matCheck;
-					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
-					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
-				}
-				for (Item item : reqInfMat.keySet()) {
-					boolean found = false;
-					matCheck: for (ItemStack stack : infusionMaterials) {
-						if (stack == null) continue matCheck;
-						if (stack.getItem() == item) found = true;
+	public static boolean arrayListContainsItemStack(ArrayList<ItemStack> list, ItemStack checkFor) {
+		for (ItemStack stack : list) {
+			if (stack.getItem() == checkFor.getItem()) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Is a recipe registered for the input and infusionMaterials?
+	 * @param input - ItemStack to be infused
+	 * @param infusionMaterials - Infusion Materials
+	 * @return Whether the ingredients will produce an infusion or not.
+	 */
+	public boolean isValidRecipe(ItemStack input, ItemStack... infusionMaterials) {
+		if (input == null) return false;
+		recipeLoop: for (InfusionRecipeLib recipe : this.recipes) {
+			if (!(recipe.getInput().getItem() == input.getItem())) continue recipeLoop;
+			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipe.getInfusionMaterials());
+			providedStacks: for (ItemStack provided : infusionMaterials) {
+				if (provided == null) continue providedStacks;
+				if (!arrayListContainsItemStack(recipeRequirements, provided)) return false;
+				rRLoop: for (ItemStack reqStack : recipeRequirements) {
+					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
+					if (provided.stackSize >= reqStack.stackSize) {
+						recipeRequirements.remove(reqStack);
+						continue providedStacks;
 					}
-					if (!found) continue recipe_loop;
 				}
-			} else {
-				continue recipe_loop;
 			}
-			return ir.getInfusionMaterials();
+			if (recipeRequirements.isEmpty()) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Gets the a copy of the recipe from an input and infusion materials.
+	 * Useful for manipulating stack sizes or giving experience later.
+	 * This runs isValidRecipe and returns null if no valid recipe is found.
+	 * @param input - Item to be infused
+	 * @param infusionMaterials - Infusion Materials
+	 * @return A copy of the recipe.
+	 */
+	public InfusionRecipeLib getRecipe(ItemStack input, ItemStack... infusionMaterials) {
+		if (input == null) return null;
+		recipeLoop: for (InfusionRecipeLib recipe : this.recipes) {
+			if (!(recipe.getInput().getItem() == input.getItem())) continue recipeLoop;
+			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipe.getInfusionMaterials());
+			providedStacks: for (ItemStack provided : infusionMaterials) {
+				if (provided == null) continue providedStacks;
+				if (!arrayListContainsItemStack(recipeRequirements, provided)) return null;
+				rRLoop: for (ItemStack reqStack : recipeRequirements) {
+					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
+					if (provided.stackSize >= reqStack.stackSize) {
+						recipeRequirements.remove(reqStack);
+						continue providedStacks;
+					}
+				}
+			}
+			if (recipeRequirements.isEmpty()) return recipe;
 		}
 		return null;
 	}
 	
-	public int getInfusingIngredientAmount(ItemStack input, ItemStack ing, ItemStack... infusionMaterials) {
-		if (input.getItem() == null) return 0;
-		recipe_loop: for (InfusionRecipeLib ir : recipeExperienceMap.keySet()) {
-			if (ir.getInput().getItem() == input.getItem()) {
-				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
-				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
-					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
-				}
-				matCheck: for (ItemStack enteredMat : infusionMaterials) {
-					if (enteredMat == null) continue matCheck;
-					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
-					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
-				}
-				for (Item item : reqInfMat.keySet()) {
-					boolean found = false;
-					matCheck: for (ItemStack stack : infusionMaterials) {
-						if (stack == null) continue matCheck;
-						if (stack.getItem() == item) found = true;
-					}
-					if (!found) continue recipe_loop;
-				}
-			} else {
-				continue recipe_loop;
-			}
-			for (ItemStack stack : ir.getInfusionMaterials()) {
-				if (stack.getItem() == ing.getItem()) { return stack.stackSize; }
-			}
-		}
-		return 0;
-	}
-	
-	/** Returns the infusing result of an item. */
-	public ItemStack getInfusingResult(ItemStack input, ItemStack... infusionMaterials) {
-		if (input.getItem() == null) return null;
-		recipe_loop: for (InfusionRecipeLib ir : recipeExperienceMap.keySet()) {
-			if (ir.getInput().getItem() == input.getItem()) {
-				HashMap<Item, Integer> reqInfMat = new HashMap<Item, Integer>();
-				for (ItemStack infusionMat : ir.getInfusionMaterials()) {
-					reqInfMat.put(infusionMat.getItem(), infusionMat.stackSize);
-				}
-				matCheck: for (ItemStack enteredMat : infusionMaterials) {
-					if (enteredMat == null) continue matCheck;
-					if (!reqInfMat.containsKey(enteredMat.getItem())) continue recipe_loop;
-					if (reqInfMat.get(enteredMat.getItem()) > enteredMat.stackSize) continue recipe_loop;
-				}
-				for (Item item : reqInfMat.keySet()) {
-					boolean found = false;
-					matCheck: for (ItemStack stack : infusionMaterials) {
-						if (stack == null) continue matCheck;
-						if (stack.getItem() == item) found = true;
-					}
-					if (!found) continue recipe_loop;
-				}
-			} else {
-				continue recipe_loop;
-			}
-			return ir.getOutput();
-		}
-		return null;
-	}
-	
-	public Set<InfusionRecipeLib> getInfusingList() {
-		return this.recipeExperienceMap.keySet();
-	}
-	
-	public float getInfusionExperience(ItemStack stack, ItemStack... infusionMaterials) {
-		/* float ret = stack.getItem().getSmeltingExperience(stack); if (ret !=
-		 * -1) return ret; Iterator iterator =
-		 * this.experienceList.entrySet().iterator(); Entry entry; do { if
-		 * (!iterator.hasNext()) { return 0.0F; } entry =
-		 * (Entry)iterator.next(); } while (!this.compareItemStacks(stack,
-		 * (ItemStack)entry.getKey())); return
-		 * ((Float)entry.getValue()).floatValue(); */
-		return 0F; // TODO Rework this
-	}
+	/**
+	 * All registered infusion recipes.
+	 * @return A copy of registered recipes.
+	 */
+	public ArrayList<InfusionRecipeLib> getInfusingList() { return new ArrayList<InfusionRecipeLib>(this.recipes); }
 }
