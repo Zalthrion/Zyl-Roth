@@ -22,7 +22,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 	
 	protected EntityTameable tameableHorse;
 	
-	protected NBTTagCompound tagCompund;
+	protected NBTTagCompound tagCompound;
 	
 	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
@@ -75,12 +75,12 @@ public class MountBaseHorse extends EntityTameableHorse {
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		super.readEntityFromNBT(tagCompund);
 		
-		this.tagCompund = tagCompund;
+		this.tagCompound = tagCompund;
 		this.setHorseTamed(tagCompund.getBoolean("Tame"));
 		this.setHorseSaddled(tagCompund.getBoolean("Saddled"));
 		this.isSummoned(tagCompund.getBoolean("Summoned"));
 		
-		this.tagCompund.getBoolean("Summoned");
+		this.tagCompound.getBoolean("Summoned");
 		
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
 			this.func_152120_b(tagCompund.getString("OwnerUUID"));
