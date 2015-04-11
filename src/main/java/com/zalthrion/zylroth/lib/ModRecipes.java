@@ -40,18 +40,9 @@ public final class ModRecipes {
 	
 	public static void registerInfusionRecipes() {
 		
-		// InfusionRecipeHandler.infusing().addInfusion(new
-		// ItemStack(Items.iron_axe), new ItemStack(Items.iron_horse_armor), new
-		// ItemStack(Items.apple, 2, 0), new ItemStack(Items.carrot, 3, 0));
+//		InfusionRecipeHandler.infusing().addInfusion(new ItemStack(Items.iron_axe), new ItemStack(Items.iron_horse_armor), new ItemStack(Items.apple, 2, 0), new ItemStack(Items.carrot, 3, 0));
 		
-		// TODO Add the ability to use two of the same items on infusion
-		// InfusionRecipeHandler.infusing().addInfusion(new
-		// ItemStack(ModItems.Soul_Essence), new
-		// ItemStack(ModItems.Cursed_Soul_Essence), new
-		// ItemStack(ModItems.Raw_Tenebrae, 1, 0), new
-		// ItemStack(ModItems.Raw_Tenebrae, 1, 0));
-		
-		InfusionRecipeHandler.infusing().addInfusion(new ItemStack(ModBlocks.Tenebrae_Block), new ItemStack(ModBlocks.Infused_Tenebrae), new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Soul_Essence, 1, 0));
+		InfusionRecipeHandler.infusing().addInfusion(new ItemStack(ModItems.Soul_Essence), new ItemStack(ModItems.Cursed_Soul_Essence), new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Raw_Tenebrae, 1, 0));
 		
 	}
 }

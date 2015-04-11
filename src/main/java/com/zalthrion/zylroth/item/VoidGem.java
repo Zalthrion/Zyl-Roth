@@ -10,5 +10,4 @@ public class VoidGem extends ItemBase {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}
-	
 }

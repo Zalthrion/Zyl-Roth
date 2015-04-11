@@ -3,11 +3,8 @@ package com.zalthrion.zylroth.lib;
 import net.minecraft.item.Item;
 
 import com.zalthrion.zylroth.item.*;
-import com.zalthrion.zylroth.item.mount.*;
 
 public final class ModItems {
-	
-	//Tenebrae
 	
 	public static Item Raw_Tenebrae;
 	
@@ -19,21 +16,11 @@ public final class ModItems {
 	
 	public static Item Unstable_Tenebrae_Essence;
 	
-	
-	//Mounts
-	
-	public static Item SC_Deathcharger;
-	
-	public static Item SC_PlaguedHorse;
-	
-	
-	//Others
-	
-	public static Item Dark_Shard;
-	
 	public static Item Soul_Essence;
 	
 	public static Item Cursed_Soul_Essence;
+	
+	public static Item Dark_Shard;
 	
 	public static Item Test_Item;
 	
@@ -41,9 +28,8 @@ public final class ModItems {
 	
 	public static Item Void_Gem;
 	
+	
 	public static void init() {
-		
-		//Tenebrae
 		
 		Raw_Tenebrae = new RawTenebrae();
 		
@@ -55,21 +41,11 @@ public final class ModItems {
 		
 		Unstable_Tenebrae_Essence = new UnstableTenebraeEssence();
 		
-		
-		//Mounts
-		
-		SC_Deathcharger = new SCDeathcharger();
-		
-		SC_PlaguedHorse = new SCPlaguedHorse();
-		
-		
-		//Others
-		
-		Dark_Shard = new DarkShard();
-		
 		Soul_Essence = new SoulEssence();
 		
 		Cursed_Soul_Essence = new CursedSoulEssence();
+		
+		Dark_Shard = new DarkShard();
 		
 		Test_Item = new TestItem();
 		

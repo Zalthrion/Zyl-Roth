@@ -28,10 +28,8 @@ public class ContainerInfuser extends ContainerBase {
 		
 		this.addSlotToContainer(new Slot(tile, INPUT, 34, 27)); // Input
 		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 27)); // Output
-		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 1)); // First
-																	// Fuel
-		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 55)); // Second
-																		// Fuel
+		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 1)); // First Fuel
+		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 55)); // Second Fuel
 		
 		bindPlayerInventory(inventoryPlayer);
 	}

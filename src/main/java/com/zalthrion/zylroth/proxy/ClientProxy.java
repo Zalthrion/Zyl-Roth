@@ -1,13 +1,10 @@
 package com.zalthrion.zylroth.proxy;
 
 import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.mount.*;
 import com.zalthrion.zylroth.model.entity.*;
-import com.zalthrion.zylroth.model.entity.mount.*;
 import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.render.BlockTESRRenderer;
 import com.zalthrion.zylroth.render.entity.*;
-import com.zalthrion.zylroth.render.entity.mount.*;
 import com.zalthrion.zylroth.render.tile.*;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
@@ -30,14 +27,6 @@ public class ClientProxy extends CommonProxy {
 	public void registerRenderers() {
 		float shadowSize = 0.5F;
 		
-		
-		// ANIMALS
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(new ModelBird(), shadowSize, shadowSize));
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(new ModelRainbowPig(), shadowSize));
-
-		
 		// MOBS
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityMutantTenebraeGolem.class, new RenderMutantTenebraeGolem(new ModelMutantTenebraeGolem(), shadowSize));
@@ -47,17 +36,14 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(new ModelUndead(), shadowSize, shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(new ModelUndead(), shadowSize, shadowSize));
-				
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(new ModelBird(), shadowSize, shadowSize));
+		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGolem.class, new RenderTenebraeGolem(new ModelTenebraeGolem(), shadowSize));
-				
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(new ModelRainbowPig(), shadowSize));
+		
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidDragon.class, new RenderVoidDragon());
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletalHorse.class, new RenderSkeletalHorse(new ModelSkeletalHorse(), shadowSize));
-		
-		
-		//MOUNTS
-		
-		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new RenderDeathStrider (new ModelDeathStrider(), shadowSize));
 		
 	}
 	

@@ -33,7 +33,7 @@ public class WorldStructureGenerator implements IWorldGenerator {
 	}
 	
 	private void GenerateOverworld(Random random, int x, int z, World world) {
-		
+
 	}
 	
 	private void GenerateNether(Random random, int x, int z, World world) {
@@ -45,10 +45,11 @@ public class WorldStructureGenerator implements IWorldGenerator {
 	}
 	
 	private void GenerateKyrul(Random random, int x, int z, World world) {
-		
-		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
-		if (biomegenbase == ModBiomes.VoidMountains) {
-			for (int k = 0; k < 2; k ++) {
+
+		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);	
+		if (biomegenbase == ModBiomes.VoidMountains ) {
+			for(int k = 0; k < 2; k++) {
+				System.out.println("Generating Structure");
 				int RandPosX = x + random.nextInt(16);
 				int RandPosY = random.nextInt(90);
 				int RandPosZ = z + random.nextInt(16);
