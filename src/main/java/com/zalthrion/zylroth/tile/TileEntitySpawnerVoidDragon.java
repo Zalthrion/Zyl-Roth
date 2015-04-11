@@ -11,20 +11,18 @@ import net.minecraft.util.MathHelper;
 public class TileEntitySpawnerVoidDragon extends TileEntity {
 	
 	private int activationRange = 16;
-
+	
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
 	}
-
+	
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(xCoord + 0.5D,
-				yCoord + 0.5D, zCoord + 0.5D,
-				activationRange) != null;
+		return worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, activationRange) != null;
 	}
-
+	
 	@Override
 	public void updateEntity() {
 		if (!worldObj.isRemote && isActivated()) {

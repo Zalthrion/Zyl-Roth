@@ -29,7 +29,7 @@ public class TestItem2 extends ItemBase {
 				EntityPlayerMP playerMP = (EntityPlayerMP) player;
 				
 				WorldServer ws = playerMP.mcServer.worldServerForDimension(48);
-								
+				
 				Teleporter teleporter = new SpecialTeleporter(ws);
 				
 				if (!(player.dimension == 48)) {
