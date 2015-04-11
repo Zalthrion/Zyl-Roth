@@ -1,5 +1,9 @@
 package com.zalthrion.zylroth.proxy;
 
+import com.zalthrion.zylroth.event.PlayerEventHandler;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+
 public class CommonProxy implements IProxy {
 	
 	@Override
@@ -24,5 +28,6 @@ public class CommonProxy implements IProxy {
 	
 	@Override
 	public void init() { // For registering stuff on the init
+		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 	}
 }

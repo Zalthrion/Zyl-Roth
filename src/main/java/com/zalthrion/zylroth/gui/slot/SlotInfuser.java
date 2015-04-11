@@ -1,13 +1,9 @@
 package com.zalthrion.zylroth.gui.slot;
 
-import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
-
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 
 public class SlotInfuser extends Slot {
 	/** The player that is using the GUI where this slot resides. */
@@ -47,10 +43,10 @@ public class SlotInfuser extends Slot {
 	
 	@Override
 	protected void onCrafting(ItemStack stack) {
-		stack.onCrafting(thePlayer.worldObj, thePlayer, amount_crafted);
+/*		stack.onCrafting(thePlayer.worldObj, thePlayer, amount_crafted);
 		if (!thePlayer.worldObj.isRemote) {
 			int i = amount_crafted;
-			float f = InfusionRecipeHandler.infusing().getInfusionExperience(stack);
+			float f = InfusionRecipeHandler.instnace().getInfusionExperience(stack);
 			int j;
 			
 			if (f == 0.0F) {
@@ -71,6 +67,6 @@ public class SlotInfuser extends Slot {
 			}
 		}
 		
-		amount_crafted = 0;
+		amount_crafted = 0;*/
 	}
 }
