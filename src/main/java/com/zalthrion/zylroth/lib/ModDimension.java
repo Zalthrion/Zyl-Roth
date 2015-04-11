@@ -10,11 +10,11 @@ public class ModDimension {
 	
 	public static final int dimensionId_Iridis = 48;
 	
-	public static void init(){
+	public static void init() {
 		registerDimension();
 	}
 	
-	public static void registerDimension(){
+	public static void registerDimension() {
 		
 		DimensionManager.registerProviderType(dimensionId_Kyrul, WorldProviderKyrul.class, false);
 		DimensionManager.registerDimension(dimensionId_Kyrul, dimensionId_Kyrul);

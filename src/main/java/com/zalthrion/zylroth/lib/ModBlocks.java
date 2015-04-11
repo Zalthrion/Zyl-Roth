@@ -31,7 +31,7 @@ public final class ModBlocks {
 	
 	public static void registerBlocks() {
 		
-		//Tenebrae
+		// Tenebrae
 		
 		Tenebrae_Ore = new TenebraeOre();
 		Tenebrae_Block = new TenebraeBlock();
@@ -39,18 +39,15 @@ public final class ModBlocks {
 		Chiseled_Tenebrae = new ChiseledTenebrae();
 		Infused_Tenebrae = new InfusedTenebrae();
 		
-		
-		//Ambient
+		// Ambient
 		
 		Ash_Block = new AshBlock();
 		
-		
-		//Spawners
+		// Spawners
 		
 		Spawner_VoidDragon = new SpawnerVoidDragon();
 		GameRegistry.registerBlock(ModBlocks.Spawner_VoidDragon, "spawnerVoidDragon");
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "Spawner Void Dragon");
-		
 		
 		// Infuser
 		

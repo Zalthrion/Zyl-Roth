@@ -15,32 +15,10 @@ public class BlockBase extends Block {
 	public BlockBase(Material material) {
 		super(material);
 	}
-
-/*	public BlockBase() {
-		this(Material.rock);
-	}
-	
-	public BlockBase(boolean setCreativeTab) {
-		this(Material.rock, setCreativeTab);
-	}
-	
-	public BlockBase(Material material) {
-		this(material, true);
-	}*/
 	
 	public BlockBase(Material material, boolean setCreativeTab) {
 		super(material);
 		if (setCreativeTab) this.setCreativeTab(ModTabs.ZylRoth);
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
 	}
 	
 	@Override
@@ -62,4 +40,5 @@ public class BlockBase extends Block {
 		this.setUnlocalizedName(name);
 		this.setTextureName(Reference.MOD_ID + ":" + name);
 	}
+	
 }

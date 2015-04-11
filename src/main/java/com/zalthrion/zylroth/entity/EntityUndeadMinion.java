@@ -25,12 +25,7 @@ import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityUndeadMinion extends EntityMob {
-	
-	private int attackTimer;
 	
 	public EntityUndeadMinion(World world) {
 		super(world);
@@ -59,7 +54,7 @@ public class EntityUndeadMinion extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.05D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
@@ -68,37 +63,32 @@ public class EntityUndeadMinion extends EntityMob {
 	
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
+		
 		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
-
-		if(!KyrulMinions) {
-			this.attackTimer = 10;
+		
+		if (!KyrulMinions) {
 			this.worldObj.setEntityState(this, (byte) 4);
 			
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+			 boolean flag = entity.attackEntityFrom(
+			 DamageSource.causeMobDamage(this), (float) (7 +
+			 this.rand.nextInt(15))); if (flag) { entity.motionY += 0.1D; }
 			
-			if (flag) {
-				entity.motionY += 0.1D;
-			}
-			
-			if(entity instanceof EntityPlayer){
+			if (entity instanceof EntityPlayer) {
 				
-				double meleeDistance = 8;
-				double dx = this.posX - posX;
-				double dz = this.posZ - posZ;
-				boolean isInMeleeDistance = dx * dx + dz * dz <= meleeDistance * meleeDistance;
+				EntityPlayer player = (EntityPlayer) entity;
+
+				boolean hasArmor = true;
+				for (int i = 0; i < 4; i ++) {
+					if (player.inventory.armorInventory[i] != null) hasArmor = false;
+				}
 				
-				if (isInMeleeDistance) {
-					this.playSound("mob.blaze.hit", 1.0F, 1.0F);
+				if (!player.worldObj.isRemote && !hasArmor) {
+					this.playSound("mob.blaze.hit", 0.3F, 1.0F);
 				}
 			}
 		}
 		
 		return KyrulMinions;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public int getAttackTimer() {
-		return this.attackTimer;
 	}
 	
 	/** Returns the sound this mob makes while it's alive. */
@@ -122,7 +112,7 @@ public class EntityUndeadMinion extends EntityMob {
 	@Override
 	protected void collideWithEntity(Entity entity) {
 		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
-
+		
 		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(KyrulMinions)) {
 			this.setAttackTarget((EntityLivingBase) entity);
 		}

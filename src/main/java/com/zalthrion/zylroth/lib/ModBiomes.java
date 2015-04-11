@@ -25,12 +25,12 @@ public class ModBiomes {
 	
 	public static BiomeGenBase RainbowForest;
 	
-	public static void init(){
+	public static void init() {
 		initBiomes();
 		registerBiomes();
 	}
 	
-	public static void initBiomes(){
+	public static void initBiomes() {
 		
 		DreadWastes = new BiomeGenDreadWastes(180);
 		
@@ -51,7 +51,7 @@ public class ModBiomes {
 		
 	}
 	
-	public static void registerBiomes(){
+	public static void registerBiomes() {
 		
 		BiomeDictionary.registerBiomeType(DreadWastes, Type.PLAINS);
 		BiomeDictionary.registerBiomeType(HauntedForest, Type.FOREST);
@@ -63,7 +63,7 @@ public class ModBiomes {
 		BiomeDictionary.registerBiomeType(SapphireOcean, Type.OCEAN);
 		BiomeDictionary.registerBiomeType(RainbowForest, Type.MAGICAL);
 		
-//		BiomeManager.addSpawnBiome(DreadWastes);
+		// BiomeManager.addSpawnBiome(DreadWastes);
 		
 	}
 	
