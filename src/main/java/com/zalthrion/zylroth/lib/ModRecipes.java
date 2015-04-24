@@ -2,10 +2,6 @@ package com.zalthrion.zylroth.lib;
 
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 
-<<<<<<< HEAD
-=======
-import net.minecraft.init.Blocks;
->>>>>>> origin/master
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -44,7 +40,6 @@ public final class ModRecipes {
 		
 	}
 	
-<<<<<<< HEAD
 	public static void registerArmorRecipes() {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Helmet), "III", "IEI", 'I', ModItems.Tenebrae_Ingot);
@@ -57,10 +52,5 @@ public final class ModRecipes {
 	public static void registerInfusionRecipes() {
 //		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.wool), new ItemStack(Blocks.planks), 0, new ItemStack(Items.nether_star, 2, 0), new ItemStack(Items.arrow, 3, 0));
 		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModBlocks.Tenebrae_Block), new ItemStack(ModBlocks.Infused_Tenebrae), 0, new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Soul_Essence, 1, 0));
-=======
-	public static void registerInfusionRecipes() {
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.wool), new ItemStack(Blocks.planks), 0, new ItemStack(Items.nether_star, 2, 0), new ItemStack(Items.arrow, 3, 0));
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModItems.Soul_Essence), new ItemStack(ModItems.Cursed_Soul_Essence), 0, new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Raw_Tenebrae, 1, 0));
->>>>>>> origin/master
 	}
 }

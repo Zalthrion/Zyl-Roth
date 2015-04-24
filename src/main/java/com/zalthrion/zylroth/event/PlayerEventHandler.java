@@ -7,11 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
 
-<<<<<<< HEAD
 import com.zalthrion.zylroth.entity.mount.*;
-=======
-import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
->>>>>>> origin/master
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -21,19 +17,13 @@ public class PlayerEventHandler {
 	@SubscribeEvent public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-<<<<<<< HEAD
 		
-=======
->>>>>>> origin/master
 		if (persistentData.hasKey("ownsMountDeathcharger")) {
 			UUID ownedHorse = UUID.fromString(persistentData.getString("ownsMountDeathcharger"));
 			persistentData.removeTag("ownsMountDeathcharger");
 			WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
 			for (WorldServer world : worlds) {
-<<<<<<< HEAD
 				@SuppressWarnings("rawtypes")
-=======
->>>>>>> origin/master
 				Iterator iterator = world.loadedEntityList.iterator();
 				while (iterator.hasNext()) {
 					Object obj = iterator.next();
@@ -44,7 +34,6 @@ public class PlayerEventHandler {
 				}
 			}
 		}
-<<<<<<< HEAD
 		
 		if (persistentData.hasKey("ownsMountPlaguedHorse")) {
 			UUID ownedHorse = UUID.fromString(persistentData.getString("ownsMountPlaguedHorse"));
@@ -62,7 +51,5 @@ public class PlayerEventHandler {
 				}
 			}
 		}
-=======
->>>>>>> origin/master
 	}
 }
