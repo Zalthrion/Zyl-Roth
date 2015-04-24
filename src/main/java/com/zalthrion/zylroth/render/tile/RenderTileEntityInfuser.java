@@ -19,14 +19,21 @@ public class RenderTileEntityInfuser extends TileEntitySpecialRenderer {
 	}
 	
 	@Override
-	public void renderTileEntityAt(TileEntity te, double dx, double dy, double dz, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+		
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) dx + 0.5F, (float) dy + 1.5F, (float) dz + 0.5F);
+		
+		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
+		
 		this.bindTexture(Infuser);
-		GL11.glPushMatrix();
-		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+		
 		this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		
 		GL11.glPopMatrix();
-		GL11.glPopMatrix();
+		
 	}
+	
+	//TODO Rotations
+	
 }

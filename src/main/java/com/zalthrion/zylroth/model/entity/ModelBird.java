@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
-/** Fish Model - Zalthrion Created using Tabula 4.1.0 */
+/** Bird Model - Zalthrion Created using Tabula 4.1.0 */
 public class ModelBird extends ModelBase {
 	public ModelRenderer Body;
 	public ModelRenderer Head;
@@ -172,7 +172,7 @@ public class ModelBird extends ModelBase {
 	
 	/** not actually sure this is size, is not used as of now, but the model
 	 * would be recreated if the value changed and it seems a good match for a
-	 * bats size */
+	 * bird size */
 	public int getBirdSize() {
 		return 36;
 	}

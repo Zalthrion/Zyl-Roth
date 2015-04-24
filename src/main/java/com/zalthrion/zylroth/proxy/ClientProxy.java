@@ -35,7 +35,7 @@ public class ClientProxy extends CommonProxy {
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(new ModelBird(), shadowSize, shadowSize));
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(new ModelRainbowPig(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(new ModelRainbowPig(), new ModelRainbowPig(), shadowSize));
 
 		
 		// MOBS
@@ -57,8 +57,10 @@ public class ClientProxy extends CommonProxy {
 		
 		//MOUNTS
 		
-		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new RenderDeathStrider (new ModelDeathStrider(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new RenderDeathcharger(new ModelDeathcharger(), shadowSize));
 		
+		RenderingRegistry.registerEntityRenderingHandler(MountPlaguedHorse.class, new RenderPlaguedHorse(new ModelPlaguedHorse(), shadowSize));
+
 	}
 	
 	public void registerBlockRenderers() {

@@ -1,5 +1,8 @@
 package com.zalthrion.zylroth.tile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -10,6 +13,7 @@ import net.minecraft.nbt.NBTTagList;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.container.ContainerInfuser;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
+import com.zalthrion.zylroth.handler.recipe.InfusionRecipeLib;
 import com.zalthrion.zylroth.lib.ModItems;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -69,12 +73,13 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 				if (isBurning()) {
 					flag1 = true;
 					
-					if (slots[ContainerInfuser.FIRST_FUEL] != null) {
-						-- slots[ContainerInfuser.FIRST_FUEL].stackSize;
-						if (slots[ContainerInfuser.FIRST_FUEL].stackSize == 0) {
-							slots[ContainerInfuser.FIRST_FUEL] = slots[ContainerInfuser.FIRST_FUEL].getItem().getContainerItem(slots[ContainerInfuser.FIRST_FUEL]);
-						}
-					}
+					/* if (slots[ContainerInfuser.FIRST_FUEL] != null) { --
+					 * slots[ContainerInfuser.FIRST_FUEL].stackSize; if
+					 * (slots[ContainerInfuser.FIRST_FUEL].stackSize == 0) {
+					 * slots[ContainerInfuser.FIRST_FUEL] =
+					 * slots[ContainerInfuser
+					 * .FIRST_FUEL].getItem().getContainerItem
+					 * (slots[ContainerInfuser.FIRST_FUEL]); } } */
 				}
 			}
 			
@@ -103,9 +108,10 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	private boolean canInfuse() {
 		if (slots[0] == null) return false;
 		if (slots[2] == null && slots[3] == null) return false;
-		InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.infusing();
-		ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);;
-		if (stack == null) return false;
+		InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
+		InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
+		if (recipe == null) return false;
+		ItemStack stack = recipe.getOutput();
 		if (slots[ContainerInfuser.OUTPUT] == null) return true;
 		if (!slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) return false;
 		int result = slots[ContainerInfuser.OUTPUT].stackSize + stack.stackSize;
@@ -114,11 +120,11 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	
 	public void infuseItem() {
 		if (canInfuse()) {
-			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.infusing();
+			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
 			
-			@SuppressWarnings("unused")
-			ItemStack[] ings = infusionRecipes.getInfusingIngredients(slots[0], slots[2], slots[3]);;
-			ItemStack stack = infusionRecipes.getInfusingResult(slots[0], slots[2], slots[3]);
+			InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
+			if (recipe == null) return;
+			ItemStack stack = recipe.getOutput();
 			if (slots[ContainerInfuser.OUTPUT] == null) {
 				slots[ContainerInfuser.OUTPUT] = stack.copy();
 			} else if (slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) {
@@ -126,12 +132,33 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 			
 			-- slots[ContainerInfuser.INPUT].stackSize;
-			ItemStack temp2 = null;
-			ItemStack temp3 = null;
-			if (slots[2] != null) temp2 = slots[2].copy();
-			if (slots[3] != null) temp3 = slots[3].copy();
-			if (slots[2] != null) slots[2].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], temp2, temp2, temp3);
-			if (slots[3] != null) slots[3].stackSize -= infusionRecipes.getInfusingIngredientAmount(slots[0], temp3, temp2, temp3);
+			// TODO Work this out.
+			InfusionRecipeLib recipeCopy = recipe.copy();
+			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipeCopy.getInfusionMaterials());
+			HashMap<Integer, ItemStack> providedStacks = new HashMap<Integer, ItemStack>() {
+				private static final long serialVersionUID = 1L;
+				{
+					if (slots[2] != null) put(2, slots[2].copy());
+					if (slots[3] != null) put(3, slots[3].copy());
+				}
+			};
+			providedStacks: for (ItemStack provided : providedStacks.values()) {
+				if (provided == null) continue providedStacks;
+				if (!InfusionRecipeHandler.arrayListContainsItemStack(recipeRequirements, provided)) break providedStacks; // Something
+																															// went
+																															// wrong
+				rRLoop: for (ItemStack reqStack : recipeRequirements) {
+					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
+					if (provided.stackSize >= reqStack.stackSize) {
+						provided.stackSize -= reqStack.stackSize;
+						recipeRequirements.remove(reqStack);
+						continue providedStacks;
+					}
+				}
+			}
+			
+			if (slots[2] != null) slots[2] = providedStacks.get(2);
+			if (slots[3] != null) slots[3] = providedStacks.get(3);
 			
 			if (slots[0].stackSize <= 0) slots[0] = null;
 			if (slots[2] != null) {

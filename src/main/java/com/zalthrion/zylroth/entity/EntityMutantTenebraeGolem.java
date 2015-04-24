@@ -13,6 +13,8 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +28,7 @@ import com.zalthrion.zylroth.lib.ModItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMutantTenebraeGolem extends EntityGolem {
+public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDisplayData {
 	private int attackTimer;
 	
 	public EntityMutantTenebraeGolem(World world) {
@@ -41,6 +43,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem {
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
 	}
 	
@@ -59,9 +62,9 @@ public class EntityMutantTenebraeGolem extends EntityGolem {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(275.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
 		this.getCustomNameTag();
 		
 	}
@@ -101,6 +104,10 @@ public class EntityMutantTenebraeGolem extends EntityGolem {
 			if (block.getMaterial() != Material.air) {
 				this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(i, j, k), this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
 			}
+		}
+		
+		if (worldObj.isRemote) {
+			BossStatus.setBossStatus(this, true);
 		}
 	}
 	
@@ -147,7 +154,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem {
 	/** Returns the sound this mob makes when it is hurt. */
 	@Override
 	protected String getHurtSound() {
-		return "mob.irongolem.hit";
+		return "random.anvil_land";
 	}
 	
 	/** Returns the sound this mob makes on death. */
@@ -167,7 +174,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem {
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.Unstable_Tenebrae_Essence, 1);
+		this.dropItem(ModItems.Void_Gem, 1);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		

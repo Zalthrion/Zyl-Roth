@@ -68,7 +68,8 @@ public class ModEntity {
 		EntityRegistry.registerModEntity(MountDeathcharger.class, "Deathcharger", 10, this, 80, 4, true);
 		
 		EntityRegistry.registerModEntity(MountPlaguedHorse.class, "Plagued Horse", 11, this, 80, 4, true);
-
+		
+		
 	}
 	
 	public static void init() {
@@ -108,6 +109,7 @@ public class ModEntity {
 		registerEntity(MountDeathcharger.class, Reference.MOD_ID + ":" + "Deathcharger");
 		
 		registerEntity(MountPlaguedHorse.class, Reference.MOD_ID + ":" + "Plagued_Horse");
+		
 
 	}
 }

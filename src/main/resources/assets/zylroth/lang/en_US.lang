@@ -2,17 +2,19 @@
 itemGroup.Zyl'Roth=Zyl'Roth
 
 tooltip.zylroth:shift=- Hold Shift for more info -
+
 tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=The life source of a mechanical creature.
 tooltip.zylroth:head=It seems just like an odd piece of architecture.
 tooltip.zylroth:tenebrae=You can feel darkness coming out from it...
+tooltip.zylroth:tenebrae_armor=Made of a resistant material, seems like is more durable than diamond..
 
 tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
 tile.zylroth:infusedTenebrae.name=Infused Tenebrae
-tile.zylroth:tenebraeBlock.name=Tenebrae Block
-tile.zylroth:tenebraeCore.name=Tenebrae Core
 tile.zylroth:infuserMachine.name=Tenebrae Infuser
 tile.zylroth:infuserMachineActive.name=Tenebrae Infuser [Active]
+tile.zylroth:tenebraeBlock.name=Tenebrae Block
+tile.zylroth:tenebraeCore.name=Tenebrae Core
 tile.zylroth:tenebraeOre.name=Tenebrae Ore
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
@@ -21,18 +23,30 @@ entity.zylroth:Bird.name=Bird
 entity.zylroth:Mutant_Tenebrae_Golem.name=Mutant Tenebrae Golem
 entity.zylroth:Pyro_Knight.name=Pyro Knight
 entity.zylroth:Rainbow_Pig.name=Rainbow Pig
+entity.zylroth:Skeletal_Horse.name=Skeletal Horse
+entity.zylroth:Tenebrae_Golem.name=Tenebrae Golem
 entity.zylroth:Undead_Minion.name=Undead Minion
 entity.zylroth:Undead_Warrior.name=Undead Warrior
-entity.zylroth:Tenebrae_Golem.name=Tenebrae Golem
 entity.zylroth:Void_Dragon.name=Void Dragon
+
+entity.zylroth:Deathcharger.name=Deathcharger
+entity.zylroth:Plagued_Horse.name=Plagued Horse
+
+item.zylroth:darkShard.name=Dark Shard
+item.zylroth:tenebraeIngot.name=Tenebrae Ingot
 
 item.zylroth:rawTenebrae.name=Raw Tenebrae
 item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
-item.zylroth:tenebraeIngot.name=Tenebrae Ingot
-item.zylroth:unstableTenebraeEssence.name=Unstable Tenebrae Essence
-item.zylroth:purifiedTenebraeEssence.name=Purified Tenebrae Essence
+
 item.zylroth:soulEssence.name=Soul Essence
 item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
-item.zylroth:darkShard.name=Dark Shard
-item.zylroth:testItem.name=Test Item
-item.zylroth:testItem2.name=Test Item 2
+
+item.zylroth:unstableTenebraeEssence.name=Unstable Tenebrae Essence
+item.zylroth:purifiedTenebraeEssence.name=Purified Tenebrae Essence
+
+item.zylroth:rainbowTalisman.name=Rainbow Talisman
+item.zylroth:voidTalisman.name=Void Talisman
+
+item.zylroth:emptySummoningCrystal.name=Empty Summoning Crystal
+item.zylroth:SC_Deathcharger.name=(Summoning Crystal) Deathcharger
+item.zylroth:SC_PlaguedHorse.name=(Summoning Crystal) Plagued Horse

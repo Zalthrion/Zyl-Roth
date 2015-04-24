@@ -3,7 +3,6 @@ package com.zalthrion.zylroth.block.machine;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -11,7 +10,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -66,12 +64,6 @@ public class InfuserMachine extends BlockBaseContainer {
 	@Override
 	public Item getItemDropped(int meta, Random random, int fortune) {
 		return Item.getItemFromBlock(ModBlocks.Infuser_Idle);
-	}
-	
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
 	}
 	
 	public static void updateBlockState(boolean active, World world, int x, int y, int z) {
@@ -145,4 +137,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		
 		super.breakBlock(world, x, y, z, block, meta);
 	}
+	
+	//TODO Rotations
+	
 }

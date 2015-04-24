@@ -1,12 +1,12 @@
 package com.zalthrion.zylroth.block.machine;
 
-import com.zalthrion.zylroth.block.BlockBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.zalthrion.zylroth.block.BlockBase;
 
 public class BlockBaseContainer extends BlockBase implements ITileEntityProvider {
 	
@@ -50,4 +50,5 @@ public class BlockBaseContainer extends BlockBase implements ITileEntityProvider
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return null;
 	}
+	
 }

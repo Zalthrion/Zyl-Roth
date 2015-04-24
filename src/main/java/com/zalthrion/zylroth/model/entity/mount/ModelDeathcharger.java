@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 
 @SideOnly(Side.CLIENT)
-public class ModelDeathStrider extends ModelBase {
+public class ModelDeathcharger extends ModelBase {
 	private ModelRenderer head;
 	private ModelRenderer mouthTop;
 	private ModelRenderer mouthBottom;
@@ -61,7 +61,7 @@ public class ModelDeathStrider extends ModelBase {
 	private ModelRenderer horseLeftRein;
 	private ModelRenderer horseRightRein;
 	
-	public ModelDeathStrider() {
+	public ModelDeathcharger() {
 		this.textureWidth = 128;
 		this.textureHeight = 128;
 		this.body = new ModelRenderer(this, 0, 34);

@@ -39,6 +39,8 @@ public class Zylroth {
 		ModItems.init();
 
 		ModBlocks.init();
+		
+		ModArmors.init();
 
 		ModBiomes.init();
 				
@@ -60,6 +62,8 @@ public class Zylroth {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		
 		ModEntity.init();
+		
+		ModOreDictionary.init();
 		
 		ModRecipes.init();
 		

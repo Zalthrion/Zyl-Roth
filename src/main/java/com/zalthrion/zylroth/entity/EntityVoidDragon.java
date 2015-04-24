@@ -6,9 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.EntityDragonPart;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -16,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IBossDisplayData {
+public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 	
 	private Entity entity;
 	boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
@@ -279,10 +277,6 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IBo
 				entitydragonpart.onUpdate();
 				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
-		}
-		
-		if (worldObj.isRemote) {
-			BossStatus.setBossStatus(this, true);
 		}
 	}
 	

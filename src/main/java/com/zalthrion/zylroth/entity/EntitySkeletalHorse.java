@@ -22,7 +22,7 @@ public class EntitySkeletalHorse extends EntityHorse {
 	/** Returns true if the horse is an Undead horse */
 	@Override
 	public boolean isUndead() {
-		return false;
+		return true;
 	}
 	
 	/** Returns true if the rider of the entity should be dismounted on water */

@@ -1,7 +1,6 @@
 package com.zalthrion.zylroth.entity.mount;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -20,9 +19,9 @@ public class MountBaseHorse extends EntityTameableHorse {
 	
 	protected EntityPlayer player;
 	
-	protected EntityTameable tameableHorse;
+	protected EntityTameableHorse tameableHorse;
 	
-	protected NBTTagCompound tagCompund;
+	protected NBTTagCompound tagCompound;
 	
 	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
@@ -75,12 +74,12 @@ public class MountBaseHorse extends EntityTameableHorse {
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		super.readEntityFromNBT(tagCompund);
 		
-		this.tagCompund = tagCompund;
+		this.tagCompound = tagCompund;
 		this.setHorseTamed(tagCompund.getBoolean("Tame"));
 		this.setHorseSaddled(tagCompund.getBoolean("Saddled"));
 		this.isSummoned(tagCompund.getBoolean("Summoned"));
 		
-		this.tagCompund.getBoolean("Summoned");
+		this.tagCompound.getBoolean("Summoned");
 		
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
 			this.func_152120_b(tagCompund.getString("OwnerUUID"));
@@ -119,24 +118,13 @@ public class MountBaseHorse extends EntityTameableHorse {
 	/** Returns true if the entity can despawn */
 	@Override
 	protected boolean canDespawn() {
-		
-		if (this.isTame()) {
-			return false;
-		}
-		
-		else return true;
+		return false;
 	}
 	
 	/** Checks if the entity can be leashed or not */
 	@Override
 	public boolean allowLeashing() {
-		
-		if (this.isSummoned) {
-			
-			return false;
-		}
-		
-		else return super.allowLeashing();
+		return false;
 	}
 	
 	/** Checks if the entity is invulnerable or not */

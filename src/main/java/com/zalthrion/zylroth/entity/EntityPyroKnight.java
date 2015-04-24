@@ -56,10 +56,9 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-//		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(650.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(450.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(20.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(25.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.4D);
 	}

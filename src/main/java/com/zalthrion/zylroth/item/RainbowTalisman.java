@@ -11,11 +11,12 @@ import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TestItem2 extends ItemBase {
+public class RainbowTalisman extends ItemBase {
 	
-	private String name = "testItem2";
+	private String name = "rainbowTalisman"
+			+ "";
 	
-	public TestItem2() {
+	public RainbowTalisman() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}
@@ -32,12 +33,12 @@ public class TestItem2 extends ItemBase {
 				
 				Teleporter teleporter = new SpecialTeleporter(ws);
 				
-				if (!(player.dimension == 48)) {
+				if (!(player.dimension == 48) && player.ridingEntity == null) {
 					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 48, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}
 				
-				else if (player.dimension == 48) {
+				else if (player.dimension == 48 && player.ridingEntity == null) {
 					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}

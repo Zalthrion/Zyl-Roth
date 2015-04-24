@@ -4,9 +4,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class MountDeathcharger extends MountBaseHorse {
 	
@@ -31,6 +33,10 @@ public class MountDeathcharger extends MountBaseHorse {
 			
 			this.setDead();
 			persistentData.removeTag("ownsMountDeathcharger");
+		}
+		
+		if (!func_152114_e(player) && !worldObj.isRemote){ //Checks if the player is the Owner of the mount
+            player.addChatMessage(new ChatComponentTranslation(Reference.MOD_ID + ":" + "mount.owned"));
 		}
 		
 		return super.interact(player);

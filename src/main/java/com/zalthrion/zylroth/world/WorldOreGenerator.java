@@ -25,12 +25,14 @@ public class WorldOreGenerator implements IWorldGenerator {
 			case -1:
 				GenerateNether(random, chunkX * 16, chunkZ * 16, world);
 				break;
+			case 47:
+				GenerateKyrul(random, chunkX * 16, chunkZ * 16, world);
 		}
 	}
 	
 	private void GenerateOverworld(Random random, int x, int z, World world) {
 		
-		this.addOreSpawn(ModBlocks.Tenebrae_Ore, world, random, x, z, 2, 6, 5, 0, 32);
+		this.addOreSpawn(ModBlocks.Tenebrae_Ore, world, random, x, z, 2, 6, 4, 0, 32);
 		
 	}
 	
@@ -39,6 +41,12 @@ public class WorldOreGenerator implements IWorldGenerator {
 	}
 	
 	private void GenerateEnd(Random random, int x, int z, World world) {
+		
+	}
+	
+	private void GenerateKyrul(Random random, int x, int z, World world) {
+		
+		this.addOreSpawn(ModBlocks.Tenebrae_Ore, world, random, x, z, 2, 6, 5, 0, 32);
 		
 	}
 	

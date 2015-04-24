@@ -13,15 +13,15 @@ import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TestItem extends ItemBase {
+public class VoidTalisman extends ItemBase {
 	
-	private String name = "testItem";
+	private String name = "voidTalisman";
 	@SuppressWarnings("unused")
 	private InventoryPlayer inventory;
 	@SuppressWarnings("unused")
 	private TileEntityInfuser tile = new TileEntityInfuser();
 	
-	public TestItem() {
+	public VoidTalisman() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}
@@ -43,12 +43,12 @@ public class TestItem extends ItemBase {
 				
 				Teleporter teleporter = new SpecialTeleporter(ws);
 				
-				if (!(player.dimension == 47)) {
+				if (!(player.dimension == 47) && player.ridingEntity == null) {
 					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}
 				
-				else if (player.dimension == 47) {
+				else if (player.dimension == 47 && player.ridingEntity == null) {
 					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}

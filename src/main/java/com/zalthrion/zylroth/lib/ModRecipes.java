@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.lib;
 
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -11,6 +12,7 @@ public final class ModRecipes {
 		registerSmeltingRecipes();
 		registerShapedRecipes();
 		registerShapelessRecipes();
+		registerArmorRecipes();
 		registerInfusionRecipes();
 	}
 	
@@ -28,7 +30,7 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.Raw_Tenebrae_Ingot), "RRR", 'R', ModItems.Raw_Tenebrae);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Infuser_Idle), "TGT", "GCG", "GPG", 'T', ModBlocks.Tenebrae_Block, 'G', ModItems.Void_Gem);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Infuser_Idle), "DTD", "TCT", "DTD", 'D', Items.diamond,  'T', ModBlocks.Tenebrae_Block, 'C', ModBlocks.Tenebrae_Core);
 		
 	}
 	
@@ -38,20 +40,17 @@ public final class ModRecipes {
 		
 	}
 	
+	public static void registerArmorRecipes() {
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Helmet), "III", "IEI", 'I', ModItems.Tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Chestplate), "IEI", "III", "III", 'I', ModItems.Tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Leggings), "III", "IEI", "IEI", 'I', ModItems.Tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Boots), "IEI", "IEI", 'I', ModItems.Tenebrae_Ingot);
+
+	}
+	
 	public static void registerInfusionRecipes() {
-		
-		// InfusionRecipeHandler.infusing().addInfusion(new
-		// ItemStack(Items.iron_axe), new ItemStack(Items.iron_horse_armor), new
-		// ItemStack(Items.apple, 2, 0), new ItemStack(Items.carrot, 3, 0));
-		
-		// TODO Add the ability to use two of the same items on infusion
-		// InfusionRecipeHandler.infusing().addInfusion(new
-		// ItemStack(ModItems.Soul_Essence), new
-		// ItemStack(ModItems.Cursed_Soul_Essence), new
-		// ItemStack(ModItems.Raw_Tenebrae, 1, 0), new
-		// ItemStack(ModItems.Raw_Tenebrae, 1, 0));
-		
-		InfusionRecipeHandler.infusing().addInfusion(new ItemStack(ModBlocks.Tenebrae_Block), new ItemStack(ModBlocks.Infused_Tenebrae), new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Soul_Essence, 1, 0));
-		
+//		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.wool), new ItemStack(Blocks.planks), 0, new ItemStack(Items.nether_star, 2, 0), new ItemStack(Items.arrow, 3, 0));
+		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModBlocks.Tenebrae_Block), new ItemStack(ModBlocks.Infused_Tenebrae), 0, new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Soul_Essence, 1, 0));
 	}
 }

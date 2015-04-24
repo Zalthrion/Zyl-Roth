@@ -22,9 +22,18 @@ public final class ModItems {
 	
 	//Mounts
 	
+	public static Item Empty_SummoningCrystal;
+	
 	public static Item SC_Deathcharger;
 	
 	public static Item SC_PlaguedHorse;
+	
+	
+	//Portals
+	
+	public static Item Void_Talisman;
+	
+	public static Item Rainbow_Talisman;
 	
 	
 	//Others
@@ -35,11 +44,8 @@ public final class ModItems {
 	
 	public static Item Cursed_Soul_Essence;
 	
-	public static Item Test_Item;
-	
-	public static Item Test_Item_2;
-	
 	public static Item Void_Gem;
+	
 	
 	public static void init() {
 		
@@ -58,9 +64,18 @@ public final class ModItems {
 		
 		//Mounts
 		
+		Empty_SummoningCrystal = new EmptySummoningCrystal();
+		
 		SC_Deathcharger = new SCDeathcharger();
 		
 		SC_PlaguedHorse = new SCPlaguedHorse();
+		
+		
+		//Portals
+		
+		Void_Talisman = new VoidTalisman();
+		
+		Rainbow_Talisman = new RainbowTalisman();
 		
 		
 		//Others
@@ -70,10 +85,6 @@ public final class ModItems {
 		Soul_Essence = new SoulEssence();
 		
 		Cursed_Soul_Essence = new CursedSoulEssence();
-		
-		Test_Item = new TestItem();
-		
-		Test_Item_2 = new TestItem2();
 		
 		Void_Gem = new VoidGem();
 		
