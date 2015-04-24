@@ -73,6 +73,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 				if (isBurning()) {
 					flag1 = true;
 					
+<<<<<<< HEAD
 					/* if (slots[ContainerInfuser.FIRST_FUEL] != null) { --
 					 * slots[ContainerInfuser.FIRST_FUEL].stackSize; if
 					 * (slots[ContainerInfuser.FIRST_FUEL].stackSize == 0) {
@@ -80,6 +81,14 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 					 * slots[ContainerInfuser
 					 * .FIRST_FUEL].getItem().getContainerItem
 					 * (slots[ContainerInfuser.FIRST_FUEL]); } } */
+=======
+/*					if (slots[ContainerInfuser.FIRST_FUEL] != null) {
+						-- slots[ContainerInfuser.FIRST_FUEL].stackSize;
+						if (slots[ContainerInfuser.FIRST_FUEL].stackSize == 0) {
+							slots[ContainerInfuser.FIRST_FUEL] = slots[ContainerInfuser.FIRST_FUEL].getItem().getContainerItem(slots[ContainerInfuser.FIRST_FUEL]);
+						}
+					}*/
+>>>>>>> origin/master
 				}
 			}
 			
@@ -132,7 +141,11 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 			
 			-- slots[ContainerInfuser.INPUT].stackSize;
+<<<<<<< HEAD
 			// TODO Work this out.
+=======
+			//TODO Work this out.
+>>>>>>> origin/master
 			InfusionRecipeLib recipeCopy = recipe.copy();
 			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipeCopy.getInfusionMaterials());
 			HashMap<Integer, ItemStack> providedStacks = new HashMap<Integer, ItemStack>() {
@@ -144,9 +157,13 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			};
 			providedStacks: for (ItemStack provided : providedStacks.values()) {
 				if (provided == null) continue providedStacks;
+<<<<<<< HEAD
 				if (!InfusionRecipeHandler.arrayListContainsItemStack(recipeRequirements, provided)) break providedStacks; // Something
 																															// went
 																															// wrong
+=======
+				if (!InfusionRecipeHandler.arrayListContainsItemStack(recipeRequirements, provided)) break providedStacks; // Something went wrong
+>>>>>>> origin/master
 				rRLoop: for (ItemStack reqStack : recipeRequirements) {
 					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
 					if (provided.stackSize >= reqStack.stackSize) {
