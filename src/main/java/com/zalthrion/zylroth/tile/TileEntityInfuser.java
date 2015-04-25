@@ -35,6 +35,11 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	public int currentItemBurnTime; // Start time for this fuel
 	public int cookTime; // How much time left until cooked
 	
+	private int facing;
+	
+	public void setFacing(int newFacing) { this.facing = newFacing; }
+	public int getFacing() { return this.facing; }
+	
 	public boolean canUpdate() {
 		return true;
 	};
