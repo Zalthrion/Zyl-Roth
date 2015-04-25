@@ -100,8 +100,8 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 			
 			if (flag != isBurning()) {
-				flag1 = true;
 				InfuserMachine.updateBlockState(this.isBurning(), worldObj, xCoord, yCoord, zCoord);
+				flag1 = true;
 			}
 		}
 		
@@ -280,10 +280,6 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		
-		burnTime = nbt.getShort("BurnTime");
-		cookTime = nbt.getShort("CookTime");
-		currentItemBurnTime = getItemBurnTime(slots[1]);
-		
 		NBTTagList list = nbt.getTagList("Stacks", nbt.getId());
 		this.slots = new ItemStack[this.getSizeInventory()];
 		
@@ -297,6 +293,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 		}
 		
+		facing = nbt.getInteger("Facing");
 		burnTime = nbt.getShort("BurnTime");
 		cookTime = nbt.getShort("CookTime");
 		currentItemBurnTime = getItemBurnTime(slots[1]);
@@ -310,6 +307,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		
 		NBTTagList list = new NBTTagList();
 		
+		nbt.setInteger("Facing", facing);
 		nbt.setShort("BurnTime", (short) burnTime);
 		nbt.setShort("CookTime", (short) cookTime);
 		
