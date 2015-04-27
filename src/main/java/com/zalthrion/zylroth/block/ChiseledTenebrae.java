@@ -1,23 +1,17 @@
 package com.zalthrion.zylroth.block;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
 import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
 import com.zalthrion.zylroth.itemblock.HeadItemBlock;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChiseledTenebrae extends BlockBase {
 	private String name = "chiseledTenebrae";
@@ -33,109 +27,63 @@ public class ChiseledTenebrae extends BlockBase {
 		GameRegistry.registerBlock(this, HeadItemBlock.class, name);
 	}
 	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		IIcon tbIcon = ModBlocks.Tenebrae_Block.getIcon(0, 0);
-		IIcon ret = side == 1 ? tbIcon : (side == 0 ? tbIcon : (meta == 2 && side == 2 ? this.blockIcon : (meta == 3 && side == 5 ? this.blockIcon : (meta == 0 && side == 3 ? this.blockIcon : (meta == 1 && side == 4 ? this.blockIcon : tbIcon)))));
-		return ret;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register) {
-		this.blockIcon = register.registerIcon(Reference.MOD_ID + ":" + name);
-	}
-	
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		super.onBlockAdded(world, x, y, z);
+	@Override public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		super.onBlockAdded(world, pos, state);
 		
-		if (world.getBlock(x, y - 1, z) == ModBlocks.Tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.Infused_Tenebrae) {
-			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.Infused_Tenebrae && world.getBlock(x + 1, y - 1, z) == ModBlocks.Infused_Tenebrae;
-			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.Infused_Tenebrae && world.getBlock(x, y - 1, z + 1) == ModBlocks.Infused_Tenebrae;
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.Tenebrae_Core && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.Infused_Tenebrae) {
+			boolean flag = world.getBlockState(pos.add(-1, -1, 0)).getBlock() == ModBlocks.Infused_Tenebrae && world.getBlockState(pos.add(1, -1, 0)).getBlock() == ModBlocks.Infused_Tenebrae;
+			boolean flag1 = world.getBlockState(pos.add(0, -1, -1)).getBlock() == ModBlocks.Infused_Tenebrae && world.getBlockState(pos.add(0, -1, 1)).getBlock() == ModBlocks.Infused_Tenebrae;
 			
 			if (flag || flag1) {
-				world.setBlock(x, y, z, getBlockById(0), 0, 2);
-				world.setBlock(x, y - 1, z, getBlockById(0), 0, 2);
-				world.setBlock(x, y - 2, z, getBlockById(0), 0, 2);
+				world.setBlockToAir(pos);
+				world.setBlockToAir(pos.add(0, -1, 0));
+				world.setBlockToAir(pos.add(0, -2, 0));
 				
 				if (flag) {
-					world.setBlock(x - 1, y - 1, z, getBlockById(0), 0, 2);
-					world.setBlock(x + 1, y - 1, z, getBlockById(0), 0, 2);
+					world.setBlockToAir(pos.add(-1, -1, 0));
+					world.setBlockToAir(pos.add(1, -1, 0));
 				} else {
-					world.setBlock(x, y - 1, z - 1, getBlockById(0), 0, 2);
-					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
+					world.setBlockToAir(pos.add(0, -1, -1));
+					world.setBlockToAir(pos.add(0, -1, 1));
 				}
 				
 				EntityMutantTenebraeGolem golem = new EntityMutantTenebraeGolem(world);
 				golem.setPlayerCreated(true);
-				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
+				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
 				
 				for (int i1 = 0; i1 < 120; ++ i1) {
-					world.spawnParticle("snowballpoof", (double) x + world.rand.nextDouble(), (double) (y - 2) + world.rand.nextDouble() * 3.9D, (double) z + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
-				}
-				
-				world.notifyBlockChange(x, y, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 1, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 2, z, getBlockById(0));
-				
-				if (flag) {
-					world.notifyBlockChange(x - 1, y - 1, z, getBlockById(0));
-					world.notifyBlockChange(x + 1, y - 1, z, getBlockById(0));
-				} else {
-					world.notifyBlockChange(x, y - 1, z - 1, getBlockById(0));
-					world.notifyBlockChange(x, y - 1, z + 1, getBlockById(0));
+					world.spawnParticle(EnumParticleTypes.SNOWBALL, (double) pos.getX() + world.rand.nextDouble(), (double) (pos.getY() - 2) + world.rand.nextDouble() * 3.9D, (double) pos.getZ() + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
 		
-		else if (world.getBlock(x, y - 1, z) == ModBlocks.Tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.Tenebrae_Block) {
-			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.Tenebrae_Block && world.getBlock(x + 1, y - 1, z) == ModBlocks.Tenebrae_Block;
-			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.Tenebrae_Block && world.getBlock(x, y - 1, z + 1) == ModBlocks.Tenebrae_Block;
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.Tenebrae_Block && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.Tenebrae_Block) {
+			boolean flag = world.getBlockState(pos.west().down()).getBlock() == ModBlocks.Tenebrae_Block && world.getBlockState(pos.east().down()).getBlock() == ModBlocks.Tenebrae_Block;
+			boolean flag1 = world.getBlockState(pos.down().north()).getBlock() == ModBlocks.Tenebrae_Block && world.getBlockState(pos.down().south()).getBlock() == ModBlocks.Tenebrae_Block;
 			
 			if (flag || flag1) {
-				world.setBlock(x, y, z, getBlockById(0), 0, 2);
-				world.setBlock(x, y - 1, z, getBlockById(0), 0, 2);
-				world.setBlock(x, y - 2, z, getBlockById(0), 0, 2);
+				world.setBlockToAir(pos);
+				world.setBlockToAir(pos.down());
+				world.setBlockToAir(pos.down(2));
 				
 				if (flag) {
-					world.setBlock(x - 1, y - 1, z, getBlockById(0), 0, 2);
-					world.setBlock(x + 1, y - 1, z, getBlockById(0), 0, 2);
+					world.setBlockToAir(pos.west().down());
+					world.setBlockToAir(pos.east().down());
 				} else {
-					world.setBlock(x, y - 1, z - 1, getBlockById(0), 0, 2);
-					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
+					world.setBlockToAir(pos.down().north());
+					world.setBlockToAir(pos.down().south());
 				}
 				
 				EntityTenebraeGolem golem = new EntityTenebraeGolem(world);
 				golem.setPlayerCreated(true);
-				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
+				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
 				
 				for (int i1 = 0; i1 < 120; ++ i1) {
-					world.spawnParticle("snowballpoof", (double) x + world.rand.nextDouble(), (double) (y - 2) + world.rand.nextDouble() * 3.9D, (double) z + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
-				}
-				
-				world.notifyBlockChange(x, y, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 1, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 2, z, getBlockById(0));
-				
-				if (flag) {
-					world.notifyBlockChange(x - 1, y - 1, z, getBlockById(0));
-					world.notifyBlockChange(x + 1, y - 1, z, getBlockById(0));
-				} else {
-					world.notifyBlockChange(x, y - 1, z - 1, getBlockById(0));
-					world.notifyBlockChange(x, y - 1, z + 1, getBlockById(0));
+					world.spawnParticle(EnumParticleTypes.SNOWBALL, (double) pos.getX() + world.rand.nextDouble(), (double) (pos.getY() - 2) + world.rand.nextDouble() * 3.9D, (double) pos.getZ() + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
 	}
-	
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
-		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
-	}
-	
 }

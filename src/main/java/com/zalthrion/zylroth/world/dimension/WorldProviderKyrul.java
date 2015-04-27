@@ -5,16 +5,15 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModDimension;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderKyrul extends WorldProvider {
 	
 	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), terrainType);
+		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 		this.dimensionId = ModDimension.dimensionId_Kyrul;
 		this.hasNoSky = true;
 	}
@@ -52,7 +51,7 @@ public class WorldProviderKyrul extends WorldProvider {
 		f3 *= f2 * 0.0F + 0.15F;
 		f4 *= f2 * 0.0F + 0.15F;
 		f5 *= f2 * 0.0F + 0.15F;
-		return Vec3.createVectorHelper((double) f3, (double) f4, (double) f5);
+		return new Vec3((double) f3, (double) f4, (double) f5);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -109,6 +108,10 @@ public class WorldProviderKyrul extends WorldProvider {
 			float f1 = 1.0F - i / 15.0F;
 			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
 		}
+	}
+
+	@Override public String getInternalNameSuffix() {
+		return "";
 	}
 	
 }

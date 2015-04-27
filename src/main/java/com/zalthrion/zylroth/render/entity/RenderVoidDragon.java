@@ -5,21 +5,23 @@ import java.util.Random;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 import com.zalthrion.zylroth.model.entity.ModelVoidDragon;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderVoidDragon extends RenderLiving {
@@ -33,10 +35,10 @@ public class RenderVoidDragon extends RenderLiving {
 	/** An instance of the dragon model in RenderDragon */
 	protected ModelVoidDragon modelDragon;
 	
-	public RenderVoidDragon() {
-		super(new ModelVoidDragon(0.0F), 0.3F);
+	public RenderVoidDragon(RenderManager renderManager) {
+		super(renderManager, new ModelVoidDragon(0.0F), 0.3F);
 		modelDragon = (ModelVoidDragon) mainModel;
-		setRenderPassModel(mainModel);
+		this.addLayer(new LayerHeldItem(this));
 	}
 	
 	/** Applies the scale to the transform matrix */
@@ -108,8 +110,8 @@ public class RenderVoidDragon extends RenderLiving {
 	
 	/** Renders the animation for when an enderdragon dies */
 	protected void renderDragonDying(EntityVoidDragon dragon, float par2) {
-		super.renderEquippedItems(dragon, par2);
-		Tessellator tessellator = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer wr = tessellator.getWorldRenderer();
 		
 		if (dragon.deathTicks > 0) {
 			RenderHelper.disableStandardItemLighting();
@@ -136,16 +138,16 @@ public class RenderVoidDragon extends RenderLiving {
 				GL11.glRotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(random.nextFloat() * 360.0F + f1 * 90.0F, 0.0F, 0.0F, 1.0F);
-				tessellator.startDrawing(6);
+				wr.startDrawing(6);
 				float f3 = random.nextFloat() * 20.0F + 5.0F + f2 * 10.0F;
 				float f4 = random.nextFloat() * 2.0F + 1.0F + f2 * 2.0F;
-				tessellator.setColorRGBA_I(16777215, (int) (255.0F * (1.0F - f2)));
-				tessellator.addVertex(0.0D, 0.0D, 0.0D);
-				tessellator.setColorRGBA_I(16711935, 0);
-				tessellator.addVertex(-0.866D * f4, f3, -0.5F * f4);
-				tessellator.addVertex(0.866D * f4, f3, -0.5F * f4);
-				tessellator.addVertex(0.0D, f3, 1.0F * f4);
-				tessellator.addVertex(-0.866D * f4, f3, -0.5F * f4);
+				wr.setColorRGBA_I(16777215, (int) (255.0F * (1.0F - f2)));
+				wr.addVertex(0.0D, 0.0D, 0.0D);
+				wr.setColorRGBA_I(16711935, 0);
+				wr.addVertex(-0.866D * f4, f3, -0.5F * f4);
+				wr.addVertex(0.866D * f4, f3, -0.5F * f4);
+				wr.addVertex(0.0D, f3, 1.0F * f4);
+				wr.addVertex(-0.866D * f4, f3, -0.5F * f4);
 				tessellator.draw();
 			}
 			
@@ -191,17 +193,6 @@ public class RenderVoidDragon extends RenderLiving {
 		renderDragon((EntityVoidDragon) par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 	
-	/** Queries whether should render the specified pass or not. */
-	@Override
-	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3) {
-		return renderGlow((EntityVoidDragon) par1EntityLivingBase, par2, par3);
-	}
-	
-	@Override
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		renderDragonDying((EntityVoidDragon) par1EntityLivingBase, par2);
-	}
-	
 	@Override
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
 		rotateDragonBody((EntityVoidDragon) par1EntityLivingBase, par2, par3, par4);
@@ -239,5 +230,4 @@ public class RenderVoidDragon extends RenderLiving {
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
 		renderDragon((EntityVoidDragon) par1Entity, par2, par4, par6, par8, par9);
 	}
-	
 }

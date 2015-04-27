@@ -1,21 +1,28 @@
 package com.zalthrion.zylroth;
 
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
-import com.zalthrion.zylroth.lib.*;
+import com.zalthrion.zylroth.lib.ModArmors;
+import com.zalthrion.zylroth.lib.ModBiomes;
+import com.zalthrion.zylroth.lib.ModBlocks;
+import com.zalthrion.zylroth.lib.ModDimension;
+import com.zalthrion.zylroth.lib.ModEntity;
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModOreDictionary;
+import com.zalthrion.zylroth.lib.ModRecipes;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
-import com.zalthrion.zylroth.world.WorldStructureGenerator;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
-
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.zalthrion.zylroth.world.WorldStructureGenerator;
 
 /*---------------------------------------------------------------------------*/
 

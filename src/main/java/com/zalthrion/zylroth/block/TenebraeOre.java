@@ -2,11 +2,14 @@ package com.zalthrion.zylroth.block;
 
 import java.util.Random;
 
-import com.zalthrion.zylroth.lib.ModTabs;
-
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.zalthrion.zylroth.lib.ModTabs;
 
 public class TenebraeOre extends BlockBase {
 	
@@ -24,15 +27,12 @@ public class TenebraeOre extends BlockBase {
 	}
 	
 	@Override
-	public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
-		super.randomDisplayTick(par1World, x, y, z, par5Random);
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		super.randomDisplayTick(world, pos, state, rand);
 		
-		double d0 = (double) ((float) x + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F);
-		double d1 = (double) ((float) y + 0.4F);
-		double d2 = (double) ((float) z + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F);
-		double d3 = 0.0D;
-		double d4 = 0.0D;
-		double d5 = 0.0D;
-		par1World.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
+		double d0 = (double) ((float) pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
+		double d1 = (double) ((float) pos.getY() + 0.4F);
+		double d2 = (double) ((float) pos.getZ() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
+		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0, 0, 0);
 	}
 }

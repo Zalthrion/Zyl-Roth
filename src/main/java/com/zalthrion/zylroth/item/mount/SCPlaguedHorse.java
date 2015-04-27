@@ -5,10 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SCPlaguedHorse extends SummoningCrystalBase {
 	
@@ -32,7 +31,7 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 			if (player.ridingEntity == null) {
 				
 				mount.copyLocationAndAnglesFrom(player);
-				mount.onSpawnWithEgg((IEntityLivingData) null);
+				mount.onInitialSpawn(world.getDifficultyForLocation(player.playerLocation), (IEntityLivingData) null);
 				
 				if (!player.worldObj.isRemote && mount.isAdultHorse()) {
 					

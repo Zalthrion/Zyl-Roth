@@ -8,7 +8,7 @@ import com.zalthrion.zylroth.lib.ModDimension;
 public class WorldProviderIridis extends WorldProvider {
 	
 	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerIridis(worldObj.getSeed(), terrainType);
+		this.worldChunkMgr = new WorldChunkManagerIridis(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 		this.dimensionId = ModDimension.dimensionId_Iridis;
 	}
 	
@@ -20,5 +20,8 @@ public class WorldProviderIridis extends WorldProvider {
 	public String getDimensionName() {
 		return "Iri'dis";
 	}
-	
+
+	@Override public String getInternalNameSuffix() {
+		return "";
+	}
 }

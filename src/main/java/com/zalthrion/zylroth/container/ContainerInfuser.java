@@ -5,12 +5,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.gui.slot.SlotInfuser;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerInfuser extends ContainerBase {
 	TileEntityInfuser infuser;

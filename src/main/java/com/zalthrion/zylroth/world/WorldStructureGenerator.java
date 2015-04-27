@@ -5,11 +5,10 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.zalthrion.zylroth.lib.ModBiomes;
 import com.zalthrion.zylroth.world.gen.structures.DragonNest;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldStructureGenerator implements IWorldGenerator {
 	
@@ -17,7 +16,7 @@ public class WorldStructureGenerator implements IWorldGenerator {
 	
 	@Override
 	public void generate(Random random, int x, int z, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		switch (world.provider.dimensionId) {
+		switch (world.provider.getDimensionId()) {
 			case 0:
 				GenerateOverworld(random, x * 16, z * 16, world);
 				break;

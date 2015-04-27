@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 
 public class TileEntityBase extends TileEntity implements IInventory {
 	@Override
@@ -32,11 +34,6 @@ public class TileEntityBase extends TileEntity implements IInventory {
 	}
 	
 	@Override
-	public String getInventoryName() {
-		return null;
-	}
-	
-	@Override
 	public int getInventoryStackLimit() {
 		return 0;
 	}
@@ -50,19 +47,40 @@ public class TileEntityBase extends TileEntity implements IInventory {
 	public boolean isItemValidForSlot(int i, ItemStack itemStack) {
 		return false;
 	}
-	
-	@Override
-	public boolean isCustomInventoryName() {
+
+	@Override public String getCommandSenderName() {
+		return "TEBase";
+	}
+
+	@Override public boolean hasCustomName() {
 		return false;
 	}
-	
-	@Override
-	public void openChest() {
+
+	@Override public IChatComponent getDisplayName() {
+		return new ChatComponentText(getCommandSenderName());
+	}
+
+	@Override public void openInventory(EntityPlayer player) {
 		
 	}
-	
-	@Override
-	public void closeChest() {
+
+	@Override public void closeInventory(EntityPlayer player) {
+		
+	}
+
+	@Override public int getField(int id) {
+		return 0;
+	}
+
+	@Override public void setField(int id, int value) {
+		
+	}
+
+	@Override public int getFieldCount() {
+		return 0;
+	}
+
+	@Override public void clear() {
 		
 	}
 }

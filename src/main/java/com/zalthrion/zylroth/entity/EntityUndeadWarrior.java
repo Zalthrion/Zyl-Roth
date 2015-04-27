@@ -20,6 +20,8 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -32,7 +34,7 @@ public class EntityUndeadWarrior extends EntityMob {
 		super(world);
 		this.setSize(0.5F, 2.1F);
 		this.isImmuneToFire = true;
-		this.getNavigator().setBreakDoors(true);
+		((PathNavigateGround)this.getNavigator()).setBreakDoors(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIBreakDoor(this));;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
@@ -41,14 +43,9 @@ public class EntityUndeadWarrior extends EntityMob {
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true));
-	}
-	
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMob.class, true));
 	}
 	
 	@Override
@@ -138,16 +135,16 @@ public class EntityUndeadWarrior extends EntityMob {
 	public void onKillEntity(EntityLivingBase entity) {
 		super.onKillEntity(entity);
 		
-		if ((this.worldObj.difficultySetting == EnumDifficulty.NORMAL || this.worldObj.difficultySetting == EnumDifficulty.HARD) && entity instanceof EntityVillager) {
-			if (this.worldObj.difficultySetting != EnumDifficulty.HARD && this.rand.nextBoolean()) { return; }
+		if ((this.worldObj.getDifficulty() == EnumDifficulty.NORMAL || this.worldObj.getDifficulty() == EnumDifficulty.HARD) && entity instanceof EntityVillager) {
+			if (this.worldObj.getDifficulty() != EnumDifficulty.HARD && this.rand.nextBoolean()) { return; }
 			
 			EntityUndeadMinion entityundeadminion = new EntityUndeadMinion(this.worldObj);
 			entityundeadminion.copyLocationAndAnglesFrom(entity);
 			this.worldObj.removeEntity(entity);
-			entityundeadminion.onSpawnWithEgg((IEntityLivingData) null);
+			entityundeadminion.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), (IEntityLivingData) null);
 			
 			this.worldObj.spawnEntityInWorld(entityundeadminion);
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+			this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this.posX, this.posY, this.posZ), 0);
 		}
 	}
 	

@@ -1,22 +1,23 @@
 package com.zalthrion.zylroth.render.entity.mount;
 
-import com.google.common.collect.Maps;
-import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.entity.RenderHorse;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Maps;
+import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
 
 @SideOnly(Side.CLIENT)
 public class RenderPlaguedHorse extends RenderHorse {
@@ -29,8 +30,8 @@ public class RenderPlaguedHorse extends RenderHorse {
 	private static final ResourceLocation zombieHorseTextures = new ResourceLocation("textures/entity/horse/horse_zombie.png");
 	private static final ResourceLocation skeletonHorseTextures = new ResourceLocation("textures/entity/horse/horse_skeleton.png");
 	
-	public RenderPlaguedHorse(ModelBase p_i1256_1_, float p_i1256_2_) {
-		super(p_i1256_1_, p_i1256_2_);
+	public RenderPlaguedHorse(RenderManager renderManager, ModelHorse horse, ModelPlaguedHorse mph, float shadowSize) {
+		super(renderManager, horse, shadowSize);
 	}
 	
 	/** Allows the render to do any OpenGL state modifications necessary before
@@ -97,18 +98,18 @@ public class RenderPlaguedHorse extends RenderHorse {
 	
 	/** Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime */
-	protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_) {
+	@Override protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_) {
 		this.preRenderCallback((MountPlaguedHorse) p_77041_1_, p_77041_2_);
 	}
 	
 	/** Renders the model in RenderLiving */
-	protected void renderModel(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
+	@Override protected void renderModel(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		this.renderModel((MountPlaguedHorse) p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+	@Override protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
 		return this.getEntityTexture((MountPlaguedHorse) p_110775_1_);
 	}
 }

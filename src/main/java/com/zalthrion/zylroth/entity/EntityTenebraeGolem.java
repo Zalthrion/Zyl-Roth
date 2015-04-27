@@ -1,7 +1,6 @@
 package com.zalthrion.zylroth.entity;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,11 +16,14 @@ import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityTenebraeGolem extends EntityGolem {
 	private int attackTimer;
@@ -29,7 +31,7 @@ public class EntityTenebraeGolem extends EntityGolem {
 	public EntityTenebraeGolem(World world) {
 		super(world);
 		this.setSize(1.4F, 2.9F);
-		this.getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
 		this.isImmuneToFire = true;
 		this.experienceValue = 15;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
@@ -45,12 +47,6 @@ public class EntityTenebraeGolem extends EntityGolem {
 	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-	}
-	
-	/** Returns true if the newer Entity AI code should be run */
-	@Override
-	public boolean isAIEnabled() {
-		return true;
 	}
 	
 	@Override
@@ -91,12 +87,11 @@ public class EntityTenebraeGolem extends EntityGolem {
 		
 		if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D && this.rand.nextInt(5) == 0) {
 			int i = MathHelper.floor_double(this.posX);
-			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.yOffset);
+			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.getYOffset());
 			int k = MathHelper.floor_double(this.posZ);
-			Block block = this.worldObj.getBlock(i, j, k);
 			
-			if (block.getMaterial() != Material.air) {
-				this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(i, j, k), this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
+			if (!this.worldObj.isAirBlock(new BlockPos(i, j, k))) {
+				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
 			}
 		}
 	}
@@ -155,7 +150,7 @@ public class EntityTenebraeGolem extends EntityGolem {
 	
 	/** Plays step sound at given x, y, z for the entity */
 	@Override
-	protected void playStepSound(int x, int y, int z, Block block) {
+	protected void playStepSound(BlockPos pos, Block block) {
 		this.playSound("mob.irongolem.walk", 1.0F, 1.0F);
 	}
 	

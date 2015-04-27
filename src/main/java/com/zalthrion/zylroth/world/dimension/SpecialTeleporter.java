@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.world.dimension;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -17,13 +18,13 @@ public class SpecialTeleporter extends Teleporter {
 	public static void adjustPosY(Entity entity) {
 		int x = MathHelper.floor_double(entity.posX);
 		int z = MathHelper.floor_double(entity.posZ);
-		int y = entity.worldObj.getHeightValue(x, z);
-		switch (entity.worldObj.provider.dimensionId) {
+		int y = entity.worldObj.getHeight(new BlockPos(x, 128, z)).getY();
+		switch (entity.worldObj.provider.getDimensionId()) {
 			case -1:
 				y -= 10;
 				boolean flag = true;
 				while (y > 30 && flag) {
-					if (entity.worldObj.getBlock(x, y, z).getMaterial().blocksMovement() && entity.worldObj.isAirBlock(x, y + 1, z) && entity.worldObj.isAirBlock(x, y + 2, z)) {
+					if (entity.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock().getMaterial().blocksMovement() && entity.worldObj.isAirBlock(new BlockPos(x, y + 1, z)) && entity.worldObj.isAirBlock(new BlockPos(x, y + 2, z))) {
 						flag = false;
 					} else {
 						-- y;
@@ -40,16 +41,9 @@ public class SpecialTeleporter extends Teleporter {
 	}
 	
 	@Override
-	public void placeInPortal(Entity entity, double dx, double dy, double dz, float yaw) {
-		if (entity instanceof EntityPlayer) {
-			((EntityPlayer) entity).setPositionAndUpdate(dx, dy, dz);
-		} else {
-			entity.setPosition(dx, dy, dz);
-		}
-	}
-	
-	@Override
 	public boolean makePortal(Entity entity) {
 		return true;
 	}
+	
+	@Override public void removeStalePortalLocations(long par1) {}
 }

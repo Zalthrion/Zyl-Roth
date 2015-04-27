@@ -16,17 +16,17 @@ public class BiomeGenJadePlains extends BiomeGenBase {
 		this.theBiomeDecorator.treesPerChunk = -999;
 		this.theBiomeDecorator.grassPerChunk = 8;
 		
-		this.topBlock = (Blocks.grass);
-		this.fillerBlock = (Blocks.dirt);
+		this.topBlock = (Blocks.grass).getDefaultState();
+		this.fillerBlock = (Blocks.dirt).getDefaultState();
 		
-		this.addFlower(Blocks.red_flower, 4, 3);
-		this.addFlower(Blocks.red_flower, 5, 3);
-		this.addFlower(Blocks.red_flower, 6, 3);
-		this.addFlower(Blocks.red_flower, 7, 3);
-		this.addFlower(Blocks.red_flower, 0, 20);
-		this.addFlower(Blocks.red_flower, 3, 20);
-		this.addFlower(Blocks.red_flower, 8, 20);
-		this.addFlower(Blocks.yellow_flower, 0, 30);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
+		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
+		this.addFlower(Blocks.yellow_flower.getDefaultState(), 30);
 		
 		this.setHeight(height_LowPlains);
 		this.setBiomeName("Jade Plains");
@@ -35,12 +35,12 @@ public class BiomeGenJadePlains extends BiomeGenBase {
 	}
 	
 	@Override
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
+	public int getModdedBiomeGrassColor(int original) {
 		return color = 0x0CA833;
 	}
 	
 	@Override
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
+	public int getModdedBiomeFoliageColor(int original) {
 		return color = 0x16BA40;
 	}
 	

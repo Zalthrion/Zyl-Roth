@@ -1,10 +1,9 @@
 package com.zalthrion.zylroth.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.lib.ModTabs;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class AshBlock extends BlockBase {
 	
@@ -18,5 +17,4 @@ public class AshBlock extends BlockBase {
 		this.setCreativeTab(ModTabs.ZylRoth);
 		GameRegistry.registerBlock(this, name);
 	}
-	
 }

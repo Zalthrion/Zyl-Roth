@@ -20,7 +20,7 @@ public class RenderTileEntityInfuser extends TileEntitySpecialRenderer {
 	}
 	
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
 		if (te instanceof TileEntityInfuser) {
 			TileEntityInfuser tei = (TileEntityInfuser) te;
 			int facing = tei.getFacing();

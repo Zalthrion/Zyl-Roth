@@ -2,17 +2,18 @@ package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderUndeadWarrior extends RenderBiped {
@@ -21,8 +22,9 @@ public class RenderUndeadWarrior extends RenderBiped {
 	/** Scale of the model to use */
 	private float scale = 0.8F;
 	
-	public RenderUndeadWarrior(ModelBiped par1ModelBase, float par2, float par3) {
-		super(par1ModelBase, par2 * par3);
+	public RenderUndeadWarrior(RenderManager renderManager, ModelBiped par1ModelBase, float par2, float par3) {
+		super(renderManager, par1ModelBase, par2 * par3);
+		this.addLayer(new LayerHeldItem(this));
 	}
 	
 	public void doRenderUndeadWarrior(EntityUndeadWarrior par1EntityUndeadWarrior, double par2, double par4, double par6, float par8, float par9) {
@@ -68,6 +70,5 @@ public class RenderUndeadWarrior extends RenderBiped {
 	protected void renderEntityUndeadWarrior(EntityUndeadWarrior entityundeadwarrior, float par2) {
 		// any other model related renderers can go here.
 		// super.func_130005_c(entityundeadwarrior, par2);
-		super.renderEquippedItems(entityundeadwarrior, par2);
 	}
 }

@@ -3,10 +3,9 @@ package com.zalthrion.zylroth.handler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.IFuelHandler;
 
 import com.zalthrion.zylroth.lib.ModItems;
-
-import cpw.mods.fml.common.IFuelHandler;
 
 public class FuelHandler implements IFuelHandler {
 	

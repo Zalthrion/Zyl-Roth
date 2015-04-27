@@ -1,19 +1,20 @@
 package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderTenebraeGolem extends RenderLiving {
@@ -24,8 +25,9 @@ public class RenderTenebraeGolem extends RenderLiving {
 	@SuppressWarnings("unused")
 	private final ModelTenebraeGolem tenebrae_golemModel;
 	
-	public RenderTenebraeGolem(ModelTenebraeGolem ModelTenebraeGolem, float shadowSize) {
-		super(new ModelTenebraeGolem(), 0.5F);
+	public RenderTenebraeGolem(RenderManager renderManager, ModelTenebraeGolem ModelTenebraeGolem, float shadowSize) {
+		super(renderManager, new ModelTenebraeGolem(), shadowSize);
+		this.addLayer(new LayerHeldItem(this));
 		this.tenebrae_golemModel = (ModelTenebraeGolem) this.mainModel;
 	}
 	
@@ -50,21 +52,11 @@ public class RenderTenebraeGolem extends RenderLiving {
 		}
 	}
 	
-	/** Renders Iron Golem Equipped items. */
-	protected void renderTenebraeGolemEquippedItems(EntityTenebraeGolem par1EntityTenebraeGolem, float par2) {
-		super.renderEquippedItems(par1EntityTenebraeGolem, par2);
-		
-	}
-	
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		this.doRenderTenebraeGolem((EntityTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderTenebraeGolemEquippedItems((EntityTenebraeGolem) par1EntityLivingBase, par2);
-	}
-	
-	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
 		this.rotateTenebraeGolemCorpse((EntityTenebraeGolem) par1EntityLivingBase, par2, par3, par4);
 	}
 	
@@ -87,5 +79,4 @@ public class RenderTenebraeGolem extends RenderLiving {
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
 		this.doRenderTenebraeGolem((EntityTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
 	}
-	
 }

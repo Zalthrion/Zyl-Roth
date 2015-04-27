@@ -1,8 +1,8 @@
 package com.zalthrion.zylroth.item.mount;
 
-import com.zalthrion.zylroth.item.ItemBase;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.zalthrion.zylroth.item.ItemBase;
 
 public class EmptySummoningCrystal extends ItemBase {
 	

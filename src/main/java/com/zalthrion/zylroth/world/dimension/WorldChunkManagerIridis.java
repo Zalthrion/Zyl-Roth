@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.zalthrion.zylroth.world.gen.GenLayerIridis;
-
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ReportedException;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
@@ -17,8 +15,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.zalthrion.zylroth.world.gen.GenLayerIridis;
 
 public class WorldChunkManagerIridis extends WorldChunkManager {
 	
@@ -58,8 +58,8 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	
 	/** Returns the BiomeGenBase related to the x, z position on the world. */
 	@Override
-	public BiomeGenBase getBiomeGenAt(int x, int z) {
-		return this.biomeCache.getBiomeGenAt(x, z);
+	public BiomeGenBase getBiomeGenerator(BlockPos pos) {
+		return this.biomeCache.func_180284_a(pos.getX(), pos.getZ(), (BiomeGenBase) null);
 	}
 	
 	/** Returns a list of rainfall values for the specified blocks. Args:

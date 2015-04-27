@@ -2,16 +2,16 @@ package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderRainbowPig extends RenderLiving {
@@ -21,11 +21,10 @@ public class RenderRainbowPig extends RenderLiving {
 	
 	public ModelBase modelBase;
 	
-	public RenderRainbowPig(ModelBase p_i1262_1_, ModelBase p_i1265_2_, float p_i1262_2_) {
-		super(p_i1262_1_, p_i1262_2_);
-        this.setRenderPassModel(p_i1265_2_);
+	public RenderRainbowPig(RenderManager renderManager, ModelBase model, float shadowSize) {
+		super(renderManager, model, shadowSize);
         
-        this.modelBase = p_i1265_2_;
+        this.modelBase = model;
 	}
 	
     /**

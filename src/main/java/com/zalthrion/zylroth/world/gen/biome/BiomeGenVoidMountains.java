@@ -22,8 +22,8 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		
 		this.theBiomeDecorator.generateLakes = false;
 		
-		this.topBlock = (Blocks.grass);
-		this.fillerBlock = (Blocks.stone);
+		this.topBlock = (Blocks.grass).getDefaultState();
+		this.fillerBlock = (Blocks.stone).getDefaultState();
 		
 		this.setHeight(height_HighPlateaus);
 		this.setBiomeName("Void Mountains");
@@ -35,12 +35,12 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 	}
 	
 	@Override
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
+	public int getModdedBiomeGrassColor(int original) {
 		return color = 0x423E45;
 	}
 	
 	@Override
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
+	public int getModdedBiomeFoliageColor(int original) {
 		return color = 0x423E45;
 	}
 	

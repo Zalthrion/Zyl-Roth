@@ -1,12 +1,12 @@
 package com.zalthrion.zylroth.model.entity.mount;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
@@ -347,7 +347,7 @@ public class ModelDeathcharger extends ModelBase {
 		float f8 = entityhorse.getGrassEatingAmount(p_78086_4_);
 		float f9 = entityhorse.getRearingAmount(p_78086_4_);
 		float f10 = 1.0F - f9;
-		float f11 = entityhorse.func_110201_q(p_78086_4_);
+		float f11 = entityhorse.getMouthOpennessAngle(p_78086_4_);
 		boolean flag = entityhorse.field_110278_bp != 0;
 		boolean flag1 = entityhorse.isHorseSaddled();
 		boolean flag2 = entityhorse.riddenByEntity != null;

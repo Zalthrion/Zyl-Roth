@@ -1,14 +1,18 @@
 package com.zalthrion.zylroth.lib;
 
 import net.minecraft.block.Block;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.zalthrion.zylroth.block.*;
-import com.zalthrion.zylroth.block.machine.*;
+import com.zalthrion.zylroth.block.AshBlock;
+import com.zalthrion.zylroth.block.ChiseledTenebrae;
+import com.zalthrion.zylroth.block.InfusedTenebrae;
+import com.zalthrion.zylroth.block.TenebraeBlock;
+import com.zalthrion.zylroth.block.TenebraeCore;
+import com.zalthrion.zylroth.block.TenebraeOre;
+import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class ModBlocks {
 	

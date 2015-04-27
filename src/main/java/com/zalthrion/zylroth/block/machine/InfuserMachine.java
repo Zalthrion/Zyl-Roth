@@ -2,7 +2,8 @@ package com.zalthrion.zylroth.block.machine;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -26,6 +29,8 @@ public class InfuserMachine extends BlockBaseContainer {
 	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
 	
+	private static final PropertyBool active = PropertyBool.create("active");
+	
 	private static boolean keepInventory;
 	
 	public InfuserMachine(boolean isActive) {
@@ -37,6 +42,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(active, false));
 		this.setStepSound(soundTypeMetal);
 	}
 	
@@ -50,53 +56,40 @@ public class InfuserMachine extends BlockBaseContainer {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (worldIn.isRemote)
 			return true;
 		else {
-			TileEntityInfuser tile = (TileEntityInfuser) world.getTileEntity(x, y, z);
+			TileEntityInfuser tile = (TileEntityInfuser) worldIn.getTileEntity(pos);
 			
-			if ((tile == null) || player.isSneaking()) return false;
+			if ((tile == null) || playerIn.isSneaking()) return false;
 			
-			player.openGui(Zylroth.instance, GuiIDs.INFUSER, world, x, y, z);
+			playerIn.openGui(Zylroth.instance, GuiIDs.INFUSER, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}
 	
 	@Override
-	public Item getItemDropped(int meta, Random random, int fortune) {
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(ModBlocks.Infuser_Idle);
 	}
 	
-	public static void updateBlockState(boolean active, World world, int x, int y, int z) {
-		int i = world.getBlockMetadata(x, y, z);
+	public static IBlockState getActiveState(IBlockState state, boolean isActive) {
+		return state.withProperty(active, isActive);
+	}
+	
+	public static void updateBlockState(boolean active, World world, BlockPos pos) {
+		world.setBlockState(pos, getActiveState(world.getBlockState(pos), active));
 		
-		TileEntity tile = world.getTileEntity(x, y, z);
-		keepInventory = true;
-		
-		if (active) {
-			world.setBlock(x, y, z, ModBlocks.Infuser);
-			
-		} else {
-			
-			world.setBlock(x, y, z, ModBlocks.Infuser_Idle);
-		}
-		
-		keepInventory = false;
-		
-		world.setBlockMetadataWithNotify(x, y, z, i, 2);
-		
+		TileEntity tile = world.getTileEntity(pos);
 		if (tile != null) {
 			tile.validate();
-			world.setTileEntity(x, y, z, tile);
+			world.setTileEntity(pos, tile);
 		}
-	} // I'm not sure two blocks are needed? Why not just make getIcon depend
-		// upon if the TileEntity is active or not.
-		// public IIcon getIcon(IBlockAccess worldIn, int x, int y, int z, int
-		// side)
+	}
 	
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition mop, World world, int x, int y, int z, EntityPlayer player) {
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
 		return new ItemStack(ModBlocks.Infuser_Idle);
 	}
 	
@@ -106,14 +99,14 @@ public class InfuserMachine extends BlockBaseContainer {
 	}
 	
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int i) {
-		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(x, y, z));
+	public int getComparatorInputOverride(World world, BlockPos pos) {
+		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
 		if (!keepInventory) {
-			TileEntity tileEntity = world.getTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(pos);
 			if (!(tileEntity instanceof IInventory)) { return; }
 			IInventory inventory = (IInventory) tileEntity;
 			
@@ -121,9 +114,9 @@ public class InfuserMachine extends BlockBaseContainer {
 				ItemStack itemstack = inventory.getStackInSlotOnClosing(i);
 				
 				if (itemstack != null) {
-					float spawnX = x + world.rand.nextFloat();
-					float spawnY = y + world.rand.nextFloat();
-					float spawnZ = z + world.rand.nextFloat();
+					float spawnX = pos.getX() + world.rand.nextFloat();
+					float spawnY = pos.getY() + world.rand.nextFloat();
+					float spawnZ = pos.getZ() + world.rand.nextFloat();
 					
 					EntityItem entityitem = new EntityItem(world, spawnX, spawnY, spawnZ, itemstack);
 					
@@ -137,26 +130,17 @@ public class InfuserMachine extends BlockBaseContainer {
 			}
 		}
 		
-		super.breakBlock(world, x, y, z, block, meta);
+		super.breakBlock(world, pos, state);
 	}
 	
-	@Override public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack itemStack) {
-		int facing = MathHelper.floor_double((double) ((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+	@Override public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		int facing = MathHelper.floor_double((double) ((placer.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		facing ++;
-		TileEntity te = world.getTileEntity(i, j, k);
+		TileEntity te = world.getTileEntity(pos);
 		if (te != null && te instanceof TileEntityInfuser) {
 			TileEntityInfuser tei = (TileEntityInfuser) te;
 			tei.setFacing(facing);
-			world.markBlockForUpdate(i, j, k);
+			world.markBlockForUpdate(pos);
 		}
 	}
-	
-/*	@Override public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		TileEntity te = world.getTileEntity(x, y, z);
-		if (te instanceof TileEntityInfuser) {
-			TileEntityInfuser tei = (TileEntityInfuser) te;
-			return tei.isBurning() ? 15 : 0;
-		}
-		return getLightValue();
-	}*/ //TODO Activate this if you want to remove the "active" block and make it one
 }

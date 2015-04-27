@@ -7,11 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class VoidTalisman extends ItemBase {
 	

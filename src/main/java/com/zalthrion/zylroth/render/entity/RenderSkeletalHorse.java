@@ -1,22 +1,23 @@
 package com.zalthrion.zylroth.render.entity;
 
-import com.google.common.collect.Maps;
-import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.entity.RenderHorse;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Maps;
+import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
+import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
 
 @SideOnly(Side.CLIENT)
 public class RenderSkeletalHorse extends RenderHorse {
@@ -29,8 +30,8 @@ public class RenderSkeletalHorse extends RenderHorse {
 	private static final ResourceLocation zombieHorseTextures = new ResourceLocation("textures/entity/horse/horse_zombie.png");
 	private static final ResourceLocation skeletonHorseTextures = new ResourceLocation("textures/entity/horse/horse_skeleton.png");
 	
-	public RenderSkeletalHorse(ModelBase p_i1256_1_, float p_i1256_2_) {
-		super(p_i1256_1_, p_i1256_2_);
+	public RenderSkeletalHorse(RenderManager renderManager, ModelHorse pseudo, ModelSkeletalHorse p_i1256_1_, float p_i1256_2_) {
+		super(renderManager, pseudo, p_i1256_2_);
 	}
 	
 	/** Allows the render to do any OpenGL state modifications necessary before

@@ -1,8 +1,8 @@
 package com.zalthrion.zylroth.proxy;
 
-import com.zalthrion.zylroth.event.PlayerEventHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import com.zalthrion.zylroth.event.PlayerEventHandler;
 
 public class CommonProxy implements IProxy {
 	

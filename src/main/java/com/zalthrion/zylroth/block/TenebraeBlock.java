@@ -1,12 +1,12 @@
 package com.zalthrion.zylroth.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.lib.ModTabs;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TenebraeBlock extends BlockBase {
 	
@@ -24,7 +24,7 @@ public class TenebraeBlock extends BlockBase {
 	}
 	
 	@Override
-	public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
+	public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
 		return true;
 	}
 }
