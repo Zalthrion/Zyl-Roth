@@ -13,6 +13,8 @@ public final class ModItems {
 	
 	public static Item Raw_Tenebrae_Ingot;
 	
+	public static Item Tenebrae_Core;
+	
 	public static Item Tenebrae_Ingot;
 	
 	public static Item Purified_Tenebrae_Essence;
@@ -22,11 +24,13 @@ public final class ModItems {
 	
 	//Mounts
 	
-	public static Item Empty_SummoningCrystal;
+	public static Item Empty_SC;
 	
 	public static Item SC_Deathcharger;
 	
 	public static Item SC_PlaguedHorse;
+	
+	public static Item SC_WarTortoise;
 	
 	
 	//Portals
@@ -55,6 +59,8 @@ public final class ModItems {
 		
 		Raw_Tenebrae_Ingot = new RawTenebraeIngot();
 		
+		Tenebrae_Core = new TenebraeCore();
+		
 		Tenebrae_Ingot = new TenebraeIngot();
 		
 		Purified_Tenebrae_Essence = new PurifiedTenebraeEssence();
@@ -64,11 +70,13 @@ public final class ModItems {
 		
 		//Mounts
 		
-		Empty_SummoningCrystal = new EmptySummoningCrystal();
+		Empty_SC = new EmptySC();
 		
 		SC_Deathcharger = new SCDeathcharger();
 		
 		SC_PlaguedHorse = new SCPlaguedHorse();
+		
+		SC_WarTortoise = new SCWarTortoise();
 		
 		
 		//Portals

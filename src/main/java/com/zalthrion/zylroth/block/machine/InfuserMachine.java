@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.block.machine;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -10,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -138,6 +140,23 @@ public class InfuserMachine extends BlockBaseContainer {
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 	
-	//TODO Rotations
+	@Override public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack itemStack) {
+		int facing = MathHelper.floor_double((double) ((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		facing ++;
+		TileEntity te = world.getTileEntity(i, j, k);
+		if (te != null && te instanceof TileEntityInfuser) {
+			TileEntityInfuser tei = (TileEntityInfuser) te;
+			tei.setFacing(facing);
+			world.markBlockForUpdate(i, j, k);
+		}
+	}
 	
+/*	@Override public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te instanceof TileEntityInfuser) {
+			TileEntityInfuser tei = (TileEntityInfuser) te;
+			return tei.isBurning() ? 15 : 0;
+		}
+		return getLightValue();
+	}*/ //TODO Activate this if you want to remove the "active" block and make it one
 }

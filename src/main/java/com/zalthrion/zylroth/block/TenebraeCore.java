@@ -12,7 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TenebraeCore extends BlockBase {
 	
-	private String name = "tenebraeCore";
+	private String name = "tenebraeCoreBlock";
 	
 	public TenebraeCore() {
 		super(Material.rock);

@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.util.ResourceLocation;
 
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
@@ -31,7 +30,7 @@ public class RenderRainbowPig extends RenderLiving {
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityPig p_77032_1_, int p_77032_2_, float p_77032_3_)
+    protected int shouldRenderPass(EntityRainbowPig p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
         if (p_77032_2_ == 0 && p_77032_1_.getSaddled())
         {
@@ -55,7 +54,7 @@ public class RenderRainbowPig extends RenderLiving {
      */
     protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntityPig)p_77032_1_, p_77032_2_, p_77032_3_);
+        return this.shouldRenderPass((EntityRainbowPig)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
 	

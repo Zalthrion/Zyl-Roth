@@ -28,7 +28,7 @@ public class MountPlaguedHorse extends MountBaseHorse {
 		
 		ItemStack stack = player.inventory.getCurrentItem();
 		
-		if (stack != null && stack.getItem() == ModItems.SC_PlaguedHorse && this.isSummoned(true) && player.isSneaking()) {
+		if (stack != null && stack.getItem() == ModItems.SC_PlaguedHorse && player.isSneaking() && persistentData.hasKey("ownsMountPlaguedHorse")) {
 			
 			this.setDead();
 			persistentData.removeTag("ownsMountPlaguedHorse");

@@ -30,7 +30,9 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.Raw_Tenebrae_Ingot), "RRR", 'R', ModItems.Raw_Tenebrae);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Infuser_Idle), "DTD", "TCT", "DTD", 'D', Items.diamond,  'T', ModBlocks.Tenebrae_Block, 'C', ModBlocks.Tenebrae_Core);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Infuser_Idle), "DTD", "TCT", "DTD", 'D', Items.diamond, 'T', ModBlocks.Tenebrae_Block, 'C', ModBlocks.Tenebrae_Core);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.Tenebrae_Core), "IEI", "ECE", "IEI", 'I', ModItems.Tenebrae_Ingot, 'E', ModItems.Soul_Essence, 'C', ModItems.Tenebrae_Core);
 		
 	}
 	
@@ -50,7 +52,9 @@ public final class ModRecipes {
 	}
 	
 	public static void registerInfusionRecipes() {
+		
 //		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.wool), new ItemStack(Blocks.planks), 0, new ItemStack(Items.nether_star, 2, 0), new ItemStack(Items.arrow, 3, 0));
 		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModBlocks.Tenebrae_Block), new ItemStack(ModBlocks.Infused_Tenebrae), 0, new ItemStack(ModItems.Raw_Tenebrae, 1, 0), new ItemStack(ModItems.Soul_Essence, 1, 0));
+		
 	}
 }

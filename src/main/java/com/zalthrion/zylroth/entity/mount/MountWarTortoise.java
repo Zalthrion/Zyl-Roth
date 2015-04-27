@@ -1,23 +1,22 @@
 package com.zalthrion.zylroth.entity.mount;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.reference.Reference;
 
-public class MountDeathcharger extends MountBaseHorse {
+public class MountWarTortoise extends MountBase {
 	
-	public MountDeathcharger(World world) {
+	public MountWarTortoise(World world) {
 		super(world);
 		this.isEntityUndead();
 		this.isImmuneToFire = true;
 		
-		this.setCustomNameTag("Deathcharger");
+		this.setCustomNameTag("War Tortoise");
 	}
 	
 	@Override
@@ -25,23 +24,16 @@ public class MountDeathcharger extends MountBaseHorse {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		this.func_152115_b(player.getUniqueID().toString());
-		
 		ItemStack stack = player.inventory.getCurrentItem();
 		
-		if (stack != null && stack.getItem() == ModItems.SC_Deathcharger && player.isSneaking() && persistentData.hasKey("ownsMountDeathcharger")) {
+		if (stack != null && stack.getItem() == ModItems.SC_WarTortoise && player.isSneaking() && persistentData.hasKey("ownsMountWarTortoise")) {
 			
 			this.setDead();
-			persistentData.removeTag("ownsMountDeathcharger");
-		}
-		
-		if (!func_152114_e(player) && !worldObj.isRemote){ //Checks if the player is the Owner of the mount
-            player.addChatMessage(new ChatComponentTranslation(Reference.MOD_ID + ":" + "mount.owned"));
+			persistentData.removeTag("ownsMountWarTortoise");
 		}
 		
 		return super.interact(player);
 	}
-	
 	
 	/** Returns the horse type. 0 = Normal, 1 = Donkey, 2 = Mule, 3 = Undead
 	 * Horse, 4 = Skeleton Horse */
@@ -66,6 +58,25 @@ public class MountDeathcharger extends MountBaseHorse {
 	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
+	}
+	
+	/** Returns the sound this mob makes while it's alive. */
+	protected String getLivingSound() {
+		return "mob.pig.say";
+	}
+	
+	/** Returns the sound this mob makes when it is hurt. */
+	protected String getHurtSound() {
+		return "mob.pig.say";
+	}
+	
+	/** Returns the sound this mob makes on death. */
+	protected String getDeathSound() {
+		return "mob.pig.death";
+	}
+	
+	protected void playStepSound(int x, int y, int z, Block blockIn) {
+		this.playSound("mob.pig.step", 0.15F, 1.0F);
 	}
 	
 }
