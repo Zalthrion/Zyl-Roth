@@ -20,6 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /*---------------------------------------------------------------------------*/
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+
 /*---------------------------------------------------------------------------*/
 public class Zylroth {
 	

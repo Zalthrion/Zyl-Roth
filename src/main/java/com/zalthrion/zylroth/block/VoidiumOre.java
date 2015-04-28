@@ -7,15 +7,15 @@ import com.zalthrion.zylroth.lib.ModTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
-public class TenebraeOre extends BlockBase {
+public class VoidiumOre extends BlockBase {
 	
-	private String name = "tenebraeOre";
+	private String name = "voidiumOre";
 	
-	public TenebraeOre() {
+	public VoidiumOre() {
 		super(Material.rock);
 		this.setNames(name);
 		this.setHardness(3.0F);
-		this.setHarvestLevel("pickaxe", 2);
+		this.setHarvestLevel("pickaxe", 3);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
 		this.setCreativeTab(ModTabs.ZylRoth);

@@ -5,102 +5,51 @@ import net.minecraft.item.Item;
 import com.zalthrion.zylroth.item.*;
 import com.zalthrion.zylroth.item.mount.*;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public final class ModItems {
-	
-	//Tenebrae
-	
-	public static Item Raw_Tenebrae;
-	
-	public static Item Raw_Tenebrae_Ingot;
-	
-	public static Item Tenebrae_Ingot;
-	
-	
-	public static Item Unstable_Tenebrae_Core;
-	
-	public static Item Stable_Tenebrae_Core;
-	
-	
-	//Mounts
-	
-	public static Item Empty_SC;
-	
-	public static Item SC_Deathcharger;
-	
-	public static Item SC_PlaguedHorse;
-	
-	public static Item SC_WarTortoise;
-	
-	
-	//Portals
-	
-	public static Item Void_Talisman;
-	
-	public static Item Rainbow_Talisman;
-	
-	
-	//Others
-	
-	public static Item Dark_Shard;
-	
-	public static Item Soul_Essence;
-	
-	public static Item Cursed_Soul_Essence;
-	
-	
-	public static Item Void_Gem;
-	
-	public static Item Void_Essence;
+	/* Tenebrae */
+	public static Item raw_Tenebrae = new RawTenebrae();
+	public static Item raw_Tenebrae_Ingot = new RawTenebraeIngot();
+	public static Item tenebrae_Ingot = new TenebraeIngot();
+	public static Item unstable_Tenebrae_Core = new UnstableTenebraeCore();
+	public static Item stable_Tenebrae_Core = new StableTenebraeCore();
+	/* Mounts */
+	public static Item Empty_SC = new EmptySC();
+	public static Item SC_Deathcharger = new SCDeathcharger();
+	public static Item SC_PlaguedHorse = new SCPlaguedHorse();
+	public static Item SC_WarTortoise = new SCWarTortoise();
+	/* Portals */
+	public static Item void_Talisman = new VoidTalisman();
+	public static Item rainbow_Talisman = new RainbowTalisman();
+	/* Others */
+	public static Item dark_Shard = new DarkShard();
+	public static Item soul_Essence = new SoulEssence();
+	public static Item cursed_Soul_Essence = new CursedSoulEssence();
+	public static Item void_Gem = new VoidGem();
+	public static Item void_Essence = new VoidEssence();
 	
 	
 	public static void init() {
-		
-		//Tenebrae
-		
-		Raw_Tenebrae = new RawTenebrae();
-		
-		Raw_Tenebrae_Ingot = new RawTenebraeIngot();
-		
-		Tenebrae_Ingot = new TenebraeIngot();
-		
-		
-		Unstable_Tenebrae_Core = new UnstableTenebraeCore();
-		
-		Stable_Tenebrae_Core = new StableTenebraeCore();
-		
-		
-		//Mounts
-		
-		Empty_SC = new EmptySC();
-		
-		SC_Deathcharger = new SCDeathcharger();
-		
-		SC_PlaguedHorse = new SCPlaguedHorse();
-		
-		SC_WarTortoise = new SCWarTortoise();
-		
-		
-		//Portals
-		
-		Void_Talisman = new VoidTalisman();
-		
-		Rainbow_Talisman = new RainbowTalisman();
-		
-		
-		//Others
-		
-		Dark_Shard = new DarkShard();
-		
-		
-		Soul_Essence = new SoulEssence();
-		
-		Cursed_Soul_Essence = new CursedSoulEssence();
-		
-		
-		Void_Gem = new VoidGem();
-		
-		Void_Essence = new VoidEssence();
-		
+		/* Tenebrae */
+		GameRegistry.registerItem(raw_Tenebrae, "rawTenebrae");
+		GameRegistry.registerItem(raw_Tenebrae_Ingot, "rawTenebraeIngot");
+		GameRegistry.registerItem(tenebrae_Ingot, "tenebraeIngot");
+		GameRegistry.registerItem(unstable_Tenebrae_Core, "unstableTenebraeCore");
+		GameRegistry.registerItem(stable_Tenebrae_Core, "stableTenebraeCore");
+		/* Mounts */
+		GameRegistry.registerItem(Empty_SC, "emptySummoningCrystal");
+		GameRegistry.registerItem(SC_Deathcharger, "SC_Deathcharger");
+		GameRegistry.registerItem(SC_PlaguedHorse, "SC_PlaguedHorse");
+		GameRegistry.registerItem(SC_WarTortoise, "SC_WarTortoise");
+		/* Portals */
+		GameRegistry.registerItem(void_Talisman, "voidTalisman");
+		GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
+		/* Others */
+		GameRegistry.registerItem(dark_Shard, "darkShard");
+		GameRegistry.registerItem(soul_Essence, "soulEssence");
+		GameRegistry.registerItem(cursed_Soul_Essence, "cursedSoulEssence");
+		GameRegistry.registerItem(void_Gem, "voidGem");
+		GameRegistry.registerItem(void_Essence, "voidEssence");
 	}
-	
 }

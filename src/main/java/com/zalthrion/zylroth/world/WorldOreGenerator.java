@@ -32,7 +32,7 @@ public class WorldOreGenerator implements IWorldGenerator {
 	
 	private void GenerateOverworld(Random random, int x, int z, World world) {
 		
-		this.addOreSpawn(ModBlocks.Tenebrae_Ore, world, random, x, z, 2, 6, 4, 0, 32);
+		this.addOreSpawn(ModBlocks.tenebrae_Ore, world, random, x, z, 2, 6, 4, 0, 32);
 		
 	}
 	
@@ -46,7 +46,7 @@ public class WorldOreGenerator implements IWorldGenerator {
 	
 	private void GenerateKyrul(Random random, int x, int z, World world) {
 		
-		this.addOreSpawn(ModBlocks.Tenebrae_Ore, world, random, x, z, 2, 6, 5, 0, 32);
+		this.addOreSpawn(ModBlocks.voidium_Ore, world, random, x, z, 2, 6, 5, 0, 32);
 		
 	}
 	

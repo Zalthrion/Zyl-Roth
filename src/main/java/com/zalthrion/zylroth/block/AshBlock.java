@@ -4,8 +4,6 @@ import net.minecraft.block.material.Material;
 
 import com.zalthrion.zylroth.lib.ModTabs;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class AshBlock extends BlockBase {
 	
 	private String name = "ashBlock";
@@ -16,7 +14,6 @@ public class AshBlock extends BlockBase {
 		this.setHardness(0.5F);
 		this.setStepSound(soundTypeSand);
 		this.setCreativeTab(ModTabs.ZylRoth);
-		GameRegistry.registerBlock(this, name);
 	}
 	
 }

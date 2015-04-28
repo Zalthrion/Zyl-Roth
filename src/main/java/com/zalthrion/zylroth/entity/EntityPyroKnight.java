@@ -170,7 +170,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ModItems.Dark_Shard, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.dark_Shard, 1, 6), 0f);
 		}
 	}
 	

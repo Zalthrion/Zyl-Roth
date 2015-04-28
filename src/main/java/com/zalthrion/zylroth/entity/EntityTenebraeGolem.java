@@ -166,12 +166,12 @@ public class EntityTenebraeGolem extends EntityGolem {
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.Unstable_Tenebrae_Core, 1);
+		this.dropItem(ModItems.unstable_Tenebrae_Core, 1);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ModItems.Raw_Tenebrae, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.raw_Tenebrae, 1, 6), 0f);
 		}
 	}
 	

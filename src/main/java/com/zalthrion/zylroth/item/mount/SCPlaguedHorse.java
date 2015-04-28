@@ -8,8 +8,6 @@ import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class SCPlaguedHorse extends SummoningCrystalBase {
 	
 	private String itemName = "SC_PlaguedHorse";
@@ -18,7 +16,6 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 	
 	public SCPlaguedHorse() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

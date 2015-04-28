@@ -143,7 +143,7 @@ public class DragonNest extends WorldGenerator implements IWorldGenerator {
 		this.setBlock(world, i + 3, j + 2, k + 0, Blocks.air, 0);
 		this.setBlock(world, i + 3, j + 2, k + 1, Blocks.air, 0);
 		this.setBlock(world, i + 3, j + 2, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 2, k + 3, ModBlocks.Spawner_VoidDragon, 0);
+		this.setBlock(world, i + 3, j + 2, k + 3, ModBlocks.spawner_VoidDragon, 0);
 		this.setBlock(world, i + 3, j + 2, k + 4, Blocks.stone, 0);
 		this.setBlock(world, i + 3, j + 2, k + 5, Blocks.air, 0);
 		this.setBlock(world, i + 3, j + 2, k + 6, Blocks.air, 0);

@@ -65,7 +65,7 @@ public class InfuserMachine extends BlockBaseContainer {
 	
 	@Override
 	public Item getItemDropped(int meta, Random random, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.Infuser_Idle);
+		return Item.getItemFromBlock(ModBlocks.infuser_Idle);
 	}
 	
 	public static void updateBlockState(boolean active, World world, int x, int y, int z) {
@@ -75,11 +75,11 @@ public class InfuserMachine extends BlockBaseContainer {
 		keepInventory = true;
 		
 		if (active) {
-			world.setBlock(x, y, z, ModBlocks.Infuser);
+			world.setBlock(x, y, z, ModBlocks.infuser);
 			
 		} else {
 			
-			world.setBlock(x, y, z, ModBlocks.Infuser_Idle);
+			world.setBlock(x, y, z, ModBlocks.infuser_Idle);
 		}
 		
 		keepInventory = false;
@@ -97,7 +97,7 @@ public class InfuserMachine extends BlockBaseContainer {
 	
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition mop, World world, int x, int y, int z, EntityPlayer player) {
-		return new ItemStack(ModBlocks.Infuser_Idle);
+		return new ItemStack(ModBlocks.infuser_Idle);
 	}
 	
 	@Override

@@ -11,8 +11,6 @@ import net.minecraft.world.WorldServer;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class VoidTalisman extends ItemBase {
 	
 	private String name = "voidTalisman";
@@ -23,7 +21,6 @@ public class VoidTalisman extends ItemBase {
 	
 	public VoidTalisman() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	/* @Override public ItemStack onItemRightClick(ItemStack item, World world,

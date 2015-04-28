@@ -4,10 +4,10 @@ itemGroup.Zyl'Roth=Zyl'Roth
 tooltip.zylroth:shift=- Hold Shift for more info -
 
 tooltip.zylroth:beacon=Can be used for Beacon bases
-tooltip.zylroth:core=The life source of a mechanical creature.
-tooltip.zylroth:head=It seems just like an odd piece of architecture.
-tooltip.zylroth:tenebrae=You can feel darkness coming out from it...
-tooltip.zylroth:tenebrae_armor=Made of a resistant material, seems like is more durable than diamond..
+tooltip.zylroth:core=A powerful artifact with immense power running inside it.
+tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
+tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
+tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond..
 
 tile.zylroth:ashBlock.name=Ash Block
 tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
@@ -33,18 +33,17 @@ entity.zylroth:Void_Dragon.name=Void Dragon
 entity.zylroth:Deathcharger.name=Deathcharger
 entity.zylroth:Plagued_Horse.name=Plagued Horse
 
-item.zylroth:darkShard.name=Dark Shard
-item.zylroth:tenebraeIngot.name=Tenebrae Ingot
 item.zylroth:tenebraeCore.name=Tenebrae Core
-
 item.zylroth:rawTenebrae.name=Raw Tenebrae
 item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
+item.zylroth:tenebraeIngot.name=Tenebrae Ingot
+item.zylroth:unstableTenebraeCore.name=Unstable Tenebrae Core
+item.zylroth:stableTenebraeCore.name=Stable Tenebrae Core
 
+item.zylroth:darkShard.name=Dark Shard
 item.zylroth:soulEssence.name=Soul Essence
 item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
-
-item.zylroth:unstableTenebraeEssence.name=Unstable Tenebrae Essence
-item.zylroth:purifiedTenebraeEssence.name=Purified Tenebrae Essence
+item.zylroth:voidEssence.name=Void Essence
 
 item.zylroth:rainbowTalisman.name=Rainbow Talisman
 item.zylroth:voidTalisman.name=Void Talisman

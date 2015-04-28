@@ -174,13 +174,13 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.Void_Essence, 1);
-		this.dropItem(ModItems.Void_Gem, 4);
+		this.dropItem(ModItems.void_Essence, 1);
+		this.dropItem(ModItems.void_Gem, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ModItems.Raw_Tenebrae, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.raw_Tenebrae, 1, 6), 0f);
 		}
 	}
 	

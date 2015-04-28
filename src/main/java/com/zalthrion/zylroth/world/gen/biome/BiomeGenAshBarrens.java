@@ -20,8 +20,8 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 		this.theBiomeDecorator.treesPerChunk = -999;
 		this.theBiomeDecorator.grassPerChunk = 8;
 		
-		this.topBlock = (ModBlocks.Ash_Block);
-		this.fillerBlock = (ModBlocks.Ash_Block);
+		this.topBlock = (ModBlocks.ash_Block);
+		this.fillerBlock = (ModBlocks.ash_Block);
 		
 		this.setHeight(height_Default);
 		this.setBiomeName("Ash Barrens");

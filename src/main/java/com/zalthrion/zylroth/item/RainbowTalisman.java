@@ -9,8 +9,6 @@ import net.minecraft.world.WorldServer;
 
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class RainbowTalisman extends ItemBase {
 	
 	private String name = "rainbowTalisman"
@@ -18,7 +16,6 @@ public class RainbowTalisman extends ItemBase {
 	
 	public RainbowTalisman() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

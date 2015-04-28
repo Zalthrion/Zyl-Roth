@@ -10,11 +10,16 @@ public final class ModOreDictionary {
 	
 	public static void registerDictionary() {
 		
-		OreDictionary.registerOre("oreTenebrae", ModBlocks.Tenebrae_Ore);
+		/* Tenebrae */
 		
-		OreDictionary.registerOre("ingotTenebrae", ModItems.Tenebrae_Ingot);
+		OreDictionary.registerOre("oreTenebrae", ModBlocks.tenebrae_Ore);
+		OreDictionary.registerOre("ingotTenebrae", ModItems.tenebrae_Ingot);
+		OreDictionary.registerOre("blockTenebrae", ModBlocks.tenebrae_Block);
 		
-		OreDictionary.registerOre("blockTenebrae", ModBlocks.Tenebrae_Block);
+		
+		/* Voidium */
+		
+		OreDictionary.registerOre("oreVoidium", ModBlocks.voidium_Ore);
 		
 	}
 }

@@ -8,8 +8,6 @@ import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class SCDeathcharger extends SummoningCrystalBase {
 	
 	private String itemName = "SC_Deathcharger";
@@ -18,7 +16,6 @@ public class SCDeathcharger extends SummoningCrystalBase {
 	
 	public SCDeathcharger() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

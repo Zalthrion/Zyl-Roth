@@ -8,8 +8,6 @@ import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class SCWarTortoise extends SummoningCrystalBase {
 	
 	private String itemName = "SC_WarTortoise";
@@ -18,7 +16,6 @@ public class SCWarTortoise extends SummoningCrystalBase {
 	
 	public SCWarTortoise() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
