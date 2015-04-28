@@ -19,6 +19,7 @@ import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class ModEntity {
@@ -77,6 +78,8 @@ public class ModEntity {
 		
 		EntityRegistry.registerModEntity(MountPlaguedHorse.class, "Plagued Horse", 11, this, 80, 4, true);
 		
+		EntityRegistry.registerModEntity(MountWarTortoise.class, "War Tortoise", 12, this, 80, 4, true);
+		
 		
 	}
 	
@@ -117,6 +120,8 @@ public class ModEntity {
 		registerEntity(MountDeathcharger.class, Reference.MOD_ID + ":" + "Deathcharger");
 		
 		registerEntity(MountPlaguedHorse.class, Reference.MOD_ID + ":" + "Plagued_Horse");
+		
+		registerEntityEgg(MountWarTortoise.class, Reference.MOD_ID + ":" + "War_Tortoise", 0xeaeae9, 0xc99a03);
 		
 
 	}

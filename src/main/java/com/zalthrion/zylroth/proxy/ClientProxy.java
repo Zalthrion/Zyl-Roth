@@ -17,6 +17,7 @@ import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.model.entity.ModelBird;
 import com.zalthrion.zylroth.model.entity.ModelMutantTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelRainbowPig;
@@ -25,6 +26,7 @@ import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelUndead;
 import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
 import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
+import com.zalthrion.zylroth.model.entity.mount.ModelWarTortoise;
 import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.render.entity.RenderBird;
 import com.zalthrion.zylroth.render.entity.RenderMutantTenebraeGolem;
@@ -37,6 +39,7 @@ import com.zalthrion.zylroth.render.entity.RenderUndeadWarrior;
 import com.zalthrion.zylroth.render.entity.RenderVoidDragon;
 import com.zalthrion.zylroth.render.entity.mount.RenderDeathcharger;
 import com.zalthrion.zylroth.render.entity.mount.RenderPlaguedHorse;
+import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
@@ -89,6 +92,8 @@ public class ClientProxy extends CommonProxy {
 		
 		RenderingRegistry.registerEntityRenderingHandler(MountPlaguedHorse.class, new RenderPlaguedHorse(rm, new ModelHorse(), new ModelPlaguedHorse(), shadowSize));
 
+		RenderingRegistry.registerEntityRenderingHandler(MountWarTortoise.class, new RenderWarTortoise(rm, new ModelWarTortoise(), shadowSize));
+		
 	}
 	
 	public void registerBlockRenderers() {

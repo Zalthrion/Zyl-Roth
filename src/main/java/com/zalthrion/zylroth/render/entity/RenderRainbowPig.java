@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,7 +29,7 @@ public class RenderRainbowPig extends RenderLiving {
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityPig p_77032_1_, int p_77032_2_, float p_77032_3_)
+    protected int shouldRenderPass(EntityRainbowPig p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
         if (p_77032_2_ == 0 && p_77032_1_.getSaddled())
         {
@@ -54,13 +53,13 @@ public class RenderRainbowPig extends RenderLiving {
      */
     protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntityPig)p_77032_1_, p_77032_2_, p_77032_3_);
+        return this.shouldRenderPass((EntityRainbowPig)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+	@Override protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
 		return this.getEntityTexture((EntityRainbowPig) p_110775_1_);
 	}
 }

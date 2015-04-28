@@ -2,12 +2,13 @@ package com.zalthrion.zylroth.item;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class PurifiedTenebraeEssence extends ItemBase {
+public class UnstableTenebraeCore extends ItemBase {
 	
-	private String name = "purifiedTenebraeEssence";
+	private String name = "tenebraeCore";
 	
-	public PurifiedTenebraeEssence() {
+	public UnstableTenebraeCore() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}
+	
 }

@@ -9,12 +9,13 @@ tooltip.zylroth:head=It seems just like an odd piece of architecture.
 tooltip.zylroth:tenebrae=You can feel darkness coming out from it...
 tooltip.zylroth:tenebrae_armor=Made of a resistant material, seems like is more durable than diamond..
 
+tile.zylroth:ashBlock.name=Ash Block
 tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
 tile.zylroth:infusedTenebrae.name=Infused Tenebrae
 tile.zylroth:infuserMachine.name=Tenebrae Infuser
 tile.zylroth:infuserMachineActive.name=Tenebrae Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
-tile.zylroth:tenebraeCore.name=Tenebrae Core
+tile.zylroth:tenebraeCoreBlock.name=Tenebrae Core
 tile.zylroth:tenebraeOre.name=Tenebrae Ore
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]

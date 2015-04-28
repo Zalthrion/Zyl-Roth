@@ -9,7 +9,7 @@ public class ModTabs {
 		
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.Purified_Tenebrae_Essence;
+			return ModItems.Stable_Tenebrae_Core;
 		}
 	};
 	

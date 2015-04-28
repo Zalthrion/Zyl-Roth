@@ -15,18 +15,21 @@ public final class ModItems {
 	
 	public static Item Tenebrae_Ingot;
 	
-	public static Item Purified_Tenebrae_Essence;
 	
-	public static Item Unstable_Tenebrae_Essence;
+	public static Item Unstable_Tenebrae_Core;
+	
+	public static Item Stable_Tenebrae_Core;
 	
 	
 	//Mounts
 	
-	public static Item Empty_SummoningCrystal;
+	public static Item Empty_SC;
 	
 	public static Item SC_Deathcharger;
 	
 	public static Item SC_PlaguedHorse;
+	
+	public static Item SC_WarTortoise;
 	
 	
 	//Portals
@@ -44,7 +47,10 @@ public final class ModItems {
 	
 	public static Item Cursed_Soul_Essence;
 	
+	
 	public static Item Void_Gem;
+	
+	public static Item Void_Essence;
 	
 	
 	public static void init() {
@@ -57,18 +63,21 @@ public final class ModItems {
 		
 		Tenebrae_Ingot = new TenebraeIngot();
 		
-		Purified_Tenebrae_Essence = new PurifiedTenebraeEssence();
 		
-		Unstable_Tenebrae_Essence = new UnstableTenebraeEssence();
+		Unstable_Tenebrae_Core = new UnstableTenebraeCore();
+		
+		Stable_Tenebrae_Core = new StableTenebraeCore();
 		
 		
 		//Mounts
 		
-		Empty_SummoningCrystal = new EmptySummoningCrystal();
+		Empty_SC = new EmptySC();
 		
 		SC_Deathcharger = new SCDeathcharger();
 		
 		SC_PlaguedHorse = new SCPlaguedHorse();
+		
+		SC_WarTortoise = new SCWarTortoise();
 		
 		
 		//Portals
@@ -82,11 +91,15 @@ public final class ModItems {
 		
 		Dark_Shard = new DarkShard();
 		
+		
 		Soul_Essence = new SoulEssence();
 		
 		Cursed_Soul_Essence = new CursedSoulEssence();
 		
+		
 		Void_Gem = new VoidGem();
+		
+		Void_Essence = new VoidEssence();
 		
 	}
 	
