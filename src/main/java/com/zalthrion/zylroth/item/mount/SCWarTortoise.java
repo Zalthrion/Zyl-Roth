@@ -1,13 +1,12 @@
 package com.zalthrion.zylroth.item.mount;
 
-import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
-
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
 public class SCWarTortoise extends SummoningCrystalBase {
 	
@@ -17,7 +16,6 @@ public class SCWarTortoise extends SummoningCrystalBase {
 	
 	public SCWarTortoise() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

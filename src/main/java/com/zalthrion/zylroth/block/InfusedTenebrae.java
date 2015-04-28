@@ -1,9 +1,7 @@
 package com.zalthrion.zylroth.block;
 
 import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
 import com.zalthrion.zylroth.lib.ModTabs;
 
 public class InfusedTenebrae extends BlockBase {
@@ -18,6 +16,5 @@ public class InfusedTenebrae extends BlockBase {
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypeMetal);
 		this.setCreativeTab(ModTabs.ZylRoth);
-		GameRegistry.registerBlock(this, TenebraeItemBlock.class, name);
 	}
 }

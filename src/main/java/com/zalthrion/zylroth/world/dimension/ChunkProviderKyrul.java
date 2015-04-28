@@ -3,22 +3,16 @@ package com.zalthrion.zylroth.world.dimension;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.DUNGEON;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ICE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
 
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -30,14 +24,8 @@ import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.feature.WorldGenDungeons;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderKyrul implements IChunkProvider {
 	/** RNG. */
@@ -178,7 +166,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	}
 	
 	public void replaceBlocksForBiome(int p_147422_1_, int p_147422_2_, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_) {
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147422_1_, p_147422_2_, p_147422_3_, p_147422_4_, p_147422_5_, this.worldObj);
+/*		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147422_1_, p_147422_2_, p_147422_3_, p_147422_4_, p_147422_5_, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY) return;
 		
@@ -190,7 +178,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 				BiomeGenBase biomegenbase = p_147422_5_[l + k * 16];
 				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, p_147422_1_ * 16 + k, p_147422_2_ * 16 + l, this.stoneNoise[l + k * 16]);
 			}
-		}
+		}*/
 	}
 	
 	/** loads or generates the chunk at the chunk location specified */
@@ -202,7 +190,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	 * will generates all the blocks for the specified chunk from the map seed
 	 * and chunk seed */
 	@Override public Chunk provideChunk(int chunkX, int chunkZ) {
-		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
+/*		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
 		this.populateChunkArray(chunkX, chunkZ, ablock);
@@ -222,8 +210,8 @@ public class ChunkProviderKyrul implements IChunkProvider {
 			abyte1[k] = (byte) this.biomesForGeneration[k].biomeID;
 		}
 		
-		chunk.generateSkylightMap();
-		return chunk;
+		chunk.generateSkylightMap();*/
+		return new Chunk(this.worldObj, chunkX, chunkZ);
 	}
 	
 	private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_) {
@@ -332,7 +320,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	
 	/** Populates chunk with ores etc etc */
 	public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_) {
-		BlockFalling.fallInstantly = true;
+/*		BlockFalling.fallInstantly = true;
 		int k = p_73153_2_ * 16;
 		int l = p_73153_3_ * 16;
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(k + 16, l + 16);
@@ -401,7 +389,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag));
 		
-		BlockFalling.fallInstantly = false;
+		BlockFalling.fallInstantly = false;*/
 	}
 	
 	/** Two modes of operation: if passed true, save all Chunks in one go. If
@@ -440,23 +428,43 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	
 	/** Returns a list of creatures of the specified type that can spawn at the
 	 * given location. */
-	@SuppressWarnings("rawtypes")
+/*	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType creaturetype, int x, int y, int z) {
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(x, z);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creaturetype);
-	}
+	}*/
 	
-	public ChunkPosition findClosestStructure(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
+/*	public ChunkPosition findClosestStructure(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
 		return null;
-	}
+	}*/
 	
-	public int getLoadedChunkCount() {
+	@Override public int getLoadedChunkCount() {
 		return 0;
 	}
-	
-	public void recreateStructures(int p_82695_1_, int p_82695_2_) {
-		if (this.mapFeaturesEnabled) {
+
+	@Override public Chunk provideChunk(BlockPos blockPosIn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override public List getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override public void recreateStructures(Chunk chunk, int chunkX, int chunkZ) {
+/*		if (this.mapFeaturesEnabled) {
 			this.mineshaftGenerator.generate(this, this.worldObj, p_82695_1_, p_82695_2_, (Block[]) null);
-		}
+		}*/
 	}
 }

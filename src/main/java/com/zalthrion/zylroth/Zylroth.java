@@ -66,6 +66,8 @@ public class Zylroth {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		
+		proxy.registerItemRenderers();
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		
 		ModEntity.init();

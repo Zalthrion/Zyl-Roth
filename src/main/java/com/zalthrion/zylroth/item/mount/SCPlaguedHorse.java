@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 
@@ -17,7 +16,6 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 	
 	public SCPlaguedHorse() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

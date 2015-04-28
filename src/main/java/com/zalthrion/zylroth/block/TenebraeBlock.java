@@ -3,9 +3,7 @@ package com.zalthrion.zylroth.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.lib.ModTabs;
 
 public class TenebraeBlock extends BlockBase {
@@ -20,7 +18,6 @@ public class TenebraeBlock extends BlockBase {
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypeMetal);
 		this.setCreativeTab(ModTabs.ZylRoth);
-		GameRegistry.registerBlock(this, BeaconBaseItemBlock.class, name);
 	}
 	
 	@Override

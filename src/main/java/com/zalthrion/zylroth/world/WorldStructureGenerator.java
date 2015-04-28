@@ -3,12 +3,8 @@ package com.zalthrion.zylroth.world;
 import java.util.Random;
 
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
-
-import com.zalthrion.zylroth.lib.ModBiomes;
-import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
 public class WorldStructureGenerator implements IWorldGenerator {
 	
@@ -27,7 +23,7 @@ public class WorldStructureGenerator implements IWorldGenerator {
 				GenerateNether(random, x * 16, z * 16, world);
 				break;
 			case 47:
-				GenerateKyrul(random, x * 16, z * 16, world);
+				// GenerateKyrul(random, x * 16, z * 16, world);
 		}
 	}
 	
@@ -43,7 +39,7 @@ public class WorldStructureGenerator implements IWorldGenerator {
 		
 	}
 	
-	private void GenerateKyrul(Random random, int x, int z, World world) {
+/*	private void GenerateKyrul(Random random, int x, int z, World world) {
 		
 		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
 		if (biomegenbase == ModBiomes.VoidMountains) {
@@ -54,6 +50,6 @@ public class WorldStructureGenerator implements IWorldGenerator {
 				new DragonNest().generate(world, random, RandPosX, RandPosY, RandPosZ);
 			}
 		}
-	}
+	}*/
 	
 }
