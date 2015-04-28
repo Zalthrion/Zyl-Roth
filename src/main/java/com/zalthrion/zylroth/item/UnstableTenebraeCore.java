@@ -2,11 +2,11 @@ package com.zalthrion.zylroth.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TenebraeCore extends ItemBase {
+public class UnstableTenebraeCore extends ItemBase {
 	
 	private String name = "tenebraeCore";
 	
-	public TenebraeCore() {
+	public UnstableTenebraeCore() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}

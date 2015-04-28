@@ -13,13 +13,12 @@ public final class ModItems {
 	
 	public static Item Raw_Tenebrae_Ingot;
 	
-	public static Item Tenebrae_Core;
-	
 	public static Item Tenebrae_Ingot;
 	
-	public static Item Purified_Tenebrae_Essence;
 	
-	public static Item Unstable_Tenebrae_Essence;
+	public static Item Unstable_Tenebrae_Core;
+	
+	public static Item Stable_Tenebrae_Core;
 	
 	
 	//Mounts
@@ -48,7 +47,10 @@ public final class ModItems {
 	
 	public static Item Cursed_Soul_Essence;
 	
+	
 	public static Item Void_Gem;
+	
+	public static Item Void_Essence;
 	
 	
 	public static void init() {
@@ -59,13 +61,12 @@ public final class ModItems {
 		
 		Raw_Tenebrae_Ingot = new RawTenebraeIngot();
 		
-		Tenebrae_Core = new TenebraeCore();
-		
 		Tenebrae_Ingot = new TenebraeIngot();
 		
-		Purified_Tenebrae_Essence = new PurifiedTenebraeEssence();
 		
-		Unstable_Tenebrae_Essence = new UnstableTenebraeEssence();
+		Unstable_Tenebrae_Core = new UnstableTenebraeCore();
+		
+		Stable_Tenebrae_Core = new StableTenebraeCore();
 		
 		
 		//Mounts
@@ -90,11 +91,15 @@ public final class ModItems {
 		
 		Dark_Shard = new DarkShard();
 		
+		
 		Soul_Essence = new SoulEssence();
 		
 		Cursed_Soul_Essence = new CursedSoulEssence();
 		
+		
 		Void_Gem = new VoidGem();
+		
+		Void_Essence = new VoidEssence();
 		
 	}
 	

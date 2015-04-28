@@ -2,11 +2,11 @@ package com.zalthrion.zylroth.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class UnstableTenebraeEssence extends ItemBase {
+public class VoidEssence extends ItemBase {
 	
 	private String name = "unstableTenebraeEssence";
 	
-	public UnstableTenebraeEssence() {
+	public VoidEssence() {
 		this.setNames(name);
 		GameRegistry.registerItem(this, name);
 	}

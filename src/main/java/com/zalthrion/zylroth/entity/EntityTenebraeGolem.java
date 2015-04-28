@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.entity;
 
+import com.zalthrion.zylroth.lib.ModItems;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -16,7 +18,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -164,23 +166,12 @@ public class EntityTenebraeGolem extends EntityGolem {
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		int j = this.rand.nextInt(3);
-		int k;
+		this.dropItem(ModItems.Unstable_Tenebrae_Core, 1);
 		
-		for (k = 0; k < j; ++ k) {
-			this.dropItem(Items.sugar, 1);
-		}
+		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
-		k = 3 + this.rand.nextInt(3);
-		
-		for (int l = 0; l < k; ++ l) {
-			this.dropItem(Items.iron_ingot, 1);
-		}
-		
-		int ob;
-		
-		for (ob = 0; ob < j; ++ ob) {
-			this.dropItem(Items.arrow, 1);
+		for (int def = 0; def < amount; ++ def) {
+			this.entityDropItem(new ItemStack(ModItems.Raw_Tenebrae, 1, 6), 0f);
 		}
 	}
 	

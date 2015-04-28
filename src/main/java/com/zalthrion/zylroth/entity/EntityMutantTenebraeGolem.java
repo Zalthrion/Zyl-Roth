@@ -154,7 +154,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	/** Returns the sound this mob makes when it is hurt. */
 	@Override
 	protected String getHurtSound() {
-		return "random.anvil_land";
+		return "mob.zombie.metal";
 	}
 	
 	/** Returns the sound this mob makes on death. */
@@ -174,7 +174,8 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.Void_Gem, 1);
+		this.dropItem(ModItems.Void_Essence, 1);
+		this.dropItem(ModItems.Void_Gem, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		

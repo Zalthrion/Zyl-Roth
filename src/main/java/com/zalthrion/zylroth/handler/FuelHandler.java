@@ -17,14 +17,19 @@ public class FuelHandler implements IFuelHandler {
 		Block blockFuel = Block.getBlockFromItem(fuel.getItem());
 		Item itemFuel = fuel.getItem();
 		
-		if (itemFuel == ModItems.Unstable_Tenebrae_Essence) {
+		if (itemFuel == ModItems.Soul_Essence) {
 			
 			return 6400;
+		}
+		
+		else if (itemFuel == ModItems.Cursed_Soul_Essence) {
 			
-		} else {
+			return 6400;
+		}
+		
+		else {
 			
 			return 0;
-			
 		}
 	}
 }

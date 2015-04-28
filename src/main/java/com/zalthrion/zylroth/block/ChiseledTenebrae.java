@@ -76,22 +76,10 @@ public class ChiseledTenebrae extends BlockBase {
 				for (int i1 = 0; i1 < 120; ++ i1) {
 					world.spawnParticle("snowballpoof", (double) x + world.rand.nextDouble(), (double) (y - 2) + world.rand.nextDouble() * 3.9D, (double) z + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
 				}
-				
-				world.notifyBlockChange(x, y, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 1, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 2, z, getBlockById(0));
-				
-				if (flag) {
-					world.notifyBlockChange(x - 1, y - 1, z, getBlockById(0));
-					world.notifyBlockChange(x + 1, y - 1, z, getBlockById(0));
-				} else {
-					world.notifyBlockChange(x, y - 1, z - 1, getBlockById(0));
-					world.notifyBlockChange(x, y - 1, z + 1, getBlockById(0));
-				}
 			}
 		}
 		
-		else if (world.getBlock(x, y - 1, z) == ModBlocks.Tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.Tenebrae_Block) {
+		else if (world.getBlock(x, y - 1, z) == ModBlocks.Tenebrae_Block && world.getBlock(x, y - 2, z) == ModBlocks.Tenebrae_Block) {
 			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.Tenebrae_Block && world.getBlock(x + 1, y - 1, z) == ModBlocks.Tenebrae_Block;
 			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.Tenebrae_Block && world.getBlock(x, y - 1, z + 1) == ModBlocks.Tenebrae_Block;
 			
@@ -115,18 +103,6 @@ public class ChiseledTenebrae extends BlockBase {
 				
 				for (int i1 = 0; i1 < 120; ++ i1) {
 					world.spawnParticle("snowballpoof", (double) x + world.rand.nextDouble(), (double) (y - 2) + world.rand.nextDouble() * 3.9D, (double) z + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
-				}
-				
-				world.notifyBlockChange(x, y, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 1, z, getBlockById(0));
-				world.notifyBlockChange(x, y - 2, z, getBlockById(0));
-				
-				if (flag) {
-					world.notifyBlockChange(x - 1, y - 1, z, getBlockById(0));
-					world.notifyBlockChange(x + 1, y - 1, z, getBlockById(0));
-				} else {
-					world.notifyBlockChange(x, y - 1, z - 1, getBlockById(0));
-					world.notifyBlockChange(x, y - 1, z + 1, getBlockById(0));
 				}
 			}
 		}
