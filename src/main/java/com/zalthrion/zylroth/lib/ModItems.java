@@ -38,7 +38,7 @@ public final class ModItems {
 		GameRegistry.registerItem(unstable_Tenebrae_Core, "unstableTenebraeCore");
 		GameRegistry.registerItem(stable_Tenebrae_Core, "stableTenebraeCore");
 		/* Mounts */
-		GameRegistry.registerItem(Empty_SC, "emptySummoningCrystal");
+		GameRegistry.registerItem(Empty_SC, "emptySC");
 		GameRegistry.registerItem(SC_Deathcharger, "SC_Deathcharger");
 		GameRegistry.registerItem(SC_PlaguedHorse, "SC_PlaguedHorse");
 		GameRegistry.registerItem(SC_WarTortoise, "SC_WarTortoise");
