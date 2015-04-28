@@ -2,7 +2,6 @@ package com.zalthrion.zylroth.world.dimension;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -204,7 +203,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	/** Finds a valid position within a range, that is in one of the listed
 	 * biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y
 	 * positions. */
-	@Override
+/*	@Override
 	@SuppressWarnings("rawtypes")
 	public ChunkPosition findBiomePosition(int x, int y, int z, List par4List, Random random) {
 		IntCache.resetIntCache();
@@ -230,7 +229,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 		}
 		
 		return chunkposition;
-	}
+	}*/
 	
 	/** Calls the WorldChunkManager's biomeCache.cleanupCache() */
 	@Override

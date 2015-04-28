@@ -6,18 +6,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class RainbowTalisman extends ItemBase {
 	
-	private String name = "rainbowTalisman"
-			+ "";
+	private String name = "rainbowTalisman";
 	
 	public RainbowTalisman() {
 		this.setNames(name);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

@@ -12,4 +12,6 @@ public interface IProxy {
 	public abstract void registerTiles();
 	
 	public abstract void registerRenderInformation();
+	
+	public abstract void registerItemRenderers();
 }

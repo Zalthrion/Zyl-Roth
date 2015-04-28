@@ -2,7 +2,6 @@ package com.zalthrion.zylroth.block.machine;
 
 import java.util.Random;
 
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -29,8 +28,6 @@ public class InfuserMachine extends BlockBaseContainer {
 	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
 	
-	private static final PropertyBool active = PropertyBool.create("active");
-	
 	private static boolean keepInventory;
 	
 	public InfuserMachine(boolean isActive) {
@@ -42,7 +39,6 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(active, false));
 		this.setStepSound(soundTypeMetal);
 	}
 	
@@ -71,15 +67,11 @@ public class InfuserMachine extends BlockBaseContainer {
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.Infuser_Idle);
-	}
-	
-	public static IBlockState getActiveState(IBlockState state, boolean isActive) {
-		return state.withProperty(active, isActive);
+		return Item.getItemFromBlock(ModBlocks.infuser_Idle);
 	}
 	
 	public static void updateBlockState(boolean active, World world, BlockPos pos) {
-		world.setBlockState(pos, getActiveState(world.getBlockState(pos), active));
+		world.setBlockState(pos, active ? ModBlocks.infuser.getDefaultState() : ModBlocks.infuser_Idle.getDefaultState());
 		
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile != null) {
@@ -90,7 +82,7 @@ public class InfuserMachine extends BlockBaseContainer {
 	
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-		return new ItemStack(ModBlocks.Infuser_Idle);
+		return new ItemStack(ModBlocks.infuser_Idle);
 	}
 	
 	@Override

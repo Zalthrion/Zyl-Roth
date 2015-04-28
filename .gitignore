@@ -1,0 +1,11 @@
+/bin/
+.gradle/
+.classpath
+.project
+.settings
+/saves/
+/logs/
+/config/
+/crash-reports/
+options.txt
+usernamecache.json

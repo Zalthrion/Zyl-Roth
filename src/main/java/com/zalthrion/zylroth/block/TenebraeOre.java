@@ -7,7 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.lib.ModTabs;
 
@@ -23,7 +22,6 @@ public class TenebraeOre extends BlockBase {
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
 		this.setCreativeTab(ModTabs.ZylRoth);
-		GameRegistry.registerBlock(this, name);
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.handler;
 
+import java.util.HashMap;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,21 +11,20 @@ import com.zalthrion.zylroth.lib.ModItems;
 
 public class FuelHandler implements IFuelHandler {
 	
+	private HashMap<Item, Integer> fuelMap = new HashMap<Item, Integer>() {
+		private static final long serialVersionUID = 1L;
+		{
+			put(ModItems.soul_Essence, 6400);
+			put(ModItems.cursed_Soul_Essence, 6400);
+		}
+	};
+	
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		
 		@SuppressWarnings("unused")
 		Block blockFuel = Block.getBlockFromItem(fuel.getItem());
 		Item itemFuel = fuel.getItem();
 		
-		if (itemFuel == ModItems.Unstable_Tenebrae_Essence) {
-			
-			return 6400;
-			
-		} else {
-			
-			return 0;
-			
-		}
+		return fuelMap.containsKey(itemFuel) ? fuelMap.get(itemFuel) : 0;
 	}
 }

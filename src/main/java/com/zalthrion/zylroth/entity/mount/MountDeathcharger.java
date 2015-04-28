@@ -29,7 +29,7 @@ public class MountDeathcharger extends MountBaseHorse {
 		
 		ItemStack stack = player.inventory.getCurrentItem();
 		
-		if (stack != null && stack.getItem() == ModItems.SC_Deathcharger && this.isSummoned(true) && player.isSneaking()) {
+		if (stack != null && stack.getItem() == ModItems.SC_Deathcharger && player.isSneaking() && persistentData.hasKey("ownsMountDeathcharger")) {
 			
 			this.setDead();
 			persistentData.removeTag("ownsMountDeathcharger");

@@ -30,4 +30,8 @@ public class CommonProxy implements IProxy {
 	public void init() { // For registering stuff on the init
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 	}
+
+	@Override public void registerItemRenderers() {
+		
+	}
 }

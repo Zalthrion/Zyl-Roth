@@ -242,7 +242,7 @@ public class TileEntityInfuser extends TileEntityBase implements IUpdatePlayerLi
 			
 			Item i = stack.getItem();
 			
-			if (i == ModItems.Raw_Tenebrae) return 400;
+			if (i == ModItems.raw_Tenebrae) return 400;
 			
 			GameRegistry.getFuelValue(stack);
 		}
