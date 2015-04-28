@@ -112,10 +112,10 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		this.mobSpawnerNoise = (NoiseGeneratorOctaves) noiseGens[6];
 	}
 	
-	public void func_147424_a(int p_147424_1_, int p_147424_2_, Block[] p_147424_3_) {
+	public void populateChunkArray(int chunkX, int chunkZ, Block[] chunkArray) {
 		byte b0 = 63;
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, p_147424_1_ * 4 - 2, p_147424_2_ * 4 - 2, 10, 10);
-		this.func_147423_a(p_147424_1_ * 4, 0, p_147424_2_ * 4);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
+		this.func_147423_a(chunkX * 4, 0, chunkZ * 4);
 		
 		for (int k = 0; k < 4; ++ k) {
 			int l = k * 5;
@@ -155,11 +155,11 @@ public class ChunkProviderKyrul implements IChunkProvider {
 							
 							for (int k3 = 0; k3 < 4; ++ k3) {
 								if ((d15 += d16) > 0.0D) {
-									p_147424_3_[j3 += short1] = Blocks.stone;
+									chunkArray[j3 += short1] = Blocks.stone;
 								} else if (k2 * 8 + l2 < b0) {
-									p_147424_3_[j3 += short1] = Blocks.water;
+									chunkArray[j3 += short1] = Blocks.water;
 								} else {
-									p_147424_3_[j3 += short1] = null;
+									chunkArray[j3 += short1] = null;
 								}
 							}
 							
@@ -201,21 +201,21 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	/** Will return back a chunk, if it doesn't exist and its not a MP client it
 	 * will generates all the blocks for the specified chunk from the map seed
 	 * and chunk seed */
-	public Chunk provideChunk(int p_73154_1_, int p_73154_2_) {
-		this.rand.setSeed((long) p_73154_1_ * 341873128712L + (long) p_73154_2_ * 132897987541L);
+	@Override public Chunk provideChunk(int chunkX, int chunkZ) {
+		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
-		this.func_147424_a(p_73154_1_, p_73154_2_, ablock);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, p_73154_1_ * 16, p_73154_2_ * 16, 16, 16);
-		this.replaceBlocksForBiome(p_73154_1_, p_73154_2_, ablock, abyte, this.biomesForGeneration);
-		this.caveGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
-		this.ravineGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
+		this.populateChunkArray(chunkX, chunkZ, ablock);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		this.replaceBlocksForBiome(chunkX, chunkZ, ablock, abyte, this.biomesForGeneration);
+		this.caveGenerator.generate(this, this.worldObj, chunkX, chunkZ, ablock);
+		this.ravineGenerator.generate(this, this.worldObj, chunkX, chunkZ, ablock);
 		
 		if (this.mapFeaturesEnabled) {
-			this.mineshaftGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
+			this.mineshaftGenerator.generate(this, this.worldObj, chunkX, chunkZ, ablock);
 		}
 		
-		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, p_73154_1_, p_73154_2_);
+		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, chunkX, chunkZ);
 		byte[] abyte1 = chunk.getBiomeArray();
 		
 		for (int k = 0; k < abyte1.length; ++ k) {
