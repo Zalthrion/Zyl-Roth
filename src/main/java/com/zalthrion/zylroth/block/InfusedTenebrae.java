@@ -1,11 +1,10 @@
 package com.zalthrion.zylroth.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
 import com.zalthrion.zylroth.lib.ModTabs;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class InfusedTenebrae extends BlockBase {
 	

@@ -1,7 +1,6 @@
 package com.zalthrion.zylroth.entity;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,14 +18,16 @@ import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDisplayData {
 	private int attackTimer;
@@ -34,7 +35,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	public EntityMutantTenebraeGolem(World world) {
 		super(world);
 		this.setSize(0.6F, 2.9F);
-		this.getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
 		this.isImmuneToFire = true;
 		this.experienceValue = 15;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
@@ -43,7 +44,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
 	}
 	
@@ -51,12 +52,6 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-	}
-	
-	/** Returns true if the newer Entity AI code should be run */
-	@Override
-	public boolean isAIEnabled() {
-		return true;
 	}
 	
 	@Override
@@ -97,12 +92,11 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 		
 		if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D && this.rand.nextInt(5) == 0) {
 			int i = MathHelper.floor_double(this.posX);
-			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.yOffset);
+			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.getYOffset());
 			int k = MathHelper.floor_double(this.posZ);
-			Block block = this.worldObj.getBlock(i, j, k);
 			
-			if (block.getMaterial() != Material.air) {
-				this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(i, j, k), this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
+			if (!this.worldObj.isAirBlock(new BlockPos(i, j, k))) {
+				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
 			}
 		}
 		
@@ -165,7 +159,7 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	
 	/** Plays step sound at given x, y, z for the entity */
 	@Override
-	protected void playStepSound(int x, int y, int z, Block block) {
+	protected void playStepSound(BlockPos pos, Block block) {
 		this.playSound("mob.irongolem.walk", 1.0F, 1.0F);
 	}
 	

@@ -12,8 +12,8 @@ public class BiomeGenSapphireOcean extends BiomeGenBase {
 		this.spawnableMonsterList.clear();
 		this.spawnableCaveCreatureList.clear();
 		
-		this.topBlock = (Blocks.flowing_water);
-		this.fillerBlock = (Blocks.flowing_water);
+		this.topBlock = (Blocks.flowing_water).getDefaultState();
+		this.fillerBlock = (Blocks.flowing_water).getDefaultState();
 		
 		this.setBiomeName("Sapphire Ocean");
 		this.setHeight(height_Oceans);
@@ -27,12 +27,12 @@ public class BiomeGenSapphireOcean extends BiomeGenBase {
 	}
 	
 	@Override
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
+	public int getModdedBiomeGrassColor(int original) {
 		return color = 0x0CA833;
 	}
 	
 	@Override
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
+	public int getModdedBiomeFoliageColor(int original) {
 		return color = 0x16BA40;
 	}
 	

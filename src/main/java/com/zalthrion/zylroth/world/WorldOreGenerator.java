@@ -2,20 +2,20 @@ package com.zalthrion.zylroth.world;
 
 import java.util.Random;
 
-import com.zalthrion.zylroth.lib.ModBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
+
+import com.zalthrion.zylroth.lib.ModBlocks;
 
 public class WorldOreGenerator implements IWorldGenerator {
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		switch (world.provider.dimensionId) {
+		switch (world.provider.getDimensionId()) {
 			case 0:
 				GenerateOverworld(random, chunkX * 16, chunkZ * 16, world);
 				break;

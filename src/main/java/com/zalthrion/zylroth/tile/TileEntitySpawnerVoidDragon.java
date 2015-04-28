@@ -5,10 +5,11 @@ import com.zalthrion.zylroth.entity.EntityVoidDragon;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 
-public class TileEntitySpawnerVoidDragon extends TileEntity {
+public class TileEntitySpawnerVoidDragon extends TileEntity implements IUpdatePlayerListBox {
 	
 	private int activationRange = 16;
 	
@@ -16,20 +17,20 @@ public class TileEntitySpawnerVoidDragon extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 	
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, activationRange) != null;
+		return worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, activationRange) != null;
 	}
 	
 	@Override
-	public void updateEntity() {
+	public void update() {
 		if (!worldObj.isRemote && isActivated()) {
 			EntityVoidDragon mob = new EntityVoidDragon(worldObj);
-			mob.setLocationAndAngles(xCoord, yCoord, zCoord, MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
+			mob.setLocationAndAngles(this.pos.getX(), this.pos.getY(), this.pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			worldObj.setBlockToAir(this.pos);
 		}
 	}
 	

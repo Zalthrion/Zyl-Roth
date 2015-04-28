@@ -6,12 +6,12 @@ import java.util.UUID;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import com.zalthrion.zylroth.entity.mount.*;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
+import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
+import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 
 public class PlayerEventHandler {
 	@SubscribeEvent public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {

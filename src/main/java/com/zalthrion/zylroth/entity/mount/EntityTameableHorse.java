@@ -1,8 +1,5 @@
 package com.zalthrion.zylroth.entity.mount;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.UUID;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +8,10 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.management.PreYggdrasilConverter;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityTameableHorse extends EntityHorse implements IEntityOwnable {
 	public EntityTameableHorse(World p_i1604_1_) {
@@ -55,18 +55,12 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	
 	/** Play the taming effect, will either be hearts or smoke depending on
 	 * status */
-	protected void playTameEffect(boolean p_70908_1_) {
-		String s = "heart";
-		
-		if (!p_70908_1_) {
-			s = "smoke";
-		}
-		
+	protected void playTameEffect(boolean happy) {
 		for (int i = 0; i < 7; ++ i) {
 			double d0 = this.rand.nextGaussian() * 0.02D;
 			double d1 = this.rand.nextGaussian() * 0.02D;
 			double d2 = this.rand.nextGaussian() * 0.02D;
-			this.worldObj.spawnParticle(s, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
+			this.worldObj.spawnParticle(happy ? EnumParticleTypes.HEART : EnumParticleTypes.SMOKE_NORMAL, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
 		}
 	}
 	

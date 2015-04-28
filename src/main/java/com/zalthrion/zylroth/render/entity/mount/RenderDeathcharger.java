@@ -1,22 +1,23 @@
 package com.zalthrion.zylroth.render.entity.mount;
 
-import com.google.common.collect.Maps;
-import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.entity.RenderHorse;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Maps;
+import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
+import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
 
 @SideOnly(Side.CLIENT)
 public class RenderDeathcharger extends RenderHorse {
@@ -29,8 +30,8 @@ public class RenderDeathcharger extends RenderHorse {
 	private static final ResourceLocation zombieHorseTextures = new ResourceLocation("textures/entity/horse/horse_zombie.png");
 	private static final ResourceLocation skeletonHorseTextures = new ResourceLocation("textures/entity/horse/horse_skeleton.png");
 	
-	public RenderDeathcharger(ModelBase p_i1256_1_, float p_i1256_2_) {
-		super(p_i1256_1_, p_i1256_2_);
+	public RenderDeathcharger(RenderManager renderManager, ModelHorse horse, ModelDeathcharger mdc, float shadowSize) {
+		super(renderManager, horse, shadowSize);
 	}
 	
 	/** Allows the render to do any OpenGL state modifications necessary before

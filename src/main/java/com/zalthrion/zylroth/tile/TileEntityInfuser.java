@@ -9,6 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.container.ContainerInfuser;
@@ -16,11 +21,7 @@ import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeLib;
 import com.zalthrion.zylroth.lib.ModItems;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class TileEntityInfuser extends TileEntityBase implements ISidedInventory {
+public class TileEntityInfuser extends TileEntityBase implements IUpdatePlayerListBox, ISidedInventory {
 	
 	private String localizedName;
 	
@@ -37,19 +38,23 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	
 	private int facing;
 	
-	public void setFacing(int newFacing) { this.facing = newFacing; }
-	public int getFacing() { return this.facing; }
+	public void setFacing(int newFacing) {
+		this.facing = newFacing;
+	}
+	
+	public int getFacing() {
+		return this.facing;
+	}
 	
 	public boolean canUpdate() {
 		return true;
-	};
+	}
 	
 	public boolean isBurning() {
 		return this.burnTime > 0;
-	};
+	}
 	
-	@Override
-	public String getInventoryName() {
+	@Override public String getCommandSenderName() {
 		return this.isInventoryNameLocalized() ? this.localizedName : "container.infuser";
 	}
 	
@@ -61,8 +66,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		this.localizedName = displayName;
 	}
 	
-	@Override
-	public void updateEntity() {
+	@Override public void update() {
 		boolean flag = isBurning();
 		boolean flag1 = false;
 		
@@ -100,7 +104,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			}
 			
 			if (flag != isBurning()) {
-				InfuserMachine.updateBlockState(this.isBurning(), worldObj, xCoord, yCoord, zCoord);
+				InfuserMachine.updateBlockState(this.isBurning(), worldObj, this.pos);
 				flag1 = true;
 			}
 		}
@@ -175,13 +179,11 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		}
 	}
 	
-	@Override
-	public ItemStack getStackInSlot(int i) {
+	@Override public ItemStack getStackInSlot(int i) {
 		return this.slots[i];
 	}
 	
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
+	@Override public ItemStack decrStackSize(int i, int j) {
 		if (this.slots[i] != null) {
 			ItemStack stack;
 			
@@ -216,8 +218,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		return null;
 	}
 	
-	@Override
-	public void setInventorySlotContents(int i, ItemStack stack) {
+	@Override public void setInventorySlotContents(int i, ItemStack stack) {
 		this.slots[i] = stack;
 		
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
@@ -226,11 +227,10 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	}
 	
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 	
-	@Override
-	public int getSizeInventory() {
+	@Override public int getSizeInventory() {
 		return this.slots.length;
 	};
 	
@@ -254,27 +254,24 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		return getItemBurnTime(stack) > 0;
 	}
 	
-	@Override
-	public int getInventoryStackLimit() {
+	@Override public int getInventoryStackLimit() {
 		return 64;
 	};
 	
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
+	@Override public boolean isItemValidForSlot(int i, ItemStack stack) {
 		return i == 1 ? isInfusionItem(stack) : i == 2 ? false : i == 3 ? false : true;
 	};
 	
-	@Override
-	public int[] getSlotsForFace(int var1) {
-		return var1 == 0 ? slots_bottom : (var1 == 1 ? slots_top : slots_sides);
+	@Override public int[] getSlotsForFace(EnumFacing side) {
+		return side.getIndex() == 0 ? slots_bottom : (side.getIndex() == 1 ? slots_top : slots_sides);
 	}
 	
-	public boolean canInsertItem(int i, ItemStack items, int j) {
+	@Override public boolean canInsertItem(int i, ItemStack items, EnumFacing side) {
 		return this.isItemValidForSlot(i, items);
 	}
 	
-	public boolean canExtractItem(int i, ItemStack items, int j) {
-		return j == 0 || i != 0 || i != 1 || i != 2;
+	@Override public boolean canExtractItem(int i, ItemStack items, EnumFacing side) {
+		return side.getIndex() == 0 || i != 0 || i != 1 || i != 2;
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -327,9 +324,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		 * this.localizedName); } */
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public int getCookProgressScaled(int i) {
+	@SideOnly(Side.CLIENT) public int getCookProgressScaled(int i) {
 		return cookTime * i / 400;
 	}
-	
 }

@@ -1,6 +1,7 @@
 package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,8 +18,8 @@ public class RenderBird extends RenderLiving {
 	
 	private int renderedBirdSize;
 	
-	public RenderBird(ModelBird birdModel, float shadowSize, float shadowSize2) {
-		super(new ModelBird(), 0.20F);
+	public RenderBird(RenderManager renderManager, ModelBird birdModel, float shadowSize) {
+		super(renderManager, new ModelBird(), shadowSize);
 		this.renderedBirdSize = ((ModelBird) this.mainModel).getBirdSize();
 	}
 	

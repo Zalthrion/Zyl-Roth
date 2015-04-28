@@ -1,6 +1,6 @@
 package com.zalthrion.zylroth.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class PurifiedTenebraeEssence extends ItemBase {
 	

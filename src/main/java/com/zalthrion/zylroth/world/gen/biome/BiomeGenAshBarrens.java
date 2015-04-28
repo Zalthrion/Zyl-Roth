@@ -20,8 +20,8 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 		this.theBiomeDecorator.treesPerChunk = -999;
 		this.theBiomeDecorator.grassPerChunk = 8;
 		
-		this.topBlock = (ModBlocks.Ash_Block);
-		this.fillerBlock = (ModBlocks.Ash_Block);
+		this.topBlock = (ModBlocks.Ash_Block).getDefaultState();
+		this.fillerBlock = (ModBlocks.Ash_Block).getDefaultState();
 		
 		this.setHeight(height_Default);
 		this.setBiomeName("Ash Barrens");
@@ -30,15 +30,16 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 	}
 	
 	@Override
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
+	public int getModdedBiomeGrassColor(int original) {
 		return color = 0x423E45;
 	}
 	
 	@Override
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
+	public int getModdedBiomeFoliageColor(int original) {
 		return color = 0x423E45;
 	}
 	
+	@Override
 	public int getSkyColorByTemp(float par1) {
 		return 0x474747;
 	}

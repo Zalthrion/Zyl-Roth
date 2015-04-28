@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.entity.mount;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class MountBaseHorse extends EntityTameableHorse {
@@ -82,7 +83,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 		this.tagCompound.getBoolean("Summoned");
 		
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
-			this.func_152120_b(tagCompund.getString("OwnerUUID"));
+			this.setOwnerId(tagCompund.getString("OwnerUUID"));
 		}
 	}
 	
@@ -129,13 +130,11 @@ public class MountBaseHorse extends EntityTameableHorse {
 	
 	/** Checks if the entity is invulnerable or not */
 	@Override
-	public boolean isEntityInvulnerable() {
-		
-		if (!this.isSummoned) {
+	public boolean isEntityInvulnerable(DamageSource source) {
+		if (!this.isSummoned || source == DamageSource.outOfWorld) {
 			return false;
 		}
 		
-		else return true;
+		return true;
 	}
-	
 }

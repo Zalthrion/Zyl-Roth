@@ -6,12 +6,20 @@ import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.mount.*;
+import com.zalthrion.zylroth.entity.EntityBird;
+import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.EntityRainbowPig;
+import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
+import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityUndeadMinion;
+import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
+import com.zalthrion.zylroth.entity.EntityVoidDragon;
+import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
+import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class ModEntity {
 	
@@ -33,7 +41,7 @@ public class ModEntity {
 	
 	public void addSpawn(Class<? extends EntityLiving> entityClass, int spawnProb, int min, int max, BiomeGenBase[] biomes) {
 		if (spawnProb > 0) {
-			EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.creature, biomes);
+			EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.CREATURE, biomes);
 		}
 	}
 	

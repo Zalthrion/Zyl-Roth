@@ -2,17 +2,18 @@ package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderUndeadMinion extends RenderBiped {
@@ -21,8 +22,9 @@ public class RenderUndeadMinion extends RenderBiped {
 	/** Scale of the model to use */
 	private float scale = 0.8F;
 	
-	public RenderUndeadMinion(ModelBiped par1ModelBase, float par2, float par3) {
-		super(par1ModelBase, par2 * par3);
+	public RenderUndeadMinion(RenderManager renderManager, ModelBiped par1ModelBase, float par2, float par3) {
+		super(renderManager, par1ModelBase, par2 * par3);
+		this.addLayer(new LayerHeldItem(this));
 	}
 	
 	public void doRenderUndeadMinion(EntityUndeadMinion par1EntityUndeadMinion, double par2, double par4, double par6, float par8, float par9) {
@@ -40,7 +42,7 @@ public class RenderUndeadMinion extends RenderBiped {
 	
 	/** Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime */
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
+	@Override protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
 		this.preRenderScale((EntityUndeadMinion) par1EntityLivingBase, par2);
 	}
 	
@@ -57,7 +59,7 @@ public class RenderUndeadMinion extends RenderBiped {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getUndeadMinionTextures((EntityUndeadMinion) par1Entity);
 	}
 	
@@ -68,6 +70,5 @@ public class RenderUndeadMinion extends RenderBiped {
 	protected void renderEntityUndeadMinion(EntityUndeadMinion entityundeadminion, float par2) {
 		// any other model related renderers can go here.
 		// super.func_130005_c(entityundeadminion, par2);
-		super.renderEquippedItems(entityundeadminion, par2);
 	}
 }

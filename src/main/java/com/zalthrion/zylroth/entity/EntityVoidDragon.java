@@ -10,6 +10,7 @@ import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -118,7 +119,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 			f = (rand.nextFloat() - 0.5F) * 8.0F;
 			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-			worldObj.spawnParticle("largeexplode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		} else {
 			f = 0.2F / (MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
 			f *= (float) Math.pow(2.0D, motionY);
@@ -170,7 +171,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 					
 					if (d7 > 10.0D) d7 = 10.0D;
 					
-					targetY = target.boundingBox.minY + d7;
+					targetY = target.getEntityBoundingBox().minY + d7;
 				} else {
 					targetX += rand.nextGaussian() * 2.0D;
 					targetZ += rand.nextGaussian() * 2.0D;
@@ -194,8 +195,8 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 				
 				if (d9 < -50.0D) d9 = -50.0D;
 				
-				Vec3 vec3 = Vec3.createVectorHelper(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = Vec3.createVectorHelper(MathHelper.sin(rotationYaw * (float) Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float) Math.PI / 180.0F)).normalize();
+				Vec3 vec3 = new Vec3(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3 vec31 = new Vec3(MathHelper.sin(rotationYaw * (float) Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float) Math.PI / 180.0F)).normalize();
 				float f4 = (float) (vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 				
 				if (f4 < 0.0F) f4 = 0.0F;
@@ -214,7 +215,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 				
 				moveEntity(motionX, motionY, motionZ);
 				
-				Vec3 vec32 = Vec3.createVectorHelper(motionX, motionY, motionZ).normalize();
+				Vec3 vec32 = new Vec3(motionX, motionY, motionZ).normalize();
 				float f8 = (float) (vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
@@ -247,9 +248,9 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 			dragonPartWing2.setLocationAndAngles(posX - f12 * 4.5F, posY + 2.0D, posZ - f11 * 4.5F, 0.0F, 0.0F);
 			
 			if (!worldObj.isRemote && hurtTime == 0) {
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(1.0D, 1.0D, 1.0D)));
 			}
 			
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -354,7 +355,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 	}
 	
 	@Override
-	public World func_82194_d() {
+	public World getWorld() {
 		return worldObj;
 	}
 	

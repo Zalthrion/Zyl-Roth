@@ -1,19 +1,20 @@
 package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelMutantTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderMutantTenebraeGolem extends RenderLiving {
@@ -24,8 +25,9 @@ public class RenderMutantTenebraeGolem extends RenderLiving {
 	@SuppressWarnings("unused")
 	private final ModelMutantTenebraeGolem mutant_tenebrae_golemModel;
 	
-	public RenderMutantTenebraeGolem(ModelMutantTenebraeGolem modelMutantTenebraeGolem, float shadowSize) {
-		super(new ModelMutantTenebraeGolem(), 0.5F);
+	public RenderMutantTenebraeGolem(RenderManager renderManager, ModelMutantTenebraeGolem modelMutantTenebraeGolem, float shadowSize) {
+		super(renderManager, new ModelMutantTenebraeGolem(), shadowSize);
+		this.addLayer(new LayerHeldItem(this));
 		this.mutant_tenebrae_golemModel = (ModelMutantTenebraeGolem) this.mainModel;
 	}
 	
@@ -50,18 +52,8 @@ public class RenderMutantTenebraeGolem extends RenderLiving {
 		}
 	}
 	
-	/** Renders Iron Golem Equipped items. */
-	protected void renderMutantTenebraeGolemEquippedItems(EntityMutantTenebraeGolem par1EntityMutantTenebraeGolem, float par2) {
-		super.renderEquippedItems(par1EntityMutantTenebraeGolem, par2);
-		
-	}
-	
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		this.doRenderMutantTenebraeGolem((EntityMutantTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
-	}
-	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderMutantTenebraeGolemEquippedItems((EntityMutantTenebraeGolem) par1EntityLivingBase, par2);
 	}
 	
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {

@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkPosition;
@@ -29,6 +30,7 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import net.minecraftforge.common.*;
 import cpw.mods.fml.common.eventhandler.Event.*;
 import net.minecraftforge.event.terraingen.*;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderIridis implements IChunkProvider {
 	/** RNG. */
@@ -188,21 +190,21 @@ public class ChunkProviderIridis implements IChunkProvider {
 	/** Will return back a chunk, if it doesn't exist and its not a MP client it
 	 * will generates all the blocks for the specified chunk from the map seed
 	 * and chunk seed */
-	public Chunk provideChunk(int p_73154_1_, int p_73154_2_) {
-		this.rand.setSeed((long) p_73154_1_ * 341873128712L + (long) p_73154_2_ * 132897987541L);
+	@Override public Chunk provideChunk(int x, int y) {
+		this.rand.setSeed((long) x * 341873128712L + (long) y * 132897987541L);
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
-		this.func_147424_a(p_73154_1_, p_73154_2_, ablock);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, p_73154_1_ * 16, p_73154_2_ * 16, 16, 16);
-		this.replaceBlocksForBiome(p_73154_1_, p_73154_2_, ablock, abyte, this.biomesForGeneration);
-		this.caveGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
-		this.ravineGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
+		this.func_147424_a(x, y, ablock);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, y * 16, 16, 16);
+		this.replaceBlocksForBiome(x, y, ablock, abyte, this.biomesForGeneration);
+		this.caveGenerator.generate(this, this.worldObj, x, y, ablock);
+		this.ravineGenerator.generate(this, this.worldObj, x, y, ablock);
 		
 		if (this.mapFeaturesEnabled) {
 			
 		}
 		
-		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, p_73154_1_, p_73154_2_);
+		Chunk chunk = new Chunk(this.worldObj, x, y);
 		byte[] abyte1 = chunk.getBiomeArray();
 		
 		for (int k = 0; k < abyte1.length; ++ k) {
@@ -374,14 +376,14 @@ public class ChunkProviderIridis implements IChunkProvider {
 		doGen = TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, ICE);
 		for (k1 = 0; doGen && k1 < 16; ++ k1) {
 			for (l1 = 0; l1 < 16; ++ l1) {
-				i2 = this.worldObj.getPrecipitationHeight(k + k1, l + l1);
+				i2 = this.worldObj.getPrecipitationHeight(new BlockPos(k + k1, 128, l + l1)).getY();
 				
-				if (this.worldObj.isBlockFreezable(k1 + k, i2 - 1, l1 + l)) {
-					this.worldObj.setBlock(k1 + k, i2 - 1, l1 + l, Blocks.ice, 0, 2);
+				if (this.worldObj.canBlockFreeze(new BlockPos(k1 + k, i2 - 1, l1 + l), true)) {
+					this.worldObj.setBlockState(new BlockPos(k1 + k, i2 - 1, l1 + l), Blocks.ice.getDefaultState(), 2);
 				}
 				
-				if (this.worldObj.canSnowAt(k1 + k, i2, l1 + l, true)) {
-					this.worldObj.setBlock(k1 + k, i2, l1 + l, Blocks.snow_layer, 0, 2);
+				if (this.worldObj.canSnowAt(new BlockPos(k1 + k, i2, l1 + l), true)) {
+					this.worldObj.setBlockState(new BlockPos(k1 + k, i2, l1 + l), Blocks.snow_layer.getDefaultState(), 2);
 				}
 			}
 		}

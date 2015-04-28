@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.gui.inventory;
 
+import java.io.IOException;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -59,7 +61,7 @@ public class GuiInfuser extends GuiContainer {
 	}
 	
 	@Override
-	public void actionPerformed(GuiButton button) {
+	public void actionPerformed(GuiButton button) throws IOException {
 		switch (button.id) {
 		
 			case 1:

@@ -17,8 +17,8 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 		this.theBiomeDecorator.treesPerChunk = 10;
 		this.theBiomeDecorator.grassPerChunk = 3;
 		
-		this.topBlock = (Blocks.grass);
-		this.fillerBlock = (Blocks.dirt);
+		this.topBlock = (Blocks.grass).getDefaultState();
+		this.fillerBlock = (Blocks.dirt).getDefaultState();
 		
 		this.setHeight(height_LowIslands);
 		this.setBiomeName("Rainbow Forest");
@@ -29,12 +29,12 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 	}
 	
 	@Override
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
+	public int getModdedBiomeGrassColor(int original) {
 		return color = 0x9BD61C;
 	}
 	
 	@Override
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
+	public int getModdedBiomeFoliageColor(int original) {
 		return color = 0x11ADC2;
 	}
 	
