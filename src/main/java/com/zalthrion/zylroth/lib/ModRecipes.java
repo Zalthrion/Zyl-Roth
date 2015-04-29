@@ -31,17 +31,21 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.raw_Tenebrae_Ingot), "RRR", 'R', ModItems.raw_Tenebrae);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "DTD", "TCT", "DTD", 'D', Items.diamond, 'T', ModBlocks.tenebrae_Block, 'C', ModBlocks.tenebrae_Core);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "DTD", "TCT", "DTD", 'D', Items.diamond, 'T', ModBlocks.tenebrae_Block, 'C', ModItems.unstable_Tenebrae_Core);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Core), "BEB", "ECE", "BEB", 'B', ModBlocks.tenebrae_Block, 'E', ModItems.soul_Essence, 'C', ModItems.stable_Tenebrae_Core);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Core), "DED", "ECE", "DED", 'D', Items.diamond, 'E', ModItems.soul_Essence, 'C', ModItems.unstable_Tenebrae_Core);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.void_Talisman), "VIV", "IEI", "VIV", 'V', ModItems.void_Gem, 'I', Items.gold_ingot, 'E', ModItems.void_Essence);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chiseled_Tenebrae), "IRI", "RBR", "IRI", 'I', Items.iron_ingot, 'R', ModItems.raw_Tenebrae, 'B', ModBlocks.tenebrae_Block);
 		
 	}
 	
 	public static void registerShapelessRecipes() {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.tenebrae_Ingot, 9), new ItemStack(ModBlocks.tenebrae_Block));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.tenebrae_Block, 1), new ItemStack(ModBlocks.chiseled_Tenebrae));
 		
 	}
 	
