@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.reference.GuiIDs;
-import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class InfuserMachine extends BlockBaseContainer {
@@ -48,7 +47,7 @@ public class InfuserMachine extends BlockBaseContainer {
 	
 	@Override
 	public int getRenderType() {
-		return RenderIDs.blockInfuserRI;
+		return 2;
 	}
 	
 	@Override
