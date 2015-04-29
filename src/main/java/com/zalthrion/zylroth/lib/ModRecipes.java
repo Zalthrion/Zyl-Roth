@@ -33,7 +33,7 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "DTD", "TCT", "DTD", 'D', Items.diamond, 'T', ModBlocks.tenebrae_Block, 'C', ModBlocks.tenebrae_Core);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Core), "BEB", "ECE", "BEB", 'B', ModBlocks.tenebrae_Block, 'E', ModItems.soul_Essence, 'C', ModItems.unstable_Tenebrae_Core);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Core), "BEB", "ECE", "BEB", 'B', ModBlocks.tenebrae_Block, 'E', ModItems.soul_Essence, 'C', ModItems.stable_Tenebrae_Core);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.void_Talisman), "VIV", "IEI", "VIV", 'V', ModItems.void_Gem, 'I', Items.gold_ingot, 'E', ModItems.void_Essence);
 		
