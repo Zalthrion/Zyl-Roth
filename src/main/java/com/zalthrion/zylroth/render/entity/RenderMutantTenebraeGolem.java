@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelMutantTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
@@ -30,16 +30,16 @@ public class RenderMutantTenebraeGolem extends RenderLiving {
 	}
 	
 	/** Renders the Iron Golem. */
-	public void doRenderMutantTenebraeGolem(EntityMutantTenebraeGolem par1EntityMutantTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
+	public void doRenderMutantTenebraeGolem(EntityEmpoweredTenebraeGolem par1EntityMutantTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(par1EntityMutantTenebraeGolem, par2, par4, par6, par8, par9);
 	}
 	
-	protected ResourceLocation getMutantTenebraeGolemTextures(EntityMutantTenebraeGolem par1EntityMutantTenebraeGolem) {
+	protected ResourceLocation getMutantTenebraeGolemTextures(EntityEmpoweredTenebraeGolem par1EntityMutantTenebraeGolem) {
 		return MTgolemTextures;
 	}
 	
 	/** Rotates Mutant Tenebrae Golem corpse. */
-	protected void rotateMutantTenebraeGolemCorpse(EntityMutantTenebraeGolem par1EntityMutantTenebraeGolem, float par2, float par3, float par4) {
+	protected void rotateMutantTenebraeGolemCorpse(EntityEmpoweredTenebraeGolem par1EntityMutantTenebraeGolem, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityMutantTenebraeGolem, par2, par3, par4);
 		
 		if ((double) par1EntityMutantTenebraeGolem.limbSwingAmount >= 0.01D) {
@@ -51,31 +51,31 @@ public class RenderMutantTenebraeGolem extends RenderLiving {
 	}
 	
 	/** Renders Iron Golem Equipped items. */
-	protected void renderMutantTenebraeGolemEquippedItems(EntityMutantTenebraeGolem par1EntityMutantTenebraeGolem, float par2) {
+	protected void renderMutantTenebraeGolemEquippedItems(EntityEmpoweredTenebraeGolem par1EntityMutantTenebraeGolem, float par2) {
 		super.renderEquippedItems(par1EntityMutantTenebraeGolem, par2);
 		
 	}
 	
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderMutantTenebraeGolem((EntityMutantTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
+		this.doRenderMutantTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 	
 	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderMutantTenebraeGolemEquippedItems((EntityMutantTenebraeGolem) par1EntityLivingBase, par2);
+		this.renderMutantTenebraeGolemEquippedItems((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2);
 	}
 	
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
-		this.rotateMutantTenebraeGolemCorpse((EntityMutantTenebraeGolem) par1EntityLivingBase, par2, par3, par4);
+		this.rotateMutantTenebraeGolemCorpse((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par3, par4);
 	}
 	
 	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderMutantTenebraeGolem((EntityMutantTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
+		this.doRenderMutantTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.getMutantTenebraeGolemTextures((EntityMutantTenebraeGolem) par1Entity);
+		return this.getMutantTenebraeGolemTextures((EntityEmpoweredTenebraeGolem) par1Entity);
 	}
 	
 	/** Actually renders the given argument. This is a synthetic bridge method,
@@ -85,7 +85,7 @@ public class RenderMutantTenebraeGolem extends RenderLiving {
 	 * void doRender(T entity, double d, double d1, double d2, float f, float
 	 * f1). But JAD is pre 1.5 so doesn't do that. */
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderMutantTenebraeGolem((EntityMutantTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
+		this.doRenderMutantTenebraeGolem((EntityEmpoweredTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
 	}
 	
 }

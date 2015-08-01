@@ -58,7 +58,7 @@ public class ModEntity {
 		
 		// Mobs
 		
-		registerEntityEgg(EntityMutantTenebraeGolem.class, "Mutant Tenebrae Golem (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityEmpoweredTenebraeGolem.class, "Empowered Tenebrae Golem (ZYR)", 0xeaeae9, 0xc99a03);
 		
 		registerEntityEgg(EntityPyroKnight.class, "Pyro Knight (ZYR)", 0xeaeae9, 0xc99a03);
 		

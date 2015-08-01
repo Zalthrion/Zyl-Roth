@@ -28,10 +28,10 @@ import com.zalthrion.zylroth.lib.ModItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDisplayData {
+public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDisplayData {
 	private int attackTimer;
 	
-	public EntityMutantTenebraeGolem(World world) {
+	public EntityEmpoweredTenebraeGolem(World world) {
 		super(world);
 		this.setSize(0.6F, 2.9F);
 		this.getNavigator().setAvoidsWater(true);
@@ -174,8 +174,8 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.void_Essence, 1);
-		this.dropItem(ModItems.void_Gem, 4);
+		this.dropItem(ModItems.void_Gem, 1);	
+		this.dropItem(ModItems.void_Essence, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		

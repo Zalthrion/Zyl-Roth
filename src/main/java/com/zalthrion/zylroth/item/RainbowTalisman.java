@@ -16,6 +16,7 @@ public class RainbowTalisman extends ItemBase {
 	
 	public RainbowTalisman() {
 		this.setNames(name);
+		this.setMaxStackSize(1);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

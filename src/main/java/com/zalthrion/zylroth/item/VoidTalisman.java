@@ -21,6 +21,7 @@ public class VoidTalisman extends ItemBase {
 	
 	public VoidTalisman() {
 		this.setNames(name);
+		this.setMaxStackSize(1);
 	}
 	
 	/* @Override public ItemStack onItemRightClick(ItemStack item, World world,

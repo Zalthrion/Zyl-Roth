@@ -8,7 +8,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
@@ -65,7 +65,7 @@ public class ChiseledTenebrae extends BlockBase {
 					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
 				}
 				
-				EntityMutantTenebraeGolem golem = new EntityMutantTenebraeGolem(world);
+				EntityEmpoweredTenebraeGolem golem = new EntityEmpoweredTenebraeGolem(world);
 				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
