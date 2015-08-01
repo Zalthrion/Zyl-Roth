@@ -16,6 +16,7 @@ public class SCWarTortoise extends SummoningCrystalBase {
 	
 	public SCWarTortoise() {
 		this.setNames(name);
+		setCreativeTab(null);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
