@@ -3,19 +3,15 @@ package com.zalthrion.zylroth.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -28,7 +24,7 @@ import com.zalthrion.zylroth.lib.ModItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDisplayData {
+public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisplayData {
 	private int attackTimer;
 	
 	public EntityEmpoweredTenebraeGolem(World world) {
@@ -39,12 +35,12 @@ public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDi
 		this.experienceValue = 15;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
 		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		// this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
+		// this.tasks.addTask(7, new EntityAIWatchClosest(this,
+		// EntityPlayer.class, 6.0F));
+		// this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
 	}
 	
 	@Override
@@ -62,11 +58,11 @@ public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDi
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(275.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(675.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getCustomNameTag();
-		
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(90.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
 	}
 	
 	/** Decrements the entity's air supply when underwater */
@@ -122,7 +118,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDi
 		boolean flag = par1.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
 		
 		if (flag) {
-			par1.motionY += 0.4000000059604645D;
+			par1.motionY += 1.0D;
 		}
 		
 		this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
@@ -174,7 +170,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDi
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.void_Gem, 1);	
+		this.dropItem(ModItems.void_Gem, 1);
 		this.dropItem(ModItems.void_Essence, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
@@ -202,5 +198,12 @@ public class EntityEmpoweredTenebraeGolem extends EntityGolem implements IBossDi
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		super.onDeath(par1DamageSource);
+	}
+	
+	/** Called when the mob is falling. Calculates and applies fall damage. */
+	protected void fall(float distance) {}
+	
+	protected boolean canDespawn() {
+		return false;
 	}
 }

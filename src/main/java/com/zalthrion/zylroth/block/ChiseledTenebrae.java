@@ -48,7 +48,7 @@ public class ChiseledTenebrae extends BlockBase {
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
 		
-		if (world.getBlock(x, y - 1, z) == ModBlocks.tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.infused_Tenebrae) {
+		if (world.getBlock(x, y - 1, z) == ModBlocks.empowered_Tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.infused_Tenebrae) {
 			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.infused_Tenebrae && world.getBlock(x + 1, y - 1, z) == ModBlocks.infused_Tenebrae;
 			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.infused_Tenebrae && world.getBlock(x, y - 1, z + 1) == ModBlocks.infused_Tenebrae;
 			
@@ -76,7 +76,7 @@ public class ChiseledTenebrae extends BlockBase {
 			}
 		}
 		
-		else if (world.getBlock(x, y - 1, z) == ModBlocks.tenebrae_Block && world.getBlock(x, y - 2, z) == ModBlocks.tenebrae_Block) {
+		else if (world.getBlock(x, y - 1, z) == ModBlocks.tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.tenebrae_Block) {
 			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.tenebrae_Block && world.getBlock(x + 1, y - 1, z) == ModBlocks.tenebrae_Block;
 			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.tenebrae_Block && world.getBlock(x, y - 1, z + 1) == ModBlocks.tenebrae_Block;
 			
