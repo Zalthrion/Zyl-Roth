@@ -20,7 +20,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	
 	private static final ResourceLocation ETgolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
 	
-	/** Iron Golem's Model. */
+	/** Empowered Tenebrae Golem's Model. */
 	@SuppressWarnings("unused")
 	private final ModelEmpoweredTenebraeGolem empowered_tenebrae_golemModel;
 	
@@ -29,7 +29,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		this.empowered_tenebrae_golemModel = (ModelEmpoweredTenebraeGolem) this.mainModel;
 	}
 	
-	/** Renders the Iron Golem. */
+	/** Renders the Empowered Tenebrae Golem. */
 	public void doRenderEmpoweredTenebraeGolem(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(par1EntityEmpoweredTenebraeGolem, par2, par4, par6, par8, par9);
 	}
@@ -50,7 +50,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		}
 	}
 	
-	/** Renders Iron Golem Equipped items. */
+	/** Renders Equipped items. */
 	protected void renderEmpoweredTenebraeGolemEquippedItems(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem, float par2) {
 		super.renderEquippedItems(par1EntityEmpoweredTenebraeGolem, par2);
 		
@@ -88,4 +88,12 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		this.doRenderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
 	}
 	
+	@Override
+	protected void renderLivingAt(EntityLivingBase p_77039_1_, double p_77039_2_, double p_77039_4_, double p_77039_6_) {
+		super.renderLivingAt(p_77039_1_, p_77039_2_, p_77039_4_, p_77039_6_);
+		GL11.glScalef(0.55F, 0.55F, 0.55F);
+		
+		// The lols are real.
+//		GL11.glScalef(p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat());
+	}	
 }

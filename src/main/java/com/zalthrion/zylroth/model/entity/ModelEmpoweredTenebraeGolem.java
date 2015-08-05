@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.model.entity;
 
+import org.lwjgl.opengl.GL11;
+
 import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 
 import net.minecraft.client.model.ModelBase;
@@ -100,6 +102,11 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 	
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		float scaleFactor = 2.5F;
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0F, 1.5F-1.5F*scaleFactor, 0F); 
+		GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
+		
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		
 		this.LeftArmConnection.render(f5);
@@ -112,6 +119,8 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 		this.TopLeftArm.render(f5);
 		this.LeftShoulderpad.render(f5);
 		this.TopBody.render(f5);
+
+		GL11.glPopMatrix();
 	}
 	
 	/** This is a helper function from Tabula to set the rotation of model parts */
@@ -122,8 +131,11 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 	}
 	
 	public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-		this.TopLeftLeg.rotateAngleX = -2.5F * this.func_78172_a(p_78087_1_, 8.0F) * p_78087_2_;
-		this.TopRightLeg.rotateAngleX = 2.5F * this.func_78172_a(p_78087_1_, 8.0F) * p_78087_2_;
+		this.TopLeftLeg.rotateAngleX = -2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
+		this.TopRightLeg.rotateAngleX = 2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
+		
+		this.BottomLeftLeg.rotateAngleX = -2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
+		this.BottomRightLeg.rotateAngleX = 2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
 		
 		this.BottomLeftLeg.rotateAngleX = 1.5F * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = 1.5F * p_78087_2_;

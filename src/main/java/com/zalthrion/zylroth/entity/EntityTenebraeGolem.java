@@ -15,7 +15,7 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityTenebraeGolem extends EntityGolem {
+public class EntityTenebraeGolem extends EntityMob {
 	private int attackTimer;
 	
 	public EntityTenebraeGolem(World world) {
@@ -193,5 +193,18 @@ public class EntityTenebraeGolem extends EntityGolem {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		super.onDeath(par1DamageSource);
+	}
+	
+	/** Called when the mob is falling. Calculates and applies fall damage. */
+	protected void fall(float distance) {}
+	
+	protected boolean canDespawn() {
+		return false;
+	}
+	
+	/** Returns true if this entity can attack entities of the specified class. */
+	@SuppressWarnings("rawtypes")
+	public boolean canAttackClass(Class par1Class) {
+		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
 	}
 }

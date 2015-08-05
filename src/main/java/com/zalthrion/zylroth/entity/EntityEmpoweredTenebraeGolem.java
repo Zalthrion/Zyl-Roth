@@ -3,18 +3,22 @@ package com.zalthrion.zylroth.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -29,18 +33,21 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	
 	public EntityEmpoweredTenebraeGolem(World world) {
 		super(world);
-		this.setSize(0.6F, 2.9F);
+		this.setSize(2.1F, 4.2F);
 		this.getNavigator().setAvoidsWater(true);
 		this.isImmuneToFire = true;
-		this.experienceValue = 15;
+		this.experienceValue = 75;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 2.0D, 32.0F));
+		this.tasks.addTask(3, new EntityAISwimming(this));
 		// this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
 		// this.tasks.addTask(7, new EntityAIWatchClosest(this,
 		// EntityPlayer.class, 6.0F));
 		// this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true));
+		
 	}
 	
 	@Override
@@ -58,11 +65,13 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		// this.applyAttribute(SharedMonsterAttributes.attackDamage, 0.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(675.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(90.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
+		
 	}
 	
 	/** Decrements the entity's air supply when underwater */
@@ -107,18 +116,28 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		}
 	}
 	
-	/** Returns true if this entity can attack entities of the specified class. */
-	/* public boolean canAttackClass(Class par1Class) { return
-	 * this.isPlayerCreated(); } */
-	
 	@Override
-	public boolean attackEntityAsMob(Entity par1) {
-		this.attackTimer = 10;
+	public boolean attackEntityAsMob(Entity entity) {
+ 		this.attackTimer = 40;
 		this.worldObj.setEntityState(this, (byte) 4);
-		boolean flag = par1.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
 		
-		if (flag) {
-			par1.motionY += 1.0D;
+		boolean strike = super.attackEntityAsMob(entity);
+		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+        
+		if (flag && this.attackTimer > 10) {
+			if (this.getRNG().nextBoolean()) {
+				this.attackTimer = 0;
+				entity.motionY += 1.0D;
+				return flag;
+			}
+		}
+		
+		if (strike && this.attackTimer > 25) {
+			if (this.getRNG().nextBoolean()) {
+				this.attackTimer = 400;
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
+				return strike;
+			}
 		}
 		
 		this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
@@ -136,10 +155,11 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		}
 	}
 	
+	/** Controls the delay between the attacks of the entity */
 	@SideOnly(Side.CLIENT)
 	public int getAttackTimer() {
 		return this.attackTimer;
-	} // TODO What was this?
+	}
 	
 	/** Returns the sound this mob makes while it's alive. */
 	@Override
@@ -205,5 +225,17 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	
 	protected boolean canDespawn() {
 		return false;
+	}
+	
+	/* private void applyAttribute(IAttribute attribute, double baseValue) {
+	 * IAttributeInstance attr = this.getEntityAttribute(attribute); if (attr ==
+	 * null) { this.getAttributeMap().registerAttribute(attribute);
+	 * this.getEntityAttribute(attribute).setBaseValue(baseValue); } else {
+	 * attr.setBaseValue(baseValue); } } */
+	
+	/** Returns true if this entity can attack entities of the specified class. */
+	@SuppressWarnings("rawtypes")
+	public boolean canAttackClass(Class par1Class) {
+		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
 	}
 }

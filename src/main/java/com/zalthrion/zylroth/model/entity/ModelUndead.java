@@ -36,14 +36,9 @@ public class ModelUndead extends ModelBiped {
 		this.bipedRightArm.rotateAngleZ = 0.0F;
 		this.bipedLeftArm.rotateAngleZ = 0.0F;
 		this.bipedRightArm.rotateAngleY = -(0.1F - f6 * 0.6F);
-		this.bipedLeftArm.rotateAngleY = 0.1F - f6 * 0.6F;/* this.bipedRightArm.
-														 * rotateAngleX =
-														 * -((float)Math.PI /
-														 * 2F);
-														 * this.bipedLeftArm
-														 * .rotateAngleX =
-														 * -((float)Math.PI /
-														 * 2F); */
+		this.bipedLeftArm.rotateAngleY = 0.1F - f6 * 0.6F;
+		/* this.bipedRightArm. rotateAngleX = -((float)Math.PI / 2F);
+		 * this.bipedLeftArm .rotateAngleX = -((float)Math.PI / 2F); */
 		this.bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
 		this.bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
 		this.bipedRightArm.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;

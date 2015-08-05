@@ -20,7 +20,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 	
 	private static final ResourceLocation tenebrae_golemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Tenebrae_Golem.png");
 	
-	/** Iron Golem's Model. */
+	/** Tenebrae Golem's Model. */
 	@SuppressWarnings("unused")
 	private final ModelTenebraeGolem tenebrae_golemModel;
 	
@@ -29,7 +29,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 		this.tenebrae_golemModel = (ModelTenebraeGolem) this.mainModel;
 	}
 	
-	/** Renders the Iron Golem. */
+	/** Renders the Tenebrae Golem. */
 	public void doRenderTenebraeGolem(EntityTenebraeGolem par1EntityTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(par1EntityTenebraeGolem, par2, par4, par6, par8, par9);
 	}
@@ -38,7 +38,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 		return tenebrae_golemTextures;
 	}
 	
-	/** Rotates Mutant Tenebrae Golem corpse. */
+	/** Rotates Tenebrae Golem corpse. */
 	protected void rotateTenebraeGolemCorpse(EntityTenebraeGolem par1EntityTenebraeGolem, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityTenebraeGolem, par2, par3, par4);
 		
@@ -50,7 +50,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 		}
 	}
 	
-	/** Renders Iron Golem Equipped items. */
+	/** Renders Equipped items. */
 	protected void renderTenebraeGolemEquippedItems(EntityTenebraeGolem par1EntityTenebraeGolem, float par2) {
 		super.renderEquippedItems(par1EntityTenebraeGolem, par2);
 		

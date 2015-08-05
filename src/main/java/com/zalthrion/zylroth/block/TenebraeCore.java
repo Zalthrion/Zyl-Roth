@@ -6,7 +6,7 @@ import com.zalthrion.zylroth.lib.ModTabs;
 
 public class TenebraeCore extends BlockBase {
 	
-	private String name = "tenebraeCoreBlock";
+	private String name = "tenebraeCore";
 	
 	public TenebraeCore() {
 		super(Material.rock);

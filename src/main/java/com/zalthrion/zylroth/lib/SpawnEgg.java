@@ -50,7 +50,7 @@ public class SpawnEgg extends ItemMonsterPlacer
         colorBase = parPrimaryColor;
         colorSpots = parSecondaryColor;
         // DEBUG
-        System.out.println("Spawn egg constructor for "+entityToSpawnName);
+        System.out.println("Added Spawn egg for "+entityToSpawnName);
     }
 
     /**

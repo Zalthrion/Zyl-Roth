@@ -3,9 +3,17 @@ package com.zalthrion.zylroth.block;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EmpoweredTenebraeCore extends BlockBase {
 	
@@ -19,6 +27,14 @@ public class EmpoweredTenebraeCore extends BlockBase {
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypeMetal);
 		this.setCreativeTab(ModTabs.ZylRoth);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		IIcon tbIcon = ModBlocks.tenebrae_Core.getIcon(0, 0);
+		IIcon ret = side == 1 ? tbIcon : (side == 0 ? tbIcon : (meta == 2 && side == 2 ? this.blockIcon : (meta == 3 && side == 5 ? this.blockIcon : (meta == 0 && side == 3 ? this.blockIcon : (meta == 1 && side == 4 ? this.blockIcon : tbIcon)))));
+		return ret;
 	}
 	
 	@Override
@@ -44,5 +60,11 @@ public class EmpoweredTenebraeCore extends BlockBase {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
+		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+		world.setBlockMetadataWithNotify(x, y, z, l, 2);
 	}
 }

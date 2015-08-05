@@ -110,5 +110,4 @@ public class ChiseledTenebrae extends BlockBase {
 		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, l, 2);
 	}
-	
 }

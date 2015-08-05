@@ -7,38 +7,52 @@ core.tooltip=La fuente de vida de una criatura mécanica
 head.tooltip=Se ve como una pieza rara de arquitectura.
 tenebrae.tooltip=Puedes sentir oscuridad salir de el..
 
+tile.zylroth:ashBlock.name=Bloque de Ceniza
 tile.zylroth:chiseledTenebrae.name=Tenebrae Cincelada
+tile.zylroth:empoweredTenebraeCore.name=Núcleo de Tenebrae Energizada
+tile.zylroth:infusedTenebrae.name=Tenebrae Potenciada
+tile.zylroth:infuserMachine.name=Tenebrae Infuser
+tile.zylroth:infuserMachineActive.name=Tenebrae Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Bloque de Tenebrae
 tile.zylroth:tenebraeCore.name=Núcleo de Tenebrae
-tile.zylroth:infusedTenebrae.name=Tenebrae Potenciada
-tile.zylroth:tenebraeOre.name= Mineral de Tenebrae
+tile.zylroth:tenebraeOre.name=Mineral de Tenebrae
+tile.zylroth:voidiumOre.name=Mineral de Voidium
 
-entity.Bird.name=Ave
-entity.Mutant_Tenebrae_Golem.name=Golem de Tenebrae Mutante
-entity.Pyro_Knight.name=Pyro-Caballero
-entity.Rainbow_Pig.name=Cerdo Arcoiris
-entity.Undead_Minion.name=Esbirro No-muerto
-entity.Undead_Warrior.name=Guerrero No-muerto
-entity.Tenebrae_Golem.name=Golem de Tenebrae
+tile.zylroth:spawnerVoidDragon.name=Spawner [Dragon Abisal]
+
+entity.zylroth:Bird.name=Ave
+entity.zylroth:Empowered_Tenebrae_Golem.name=Golem de Tenebrae Energizado
+entity.zylroth:Pyro_Knight.name=Pyro-Caballero
+entity.zylroth:Rainbow_Pig.name=Cerdo Arcoiris
+entity.zylroth:Skeletal_Horse.name=Caballo Esqueletico
+entity.zylroth:Tenebrae_Golem.name=Golem de Tenebrae
+entity.zylroth:Undead_Minion.name=Esbirro No-muerto
+entity.zylroth:Undead_Warrior.name=Guerrero No-muerto
+entity.zylroth:Void_Dragon.name=Dragon Abisal
+
+entity.zylroth:Deathcharger.name=Destrero de la Muerte
+entity.zylroth:Plagued_Horse.name=Caballo Plagado
+
+item.zylroth:tenebraeHelmet.name=Casco de Tenebrae
+item.zylroth:tenebraeChestplate.name=Pechera de Tenebrae
+item.zylroth:tenebraeLeggings.name=Pantalones de Tenebrae
+item.zylroth:tenebraeBoots.name=Botas de Tenebrae
 
 item.zylroth:rawTenebrae.name=Tenebrae Primordial
-item.zylroth:rawTenebrae_Ingot.name=Lingote de Tenebrae Primordial
+item.zylroth:rawTenebraeIngot.name=Lingote de Tenebrae Primordial
 item.zylroth:tenebraeIngot.name=Lingote de Tenebrae
-item.zylroth:unstableTenebrae_Essence.name=Esencia de Tenebrae Inestable
-item.zylroth:purifiedTenebrae_Essence.name=Esencia de Tenebrae Purificada
+item.zylroth:unstableTenebraeCore.name=Núcleo de Tenebrae Inestable
+
+item.zylroth:darkShard.name=Fragmento Oscuro
 item.zylroth:soulEssence.name=Esencia de Alma
 item.zylroth:cursedSoulEssence.name=Esencia de Alma Maldita
-item.zylroth:darkShard.name=Fragmento Oscuro
-item.zylroth:testItem.name=Item de Prueba
-item.zylroth:testItem2.name=Item de Prueba 2
+item.zylroth:voidEssence.name=Esencia del Vacio
+item.zylroth:voidGem.name=Gema del Vacio
 
-item.zylroth:rawTenebrae.name=Raw Tenebrae
-item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
-item.zylroth:tenebraeIngot.name=Tenebrae Ingot
-item.zylroth:purifiedTenebraeEssence.name=Purified Tenebrae Essence
-item.zylroth:unstableTenebraeEssence.name=Unstable Tenebrae Essence
-item.zylroth:soulEssence.name=Soul Essence
-item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
-item.zylroth:darkShard.name=Dark Shard
-item.zylroth:testItem.name=Test Item
-item.zylroth:testItem2.name=Test Item 2
+item.zylroth.goldTalisman.name=Talisman de Oro
+item.zylroth:rainbowTalisman.name=Talisman Arcoiris
+item.zylroth:voidTalisman.name=Talisman del Vacio
+
+item.zylroth:emptySC.name=Cristal de Invocación Vacio
+item.zylroth:Summoning-Crystal_SC_Deathcharger.name=(Cristal de Invocación) Destrero de la Muerte
+item.zylroth:Summoning-Crystal_SC_PlaguedHorse.name=(Cristal de Invocación) Caballo Plagado
