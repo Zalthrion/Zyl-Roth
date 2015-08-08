@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.utility.LogHelper;
 
 public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 	private TileEntityInfuser tei = new TileEntityInfuser();
@@ -23,7 +22,6 @@ public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 	
 	
 	@Override public void renderByItem(ItemStack itemStack) {
-		LogHelper.warn("TEST");
 		Block block = Block.getBlockFromItem(itemStack.getItem());
 		if (block == ModBlocks.infuser || block == ModBlocks.infuser_Idle) {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(this.tei, 0, 0, 0, 0F);

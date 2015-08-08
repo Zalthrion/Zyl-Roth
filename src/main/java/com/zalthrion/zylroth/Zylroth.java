@@ -42,46 +42,28 @@ public class Zylroth {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
-		ModItems.init();
-
-		ModBlocks.init();
-		
 		ModArmors.init();
-
 		ModBiomes.init();
-				
 		ModDimension.init();
-		
 		GameRegistry.registerWorldGenerator(new WorldOreGenerator(), 12);
-		
 		GameRegistry.registerWorldGenerator(new WorldStructureGenerator(), 12);
-		
 		GameRegistry.registerFuelHandler(new FuelHandler());
-		
 	}
 	
 	/*---------------------------------------------------------------------------*/
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		
-		proxy.registerItemRenderers();
-		
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		
+		ModBlocks.init();
+		ModItems.init();
 		ModEntity.init();
-		
 		ModOreDictionary.init();
-		
 		ModRecipes.init();
-		
-		proxy.registerBlocks();
-		
-		proxy.registerItems();
-		
+		proxy.bindTileEntitySpecialRenderers();
+		proxy.registerRenderInformation();
+		proxy.registerItemRenderers();
 		proxy.registerRenderers();
-		
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
 	
 	/*---------------------------------------------------------------------------*/

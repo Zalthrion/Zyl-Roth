@@ -10,6 +10,7 @@ import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
 import com.zalthrion.zylroth.block.TenebraeOre;
 import com.zalthrion.zylroth.block.VoidiumOre;
+import com.zalthrion.zylroth.block.item.ItemBlockInfuser;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
@@ -51,7 +52,7 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(spawner_VoidDragon, "spawnerVoidDragon");
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 		/* Machines */
-		GameRegistry.registerBlock(infuser_Idle, "infuserMachine");
+		GameRegistry.registerBlock(infuser_Idle, ItemBlockInfuser.class, "infuserMachine");
 		GameRegistry.registerBlock(infuser, "infuserMachineActive");
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
 	}
