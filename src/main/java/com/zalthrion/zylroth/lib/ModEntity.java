@@ -78,7 +78,7 @@ public class ModEntity {
 		
 		registerEntity(MountPlaguedHorse.class, "Plagued Horse (ZYR)");
 		
-		registerEntityEgg(MountWarTortoise.class, "War Tortoise (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntity(MountWarTortoise.class, "War Tortoise (ZYR)");
 		
 	}
 }

@@ -1,13 +1,28 @@
 
 itemGroup.Zyl'Roth=Zyl'Roth
 
+#Tooltips
+
 tooltip.zylroth:shift=- Hold Shift for more info -
 
 tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=A powerful artifact with immense power running inside it.
 tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
 tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
-tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond..
+tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond.
+
+tooltip.zylroth:broken_sword=You must repair this sword to continue using it!
+tooltip.zylroth:broken_tool=You must repair this tool to continue using it!
+
+tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
+
+tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
+tooltip.zylroth:tenebrae_sword_lore=The sword seems to be vibrating while on your hand.
+
+tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
+tooltip.zylroth:tenebrae_tool_lore=A tool made of the ancient ore, the Tenebrae, a dark essence surrounds it.
+
+#Blocks
 
 tile.zylroth:ashBlock.name=Ash Block
 tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
@@ -22,6 +37,9 @@ tile.zylroth:voidiumOre.name=Voidium Ore
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
+
+#Entity
+
 entity.zylroth:Bird.name=Bird
 entity.zylroth:Empowered_Tenebrae_Golem.name=Empowered Tenebrae Golem
 entity.zylroth:Pyro_Knight.name=Pyro Knight
@@ -35,10 +53,25 @@ entity.zylroth:Void_Dragon.name=Void Dragon
 entity.zylroth:Deathcharger.name=Deathcharger
 entity.zylroth:Plagued_Horse.name=Plagued Horse
 
+
+#Armors
+
 item.zylroth:tenebraeHelmet.name=Tenebrae Helmet
 item.zylroth:tenebraeChestplate.name=Tenebrae Chestplate
 item.zylroth:tenebraeLeggings.name=Tenebrae Leggings
 item.zylroth:tenebraeBoots.name=Tenebrae Boots
+
+
+#Tools
+
+item.zylroth:tenebraeSword.name=Tenebrae Sword
+item.zylroth:tenebraePickaxe.name=Tenebrae Pickaxe
+item.zylroth:tenebraeAxe.name=Tenebrae Axe
+item.zylroth:tenebraeShovel.name=Tenebrae Shovel
+item.zylroth:tenebraeHoe.name=Tenebrae Hoe
+
+
+#Items
 
 item.zylroth:rawTenebrae.name=Raw Tenebrae
 item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot

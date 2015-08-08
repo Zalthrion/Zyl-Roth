@@ -24,7 +24,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
 		this.setCreativeTab(ModTabs.ZylRoth);
-		this.setNames(Reference.MOD_ID + ":" + name);
+		this.setNames(Reference.MOD_ID.toLowerCase() + ":" + name);
 	}
 	
 	@Override
@@ -35,18 +35,18 @@ public class TenebraeArmor extends ItemBaseArmor {
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
-		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "shift"));
+		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "tenebrae_armor"));
-			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "shift"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_armor"));
+			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		}
 	}
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		
-		return Reference.MOD_ID + ":textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
+		return Reference.MOD_ID.toLowerCase() + ":/textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 	
 }

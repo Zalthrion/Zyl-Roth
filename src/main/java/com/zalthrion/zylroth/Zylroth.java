@@ -42,6 +42,8 @@ public class Zylroth {
 		ModBlocks.init();
 		
 		ModArmors.init();
+		
+		ModTools.init();
 
 		ModBiomes.init();
 				

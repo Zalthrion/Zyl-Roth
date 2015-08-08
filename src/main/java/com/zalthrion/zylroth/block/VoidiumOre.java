@@ -2,9 +2,11 @@ package com.zalthrion.zylroth.block;
 
 import java.util.Random;
 
+import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public class VoidiumOre extends BlockBase {
@@ -32,5 +34,29 @@ public class VoidiumOre extends BlockBase {
 		double d4 = 0.0D;
 		double d5 = 0.0D;
 		par1World.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
+	}
+	
+	public Item getItemDropped(int metadata, Random rand, int fortune) {
+		return ModItems.raw_Tenebrae;
+	}
+	
+	public int quantityDropped(Random rand) {
+		return 2 + rand.nextInt(4);
+	}
+	
+	public int quantityDroppedWithBonus(int fortune, Random random) {
+		if (fortune > 0) {
+			int j = random.nextInt(fortune + 2) - 1;
+			
+			if (j < 0) {
+				j = 0;
+			}
+			
+			return quantityDropped(random) * (j + 1);
+		}
+		
+		else {
+			return quantityDropped(random);
+		}
 	}
 }

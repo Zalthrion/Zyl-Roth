@@ -14,6 +14,7 @@ public final class ModRecipes {
 		registerShapedRecipes();
 		registerShapelessRecipes();
 		registerArmorRecipes();
+		registerToolRecipes();
 		registerInfusionRecipes();
 	}
 	
@@ -58,6 +59,22 @@ public final class ModRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Leggings), "III", "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Boots), "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
 
+	}
+	
+	public static void registerToolRecipes() {
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeSword), "NTN", "OTO", "NBN", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraePickaxe), "TTT", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeAxe), "TTN", "TBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeAxe), "NTT", "NBT", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeShovel), "NTN", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeHoe), "TTN", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeHoe), "NTT", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		
 	}
 	
 	public static void registerInfusionRecipes() {

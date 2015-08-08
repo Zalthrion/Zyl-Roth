@@ -1,7 +1,7 @@
 package com.zalthrion.zylroth.reference;
 
 public class Reference {
-	public static final String MOD_ID = "zylroth";
+	public static final String MOD_ID = "Zylroth";
 	public static final String MOD_NAME = "Zyl'roth";
 	public static final String MINECRAFT_VERSION = "1.7.10";
 	public static final String VERSION = "0.1.0";
