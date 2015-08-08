@@ -46,7 +46,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		
-		return Reference.MOD_ID.toLowerCase() + ":/textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
+		return Reference.MOD_ID.toLowerCase() + ":" + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 	
 }

@@ -18,9 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBasePickaxe extends ItemPickaxe {
 	
 	protected boolean leftClick;
-	
-	int Tenebrae = 2249;
-	
+		
 	public ItemBasePickaxe(ToolMaterial toolMaterial) {
 		super(toolMaterial);
 		setCreativeTab(ModTabs.ZylRoth);

@@ -18,9 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBaseSword extends ItemSword {
 	
 	protected boolean leftClick;
-	
-	int Tenebrae = 2249;
-	
+		
 	public ItemBaseSword(ToolMaterial toolMaterial) {
 		super(toolMaterial);
 		setCreativeTab(ModTabs.ZylRoth);

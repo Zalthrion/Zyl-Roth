@@ -14,13 +14,15 @@ public class TenebraeAxe extends ItemBaseAxe {
 	
 	private String name = "tenebraeAxe";
 	
+	int tenebrae = 2249;
+	
 	public TenebraeAxe(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= Tenebrae;
+		return stack.getMetadata() >= tenebrae;
 	}
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})

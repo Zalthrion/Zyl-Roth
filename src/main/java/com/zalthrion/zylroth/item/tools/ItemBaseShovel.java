@@ -18,9 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBaseShovel extends ItemSpade {
 	
 	protected boolean leftClick;
-	
-	int Tenebrae = 2249;
-	
+		
 	public ItemBaseShovel(ToolMaterial toolMaterial) {
 		super(toolMaterial);
 		setCreativeTab(ModTabs.ZylRoth);

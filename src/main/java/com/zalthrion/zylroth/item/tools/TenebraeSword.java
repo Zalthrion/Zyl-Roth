@@ -19,13 +19,15 @@ public class TenebraeSword extends ItemBaseSword {
 	
 	private String name = "tenebraeSword";
 	
+	int tenebrae = 2249;
+	
 	public TenebraeSword(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= Tenebrae;
+		return stack.getMetadata() >= tenebrae;
 	}
 	
 	@Override

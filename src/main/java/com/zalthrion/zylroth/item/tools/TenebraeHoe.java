@@ -21,13 +21,15 @@ public class TenebraeHoe extends ItemBaseHoe {
 	
 	private String name = "tenebraeHoe";
 	
+	int tenebrae = 2249;
+	
 	public TenebraeHoe(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= Tenebrae;
+		return stack.getMetadata() >= tenebrae;
 	}
 	
 	@Override

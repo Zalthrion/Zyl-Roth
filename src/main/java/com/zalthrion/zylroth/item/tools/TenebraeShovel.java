@@ -21,13 +21,15 @@ public class TenebraeShovel extends ItemBaseShovel {
 	
 	private String name = "tenebraeShovel";
 	
+	int tenebrae = 2249;
+	
 	public TenebraeShovel(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= Tenebrae;
+		return stack.getMetadata() >= tenebrae;
 	}
 	
 	@Override

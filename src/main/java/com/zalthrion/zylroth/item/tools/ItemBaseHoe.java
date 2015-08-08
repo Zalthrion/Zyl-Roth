@@ -18,9 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBaseHoe extends ItemHoe {
 	
 	protected boolean leftClick;
-	
-	int Tenebrae = 2249;
-	
+		
 	public ItemBaseHoe(ToolMaterial toolMaterial) {
 		super(toolMaterial);
 		setCreativeTab(ModTabs.ZylRoth);

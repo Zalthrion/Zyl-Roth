@@ -18,9 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBaseAxe extends ItemAxe {
 	
 	protected boolean leftClick;
-	
-	int Tenebrae = 2249;
-	
+		
 	public ItemBaseAxe(ToolMaterial toolMaterial) {
 		super(toolMaterial);
 		setCreativeTab(ModTabs.ZylRoth);

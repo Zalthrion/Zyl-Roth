@@ -20,13 +20,15 @@ public class TenebraePickaxe extends ItemBasePickaxe {
 	
 	private String name = "tenebraePickaxe";
 	
+	int tenebrae = 2249;
+	
 	public TenebraePickaxe(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= Tenebrae;
+		return stack.getMetadata() >= tenebrae;
 	}
 	
 	@Override
