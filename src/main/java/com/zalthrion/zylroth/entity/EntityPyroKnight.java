@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.entity;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -8,28 +9,29 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTools;
 
 public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	
@@ -43,8 +45,6 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
 		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
@@ -55,10 +55,10 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(450.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(20.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(25.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.4D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(40.0D);
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 				}
 				
 				if (!player.worldObj.isRemote && !hasArmor) {
-					this.playSound("mob.blaze.hit", 0.3F, 1.0F);
+					this.playSound("mob.blaze.hit", 0.5F, 1.0F);
 				}
 			}
 			
@@ -137,6 +137,22 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 			BossStatus.setBossStatus(this, true);
 		}
 		
+		for (int l = 0; l < 4; ++ l) {
+			
+			int x = MathHelper.floor_double(this.posX);
+			int y = MathHelper.floor_double(this.posY);
+			int z = MathHelper.floor_double(this.posZ);
+			
+			x = MathHelper.floor_double(this.posX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
+			y = MathHelper.floor_double(this.posY);
+			z = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
+			BlockPos pos = new BlockPos(x, y, z);
+			
+			if (this.worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(this.worldObj, pos)) {
+				this.worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
+			}
+		}
+		
 		super.onLivingUpdate();
 	}
 	
@@ -179,13 +195,14 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	private static final ItemStack defaultHeldItem;
 	
 	static {
-		defaultHeldItem = new ItemStack(Items.stick, 1);
+		defaultHeldItem = new ItemStack(ModTools.tenebraeSword, 1);
 	}
 	
-	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean canAttackClass(Class par1Class) {
+	@Override @SuppressWarnings("rawtypes") public boolean canAttackClass(Class par1Class) {
 		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class && EntitySkeletalHorse.class != par1Class;
 	}
 	
+	@Override protected boolean canDespawn() {
+		return false;
+	}
 }

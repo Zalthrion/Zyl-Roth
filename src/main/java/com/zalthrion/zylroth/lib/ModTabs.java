@@ -16,7 +16,7 @@ public class ModTabs {
 		
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.stable_Tenebrae_Core;
+			return ModItems.unstable_Tenebrae_Core;
 		}
 		
 		@SuppressWarnings("unchecked") @Override public void displayAllReleventItems(@SuppressWarnings("rawtypes") List items) {

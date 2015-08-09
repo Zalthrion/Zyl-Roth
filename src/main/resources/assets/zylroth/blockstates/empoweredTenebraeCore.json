@@ -3,6 +3,6 @@
 
 {
     "variants": {
-        "normal": { "model": "zylroth:tenebraeCoreBlock" }
+        "normal": { "model": "zylroth:empoweredTenebraeCore" }
     }
 }

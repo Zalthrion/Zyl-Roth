@@ -19,6 +19,7 @@ import com.zalthrion.zylroth.lib.ModEntity;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModOreDictionary;
 import com.zalthrion.zylroth.lib.ModRecipes;
+import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
@@ -43,6 +44,7 @@ public class Zylroth {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModArmors.init();
+		ModTools.init();
 		ModBiomes.init();
 		ModDimension.init();
 		GameRegistry.registerWorldGenerator(new WorldOreGenerator(), 12);

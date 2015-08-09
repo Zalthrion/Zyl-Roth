@@ -51,5 +51,22 @@ public class PlayerEventHandler {
 				}
 			}
 		}
+		
+		if (persistentData.hasKey("ownsMountWarTortoise")) {
+			UUID ownedHorse = UUID.fromString(persistentData.getString("ownsMountWarTortoise"));
+			persistentData.removeTag("ownsMountWarTortoise");
+			WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+			for (WorldServer world : worlds) {
+				@SuppressWarnings("rawtypes")
+				Iterator iterator = world.loadedEntityList.iterator();
+				while (iterator.hasNext()) {
+					Object obj = iterator.next();
+					if (obj instanceof MountPlaguedHorse) {
+						MountPlaguedHorse mph = (MountPlaguedHorse) obj;
+						if (mph.getUniqueID().equals(ownedHorse)) mph.setDead();
+					}
+				}
+			}
+		}
 	}
 }

@@ -21,7 +21,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 	
 	private static final ResourceLocation tenebrae_golemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Tenebrae_Golem.png");
 	
-	/** Iron Golem's Model. */
+	/** Tenebrae Golem's Model. */
 	@SuppressWarnings("unused")
 	private final ModelTenebraeGolem tenebrae_golemModel;
 	
@@ -31,7 +31,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 		this.tenebrae_golemModel = (ModelTenebraeGolem) this.mainModel;
 	}
 	
-	/** Renders the Iron Golem. */
+	/** Renders the Tenebrae Golem. */
 	public void doRenderTenebraeGolem(EntityTenebraeGolem par1EntityTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(par1EntityTenebraeGolem, par2, par4, par6, par8, par9);
 	}
@@ -40,7 +40,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 		return tenebrae_golemTextures;
 	}
 	
-	/** Rotates Mutant Tenebrae Golem corpse. */
+	/** Rotates Tenebrae Golem corpse. */
 	protected void rotateTenebraeGolemCorpse(EntityTenebraeGolem par1EntityTenebraeGolem, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityTenebraeGolem, par2, par3, par4);
 		
@@ -66,17 +66,11 @@ public class RenderTenebraeGolem extends RenderLiving {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getTenebraeGolemTextures((EntityTenebraeGolem) par1Entity);
 	}
 	
-	/** Actually renders the given argument. This is a synthetic bridge method,
-	 * always casting down its argument and then handing it off to a worker
-	 * function which does the actual work. In all probabilty, the class Render
-	 * is generic (Render<T extends Entity) and this method has signature public
-	 * void doRender(T entity, double d, double d1, double d2, float f, float
-	 * f1). But JAD is pre 1.5 so doesn't do that. */
-	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+	@Override public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
 		this.doRenderTenebraeGolem((EntityTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
 	}
 }

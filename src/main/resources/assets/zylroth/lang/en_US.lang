@@ -1,52 +1,94 @@
 itemGroup.Zyl'Roth=Zyl'Roth
 
+# Tooltips
+
 tooltip.zylroth:shift=- Hold Shift for more info -
 
 tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=A powerful artifact with immense power running inside it.
 tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
 tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
-tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond..
+tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond.
+
+tooltip.zylroth:broken_sword=You must repair this sword to continue using it!
+tooltip.zylroth:broken_tool=You must repair this tool to continue using it!
+
+tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
+
+tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
+tooltip.zylroth:tenebrae_sword_lore=The sword seems to be vibrating while on your hand.
+
+tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
+tooltip.zylroth:tenebrae_tool_lore=A tool made of the ancient ore, the Tenebrae, a dark essence surrounds it.
+
+# Blocks
 
 tile.zylroth:ashBlock.name=Ash Block
 tile.zylroth:chiseledTenebrae.name=Chiseled Tenebrae
+tile.zylroth:empoweredTenebraeCore.name=Empowered Tenebrae Core
 tile.zylroth:infusedTenebrae.name=Infused Tenebrae
 tile.zylroth:infuserMachine.name=Tenebrae Infuser
 tile.zylroth:infuserMachineActive.name=Tenebrae Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
-tile.zylroth:tenebraeCoreBlock.name=Tenebrae Core
+tile.zylroth:tenebraeCore.name=Tenebrae Core
 tile.zylroth:tenebraeOre.name=Tenebrae Ore
+tile.zylroth:voidiumOre.name=Voidium Ore
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
-entity.zylroth:Bird.name=Bird
-entity.zylroth:Mutant_Tenebrae_Golem.name=Mutant Tenebrae Golem
-entity.zylroth:Pyro_Knight.name=Pyro Knight
-entity.zylroth:Rainbow_Pig.name=Rainbow Pig
-entity.zylroth:Skeletal_Horse.name=Skeletal Horse
-entity.zylroth:Tenebrae_Golem.name=Tenebrae Golem
-entity.zylroth:Undead_Minion.name=Undead Minion
-entity.zylroth:Undead_Warrior.name=Undead Warrior
-entity.zylroth:Void_Dragon.name=Void Dragon
+# Entity
 
-entity.zylroth:Deathcharger.name=Deathcharger
-entity.zylroth:Plagued_Horse.name=Plagued Horse
+entity.Zylroth:Bird.name=Bird
+entity.Zylroth.EmpoweredTenebraeGolem.name=Empowered Tenebrae Golem
+entity.Zylroth:PyroKnight.name=Pyro Knight
+entity.Zylroth:RainbowPig.name=Rainbow Pig
+entity.Zylroth:SkeletalHorse.name=Skeletal Horse
+entity.Zylroth:TenebraeGolem.name=Tenebrae Golem
+entity.Zylroth:UndeadMinion.name=Undead Minion
+entity.Zylroth:UndeadWarrior.name=Undead Warrior
+entity.Zylroth:VoidDragon.name=Void Dragon
 
-item.zylroth:tenebraeCore.name=Tenebrae Core
+entity.Zylroth:Deathcharger.name=Deathcharger
+entity.Zylroth:PlaguedHorse.name=Plagued Horse
+
+# Armors
+
+item.zylroth:tenebraeHelmet.name=Tenebrae Helmet
+item.zylroth:tenebraeChestplate.name=Tenebrae Chestplate
+item.zylroth:tenebraeLeggings.name=Tenebrae Leggings
+item.zylroth:tenebraeBoots.name=Tenebrae Boots
+
+# Tools
+
+item.zylroth:creativeSword.name=Creative Sword
+item.zylroth:creativePickaxe.name=Creative Pickaxe
+item.zylroth:creativeAxe.name=Creative Axe
+item.zylroth:creativeShovel.name=Creative Shovel
+item.zylroth:creativeHoe.name=Creative Hoe
+
+item.zylroth:tenebraeSword.name=Tenebrae Sword
+item.zylroth:tenebraePickaxe.name=Tenebrae Pickaxe
+item.zylroth:tenebraeAxe.name=Tenebrae Axe
+item.zylroth:tenebraeShovel.name=Tenebrae Shovel
+item.zylroth:tenebraeHoe.name=Tenebrae Hoe
+
+# Items
+
 item.zylroth:rawTenebrae.name=Raw Tenebrae
 item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
 item.zylroth:tenebraeIngot.name=Tenebrae Ingot
 item.zylroth:unstableTenebraeCore.name=Unstable Tenebrae Core
-item.zylroth:stableTenebraeCore.name=Stable Tenebrae Core
 
 item.zylroth:darkShard.name=Dark Shard
 item.zylroth:soulEssence.name=Soul Essence
 item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
 item.zylroth:voidEssence.name=Void Essence
+item.zylroth:voidGem.name=Void Gem
 
+item.zylroth:goldTalisman.name=Gold Talisman
 item.zylroth:rainbowTalisman.name=Rainbow Talisman
 item.zylroth:voidTalisman.name=Void Talisman
 
-item.zylroth:emptySummoningCrystal.name=Empty Summoning Crystal
-item.zylroth:SC_Deathcharger.name=(Summoning Crystal) Deathcharger
-item.zylroth:SC_PlaguedHorse.name=(Summoning Crystal) Plagued Horse
+item.zylroth:emptySC.name=Empty Summoning Crystal
+item.zylroth:Summoning-Crystal_SC_Deathcharger.name=(Summoning Crystal) Deathcharger
+item.zylroth:Summoning-Crystal_SC_PlaguedHorse.name=(Summoning Crystal) Plagued Horse

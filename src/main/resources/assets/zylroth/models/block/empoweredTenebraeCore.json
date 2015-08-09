@@ -4,6 +4,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "zylroth:blocks/tenebraeCoreBlock"
+        "all": "zylroth:blocks/empoweredTenebraeCore"
     }
 }

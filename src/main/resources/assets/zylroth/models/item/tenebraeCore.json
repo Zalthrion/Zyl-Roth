@@ -2,7 +2,7 @@
 # Generated using sheenrox82's JSON File Generator for Minecraft 1.8.
 
 {
-    "parent": "zylroth:block/tenebraeCoreBlock",
+    "parent": "zylroth:block/tenebraeCore",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
