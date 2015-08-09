@@ -73,7 +73,7 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("You must repair this sword to continue using it!")); //TODO Localize this
+		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		
 		return true;
 	}
