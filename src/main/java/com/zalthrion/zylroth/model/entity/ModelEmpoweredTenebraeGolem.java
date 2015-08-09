@@ -4,6 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -11,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 /** TenebraeGolem - Zalthrion Created using Tabula 4.1.1 */
+@SideOnly(Side.CLIENT)
 public class ModelEmpoweredTenebraeGolem extends ModelBase {
 	
 	public ModelRenderer TopRightArm;
@@ -130,9 +133,10 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 		modelRenderer.rotateAngleZ = z;
 	}
 	
+	@Override
 	public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-		this.TopLeftLeg.rotateAngleX = -2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
-		this.TopRightLeg.rotateAngleX = 2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
+		this.TopLeftLeg.rotateAngleX = -2.5F * this.func_78172_a(p_78087_1_, 10.0F) * p_78087_2_;
+		this.TopRightLeg.rotateAngleX = 2.5F * this.func_78172_a(p_78087_1_, 10.0F) * p_78087_2_;
 		
 		this.BottomLeftLeg.rotateAngleX = -2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = 2.5F * this.func_78172_a(p_78087_1_, 12.0F) * p_78087_2_;
@@ -155,6 +159,7 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 		}
 	}
 	
+	@Override
 	public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
 		EntityEmpoweredTenebraeGolem entityEmpoweredTenebraeGolem = (EntityEmpoweredTenebraeGolem) p_78086_1_;
 		int i = entityEmpoweredTenebraeGolem.getAttackTimer();

@@ -206,7 +206,7 @@ public class SpawnEgg extends ItemMonsterPlacer {
 	
 	public void setEntityToSpawnName(String parEntityToSpawnName) {
 		entityToSpawnName = parEntityToSpawnName;
-		entityToSpawnNameFull = Reference.MOD_ID + "." + entityToSpawnName;
+		entityToSpawnNameFull = Reference.MOD_ID.toLowerCase() + "." + entityToSpawnName;
 	}
 	
 }

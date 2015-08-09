@@ -11,8 +11,10 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +33,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisplayData {
 	private int attackTimer;
 	
+	private int deathTicks;
+	
 	public EntityEmpoweredTenebraeGolem(World world) {
 		super(world);
 		this.setSize(2.1F, 4.2F);
@@ -40,20 +44,11 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
 		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 2.0D, 32.0F));
 		this.tasks.addTask(3, new EntityAISwimming(this));
-		// this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
-		// this.tasks.addTask(7, new EntityAIWatchClosest(this,
-		// EntityPlayer.class, 6.0F));
-		// this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.tasks.addTask(6, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true));
 		
-	}
-	
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 	}
 	
 	/** Returns true if the newer Entity AI code should be run */
@@ -66,7 +61,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		// this.applyAttribute(SharedMonsterAttributes.attackDamage, 0.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(675.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
@@ -118,12 +113,12 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
- 		this.attackTimer = 40;
+		this.attackTimer = 40;
 		this.worldObj.setEntityState(this, (byte) 4);
 		
 		boolean strike = super.attackEntityAsMob(entity);
 		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
-        
+		
 		if (flag && this.attackTimer > 10) {
 			if (this.getRNG().nextBoolean()) {
 				this.attackTimer = 0;
@@ -200,25 +195,59 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		}
 	}
 	
-	public boolean isPlayerCreated() {
-		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
-	}
-	
-	public void setPlayerCreated(boolean par1) {
-		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
-		
-		if (par1) {
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 | 1)));
-		} else {
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 & -2)));
+    protected void onDeathUpdate()
+    {
+        ++this.deathTicks;
+
+        if (this.deathTicks >= 180 && this.deathTicks <= 200)
+        {
+            float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+            float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+            float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+            this.worldObj.spawnParticle("hugeexplosion", this.posX + (double)f, this.posY + 2.0D + (double)f1, this.posZ + (double)f2, 0.0D, 0.0D, 0.0D);
+        }
+
+        int i;
+        int j;
+
+        if (!this.worldObj.isRemote)
+        {
+            if (this.deathTicks == 1)
+            {
+                this.worldObj.playBroadcastSound(1018, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+            }
+        }
+
+        this.moveEntity(0.D, 0.1D, 0.0D);
+		for (int countparticles = 900; countparticles <= 1000; ++ countparticles) {
+			this.worldObj.spawnParticle("portal", (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+			this.worldObj.spawnParticle("portal", (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+			this.worldObj.spawnParticle("portal", (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
 		}
-	}
-	
-	/** Called when the mob's health reaches 0. */
-	@Override
-	public void onDeath(DamageSource par1DamageSource) {
-		super.onDeath(par1DamageSource);
-	}
+        this.renderYawOffset = this.rotationYaw += 1000.0F;
+
+        if (this.deathTicks == 200 && !this.worldObj.isRemote)
+        {
+            i = 2000;
+
+            while (i > 0)
+            {
+                j = EntityXPOrb.getXPSplit(i);
+                i -= j;
+                this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+            }
+
+            this.setDead();
+        }
+    }
+    
+    @Override
+    public boolean canBeCollidedWith() {
+    	if(this.deathTicks >= 1){
+    		return false;
+    	} 
+    	else return true;
+    }
 	
 	/** Called when the mob is falling. Calculates and applies fall damage. */
 	protected void fall(float distance) {}

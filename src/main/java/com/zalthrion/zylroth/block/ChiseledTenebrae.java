@@ -66,7 +66,7 @@ public class ChiseledTenebrae extends BlockBase {
 				}
 				
 				EntityEmpoweredTenebraeGolem golem = new EntityEmpoweredTenebraeGolem(world);
-				golem.setPlayerCreated(true);
+//				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
 				

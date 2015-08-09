@@ -38,7 +38,7 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Block), "III", "III", "III", 'I', ModItems.tenebrae_Ingot);
 						
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "TCT", "DTD", 'D', Blocks.redstone_block, 'T', ModBlocks.tenebrae_Block, 'C', ModItems.unstable_Tenebrae_Core);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "ICI", "RIR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'C', ModItems.unstable_Tenebrae_Core);
 		
 	}
 	
