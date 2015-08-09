@@ -1,5 +1,8 @@
+B
+#Creative Tabs
 
 itemGroup.Zyl'Roth=Zyl'Roth
+
 
 #Tooltips
 
@@ -22,6 +25,7 @@ tooltip.zylroth:tenebrae_sword_lore=The sword seems to be vibrating while on you
 tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
 tooltip.zylroth:tenebrae_tool_lore=A tool made of the ancient ore, the Tenebrae, a dark essence surrounds it.
 
+
 #Blocks
 
 tile.zylroth:ashBlock.name=Ash Block
@@ -40,18 +44,18 @@ tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
 #Entity
 
-entity.zylroth:Bird.name=Bird
-entity.zylroth:Empowered_Tenebrae_Golem.name=Empowered Tenebrae Golem
-entity.zylroth:Pyro_Knight.name=Pyro Knight
-entity.zylroth:Rainbow_Pig.name=Rainbow Pig
-entity.zylroth:Skeletal_Horse.name=Skeletal Horse
-entity.zylroth:Tenebrae_Golem.name=Tenebrae Golem
-entity.zylroth:Undead_Minion.name=Undead Minion
-entity.zylroth:Undead_Warrior.name=Undead Warrior
-entity.zylroth:Void_Dragon.name=Void Dragon
+entity.Zylroth.bird.name=Bird
+entity.Zylroth.empoweredTenebraeGolem.name=Empowered Tenebrae Golem
+entity.Zylroth.pyroKnight.name=Pyro Knight
+entity.Zylroth.rainbowPig.name=Rainbow Pig
+entity.Zylroth.skeletalHorse.name=Skeletal Horse
+entity.Zylroth.tenebraeGolem.name=Tenebrae Golem
+entity.Zylroth.undeadMinion.name=Undead Minion
+entity.Zylroth.undeadWarrior.name=Undead Warrior
+entity.Zylroth.Void_Dragon.name=Void Dragon
 
-entity.zylroth:Deathcharger.name=Deathcharger
-entity.zylroth:Plagued_Horse.name=Plagued Horse
+entity.Zylroth:Deathcharger.name=Deathcharger
+entity.Zylroth:Plagued_Horse.name=Plagued Horse
 
 
 #Armors
@@ -63,6 +67,12 @@ item.zylroth:tenebraeBoots.name=Tenebrae Boots
 
 
 #Tools
+
+item.zylroth:creativeSword.name=Creative Sword
+item.zylroth:creativePickaxe.name=Creative Pickaxe
+item.zylroth:creativeAxe.name=Creative Axe
+item.zylroth:creativeShovel.name=Creative Shovel
+item.zylroth:creativeHoe.name=Creative Hoe
 
 item.zylroth:tenebraeSword.name=Tenebrae Sword
 item.zylroth:tenebraePickaxe.name=Tenebrae Pickaxe

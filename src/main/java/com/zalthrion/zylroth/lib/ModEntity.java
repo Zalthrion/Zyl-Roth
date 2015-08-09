@@ -52,31 +52,31 @@ public class ModEntity {
 		
 		// Animals
 		
-		registerEntityEgg(EntityBird.class, "Bird (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityBird.class, "bird", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityRainbowPig.class, "Rainbow Pig (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityRainbowPig.class, "rainbowPig", 0xeaeae9, 0xc99a03);
 		
 		// Mobs
 		
-		registerEntityEgg(EntityEmpoweredTenebraeGolem.class, "Empowered Tenebrae Golem (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityEmpoweredTenebraeGolem.class, "empoweredTenebraeGolem", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityPyroKnight.class, "Pyro Knight (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityPyroKnight.class, "pyroKnight", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntitySkeletalHorse.class, "Skeletal Horse (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntitySkeletalHorse.class, "skeletalHorse", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityTenebraeGolem.class, "Tenebrae Golem (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityTenebraeGolem.class, "tenebraeGolem", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityUndeadMinion.class, "Undead Minion (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityUndeadMinion.class, "undeadMinion", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityUndeadWarrior.class, "Undead Warrior (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityUndeadWarrior.class, "undeadWarrior", 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityVoidDragon.class, "Void Dragon (ZYR)", 0xeaeae9, 0xc99a03);
+		registerEntityEgg(EntityVoidDragon.class, "voidDragon", 0xeaeae9, 0xc99a03);
 		
 		// Mounts
 		
-		registerEntity(MountDeathcharger.class, "Deathcharger (ZYR)");
+		registerEntity(MountDeathcharger.class, "Deathcharger");
 		
-		registerEntity(MountPlaguedHorse.class, "Plagued Horse (ZYR)");
+		registerEntity(MountPlaguedHorse.class, "Plagued Horse");
 		
 		registerEntity(MountWarTortoise.class, "War Tortoise (ZYR)");
 		

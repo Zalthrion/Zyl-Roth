@@ -12,19 +12,19 @@ import org.lwjgl.input.Keyboard;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class TenebraeAxe extends ItemBaseAxe {
+public class CreativeAxe extends ItemBaseAxe {
 	
-	private String name = "tenebraeAxe";
+	private String name = "creativeAxe";
 	
-	int tenebrae = 2249;
+	int creative = 2249;
 	
-	public TenebraeAxe(ToolMaterial material) {
+	public CreativeAxe(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebrae;
+		return stack.getMetadata() >= creative;
 	}
 	
 	@Override

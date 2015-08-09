@@ -2,20 +2,15 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
 
 import org.lwjgl.input.Keyboard;
 
+import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class TenebraeHoe extends ItemBaseHoe {
 	
@@ -33,52 +28,13 @@ public class TenebraeHoe extends ItemBaseHoe {
 	}
 	
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
-		
-		if (!player.canPlayerEdit(x, y, z, p_77648_7_, stack)) {
-			return false;
-		} else {
+	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
+		if (this.isBroken(stack)) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 			
-			UseHoeEvent event = new UseHoeEvent(player, stack, world, x, y, z);
-			if (MinecraftForge.EVENT_BUS.post(event)) { return false; }
+			return true;
 			
-			if (event.getResult() == Result.ALLOW) {
-				stack.damageItem(1, player);
-				return true;
-			}
-			
-			Block block = world.getBlock(x, y, z);
-			
-			if (p_77648_7_ != 0 && world.getBlock(x, y + 1, z).isAir(world, x, y + 1, z) && (block == Blocks.grass || block == Blocks.dirt) && !(this.isBroken(stack))) {
-				Block block1 = Blocks.farmland;
-				world.playSoundEffect((double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), block1.stepSound.getStepSound(), (block1.stepSound.getVolume() + 1.0F) / 2.0F, block1.stepSound.getFrequency() * 0.8F);
-				
-				if (world.isRemote) {
-					return true;
-				} else {
-					for (int ix = -1; ix < 2; ++ ix) {
-						for (int iz = -1; iz < 2; ++ iz) {
-							
-							boolean isAGrass = world.getBlock(x + ix, y, z + iz) == Blocks.grass;
-							boolean isADirt = world.getBlock(x + ix, y, z + iz) == Blocks.dirt;
-							
-							if (isADirt || isAGrass && !(player.isSneaking())) {
-								world.setBlock(x + ix, y, z + iz, block1);
-								stack.damageItem(1, player);
-							}
-							
-							else if (player.isSneaking()) {
-								world.setBlock(x, y, z, block1);
-								stack.damageItem(1, player);
-							}
-						}
-					}
-					return true;
-				}
-			} else {
-				return false;
-			}
-		}
+		} else return false;
 	}
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
@@ -101,6 +57,12 @@ public class TenebraeHoe extends ItemBaseHoe {
 				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_info"));
 			}
 		}
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
+		
+		return stack.getItem() == ModItems.tenebrae_Ingot;
 	}
 	
 }

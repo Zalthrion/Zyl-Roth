@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.item.tools;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -16,19 +17,19 @@ import org.lwjgl.input.Keyboard;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class TenebraeSword extends ItemBaseSword {
+public class CreativeSword extends ItemBaseSword {
 	
-	private String name = "tenebraeSword";
+	private String name = "creativeSword";
 	
-	int tenebrae = 2249;
+	int creative = 12249;
 	
-	public TenebraeSword(ToolMaterial material) {
+	public CreativeSword(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebrae;
+		return stack.getMetadata() >= creative;
 	}
 	
 	@Override
@@ -53,6 +54,28 @@ public class TenebraeSword extends ItemBaseSword {
 				world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
 				world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
 			}
+		}
+		
+		if (player.isSneaking()) {
+			
+			if (player.capabilities.isCreativeMode) { return stack; }
+			
+			if (this.isBroken(stack) && !(world.isRemote)) {
+				player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+				return stack;
+				
+			} else if (stack.getMetadata() < 12200) {
+				
+				stack.damageItem(50, player);
+				world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				
+				if (!world.isRemote) {
+					world.spawnEntityInWorld(new EntityEnderPearl(world, player));
+				}
+				
+				world.spawnParticle("portal", player.posX + (rand.nextDouble() - 0.5D) * (double) player.width, player.posY + rand.nextDouble() * (double) player.height - (double) player.yOffset, player.posZ + (rand.nextDouble() - 0.5D) * (double) player.width, 0.0D, 0.0D, 0.0D);
+			}
+			
 		}
 		
 		return super.onItemRightClick(stack, world, player);

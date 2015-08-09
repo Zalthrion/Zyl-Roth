@@ -1,8 +1,10 @@
 package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
-import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -14,27 +16,31 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class TenebraeSword extends ItemBaseSword {
+public class CreativePickaxe extends ItemBasePickaxe {
 	
-	private String name = "tenebraeSword";
+	private String name = "creativePickaxe";
 	
-	int tenebrae = 2249;
+	int creative = 12249;
 	
-	public TenebraeSword(ToolMaterial material) {
+	public CreativePickaxe(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebrae;
+		return stack.getMetadata() >= creative;
 	}
 	
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
-		if (this.isBroken(stack)) {
-			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+		
+		World world = player.worldObj;
+		
+		if (this.isBroken(stack) && !(world.isRemote)) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 			
 			return true;
 			
@@ -42,20 +48,52 @@ public class TenebraeSword extends ItemBaseSword {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
 		
-		Random rand = new Random();
+		EntityPlayer player = (EntityPlayer) entity;
 		
-		if (!(player.isSneaking()) && !(player.capabilities.isCreativeMode)) {
+		if (player.capabilities.isCreativeMode) { return false; }
+		
+		if (this.isBroken(stack) && !(world.isRemote)) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 			
-			for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
-				world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
-				world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
-				world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
+		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
+			
+			Material material = world.getBlock(x, y, z).getMaterial();
+			
+			boolean valid = (material == Material.rock || material == Material.ice || material == Material.clay);
+			
+			if (valid) {
+				for (int ix = -1; ix < 2; ++ ix) {
+					for (int iy = -1; iy < 2; ++ iy) {
+						for (int iz = -1; iz < 2; ++ iz) {
+							
+							Material neighbourMaterial = world.getBlock(x + ix, y + iy, z + iz).getMaterial();
+							
+							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.clay);
+							
+							boolean neighbourValid_Shovel = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
+							
+							if (neighbourValid) {
+								world.breakBlock(x + ix, y + iy, z + iz, true);
+								stack.damageItem(1, player);
+							}
+							
+							else if (neighbourValid || neighbourValid_Shovel) {
+								
+								ItemStack shovel = new ItemStack(ModTools.creativeShovel);
+								
+								world.breakBlock(x + ix, y + iy, z + iz, true);
+								stack.damageItem(1, player);
+								shovel.damageItem(1, player);
+							}
+						}
+					}
+				}
 			}
 		}
 		
-		return super.onItemRightClick(stack, world, player);
+		return super.onBlockDestroyed(stack, world, block, x, y, z, entity);
 	}
 	
 	@Override
@@ -121,11 +159,11 @@ public class TenebraeSword extends ItemBaseSword {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		}
 		
 		else if (!(this.isBroken(stack))) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_sword_lore"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
 			
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
@@ -133,10 +171,9 @@ public class TenebraeSword extends ItemBaseSword {
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 				
-				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_sword_info"));
+				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_info"));
 			}
 		}
-		
 	}
 	
 	@Override
