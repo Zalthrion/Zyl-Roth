@@ -18,6 +18,8 @@ public final class ModTools {
 	public static Item tenebraeShovel;
 	public static Item tenebraeHoe;
 	
+	// Creative
+	
 	public static Item creativeSword;
 	public static Item creativePickaxe;
 	public static Item creativeAxe;
@@ -30,10 +32,11 @@ public final class ModTools {
 	
 	public static void TenebraeTools() {
 		
+		ToolMaterial CreativeSword = EnumHelper.addToolMaterial("CreativeDamageTools", 3, 12250, 10, 996.0F, 50);
 		ToolMaterial CreativeDamageTools = EnumHelper.addToolMaterial("CreativeDamageTools", 3, 12250, 10, 500.0F, 50);
 		ToolMaterial CreativeTools = EnumHelper.addToolMaterial("CreativeTools", 3, 12250, 10, 250.0F, 50);
 		
-		GameRegistry.registerItem(creativeSword = new CreativeSword(CreativeDamageTools), "creative_sword");
+		GameRegistry.registerItem(creativeSword = new CreativeSword(CreativeSword), "creative_sword");
 		GameRegistry.registerItem(creativePickaxe = new CreativePickaxe(CreativeDamageTools), "creative_pickaxe");
 		GameRegistry.registerItem(creativeAxe = new CreativeAxe(CreativeDamageTools), "creative_axe");
 		GameRegistry.registerItem(creativeShovel = new CreativeShovel(CreativeTools), "creative_shovel");

@@ -4,8 +4,11 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
@@ -16,7 +19,10 @@ import org.lwjgl.input.Keyboard;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class CreativeShovel extends ItemBaseShovel {
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	
 	private String name = "creativeShovel";
 	
@@ -42,6 +48,22 @@ public class CreativeShovel extends ItemBaseShovel {
 	}
 	
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (!(this.isBroken(stack))) stack.damageItem(1, attacker);
+		return true;
+	}
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		if (!isBroken(stack)) return false;
+		World world = player.worldObj;
+		
+		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+		
+		return true;
+	}
+	
+	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
 		
 		EntityPlayer player = (EntityPlayer) entity;
@@ -55,8 +77,7 @@ public class CreativeShovel extends ItemBaseShovel {
 			
 			Material material = world.getBlock(x, y, z).getMaterial();
 			
-			boolean valid = (material == Material.craftedSnow || material == Material.grass || material == Material.ground ||material == Material.sand || material == Material.snow);
-
+			boolean valid = (material == Material.craftedSnow || material == Material.grass || material == Material.ground || material == Material.sand || material == Material.snow);
 			
 			if (valid) {
 				for (int ix = -1; ix < 2; ++ ix) {
@@ -65,7 +86,7 @@ public class CreativeShovel extends ItemBaseShovel {
 							
 							Material neighbourMaterial = world.getBlock(x + ix, y + iy, z + iz).getMaterial();
 							
-							boolean neighbourValid = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground ||neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
+							boolean neighbourValid = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
 							
 							if (neighbourValid) {
 								world.breakBlock(x + ix, y + iy, z + iz, true);
@@ -106,5 +127,31 @@ public class CreativeShovel extends ItemBaseShovel {
 	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		
 		return stack.getItem() == ModItems.tenebrae_Ingot;
+	}
+	
+	@Override
+	public String getUnlocalizedName() {
+		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
+	
+	@Override
+	public String getUnlocalizedName(ItemStack itemStack) {
+		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconRegister) {
+		String BaseName = getUnwrappedUnlocalizedName(getUnlocalizedName());
+		itemIcon = iconRegister.registerIcon(BaseName);
+	}
+	
+	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
+		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+	
+	protected void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setTextureName(Reference.MOD_ID + ":" + name);
 	}
 }

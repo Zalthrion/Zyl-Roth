@@ -5,6 +5,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.client.IRenderHandler;
 
 import com.zalthrion.zylroth.lib.ModDimension;
 
@@ -26,11 +27,6 @@ public class WorldProviderKyrul extends WorldProvider {
 	@Override
 	public String getDimensionName() {
 		return "Ky'rul";
-	}
-	
-	@Override
-	public void setWorldTime(long time) {
-		worldObj.getWorldInfo().setWorldTime(16000);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -63,7 +59,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	/** Returns 'true' if in the "main surface world", but 'false' if in the
 	 * Nether or End dimensions. */
 	public boolean isSurfaceWorld() {
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -111,4 +107,11 @@ public class WorldProviderKyrul extends WorldProvider {
 		}
 	}
 	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IRenderHandler getSkyRenderer() {
+		
+		return new SkyRenderKyrul();
+		
+	}
 }

@@ -3,15 +3,23 @@ package com.zalthrion.zylroth.lib;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.zalthrion.zylroth.Zylroth;
-import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.mount.*;
+import com.zalthrion.zylroth.entity.EntityBird;
+import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.EntityRainbowPig;
+import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
+import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityUndeadMinion;
+import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
+import com.zalthrion.zylroth.entity.EntityVoidDragon;
+import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
+import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModEntity {
 	
@@ -24,18 +32,12 @@ public class ModEntity {
 		return nextEntityID - 1;
 	}
 	
-	public static void registerEntity(Class<? extends Entity> entityClass, String entityName) {
+	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, boolean hasEgg, int bgEggColor, int fgEggColor) {
 		EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true);
-	}
-	
-	private static void registerEntityEgg(Class<? extends Entity> entityClass, String entityName, int bkEggColor, int fgEggColor) {
-		EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true);
-		registerSpawnEgg(entityName, bkEggColor, fgEggColor);
-	}
-	
-	private static void registerSpawnEgg(String name, int bkEggColor, int fgEggColor) {
-		Item itemSpawnEgg = new SpawnEgg(name, bkEggColor, fgEggColor).setUnlocalizedName("spawn_egg_" + name.toLowerCase()).setTextureName("zylroth:spawnEgg");
-		GameRegistry.registerItem(itemSpawnEgg, "spawnEgg" + name);
+		if (hasEgg) {
+			// Item spawnEgg = new SpawnEgg(entityName, bgEggColor, fgEggColor);
+			// GameRegistry.registerItem(spawnEgg, "spawnEgg" + entityName);
+		}
 	}
 	
 	public void addSpawn(Class<? extends EntityLiving> entityClass, int spawnProb, int min, int max, BiomeGenBase[] biomes) {
@@ -52,33 +54,33 @@ public class ModEntity {
 		
 		// Animals
 		
-		registerEntityEgg(EntityBird.class, "bird", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityBird.class, "bird", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityRainbowPig.class, "rainbowPig", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityRainbowPig.class, "rainbowPig", true, 0xeaeae9, 0xc99a03);
 		
 		// Mobs
 		
-		registerEntityEgg(EntityEmpoweredTenebraeGolem.class, "empoweredTenebraeGolem", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityEmpoweredTenebraeGolem.class, "empoweredTenebraeGolem", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityPyroKnight.class, "pyroKnight", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityPyroKnight.class, "pyroKnight", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntitySkeletalHorse.class, "skeletalHorse", 0xeaeae9, 0xc99a03);
+		registerEntity(EntitySkeletalHorse.class, "skeletalHorse", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityTenebraeGolem.class, "tenebraeGolem", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityTenebraeGolem.class, "tenebraeGolem", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityUndeadMinion.class, "undeadMinion", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityUndeadMinion.class, "undeadMinion", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityUndeadWarrior.class, "undeadWarrior", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityUndeadWarrior.class, "undeadWarrior", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntityEgg(EntityVoidDragon.class, "voidDragon", 0xeaeae9, 0xc99a03);
+		registerEntity(EntityVoidDragon.class, "voidDragon", true, 0xeaeae9, 0xc99a03);
 		
 		// Mounts
 		
-		registerEntity(MountDeathcharger.class, "Deathcharger");
+		registerEntity(MountDeathcharger.class, "Deathcharger", false, 0, 0);
 		
-		registerEntity(MountPlaguedHorse.class, "Plagued Horse");
+		registerEntity(MountPlaguedHorse.class, "Plagued Horse", false, 0, 0);
 		
-		registerEntity(MountWarTortoise.class, "War Tortoise (ZYR)");
+		registerEntity(MountWarTortoise.class, "War Tortoise", false, 0, 0);
 		
 	}
 }

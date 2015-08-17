@@ -11,6 +11,7 @@ public class BiomeGenJadePlains extends BiomeGenBase {
 		// this.blockMaterial = Material.water;
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
 		this.flowers.clear();
 		
 		this.theBiomeDecorator.treesPerChunk = -999;

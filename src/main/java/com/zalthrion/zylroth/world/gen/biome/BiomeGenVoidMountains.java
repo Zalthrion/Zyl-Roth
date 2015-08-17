@@ -18,7 +18,11 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
 		this.flowers.clear();
+		
+		this.theBiomeDecorator.flowersPerChunk = -999;
+		this.theBiomeDecorator.treesPerChunk = -999;
 		
 		this.theBiomeDecorator.generateLakes = false;
 		
@@ -45,7 +49,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 	}
 	
 	public int getSkyColorByTemp(float par1) {
-		return 0x474747;
+		return 0x1E2224;
 	}
 	
 }

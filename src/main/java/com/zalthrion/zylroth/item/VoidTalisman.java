@@ -24,11 +24,6 @@ public class VoidTalisman extends ItemBase {
 		this.setMaxStackSize(1);
 	}
 	
-	/* @Override public ItemStack onItemRightClick(ItemStack item, World world,
-	 * EntityPlayer player) { if (!world.isRemote)
-	 * Minecraft.getMinecraft().displayGuiScreen(new GuiInfuser(inventory,
-	 * tile)); return super.onItemRightClick(item, world, player); } */
-	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
 		if (!world.isRemote) {

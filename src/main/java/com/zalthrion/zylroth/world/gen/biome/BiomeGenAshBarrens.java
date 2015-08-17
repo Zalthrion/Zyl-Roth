@@ -14,6 +14,8 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
+		this.spawnableWaterCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
 		this.flowers.clear();
 		
 		this.theBiomeDecorator.flowersPerChunk = -999;
@@ -40,7 +42,7 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 	}
 	
 	public int getSkyColorByTemp(float par1) {
-		return 0x474747;
+		return 0x1E2224;
 	}
 	
 }

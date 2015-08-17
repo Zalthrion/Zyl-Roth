@@ -21,6 +21,7 @@ public class TenebraeOre extends BlockBase {
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
 		this.setCreativeTab(ModTabs.ZylRoth);
+		this.canSilkHarvest();
 	}
 	
 	@Override
@@ -59,4 +60,5 @@ public class TenebraeOre extends BlockBase {
 			return quantityDropped(random);
 		}
 	}
+	
 }

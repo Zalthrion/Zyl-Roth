@@ -21,6 +21,7 @@ public class VoidiumOre extends BlockBase {
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
 		this.setCreativeTab(ModTabs.ZylRoth);
+		this.canSilkHarvest();
 	}
 	
 	@Override
