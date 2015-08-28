@@ -20,6 +20,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		this.spawnableWaterCreatureList.clear();
 		this.flowers.clear();
 		
+		this.theBiomeDecorator.flowersPerChunk = 0;
 		this.theBiomeDecorator.generateLakes = false;
 		
 		this.topBlock = (Blocks.grass).getDefaultState();

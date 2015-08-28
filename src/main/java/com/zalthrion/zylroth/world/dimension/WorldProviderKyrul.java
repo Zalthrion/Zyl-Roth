@@ -9,6 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModDimension;
+import com.zalthrion.zylroth.utility.LogHelper;
 
 public class WorldProviderKyrul extends WorldProvider {
 	
@@ -19,7 +20,8 @@ public class WorldProviderKyrul extends WorldProvider {
 	}
 	
 	public IChunkProvider createChunkGenerator() {
-		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true);
+		LogHelper.warn(this.worldObj.getWorldInfo().getGeneratorOptions());
+		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true, this.worldObj.getWorldInfo().getGeneratorOptions());
 	}
 	
 	@Override

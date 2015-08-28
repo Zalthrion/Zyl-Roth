@@ -8,7 +8,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesKyrul extends GenLayer {
 	
-	protected BiomeGenBase[] allowedBiomes = {ModBiomes.DreadWastes, ModBiomes.HauntedForest, ModBiomes.AshBarrens, ModBiomes.VoidMountains};
+	protected BiomeGenBase[] allowedBiomes = {/*ModBiomes.DreadWastes, ModBiomes.HauntedForest, ModBiomes.AshBarrens, */ModBiomes.VoidMountains}; //TODO Uncomment this after testing
 	
 	public GenLayerBiomesKyrul(long seed) {
 		super(seed);
