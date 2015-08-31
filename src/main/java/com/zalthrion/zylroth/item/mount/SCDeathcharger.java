@@ -21,7 +21,7 @@ public class SCDeathcharger extends SummoningCrystalBase {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-
+		
 		MountDeathcharger mount = new MountDeathcharger(player.worldObj);
 		
 		if (player instanceof EntityPlayer) {
@@ -39,7 +39,7 @@ public class SCDeathcharger extends SummoningCrystalBase {
 						
 						mount.isSummoned = true;
 						
-						if(mount.isSummoned == true) {
+						if (mount.isSummoned == true) {
 							
 							mount.isSummoned(true);
 							
@@ -48,8 +48,8 @@ public class SCDeathcharger extends SummoningCrystalBase {
 							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountDeathcharger", mount.getUniqueID().toString());
 							
-						}			
-					} 
+						}
+					}
 				}
 			}
 		}

@@ -22,7 +22,7 @@ public class SCWarTortoise extends SummoningCrystalBase {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-
+		
 		MountWarTortoise mount = new MountWarTortoise(player.worldObj);
 		
 		if (player instanceof EntityPlayer) {
@@ -38,7 +38,7 @@ public class SCWarTortoise extends SummoningCrystalBase {
 						
 						mount.isSummoned = true;
 						
-						if(mount.isSummoned == true) {
+						if (mount.isSummoned == true) {
 							
 							mount.isSummoned(true);
 							
@@ -47,8 +47,8 @@ public class SCWarTortoise extends SummoningCrystalBase {
 							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountWarTortoise", mount.getUniqueID().toString());
 							
-						}			
-					} 
+						}
+					}
 				}
 			}
 		}

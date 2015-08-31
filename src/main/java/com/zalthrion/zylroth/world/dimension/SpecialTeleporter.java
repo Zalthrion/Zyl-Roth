@@ -25,7 +25,8 @@ public class SpecialTeleporter extends Teleporter {
 				while (y > 30 && flag) {
 					if (entity.worldObj.getBlock(x, y, z).getMaterial().blocksMovement() && entity.worldObj.isAirBlock(x, y + 1, z) && entity.worldObj.isAirBlock(x, y + 2, z)) {
 						flag = false;
-					} else {
+					}
+					else {
 						-- y;
 					}
 				}
@@ -34,7 +35,8 @@ public class SpecialTeleporter extends Teleporter {
 		}
 		if (entity instanceof EntityPlayer) {
 			((EntityPlayer) entity).setPositionAndUpdate((double) x + 0.5D, y + 1, (double) z + 0.5D);
-		} else {
+		}
+		else {
 			entity.setPosition((double) x + 0.5D, y + 1, (double) z + 0.5D);
 		}
 	}
@@ -43,7 +45,8 @@ public class SpecialTeleporter extends Teleporter {
 	public void placeInPortal(Entity entity, double dx, double dy, double dz, float yaw) {
 		if (entity instanceof EntityPlayer) {
 			((EntityPlayer) entity).setPositionAndUpdate(dx, dy, dz);
-		} else {
+		}
+		else {
 			entity.setPosition(dx, dy, dz);
 		}
 	}

@@ -63,20 +63,20 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		super.applyEntityAttributes();
 		// this.applyAttribute(SharedMonsterAttributes.attackDamage, 0.0D);
 		
-		if(ConfigurationHandler.getHardcoreModeEnabled() == true){
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.28D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(25.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
+		if (ConfigurationHandler.getHardcoreModeEnabled() == true) {
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.28D);
+			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(25.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
 		}
 		
 		else {
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(750.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(750.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
+			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
 		}
 	}
 	
@@ -156,7 +156,8 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		if (par1 == 4) {
 			this.attackTimer = 10;
 			this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
-		} else {
+		}
+		else {
 			super.handleHealthUpdate(par1);
 		}
 	}
@@ -206,59 +207,53 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		}
 	}
 	
-    protected void onDeathUpdate()
-    {
-        ++this.deathTicks;
-
-        if (this.deathTicks >= 180 && this.deathTicks <= 200)
-        {
-            float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-            float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-            float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-            this.worldObj.spawnParticle("hugeexplosion", this.posX + (double)f, this.posY + 2.0D + (double)f1, this.posZ + (double)f2, 0.0D, 0.0D, 0.0D);
-        }
-
-        int i;
-        int j;
-
-        if (!this.worldObj.isRemote)
-        {
-            if (this.deathTicks == 1)
-            {
-                this.worldObj.playBroadcastSound(1018, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
-            }
-        }
-
-        this.moveEntity(0.D, 0.1D, 0.0D);
+	protected void onDeathUpdate() {
+		++ this.deathTicks;
+		
+		if (this.deathTicks >= 180 && this.deathTicks <= 200) {
+			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.worldObj.spawnParticle("hugeexplosion", this.posX + (double) f, this.posY + 2.0D + (double) f1, this.posZ + (double) f2, 0.0D, 0.0D, 0.0D);
+		}
+		
+		int i;
+		int j;
+		
+		if (!this.worldObj.isRemote) {
+			if (this.deathTicks == 1) {
+				this.worldObj.playBroadcastSound(1018, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+			}
+		}
+		
+		this.moveEntity(0.D, 0.1D, 0.0D);
 		for (int countparticles = 900; countparticles <= 1000; ++ countparticles) {
 			this.worldObj.spawnParticle("portal", (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
 			this.worldObj.spawnParticle("portal", (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
 			this.worldObj.spawnParticle("portal", (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
 		}
-        this.renderYawOffset = this.rotationYaw += 1000.0F;
-
-        if (this.deathTicks == 200 && !this.worldObj.isRemote)
-        {
-            i = 2000;
-
-            while (i > 0)
-            {
-                j = EntityXPOrb.getXPSplit(i);
-                i -= j;
-                this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
-            }
-
-            this.setDead();
-        }
-    }
-    
-    @Override
-    public boolean canBeCollidedWith() {
-    	if(this.deathTicks >= 1){
-    		return false;
-    	} 
-    	else return true;
-    }
+		this.renderYawOffset = this.rotationYaw += 1000.0F;
+		
+		if (this.deathTicks == 200 && !this.worldObj.isRemote) {
+			i = 2000;
+			
+			while (i > 0) {
+				j = EntityXPOrb.getXPSplit(i);
+				i -= j;
+				this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+			}
+			
+			this.setDead();
+		}
+	}
+	
+	@Override
+	public boolean canBeCollidedWith() {
+		if (this.deathTicks >= 1) {
+			return false;
+		}
+		else return true;
+	}
 	
 	/** Called when the mob is falling. Calculates and applies fall damage. */
 	protected void fall(float distance) {}

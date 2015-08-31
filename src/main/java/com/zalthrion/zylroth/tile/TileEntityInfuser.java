@@ -37,8 +37,13 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	
 	private int facing;
 	
-	public void setFacing(int newFacing) { this.facing = newFacing; }
-	public int getFacing() { return this.facing; }
+	public void setFacing(int newFacing) {
+		this.facing = newFacing;
+	}
+	
+	public int getFacing() {
+		return this.facing;
+	}
 	
 	public boolean canUpdate() {
 		return true;
@@ -95,7 +100,8 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 					infuseItem();
 					flag1 = true;
 				}
-			} else {
+			}
+			else {
 				cookTime = 0;
 			}
 			
@@ -111,14 +117,19 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 	}
 	
 	private boolean canInfuse() {
-		if (slots[0] == null) return false;
-		if (slots[2] == null && slots[3] == null) return false;
+		if (slots[0] == null)
+			return false;
+		if (slots[2] == null && slots[3] == null)
+			return false;
 		InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
 		InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
-		if (recipe == null) return false;
+		if (recipe == null)
+			return false;
 		ItemStack stack = recipe.getOutput();
-		if (slots[ContainerInfuser.OUTPUT] == null) return true;
-		if (!slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) return false;
+		if (slots[ContainerInfuser.OUTPUT] == null)
+			return true;
+		if (!slots[ContainerInfuser.OUTPUT].isItemEqual(stack))
+			return false;
 		int result = slots[ContainerInfuser.OUTPUT].stackSize + stack.stackSize;
 		return (result <= getInventoryStackLimit() && result <= stack.getMaxStackSize());
 	}
@@ -128,11 +139,13 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
 			
 			InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
-			if (recipe == null) return;
+			if (recipe == null)
+				return;
 			ItemStack stack = recipe.getOutput();
 			if (slots[ContainerInfuser.OUTPUT] == null) {
 				slots[ContainerInfuser.OUTPUT] = stack.copy();
-			} else if (slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) {
+			}
+			else if (slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) {
 				slots[ContainerInfuser.OUTPUT].stackSize += stack.stackSize;
 			}
 			
@@ -143,17 +156,22 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			HashMap<Integer, ItemStack> providedStacks = new HashMap<Integer, ItemStack>() {
 				private static final long serialVersionUID = 1L;
 				{
-					if (slots[2] != null) put(2, slots[2].copy());
-					if (slots[3] != null) put(3, slots[3].copy());
+					if (slots[2] != null)
+						put(2, slots[2].copy());
+					if (slots[3] != null)
+						put(3, slots[3].copy());
 				}
 			};
 			providedStacks: for (ItemStack provided : providedStacks.values()) {
-				if (provided == null) continue providedStacks;
-				if (!InfusionRecipeHandler.arrayListContainsItemStack(recipeRequirements, provided)) break providedStacks; // Something
-																															// went
-																															// wrong
+				if (provided == null)
+					continue providedStacks;
+				if (!InfusionRecipeHandler.arrayListContainsItemStack(recipeRequirements, provided))
+					break providedStacks; // Something
+											// went
+											// wrong
 				rRLoop: for (ItemStack reqStack : recipeRequirements) {
-					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
+					if (provided.getItem() != reqStack.getItem())
+						continue rRLoop;
 					if (provided.stackSize >= reqStack.stackSize) {
 						provided.stackSize -= reqStack.stackSize;
 						recipeRequirements.remove(reqStack);
@@ -162,15 +180,20 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 				}
 			}
 			
-			if (slots[2] != null) slots[2] = providedStacks.get(2);
-			if (slots[3] != null) slots[3] = providedStacks.get(3);
+			if (slots[2] != null)
+				slots[2] = providedStacks.get(2);
+			if (slots[3] != null)
+				slots[3] = providedStacks.get(3);
 			
-			if (slots[0].stackSize <= 0) slots[0] = null;
+			if (slots[0].stackSize <= 0)
+				slots[0] = null;
 			if (slots[2] != null) {
-				if (slots[2].stackSize <= 0) slots[2] = null;
+				if (slots[2].stackSize <= 0)
+					slots[2] = null;
 			}
 			if (slots[3] != null) {
-				if (slots[3].stackSize <= 0) slots[3] = null;
+				if (slots[3].stackSize <= 0)
+					slots[3] = null;
 			}
 		}
 	}
@@ -190,7 +213,8 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 				this.slots[i] = null;
 				return stack;
 				
-			} else {
+			}
+			else {
 				stack = this.slots[i].splitStack(j);
 				
 				if (this.slots[i].stackSize == 0) {
@@ -238,11 +262,13 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		if (stack == null) {
 			return 0;
 			
-		} else {
+		}
+		else {
 			
 			Item i = stack.getItem();
 			
-			if (i == ModItems.raw_Tenebrae) return 400;
+			if (i == ModItems.raw_Tenebrae)
+				return 400;
 			
 			GameRegistry.getFuelValue(stack);
 		}

@@ -16,7 +16,6 @@ public final class ModOreDictionary {
 		OreDictionary.registerOre("ingotTenebrae", ModItems.tenebrae_Ingot);
 		OreDictionary.registerOre("blockTenebrae", ModBlocks.tenebrae_Block);
 		
-		
 		/* Voidium */
 		
 		OreDictionary.registerOre("oreVoidium", ModBlocks.voidium_Ore);

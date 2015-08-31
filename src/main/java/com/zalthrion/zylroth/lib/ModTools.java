@@ -42,7 +42,6 @@ public final class ModTools {
 		GameRegistry.registerItem(creativeShovel = new CreativeShovel(CreativeTools), "creative_shovel");
 		GameRegistry.registerItem(creativeHoe = new CreativeHoe(CreativeTools), "creative_hoe");
 		
-		
 		ToolMaterial TenebraeDamageTools = EnumHelper.addToolMaterial("TenebraeDamageTools", 3, 2250, 10, 6.5F, 15);
 		ToolMaterial TenebraeTools = EnumHelper.addToolMaterial("TenebraeTools", 3, 2250, 10, 4.5F, 15);
 		

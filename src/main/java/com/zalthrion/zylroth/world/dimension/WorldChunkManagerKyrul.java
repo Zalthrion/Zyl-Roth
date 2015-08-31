@@ -158,7 +158,8 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 			BiomeGenBase[] abiomegenbase1 = this.biomeCache.getCachedBiomes(x, y);
 			System.arraycopy(abiomegenbase1, 0, listToReuse, 0, width * length);
 			return listToReuse;
-		} else {
+		}
+		else {
 			int[] aint = this.biomeIndexLayer.getInts(x, y, width, length);
 			
 			for (int i = 0; i < width * length; ++ i) {

@@ -22,7 +22,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /*---------------------------------------------------------------------------*/
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
-
 /*---------------------------------------------------------------------------*/
 public class Zylroth {
 	
@@ -45,13 +44,13 @@ public class Zylroth {
 		ModBiomes.init();
 		
 		ModItems.init();
-
+		
 		ModBlocks.init();
 		
 		ModArmors.init();
 		
 		ModTools.init();
-				
+		
 		ModDimension.init();
 		
 		GameRegistry.registerWorldGenerator(new WorldOreGenerator(), 12);

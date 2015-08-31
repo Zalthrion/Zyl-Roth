@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	
 //	private static final ResourceLocation Explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
-
+	
 	private static final ResourceLocation ETgolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
 	
 	/** Empowered Tenebrae Golem's Model. */
@@ -47,33 +47,26 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 			float f5 = (golem.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
 			f5 = MathHelper.sqrt_float(f5);
 			
-			if (f5 > 1.0F) f5 = 1.0F;
+			if (f5 > 1.0F)
+				f5 = 1.0F;
 			
 			GL11.glRotatef(f5 * getDeathMaxRotation(golem), 0.0F, 0.0F, 1.0F);
 		}
 	}
 	
-/*	protected void renderEmpoweredTenebraeGolemModel(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4, float par5, float par6, float par7) {
-		if (golem.deathTicks > 0) {
-			float f6 = golem.deathTicks / 200.0F;
-			GL11.glDepthFunc(GL11.GL_LEQUAL);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glAlphaFunc(GL11.GL_GREATER, f6);
-			bindTexture(Explosion);
-			mainModel.render(golem, par2, par3, par4, par5, par6, par7);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-			
-			//TODO Render Glitch, and without it the animation doesn't works.
-//			GL11.glDepthFunc(GL11.GL_EQUAL);
-		}
-		
-		bindEntityTexture(golem);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		mainModel.render(golem, par2, par3, par4, par5, par6, par7);
-		GL11.glDisable(GL11.GL_BLEND);
-		
-	} */
+	/* protected void
+	 * renderEmpoweredTenebraeGolemModel(EntityEmpoweredTenebraeGolem golem,
+	 * float par2, float par3, float par4, float par5, float par6, float par7) {
+	 * if (golem.deathTicks > 0) { float f6 = golem.deathTicks / 200.0F;
+	 * GL11.glDepthFunc(GL11.GL_LEQUAL); GL11.glEnable(GL11.GL_ALPHA_TEST);
+	 * GL11.glAlphaFunc(GL11.GL_GREATER, f6); bindTexture(Explosion);
+	 * mainModel.render(golem, par2, par3, par4, par5, par6, par7);
+	 * GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F); //TODO Render Glitch, and
+	 * without it the animation doesn't works. //
+	 * GL11.glDepthFunc(GL11.GL_EQUAL); } bindEntityTexture(golem);
+	 * GL11.glEnable(GL11.GL_BLEND); GL11.glBlendFunc(GL11.GL_SRC_ALPHA,
+	 * GL11.GL_ONE_MINUS_SRC_ALPHA); mainModel.render(golem, par2, par3, par4,
+	 * par5, par6, par7); GL11.glDisable(GL11.GL_BLEND); } */
 	
 	/** Renders the Empowered Tenebrae Golem. */
 	public void renderEmpoweredTenebraeGolem(EntityEmpoweredTenebraeGolem golem, double par2, double par4, double par6, float par8, float par9) {
@@ -119,10 +112,11 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	}
 	
 	/** Renders the model in RenderLiving */
-/*	@Override W.I.P
-	protected void renderModel(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {
-		renderEmpoweredTenebraeGolemModel((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
-	}*/
+	/* @Override W.I.P protected void renderModel(EntityLivingBase
+	 * par1EntityLivingBase, float par2, float par3, float par4, float par5,
+	 * float par6, float par7) {
+	 * renderEmpoweredTenebraeGolemModel((EntityEmpoweredTenebraeGolem)
+	 * par1EntityLivingBase, par2, par3, par4, par5, par6, par7); } */
 	
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
@@ -135,5 +129,5 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		
 		// The lols are real.
 //		GL11.glScalef(p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat());
-	}	
+	}
 }

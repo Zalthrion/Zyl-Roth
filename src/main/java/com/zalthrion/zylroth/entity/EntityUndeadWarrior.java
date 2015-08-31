@@ -56,21 +56,21 @@ public class EntityUndeadWarrior extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		
-		if(ConfigurationHandler.getHardcoreModeEnabled() == true){
-
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.4D);
+		if (ConfigurationHandler.getHardcoreModeEnabled() == true) {
+			
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
+			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
+			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.4D);
 		}
 		
 		else {
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
+			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 		}
 		
 		this.getCustomNameTag();
@@ -93,11 +93,11 @@ public class EntityUndeadWarrior extends EntityMob {
 			if (entity instanceof EntityPlayer) {
 				
 				EntityPlayer player = (EntityPlayer) entity;
-
 				
 				boolean hasArmor = true;
 				for (int i = 0; i < 4; i ++) {
-					if (player.inventory.armorInventory[i] != null) hasArmor = false;
+					if (player.inventory.armorInventory[i] != null)
+						hasArmor = false;
 				}
 				
 				if (!player.worldObj.isRemote && !hasArmor) {

@@ -107,7 +107,7 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		float scaleFactor = 2.5F;
 		GL11.glPushMatrix();
-		GL11.glTranslatef(0F, 1.5F-1.5F*scaleFactor, 0F); 
+		GL11.glTranslatef(0F, 1.5F - 1.5F * scaleFactor, 0F);
 		GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
 		
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
@@ -122,7 +122,7 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 		this.TopLeftArm.render(f5);
 		this.LeftShoulderpad.render(f5);
 		this.TopBody.render(f5);
-
+		
 		GL11.glPopMatrix();
 	}
 	

@@ -25,7 +25,8 @@ public class InfusionRecipeLib {
 		}
 	}
 	
-	@Deprecated public InfusionRecipeLib(ItemStack in, ItemStack out, ItemStack... infusionMaterials) {
+	@Deprecated
+	public InfusionRecipeLib(ItemStack in, ItemStack out, ItemStack... infusionMaterials) {
 		this(in, out, 0, infusionMaterials);
 	}
 	

@@ -30,7 +30,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 	@Override
 	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		
-		return stack.getItem() == ModItems.tenebrae_Ingot;	
+		return stack.getItem() == ModItems.tenebrae_Ingot;
 	}
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})

@@ -130,7 +130,8 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 		
 		if (this.getHealth() <= 0.0F) {
 			
-		} else {
+		}
+		else {
 			f = 0.2F / (MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ) * 10.0F + 1.0F);
 			f *= (float) Math.pow(2.0D, this.motionY);
 			
@@ -169,7 +170,8 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 					this.setPosition(d10, d0, d1);
 					this.setRotation(this.rotationYaw, this.rotationPitch);
 				}
-			} else {
+			}
+			else {
 				d10 = this.targetX - this.posX;
 				d0 = this.targetY - this.posY;
 				d1 = this.targetZ - this.posZ;
@@ -188,7 +190,8 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 					}
 					
 					this.targetY = this.target.boundingBox.minY + d8;
-				} else {
+				}
+				else {
 					this.targetX += this.rand.nextGaussian() * 2.0D;
 					this.targetZ += this.rand.nextGaussian() * 2.0D;
 				}
@@ -342,7 +345,7 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 		for (int i = 0; i < p_70971_1_.size(); ++ i) {
 			Entity entity = (Entity) p_70971_1_.get(i);
 			
-			if((entity instanceof EntityLivingBase && !(KyrulMinions))){
+			if ((entity instanceof EntityLivingBase && !(KyrulMinions))) {
 				if (ConfigurationHandler.getHardcoreModeEnabled() == true)
 					entity.attackEntityFrom(DamageSource.causeMobDamage(this), 12.0F);
 				
@@ -358,7 +361,8 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 		
 		if (this.rand.nextInt(2) == 0 && !this.worldObj.playerEntities.isEmpty()) {
 			this.target = (Entity) this.worldObj.playerEntities.get(this.rand.nextInt(this.worldObj.playerEntities.size()));
-		} else {
+		}
+		else {
 			boolean flag = false;
 			
 			do {

@@ -49,7 +49,8 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 			
 			return true;
 			
-		} else return false;
+		}
+		else return false;
 	}
 	
 	@Override
@@ -62,10 +63,11 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 		if (this.isBroken(stack) && !(world.isRemote)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 			
-		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
+		}
+		else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
 			
 			Material material = world.getBlock(x, y, z).getMaterial();
-
+			
 			boolean isStone = world.getBlock(x, y, z) == Blocks.stone;
 			boolean isCobblestone = world.getBlock(x, y, z) == Blocks.cobblestone;
 			boolean isStoneBrick = world.getBlock(x, y, z) == Blocks.stonebrick;
@@ -85,7 +87,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 							boolean isASandstone = world.getBlock(x + ix, y + iy, z + iz) == Blocks.sandstone;
 							boolean isANetherrack = world.getBlock(x + ix, y + iy, z + iz) == Blocks.netherrack;
 							
-							boolean neighbourValid_Shovel = (neighbourMaterial == Material.craftedSnow || material == Material.grass || material == Material.ground ||material == Material.sand || material == Material.snow);
+							boolean neighbourValid_Shovel = (neighbourMaterial == Material.craftedSnow || material == Material.grass || material == Material.ground || material == Material.sand || material == Material.snow);
 							
 							if (isACobblestone || isAStone || isAStoneBrick || isASandstone || isANetherrack) {
 								world.breakBlock(x + ix, y + iy, z + iz, true);
@@ -133,7 +135,8 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 			if (side == 5) {
 				++ x;
 			}
-			if (!world.isAirBlock(x, y, z)) return false;
+			if (!world.isAirBlock(x, y, z))
+				return false;
 		}
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {

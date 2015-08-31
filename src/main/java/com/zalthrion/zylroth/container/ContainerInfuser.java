@@ -110,12 +110,15 @@ public class ContainerInfuser extends ContainerBase {
 			itemstack = stack.copy();
 			if (index < 4) {
 				if (!mergeItemStack(stack, index, inventorySlots.size(), true)) { return null; }
-			} else if (!slot.isItemValid(stack)) {
+			}
+			else if (!slot.isItemValid(stack)) {
 				return null;
-			} else if (!mergeItemStack(stack, 0, 1, false)) { return null; }
+			}
+			else if (!mergeItemStack(stack, 0, 1, false)) { return null; }
 			if (stack.stackSize == 0) {
 				slot.putStack(null);
-			} else {
+			}
+			else {
 				slot.onSlotChanged();
 			}
 		}

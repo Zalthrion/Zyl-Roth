@@ -30,7 +30,8 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		
 		if (this.func_152113_b() == null) {
 			tagCompound.setString("OwnerUUID", "");
-		} else {
+		}
+		else {
 			tagCompound.setString("OwnerUUID", this.func_152113_b());
 		}
 	}
@@ -42,7 +43,8 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
 			s = tagCompund.getString("OwnerUUID");
-		} else {
+		}
+		else {
 			String s1 = tagCompund.getString("Owner");
 			s = PreYggdrasilConverter.func_152719_a(s1);
 		}
@@ -74,9 +76,11 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	public void handleHealthUpdate(byte p_70103_1_) {
 		if (p_70103_1_ == 7) {
 			this.playTameEffect(true);
-		} else if (p_70103_1_ == 6) {
+		}
+		else if (p_70103_1_ == 6) {
 			this.playTameEffect(false);
-		} else {
+		}
+		else {
 			super.handleHealthUpdate(p_70103_1_);
 		}
 	}
@@ -90,7 +94,8 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		
 		if (p_70903_1_) {
 			this.dataWatcher.updateObject(26, Byte.valueOf((byte) (b0 | 4)));
-		} else {
+		}
+		else {
 			this.dataWatcher.updateObject(26, Byte.valueOf((byte) (b0 & -5)));
 		}
 	}

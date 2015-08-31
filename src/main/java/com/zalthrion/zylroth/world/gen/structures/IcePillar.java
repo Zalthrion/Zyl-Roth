@@ -38,7 +38,8 @@ public class IcePillar extends WorldGenerator implements IWorldGenerator {
 			if (blockAbove != Blocks.air) { return false; }
 			if (block == x) {
 				return true;
-			} else if (block == Blocks.snow && blockBelow == x) { return true; }
+			}
+			else if (block == Blocks.snow && blockBelow == x) { return true; }
 		}
 		
 		return false;
@@ -145,7 +146,8 @@ public class IcePillar extends WorldGenerator implements IWorldGenerator {
 		this.setBlock(world, x + 3, y + 2, z + 1, Blocks.air, 0);
 		this.setBlock(world, x + 3, y + 2, z + 2, Blocks.stone, 0);
 		this.setBlock(world, x + 3, y + 2, z + 3, ModBlocks.spawner_VoidDragon, 0);
-		this.setBlock(world, x + 3, y + 3, z + 3, Blocks.gravel, 0); //Top Block
+		this.setBlock(world, x + 3, y + 3, z + 3, Blocks.gravel, 0); // Top
+																		// Block
 		this.setBlock(world, x + 3, y + 2, z + 4, Blocks.stone, 0);
 		this.setBlock(world, x + 3, y + 2, z + 5, Blocks.air, 0);
 		this.setBlock(world, x + 3, y + 2, z + 6, Blocks.air, 0);

@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class ModArmors {
 	
-	//Tenebrae
+	// Tenebrae
 	
 	public static Item Tenebrae_Helmet;
 	public static Item Tenebrae_Chestplate;
@@ -23,13 +23,12 @@ public final class ModArmors {
 	
 	public static void TenebraeArmor() {
 		
-		ArmorMaterial Tenebrae = EnumHelper.addArmorMaterial("Tenebrae", 42, new int[]{3, 8, 6, 3}, 16);
+		ArmorMaterial Tenebrae = EnumHelper.addArmorMaterial("Tenebrae", 42, new int[] {3, 8, 6, 3}, 16);
 		
 		GameRegistry.registerItem(Tenebrae_Helmet = new TenebraeArmor(Tenebrae, "tenebrae", 0).setUnlocalizedName("tenebraeHelmet"), "tenebrae_helmet");
 		GameRegistry.registerItem(Tenebrae_Chestplate = new TenebraeArmor(Tenebrae, "tenebrae", 1).setUnlocalizedName("tenebraeChestplate"), "tenebrae_chestplate");
 		GameRegistry.registerItem(Tenebrae_Leggings = new TenebraeArmor(Tenebrae, "tenebrae", 2).setUnlocalizedName("tenebraeLeggings"), "tenebrae_leggings");
 		GameRegistry.registerItem(Tenebrae_Boots = new TenebraeArmor(Tenebrae, "tenebrae", 3).setUnlocalizedName("tenebraeBoots"), "tenebrae_boots");
-
 		
 	}
 	

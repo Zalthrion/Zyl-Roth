@@ -60,7 +60,8 @@ public class SpawnEgg extends ItemMonsterPlacer {
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		if (par3World.isRemote) {
 			return true;
-		} else {
+		}
+		else {
 			Block block = par3World.getBlock(par4, par5, par6);
 			par4 += Facing.offsetsXForSide[par7];
 			par5 += Facing.offsetsYForSide[par7];
@@ -93,12 +94,14 @@ public class SpawnEgg extends ItemMonsterPlacer {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		if (par2World.isRemote) {
 			return par1ItemStack;
-		} else {
+		}
+		else {
 			MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
 			
 			if (movingobjectposition == null) {
 				return par1ItemStack;
-			} else {
+			}
+			else {
 				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 					int i = movingobjectposition.blockX;
 					int j = movingobjectposition.blockY;
@@ -141,7 +144,8 @@ public class SpawnEgg extends ItemMonsterPlacer {
 				parWorld.spawnEntityInWorld(entityToSpawn);
 				entityToSpawn.onSpawnWithEgg((IEntityLivingData) null);
 				entityToSpawn.playLivingSound();
-			} else {
+			}
+			else {
 				// DEBUG
 				System.out.println("Entity not found " + entityToSpawnName);
 			}

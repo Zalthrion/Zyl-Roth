@@ -13,7 +13,7 @@ public class ConfigurationHandler {
 	public static Configuration configuration;
 	
 	private static boolean enableHardcoreMode = false;
-	private static boolean enableKyrul = true ;
+	private static boolean enableKyrul = true;
 	private static boolean enableIridis = true;
 	private static boolean enableGlaciem = true;
 	
@@ -36,9 +36,9 @@ public class ConfigurationHandler {
 		enableHardcoreMode = configuration.getBoolean("Hardcore Mode", Configuration.CATEGORY_GENERAL, false, "Enable/Disable the Hardcore Mode");
 		
 		enableKyrul = configuration.getBoolean("Enable Ky'rul", "Dimensions", true, "Enable/Disable the Ky'rul Dimension");
-
+		
 		enableIridis = configuration.getBoolean("Enable Iri'dis", "Dimensions", true, "Enable/Disable the Iri'dis Dimension");
-
+		
 		enableGlaciem = configuration.getBoolean("Enable Glaciem", "Dimensions", true, "Enable/Disable the Glaciem Dimension");
 		
 		if (configuration.hasChanged()) {
@@ -46,13 +46,20 @@ public class ConfigurationHandler {
 		}
 	}
 	
-	public static boolean getHardcoreModeEnabled() { return enableHardcoreMode; }
+	public static boolean getHardcoreModeEnabled() {
+		return enableHardcoreMode;
+	}
 	
-	public static boolean getKyrulEnabled() { return enableKyrul; }
-
-	public static boolean getIridisEnabled() { return enableIridis; }
-
-	public static boolean getGlaciemEnabled() { return enableGlaciem; }
-
-
+	public static boolean getKyrulEnabled() {
+		return enableKyrul;
+	}
+	
+	public static boolean getIridisEnabled() {
+		return enableIridis;
+	}
+	
+	public static boolean getGlaciemEnabled() {
+		return enableGlaciem;
+	}
+	
 }

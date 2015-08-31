@@ -82,7 +82,8 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 				
 				boolean hasArmor = true;
 				for (int i = 0; i < 4; i ++) {
-					if (player.inventory.armorInventory[i] != null) hasArmor = false;
+					if (player.inventory.armorInventory[i] != null)
+						hasArmor = false;
 				}
 				
 				if (!player.worldObj.isRemote && !hasArmor) {

@@ -273,7 +273,8 @@ public class ModelSkeletalHorse extends ModelBase {
 			
 			if (f6 <= 0.0F) {
 				GL11.glTranslatef(0.0F, 1.35F * (1.0F - f7), 0.0F);
-			} else {
+			}
+			else {
 				GL11.glTranslatef(0.0F, 0.9F * (1.0F - f7) * f6 + 1.35F * (1.0F - f7) * (1.0F - f6), 0.15F * (1.0F - f7) * f6);
 			}
 		}
@@ -281,7 +282,8 @@ public class ModelSkeletalHorse extends ModelBase {
 		if (flag3) {
 			this.muleLeftEar.render(p_78088_7_);
 			this.muleRightEar.render(p_78088_7_);
-		} else {
+		}
+		else {
 			this.horseLeftEar.render(p_78088_7_);
 			this.horseRightEar.render(p_78088_7_);
 		}
@@ -498,7 +500,8 @@ public class ModelSkeletalHorse extends ModelBase {
 				this.horseLeftSaddleMetal.rotateAngleZ = 0.0F;
 				this.horseRightSaddleRope.rotateAngleZ = 0.0F;
 				this.horseRightSaddleMetal.rotateAngleZ = 0.0F;
-			} else {
+			}
+			else {
 				this.horseLeftSaddleRope.rotateAngleX = f14 / 3.0F;
 				this.horseLeftSaddleMetal.rotateAngleX = f14 / 3.0F;
 				this.horseRightSaddleRope.rotateAngleX = f14 / 3.0F;
@@ -519,7 +522,8 @@ public class ModelSkeletalHorse extends ModelBase {
 		if (flag) {
 			this.tailBase.rotateAngleY = MathHelper.cos(f12 * 0.7F);
 			f15 = 0.0F;
-		} else {
+		}
+		else {
 			this.tailBase.rotateAngleY = 0.0F;
 		}
 		

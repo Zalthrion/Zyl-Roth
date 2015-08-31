@@ -35,13 +35,15 @@ public class MountDeathcharger extends MountBaseHorse {
 			persistentData.removeTag("ownsMountDeathcharger");
 		}
 		
-		if (!func_152114_e(player) && !worldObj.isRemote){ //Checks if the player is the Owner of the mount
-            player.addChatMessage(new ChatComponentTranslation(Reference.MOD_ID + ":" + "mount.owned"));
+		if (!func_152114_e(player) && !worldObj.isRemote) { // Checks if the
+															// player is the
+															// Owner of the
+															// mount
+			player.addChatMessage(new ChatComponentTranslation(Reference.MOD_ID + ":" + "mount.owned"));
 		}
 		
 		return super.interact(player);
 	}
-	
 	
 	/** Returns the horse type. 0 = Normal, 1 = Donkey, 2 = Mule, 3 = Undead
 	 * Horse, 4 = Skeleton Horse */

@@ -30,7 +30,7 @@ public class BiomeGenDreadWastes extends BiomeGenBase {
 		
 		this.setHeight(height_LowPlains);
 		this.setBiomeName("Dread Wastes");
-
+		
 		this.spawnableMonsterList.add(new BiomeGenBase.SpawnListEntry(EntityUndeadMinion.class, 2, 1, 1));
 		this.spawnableMonsterList.add(new BiomeGenBase.SpawnListEntry(EntityUndeadWarrior.class, 1, 1, 1));
 		

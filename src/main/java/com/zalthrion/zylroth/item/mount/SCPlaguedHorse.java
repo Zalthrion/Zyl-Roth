@@ -21,7 +21,7 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-
+		
 		MountPlaguedHorse mount = new MountPlaguedHorse(player.worldObj);
 		
 		if (player instanceof EntityPlayer) {

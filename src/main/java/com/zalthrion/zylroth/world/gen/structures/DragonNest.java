@@ -36,7 +36,8 @@ public class DragonNest extends WorldGenerator {
 			if (blockAbove != Blocks.air) { return false; }
 			if (block == x) {
 				return true;
-			} else if (block == Blocks.snow && blockBelow == x) { return true; }
+			}
+			else if (block == Blocks.snow && blockBelow == x) { return true; }
 		}
 		
 		return false;
@@ -49,8 +50,7 @@ public class DragonNest extends WorldGenerator {
 		// check that each corner is one of the valid spawn blocks
 		if (!locationIsValidSpawn(world, x, y, z) || !locationIsValidSpawn(world, x + 6, y, z) || !locationIsValidSpawn(world, x + 6, y, z + 6) || !locationIsValidSpawn(world, x, y, z + 6) && world.isAirBlock(x + 3, y + 4, z + 3)) { return false; }
 		
-		/*
-		 * z = z - 10; x = x - 10; */
+		/* z = z - 10; x = x - 10; */
 		
 		world.setBlock(x + 0, y + 0, z + 1, Blocks.cobblestone, 0, 0);
 		world.setBlock(x + 0, y + 0, z + 2, Blocks.stone, 0, 0);
@@ -83,7 +83,8 @@ public class DragonNest extends WorldGenerator {
 		world.setBlock(x + 3, y + 0, z + 0, Blocks.stone, 0, 0);
 		world.setBlock(x + 3, y + 0, z + 1, Blocks.stone, 0, 0);
 		world.setBlock(x + 3, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 3, Blocks.stone, 0, 0); // Central Block
+		world.setBlock(x + 3, y + 0, z + 3, Blocks.stone, 0, 0); // Central
+																	// Block
 		world.setBlock(x + 3, y + 0, z + 4, Blocks.stone, 0, 0);
 		world.setBlock(x + 3, y + 0, z + 5, Blocks.stone, 0, 0);
 		world.setBlock(x + 3, y + 0, z + 6, Blocks.stone, 0, 0);

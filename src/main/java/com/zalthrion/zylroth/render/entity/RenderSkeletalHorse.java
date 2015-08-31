@@ -41,7 +41,8 @@ public class RenderSkeletalHorse extends RenderHorse {
 		
 		if (i == 1) {
 			f1 *= 0.87F;
-		} else if (i == 2) {
+		}
+		else if (i == 2) {
 			f1 *= 0.92F;
 		}
 		
@@ -53,7 +54,8 @@ public class RenderSkeletalHorse extends RenderHorse {
 	protected void renderModel(EntitySkeletalHorse p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		if (p_77036_1_.isInvisible()) {
 			this.mainModel.setRotationAngles(p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_, p_77036_1_);
-		} else {
+		}
+		else {
 			this.bindEntityTexture(p_77036_1_);
 			this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
 		}
@@ -76,7 +78,8 @@ public class RenderSkeletalHorse extends RenderHorse {
 				case 4:
 					return skeletonHorseTextures;
 			}
-		} else {
+		}
+		else {
 			return this.func_110848_b(p_110775_1_);
 		}
 	}

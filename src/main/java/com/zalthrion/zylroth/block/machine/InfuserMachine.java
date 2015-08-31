@@ -56,7 +56,8 @@ public class InfuserMachine extends BlockBaseContainer {
 		else {
 			TileEntityInfuser tile = (TileEntityInfuser) world.getTileEntity(x, y, z);
 			
-			if ((tile == null) || player.isSneaking()) return false;
+			if ((tile == null) || player.isSneaking())
+				return false;
 			
 			player.openGui(Zylroth.instance, GuiIDs.INFUSER, world, x, y, z);
 			return true;
@@ -77,7 +78,8 @@ public class InfuserMachine extends BlockBaseContainer {
 		if (active) {
 			world.setBlock(x, y, z, ModBlocks.infuser);
 			
-		} else {
+		}
+		else {
 			
 			world.setBlock(x, y, z, ModBlocks.infuser_Idle);
 		}
@@ -140,7 +142,8 @@ public class InfuserMachine extends BlockBaseContainer {
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 	
-	@Override public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack itemStack) {
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack itemStack) {
 		int facing = MathHelper.floor_double((double) ((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		facing ++;
 		TileEntity te = world.getTileEntity(i, j, k);
@@ -151,12 +154,22 @@ public class InfuserMachine extends BlockBaseContainer {
 		}
 	}
 	
-/*	@Override public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		TileEntity te = world.getTileEntity(x, y, z);
-		if (te instanceof TileEntityInfuser) {
-			TileEntityInfuser tei = (TileEntityInfuser) te;
-			return tei.isBurning() ? 15 : 0;
-		}
-		return getLightValue();
-	}*/ //TODO Activate this if you want to remove the "active" block and make it one
+	/* @Override public int getLightValue(IBlockAccess world, int x, int y, int
+	 * z) { TileEntity te = world.getTileEntity(x, y, z); if (te instanceof
+	 * TileEntityInfuser) { TileEntityInfuser tei = (TileEntityInfuser) te;
+	 * return tei.isBurning() ? 15 : 0; } return getLightValue(); } */// TODO
+																		// Activate
+																		// this
+																		// if
+																		// you
+																		// want
+																		// to
+																		// remove
+																		// the
+																		// "active"
+																		// block
+																		// and
+																		// make
+																		// it
+																		// one
 }

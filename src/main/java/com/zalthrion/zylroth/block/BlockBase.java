@@ -18,7 +18,8 @@ public class BlockBase extends Block {
 	
 	public BlockBase(Material material, boolean setCreativeTab) {
 		super(material);
-		if (setCreativeTab) this.setCreativeTab(ModTabs.ZylRoth);
+		if (setCreativeTab)
+			this.setCreativeTab(ModTabs.ZylRoth);
 	}
 	
 	@Override

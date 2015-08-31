@@ -44,21 +44,25 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 			
 			return true;
 			
-		} else return false;
+		}
+		else return false;
 	}
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (!(this.isBroken(stack))) stack.damageItem(1, attacker);
+		if (!(this.isBroken(stack)))
+			stack.damageItem(1, attacker);
 		return true;
 	}
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!isBroken(stack)) return false;
+		if (!isBroken(stack))
+			return false;
 		World world = player.worldObj;
 		
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+		if (world.isRemote)
+			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		
 		return true;
 	}
@@ -73,7 +77,8 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		if (this.isBroken(stack) && !(world.isRemote)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 			
-		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && !(player.isSneaking())) {
+		}
+		else if (stack.getMetadata() <= 12233 && !(world.isRemote) && !(player.isSneaking())) {
 			
 			Material material = world.getBlock(x, y, z).getMaterial();
 			

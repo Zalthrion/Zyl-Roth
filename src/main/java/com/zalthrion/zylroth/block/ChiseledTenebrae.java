@@ -60,7 +60,8 @@ public class ChiseledTenebrae extends BlockBase {
 				if (flag) {
 					world.setBlock(x - 1, y - 1, z, getBlockById(0), 0, 2);
 					world.setBlock(x + 1, y - 1, z, getBlockById(0), 0, 2);
-				} else {
+				}
+				else {
 					world.setBlock(x, y - 1, z - 1, getBlockById(0), 0, 2);
 					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
 				}
@@ -88,7 +89,8 @@ public class ChiseledTenebrae extends BlockBase {
 				if (flag) {
 					world.setBlock(x - 1, y - 1, z, getBlockById(0), 0, 2);
 					world.setBlock(x + 1, y - 1, z, getBlockById(0), 0, 2);
-				} else {
+				}
+				else {
 					world.setBlock(x, y - 1, z - 1, getBlockById(0), 0, 2);
 					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
 				}

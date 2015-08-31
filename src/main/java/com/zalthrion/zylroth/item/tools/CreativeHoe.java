@@ -47,21 +47,25 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 			
 			return true;
 			
-		} else return false;
+		}
+		else return false;
 	}
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (!(this.isBroken(stack))) stack.damageItem(1, attacker);
+		if (!(this.isBroken(stack)))
+			stack.damageItem(1, attacker);
 		return true;
 	}
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!isBroken(stack)) return false;
+		if (!isBroken(stack))
+			return false;
 		World world = player.worldObj;
 		
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+		if (world.isRemote)
+			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		
 		return true;
 	}
@@ -71,7 +75,8 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 		
 		if (!player.canPlayerEdit(x, y, z, p_77648_7_, stack)) {
 			return false;
-		} else {
+		}
+		else {
 			
 			UseHoeEvent event = new UseHoeEvent(player, stack, world, x, y, z);
 			if (MinecraftForge.EVENT_BUS.post(event)) { return false; }
@@ -89,7 +94,8 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 				
 				if (world.isRemote) {
 					return true;
-				} else {
+				}
+				else {
 					for (int ix = -1; ix < 2; ++ ix) {
 						for (int iz = -1; iz < 2; ++ iz) {
 							
@@ -113,7 +119,8 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 					
 					return true;
 				}
-			} else {
+			}
+			else {
 				return false;
 			}
 		}

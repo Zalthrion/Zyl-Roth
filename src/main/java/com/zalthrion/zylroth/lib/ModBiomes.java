@@ -8,7 +8,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class ModBiomes {
 	
-	//Ky'rul
+	// Ky'rul
 	
 	public static BiomeGenBase DreadWastes;
 	
@@ -18,8 +18,7 @@ public class ModBiomes {
 	
 	public static BiomeGenBase VoidMountains;
 	
-	
-	//Iri'dis
+	// Iri'dis
 	
 	public static BiomeGenBase JadePlains;
 	
@@ -29,15 +28,14 @@ public class ModBiomes {
 	
 	public static BiomeGenBase RainbowForest;
 	
-	
-	//Glaciem
+	// Glaciem
 	
 	public static BiomeGenBase FrozenOcean;
 	
 	public static BiomeGenBase ColdOcean;
 	
 	public static BiomeGenBase FrozenWastes;
-
+	
 	public static void init() {
 		initBiomes();
 		registerBiomes();
@@ -53,7 +51,6 @@ public class ModBiomes {
 		
 		VoidMountains = new BiomeGenVoidMountains(183);
 		
-		
 		JadePlains = new BiomeGenJadePlains(210);
 		
 		AutumnForest = new BiomeGenAutumnForest(211);
@@ -61,7 +58,6 @@ public class ModBiomes {
 		SapphireOcean = new BiomeGenSapphireOcean(212);
 		
 		RainbowForest = new BiomeGenRainbowForest(213);
-		
 		
 		FrozenOcean = new BiomeGenFrozenOcean(240);
 		

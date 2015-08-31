@@ -41,15 +41,13 @@ public class WorldStructureGenerator implements IWorldGenerator {
 	
 	private void GenerateKyrul(Random random, int x, int z, World world) {
 		
-/*		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
-		if (biomegenbase == ModBiomes.VoidMountains) {
-			for (int k = 0; k < 2; k ++) {
-				int RandPosX = x + random.nextInt(16);
-				int RandPosY = random.nextInt(90);
-				int RandPosZ = z + random.nextInt(16);
-				new DragonNest().generate(world, random, RandPosX, RandPosY, RandPosZ);
-			}
-		}*/
+		/* BiomeGenBase biomegenbase =
+		 * world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16); if
+		 * (biomegenbase == ModBiomes.VoidMountains) { for (int k = 0; k < 2; k
+		 * ++) { int RandPosX = x + random.nextInt(16); int RandPosY =
+		 * random.nextInt(90); int RandPosZ = z + random.nextInt(16); new
+		 * DragonNest().generate(world, random, RandPosX, RandPosY, RandPosZ); }
+		 * } */
 	}
 	
 }

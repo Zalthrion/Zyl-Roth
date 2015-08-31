@@ -14,7 +14,10 @@ public class InfusionRecipeHandler {
 	 * Gets the instance of the class, this is where new {@link InfusionRecipeLib}'s are registered.
 	 * @return Instance of {@link InfusionRecipeHandler}
 	 */
-	public static InfusionRecipeHandler instance() { return instance; }
+	public static InfusionRecipeHandler instance() {
+		return instance;
+	}
+	
 	/**
 	 * Registers an infusion recipe.
 	 * @param input - Input ItemStack.
@@ -28,7 +31,8 @@ public class InfusionRecipeHandler {
 	
 	public static boolean arrayListContainsItemStack(ArrayList<ItemStack> list, ItemStack checkFor) {
 		for (ItemStack stack : list) {
-			if (stack.getItem() == checkFor.getItem()) return true;
+			if (stack.getItem() == checkFor.getItem())
+				return true;
 		}
 		return false;
 	}
@@ -40,22 +44,28 @@ public class InfusionRecipeHandler {
 	 * @return Whether the ingredients will produce an infusion or not.
 	 */
 	public boolean isValidRecipe(ItemStack input, ItemStack... infusionMaterials) {
-		if (input == null) return false;
+		if (input == null)
+			return false;
 		recipeLoop: for (InfusionRecipeLib recipe : this.recipes) {
-			if (!(recipe.getInput().getItem() == input.getItem())) continue recipeLoop;
+			if (!(recipe.getInput().getItem() == input.getItem()))
+				continue recipeLoop;
 			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipe.getInfusionMaterials());
 			providedStacks: for (ItemStack provided : infusionMaterials) {
-				if (provided == null) continue providedStacks;
-				if (!arrayListContainsItemStack(recipeRequirements, provided)) return false;
+				if (provided == null)
+					continue providedStacks;
+				if (!arrayListContainsItemStack(recipeRequirements, provided))
+					return false;
 				rRLoop: for (ItemStack reqStack : recipeRequirements) {
-					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
+					if (provided.getItem() != reqStack.getItem())
+						continue rRLoop;
 					if (provided.stackSize >= reqStack.stackSize) {
 						recipeRequirements.remove(reqStack);
 						continue providedStacks;
 					}
 				}
 			}
-			if (recipeRequirements.isEmpty()) return true;
+			if (recipeRequirements.isEmpty())
+				return true;
 		}
 		return false;
 	}
@@ -69,22 +79,28 @@ public class InfusionRecipeHandler {
 	 * @return A copy of the recipe.
 	 */
 	public InfusionRecipeLib getRecipe(ItemStack input, ItemStack... infusionMaterials) {
-		if (input == null) return null;
+		if (input == null)
+			return null;
 		recipeLoop: for (InfusionRecipeLib recipe : this.recipes) {
-			if (!(recipe.getInput().getItem() == input.getItem())) continue recipeLoop;
+			if (!(recipe.getInput().getItem() == input.getItem()))
+				continue recipeLoop;
 			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipe.getInfusionMaterials());
 			providedStacks: for (ItemStack provided : infusionMaterials) {
-				if (provided == null) continue providedStacks;
-				if (!arrayListContainsItemStack(recipeRequirements, provided)) return null;
+				if (provided == null)
+					continue providedStacks;
+				if (!arrayListContainsItemStack(recipeRequirements, provided))
+					return null;
 				rRLoop: for (ItemStack reqStack : recipeRequirements) {
-					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
+					if (provided.getItem() != reqStack.getItem())
+						continue rRLoop;
 					if (provided.stackSize >= reqStack.stackSize) {
 						recipeRequirements.remove(reqStack);
 						continue providedStacks;
 					}
 				}
 			}
-			if (recipeRequirements.isEmpty()) return recipe;
+			if (recipeRequirements.isEmpty())
+				return recipe;
 		}
 		return null;
 	}
@@ -93,5 +109,7 @@ public class InfusionRecipeHandler {
 	 * All registered infusion recipes.
 	 * @return A copy of registered recipes.
 	 */
-	public ArrayList<InfusionRecipeLib> getInfusingList() { return new ArrayList<InfusionRecipeLib>(this.recipes); }
+	public ArrayList<InfusionRecipeLib> getInfusingList() {
+		return new ArrayList<InfusionRecipeLib>(this.recipes);
+	}
 }

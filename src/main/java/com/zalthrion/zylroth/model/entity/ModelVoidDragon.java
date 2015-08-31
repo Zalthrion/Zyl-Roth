@@ -181,7 +181,8 @@ public class ModelVoidDragon extends ModelBase {
 			rearLeg.render(par7);
 			GL11.glScalef(-1.0F, 1.0F, 1.0F);
 			
-			if (j == 0) GL11.glCullFace(GL11.GL_FRONT);
+			if (j == 0)
+				GL11.glCullFace(GL11.GL_FRONT);
 		}
 		
 		GL11.glPopMatrix();

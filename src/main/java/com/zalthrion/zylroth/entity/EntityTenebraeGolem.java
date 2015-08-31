@@ -127,7 +127,8 @@ public class EntityTenebraeGolem extends EntityMob {
 		if (par1 == 4) {
 			this.attackTimer = 10;
 			this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
-		} else {
+		}
+		else {
 			super.handleHealthUpdate(par1);
 		}
 	}
@@ -184,7 +185,8 @@ public class EntityTenebraeGolem extends EntityMob {
 		
 		if (par1) {
 			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 | 1)));
-		} else {
+		}
+		else {
 			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 & -2)));
 		}
 	}

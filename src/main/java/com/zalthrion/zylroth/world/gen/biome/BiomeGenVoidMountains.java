@@ -10,7 +10,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		
 		this.enableRain = false;
 		this.enableSnow = false;
-				
+		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
@@ -19,7 +19,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		
 		this.theBiomeDecorator.flowersPerChunk = -999;
 		this.theBiomeDecorator.treesPerChunk = -999;
-				
+		
 		this.theBiomeDecorator.generateLakes = false;
 		
 		this.topBlock = (Blocks.grass);

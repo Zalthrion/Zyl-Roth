@@ -55,21 +55,21 @@ public class EntityUndeadMinion extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		
-		if(ConfigurationHandler.getHardcoreModeEnabled() == true){
-
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
+		if (ConfigurationHandler.getHardcoreModeEnabled() == true) {
+			
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
+			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		}
 		
 		else {
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
+			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 		}
 		
 		this.getCustomNameTag();
@@ -83,17 +83,19 @@ public class EntityUndeadMinion extends EntityMob {
 		if (!KyrulMinions) {
 			this.worldObj.setEntityState(this, (byte) 4);
 			
-			 boolean flag = entity.attackEntityFrom(
-			 DamageSource.causeMobDamage(this), (float) (7 +
-			 this.rand.nextInt(15))); if (flag) { entity.motionY += 0.1D; }
+			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+			if (flag) {
+				entity.motionY += 0.1D;
+			}
 			
 			if (entity instanceof EntityPlayer) {
 				
 				EntityPlayer player = (EntityPlayer) entity;
-
+				
 				boolean hasArmor = true;
 				for (int i = 0; i < 4; i ++) {
-					if (player.inventory.armorInventory[i] != null) hasArmor = false;
+					if (player.inventory.armorInventory[i] != null)
+						hasArmor = false;
 				}
 				
 				if (!player.worldObj.isRemote && !hasArmor) {

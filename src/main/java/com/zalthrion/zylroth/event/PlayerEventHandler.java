@@ -14,7 +14,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 public class PlayerEventHandler {
-	@SubscribeEvent public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {
+	@SubscribeEvent
+	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
@@ -29,7 +30,8 @@ public class PlayerEventHandler {
 					Object obj = iterator.next();
 					if (obj instanceof MountDeathcharger) {
 						MountDeathcharger mdc = (MountDeathcharger) obj;
-						if (mdc.getUniqueID().equals(ownedHorse)) mdc.setDead();
+						if (mdc.getUniqueID().equals(ownedHorse))
+							mdc.setDead();
 					}
 				}
 			}
@@ -46,7 +48,8 @@ public class PlayerEventHandler {
 					Object obj = iterator.next();
 					if (obj instanceof MountPlaguedHorse) {
 						MountPlaguedHorse mph = (MountPlaguedHorse) obj;
-						if (mph.getUniqueID().equals(ownedHorse)) mph.setDead();
+						if (mph.getUniqueID().equals(ownedHorse))
+							mph.setDead();
 					}
 				}
 			}
@@ -63,7 +66,8 @@ public class PlayerEventHandler {
 					Object obj = iterator.next();
 					if (obj instanceof MountPlaguedHorse) {
 						MountPlaguedHorse mph = (MountPlaguedHorse) obj;
-						if (mph.getUniqueID().equals(ownedHorse)) mph.setDead();
+						if (mph.getUniqueID().equals(ownedHorse))
+							mph.setDead();
 					}
 				}
 			}

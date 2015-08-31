@@ -159,9 +159,11 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 							for (int k3 = 0; k3 < 4; ++ k3) {
 								if ((d15 += d16) > 0.0D) {
 									blockArray[j3 += short1] = Blocks.packed_ice;
-								} else if (k2 * 8 + l2 < b0) {
+								}
+								else if (k2 * 8 + l2 < b0) {
 									blockArray[j3 += short1] = Blocks.water;
-								} else {
+								}
+								else {
 									blockArray[j3 += short1] = null;
 								}
 							}
@@ -183,7 +185,8 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	public void replaceBlocksForBiome(int x, int z, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_) {
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, p_147422_3_, p_147422_4_, p_147422_5_, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY) return;
+		if (event.getResult() == Result.DENY)
+			return;
 		
 		double d0 = 0.03125D;
 		this.packedIceNoise = this.field_147430_m.func_151599_a(this.packedIceNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
@@ -292,7 +295,8 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 					
 					d12 /= 1.4D;
 					d12 /= 2.0D;
-				} else {
+				}
+				else {
 					if (d12 > 1.0D) {
 						d12 = 1.0D;
 					}
@@ -387,7 +391,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 				}
 			}
 		}
-				
+		
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(chunkProvider, worldObj, rand, x, z, flag));
 		
 		BlockFalling.fallInstantly = false;
