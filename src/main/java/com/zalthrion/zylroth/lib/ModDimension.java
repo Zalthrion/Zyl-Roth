@@ -23,21 +23,21 @@ public class ModDimension {
 		
 		DimensionManager.registerProviderType(dimensionId_Kyrul, WorldProviderKyrul.class, false);
 		
-		if (ConfigurationHandler.getKyrulEnabled() == true)
+		if (ConfigurationHandler.getKyrulEnabled())
 			DimensionManager.registerDimension(dimensionId_Kyrul, dimensionId_Kyrul);
 		
 		// Iridis
 		
 		DimensionManager.registerProviderType(dimensionId_Iridis, WorldProviderIridis.class, false);
 		
-		if (ConfigurationHandler.getIridisEnabled() == true)
+		if (ConfigurationHandler.getIridisEnabled())
 			DimensionManager.registerDimension(dimensionId_Iridis, dimensionId_Iridis);
 		
 		// Glaciem
 		
 		DimensionManager.registerProviderType(dimensionId_Glaciem, WorldProviderGlaciem.class, false);
 		
-		if (ConfigurationHandler.getGlaciemEnabled() == true)
+		if (ConfigurationHandler.getGlaciemEnabled())
 			DimensionManager.registerDimension(dimensionId_Glaciem, dimensionId_Glaciem);
 		
 	}

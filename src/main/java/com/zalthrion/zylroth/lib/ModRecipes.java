@@ -49,7 +49,7 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.tenebrae_Block, 1), new ItemStack(ModBlocks.chiseled_Tenebrae));
 		
-		if (ConfigurationHandler.getKyrulEnabled() == true)
+		if (ConfigurationHandler.getKyrulEnabled())
 			GameRegistry.addShapelessRecipe(new ItemStack(ModItems.void_Talisman, 1), new ItemStack(ModItems.gold_Talisman), new ItemStack(ModItems.void_Gem));
 		
 	}

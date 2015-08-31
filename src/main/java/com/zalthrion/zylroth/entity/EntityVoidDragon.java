@@ -77,7 +77,7 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		
-		if (ConfigurationHandler.getHardcoreModeEnabled() == true)
+		if (ConfigurationHandler.getHardcoreModeEnabled())
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 		
 		else this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
@@ -346,7 +346,7 @@ public class EntityVoidDragon extends EntityLiving implements IEntityMultiPart, 
 			Entity entity = (Entity) p_70971_1_.get(i);
 			
 			if ((entity instanceof EntityLivingBase && !(KyrulMinions))) {
-				if (ConfigurationHandler.getHardcoreModeEnabled() == true)
+				if (ConfigurationHandler.getHardcoreModeEnabled())
 					entity.attackEntityFrom(DamageSource.causeMobDamage(this), 12.0F);
 				
 				else entity.attackEntityFrom(DamageSource.causeMobDamage(this), 8.0F);

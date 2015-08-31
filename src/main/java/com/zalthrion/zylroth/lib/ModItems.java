@@ -52,13 +52,13 @@ public final class ModItems {
 		/* Portals */
 		GameRegistry.registerItem(gold_Talisman, "goldTalisman");
 		
-		if (ConfigurationHandler.getKyrulEnabled() == true)
+		if (ConfigurationHandler.getKyrulEnabled())
 			GameRegistry.registerItem(void_Talisman, "voidTalisman");
 		
-		if (ConfigurationHandler.getIridisEnabled() == true)
+		if (ConfigurationHandler.getIridisEnabled())
 			GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
 		
-		if (ConfigurationHandler.getGlaciemEnabled() == true)
+		if (ConfigurationHandler.getGlaciemEnabled())
 			GameRegistry.registerItem(ice_Talisman, "iceTalisman");
 		
 		/* Others */

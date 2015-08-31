@@ -56,7 +56,7 @@ public class EntityUndeadWarrior extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		
-		if (ConfigurationHandler.getHardcoreModeEnabled() == true) {
+		if (ConfigurationHandler.getHardcoreModeEnabled()) {
 			
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);

@@ -63,7 +63,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		super.applyEntityAttributes();
 		// this.applyAttribute(SharedMonsterAttributes.attackDamage, 0.0D);
 		
-		if (ConfigurationHandler.getHardcoreModeEnabled() == true) {
+		if (ConfigurationHandler.getHardcoreModeEnabled()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.28D);
 			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(25.0D);
