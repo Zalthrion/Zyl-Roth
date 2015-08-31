@@ -12,8 +12,8 @@ public class BiomeGenSapphireOcean extends BiomeGenBase {
 		this.spawnableMonsterList.clear();
 		this.spawnableCaveCreatureList.clear();
 		
-		this.topBlock = (Blocks.flowing_water);
-		this.fillerBlock = (Blocks.flowing_water);
+		this.topBlock = (Blocks.grass);
+		this.fillerBlock = (Blocks.dirt);
 		
 		this.setBiomeName("Sapphire Ocean");
 		this.setHeight(height_Oceans);

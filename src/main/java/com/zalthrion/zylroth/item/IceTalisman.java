@@ -9,11 +9,11 @@ import net.minecraft.world.WorldServer;
 
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
-public class VoidTalisman extends ItemBase {
+public class IceTalisman extends ItemBase {
 	
-	private String name = "voidTalisman";
+	private String name = "iceTalisman";
 	
-	public VoidTalisman() {
+	public IceTalisman() {
 		this.setNames(name);
 		this.setMaxStackSize(1);
 	}
@@ -26,16 +26,16 @@ public class VoidTalisman extends ItemBase {
 				
 				EntityPlayerMP playerMP = (EntityPlayerMP) player;
 				
-				WorldServer ws = playerMP.mcServer.worldServerForDimension(47);
+				WorldServer ws = playerMP.mcServer.worldServerForDimension(49);
 				
 				Teleporter teleporter = new SpecialTeleporter(ws);
 				
-				if (!(player.dimension == 47) && player.ridingEntity == null) {
-					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
+				if (!(player.dimension == 49) && player.ridingEntity == null) {
+					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 49, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}
 				
-				else if (player.dimension == 47 && player.ridingEntity == null) {
+				else if (player.dimension == 49 && player.ridingEntity == null) {
 					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 					SpecialTeleporter.adjustPosY(player);
 				}

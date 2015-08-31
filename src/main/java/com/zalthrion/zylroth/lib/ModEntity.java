@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.lib;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.zalthrion.zylroth.Zylroth;
@@ -20,6 +21,7 @@ import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModEntity {
 	
@@ -32,11 +34,11 @@ public class ModEntity {
 		return nextEntityID - 1;
 	}
 	
-	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, boolean hasEgg, int bgEggColor, int fgEggColor) {
+	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, boolean hasEgg, int bkEggColor, int fgEggColor) {
 		EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true);
 		if (hasEgg) {
-			// Item spawnEgg = new SpawnEgg(entityName, bgEggColor, fgEggColor);
-			// GameRegistry.registerItem(spawnEgg, "spawnEgg" + entityName);
+			Item spawnEgg = new SpawnEgg(entityName, bkEggColor, fgEggColor).setTextureName("zylroth:spawnEgg");
+			GameRegistry.registerItem(spawnEgg, "spawnEgg" + "." + entityName);
 		}
 	}
 	

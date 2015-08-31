@@ -1,10 +1,16 @@
 package com.zalthrion.zylroth.world.dimension;
 
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ICE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
+
 import java.util.List;
 import java.util.Random;
 
-import com.zalthrion.zylroth.lib.ModBiomes;
-import com.zalthrion.zylroth.world.gen.structures.DragonNest;
+import com.zalthrion.zylroth.world.gen.map.MapGenIceCavesGlaciem;
+import com.zalthrion.zylroth.world.gen.map.MapGenIceRavineGlaciem;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -20,21 +26,17 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.*;
-import net.minecraftforge.common.*;
-import cpw.mods.fml.common.eventhandler.Event.*;
-import net.minecraftforge.event.terraingen.*;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.ChunkProviderEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 
-public class ChunkProviderKyrul implements IChunkProvider {
+public class ChunkProviderGlaciem implements IChunkProvider {
 	
 	/** RNG. */
 	private Random rand;
@@ -57,20 +59,16 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	private WorldType field_147435_p;
 	private final double[] field_147434_q;
 	private final float[] parabolicField;
-	private double[] stoneNoise = new double[256];
+	private double[] packedIceNoise = new double[256];
 	
 	/** Holds Cave Generator */
-	private MapGenBase caveGenerator = new MapGenCaves();
-	
-	/** Holds Mineshaft Generator */
-	private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
+	private MapGenBase caveGenerator = new MapGenIceCavesGlaciem();
 	
 	/** Holds Ravine Generator */
-	private MapGenBase ravineGenerator = new MapGenRavine();
+	private MapGenBase ravineGenerator = new MapGenIceRavineGlaciem();
 	
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
-	
 	double[] field_147427_d;
 	double[] field_147428_e;
 	double[] field_147425_f;
@@ -79,11 +77,10 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-		mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, MINESHAFT);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 	
-	public ChunkProviderKyrul(World world, long p_i2006_2_, boolean p_i2006_4_) {
+	public ChunkProviderGlaciem(World world, long p_i2006_2_, boolean p_i2006_4_) {
 		this.worldObj = world;
 		this.mapFeaturesEnabled = p_i2006_4_;
 		this.field_147435_p = world.getWorldInfo().getTerrainType();
@@ -116,36 +113,6 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		this.noiseGen5 = (NoiseGeneratorOctaves) noiseGens[4];
 		this.noiseGen6 = (NoiseGeneratorOctaves) noiseGens[5];
 		this.mobSpawnerNoise = (NoiseGeneratorOctaves) noiseGens[6];
-	}
-	
-	/** Will return back a chunk, if it doesn't exist and its not a MP client it
-	 * will generates all the blocks for the specified chunk from the map seed
-	 * and chunk seed */
-	public Chunk provideChunk(int chunkX, int chunkZ) {
-		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
-		
-		Block[] ablock = new Block[65536];
-		byte[] abyte = new byte[65536];
-		
-		this.generateTerrain(chunkX, chunkZ, ablock);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
-		this.replaceBlocksForBiome(chunkX, chunkZ, ablock, abyte, this.biomesForGeneration);
-		this.caveGenerator.generate(this, this.worldObj, chunkX + 300, chunkZ + 300, ablock);
-		this.ravineGenerator.generate(this, this.worldObj, chunkX + 300, chunkZ + 300, ablock);
-		
-		if (this.mapFeaturesEnabled) {
-			this.mineshaftGenerator.generate(this, this.worldObj, chunkX, chunkZ, ablock);
-		}
-		
-		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, chunkX, chunkZ);
-		byte[] abyte1 = chunk.getBiomeArray();
-		
-		for (int k = 0; k < abyte1.length; ++ k) {
-			abyte1[k] = (byte) this.biomesForGeneration[k].biomeID;
-		}
-		
-		chunk.generateSkylightMap();
-		return chunk;
 	}
 	
 	public void generateTerrain(int x, int z, Block[] blockArray) {
@@ -191,7 +158,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 							
 							for (int k3 = 0; k3 < 4; ++ k3) {
 								if ((d15 += d16) > 0.0D) {
-									blockArray[j3 += short1] = Blocks.stone;
+									blockArray[j3 += short1] = Blocks.packed_ice;
 								} else if (k2 * 8 + l2 < b0) {
 									blockArray[j3 += short1] = Blocks.water;
 								} else {
@@ -219,12 +186,12 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		if (event.getResult() == Result.DENY) return;
 		
 		double d0 = 0.03125D;
-		this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.packedIceNoise = this.field_147430_m.func_151599_a(this.packedIceNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int k = 0; k < 16; ++ k) {
 			for (int l = 0; l < 16; ++ l) {
 				BiomeGenBase biomegenbase = p_147422_5_[l + k * 16];
-				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, x * 16 + k, z * 16 + l, this.stoneNoise[l + k * 16]);
+				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, x * 16 + k, z * 16 + l, this.packedIceNoise[l + k * 16]);
 			}
 		}
 	}
@@ -232,6 +199,37 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	/** loads or generates the chunk at the chunk location specified */
 	public Chunk loadChunk(int p_73158_1_, int p_73158_2_) {
 		return this.provideChunk(p_73158_1_, p_73158_2_);
+	}
+	
+	/** Will return back a chunk, if it doesn't exist and its not a MP client it
+	 * will generates all the blocks for the specified chunk from the map seed
+	 * and chunk seed */
+	public Chunk provideChunk(int x, int z) {
+		
+		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+		
+		Block[] ablock = new Block[65536];
+		byte[] abyte = new byte[65536];
+		
+		this.generateTerrain(x, z, ablock);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.replaceBlocksForBiome(x, z, ablock, abyte, this.biomesForGeneration);
+		this.caveGenerator.generate(this, this.worldObj, x + 200, z + 200, ablock);
+		this.ravineGenerator.generate(this, this.worldObj, x + 200, z + 200, ablock);
+		
+		if (this.mapFeaturesEnabled) {
+			
+		}
+		
+		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, x, z);
+		byte[] abyte1 = chunk.getBiomeArray();
+		
+		for (int k = 0; k < abyte1.length; ++ k) {
+			abyte1[k] = (byte) this.biomesForGeneration[k].biomeID;
+		}
+		
+		chunk.generateSkylightMap();
+		return chunk;
 	}
 	
 	private void generateNoise(int x, int y, int z) {
@@ -248,7 +246,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 				float f1 = 0.0F;
 				float f2 = 0.0F;
 				byte b0 = 2;
-				BiomeGenBase biomegenbase = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
+				BiomeGenBase biomegenbase = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 12];
 				
 				for (int l1 = -b0; l1 <= b0; ++ l1) {
 					for (int i2 = -b0; i2 <= b0; ++ i2) {
@@ -357,17 +355,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(chunkProvider, worldObj, rand, x, z, flag));
 		
 		if (this.mapFeaturesEnabled) {
-			this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, x, z);
-		}
-		
-		if (biomegenbase == ModBiomes.VoidMountains) {
-			for (int i = 0; i < 5; i ++) {
-				int Xcoord = k + rand.nextInt(16);
-				int Ycoord = rand.nextInt(90);
-				int Zcoord = l + rand.nextInt(16);
-				
-				new DragonNest().generate(worldObj, rand, Xcoord, Ycoord, Zcoord);
-			}
+			
 		}
 		
 		int k1;
@@ -381,32 +369,15 @@ public class ChunkProviderKyrul implements IChunkProvider {
 			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, k1, l1, i2);
 		}
 		
-		if (TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, LAVA) && !flag && this.rand.nextInt(8) == 0) {
-			k1 = k + this.rand.nextInt(16) + 8;
-			l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
-			i2 = l + this.rand.nextInt(16) + 8;
-			
-			if (l1 < 63 || this.rand.nextInt(10) == 0) {
-				(new WorldGenLakes(Blocks.lava)).generate(this.worldObj, this.rand, k1, l1, i2);
-			}
-		}
-		
-		boolean doGen = TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, DUNGEON);
-		for (k1 = 0; doGen && k1 < 8; ++ k1) {
-			l1 = k + this.rand.nextInt(16) + 8;
-			i2 = this.rand.nextInt(256);
-			int j2 = l + this.rand.nextInt(16) + 8;
-			(new WorldGenDungeons()).generate(this.worldObj, this.rand, l1, i2, j2);
-		}
-		
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);
 		if (TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, ANIMALS)) {
 			SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
 		}
+		
 		k += 8;
 		l += 8;
 		
-		doGen = TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, ICE);
+		boolean doGen = TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, ICE);
 		for (k1 = 0; doGen && k1 < 16; ++ k1) {
 			for (l1 = 0; l1 < 16; ++ l1) {
 				i2 = this.worldObj.getPrecipitationHeight(k + k1, l + l1);
@@ -414,13 +385,9 @@ public class ChunkProviderKyrul implements IChunkProvider {
 				if (this.worldObj.isBlockFreezable(k1 + k, i2 - 1, l1 + l)) {
 					this.worldObj.setBlock(k1 + k, i2 - 1, l1 + l, Blocks.ice, 0, 2);
 				}
-				
-				if (this.worldObj.canSnowAt(k1 + k, i2, l1 + l, true)) {
-					this.worldObj.setBlock(k1 + k, i2, l1 + l, Blocks.snow_layer, 0, 2);
-				}
 			}
 		}
-		
+				
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(chunkProvider, worldObj, rand, x, z, flag));
 		
 		BlockFalling.fallInstantly = false;
@@ -450,21 +417,14 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	
 	/** Converts the instance data to a readable string. */
 	public String makeString() {
-		return "KyrulRandomLevelSource";
+		return "GlaciemRandomLevelSource";
 	}
-	
-	/* TODO: Replaced, this is the original. Returns a list of creatures of the
-	 * specified type that can spawn at the given location. */
-	/* public List getPossibleCreatures(EnumCreatureType p_73155_1_, int
-	 * p_73155_2_, int p_73155_3_, int p_73155_4_) { BiomeGenBase biomegenbase =
-	 * this.worldObj.getBiomeGenForCoords(p_73155_2_, p_73155_4_); return null;
-	 * } */
 	
 	/** Returns a list of creatures of the specified type that can spawn at the
 	 * given location. */
 	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType creaturetype, int x, int y, int z) {
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(x, z);
+	public List getPossibleCreatures(EnumCreatureType creaturetype, int par2, int par3, int par4) {
+		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(par2, par4);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creaturetype);
 	}
 	
@@ -478,7 +438,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	
 	public void recreateStructures(int p_82695_1_, int p_82695_2_) {
 		if (this.mapFeaturesEnabled) {
-			this.mineshaftGenerator.generate(this, this.worldObj, p_82695_1_, p_82695_2_, (Block[]) null);
+			
 		}
 	}
 }

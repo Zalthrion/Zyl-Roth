@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.lib;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 
 import net.minecraft.init.Blocks;
@@ -37,7 +38,7 @@ public final class ModRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Core), "DTD", "TBT", "DTD", 'D', Items.diamond, 'T', ModItems.tenebrae_Ingot, 'B', ModBlocks.tenebrae_Block);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Block), "III", "III", "III", 'I', ModItems.tenebrae_Ingot);
-						
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "ICI", "RIR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'C', ModItems.unstable_Tenebrae_Core);
 		
 	}
@@ -48,7 +49,8 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.tenebrae_Block, 1), new ItemStack(ModBlocks.chiseled_Tenebrae));
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.void_Talisman, 1), new ItemStack(ModItems.gold_Talisman), new ItemStack(ModItems.void_Gem));
+		if (ConfigurationHandler.getKyrulEnabled() == true)
+			GameRegistry.addShapelessRecipe(new ItemStack(ModItems.void_Talisman, 1), new ItemStack(ModItems.gold_Talisman), new ItemStack(ModItems.void_Gem));
 		
 	}
 	
@@ -58,7 +60,7 @@ public final class ModRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Chestplate), "IEI", "III", "III", 'I', ModItems.tenebrae_Ingot);
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Leggings), "III", "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Boots), "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
-
+		
 	}
 	
 	public static void registerToolRecipes() {

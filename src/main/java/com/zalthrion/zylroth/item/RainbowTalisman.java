@@ -11,8 +11,7 @@ import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class RainbowTalisman extends ItemBase {
 	
-	private String name = "rainbowTalisman"
-			+ "";
+	private String name = "rainbowTalisman";
 	
 	public RainbowTalisman() {
 		this.setNames(name);

@@ -52,7 +52,7 @@ entity.Zylroth.skeletalHorse.name=Skeletal Horse
 entity.Zylroth.tenebraeGolem.name=Tenebrae Golem
 entity.Zylroth.undeadMinion.name=Undead Minion
 entity.Zylroth.undeadWarrior.name=Undead Warrior
-entity.Zylroth.Void_Dragon.name=Void Dragon
+entity.Zylroth.voidDragon.name=Void Dragon
 
 entity.Zylroth:Deathcharger.name=Deathcharger
 entity.Zylroth:Plagued_Horse.name=Plagued Horse
@@ -95,6 +95,7 @@ item.zylroth:voidEssence.name=Void Essence
 item.zylroth:voidGem.name=Void Gem
 
 item.zylroth:goldTalisman.name=Gold Talisman
+item.zylroth:iceTalisman.name=Ice Talisman
 item.zylroth:rainbowTalisman.name=Rainbow Talisman
 item.zylroth:voidTalisman.name=Void Talisman
 

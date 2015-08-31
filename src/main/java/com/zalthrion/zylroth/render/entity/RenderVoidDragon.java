@@ -1,10 +1,6 @@
 package com.zalthrion.zylroth.render.entity;
 
-import java.util.Random;
-
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -107,7 +103,7 @@ public class RenderVoidDragon extends RenderLiving {
 	}
 	
 	/** Renders the animation for when an enderdragon dies */
-	protected void renderDragonDying(EntityVoidDragon dragon, float par2) {
+/*	protected void renderDragonDying(EntityVoidDragon dragon, float par2) {
 		super.renderEquippedItems(dragon, par2);
 		Tessellator tessellator = Tessellator.instance;
 		
@@ -159,7 +155,7 @@ public class RenderVoidDragon extends RenderLiving {
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 			RenderHelper.enableStandardItemLighting();
 		}
-	}
+	}*/
 	
 	/** Renders the overlay for glowing eyes and the mouth. Called by
 	 * shouldRenderPass. */
@@ -197,10 +193,10 @@ public class RenderVoidDragon extends RenderLiving {
 		return renderGlow((EntityVoidDragon) par1EntityLivingBase, par2, par3);
 	}
 	
-	@Override
+/*	@Override
 	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
 		renderDragonDying((EntityVoidDragon) par1EntityLivingBase, par2);
-	}
+	}*/
 	
 	@Override
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {

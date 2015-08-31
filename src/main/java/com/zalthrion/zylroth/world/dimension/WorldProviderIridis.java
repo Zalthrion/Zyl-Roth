@@ -21,4 +21,8 @@ public class WorldProviderIridis extends WorldProvider {
 		return "Iri'dis";
 	}
 	
+	@Override
+	public String getSaveFolder() {
+		return "Iri'dis";
+	}
 }

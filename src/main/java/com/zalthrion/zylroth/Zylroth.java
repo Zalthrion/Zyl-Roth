@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
 import com.zalthrion.zylroth.lib.*;
@@ -8,6 +9,7 @@ import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.world.WorldStructureGenerator;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -37,6 +39,11 @@ public class Zylroth {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		
+		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+		
+		ModBiomes.init();
+		
 		ModItems.init();
 
 		ModBlocks.init();
@@ -44,8 +51,6 @@ public class Zylroth {
 		ModArmors.init();
 		
 		ModTools.init();
-
-		ModBiomes.init();
 				
 		ModDimension.init();
 		

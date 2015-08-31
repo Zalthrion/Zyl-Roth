@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.lib;
 
 import net.minecraft.item.Item;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.item.*;
 import com.zalthrion.zylroth.item.mount.*;
 
@@ -25,6 +26,7 @@ public final class ModItems {
 	public static Item gold_Talisman = new GoldTalisman();
 	public static Item void_Talisman = new VoidTalisman();
 	public static Item rainbow_Talisman = new RainbowTalisman();
+	public static Item ice_Talisman = new IceTalisman();
 	
 	/* Others */
 	public static Item dark_Shard = new DarkShard();
@@ -32,7 +34,6 @@ public final class ModItems {
 	public static Item cursed_Soul_Essence = new CursedSoulEssence();
 	public static Item void_Gem = new VoidGem();
 	public static Item void_Essence = new VoidEssence();
-	
 	
 	public static void init() {
 		
@@ -50,8 +51,15 @@ public final class ModItems {
 		
 		/* Portals */
 		GameRegistry.registerItem(gold_Talisman, "goldTalisman");
-		GameRegistry.registerItem(void_Talisman, "voidTalisman");
-		GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
+		
+		if (ConfigurationHandler.getKyrulEnabled() == true)
+			GameRegistry.registerItem(void_Talisman, "voidTalisman");
+		
+		if (ConfigurationHandler.getIridisEnabled() == true)
+			GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
+		
+		if (ConfigurationHandler.getGlaciemEnabled() == true)
+			GameRegistry.registerItem(ice_Talisman, "iceTalisman");
 		
 		/* Others */
 		GameRegistry.registerItem(dark_Shard, "darkShard");

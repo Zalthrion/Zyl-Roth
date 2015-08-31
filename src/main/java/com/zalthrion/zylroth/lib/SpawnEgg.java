@@ -24,6 +24,7 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class SpawnEgg extends ItemMonsterPlacer {
@@ -33,6 +34,7 @@ public class SpawnEgg extends ItemMonsterPlacer {
 	protected int colorSpots = 0xFFFFFF;
 	protected String entityToSpawnName = "";
 	protected String entityToSpawnNameFull = "";
+	protected String entityToSpawnLocalized = StatCollector.translateToLocal("entity" + "." + Reference.MOD_ID + "." + entityToSpawnName + "." + "name");
 	protected EntityLiving entityToSpawn = null;
 	
 	public SpawnEgg() {
@@ -48,7 +50,7 @@ public class SpawnEgg extends ItemMonsterPlacer {
 		colorSpots = parSecondaryColor;
 		
 		// Sends info to the console when a spawn egg is added to the game.
-		LogHelper.info("Added Spawn egg for " + entityToSpawnName);
+		LogHelper.info("Added Spawn egg for " + StatCollector.translateToLocal("entity" + "." + Reference.MOD_ID + "." + entityToSpawnName + "." + "name"));
 	}
 	
 	/** Callback for item usage. If the item does something special on right
@@ -173,7 +175,7 @@ public class SpawnEgg extends ItemMonsterPlacer {
 	// Doing this override means that there is no localization for language
 	// unless you specifically check for localization here and convert
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return "Spawn " + entityToSpawnName;
+		return "Spawn " + StatCollector.translateToLocal("entity" + "." + Reference.MOD_ID + "." + entityToSpawnName + "." + "name");
 	}
 	
 	@Override

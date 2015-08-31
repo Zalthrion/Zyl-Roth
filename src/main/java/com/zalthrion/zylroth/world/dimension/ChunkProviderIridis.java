@@ -31,28 +31,36 @@ import cpw.mods.fml.common.eventhandler.Event.*;
 import net.minecraftforge.event.terraingen.*;
 
 public class ChunkProviderIridis implements IChunkProvider {
+	
 	/** RNG. */
 	private Random rand;
 	private NoiseGeneratorOctaves field_147431_j;
 	private NoiseGeneratorOctaves field_147432_k;
 	private NoiseGeneratorOctaves field_147429_l;
 	private NoiseGeneratorPerlin field_147430_m;
+	
 	/** A NoiseGeneratorOctaves used in generating terrain */
 	public NoiseGeneratorOctaves noiseGen5;
-	/** A NoiseGeneratorOctaves used in generating terrain */
 	public NoiseGeneratorOctaves noiseGen6;
+	
 	public NoiseGeneratorOctaves mobSpawnerNoise;
+	
 	/** Reference to the World object. */
 	private World worldObj;
+	
 	/** are map structures going to be generated (e.g. strongholds) */
 	private final boolean mapFeaturesEnabled;
 	private WorldType field_147435_p;
 	private final double[] field_147434_q;
 	private final float[] parabolicField;
 	private double[] stoneNoise = new double[256];
+	
+	/** Holds Cave Generator */
 	private MapGenBase caveGenerator = new MapGenCaves();
-	/** Holds ravine generator */
+	
+	/** Holds Ravine Generator */
 	private MapGenBase ravineGenerator = new MapGenRavine();
+	
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
 	double[] field_147427_d;
@@ -66,17 +74,19 @@ public class ChunkProviderIridis implements IChunkProvider {
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 	
-	public ChunkProviderIridis(World p_i2006_1_, long p_i2006_2_, boolean p_i2006_4_) {
-		this.worldObj = p_i2006_1_;
+	public ChunkProviderIridis(World world, long p_i2006_2_, boolean p_i2006_4_) {
+		this.worldObj = world;
 		this.mapFeaturesEnabled = p_i2006_4_;
-		this.field_147435_p = p_i2006_1_.getWorldInfo().getTerrainType();
+		this.field_147435_p = world.getWorldInfo().getTerrainType();
 		this.rand = new Random(p_i2006_2_);
+		
 		this.field_147431_j = new NoiseGeneratorOctaves(this.rand, 16);
 		this.field_147432_k = new NoiseGeneratorOctaves(this.rand, 16);
 		this.field_147429_l = new NoiseGeneratorOctaves(this.rand, 8);
 		this.field_147430_m = new NoiseGeneratorPerlin(this.rand, 4);
 		this.noiseGen5 = new NoiseGeneratorOctaves(this.rand, 10);
 		this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 16);
+		
 		this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
 		this.field_147434_q = new double[825];
 		this.parabolicField = new float[25];
@@ -89,7 +99,7 @@ public class ChunkProviderIridis implements IChunkProvider {
 		}
 		
 		NoiseGenerator[] noiseGens = {field_147431_j, field_147432_k, field_147429_l, field_147430_m, noiseGen5, noiseGen6, mobSpawnerNoise};
-		noiseGens = TerrainGen.getModdedNoiseGenerators(p_i2006_1_, this.rand, noiseGens);
+		noiseGens = TerrainGen.getModdedNoiseGenerators(world, this.rand, noiseGens);
 		this.field_147431_j = (NoiseGeneratorOctaves) noiseGens[0];
 		this.field_147432_k = (NoiseGeneratorOctaves) noiseGens[1];
 		this.field_147429_l = (NoiseGeneratorOctaves) noiseGens[2];
@@ -99,10 +109,10 @@ public class ChunkProviderIridis implements IChunkProvider {
 		this.mobSpawnerNoise = (NoiseGeneratorOctaves) noiseGens[6];
 	}
 	
-	public void func_147424_a(int p_147424_1_, int p_147424_2_, Block[] p_147424_3_) {
+	public void generateTerrain(int x, int z, Block[] blockArray) {
 		byte b0 = 63;
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, p_147424_1_ * 4 - 2, p_147424_2_ * 4 - 2, 10, 10);
-		this.func_147423_a(p_147424_1_ * 4, 0, p_147424_2_ * 4);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
+		this.generateNoise(x * 4, 0, z * 4);
 		
 		for (int k = 0; k < 4; ++ k) {
 			int l = k * 5;
@@ -142,11 +152,11 @@ public class ChunkProviderIridis implements IChunkProvider {
 							
 							for (int k3 = 0; k3 < 4; ++ k3) {
 								if ((d15 += d16) > 0.0D) {
-									p_147424_3_[j3 += short1] = Blocks.stone;
+									blockArray[j3 += short1] = Blocks.stone;
 								} else if (k2 * 8 + l2 < b0) {
-									p_147424_3_[j3 += short1] = Blocks.water;
+									blockArray[j3 += short1] = Blocks.water;
 								} else {
-									p_147424_3_[j3 += short1] = null;
+									blockArray[j3 += short1] = null;
 								}
 							}
 							
@@ -164,18 +174,18 @@ public class ChunkProviderIridis implements IChunkProvider {
 		}
 	}
 	
-	public void replaceBlocksForBiome(int p_147422_1_, int p_147422_2_, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_) {
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147422_1_, p_147422_2_, p_147422_3_, p_147422_4_, p_147422_5_, this.worldObj);
+	public void replaceBlocksForBiome(int x, int z, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_) {
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, p_147422_3_, p_147422_4_, p_147422_5_, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY) return;
 		
 		double d0 = 0.03125D;
-		this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (p_147422_1_ * 16), (double) (p_147422_2_ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int k = 0; k < 16; ++ k) {
 			for (int l = 0; l < 16; ++ l) {
 				BiomeGenBase biomegenbase = p_147422_5_[l + k * 16];
-				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, p_147422_1_ * 16 + k, p_147422_2_ * 16 + l, this.stoneNoise[l + k * 16]);
+				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, x * 16 + k, z * 16 + l, this.stoneNoise[l + k * 16]);
 			}
 		}
 	}
@@ -188,21 +198,24 @@ public class ChunkProviderIridis implements IChunkProvider {
 	/** Will return back a chunk, if it doesn't exist and its not a MP client it
 	 * will generates all the blocks for the specified chunk from the map seed
 	 * and chunk seed */
-	public Chunk provideChunk(int p_73154_1_, int p_73154_2_) {
-		this.rand.setSeed((long) p_73154_1_ * 341873128712L + (long) p_73154_2_ * 132897987541L);
+	public Chunk provideChunk(int x, int z) {
+		
+		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+		
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
-		this.func_147424_a(p_73154_1_, p_73154_2_, ablock);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, p_73154_1_ * 16, p_73154_2_ * 16, 16, 16);
-		this.replaceBlocksForBiome(p_73154_1_, p_73154_2_, ablock, abyte, this.biomesForGeneration);
-		this.caveGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
-		this.ravineGenerator.generate(this, this.worldObj, p_73154_1_, p_73154_2_, ablock);
+		
+		this.generateTerrain(x, z, ablock);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.replaceBlocksForBiome(x, z, ablock, abyte, this.biomesForGeneration);
+		this.caveGenerator.generate(this, this.worldObj, x + 200, z + 200, ablock);
+		this.ravineGenerator.generate(this, this.worldObj, x + 200, z + 200, ablock);
 		
 		if (this.mapFeaturesEnabled) {
 			
 		}
 		
-		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, p_73154_1_, p_73154_2_);
+		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, x, z);
 		byte[] abyte1 = chunk.getBiomeArray();
 		
 		for (int k = 0; k < abyte1.length; ++ k) {
@@ -213,11 +226,11 @@ public class ChunkProviderIridis implements IChunkProvider {
 		return chunk;
 	}
 	
-	private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_) {
-		this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, 200.0D, 200.0D, 0.5D);
-		this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
-		this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-		this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+	private void generateNoise(int x, int y, int z) {
+		this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, x, z, 5, 5, 200.0D, 200.0D, 0.5D);
+		this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, x, y, z, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
+		this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+		this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
 		int l = 0;
 		int i1 = 0;
 		
@@ -227,7 +240,7 @@ public class ChunkProviderIridis implements IChunkProvider {
 				float f1 = 0.0F;
 				float f2 = 0.0F;
 				byte b0 = 2;
-				BiomeGenBase biomegenbase = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
+				BiomeGenBase biomegenbase = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 12];
 				
 				for (int l1 = -b0; l1 <= b0; ++ l1) {
 					for (int i2 = -b0; i2 <= b0; ++ i2) {
@@ -318,18 +331,22 @@ public class ChunkProviderIridis implements IChunkProvider {
 	}
 	
 	/** Populates chunk with ores etc etc */
-	public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_) {
+	public void populate(IChunkProvider chunkProvider, int x, int z) {
+		
 		BlockFalling.fallInstantly = true;
-		int k = p_73153_2_ * 16;
-		int l = p_73153_3_ * 16;
+		int k = x * 16;
+		int l = z * 16;
+		
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(k + 16, l + 16);
+		
 		this.rand.setSeed(this.worldObj.getSeed());
 		long i1 = this.rand.nextLong() / 2L * 2L + 1L;
 		long j1 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed((long) p_73153_2_ * i1 + (long) p_73153_3_ * j1 ^ this.worldObj.getSeed());
+		this.rand.setSeed(x * i1 + z * j1 ^ worldObj.getSeed());
+		
 		boolean flag = false;
 		
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(chunkProvider, worldObj, rand, x, z, flag));
 		
 		if (this.mapFeaturesEnabled) {
 			
@@ -339,14 +356,14 @@ public class ChunkProviderIridis implements IChunkProvider {
 		int l1;
 		int i2;
 		
-		if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && !flag && this.rand.nextInt(4) == 0 && TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAKE)) {
+		if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && !flag && this.rand.nextInt(4) == 0 && TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, LAKE)) {
 			k1 = k + this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(256);
 			i2 = l + this.rand.nextInt(16) + 8;
 			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, k1, l1, i2);
 		}
 		
-		if (TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAVA) && !flag && this.rand.nextInt(8) == 0) {
+		if (TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, LAVA) && !flag && this.rand.nextInt(8) == 0) {
 			k1 = k + this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
 			i2 = l + this.rand.nextInt(16) + 8;
@@ -356,7 +373,7 @@ public class ChunkProviderIridis implements IChunkProvider {
 			}
 		}
 		
-		boolean doGen = TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, DUNGEON);
+		boolean doGen = TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, DUNGEON);
 		for (k1 = 0; doGen && k1 < 8; ++ k1) {
 			l1 = k + this.rand.nextInt(16) + 8;
 			i2 = this.rand.nextInt(256);
@@ -365,13 +382,13 @@ public class ChunkProviderIridis implements IChunkProvider {
 		}
 		
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);
-		if (TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, ANIMALS)) {
+		if (TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, ANIMALS)) {
 			SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
 		}
 		k += 8;
 		l += 8;
 		
-		doGen = TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, ICE);
+		doGen = TerrainGen.populate(chunkProvider, worldObj, rand, x, z, flag, ICE);
 		for (k1 = 0; doGen && k1 < 16; ++ k1) {
 			for (l1 = 0; l1 < 16; ++ l1) {
 				i2 = this.worldObj.getPrecipitationHeight(k + k1, l + l1);
@@ -386,7 +403,7 @@ public class ChunkProviderIridis implements IChunkProvider {
 			}
 		}
 		
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(chunkProvider, worldObj, rand, x, z, flag));
 		
 		BlockFalling.fallInstantly = false;
 	}
@@ -415,7 +432,7 @@ public class ChunkProviderIridis implements IChunkProvider {
 	
 	/** Converts the instance data to a readable string. */
 	public String makeString() {
-		return "RandomLevelSource";
+		return "IridisRandomLevelSource";
 	}
 	
 	/** Returns a list of creatures of the specified type that can spawn at the

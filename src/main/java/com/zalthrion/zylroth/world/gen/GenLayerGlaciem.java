@@ -5,15 +5,15 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
-public class GenLayerKyrul extends GenLayer {
+public class GenLayerGlaciem extends GenLayer {
 	
-	public GenLayerKyrul(long seed) {
+	public GenLayerGlaciem(long seed) {
 		super(seed);
 	}
 	
 	public static GenLayer[] makeTheWorld(long seed, WorldType type) {
 		
-		GenLayer biomes = new GenLayerBiomesKyrul(1L);
+		GenLayer biomes = new GenLayerBiomesGlaciem(1L);
 		
 		biomes = new GenLayerZoom(1000L, biomes);
 		biomes = new GenLayerZoom(1001L, biomes);

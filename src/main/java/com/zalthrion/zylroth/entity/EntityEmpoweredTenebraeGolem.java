@@ -25,6 +25,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
 import cpw.mods.fml.relauncher.Side;
@@ -33,7 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisplayData {
 	private int attackTimer;
 	
-	private int deathTicks;
+	public int deathTicks;
 	
 	public EntityEmpoweredTenebraeGolem(World world) {
 		super(world);
@@ -61,12 +62,22 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		// this.applyAttribute(SharedMonsterAttributes.attackDamage, 0.0D);
+		
+		if(ConfigurationHandler.getHardcoreModeEnabled() == true){
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.28D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(25.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
+		}
+		
+		else {
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(750.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
-		
+		}
 	}
 	
 	/** Decrements the entity's air supply when underwater */

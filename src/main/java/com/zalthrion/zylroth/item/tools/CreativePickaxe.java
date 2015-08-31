@@ -83,7 +83,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 			
 			Material material = world.getBlock(x, y, z).getMaterial();
 			
-			boolean valid = (material == Material.rock || material == Material.ice || material == Material.clay);
+			boolean valid = (material == Material.rock || material == Material.ice || material == Material.packedIce || material == Material.clay);
 			
 			if (valid) {
 				for (int ix = -1; ix < 2; ++ ix) {
@@ -92,19 +92,19 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 							
 							Material neighbourMaterial = world.getBlock(x + ix, y + iy, z + iz).getMaterial();
 							
-							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.clay);
+							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.packedIce || neighbourMaterial == Material.clay);
 							
 							boolean neighbourValid_Shovel = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
 							
+							ItemStack shovel = new ItemStack(ModTools.creativeShovel, creative);
+
 							if (neighbourValid) {
 								world.breakBlock(x + ix, y + iy, z + iz, true);
 								stack.damageItem(1, player);
 							}
 							
-							else if (neighbourValid || neighbourValid_Shovel) {
-								
-								ItemStack shovel = new ItemStack(ModTools.creativeShovel);
-								
+							else if (neighbourValid || neighbourValid_Shovel && player.inventory.hasItemStack(shovel)) {
+																
 								world.breakBlock(x + ix, y + iy, z + iz, true);
 								stack.damageItem(1, player);
 								shovel.damageItem(1, player);
