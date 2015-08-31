@@ -10,7 +10,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		
 		this.enableRain = false;
 		this.enableSnow = false;
-		
+				
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
@@ -19,11 +19,11 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		
 		this.theBiomeDecorator.flowersPerChunk = -999;
 		this.theBiomeDecorator.treesPerChunk = -999;
-		
+				
 		this.theBiomeDecorator.generateLakes = false;
 		
 		this.topBlock = (Blocks.grass);
-		this.fillerBlock = (Blocks.stone);
+		this.fillerBlock = (Blocks.dirt);
 		
 		this.setHeight(height_HighPlateaus);
 		this.setBiomeName("Void Mountains");
@@ -44,5 +44,4 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 	public int getSkyColorByTemp(float par1) {
 		return 0x1E2224;
 	}
-	
 }
