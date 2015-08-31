@@ -48,83 +48,129 @@ public class DragonNest extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		// check that each corner is one of the valid spawn blocks
-		if (!locationIsValidSpawn(world, x, y, z) || !locationIsValidSpawn(world, x + 6, y, z) || !locationIsValidSpawn(world, x + 6, y, z + 6) || !locationIsValidSpawn(world, x, y, z + 6) && world.isAirBlock(x + 3, y + 4, z + 3)) { return false; }
+		if (!locationIsValidSpawn(world, x, y, z) 
+				|| !locationIsValidSpawn(world, x - 3, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x - 3, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x - 3, y + 1, z + 0)
+				|| !locationIsValidSpawn(world, x - 3, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x - 3, y + 1, z + 2)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z - 3)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z + 0)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z + 2)
+				|| !locationIsValidSpawn(world, x - 2, y + 1, z + 3)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z - 3)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z + 0)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z + 2)
+				|| !locationIsValidSpawn(world, x - 1, y + 1, z + 3)
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z - 3)
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z + 0) // Central Block
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z + 2)
+				|| !locationIsValidSpawn(world, x + 0, y + 1, z + 3)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z - 3)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z + 0)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z + 2)
+				|| !locationIsValidSpawn(world, x + 1, y + 1, z + 3)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z - 3)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z + 0)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z + 2)
+				|| !locationIsValidSpawn(world, x + 2, y + 1, z + 3)
+				|| !locationIsValidSpawn(world, x + 3, y + 1, z - 2)
+				|| !locationIsValidSpawn(world, x + 3, y + 1, z - 1)
+				|| !locationIsValidSpawn(world, x + 3, y + 1, z + 0)
+				|| !locationIsValidSpawn(world, x + 3, y + 1, z + 1)
+				|| !locationIsValidSpawn(world, x + 3, y + 1, z + 2)
+				
+				&& world.isAirBlock(x, y + 4, z)) { return false; }
 		
 		/* z = z - 10; x = x - 10; */
 		
-		world.setBlock(x + 0, y + 0, z + 1, Blocks.cobblestone, 0, 0);
-		world.setBlock(x + 0, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 0, y + 0, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 0, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 0, y + 0, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 0, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 0, z + 6, Blocks.stone, 0, 0);
+		world.setBlock(x - 3, y + 1, z - 2, Blocks.cobblestone, 0, 0);
+		world.setBlock(x - 3, y + 1, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 3, y + 1, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x - 3, y + 1, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 3, y + 1, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z - 3, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 1, z + 3, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 1, z - 3, Blocks.cobblestone, 0, 0);
+		world.setBlock(x - 1, y + 1, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 1, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 1, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 1, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 1, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 1, z + 3, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 1, z - 3, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 1, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 1, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 1, z + 0, Blocks.stone, 0, 0); // Central Block
+		world.setBlock(x + 0, y + 1, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 1, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 1, z + 3, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 1, z - 3, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 1, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 1, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 1, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 1, z + 1, Blocks.stone, 0, 0);
 		world.setBlock(x + 1, y + 1, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 1, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 1, y + 1, z + 4, Blocks.cobblestone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 0, Blocks.cobblestone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 0, z + 6, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 1, z + 3, Blocks.cobblestone, 0, 0);
+		world.setBlock(x + 2, y + 1, z - 3, Blocks.stone, 0, 0);
+		world.setBlock(x + 2, y + 1, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 2, y + 1, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 2, y + 1, z + 0, Blocks.stone, 0, 0);
 		world.setBlock(x + 2, y + 1, z + 1, Blocks.stone, 0, 0);
 		world.setBlock(x + 2, y + 1, z + 2, Blocks.stone, 0, 0);
 		world.setBlock(x + 2, y + 1, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 1, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 1, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 2, y + 2, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 0, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 3, Blocks.stone, 0, 0); // Central
-																	// Block
-		world.setBlock(x + 3, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 0, z + 6, Blocks.stone, 0, 0);
+		world.setBlock(x + 3, y + 1, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 3, y + 1, z - 1, Blocks.cobblestone, 0, 0);
+		world.setBlock(x + 3, y + 1, z + 0, Blocks.stone, 0, 0);
 		world.setBlock(x + 3, y + 1, z + 1, Blocks.stone, 0, 0);
 		world.setBlock(x + 3, y + 1, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 1, z + 3, Blocks.cobblestone, 0, 0);
-		world.setBlock(x + 3, y + 1, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 1, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 2, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 3, y + 2, z + 3, ModBlocks.spawner_VoidDragon, 0, 0);
-		world.setBlock(x + 3, y + 3, z + 3, Blocks.gravel, 0, 0); // Top Block
-		world.setBlock(x + 3, y + 2, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 0, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 0, z + 6, Blocks.cobblestone, 0, 0);
-		world.setBlock(x + 4, y + 1, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 1, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 1, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 1, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 1, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 4, y + 2, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 0, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 5, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 0, z + 6, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 1, z + 2, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 1, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 5, y + 1, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 6, y + 0, z + 1, Blocks.stone, 0, 0);
-		world.setBlock(x + 6, y + 0, z + 2, Blocks.cobblestone, 0, 0);
-		world.setBlock(x + 6, y + 0, z + 3, Blocks.stone, 0, 0);
-		world.setBlock(x + 6, y + 0, z + 4, Blocks.stone, 0, 0);
-		world.setBlock(x + 6, y + 0, z + 5, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 2, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 2, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x - 2, y + 2, z + 1, Blocks.cobblestone, 0, 0);
+		world.setBlock(x - 1, y + 2, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 2, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 2, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 2, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 2, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x - 1, y + 3, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 2, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 2, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 2, z + 0, Blocks.cobblestone, 0, 0);
+		world.setBlock(x + 0, y + 2, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 2, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 3, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 0, y + 3, z + 0, ModBlocks.spawner_VoidDragon, 0, 0);
+		world.setBlock(x + 0, y + 4, z + 0, Blocks.gravel, 0, 0); // Top Block
+		world.setBlock(x + 0, y + 3, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 2, z - 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 2, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 2, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 2, z + 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 2, z + 2, Blocks.stone, 0, 0);
+		world.setBlock(x + 1, y + 3, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x + 2, y + 2, z - 1, Blocks.stone, 0, 0);
+		world.setBlock(x + 2, y + 2, z + 0, Blocks.stone, 0, 0);
+		world.setBlock(x + 2, y + 2, z + 1, Blocks.stone, 0, 0);
 		
 		return true;
 	}
