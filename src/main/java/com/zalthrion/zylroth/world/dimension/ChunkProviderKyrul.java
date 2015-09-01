@@ -36,13 +36,13 @@ import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import com.zalthrion.zylroth.lib.ModBiomes;
-import com.zalthrion.zylroth.world.gen.structures.MapGenDragonNest;
+import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
 public class ChunkProviderKyrul implements IChunkProvider {
 	/** RNG. */
@@ -66,7 +66,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	private MapGenBase caveGenerator;
 	private MapGenMineshaft mineshaftGenerator;
 	private MapGenBase ravineGenerator;
-	private MapGenDragonNest dragonNestGenerator;
+	private DragonNest dragonNestGenerator;
 	private BiomeGenBase[] biomesForGeneration;
 	double[] ngo3Octaves;
 	double[] ngo1Octaves;
@@ -79,7 +79,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		this.caveGenerator = new MapGenCaves();
 		this.mineshaftGenerator = new MapGenMineshaft();
 		this.ravineGenerator = new MapGenRavine();
-		this.dragonNestGenerator = new MapGenDragonNest();
+		this.dragonNestGenerator = new DragonNest();
 		{
 			caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, EventType.CAVE);
 			mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, EventType.MINESHAFT);
@@ -206,7 +206,8 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		if (this.settings.useCaves) this.caveGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
 		if (this.settings.useRavines) this.ravineGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
 		if (this.settings.useMineShafts && this.mapFeaturesEnabled) this.mineshaftGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
-		if (this.worldObj.getWorldChunkManager().func_180300_a(new BlockPos(chunkX * 16, 64, chunkZ * 16), ModBiomes.VoidMountains) == ModBiomes.VoidMountains) this.dragonNestGenerator.generate(this.worldObj, this.rand, new BlockPos(chunkX * 16, this.worldObj.getHeight(new BlockPos(chunkX * 16, 0, chunkZ * 16)).getY(), chunkZ * 16), primer);
+		// if (this.worldObj.getWorldChunkManager().func_180300_a(new BlockPos(chunkX * 16, 64, chunkZ * 16), ModBiomes.voidMountains) == ModBiomes.voidMountains) this.dragonNestGenerator.generate(this.worldObj, this.rand, new BlockPos(chunkX * 16, this.worldObj.getHeight(new BlockPos(chunkX * 16, 0, chunkZ * 16)).getY(), chunkZ * 16), primer);
+		// TODO Determine how villages generate and make the DragonNest like that
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 		byte[] abyte = chunk.getBiomeArray();
 		

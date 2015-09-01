@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModTools {
 	
+	private static final ToolMaterial creativeSwordMaterial = EnumHelper.addToolMaterial("CreativeSword", 3, 12250, 10, 996, 50);
 	private static final ToolMaterial creativeDamageTools = EnumHelper.addToolMaterial("creativeDamageTools", 3, 12250, 10, 500.0F, 50);
 	private static final ToolMaterial creativeTools = EnumHelper.addToolMaterial("creativeTools", 3, 12250, 10, 250.0F, 50);
 	
@@ -30,7 +31,7 @@ public class ModTools {
 	public static final Item tenebraeShovel = new TenebraeShovel(tenebraeTools);
 	public static final Item tenebraeHoe = new TenebraeHoe(tenebraeTools);
 	
-	public static Item creativeSword = new CreativeSword(creativeDamageTools);
+	public static Item creativeSword = new CreativeSword(creativeSwordMaterial);
 	public static Item creativePickaxe = new CreativePickaxe(creativeDamageTools);
 	public static Item creativeAxe = new CreativeAxe(creativeDamageTools);
 	public static Item creativeShovel = new CreativeShovel(creativeTools);

@@ -7,23 +7,20 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class ModBiomes {
-	
-	public static BiomeGenBase DreadWastes;
-	
-	public static BiomeGenBase HauntedForest;
-	
-	public static BiomeGenBase AshBarrens;
-	
-	public static BiomeGenBase VoidMountains;
+	public static BiomeGenBase dreadWastes;
+	public static BiomeGenBase hauntedForest;
+	public static BiomeGenBase ashBarrens;
+	public static BiomeGenBase voidMountains;
 	
 	
-	public static BiomeGenBase JadePlains;
+	public static BiomeGenBase jadePlains;
+	public static BiomeGenBase autumnForest;
+	public static BiomeGenBase sapphireOcean;
+	public static BiomeGenBase rainbowForest;
 	
-	public static BiomeGenBase AutumnForest;
-	
-	public static BiomeGenBase SapphireOcean;
-	
-	public static BiomeGenBase RainbowForest;
+	public static BiomeGenBase frozenOcean;
+	public static BiomeGenBase coldOcean;
+	public static BiomeGenBase frozenWastes;
 	
 	public static void init() {
 		initBiomes();
@@ -31,40 +28,35 @@ public class ModBiomes {
 	}
 	
 	public static void initBiomes() {
+		dreadWastes = new BiomeGenDreadWastes(180);
+		hauntedForest = new BiomeGenHauntedForest(181);
+		ashBarrens = new BiomeGenAshBarrens(182);
+		voidMountains = new BiomeGenVoidMountains(183);
 		
-		DreadWastes = new BiomeGenDreadWastes(180);
+		jadePlains = new BiomeGenJadePlains(210);
+		autumnForest = new BiomeGenAutumnForest(211);
+		sapphireOcean = new BiomeGenSapphireOcean(212);
+		rainbowForest = new BiomeGenRainbowForest(213);
 		
-		HauntedForest = new BiomeGenHauntedForest(181);
-		
-		AshBarrens = new BiomeGenAshBarrens(182);
-		
-		VoidMountains = new BiomeGenVoidMountains(183);
-		
-		
-		JadePlains = new BiomeGenJadePlains(210);
-		
-		AutumnForest = new BiomeGenAutumnForest(211);
-		
-		SapphireOcean = new BiomeGenSapphireOcean(212);
-		
-		RainbowForest = new BiomeGenRainbowForest(213);
-		
+		frozenOcean = new BiomeGenFrozenOcean(240);
+		coldOcean = new BiomeGenColdOcean(241);
+		frozenWastes = new BiomeGenFrozenWastes(242);
 	}
 	
 	public static void registerBiomes() {
+		BiomeDictionary.registerBiomeType(dreadWastes, Type.PLAINS);
+		BiomeDictionary.registerBiomeType(hauntedForest, Type.FOREST);
+		BiomeDictionary.registerBiomeType(ashBarrens, Type.DRY);
+		BiomeDictionary.registerBiomeType(voidMountains, Type.HILLS);
 		
-		BiomeDictionary.registerBiomeType(DreadWastes, Type.PLAINS);
-		BiomeDictionary.registerBiomeType(HauntedForest, Type.FOREST);
-		BiomeDictionary.registerBiomeType(AshBarrens, Type.DRY);
-		BiomeDictionary.registerBiomeType(VoidMountains, Type.HILLS);
+		BiomeDictionary.registerBiomeType(jadePlains, Type.PLAINS);
+		BiomeDictionary.registerBiomeType(autumnForest, Type.FOREST);
+		BiomeDictionary.registerBiomeType(sapphireOcean, Type.OCEAN);
+		BiomeDictionary.registerBiomeType(rainbowForest, Type.MAGICAL);
 		
-		BiomeDictionary.registerBiomeType(JadePlains, Type.PLAINS);
-		BiomeDictionary.registerBiomeType(AutumnForest, Type.FOREST);
-		BiomeDictionary.registerBiomeType(SapphireOcean, Type.OCEAN);
-		BiomeDictionary.registerBiomeType(RainbowForest, Type.MAGICAL);
-		
+		BiomeDictionary.registerBiomeType(frozenOcean, Type.COLD);
+		BiomeDictionary.registerBiomeType(coldOcean, Type.OCEAN);
+		BiomeDictionary.registerBiomeType(frozenWastes, Type.COLD);
 		// BiomeManager.addSpawnBiome(DreadWastes);
-		
 	}
-	
 }

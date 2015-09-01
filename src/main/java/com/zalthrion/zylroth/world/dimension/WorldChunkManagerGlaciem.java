@@ -17,9 +17,9 @@ import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.world.gen.GenLayerKyrul;
+import com.zalthrion.zylroth.world.gen.GenLayerGlaciem;
 
-public class WorldChunkManagerKyrul extends WorldChunkManager {
+public class WorldChunkManagerGlaciem extends WorldChunkManager {
 	
 	private GenLayer genBiomes;
 	/** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
@@ -29,22 +29,22 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
-	@SuppressWarnings({"unchecked", "rawtypes"}) public WorldChunkManagerKyrul() {
+	@SuppressWarnings({"unchecked", "rawtypes"}) public WorldChunkManagerGlaciem() {
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = new ArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
 	}
 	
-	public WorldChunkManagerKyrul(long seed, WorldType worldType) {
+	public WorldChunkManagerGlaciem(long seed, WorldType worldType) {
 		this();
 		
-		GenLayer[] genlayer = GenLayerKyrul.makeTheWorld(seed, worldType);
+		GenLayer[] genlayer = GenLayerGlaciem.makeTheWorld(seed, worldType);
 		genlayer = getModdedBiomeGenerators(worldType, seed, genlayer);
 		this.genBiomes = genlayer[0];
 		this.biomeIndexLayer = genlayer[1];
 	}
 	
-	public WorldChunkManagerKyrul(World world) {
+	public WorldChunkManagerGlaciem(World world) {
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
 	}
 	

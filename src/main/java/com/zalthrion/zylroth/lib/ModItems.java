@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.lib;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.item.*;
 import com.zalthrion.zylroth.item.mount.*;
 
@@ -21,6 +22,7 @@ public final class ModItems {
 	public static Item gold_Talisman = new GoldTalisman();
 	public static Item void_Talisman = new VoidTalisman();
 	public static Item rainbow_Talisman = new RainbowTalisman();
+	public static Item ice_Talisman = new IceTalisman();
 	/* Others */
 	public static Item dark_Shard = new DarkShard();
 	public static Item soul_Essence = new SoulEssence();
@@ -42,8 +44,9 @@ public final class ModItems {
 		GameRegistry.registerItem(SC_WarTortoise, "SC_WarTortoise");
 		/* Portals */
 		GameRegistry.registerItem(gold_Talisman, "goldTalisman");
-		GameRegistry.registerItem(void_Talisman, "voidTalisman");
-		GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
+		if (ConfigurationHandler.getKyrulEnabled()) GameRegistry.registerItem(void_Talisman, "voidTalisman");
+		if (ConfigurationHandler.getIridisEnabled()) GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
+		if (ConfigurationHandler.getGlaciemEnabled()) GameRegistry.registerItem(ice_Talisman, "iceTalisman");
 		/* Others */
 		GameRegistry.registerItem(dark_Shard, "darkShard");
 		GameRegistry.registerItem(soul_Essence, "soulEssence");

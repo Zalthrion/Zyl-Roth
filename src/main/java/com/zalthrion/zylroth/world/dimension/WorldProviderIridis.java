@@ -24,4 +24,8 @@ public class WorldProviderIridis extends WorldProvider {
 	@Override public String getInternalNameSuffix() {
 		return "";
 	}
+	
+	@Override public String getSaveFolder() {
+		return "Iri'dis";
+	}
 }

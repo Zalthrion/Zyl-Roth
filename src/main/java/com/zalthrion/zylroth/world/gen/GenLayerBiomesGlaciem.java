@@ -6,15 +6,14 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerBiomesKyrul extends GenLayer {
+public class GenLayerBiomesGlaciem extends GenLayer {
+	protected BiomeGenBase[] allowedBiomes = {ModBiomes.frozenOcean, ModBiomes.coldOcean, ModBiomes.frozenWastes};
 	
-	protected BiomeGenBase[] allowedBiomes = {/*ModBiomes.DreadWastes, ModBiomes.HauntedForest, ModBiomes.AshBarrens, */ModBiomes.voidMountains}; //TODO Uncomment this after testing
-	
-	public GenLayerBiomesKyrul(long seed) {
+	public GenLayerBiomesGlaciem(long seed) {
 		super(seed);
 	}
 	
-	public GenLayerBiomesKyrul(long seed, GenLayer genlayer) {
+	public GenLayerBiomesGlaciem(long seed, GenLayer genlayer) {
 		super(seed);
 		this.parent = genlayer;
 	}

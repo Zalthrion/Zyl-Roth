@@ -56,7 +56,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
 			Material material = world.getBlockState(pos).getBlock().getMaterial();
-			boolean valid = (material == Material.rock || material == Material.ice || material == Material.clay);
+			boolean valid = (material == Material.rock || material == Material.ice || material == Material.packedIce || material == Material.clay);
 			
 			if (valid) {
 				boolean hasShovel = false;
@@ -80,7 +80,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 						for (int iz = -1; iz < 2; ++ iz) {
 							
 							Material neighbourMaterial = world.getBlockState(pos.add(ix, iy, iz)).getBlock().getMaterial();
-							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.clay);
+							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.packedIce || neighbourMaterial == Material.clay);
 							boolean neighbourValidShovel = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
 							
 							if (neighbourValid) {

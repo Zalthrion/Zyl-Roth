@@ -29,11 +29,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
 public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisplayData {
 	private int attackTimer;
-	private int deathTicks;
+	public int deathTicks;
 	
 	public EntityEmpoweredTenebraeGolem(World world) {
 		super(world);
@@ -53,10 +54,11 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 1250.0D : 750.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(hardcore ? 0.28D : 0.27D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(hardcore ? 25.0D : 15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(hardcore ? 15.0D : 5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
 	}
 	

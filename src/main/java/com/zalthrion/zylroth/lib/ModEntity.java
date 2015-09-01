@@ -3,7 +3,6 @@ package com.zalthrion.zylroth.lib;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
@@ -36,7 +35,7 @@ public class ModEntity {
 		EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true);
 		if (hasEgg) {
 			// Item spawnEgg = new SpawnEgg(entityName, bgEggColor, fgEggColor);
-			// GameRegistry.registerItem(spawnEgg, "spawnEgg" + entityName);
+			// GameRegistry.registerItem(spawnEgg, "spawnEgg" + entityName); //TODO Figure out why this makes more than one spawn egg.
 		}
 	}
 	

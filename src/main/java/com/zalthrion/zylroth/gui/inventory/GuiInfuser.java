@@ -39,7 +39,7 @@ public class GuiInfuser extends GuiContainer {
 		int i1;
 		
 		GL11.glColor4f(1, 1, 1, 1);
-		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/gui/InfuserGui.png"));
+		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/gui/InfuserGui.png"));
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
 		// fontRendererObj.drawString("Infuser", guiX + 16, guiY + +12,
 		// 0x000000);

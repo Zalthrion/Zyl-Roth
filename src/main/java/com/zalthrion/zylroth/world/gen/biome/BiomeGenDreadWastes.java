@@ -1,15 +1,14 @@
 package com.zalthrion.zylroth.world.gen.biome;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.biome.BiomeGenBase;
-
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.biome.BiomeGenBase;
+
 public class BiomeGenDreadWastes extends BiomeGenBase {
 	
-	@SuppressWarnings("unchecked")
-	public BiomeGenDreadWastes(int id) {
+	@SuppressWarnings("unchecked") public BiomeGenDreadWastes(int id) {
 		super(id);
 		
 		this.enableRain = false;
@@ -18,6 +17,7 @@ public class BiomeGenDreadWastes extends BiomeGenBase {
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
 		this.flowers.clear();
 		
 		this.theBiomeDecorator.flowersPerChunk = -999;
@@ -47,7 +47,7 @@ public class BiomeGenDreadWastes extends BiomeGenBase {
 	}
 	
 	public int getSkyColorByTemp(float par1) {
-		return 0x474747;
+		return 0x1E2224;
 	}
 	
 }

@@ -7,11 +7,10 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
@@ -20,7 +19,8 @@ import com.zalthrion.zylroth.reference.Reference;
 @SideOnly(Side.CLIENT)
 public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	
-	private static final ResourceLocation ETgolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
+	//  private static final ResourceLocation explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
+	private static final ResourceLocation etGolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
 	
 	/** Empowered Tenebrae Golem's Model. */
 	@SuppressWarnings("unused")
@@ -32,29 +32,56 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		this.empowered_tenebrae_golemModel = (ModelEmpoweredTenebraeGolem) this.mainModel;
 	}
 	
-	/** Renders the Empowered Tenebrae Golem. */
-	public void doRenderEmpoweredTenebraeGolem(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
-		super.doRender(par1EntityEmpoweredTenebraeGolem, par2, par4, par6, par8, par9);
-	}
-	
 	protected ResourceLocation getEmpoweredTenebraeGolemTextures(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem) {
-		return ETgolemTextures;
+		return etGolemTextures;
 	}
 	
 	/** Rotates Empowered Tenebrae Golem corpse. */
-	protected void rotateEmpoweredTenebraeGolemCorpse(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem, float par2, float par3, float par4) {
-		super.rotateCorpse(par1EntityEmpoweredTenebraeGolem, par2, par3, par4);
+	protected void rotateEmpoweredTenebraeGolemCorpse(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4) {
+		super.rotateCorpse(golem, par2, par3, par4);
 		
-		if ((double) par1EntityEmpoweredTenebraeGolem.limbSwingAmount >= 0.01D) {
+		if ((double) golem.limbSwingAmount >= 0.01D) {
 			float f3 = 13.0F;
-			float f4 = par1EntityEmpoweredTenebraeGolem.limbSwing - par1EntityEmpoweredTenebraeGolem.limbSwingAmount * (1.0F - par4) + 6.0F;
+			float f4 = golem.limbSwing - golem.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
-			GL11.glRotatef(6.5F * f5, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
+		}
+		
+		if (golem.deathTime > 0) {
+			float f5 = (golem.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
+			f5 = MathHelper.sqrt_float(f5);
+			if (f5 > 1F) f5 = 1F;
+			GlStateManager.rotate(f5 * getDeathMaxRotation(golem), 0, 0, 1);
 		}
 	}
 	
+/*	protected void renderEmpoweredTenebraeGolemModel(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4, float par5, float par6, float par7) {
+		if (golem.deathTicks > 0) {
+			float f6 = golem.deathTicks / 200.0F;
+			GlStateManager.depthFunc(GL11.GL_LEQUAL);
+			GlStateManager.enableAlpha();
+			GlStateManager.alphaFunc(GL11.GL_GREATER, f6);
+			bindTexture(explosion);
+			mainModel.render(golem, par2, par3, par4, par5, par6, par7);
+			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
+			GlStateManager.depthFunc(GL11.GL_EQUAL);
+			// TODO Render Glitch, and without it the animation doesn't works.
+			// GL11.glDepthFunc(GL11.GL_EQUAL);
+		}
+		
+		bindEntityTexture(golem);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		mainModel.render(golem, par2, par3, par4, par5, par6, par7);
+		GlStateManager.disableBlend();
+	}*/
+	
+	public void renderEmpoweredTenebraeGolem(EntityEmpoweredTenebraeGolem golem, double par2, double par4, double par6, float par8, float par9) {
+		super.doRender(golem, par2, par4, par6, par8, par9);
+	}
+	
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
+		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 	
 	@Override protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
@@ -62,7 +89,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	}
 	
 	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
+		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
@@ -70,7 +97,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	}
 	
 	@Override public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
+		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
 	}
 	
 	@Override protected void renderLivingAt(EntityLivingBase entity, double x, double y, double z) {
