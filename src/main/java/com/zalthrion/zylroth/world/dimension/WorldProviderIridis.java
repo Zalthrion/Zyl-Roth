@@ -13,7 +13,7 @@ public class WorldProviderIridis extends WorldProvider {
 	}
 	
 	public IChunkProvider createChunkGenerator() {
-		return new ChunkProviderIridis(this.worldObj, this.worldObj.getSeed(), true);
+		return new ChunkProviderIridis(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().getGeneratorOptions());
 	}
 	
 	@Override

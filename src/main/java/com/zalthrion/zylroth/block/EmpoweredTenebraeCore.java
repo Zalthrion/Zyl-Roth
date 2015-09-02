@@ -48,5 +48,5 @@ public class EmpoweredTenebraeCore extends BlockBase {
 /*	@Override public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
 		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, l, 2);
-	}*/ //TODO Make this block rotatable
+	}*/ //TODO Make this block rotatable or whatever this was supposed to do
 }

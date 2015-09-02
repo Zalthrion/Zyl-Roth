@@ -4,9 +4,8 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.reference.Reference;
 
@@ -27,7 +26,7 @@ public class GuiSummonHorse extends GuiScreen {
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) - 36;
 		
-		GL11.glColor4f(1, 1, 1, 1);
+		GlStateManager.color(1, 1, 1, 1);
 		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/gui/InfuserGui.png"));
 		
 		super.drawScreen(x, y, ticks);

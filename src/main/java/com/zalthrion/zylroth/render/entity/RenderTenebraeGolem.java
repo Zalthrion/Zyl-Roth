@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
@@ -9,8 +10,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
@@ -48,7 +47,7 @@ public class RenderTenebraeGolem extends RenderLiving {
 			float f3 = 13.0F;
 			float f4 = par1EntityTenebraeGolem.limbSwing - par1EntityTenebraeGolem.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
-			GL11.glRotatef(6.5F * f5, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
 	}
 	

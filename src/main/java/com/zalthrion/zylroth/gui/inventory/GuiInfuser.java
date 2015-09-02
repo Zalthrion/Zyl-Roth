@@ -4,10 +4,9 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.container.ContainerInfuser;
 import com.zalthrion.zylroth.reference.Reference;
@@ -38,7 +37,7 @@ public class GuiInfuser extends GuiContainer {
 		int guiY = (height - guiHeight) - 36;
 		int i1;
 		
-		GL11.glColor4f(1, 1, 1, 1);
+		GlStateManager.color(1, 1, 1, 1);
 		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/gui/InfuserGui.png"));
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
 		// fontRendererObj.drawString("Infuser", guiX + 16, guiY + +12,
