@@ -5,7 +5,6 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.world.World;
 
 public class EntitySkeletalHorse extends EntityHorse {
-	
 	public EntitySkeletalHorse(World world) {
 		super(world);
 		this.isEntityUndead();
@@ -36,5 +35,4 @@ public class EntitySkeletalHorse extends EntityHorse {
 	public boolean canBreatheUnderwater() {
 		return true;
 	}
-	
 }

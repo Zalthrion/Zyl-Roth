@@ -68,7 +68,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 		tagCompound.setBoolean("Tame", this.isTame());
 		tagCompound.setBoolean("Saddled", this.isHorseSaddled());
 		tagCompound.setBoolean("Summoned", this.isSummoned(true));
-		tagCompound.setString("OwnerUUID", this.func_152113_b());
+		tagCompound.setString("OwnerUUID", this.getOwnerId());
 	}
 	
 	@Override

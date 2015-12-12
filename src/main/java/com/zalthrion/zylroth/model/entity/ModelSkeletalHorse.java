@@ -202,6 +202,7 @@ public class ModelSkeletalHorse extends ModelBase {
 	}
 	
 	/** Sets the models various rotation angles then renders the model. */
+	@Override
 	public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
 		EntitySkeletalHorse entityhorse = (EntitySkeletalHorse) p_78088_1_;
 		int i = entityhorse.getHorseType();
@@ -322,6 +323,7 @@ public class ModelSkeletalHorse extends ModelBase {
 	/** Used for easily adding entity-dependent animations. The second and third
 	 * float params here are the same second and third as in the
 	 * setRotationAngles method. */
+	@Override
 	public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
 		super.setLivingAnimations(p_78086_1_, p_78086_2_, p_78086_3_, p_78086_4_);
 		float f3 = this.updateHorseRotation(p_78086_1_.prevRenderYawOffset, p_78086_1_.renderYawOffset, p_78086_4_);

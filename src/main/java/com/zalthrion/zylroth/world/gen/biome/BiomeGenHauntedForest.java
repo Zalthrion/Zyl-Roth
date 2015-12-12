@@ -46,8 +46,8 @@ public class BiomeGenHauntedForest extends BiomeGenBase {
 		return color = 0x473A52;
 	}
 	
+	@Override
 	public int getSkyColorByTemp(float par1) {
 		return 0x151617;
 	}
-	
 }

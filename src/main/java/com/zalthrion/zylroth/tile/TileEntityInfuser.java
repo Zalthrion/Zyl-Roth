@@ -207,7 +207,7 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 		
 	}
 	
-	public ItemStack getStackInSlotOnClosing(int i) {
+	@Override public ItemStack removeStackFromSlot(int i) {
 		if (this.slots[i] != null) {
 			ItemStack stack = this.slots[i];
 			this.slots[i] = null;
@@ -226,7 +226,7 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 		}
 	}
 	
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	@Override public boolean isUseableByPlayer(EntityPlayer player) {
 		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 	
@@ -274,7 +274,7 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 		return side.getIndex() == 0 || i != 0 || i != 1 || i != 2;
 	}
 	
-	public void readFromNBT(NBTTagCompound nbt) {
+	@Override public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		
 		NBTTagList list = nbt.getTagList("Stacks", nbt.getId());
@@ -299,7 +299,7 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 		 * nbt.getString("CustomName"); } */
 	}
 	
-	public void writeToNBT(NBTTagCompound nbt) {
+	@Override public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		
 		NBTTagList list = new NBTTagList();

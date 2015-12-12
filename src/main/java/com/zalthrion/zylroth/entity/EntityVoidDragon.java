@@ -19,7 +19,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMob {
-	
 	private Entity entity;
 	boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
 	

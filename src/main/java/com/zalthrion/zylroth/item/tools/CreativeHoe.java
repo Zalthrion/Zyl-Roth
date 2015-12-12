@@ -29,7 +29,7 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 	
 	public CreativeHoe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

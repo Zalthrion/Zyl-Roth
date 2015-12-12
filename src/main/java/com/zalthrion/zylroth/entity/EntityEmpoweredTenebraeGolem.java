@@ -93,12 +93,12 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.getYOffset());
 			int k = MathHelper.floor_double(this.posZ);
 			
-			if (!this.worldObj.isAirBlock(new BlockPos(i, j, k))) {
+			if (this.worldObj.getBlockState(new BlockPos(i, j, k)).getBlock().getRenderType() != -1) {
 				//TODO NOTE
 				/*
-				 * Causes ArrayIndexOutOfBoundsException: 0
+				 * See if this still Causes ArrayIndexOutOfBoundsException: 0
 				 */
-				// this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
+				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
 			}
 		}
 		
@@ -149,7 +149,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	@SideOnly(Side.CLIENT)
 	public int getAttackTimer() {
 		return this.attackTimer;
-	} // TODO What was this?
+	}
 	
 	/** Returns the sound this mob makes while it's alive. */
 	@Override
@@ -244,7 +244,8 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		}
 	}
 	
-	@Override public boolean canBeCollidedWith() {
+	@Override
+	public boolean canBeCollidedWith() {
 		if (this.deathTicks >= 1) {
 			return false;
 		} else return true;
@@ -263,7 +264,9 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	 * attr.setBaseValue(baseValue); } } */
 	
 	/** Returns true if this entity can attack entities of the specified class. */
-	@Override @SuppressWarnings("rawtypes") public boolean canAttackClass(Class par1Class) {
+	@Override
+	@SuppressWarnings("rawtypes")
+	public boolean canAttackClass(Class par1Class) {
 		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
 	}
 }

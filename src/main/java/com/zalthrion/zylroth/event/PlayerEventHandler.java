@@ -14,7 +14,8 @@ import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 
 public class PlayerEventHandler {
-	@SubscribeEvent public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {
+	@SubscribeEvent
+	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		

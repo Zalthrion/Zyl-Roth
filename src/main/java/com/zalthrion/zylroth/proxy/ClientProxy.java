@@ -82,10 +82,10 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerBlock(ModBlocks.voidium_Ore);
 		/* Items */
 		/* Armors */
-		ModelHelper.registerItem(ModArmors.Tenebrae_Helmet);
-		ModelHelper.registerItem(ModArmors.Tenebrae_Chestplate);
-		ModelHelper.registerItem(ModArmors.Tenebrae_Leggings);
-		ModelHelper.registerItem(ModArmors.Tenebrae_Boots);
+		ModelHelper.registerItem(ModArmors.tenebrae_Helmet);
+		ModelHelper.registerItem(ModArmors.tenebrae_Chestplate);
+		ModelHelper.registerItem(ModArmors.tenebrae_Leggings);
+		ModelHelper.registerItem(ModArmors.tenebrae_Boots);
 		/* Tools */
 		ModelHelper.registerItem(ModTools.creativePickaxe);
 		ModelHelper.registerItem(ModTools.creativeShovel);

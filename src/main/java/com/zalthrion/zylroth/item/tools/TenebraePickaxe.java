@@ -26,7 +26,7 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	public TenebraePickaxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

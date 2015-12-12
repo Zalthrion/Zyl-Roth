@@ -314,7 +314,6 @@ public class ChunkProviderIridis implements IChunkProvider {
 	}
 	
 	/** Populates chunk with ores etc etc */
-	//TODO Ask Zalthrion what the difference here from Ky'Rul was (I just copied and pasted)
 	@Override public void populate(IChunkProvider provider, int chunkX, int chunkZ) {
 		BlockFalling.fallInstantly = true;
 		int xPos = chunkX * 16;
@@ -406,11 +405,11 @@ public class ChunkProviderIridis implements IChunkProvider {
 	}
 	
 	/** Converts the instance data to a readable string. */
-	public String makeString() {
+	@Override public String makeString() {
 		return "RandomLevelSource";
 	}
 	
-	@SuppressWarnings("rawtypes") @Override public List getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creatureType);
 	}

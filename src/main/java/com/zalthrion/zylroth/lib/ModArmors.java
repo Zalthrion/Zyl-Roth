@@ -11,21 +11,21 @@ public final class ModArmors {
 	
 	//Tenebrae
 	
-	public static Item Tenebrae_Helmet;
-	public static Item Tenebrae_Chestplate;
-	public static Item Tenebrae_Leggings;
-	public static Item Tenebrae_Boots;
+	public static Item tenebrae_Helmet;
+	public static Item tenebrae_Chestplate;
+	public static Item tenebrae_Leggings;
+	public static Item tenebrae_Boots;
 	
 	public static void init() {
-		TenebraeArmor();
+		tenebraeArmor();
 	}
 	
-	public static void TenebraeArmor() {
+	public static void tenebraeArmor() {
 		ArmorMaterial tenebrae = EnumHelper.addArmorMaterial("Tenebrae", "Tenebrae", 42, new int[]{3, 8, 6, 3}, 16);
 		
-		GameRegistry.registerItem(Tenebrae_Helmet = new TenebraeArmor(tenebrae, "tenebrae", 0).setUnlocalizedName("tenebraeHelmet"), "tenebrae_helmet");
-		GameRegistry.registerItem(Tenebrae_Chestplate = new TenebraeArmor(tenebrae, "tenebrae", 1).setUnlocalizedName("tenebraeChestplate"), "tenebrae_chestplate");
-		GameRegistry.registerItem(Tenebrae_Leggings = new TenebraeArmor(tenebrae, "tenebrae", 2).setUnlocalizedName("tenebraeLeggings"), "tenebrae_leggings");
-		GameRegistry.registerItem(Tenebrae_Boots = new TenebraeArmor(tenebrae, "tenebrae", 3).setUnlocalizedName("tenebraeBoots"), "tenebrae_boots");
+		GameRegistry.registerItem(tenebrae_Helmet = new TenebraeArmor(tenebrae, "tenebrae", 0).setUnlocalizedName("tenebraeHelmet"), "tenebrae_helmet");
+		GameRegistry.registerItem(tenebrae_Chestplate = new TenebraeArmor(tenebrae, "tenebrae", 1).setUnlocalizedName("tenebraeChestplate"), "tenebrae_chestplate");
+		GameRegistry.registerItem(tenebrae_Leggings = new TenebraeArmor(tenebrae, "tenebrae", 2).setUnlocalizedName("tenebraeLeggings"), "tenebrae_leggings");
+		GameRegistry.registerItem(tenebrae_Boots = new TenebraeArmor(tenebrae, "tenebrae", 3).setUnlocalizedName("tenebraeBoots"), "tenebrae_boots");
 	}
 }

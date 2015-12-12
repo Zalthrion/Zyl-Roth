@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.block.spawner;
 
 import java.util.Random;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -17,7 +18,7 @@ public class SpawnerVoidDragon extends BlockBaseContainer {
 		this.setHardness(3.0F);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
-		this.setNames(name);
+		this.setUnlocalizedName(name);
 	}
 	
 	@Override
@@ -25,12 +26,13 @@ public class SpawnerVoidDragon extends BlockBaseContainer {
 		return new TileEntitySpawnerVoidDragon();
 	}
 	
-	public Item getItemDropped(int meta, Random random, int fortune) {
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
 	}
 	
+	@Override
 	public int quantityDropped(Random random) {
 		return 0;
 	}
-	
 }

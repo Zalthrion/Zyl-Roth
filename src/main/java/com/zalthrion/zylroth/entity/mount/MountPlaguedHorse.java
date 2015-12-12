@@ -24,7 +24,7 @@ public class MountPlaguedHorse extends MountBaseHorse {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		this.func_152115_b(player.getUniqueID().toString());
+		this.setOwnerId(player.getUniqueID().toString());
 		
 		ItemStack stack = player.inventory.getCurrentItem();
 		

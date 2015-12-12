@@ -10,9 +10,9 @@ public class AshBlock extends BlockBase {
 	
 	public AshBlock() {
 		super(Material.sand);
-		this.setNames(name);
+		this.setUnlocalizedName(name);
 		this.setHardness(0.5F);
 		this.setStepSound(soundTypeSand);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 	}
 }

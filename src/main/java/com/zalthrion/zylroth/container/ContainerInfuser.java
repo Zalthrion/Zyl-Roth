@@ -15,9 +15,7 @@ public class ContainerInfuser extends ContainerBase {
 	TileEntityInfuser infuser;
 	
 	private int lastCookTime;
-	
 	private int lastBurnTime;
-	
 	private int lastItemBurnTime;
 	
 	public static final int INPUT = 0, OUTPUT = 1, FIRST_FUEL = 2, SECOND_FUEL = 3;
@@ -27,10 +25,8 @@ public class ContainerInfuser extends ContainerBase {
 		
 		this.addSlotToContainer(new Slot(tile, INPUT, 34, 27)); // Input
 		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 27)); // Output
-		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 1)); // First
-																	// Fuel
-		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 55)); // Second
-																		// Fuel
+		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 1)); // First Fuel
+		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 55)); // Second Fuel
 		
 		bindPlayerInventory(inventoryPlayer);
 	}

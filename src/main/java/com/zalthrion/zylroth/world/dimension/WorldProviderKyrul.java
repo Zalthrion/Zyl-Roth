@@ -12,13 +12,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.zalthrion.zylroth.lib.ModDimension;
 
 public class WorldProviderKyrul extends WorldProvider {
-	
+	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 		this.dimensionId = ModDimension.dimensionId_Kyrul;
 		this.hasNoSky = true;
 	}
 	
+	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true, this.worldObj.getWorldInfo().getGeneratorOptions());
 	}
@@ -32,6 +33,7 @@ public class WorldProviderKyrul extends WorldProvider {
 		return "Ky'rul";
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
 		int i = 10518688;
@@ -61,6 +63,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	
 	/** Returns 'true' if in the "main surface world", but 'false' if in the
 	 * Nether or End dimensions. */
+	@Override
 	public boolean isSurfaceWorld() {
 		return true;
 	}
@@ -77,11 +80,13 @@ public class WorldProviderKyrul extends WorldProvider {
 	
 	/** Calculates the angle of sun and moon in the sky relative to a specified
 	 * time (usually worldTime) */
+	@Override
 	public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
 		return 0.0F;
 	}
 	
 	/** Returns array with sunrise/sunset colors */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
 		return null;

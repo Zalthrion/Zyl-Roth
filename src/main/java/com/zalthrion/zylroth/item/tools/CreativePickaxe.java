@@ -29,7 +29,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	public CreativePickaxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

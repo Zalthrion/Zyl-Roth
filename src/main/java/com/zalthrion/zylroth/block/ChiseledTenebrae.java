@@ -20,11 +20,12 @@ public class ChiseledTenebrae extends BlockBase {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypeMetal);
-		this.setNames(name);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setUnlocalizedName(name);
+		this.setCreativeTab(ModTabs.zylRoth);
 	}
 	
-	@Override public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
 		
 		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.empowered_Tenebrae_Core && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.infused_Tenebrae) {

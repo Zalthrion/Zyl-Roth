@@ -160,5 +160,4 @@ public class EntityUndeadMinion extends EntityMob {
 	public boolean canAttackClass(Class par1Class) {
 		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class;
 	}
-	
 }

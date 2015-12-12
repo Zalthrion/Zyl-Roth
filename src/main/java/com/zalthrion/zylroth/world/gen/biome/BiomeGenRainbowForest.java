@@ -38,8 +38,8 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 		return color = 0x11ADC2;
 	}
 	
+	@Override
 	public int getSkyColorByTemp(float par1) {
 		return 0x3CA7B5;
 	}
-	
 }

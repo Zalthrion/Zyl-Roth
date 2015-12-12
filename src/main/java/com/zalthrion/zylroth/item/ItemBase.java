@@ -9,7 +9,7 @@ import com.zalthrion.zylroth.reference.Reference;
 public class ItemBase extends Item {
 	public ItemBase() {
 		super();
-		setCreativeTab(ModTabs.ZylRoth);
+		setCreativeTab(ModTabs.zylRoth);
 		setMaxStackSize(64);
 		setNoRepair();
 	}
@@ -26,9 +26,5 @@ public class ItemBase extends Item {
 	
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
 	}
 }

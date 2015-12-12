@@ -10,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class GuiSummonHorse extends GuiScreen {
-	
 	GuiButton summonButton;
 	GuiButton unsummonButton;
 	
@@ -22,7 +21,6 @@ public class GuiSummonHorse extends GuiScreen {
 	@SuppressWarnings("unused")
 	@Override
 	public void drawScreen(int x, int y, float ticks) {
-		
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) - 36;
 		
@@ -39,7 +37,6 @@ public class GuiSummonHorse extends GuiScreen {
 	
 	@Override
 	public void initGui() {
-		
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
 		buttonList.clear();
@@ -52,20 +49,15 @@ public class GuiSummonHorse extends GuiScreen {
 	
 	@Override
 	public void actionPerformed(GuiButton button) throws IOException {
-		
 		switch (button.id) {
-		
 			case 1:
 				button.width = 55;
 				button.enabled = false;
 				// button.visible = false;
 				this.isSummonedButtonActive = true;
-				
 			case 2:
 				button.width = 55;
-				
 		}
 		super.actionPerformed(button);
 	}
-	
 }

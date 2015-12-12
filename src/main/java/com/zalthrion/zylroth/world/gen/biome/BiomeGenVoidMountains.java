@@ -40,6 +40,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		return color = 0x423E45;
 	}
 	
+	@Override
 	public int getSkyColorByTemp(float par1) {
 		return 0x1E2224;
 	}

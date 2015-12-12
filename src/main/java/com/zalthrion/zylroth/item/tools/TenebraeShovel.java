@@ -24,7 +24,7 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 	
 	public TenebraeShovel(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

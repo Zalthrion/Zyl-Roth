@@ -431,7 +431,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		return false;
 	}
 
-	@SuppressWarnings("rawtypes") @Override public List getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creatureType);
 	}

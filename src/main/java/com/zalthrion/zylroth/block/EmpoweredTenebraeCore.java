@@ -16,15 +16,16 @@ public class EmpoweredTenebraeCore extends BlockBase {
 	
 	public EmpoweredTenebraeCore() {
 		super(Material.rock);
-		this.setNames(name);
+		this.setUnlocalizedName(name);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypeMetal);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 	}
 	
-	@Override public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	@Override
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		super.randomDisplayTick(world, pos, state, rand);
 		
 		int x = pos.getX();

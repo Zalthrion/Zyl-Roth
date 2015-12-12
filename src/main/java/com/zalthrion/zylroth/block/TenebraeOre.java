@@ -18,15 +18,16 @@ public class TenebraeOre extends BlockBase {
 	
 	public TenebraeOre() {
 		super(Material.rock);
-		this.setNames(name);
+		this.setUnlocalizedName(name);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 	}
 	
-	@Override public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	@Override
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		super.randomDisplayTick(world, pos, state, rand);
 		
 		double d0 = (double) ((float) pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
@@ -35,15 +36,18 @@ public class TenebraeOre extends BlockBase {
 		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0, 0, 0);
 	}
 	
-	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ModItems.raw_Tenebrae;
 	}
 	
-	@Override public int quantityDropped(Random rand) {
+	@Override
+	public int quantityDropped(Random rand) {
 		return 2 + rand.nextInt(5);
 	}
 	
-	@Override public int quantityDroppedWithBonus(int fortune, Random rand) {
+	@Override
+	public int quantityDroppedWithBonus(int fortune, Random rand) {
 		if (fortune <= 0) return quantityDropped(rand);
 		
 		int j = rand.nextInt(fortune + 2) - 1;

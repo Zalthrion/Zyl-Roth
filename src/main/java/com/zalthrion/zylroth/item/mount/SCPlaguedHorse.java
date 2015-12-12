@@ -9,19 +9,16 @@ import net.minecraft.world.World;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 
 public class SCPlaguedHorse extends SummoningCrystalBase {
-	
 	private String itemName = "SC_PlaguedHorse";
-	
 	private String name = (baseName + "_" + itemName);
 	
 	public SCPlaguedHorse() {
-		this.setNames(name);
+		this.setUnlocalizedName(name);
 	}
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-
 		MountPlaguedHorse mount = new MountPlaguedHorse(player.worldObj);
 		
 		if (player instanceof EntityPlayer) {
@@ -35,7 +32,7 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 					
 					if (!(persistentData.hasKey("ownsMountPlaguedHorse"))) {
 						
-						mount.func_152115_b(player.getUniqueID().toString());
+						mount.setOwnerId(player.getUniqueID().toString());
 						
 						mount.isSummoned = true;
 						
@@ -54,8 +51,6 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 				}
 			}
 		}
-		
 		return super.onItemRightClick(stack, world, player);
 	}
-	
 }

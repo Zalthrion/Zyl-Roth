@@ -45,5 +45,4 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 	public int getSkyColorByTemp(float par1) {
 		return 0x1E2224;
 	}
-	
 }

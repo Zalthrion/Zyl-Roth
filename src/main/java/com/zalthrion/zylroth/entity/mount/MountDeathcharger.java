@@ -25,7 +25,7 @@ public class MountDeathcharger extends MountBaseHorse {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		this.func_152115_b(player.getUniqueID().toString());
+		this.setOwnerId(player.getUniqueID().toString());
 		
 		ItemStack stack = player.inventory.getCurrentItem();
 		
@@ -35,7 +35,7 @@ public class MountDeathcharger extends MountBaseHorse {
 			persistentData.removeTag("ownsMountDeathcharger");
 		}
 		
-		if (!func_152114_e(player) && !worldObj.isRemote){ //Checks if the player is the Owner of the mount
+		if (!isOwner(player) && !worldObj.isRemote){ //Checks if the player is the Owner of the mount
             player.addChatMessage(new ChatComponentTranslation(Reference.MOD_ID + ":" + "mount.owned"));
 		}
 		

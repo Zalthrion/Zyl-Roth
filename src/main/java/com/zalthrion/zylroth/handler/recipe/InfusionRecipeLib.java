@@ -25,10 +25,6 @@ public class InfusionRecipeLib {
 		}
 	}
 	
-	@Deprecated public InfusionRecipeLib(ItemStack in, ItemStack out, ItemStack... infusionMaterials) {
-		this(in, out, 0, infusionMaterials);
-	}
-	
 	/** Returns amount of experience earned from performing this infusion **/
 	public int getExperience() {
 		return this.experience;

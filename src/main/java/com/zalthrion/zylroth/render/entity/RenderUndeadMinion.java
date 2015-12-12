@@ -33,7 +33,7 @@ public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
 		return undeadminionTextures;
 	}
 	
-	protected void rotateUndeadMinionCorpse(EntityUndeadMinion par1EntityUndeadMinion, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityUndeadMinion par1EntityUndeadMinion, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityUndeadMinion, par2, par3, par4);
 		
 		if ((double) par1EntityUndeadMinion.limbSwingAmount >= 0.01D) {

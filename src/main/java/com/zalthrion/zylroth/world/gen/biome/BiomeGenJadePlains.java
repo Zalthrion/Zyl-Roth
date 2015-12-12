@@ -45,8 +45,8 @@ public class BiomeGenJadePlains extends BiomeGenBase {
 		return color = 0x16BA40;
 	}
 	
+	@Override
 	public int getSkyColorByTemp(float par1) {
 		return 0x3CA7B5;
 	}
-	
 }

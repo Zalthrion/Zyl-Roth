@@ -6,12 +6,13 @@ import net.minecraft.world.chunk.IChunkProvider;
 import com.zalthrion.zylroth.lib.ModDimension;
 
 public class WorldProviderIridis extends WorldProvider {
-	
+	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerIridis(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 		this.dimensionId = ModDimension.dimensionId_Iridis;
 	}
 	
+	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderIridis(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().getGeneratorOptions());
 	}

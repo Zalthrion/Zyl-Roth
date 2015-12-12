@@ -16,15 +16,14 @@ import com.zalthrion.zylroth.reference.Reference;
 public class TenebraeArmor extends ItemBaseArmor {
 	
 	private String name = "tenebraeArmor";
-	
 	private String textureName;
 	
 	public TenebraeArmor(ArmorMaterial armorMaterial, String textureName, int type) {
 		super(armorMaterial, textureName, type);
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
-		this.setCreativeTab(ModTabs.ZylRoth);
-		this.setNames(Reference.MOD_ID.toLowerCase() + ":" + name);
+		this.setCreativeTab(ModTabs.zylRoth);
+		this.setUnlocalizedName(Reference.MOD_ID.toLowerCase() + ":" + name);
 	}
 	
 	@Override

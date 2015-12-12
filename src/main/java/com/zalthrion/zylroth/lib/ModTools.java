@@ -38,10 +38,10 @@ public class ModTools {
 	public static Item creativeHoe = new CreativeHoe(creativeTools);
 	
 	public static void init() {
-		TenebraeTools();
+		tenebraeTools();
 	}
 	
-	public static void TenebraeTools() {
+	public static void tenebraeTools() {
 		GameRegistry.registerItem(tenebraeSword, "tenebrae_sword");
 		GameRegistry.registerItem(tenebraePickaxe, "tenebrae_pickaxe");
 		GameRegistry.registerItem(tenebraeAxe, "tenebrae_axe");

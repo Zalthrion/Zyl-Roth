@@ -9,20 +9,17 @@ import net.minecraft.world.World;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
 public class SCWarTortoise extends SummoningCrystalBase {
-	
 	private String itemName = "SC_WarTortoise";
-	
 	private String name = (baseName + "_" + itemName);
 	
 	public SCWarTortoise() {
-		this.setNames(name);
+		this.setUnlocalizedName(name);
 		this.setCreativeTab(null);
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-
 		MountWarTortoise mount = new MountWarTortoise(player.worldObj);
 		
 		if (player instanceof EntityPlayer) {
@@ -52,7 +49,6 @@ public class SCWarTortoise extends SummoningCrystalBase {
 				}
 			}
 		}
-		
 		return super.onItemRightClick(stack, world, player);
 	}
 }

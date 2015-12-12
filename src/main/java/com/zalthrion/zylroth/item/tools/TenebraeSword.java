@@ -29,7 +29,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	
 	public TenebraeSword(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

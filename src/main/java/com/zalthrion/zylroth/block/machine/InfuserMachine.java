@@ -33,7 +33,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		
 		super(!isActive);
 		
-		this.setNames(isActive ? name : name_idle);
+		this.setUnlocalizedName(isActive ? name : name_idle);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
@@ -41,6 +41,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setStepSound(soundTypeMetal);
 	}
 	
+	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityInfuser();
 	}

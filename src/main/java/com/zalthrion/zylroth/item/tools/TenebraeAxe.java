@@ -24,7 +24,7 @@ public class TenebraeAxe extends ItemAxe implements ZylrothTool {
 	
 	public TenebraeAxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

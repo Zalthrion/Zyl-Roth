@@ -30,7 +30,6 @@ import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
 public class EntityUndeadWarrior extends EntityMob {
-	
 	public EntityUndeadWarrior(World world) {
 		super(world);
 		this.setSize(0.5F, 2.1F);
@@ -175,5 +174,4 @@ public class EntityUndeadWarrior extends EntityMob {
 	public boolean canAttackClass(Class par1Class) {
 		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class;
 	}
-	
 }

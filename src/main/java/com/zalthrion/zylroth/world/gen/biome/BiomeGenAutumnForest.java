@@ -38,5 +38,4 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 	public int getSkyColorByTemp(float par1) {
 		return 0x3CA7B5;
 	}
-	
 }

@@ -29,7 +29,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	
 	public CreativeSword(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

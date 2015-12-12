@@ -9,7 +9,7 @@ import com.zalthrion.zylroth.reference.Reference;
 public class ItemBaseArmor extends ItemArmor {
 	public ItemBaseArmor(ArmorMaterial armorMaterial, String textureName, int type) {
 		super(armorMaterial, 0, type);
-		setCreativeTab(ModTabs.ZylRoth);
+		setCreativeTab(ModTabs.zylRoth);
 		setMaxStackSize(1);
 	}
 	
@@ -25,9 +25,5 @@ public class ItemBaseArmor extends ItemArmor {
 	
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
 	}
 }

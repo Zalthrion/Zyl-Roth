@@ -32,7 +32,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	public PlaceHolderPickaxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	
@@ -64,7 +64,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 			
 		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
 			
-			Material material = world.getBlockState(pos).getBlock().getMaterial();
+			Material material = world.getBlockState(pos).getBlock().getMaterial(); //TODO Were we going to use this?
 			
 			boolean isStone = block == Blocks.stone;
 			boolean isCobblestone = block == Blocks.cobblestone;

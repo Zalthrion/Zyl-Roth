@@ -43,7 +43,7 @@ public class WorldProviderGlaciem extends WorldProvider {
 		return true;
 	}
 	
-	@SideOnly(Side.CLIENT) public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
+	@Override @SideOnly(Side.CLIENT) public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
 		float f2 = MathHelper.cos(p_76562_1_ * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
 		
 		if (f2 < 0.0F) {
@@ -63,13 +63,13 @@ public class WorldProviderGlaciem extends WorldProvider {
 		return new Vec3(f3, f4, f5);
 	}
 	
-	@SideOnly(Side.CLIENT) public boolean doesXZShowFog(int x, int z) {
+	@Override @SideOnly(Side.CLIENT) public boolean doesXZShowFog(int x, int z) {
 		return true;
 	}
 	
 	/** Returns 'true' if in the "main surface world", but 'false' if in the
 	 * Nether or End dimensions. */
-	public boolean isSurfaceWorld() {
+	@Override public boolean isSurfaceWorld() {
 		return true;
 	}
 	
@@ -83,12 +83,12 @@ public class WorldProviderGlaciem extends WorldProvider {
 	
 	/** Calculates the angle of sun and moon in the sky relative to a specified
 	 * time (usually worldTime) */
-	public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
+	@Override public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
 		return 0.0F;
 	}
 	
 	/** Returns array with sunrise/sunset colors */
-	@SideOnly(Side.CLIENT) public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
+	@Override @SideOnly(Side.CLIENT) public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
 		return null;
 	}
 	

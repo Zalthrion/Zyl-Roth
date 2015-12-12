@@ -14,29 +14,32 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityTameableHorse extends EntityHorse implements IEntityOwnable {
-	public EntityTameableHorse(World p_i1604_1_) {
-		super(p_i1604_1_);
+	public EntityTameableHorse(World worldIn) {
+		super(worldIn);
 	}
 	
-	@Override protected void entityInit() {
+	@Override
+	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(26, Byte.valueOf((byte) 0));
 		this.dataWatcher.addObject(27, "");
 	}
 	
 	/** (abstract) Protected helper method to write subclass entity data to NBT. */
-	@Override public void writeEntityToNBT(NBTTagCompound tagCompound) {
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		super.writeEntityToNBT(tagCompound);
 		
-		if (this.func_152113_b() == null) {
+		if (this.getOwnerId() == null) {
 			tagCompound.setString("OwnerUUID", "");
 		} else {
-			tagCompound.setString("OwnerUUID", this.func_152113_b());
+			tagCompound.setString("OwnerUUID", this.getOwnerId());
 		}
 	}
 	
 	/** (abstract) Protected helper method to read subclass entity data from NBT. */
-	@Override public void readEntityFromNBT(NBTTagCompound tagCompund) {
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		super.readEntityFromNBT(tagCompund);
 		String s = "";
 		
@@ -48,14 +51,15 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		}
 		
 		if (s.length() > 0) {
-			this.func_152115_b(s);
+			this.setOwnerId(s);
 			this.setHorseTamed(true);
 		}
 	}
 	
 	/** Play the taming effect, will either be hearts or smoke depending on
 	 * status */
-	@Override protected void spawnHorseParticles(boolean happy) {
+	@Override
+	protected void spawnHorseParticles(boolean happy) {
 		for (int i = 0; i < 7; ++ i) {
 			double d0 = this.rand.nextGaussian() * 0.02D;
 			double d1 = this.rand.nextGaussian() * 0.02D;
@@ -64,7 +68,8 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		}
 	}
 	
-	@Override @SideOnly(Side.CLIENT)
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void handleStatusUpdate(byte id) {
 		if (id == 7) {
 			this.spawnHorseParticles(true);
@@ -75,11 +80,13 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		}
 	}
 	
-	@Override public boolean isTame() {
+	@Override
+	public boolean isTame() {
 		return (this.dataWatcher.getWatchableObjectByte(26) & 4) != 0;
 	}
 	
-	@Override public void setHorseTamed(boolean tamed) {
+	@Override
+	public void setHorseTamed(boolean tamed) {
 		byte b0 = this.dataWatcher.getWatchableObjectByte(26);
 		
 		if (tamed) {
@@ -89,31 +96,35 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		}
 	}
 	
-	public String func_152113_b() {
+	@Override
+	public String getOwnerId() {
 		return this.dataWatcher.getWatchableObjectString(27);
 	}
 	
-	public void func_152115_b(String p_152115_1_) {
-		this.dataWatcher.updateObject(27, p_152115_1_);
+	@Override
+	public void setOwnerId(String id) {
+		this.dataWatcher.updateObject(27, id);
 	}
 	
-	@Override public EntityLivingBase getOwner() {
+	@Override
+	public EntityLivingBase getOwner() {
 		try {
-			UUID uuid = UUID.fromString(this.func_152113_b());
+			UUID uuid = UUID.fromString(this.getOwnerId());
 			return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
 		} catch (IllegalArgumentException illegalargumentexception) {
 			return null;
 		}
 	}
 	
-	public boolean func_152114_e(EntityLivingBase p_152114_1_) {
-		return p_152114_1_ == this.getOwner();
+	public boolean isOwner(EntityLivingBase entityIn) {
+		return entityIn == this.getOwner();
 	}
 	
-	public boolean func_142018_a(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
+	public boolean shouldAttackEntity(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
 		return true;
-	}
+	} //TODO Ask Zalthrion if this is what it was supposed to be, MCP mappings made this shouldAttackEntity but it doesn't override anything
 	
+	@Override
 	public Team getTeam() {
 		if (this.isTame()) {
 			EntityLivingBase entitylivingbase = this.getOwner();
@@ -124,6 +135,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		return super.getTeam();
 	}
 	
+	@Override
 	public boolean isOnSameTeam(EntityLivingBase p_142014_1_) {
 		if (this.isTame()) {
 			EntityLivingBase entitylivingbase1 = this.getOwner();

@@ -51,5 +51,4 @@ public class BlockBaseContainer extends BlockBase implements ITileEntityProvider
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return null;
 	}
-	
 }

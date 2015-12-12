@@ -13,7 +13,8 @@ public class IceTalisman extends ItemBase {
 	private String name = "iceTalisman";
 	
 	public IceTalisman() {
-		this.setNames(name);
+		super();
+		this.setUnlocalizedName(name);
 		this.setMaxStackSize(1);
 	}
 	

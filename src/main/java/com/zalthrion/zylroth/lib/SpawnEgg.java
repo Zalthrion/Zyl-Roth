@@ -34,13 +34,14 @@ public class SpawnEgg extends ItemMonsterPlacer {
 	
 	public SpawnEgg(String parEntityToSpawnName, int parPrimaryColor, int parSecondaryColor) {
 		this.setHasSubtypes(false);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setEntityToSpawnName(parEntityToSpawnName);
 		this.colorBase = parPrimaryColor;
 		this.colorSpots = parSecondaryColor;
 	}
 	
-	@Override public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) return true;
 		Block block = world.getBlockState(pos).getBlock();
 		pos.offset(side);
@@ -61,7 +62,8 @@ public class SpawnEgg extends ItemMonsterPlacer {
 		return true;
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (world.isRemote) return stack;
 		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(world, player, true);
 		
@@ -111,7 +113,9 @@ public class SpawnEgg extends ItemMonsterPlacer {
 		return entityToSpawn;
 	}
 	
-	@Override @SideOnly(Side.CLIENT) public int getColorFromItemStack(ItemStack par1ItemStack, int parColorType) {
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack par1ItemStack, int parColorType) {
 		return (parColorType == 0) ? colorBase : colorSpots;
 	}
 	

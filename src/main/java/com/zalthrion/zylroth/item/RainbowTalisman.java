@@ -10,15 +10,15 @@ import net.minecraft.world.WorldServer;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class RainbowTalisman extends ItemBase {
-	
 	private String name = "rainbowTalisman";
 	
 	public RainbowTalisman() {
-		this.setNames(name);
+		super();
+		this.setUnlocalizedName(name);
 	}
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		
 		if (!world.isRemote) {
 			
 			if (player instanceof EntityPlayerMP) {
@@ -40,7 +40,6 @@ public class RainbowTalisman extends ItemBase {
 				}
 			}
 		}
-		
 		return super.onItemRightClick(stack, world, player);
 	}
 }

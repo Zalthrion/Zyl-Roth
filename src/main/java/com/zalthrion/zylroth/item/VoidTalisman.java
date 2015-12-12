@@ -10,14 +10,15 @@ import net.minecraft.world.WorldServer;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class VoidTalisman extends ItemBase {
-	
 	private String name = "voidTalisman";
 	
 	public VoidTalisman() {
-		this.setNames(name);
+		super();
+		this.setUnlocalizedName(name);
 		this.setMaxStackSize(1);
 	}
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
 		if (!world.isRemote) {
@@ -41,7 +42,6 @@ public class VoidTalisman extends ItemBase {
 				}
 			}
 		}
-		
 		return super.onItemRightClick(stack, world, player);
 	}
 }

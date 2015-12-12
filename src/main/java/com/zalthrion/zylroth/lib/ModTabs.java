@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class ModTabs {
 	
-	public static CreativeTabs ZylRoth = new CreativeTabs("Zyl'Roth") {
+	public static CreativeTabs zylRoth = new CreativeTabs("Zyl'Roth") {
 		private ItemSorter itemSorter = new ItemSorter();
 		
 		@Override

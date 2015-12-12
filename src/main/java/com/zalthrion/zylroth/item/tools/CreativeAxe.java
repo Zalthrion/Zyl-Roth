@@ -23,7 +23,7 @@ public class CreativeAxe extends ItemAxe implements ZylrothTool {
 	
 	public CreativeAxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

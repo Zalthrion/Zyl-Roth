@@ -25,7 +25,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	
 	public CreativeShovel(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setCreativeTab(ModTabs.zylRoth);
 		this.setUnlocalizedName(name);
 	}
 	

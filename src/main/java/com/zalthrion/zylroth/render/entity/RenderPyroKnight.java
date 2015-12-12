@@ -24,10 +24,6 @@ public class RenderPyroKnight extends RenderBiped<EntityPyroKnight> {
 		this.addLayer(new LayerHeldItem(this));
 	}
 	
-	public void doRenderPyroKnight(EntityPyroKnight par1EntityPyroKnight, double par2, double par4, double par6, float par8, float par9) {
-		super.doRender(par1EntityPyroKnight, par2, par4, par6, par8, par9);
-	}
-	
 	/** Applies the scale to the transform matrix */
 	@Override protected void preRenderCallback(EntityPyroKnight par1EntityPyroKnight, float par2) {
 		GlStateManager.scale(scale, scale, scale);
@@ -37,7 +33,7 @@ public class RenderPyroKnight extends RenderBiped<EntityPyroKnight> {
 		return pyroknightTextures;
 	}
 	
-	protected void rotatePyroKnightCorpse(EntityPyroKnight par1EntityPyroKnight, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityPyroKnight par1EntityPyroKnight, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityPyroKnight, par2, par3, par4);
 		
 		if ((double) par1EntityPyroKnight.limbSwingAmount >= 0.01D) {
