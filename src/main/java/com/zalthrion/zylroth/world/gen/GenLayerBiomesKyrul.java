@@ -8,7 +8,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesKyrul extends GenLayer {
 	
-	protected BiomeGenBase[] allowedBiomes = {ModBiomes.DreadWastes, ModBiomes.HauntedForest, ModBiomes.AshBarrens, ModBiomes.VoidMountains};
+	protected BiomeGenBase[] allowedBiomes = {/*ModBiomes.DreadWastes, ModBiomes.HauntedForest, ModBiomes.AshBarrens, */ModBiomes.voidMountains}; //TODO Uncomment this after testing
 	
 	public GenLayerBiomesKyrul(long seed) {
 		super(seed);
@@ -19,8 +19,7 @@ public class GenLayerBiomesKyrul extends GenLayer {
 		this.parent = genlayer;
 	}
 	
-	@Override
-	public int[] getInts(int x, int z, int width, int depth) {
+	@Override public int[] getInts(int x, int z, int width, int depth) {
 		int[] dest = IntCache.getIntCache(width * depth);
 		for (int dz = 0; dz < depth; dz ++) {
 			for (int dx = 0; dx < width; dx ++) {

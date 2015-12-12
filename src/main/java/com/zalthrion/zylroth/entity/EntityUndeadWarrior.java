@@ -26,6 +26,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
 public class EntityUndeadWarrior extends EntityMob {
@@ -51,12 +52,12 @@ public class EntityUndeadWarrior extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 45.0D : 25.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(12.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
-		this.getCustomNameTag();
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(hardcore ? 15.0D : 12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(hardcore ? 7.5D : 3.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(hardcore ? 0.4D : 0.2D);
 	}
 	
 	@Override

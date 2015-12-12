@@ -13,6 +13,7 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
 		
 		this.theBiomeDecorator.treesPerChunk = 10;
 		this.theBiomeDecorator.grassPerChunk = 3;

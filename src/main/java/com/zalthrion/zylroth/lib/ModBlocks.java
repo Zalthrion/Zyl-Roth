@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.block.AshBlock;
 import com.zalthrion.zylroth.block.ChiseledTenebrae;
+import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
 import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
@@ -25,6 +26,7 @@ public final class ModBlocks {
 	public static Block tenebrae_Ore = new TenebraeOre();
 	public static Block tenebrae_Block = new TenebraeBlock();
 	public static Block tenebrae_Core = new TenebraeCore();
+	public static Block empowered_Tenebrae_Core = new EmpoweredTenebraeCore();
 	public static Block chiseled_Tenebrae = new ChiseledTenebrae();
 	public static Block infused_Tenebrae = new InfusedTenebrae();
 	/* Voidium */
@@ -41,7 +43,8 @@ public final class ModBlocks {
 		/* Tenebrae */
 		GameRegistry.registerBlock(tenebrae_Ore, "tenebraeOre");
 		GameRegistry.registerBlock(tenebrae_Block, BeaconBaseItemBlock.class, "tenebraeBlock");
-		GameRegistry.registerBlock(tenebrae_Core, CoreItemBlock.class, "tenebraeCoreBlock");
+		GameRegistry.registerBlock(tenebrae_Core, CoreItemBlock.class, "tenebraeCore");
+		GameRegistry.registerBlock(empowered_Tenebrae_Core, CoreItemBlock.class, "empoweredTenebraeCore");
 		GameRegistry.registerBlock(chiseled_Tenebrae, HeadItemBlock.class, "chiseledTenebrae");
 		GameRegistry.registerBlock(infused_Tenebrae, TenebraeItemBlock.class, "infusedTenebrae");
 		/* Voidium */

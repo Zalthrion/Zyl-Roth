@@ -1,6 +1,7 @@
 package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
@@ -9,8 +10,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.reference.Reference;
@@ -33,7 +32,7 @@ public class RenderUndeadWarrior extends RenderBiped {
 	
 	/** Applies the scale to the transform matrix */
 	protected void preRenderScale(EntityUndeadWarrior par1EntityUndeadWarrior, float par2) {
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 	
 	protected ResourceLocation getUndeadWarriorTextures(EntityUndeadWarrior par1EntityUndeadWarrior) {
@@ -42,7 +41,7 @@ public class RenderUndeadWarrior extends RenderBiped {
 	
 	/** Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime */
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
+	@Override protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
 		this.preRenderScale((EntityUndeadWarrior) par1EntityLivingBase, par2);
 	}
 	
@@ -53,18 +52,14 @@ public class RenderUndeadWarrior extends RenderBiped {
 			float f3 = 13.0F;
 			float f4 = par1EntityUndeadWarrior.limbSwing - par1EntityUndeadWarrior.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
-			GL11.glRotatef(6.5F * f5, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getUndeadWarriorTextures((EntityUndeadWarrior) par1Entity);
-	}
-	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderEntityUndeadWarrior((EntityUndeadWarrior) par1EntityLivingBase, par2);
 	}
 	
 	protected void renderEntityUndeadWarrior(EntityUndeadWarrior entityundeadwarrior, float par2) {

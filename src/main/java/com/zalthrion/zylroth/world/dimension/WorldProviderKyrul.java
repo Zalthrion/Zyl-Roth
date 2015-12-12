@@ -5,6 +5,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,7 +20,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	}
 	
 	public IChunkProvider createChunkGenerator() {
-		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true);
+		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true, this.worldObj.getWorldInfo().getGeneratorOptions());
 	}
 	
 	@Override
@@ -27,9 +28,8 @@ public class WorldProviderKyrul extends WorldProvider {
 		return "Ky'rul";
 	}
 	
-	@Override
-	public void setWorldTime(long time) {
-		worldObj.getWorldInfo().setWorldTime(16000);
+	@Override public String getSaveFolder() {
+		return "Ky'rul";
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -62,13 +62,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	/** Returns 'true' if in the "main surface world", but 'false' if in the
 	 * Nether or End dimensions. */
 	public boolean isSurfaceWorld() {
-		return false;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getCloudHeight() {
-		return 8.0F;
+		return true;
 	}
 	
 	@Override
@@ -102,7 +96,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	/** Lightness of the dimension */
 	@Override
 	protected void generateLightBrightnessTable() {
-		float f = 0.05F;
+		float f = 0.08F;
 		
 		for (int i = 0; i <= 15; ++ i) {
 			float f1 = 1.0F - i / 15.0F;
@@ -114,4 +108,11 @@ public class WorldProviderKyrul extends WorldProvider {
 		return "";
 	}
 	
+	@Override @SideOnly(Side.CLIENT) public IRenderHandler getSkyRenderer() {
+		return new SkyRenderKyrul();
+	}
+	
+	@Override public IRenderHandler getCloudRenderer() {
+		return new SkyRenderKyrul();
+	}
 }

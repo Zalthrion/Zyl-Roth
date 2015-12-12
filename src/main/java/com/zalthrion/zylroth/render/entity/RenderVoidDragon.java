@@ -1,11 +1,7 @@
 package com.zalthrion.zylroth.render.entity;
 
-import java.util.Random;
-
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
@@ -25,12 +21,11 @@ import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
 public class RenderVoidDragon extends RenderLiving {
-	
 	private float scale = 0.5F;
 	
-	private static final ResourceLocation Explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_exploding.png");
-	private static final ResourceLocation Eyes = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_eyes.png");
-	private static final ResourceLocation Dragon = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon.png");
+	private static final ResourceLocation explosionTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_exploding.png");
+	private static final ResourceLocation eyesTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_eyes.png");
+	private static final ResourceLocation dragonTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon.png");
 	
 	/** An instance of the dragon model in RenderDragon */
 	protected ModelVoidDragon modelDragon;
@@ -43,7 +38,7 @@ public class RenderVoidDragon extends RenderLiving {
 	
 	/** Applies the scale to the transform matrix */
 	protected void preRenderScale(EntityVoidDragon dragon, float par2) {
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 	
 	/** Used to rotate the dragon as a whole in RenderDragon. It's called in the
@@ -51,9 +46,9 @@ public class RenderVoidDragon extends RenderLiving {
 	protected void rotateDragonBody(EntityVoidDragon dragon, float par2, float par3, float par4) {
 		float f3 = (float) dragon.getMovementOffsets(7, par4)[0];
 		float f4 = (float) (dragon.getMovementOffsets(5, par4)[1] - dragon.getMovementOffsets(10, par4)[1]);
-		GL11.glRotatef(-f3, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(f4 * 10.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glTranslatef(0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(-f3, 0, 1, 0);
+		GlStateManager.rotate(f4 * 10, 1, 0, 0);
+		GlStateManager.translate(0, 0, 1);
 		
 		if (dragon.deathTime > 0) {
 			float f5 = (dragon.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
@@ -61,7 +56,7 @@ public class RenderVoidDragon extends RenderLiving {
 			
 			if (f5 > 1.0F) f5 = 1.0F;
 			
-			GL11.glRotatef(f5 * getDeathMaxRotation(dragon), 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(f5 * getDeathMaxRotation(dragon), 0, 0, 1);
 		}
 	}
 	
@@ -69,47 +64,45 @@ public class RenderVoidDragon extends RenderLiving {
 	protected void renderDragonModel(EntityVoidDragon dragon, float par2, float par3, float par4, float par5, float par6, float par7) {
 		if (dragon.deathTicks > 0) {
 			float f6 = dragon.deathTicks / 200.0F;
-			GL11.glDepthFunc(GL11.GL_LEQUAL);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glAlphaFunc(GL11.GL_GREATER, f6);
-			bindTexture(Explosion);
+			GlStateManager.depthFunc(GL11.GL_LEQUAL);
+			GlStateManager.enableAlpha();
+			GlStateManager.alphaFunc(GL11.GL_GREATER, f6);
+			bindTexture(explosionTexture);
 			mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-			GL11.glDepthFunc(GL11.GL_EQUAL);
+			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
+			GlStateManager.depthFunc(GL11.GL_EQUAL);
 		}
 		
 		bindEntityTexture(dragon);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
-		GL11.glDisable(GL11.GL_BLEND);
+		GlStateManager.disableBlend();
 		
 		if (dragon.hurtTime > 0) {
-			GL11.glDepthFunc(GL11.GL_EQUAL);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
+			GlStateManager.depthFunc(GL11.GL_EQUAL);
+			GlStateManager.disableTexture2D();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.color(1, 0, 0, 0.5F);
 			mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glDepthFunc(GL11.GL_LEQUAL);
+			GlStateManager.enableTexture2D();
+			GlStateManager.disableBlend();
+			GlStateManager.depthFunc(GL11.GL_LEQUAL);
 		}
 	}
 	
 	/** Renders the dragon, along with its dying animation */
 	public void renderDragon(EntityVoidDragon dragon, double par2, double par4, double par6, float par8, float par9) {
-		
 		super.doRender(dragon, par2, par4, par6, par8, par9);
-		
 	}
 	
 	protected ResourceLocation func_110841_a(EntityVoidDragon dragon) {
-		return Dragon;
+		return dragonTexture;
 	}
 	
 	/** Renders the animation for when an enderdragon dies */
-	protected void renderDragonDying(EntityVoidDragon dragon, float par2) {
+/*	protected void renderDragonDying(EntityVoidDragon dragon, float par2) {
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer wr = tessellator.getWorldRenderer();
 		
@@ -121,23 +114,23 @@ public class RenderVoidDragon extends RenderLiving {
 			if (f1 > 0.8F) f2 = (f1 - 0.8F) / 0.2F;
 			
 			Random random = new Random(432L);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glShadeModel(GL11.GL_SMOOTH);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			GL11.glEnable(GL11.GL_CULL_FACE);
-			GL11.glDepthMask(false);
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.0F, -1.0F, -2.0F);
+			GlStateManager.disableTexture2D();
+			GlStateManager.shadeModel(GL11.GL_SMOOTH);
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			GlStateManager.disableAlpha();
+			GlStateManager.enableCull();
+			GlStateManager.depthMask(false);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0, -1, -2);
 			
 			for (int i = 0; i < (f1 + f1 * f1) / 2.0F * 60.0F; ++ i) {
-				GL11.glRotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F + f1 * 90.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate(random.nextFloat() * 360, 1, 0, 0);
+				GlStateManager.rotate(random.nextFloat() * 360, 0, 1, 0);
+				GlStateManager.rotate(random.nextFloat() * 360, 0, 0, 1);
+				GlStateManager.rotate(random.nextFloat() * 360, 1, 0, 0);
+				GlStateManager.rotate(random.nextFloat() * 360, 0, 1, 0);
+				GlStateManager.rotate(random.nextFloat() * 360 + f1 * 90, 0, 0, 1);
 				wr.startDrawing(6);
 				float f3 = random.nextFloat() * 20.0F + 5.0F + f2 * 10.0F;
 				float f4 = random.nextFloat() * 2.0F + 1.0F + f2 * 2.0F;
@@ -151,40 +144,40 @@ public class RenderVoidDragon extends RenderLiving {
 				tessellator.draw();
 			}
 			
-			GL11.glPopMatrix();
-			GL11.glDepthMask(true);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glShadeModel(GL11.GL_FLAT);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			GlStateManager.popMatrix();
+			GlStateManager.depthMask(true);
+			GlStateManager.disableCull();
+			GlStateManager.disableBlend();
+			GlStateManager.shadeModel(GL11.GL_FLAT);
+			GlStateManager.color(1, 1, 1, 1);
+			GlStateManager.enableTexture2D();
+			GlStateManager.enableAlpha();
 			RenderHelper.enableStandardItemLighting();
 		}
-	}
+	}*/
 	
 	/** Renders the overlay for glowing eyes and the mouth. Called by
 	 * shouldRenderPass. */
 	protected int renderGlow(EntityVoidDragon dragon, int par2, float par3) {
-		if (par2 == 1) GL11.glDepthFunc(GL11.GL_LEQUAL);
+		if (par2 == 1) GlStateManager.depthFunc(GL11.GL_LEQUAL);
 		
 		if (par2 != 0)
 			return -1;
 		else {
-			bindTexture(Eyes);
+			bindTexture(eyesTexture);
 			float f1 = 1.0F;
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glDepthFunc(GL11.GL_EQUAL);
+			GlStateManager.enableBlend();
+			GlStateManager.disableAlpha();
+			GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+			GlStateManager.disableLighting();
+			GlStateManager.depthFunc(GL11.GL_EQUAL);
 			char c0 = 61680;
 			int j = c0 % 65536;
 			int k = c0 / 65536;
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
+			GlStateManager.color(1, 1, 1, 1);
+			GlStateManager.enableLighting();
+			GlStateManager.color(1, 1, 1, f1);
 			return 1;
 		}
 	}

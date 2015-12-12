@@ -2,13 +2,12 @@ package com.zalthrion.zylroth.model.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
 
@@ -233,9 +232,9 @@ public class ModelSkeletalHorse extends ModelBase {
 		}
 		
 		if (!flag) {
-			GL11.glPushMatrix();
-			GL11.glScalef(f7, 0.5F + f7 * 0.5F, f7);
-			GL11.glTranslatef(0.0F, 0.95F * (1.0F - f7), 0.0F);
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(f7, 0.5F + f7 * 0.5F, f7);
+			GlStateManager.translate(0, 0.95 * (1 - f7), 0);
 		}
 		
 		this.backLeftLeg.render(p_78088_7_);
@@ -252,10 +251,10 @@ public class ModelSkeletalHorse extends ModelBase {
 		this.frontRightHoof.render(p_78088_7_);
 		
 		if (!flag) {
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(f7, f7, f7);
-			GL11.glTranslatef(0.0F, 1.35F * (1.0F - f7), 0.0F);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(f7, f7, f7);
+			GlStateManager.translate(0, 1.35 * (1.0 - f7), 0);
 		}
 		
 		this.body.render(p_78088_7_);
@@ -266,15 +265,15 @@ public class ModelSkeletalHorse extends ModelBase {
 		this.mane.render(p_78088_7_);
 		
 		if (!flag) {
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
 			float f8 = 0.5F + f7 * f7 * 0.5F;
-			GL11.glScalef(f8, f8, f8);
+			GlStateManager.scale(f8, f8, f8);
 			
 			if (f6 <= 0.0F) {
-				GL11.glTranslatef(0.0F, 1.35F * (1.0F - f7), 0.0F);
+				GlStateManager.translate(0, 1.35 * (1 - f7), 0);
 			} else {
-				GL11.glTranslatef(0.0F, 0.9F * (1.0F - f7) * f6 + 1.35F * (1.0F - f7) * (1.0F - f6), 0.15F * (1.0F - f7) * f6);
+				GlStateManager.translate(0, 0.9 * (1 - f7) * f6 + 1.35 * (1 - f7) * (1 - f6), 0.15 * (1 - f7) * f6);
 			}
 		}
 		
@@ -289,7 +288,7 @@ public class ModelSkeletalHorse extends ModelBase {
 		this.head.render(p_78088_7_);
 		
 		if (!flag) {
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 		
 		if (flag2) {

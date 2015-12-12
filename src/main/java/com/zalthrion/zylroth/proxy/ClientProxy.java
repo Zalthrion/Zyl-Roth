@@ -8,7 +8,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 import com.zalthrion.zylroth.entity.EntityBird;
-import com.zalthrion.zylroth.entity.EntityMutantTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.entity.EntityPyroKnight;
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
@@ -20,10 +20,12 @@ import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.handler.ModelHelper;
+import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.entity.ModelBird;
-import com.zalthrion.zylroth.model.entity.ModelMutantTenebraeGolem;
+import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelRainbowPig;
 import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
 import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
@@ -33,7 +35,7 @@ import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
 import com.zalthrion.zylroth.model.entity.mount.ModelWarTortoise;
 import com.zalthrion.zylroth.render.ModeledBlockInventoryRenderer;
 import com.zalthrion.zylroth.render.entity.RenderBird;
-import com.zalthrion.zylroth.render.entity.RenderMutantTenebraeGolem;
+import com.zalthrion.zylroth.render.entity.RenderEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.render.entity.RenderPyroKnight;
 import com.zalthrion.zylroth.render.entity.RenderRainbowPig;
 import com.zalthrion.zylroth.render.entity.RenderSkeletalHorse;
@@ -76,19 +78,38 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerBlock(ModBlocks.infuser);
 		ModelHelper.registerBlock(ModBlocks.infuser_Idle);
 		ModelHelper.registerBlock(ModBlocks.ash_Block);
+		ModelHelper.registerBlock(ModBlocks.empowered_Tenebrae_Core);
+		ModelHelper.registerBlock(ModBlocks.voidium_Ore);
 		/* Items */
+		/* Armors */
+		ModelHelper.registerItem(ModArmors.Tenebrae_Helmet);
+		ModelHelper.registerItem(ModArmors.Tenebrae_Chestplate);
+		ModelHelper.registerItem(ModArmors.Tenebrae_Leggings);
+		ModelHelper.registerItem(ModArmors.Tenebrae_Boots);
+		/* Tools */
+		ModelHelper.registerItem(ModTools.creativePickaxe);
+		ModelHelper.registerItem(ModTools.creativeShovel);
+		ModelHelper.registerItem(ModTools.creativeSword);
+		ModelHelper.registerItem(ModTools.creativeHoe);
+		ModelHelper.registerItem(ModTools.creativeAxe);
+		
+		ModelHelper.registerItem(ModTools.tenebraePickaxe);
+		ModelHelper.registerItem(ModTools.tenebraeShovel);
+		ModelHelper.registerItem(ModTools.tenebraeSword);
+		ModelHelper.registerItem(ModTools.tenebraeHoe);
+		ModelHelper.registerItem(ModTools.tenebraeAxe);
 		/* Tenebrae */
 		ModelHelper.registerItem(ModItems.raw_Tenebrae);
 		ModelHelper.registerItem(ModItems.raw_Tenebrae_Ingot);
 		ModelHelper.registerItem(ModItems.tenebrae_Ingot);
 		ModelHelper.registerItem(ModItems.unstable_Tenebrae_Core);
-		ModelHelper.registerItem(ModItems.stable_Tenebrae_Core);
 		/* Mounts */
 		ModelHelper.registerItem(ModItems.Empty_SC);
 		ModelHelper.registerItem(ModItems.SC_Deathcharger);
 		ModelHelper.registerItem(ModItems.SC_PlaguedHorse);
 		ModelHelper.registerItem(ModItems.SC_WarTortoise);
 		/* Portals */
+		ModelHelper.registerItem(ModItems.gold_Talisman);
 		ModelHelper.registerItem(ModItems.void_Talisman);
 		ModelHelper.registerItem(ModItems.rainbow_Talisman);
 		/* Others */
@@ -107,7 +128,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(rm, new ModelBird(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(rm, new ModelRainbowPig(), shadowSize));
 		/* Mobs */
-		RenderingRegistry.registerEntityRenderingHandler(EntityMutantTenebraeGolem.class, new RenderMutantTenebraeGolem(rm, new ModelMutantTenebraeGolem(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEmpoweredTenebraeGolem.class, new RenderEmpoweredTenebraeGolem(rm, new ModelEmpoweredTenebraeGolem(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPyroKnight.class, new RenderPyroKnight(rm, new ModelUndead(), shadowSize, shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(rm, new ModelUndead(), shadowSize, shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(rm, new ModelUndead(), shadowSize, shadowSize));

@@ -7,18 +7,20 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -27,41 +29,37 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
-public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDisplayData {
+public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisplayData {
 	private int attackTimer;
+	public int deathTicks;
 	
-	public EntityMutantTenebraeGolem(World world) {
+	public EntityEmpoweredTenebraeGolem(World world) {
 		super(world);
-		this.setSize(0.6F, 2.9F);
+		this.setSize(2.1F, 4.2F);
 		((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
 		this.isImmuneToFire = true;
-		this.experienceValue = 15;
+		this.experienceValue = 75;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 2.0D, 32.0F));
+		this.tasks.addTask(3, new EntityAISwimming(this));
+		this.tasks.addTask(6, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
-	}
-	
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, false, true));
 	}
 	
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(275.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
-		this.getCustomNameTag();
-		
+		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 1250.0D : 750.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(hardcore ? 0.28D : 0.27D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(hardcore ? 25.0D : 15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(hardcore ? 15.0D : 5.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
 	}
 	
 	/** Decrements the entity's air supply when underwater */
@@ -109,18 +107,28 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 		}
 	}
 	
-	/** Returns true if this entity can attack entities of the specified class. */
-	/* public boolean canAttackClass(Class par1Class) { return
-	 * this.isPlayerCreated(); } */
-	
 	@Override
-	public boolean attackEntityAsMob(Entity par1) {
-		this.attackTimer = 10;
+	public boolean attackEntityAsMob(Entity entity) {
+		this.attackTimer = 40;
 		this.worldObj.setEntityState(this, (byte) 4);
-		boolean flag = par1.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
 		
-		if (flag) {
-			par1.motionY += 0.4000000059604645D;
+		boolean strike = super.attackEntityAsMob(entity);
+		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+		
+		if (strike && this.attackTimer > 10) {
+			if (this.getRNG().nextBoolean()) {
+				this.attackTimer = 0;
+				entity.motionY += 1.0D;
+				return flag;
+			}
+		}
+		
+		if (strike && this.attackTimer > 25) {
+			if (this.getRNG().nextBoolean()) {
+				this.attackTimer = 400;
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
+				return strike;
+			}
 		}
 		
 		this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
@@ -172,13 +180,53 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.void_Essence, 1);
-		this.dropItem(ModItems.void_Gem, 4);
+		this.dropItem(ModItems.void_Gem, 1);
+		this.dropItem(ModItems.void_Essence, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
 			this.entityDropItem(new ItemStack(ModItems.raw_Tenebrae, 1, 6), 0f);
+		}
+	}
+	
+	@Override protected void onDeathUpdate() {
+		this.deathTicks ++;
+		
+		if (this.deathTicks >= 180 && this.deathTicks <= 200) {
+			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, this.posX + (double) f, this.posY + 2.0D + (double) f1, this.posZ + (double) f2, 0.0D, 0.0D, 0.0D);
+		}
+		
+		int i;
+		int j;
+		
+		if (!this.worldObj.isRemote) {
+			if (this.deathTicks == 1) {
+				this.worldObj.playBroadcastSound(1018, new BlockPos(this.posX, this.posY, this.posZ), 0);
+			}
+		}
+		
+		this.moveEntity(0.D, 0.1D, 0.0D);
+		for (int countparticles = 900; countparticles <= 1000; ++ countparticles) {
+			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
+		}
+		this.renderYawOffset = this.rotationYaw += 1000.0F;
+		
+		if (this.deathTicks == 200 && !this.worldObj.isRemote) {
+			i = 2000;
+			
+			while (i > 0) {
+				j = EntityXPOrb.getXPSplit(i);
+				i -= j;
+				this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+			}
+			
+			this.setDead();
 		}
 	}
 	
@@ -196,9 +244,26 @@ public class EntityMutantTenebraeGolem extends EntityGolem implements IBossDispl
 		}
 	}
 	
-	/** Called when the mob's health reaches 0. */
-	@Override
-	public void onDeath(DamageSource par1DamageSource) {
-		super.onDeath(par1DamageSource);
+	@Override public boolean canBeCollidedWith() {
+		if (this.deathTicks >= 1) {
+			return false;
+		} else return true;
+	}
+	
+	@Override public void fall(float distance, float damageMultiplier) {}
+	
+	@Override protected boolean canDespawn() {
+		return false;
+	}
+	
+	/* private void applyAttribute(IAttribute attribute, double baseValue) {
+	 * IAttributeInstance attr = this.getEntityAttribute(attribute); if (attr ==
+	 * null) { this.getAttributeMap().registerAttribute(attribute);
+	 * this.getEntityAttribute(attribute).setBaseValue(baseValue); } else {
+	 * attr.setBaseValue(baseValue); } } */
+	
+	/** Returns true if this entity can attack entities of the specified class. */
+	@Override @SuppressWarnings("rawtypes") public boolean canAttackClass(Class par1Class) {
+		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
 	}
 }

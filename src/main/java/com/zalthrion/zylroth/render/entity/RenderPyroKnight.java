@@ -1,6 +1,7 @@
 package com.zalthrion.zylroth.render.entity;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
@@ -9,8 +10,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityPyroKnight;
 import com.zalthrion.zylroth.reference.Reference;
@@ -33,7 +32,7 @@ public class RenderPyroKnight extends RenderBiped {
 	
 	/** Applies the scale to the transform matrix */
 	protected void preRenderScale(EntityPyroKnight par1EntityPyroKnight, float par2) {
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 	
 	protected ResourceLocation getPyroKnightTextures(EntityPyroKnight par1EntityPyroKnight) {
@@ -53,7 +52,7 @@ public class RenderPyroKnight extends RenderBiped {
 			float f3 = 13.0F;
 			float f4 = par1EntityPyroKnight.limbSwing - par1EntityPyroKnight.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
-			GL11.glRotatef(6.5F * f5, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
 	}
 	
@@ -61,10 +60,6 @@ public class RenderPyroKnight extends RenderBiped {
 	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getPyroKnightTextures((EntityPyroKnight) par1Entity);
-	}
-	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderEntityPyroKnight((EntityPyroKnight) par1EntityLivingBase, par2);
 	}
 	
 	protected void renderEntityPyroKnight(EntityPyroKnight entitypyroknight, float par2) {

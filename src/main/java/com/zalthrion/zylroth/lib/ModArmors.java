@@ -21,7 +21,7 @@ public final class ModArmors {
 	}
 	
 	public static void TenebraeArmor() {
-		ArmorMaterial tenebrae = EnumHelper.addArmorMaterial("Tenebrae", "Tenebrae", 38, new int[]{3, 8, 6, 3}, 16);
+		ArmorMaterial tenebrae = EnumHelper.addArmorMaterial("Tenebrae", "Tenebrae", 42, new int[]{3, 8, 6, 3}, 16);
 		
 		GameRegistry.registerItem(Tenebrae_Helmet = new TenebraeArmor(tenebrae, "tenebrae", 0).setUnlocalizedName("tenebraeHelmet"), "tenebrae_helmet");
 		GameRegistry.registerItem(Tenebrae_Chestplate = new TenebraeArmor(tenebrae, "tenebrae", 1).setUnlocalizedName("tenebraeChestplate"), "tenebrae_chestplate");

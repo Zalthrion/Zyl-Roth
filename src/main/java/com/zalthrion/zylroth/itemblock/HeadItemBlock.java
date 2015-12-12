@@ -21,11 +21,11 @@ public class HeadItemBlock extends ItemBlock {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "shift"));
+		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "head"));
-			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID + ":" + "shift"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "head"));
+			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		}
 	}
 	

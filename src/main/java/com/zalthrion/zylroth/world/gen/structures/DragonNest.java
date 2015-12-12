@@ -7,13 +7,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.zalthrion.zylroth.lib.ModBlocks;
 
-public class DragonNest extends WorldGenerator implements IWorldGenerator {
+public class DragonNest extends WorldGenerator {
+	public DragonNest() {}
+	
 	protected Block[] getValidSpawnBlocks() {
 		return new Block[] {Blocks.grass};
 	}
@@ -23,10 +23,9 @@ public class DragonNest extends WorldGenerator implements IWorldGenerator {
 		Block check = world.getBlockState(pos).getBlock();
 		
 		while (check != Blocks.air) {
-			if (distanceToAir > 3) { return false; }
-			
+			if (distanceToAir > 3) return false;
 			distanceToAir ++;
-			check = world.getBlockState(pos.up(distanceToAir)).getBlock();
+			check = world.getBlockState(pos).getBlock();
 		}
 		
 		pos = pos.up(distanceToAir - 1);
@@ -45,195 +44,114 @@ public class DragonNest extends WorldGenerator implements IWorldGenerator {
 		return false;
 	}
 	
-	public DragonNest() {}
-	
-	/*
-	 * For compatibility until I can be asked
-	 */
-	@Deprecated
-	public void setBlock(World world, int x, int y, int z, Block block, int metadata) {
-		setBlock(world, new BlockPos(x, y, z), block.getDefaultState(), metadata);
-	}
-	
-	@Override
-	public void setBlock(World world, BlockPos pos, Block block, int metadata) {
-		setBlock(world, pos, block.getDefaultState(), metadata);
-	}
-	
-	public void setBlock(World world, BlockPos pos, IBlockState state, int metadata) {
-		Block b1 = world.getBlockState(pos).getBlock();
+	public boolean locationsAreValid(World world, BlockPos corner1, BlockPos corner2) {
+		int x1 = corner1.getX();
+		int y1 = corner1.getY();
+		int z1 = corner1.getZ();
+		int x2 = corner2.getX();
+		int y2 = corner2.getY();
+		int z2 = corner2.getZ();
 		
-		if (b1.isAir(world, pos) || b1.isLeaves(world, pos)) {
-			world.setBlockState(pos, state);
+		for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x ++) {
+			for (int y = Math.min(y1, y2); y <= Math.max(y1, y2); y ++) {
+				for (int z = Math.min(z1, z2); z <= Math.max(z1, z2); z ++) {
+					if (!locationIsValidSpawn(world, new BlockPos(x, y, z))) return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	private void setBlocks(World world, IBlockState blockState, BlockPos[] pos) {
+		for (BlockPos aPos : pos) {
+			world.setBlockState(aPos, blockState);
 		}
 	}
 	
-	@Override
-	public boolean generate(World world, Random rand, BlockPos pos) {
-		// check that each corner is one of the valid spawn blocks
-		if (!locationIsValidSpawn(world, pos) || !locationIsValidSpawn(world, pos.east(6)) || !locationIsValidSpawn(world, pos.east(6).south(6)) || !locationIsValidSpawn(world, pos.south(6))) { return false; }
+	@Override public boolean generate(World world, Random rand, BlockPos pos) {
+		if (!locationsAreValid(world, pos.add(-3, 1, -3), pos.add(3, 1, 3)) && world.isAirBlock(pos.add(0, 4, 0))) { return false; }
 		
-		pos = pos.north(10).west(10);
-		int i = pos.getX();
-		int j = pos.getY();
-		int k = pos.getZ();
+		/* z = z - 10; x = x - 10; */
 		
-		/*
-		 * +X - East
-		 * -X - West
-		 * +Z - South
-		 * -Z - North
-		 */
-		this.setBlock(world, pos, Blocks.air, 0);
-		this.setBlock(world, pos.south(), Blocks.cobblestone, 0);
-		this.setBlock(world, pos.south(2), Blocks.stone, 0);
-		this.setBlock(world, pos.south(3), Blocks.stone, 0);
-		this.setBlock(world, pos.south(4), Blocks.stone, 0);
-		this.setBlock(world, pos.south(5), Blocks.stone, 0);
-		this.setBlock(world, pos.south(6), Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 3, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 3, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 0, j + 2, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 0, k + 0, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 0, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 0, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 0, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 0, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 0, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 0, k + 6, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 1, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 1, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 1, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 1, j + 1, k + 4, Blocks.cobblestone, 0);
-		this.setBlock(world, i + 1, j + 1, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 3, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 1, j + 2, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 0, k + 0, Blocks.cobblestone, 0);
-		this.setBlock(world, i + 2, j + 0, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 0, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 0, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 0, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 0, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 0, k + 6, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 1, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 1, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 1, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 1, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 1, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 2, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 2, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 2, j + 2, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 2, j + 2, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 3, j + 0, k + 0, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 0, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 0, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 0, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 0, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 0, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 0, k + 6, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 3, j + 1, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 1, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 1, k + 3, Blocks.cobblestone, 0);
-		this.setBlock(world, i + 3, j + 1, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 1, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 3, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 3, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 3, j + 2, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 2, k + 3, ModBlocks.spawner_VoidDragon, 0);
-		this.setBlock(world, i + 3, j + 2, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 3, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 3, j + 2, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 0, k + 0, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 0, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 0, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 0, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 0, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 0, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 0, k + 6, Blocks.cobblestone, 0);
-		this.setBlock(world, i + 4, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 1, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 1, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 1, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 1, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 1, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 2, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 2, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 4, j + 2, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 4, j + 2, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 0, k + 0, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 0, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 0, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 0, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 0, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 0, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 0, k + 6, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 1, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 1, k + 2, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 1, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 1, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 5, j + 1, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 3, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 5, j + 2, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 0, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 0, k + 1, Blocks.stone, 0);
-		this.setBlock(world, i + 6, j + 0, k + 2, Blocks.cobblestone, 0);
-		this.setBlock(world, i + 6, j + 0, k + 3, Blocks.stone, 0);
-		this.setBlock(world, i + 6, j + 0, k + 4, Blocks.stone, 0);
-		this.setBlock(world, i + 6, j + 0, k + 5, Blocks.stone, 0);
-		this.setBlock(world, i + 6, j + 0, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 3, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 1, k + 6, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 0, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 1, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 2, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 3, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 4, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 5, Blocks.air, 0);
-		this.setBlock(world, i + 6, j + 2, k + 6, Blocks.air, 0);
+		setBlocks(world, Blocks.stone.getDefaultState(), new BlockPos[] {
+			pos.up().north().west(3),
+			pos.up().west(3),
+			pos.up().south().west(3),
+			pos.up().south(2).west(2),
+			pos.up().north(3).west(2),
+			pos.up().north(2).west(2),
+			pos.up().north().west(2),
+			pos.up().west(2),
+			pos.up().south().west(2),
+			pos.up().south(2).west(2),
+			pos.up().south(3).west(2),
+			pos.up().north(2).west(),
+			pos.up().north().west(),
+			pos.up().west(),
+			pos.up().south().west(),
+			pos.up().south(2).west(),
+			pos.up().south(3).west(),
+			pos.up().north(3),
+			pos.up().north(2),
+			pos.up().north(),
+			pos.up(), // Central Block
+			pos.up().south(),
+			pos.up().south(2),
+			pos.up().south(3),
+			pos.up().north(3).east(),
+			pos.up().north(2).east(),
+			pos.up().north().east(),
+			pos.up().east(),
+			pos.up().south().east(),
+			pos.up().south(2).east(),
+			pos.up().north(3).east(2),
+			pos.up().north(2).east(2),
+			pos.up().north().east(2),
+			pos.up().east(2),
+			pos.up().south().east(2),
+			pos.up().south(2).east(2),
+			pos.up().south(3).east(2),
+			pos.up().north(2).east(3),
+			pos.up().east(2),
+			pos.up().south().east(3),
+			pos.up().south(2).east(3),
+			pos.up(2).north().east(2),
+			pos.up(2).east(2),
+			pos.up(2).north(2).east(),
+			pos.up(2).south().west(),
+			pos.up(2).west(),
+			pos.up(2).south().west(),
+			pos.up(2).south(2).west(),
+			pos.up(2).north(2),
+			pos.up(2).north(),
+			pos.up(2).south(),
+			pos.up(2).south(2),
+			pos.up(2).north(2).east(),
+			pos.up(2).north().east(),
+			pos.up(2).east(),
+			pos.up(2).south().east(),
+			pos.up(2).south(2).east(),
+			pos.up(2).north().east(2),
+			pos.up(2).east(2),
+			pos.up(2).south().east(2),
+			pos.up(3).west(),
+			pos.up(3).north(),
+			pos.up(3).south(),
+			pos.up(3).east()
+		});
+		
+		setBlocks(world, Blocks.cobblestone.getDefaultState(), new BlockPos[] {
+			pos.up().north(2).west(3),
+			pos.up().north(3).west(),
+			pos.up().south(3).east(),
+			pos.up().north().east(3),
+			pos.up(2).south().east(2),
+			pos.up(2)
+		});
+		
+		world.setBlockState(pos.up(3), ModBlocks.spawner_VoidDragon.getDefaultState());
+		world.setBlockState(pos.up(4), Blocks.gravel.getDefaultState()); // Top Block
 		
 		return true;
 	}
-
-	@Override public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {}
 }

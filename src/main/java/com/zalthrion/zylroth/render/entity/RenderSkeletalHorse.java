@@ -4,6 +4,7 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderHorse;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
@@ -12,8 +13,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Maps;
 import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
@@ -46,7 +45,7 @@ public class RenderSkeletalHorse extends RenderHorse {
 			f1 *= 0.92F;
 		}
 		
-		GL11.glScalef(f1, f1, f1);
+		GlStateManager.scale(f1, f1, f1);
 		super.preRenderCallback(p_77041_1_, p_77041_2_);
 	}
 	

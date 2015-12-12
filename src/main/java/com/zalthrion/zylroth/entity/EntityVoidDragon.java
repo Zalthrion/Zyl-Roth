@@ -2,12 +2,15 @@ package com.zalthrion.zylroth.entity;
 
 import java.util.List;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -15,7 +18,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
+public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMob {
 	
 	private Entity entity;
 	boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
@@ -63,19 +66,22 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 	private Entity target;
 	public int deathTicks;
 	
-	public EntityVoidDragon(World par1World) {
-		super(par1World);
+	public EntityVoidDragon(World world) {
+		super(world);
 		this.dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
-		this.setHealth(getMaxHealth());
-		this.setSize(7.0F, 3.0F);
+		this.setHealth(this.getMaxHealth());
+		this.setSize(16.0F, 8.0F);
 		this.isImmuneToFire = true;
+		this.noClip = true;
 		this.targetY = 100.0D;
+		this.ignoreFrustumCheck = true;
 	}
 	
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
+		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 200.0D : 50.0D);
 	}
 	
 	@Override
@@ -87,16 +93,16 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 		if (getHealth() <= 0.0F) par2 = 0.0F;
 		
 		par2 = 1.0F - par2;
-		int j = ringBufferIndex - par1 * 1 & 63;
-		int k = ringBufferIndex - par1 * 1 - 1 & 63;
+		int j = this.ringBufferIndex - par1 * 1 & 63;
+		int k = this.ringBufferIndex - par1 * 1 - 1 & 63;
 		double[] adouble = new double[3];
-		double d0 = ringBuffer[j][0];
-		double d1 = MathHelper.wrapAngleTo180_double(ringBuffer[k][0] - d0);
+		double d0 = this.ringBuffer[j][0];
+		double d1 = MathHelper.wrapAngleTo180_double(this.ringBuffer[k][0] - d0);
 		adouble[0] = d0 + d1 * par2;
-		d0 = ringBuffer[j][1];
-		d1 = ringBuffer[k][1] - d0;
+		d0 = this.ringBuffer[j][1];
+		d1 = this.ringBuffer[k][1] - d0;
 		adouble[1] = d0 + d1 * par2;
-		adouble[2] = ringBuffer[j][2] + (ringBuffer[k][2] - ringBuffer[j][2]) * par2;
+		adouble[2] = this.ringBuffer[j][2] + (this.ringBuffer[k][2] - this.ringBuffer[j][2]) * par2;
 		return adouble;
 	}
 	
@@ -105,14 +111,14 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 		float f;
 		float f1;
 		
-		if (worldObj.isRemote) {
-			f = MathHelper.cos(animTime * (float) Math.PI * 2.0F);
-			f1 = MathHelper.cos(prevAnimTime * (float) Math.PI * 2.0F);
+		if (this.worldObj.isRemote) {
+			f = MathHelper.cos(this.animTime * (float) Math.PI * 2.0F);
+			f1 = MathHelper.cos(this.prevAnimTime * (float) Math.PI * 2.0F);
 			
 			if (f1 <= -0.3F && f >= -0.3F) worldObj.playSound(posX, posY, posZ, "mob.enderdragon.wings", 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
 		}
 		
-		prevAnimTime = animTime;
+		this.prevAnimTime = this.animTime;
 		float f2;
 		
 		if (getHealth() <= 0.0F) {
@@ -121,19 +127,19 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart {
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		} else {
-			f = 0.2F / (MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
-			f *= (float) Math.pow(2.0D, motionY);
+			f = 0.2F / (MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ) * 10.0F + 1.0F);
+			f *= (float) Math.pow(2.0D, this.motionY);
 			
-			animTime += f;
+			this.animTime += f;
 			
-			rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
+			this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw);
 			
 			if (ringBufferIndex < 0) for (int i = 0; i < ringBuffer.length; ++ i) {
-				ringBuffer[i][0] = rotationYaw;
-				ringBuffer[i][1] = posY;
+				this.ringBuffer[i][0] = this.rotationYaw;
+				this.ringBuffer[i][1] = this.posY;
 			}
 			
-			if (++ ringBufferIndex == ringBuffer.length) ringBufferIndex = 0;
+			if (++ this.ringBufferIndex == this.ringBuffer.length) this.ringBufferIndex = 0;
 			
 			ringBuffer[ringBufferIndex][0] = rotationYaw;
 			ringBuffer[ringBufferIndex][1] = posY;

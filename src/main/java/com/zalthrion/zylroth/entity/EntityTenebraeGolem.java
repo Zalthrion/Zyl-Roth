@@ -12,7 +12,7 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModItems;
 
-public class EntityTenebraeGolem extends EntityGolem {
+public class EntityTenebraeGolem extends EntityMob {
 	private int attackTimer;
 	
 	public EntityTenebraeGolem(World world) {
@@ -37,8 +37,8 @@ public class EntityTenebraeGolem extends EntityGolem {
 		this.isImmuneToFire = true;
 		this.experienceValue = 15;
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
+		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 1.5D, 32.0F));
+		this.tasks.addTask(6, new EntityAIWander(this, 0.9D));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
@@ -188,5 +188,14 @@ public class EntityTenebraeGolem extends EntityGolem {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		super.onDeath(par1DamageSource);
+	}
+	
+	@Override public void fall(float distance, float damageMultipler) {}
+	@Override protected boolean canDespawn() {
+		return false;
+	}
+	
+	@Override @SuppressWarnings("rawtypes") public boolean canAttackClass(Class clazz) {
+		return EntityEmpoweredTenebraeGolem.class != clazz && EntityTenebraeGolem.class != clazz;
 	}
 }

@@ -4,7 +4,7 @@ import com.zalthrion.zylroth.item.ItemBase;
 
 public class EmptySC extends ItemBase {
 	
-	private String name = "emptySummoningCrystal";
+	private String name = "emptySC";
 	
 	public EmptySC() {
 		this.setNames(name);

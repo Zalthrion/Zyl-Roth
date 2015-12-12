@@ -29,8 +29,7 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	public WorldChunkManagerKyrul() {
+	@SuppressWarnings({"unchecked", "rawtypes"}) public WorldChunkManagerKyrul() {
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = new ArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
@@ -50,21 +49,18 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	}
 	
 	/** Gets the list of valid biomes for the player to spawn in. */
-	@Override
-	public List<BiomeGenBase> getBiomesToSpawnIn() {
+	@Override public List<BiomeGenBase> getBiomesToSpawnIn() {
 		return this.biomesToSpawnIn;
 	}
 	
 	/** Returns the BiomeGenBase related to the x, z position on the world. */
-	@Override
-	public BiomeGenBase getBiomeGenerator(BlockPos pos) {
+	@Override public BiomeGenBase getBiomeGenerator(BlockPos pos) {
 		return this.biomeCache.func_180284_a(pos.getX(), pos.getZ(), (BiomeGenBase) null);
 	}
 	
 	/** Returns a list of rainfall values for the specified blocks. Args:
 	 * listToReuse, x, z, width, length. */
-	@Override
-	public float[] getRainfall(float[] listToReuse, int x, int z, int width, int length) {
+	@Override public float[] getRainfall(float[] listToReuse, int x, int z, int width, int length) {
 		IntCache.resetIntCache();
 		
 		if (listToReuse == null || listToReuse.length < width * length) {
@@ -99,15 +95,12 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	}
 	
 	/** Return an adjusted version of a given temperature based on the y height */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getTemperatureAtHeight(float par1, int par2) {
+	@Override @SideOnly(Side.CLIENT) public float getTemperatureAtHeight(float par1, int par2) {
 		return par1;
 	}
 	
 	/** Returns an array of biomes for the location input. */
-	@Override
-	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5) {
+	@Override public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5) {
 		IntCache.resetIntCache();
 		
 		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5) {
@@ -137,16 +130,14 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	/** Returns biomes to use for the blocks and loads the other data like
 	 * temperature and humidity onto the WorldChunkManager Args: oldBiomeList,
 	 * x, z, width, depth */
-	@Override
-	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] oldBiomeList, int x, int z, int width, int depth) {
+	@Override public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] oldBiomeList, int x, int z, int width, int depth) {
 		return this.getBiomeGenAt(oldBiomeList, x, z, width, depth, true);
 	}
 	
 	/** Return a list of biomes for the specified blocks. Args: listToReuse, x,
 	 * y, width, length, cacheFlag (if false, don't check biomeCache to avoid
 	 * infinite loop in BiomeCacheBlock) */
-	@Override
-	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] listToReuse, int x, int y, int width, int length, boolean cacheFlag) {
+	@Override public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] listToReuse, int x, int y, int width, int length, boolean cacheFlag) {
 		IntCache.resetIntCache();
 		
 		if (listToReuse == null || listToReuse.length < width * length) {
@@ -168,9 +159,7 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	}
 	
 	/** checks given Chunk's Biomes against List of allowed ones */
-	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean areBiomesViable(int x, int y, int z, List par4List) {
+	@Override @SuppressWarnings("rawtypes") public boolean areBiomesViable(int x, int y, int z, List par4List) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
 		int i1 = y - z >> 2;
@@ -200,40 +189,8 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 		}
 	}
 	
-	/** Finds a valid position within a range, that is in one of the listed
-	 * biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y
-	 * positions. */
-/*	@Override
-	@SuppressWarnings("rawtypes")
-	public ChunkPosition findBiomePosition(int x, int y, int z, List par4List, Random random) {
-		IntCache.resetIntCache();
-		int l = x - z >> 2;
-		int i1 = y - z >> 2;
-		int j1 = x + z >> 2;
-		int k1 = y + z >> 2;
-		int l1 = j1 - l + 1;
-		int i2 = k1 - i1 + 1;
-		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
-		ChunkPosition chunkposition = null;
-		int j2 = 0;
-		
-		for (int k2 = 0; k2 < l1 * i2; ++ k2) {
-			int l2 = l + k2 % l1 << 2;
-			int i3 = i1 + k2 / l1 << 2;
-			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k2]);
-			
-			if (par4List.contains(biomegenbase) && (chunkposition == null || random.nextInt(j2 + 1) == 0)) {
-				chunkposition = new ChunkPosition(l2, 0, i3);
-				++ j2;
-			}
-		}
-		
-		return chunkposition;
-	}*/
-	
 	/** Calls the WorldChunkManager's biomeCache.cleanupCache() */
-	@Override
-	public void cleanupCache() {
+	@Override public void cleanupCache() {
 		this.biomeCache.cleanupCache();
 	}
 }
