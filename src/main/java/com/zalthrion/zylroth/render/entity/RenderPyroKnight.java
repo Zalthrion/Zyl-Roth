@@ -5,8 +5,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,7 +13,7 @@ import com.zalthrion.zylroth.entity.EntityPyroKnight;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderPyroKnight extends RenderBiped {
+public class RenderPyroKnight extends RenderBiped<EntityPyroKnight> {
 	private static final ResourceLocation pyroknightTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Pyro_Knight.png");
 	
 	/** Scale of the model to use */
@@ -31,18 +29,12 @@ public class RenderPyroKnight extends RenderBiped {
 	}
 	
 	/** Applies the scale to the transform matrix */
-	protected void preRenderScale(EntityPyroKnight par1EntityPyroKnight, float par2) {
+	@Override protected void preRenderCallback(EntityPyroKnight par1EntityPyroKnight, float par2) {
 		GlStateManager.scale(scale, scale, scale);
 	}
 	
-	protected ResourceLocation getPyroKnightTextures(EntityPyroKnight par1EntityPyroKnight) {
+	@Override protected ResourceLocation getEntityTexture(EntityPyroKnight par1EntityPyroKnight) {
 		return pyroknightTextures;
-	}
-	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	@Override protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.preRenderScale((EntityPyroKnight) par1EntityLivingBase, par2);
 	}
 	
 	protected void rotatePyroKnightCorpse(EntityPyroKnight par1EntityPyroKnight, float par2, float par3, float par4) {
@@ -54,12 +46,6 @@ public class RenderPyroKnight extends RenderBiped {
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
 			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
-	}
-	
-	/** Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture. */
-	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.getPyroKnightTextures((EntityPyroKnight) par1Entity);
 	}
 	
 	protected void renderEntityPyroKnight(EntityPyroKnight entitypyroknight, float par2) {

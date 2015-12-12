@@ -41,7 +41,6 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-import com.zalthrion.zylroth.lib.ModBiomes;
 import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
 public class ChunkProviderKyrul implements IChunkProvider {
@@ -421,7 +420,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		return "RandomLevelSource";
 	}
 	
-	@SuppressWarnings("rawtypes") @Override public List getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creatureType);
 	}

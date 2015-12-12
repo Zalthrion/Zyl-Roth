@@ -42,7 +42,7 @@ public class EntityTenebraeGolem extends EntityMob {
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityLiving>(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
 	}
 	
 	@Override
@@ -118,12 +118,12 @@ public class EntityTenebraeGolem extends EntityMob {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleHealthUpdate(byte par1) {
+	public void handleStatusUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
 			this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
 		} else {
-			super.handleHealthUpdate(par1);
+			super.handleStatusUpdate(par1);
 		}
 	}
 	

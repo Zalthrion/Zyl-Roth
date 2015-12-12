@@ -56,7 +56,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 			this.setHorseSaddled(true);
 			this.isHorseSaddled();
 			
-			this.isTamed();
+			this.isTame();
 		}
 		
 		return summoned;

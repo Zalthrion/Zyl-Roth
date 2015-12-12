@@ -47,8 +47,8 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		this.tasks.addTask(3, new EntityAISwimming(this));
 		this.tasks.addTask(6, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, false, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityLiving>(this, EntityLiving.class, false, true));
 	}
 	
 	@Override
@@ -137,12 +137,12 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleHealthUpdate(byte par1) {
+	public void handleStatusUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
 			this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
 		} else {
-			super.handleHealthUpdate(par1);
+			super.handleStatusUpdate(par1);
 		}
 	}
 	

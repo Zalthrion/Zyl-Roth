@@ -8,7 +8,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenDreadWastes extends BiomeGenBase {
 	
-	@SuppressWarnings("unchecked") public BiomeGenDreadWastes(int id) {
+	public BiomeGenDreadWastes(int id) {
 		super(id);
 		
 		this.enableRain = false;

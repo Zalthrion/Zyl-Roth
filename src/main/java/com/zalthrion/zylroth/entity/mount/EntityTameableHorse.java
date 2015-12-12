@@ -18,14 +18,14 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		super(p_i1604_1_);
 	}
 	
-	protected void entityInit() {
+	@Override protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(26, Byte.valueOf((byte) 0));
 		this.dataWatcher.addObject(27, "");
 	}
 	
 	/** (abstract) Protected helper method to write subclass entity data to NBT. */
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+	@Override public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		super.writeEntityToNBT(tagCompound);
 		
 		if (this.func_152113_b() == null) {
@@ -36,7 +36,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	}
 	
 	/** (abstract) Protected helper method to read subclass entity data from NBT. */
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
+	@Override public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		super.readEntityFromNBT(tagCompund);
 		String s = "";
 		
@@ -44,18 +44,18 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 			s = tagCompund.getString("OwnerUUID");
 		} else {
 			String s1 = tagCompund.getString("Owner");
-			s = PreYggdrasilConverter.func_152719_a(s1);
+			s = PreYggdrasilConverter.getStringUUIDFromName(s1);
 		}
 		
 		if (s.length() > 0) {
 			this.func_152115_b(s);
-			this.setTamed(true);
+			this.setHorseTamed(true);
 		}
 	}
 	
 	/** Play the taming effect, will either be hearts or smoke depending on
 	 * status */
-	protected void playTameEffect(boolean happy) {
+	@Override protected void spawnHorseParticles(boolean happy) {
 		for (int i = 0; i < 7; ++ i) {
 			double d0 = this.rand.nextGaussian() * 0.02D;
 			double d1 = this.rand.nextGaussian() * 0.02D;
@@ -64,25 +64,25 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		}
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public void handleHealthUpdate(byte p_70103_1_) {
-		if (p_70103_1_ == 7) {
-			this.playTameEffect(true);
-		} else if (p_70103_1_ == 6) {
-			this.playTameEffect(false);
+	@Override @SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id) {
+		if (id == 7) {
+			this.spawnHorseParticles(true);
+		} else if (id == 6) {
+			this.spawnHorseParticles(false);
 		} else {
-			super.handleHealthUpdate(p_70103_1_);
+			super.handleStatusUpdate(id);
 		}
 	}
 	
-	public boolean isTamed() {
+	@Override public boolean isTame() {
 		return (this.dataWatcher.getWatchableObjectByte(26) & 4) != 0;
 	}
 	
-	public void setTamed(boolean p_70903_1_) {
+	@Override public void setHorseTamed(boolean tamed) {
 		byte b0 = this.dataWatcher.getWatchableObjectByte(26);
 		
-		if (p_70903_1_) {
+		if (tamed) {
 			this.dataWatcher.updateObject(26, Byte.valueOf((byte) (b0 | 4)));
 		} else {
 			this.dataWatcher.updateObject(26, Byte.valueOf((byte) (b0 & -5)));
@@ -97,7 +97,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		this.dataWatcher.updateObject(27, p_152115_1_);
 	}
 	
-	public EntityLivingBase getOwner() {
+	@Override public EntityLivingBase getOwner() {
 		try {
 			UUID uuid = UUID.fromString(this.func_152113_b());
 			return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
@@ -115,7 +115,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	}
 	
 	public Team getTeam() {
-		if (this.isTamed()) {
+		if (this.isTame()) {
 			EntityLivingBase entitylivingbase = this.getOwner();
 			
 			if (entitylivingbase != null) { return entitylivingbase.getTeam(); }
@@ -125,7 +125,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	}
 	
 	public boolean isOnSameTeam(EntityLivingBase p_142014_1_) {
-		if (this.isTamed()) {
+		if (this.isTame()) {
 			EntityLivingBase entitylivingbase1 = this.getOwner();
 			
 			if (p_142014_1_ == entitylivingbase1) { return true; }

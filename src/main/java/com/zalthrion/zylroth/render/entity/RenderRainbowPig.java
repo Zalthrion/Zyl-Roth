@@ -3,7 +3,6 @@ package com.zalthrion.zylroth.render.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -13,7 +12,7 @@ import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderRainbowPig extends RenderLiving {
+public class RenderRainbowPig extends RenderLiving<EntityRainbowPig> {
 	
     private static final ResourceLocation saddledPigTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Rainbow_Pig_saddle.png");
 	private static final ResourceLocation pigTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Rainbow_Pig.png");
@@ -44,7 +43,7 @@ public class RenderRainbowPig extends RenderLiving {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(EntityRainbowPig p_110775_1_) {
+	@Override protected ResourceLocation getEntityTexture(EntityRainbowPig p_110775_1_) {
 		return pigTextures;
 	}
 	
@@ -55,11 +54,4 @@ public class RenderRainbowPig extends RenderLiving {
     {
         return this.shouldRenderPass((EntityRainbowPig)p_77032_1_, p_77032_2_, p_77032_3_);
     }
-
-	
-	/** Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture. */
-	@Override protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-		return this.getEntityTexture((EntityRainbowPig) p_110775_1_);
-	}
 }

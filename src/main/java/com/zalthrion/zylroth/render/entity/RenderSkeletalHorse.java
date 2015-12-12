@@ -5,11 +5,9 @@ import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderHorse;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -19,7 +17,7 @@ import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
 import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
 
 @SideOnly(Side.CLIENT)
-public class RenderSkeletalHorse extends RenderHorse {
+public class RenderSkeletalHorse extends RenderLiving<EntitySkeletalHorse> {
 	
 	@SuppressWarnings("rawtypes")
 	private static final Map field_110852_a = Maps.newHashMap();
@@ -35,7 +33,7 @@ public class RenderSkeletalHorse extends RenderHorse {
 	
 	/** Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime */
-	protected void preRenderCallback(EntitySkeletalHorse p_77041_1_, float p_77041_2_) {
+	@Override protected void preRenderCallback(EntitySkeletalHorse p_77041_1_, float p_77041_2_) {
 		float f1 = 1.0F;
 		int i = p_77041_1_.getHorseType();
 		
@@ -50,7 +48,7 @@ public class RenderSkeletalHorse extends RenderHorse {
 	}
 	
 	/** Renders the model in RenderLiving */
-	protected void renderModel(EntitySkeletalHorse p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
+	@Override protected void renderModel(EntitySkeletalHorse p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		if (p_77036_1_.isInvisible()) {
 			this.mainModel.setRotationAngles(p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_, p_77036_1_);
 		} else {
@@ -61,7 +59,7 @@ public class RenderSkeletalHorse extends RenderHorse {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(EntitySkeletalHorse p_110775_1_) {
+	@Override protected ResourceLocation getEntityTexture(EntitySkeletalHorse p_110775_1_) {
 		if (!p_110775_1_.func_110239_cn()) {
 			switch (p_110775_1_.getHorseType()) {
 				case 0:
@@ -93,22 +91,5 @@ public class RenderSkeletalHorse extends RenderHorse {
 		}
 		
 		return resourcelocation;
-	}
-	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_) {
-		this.preRenderCallback((EntitySkeletalHorse) p_77041_1_, p_77041_2_);
-	}
-	
-	/** Renders the model in RenderLiving */
-	protected void renderModel(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
-		this.renderModel((EntitySkeletalHorse) p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
-	}
-	
-	/** Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-		return this.getEntityTexture((EntitySkeletalHorse) p_110775_1_);
 	}
 }

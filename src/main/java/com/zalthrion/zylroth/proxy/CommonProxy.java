@@ -1,6 +1,6 @@
 package com.zalthrion.zylroth.proxy;
 
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.zalthrion.zylroth.event.PlayerEventHandler;
 
@@ -11,7 +11,7 @@ public class CommonProxy implements IProxy {
 	
 	@Override
 	public void init() { // For registering stuff on the init
-		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 	}
 
 	@Override public void registerItemRenderers() {}

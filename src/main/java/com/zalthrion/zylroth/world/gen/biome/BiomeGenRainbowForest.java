@@ -7,7 +7,6 @@ import com.zalthrion.zylroth.entity.EntityRainbowPig;
 
 public class BiomeGenRainbowForest extends BiomeGenBase {
 	
-	@SuppressWarnings("unchecked")
 	public BiomeGenRainbowForest(int id) {
 		super(id);
 		

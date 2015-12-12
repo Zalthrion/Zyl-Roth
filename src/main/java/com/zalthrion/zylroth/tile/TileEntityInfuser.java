@@ -9,8 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,7 +21,7 @@ import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeLib;
 import com.zalthrion.zylroth.lib.ModItems;
 
-public class TileEntityInfuser extends TileEntityBase implements IUpdatePlayerListBox, ISidedInventory {
+public class TileEntityInfuser extends TileEntityBase implements ITickable, ISidedInventory {
 	
 	private String localizedName;
 	
@@ -54,7 +54,7 @@ public class TileEntityInfuser extends TileEntityBase implements IUpdatePlayerLi
 		return this.burnTime > 0;
 	}
 	
-	@Override public String getCommandSenderName() {
+	@Override public String getName() {
 		return this.isInventoryNameLocalized() ? this.localizedName : "container.infuser";
 	}
 	

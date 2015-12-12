@@ -24,7 +24,7 @@ public class TileEntityBase extends TileEntity implements IInventory {
 	}
 	
 	@Override
-	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
+	public ItemStack removeStackFromSlot(int p_70304_1_) {
 		return null;
 	}
 	
@@ -48,7 +48,7 @@ public class TileEntityBase extends TileEntity implements IInventory {
 		return false;
 	}
 
-	@Override public String getCommandSenderName() {
+	@Override public String getName() {
 		return "TEBase";
 	}
 
@@ -57,7 +57,7 @@ public class TileEntityBase extends TileEntity implements IInventory {
 	}
 
 	@Override public IChatComponent getDisplayName() {
-		return new ChatComponentText(getCommandSenderName());
+		return new ChatComponentText(getName());
 	}
 
 	@Override public void openInventory(EntityPlayer player) {

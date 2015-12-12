@@ -4,9 +4,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -16,7 +13,7 @@ import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderTenebraeGolem extends RenderLiving {
+public class RenderTenebraeGolem extends RenderLiving<EntityTenebraeGolem> {
 	
 	private static final ResourceLocation tenebrae_golemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Tenebrae_Golem.png");
 	
@@ -31,16 +28,16 @@ public class RenderTenebraeGolem extends RenderLiving {
 	}
 	
 	/** Renders the Tenebrae Golem. */
-	public void doRenderTenebraeGolem(EntityTenebraeGolem par1EntityTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
+	@Override public void doRender(EntityTenebraeGolem par1EntityTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(par1EntityTenebraeGolem, par2, par4, par6, par8, par9);
 	}
 	
-	protected ResourceLocation getTenebraeGolemTextures(EntityTenebraeGolem par1EntityTenebraeGolem) {
+	@Override protected ResourceLocation getEntityTexture(EntityTenebraeGolem par1EntityTenebraeGolem) {
 		return tenebrae_golemTextures;
 	}
 	
 	/** Rotates Tenebrae Golem corpse. */
-	protected void rotateTenebraeGolemCorpse(EntityTenebraeGolem par1EntityTenebraeGolem, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityTenebraeGolem par1EntityTenebraeGolem, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityTenebraeGolem, par2, par3, par4);
 		
 		if ((double) par1EntityTenebraeGolem.limbSwingAmount >= 0.01D) {
@@ -49,27 +46,5 @@ public class RenderTenebraeGolem extends RenderLiving {
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
 			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
-	}
-	
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderTenebraeGolem((EntityTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
-	}
-	
-	@Override protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
-		this.rotateTenebraeGolemCorpse((EntityTenebraeGolem) par1EntityLivingBase, par2, par3, par4);
-	}
-	
-	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderTenebraeGolem((EntityTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
-	}
-	
-	/** Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture. */
-	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.getTenebraeGolemTextures((EntityTenebraeGolem) par1Entity);
-	}
-	
-	@Override public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		this.doRenderTenebraeGolem((EntityTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
 	}
 }

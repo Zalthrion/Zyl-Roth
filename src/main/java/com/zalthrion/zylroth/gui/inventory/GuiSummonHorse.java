@@ -37,7 +37,6 @@ public class GuiSummonHorse extends GuiScreen {
 		return false;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		

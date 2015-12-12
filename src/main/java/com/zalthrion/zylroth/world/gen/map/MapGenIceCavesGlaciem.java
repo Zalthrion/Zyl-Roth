@@ -168,7 +168,7 @@ public class MapGenIceCavesGlaciem extends MapGenBase {
 		return blockState1.getBlock() == Blocks.stone ? true : (blockState1.getBlock() == Blocks.dirt ? true : (blockState1.getBlock() == Blocks.grass ? true : (blockState1.getBlock() == Blocks.hardened_clay ? true : (blockState1.getBlock() == Blocks.stained_hardened_clay ? true : (blockState1.getBlock() == Blocks.sandstone ? true : (blockState1.getBlock() == Blocks.red_sandstone ? true : (blockState1.getBlock() == Blocks.mycelium ? true : (blockState1.getBlock() == Blocks.snow_layer ? true : (blockState1.getBlock() == Blocks.sand || blockState1.getBlock() == Blocks.gravel) && blockState2.getBlock().getMaterial() != Material.water))))))));
 	}
 	
-	@Override protected void func_180701_a(World world, int chunkX, int chunkZ, int param4, int param5, ChunkPrimer primer) {
+	@Override protected void recursiveGenerate(World world, int chunkX, int chunkZ, int param4, int param5, ChunkPrimer primer) {
 		int i1 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(15) + 1) + 1);
 		
 		if (this.rand.nextInt(7) != 0) {

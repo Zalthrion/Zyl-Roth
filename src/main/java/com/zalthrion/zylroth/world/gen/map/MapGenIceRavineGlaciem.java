@@ -155,7 +155,7 @@ public class MapGenIceRavineGlaciem extends MapGenBase {
 		}
 	}
 	
-	@Override protected void func_180701_a(World worldIn, int p_180701_2_, int p_180701_3_, int p_180701_4_, int p_180701_5_, ChunkPrimer p_180701_6_) {
+	@Override protected void recursiveGenerate(World worldIn, int p_180701_2_, int p_180701_3_, int p_180701_4_, int p_180701_5_, ChunkPrimer p_180701_6_) {
 		if (this.rand.nextInt(50) == 0) {
 			double d0 = (double) (p_180701_2_ * 16 + this.rand.nextInt(16));
 			double d1 = (double) (this.rand.nextInt(this.rand.nextInt(40) + 8) + 20);

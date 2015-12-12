@@ -102,7 +102,7 @@ public class InfuserMachine extends BlockBaseContainer {
 			IInventory inventory = (IInventory) tileEntity;
 			
 			for (int i = 0; i < inventory.getSizeInventory(); ++ i) {
-				ItemStack itemstack = inventory.getStackInSlotOnClosing(i);
+				ItemStack itemstack = inventory.removeStackFromSlot(i);
 				
 				if (itemstack != null) {
 					float spawnX = pos.getX() + world.rand.nextFloat();

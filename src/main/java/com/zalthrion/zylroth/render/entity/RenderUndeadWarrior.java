@@ -5,8 +5,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,7 +13,7 @@ import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderUndeadWarrior extends RenderBiped {
+public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
 	private static final ResourceLocation undeadwarriorTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
 	
 	/** Scale of the model to use */
@@ -26,26 +24,16 @@ public class RenderUndeadWarrior extends RenderBiped {
 		this.addLayer(new LayerHeldItem(this));
 	}
 	
-	public void doRenderUndeadWarrior(EntityUndeadWarrior par1EntityUndeadWarrior, double par2, double par4, double par6, float par8, float par9) {
-		super.doRender(par1EntityUndeadWarrior, par2, par4, par6, par8, par9);
-	}
-	
 	/** Applies the scale to the transform matrix */
-	protected void preRenderScale(EntityUndeadWarrior par1EntityUndeadWarrior, float par2) {
+	@Override protected void preRenderCallback(EntityUndeadWarrior par1EntityUndeadWarrior, float par2) {
 		GlStateManager.scale(scale, scale, scale);
 	}
 	
-	protected ResourceLocation getUndeadWarriorTextures(EntityUndeadWarrior par1EntityUndeadWarrior) {
+	@Override protected ResourceLocation getEntityTexture(EntityUndeadWarrior par1EntityUndeadWarrior) {
 		return undeadwarriorTextures;
 	}
 	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	@Override protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.preRenderScale((EntityUndeadWarrior) par1EntityLivingBase, par2);
-	}
-	
-	protected void rotateUndeadWarriorCorpse(EntityUndeadWarrior par1EntityUndeadWarrior, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityUndeadWarrior par1EntityUndeadWarrior, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityUndeadWarrior, par2, par3, par4);
 		
 		if ((double) par1EntityUndeadWarrior.limbSwingAmount >= 0.01D) {
@@ -54,16 +42,5 @@ public class RenderUndeadWarrior extends RenderBiped {
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
 			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
-	}
-	
-	/** Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture. */
-	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.getUndeadWarriorTextures((EntityUndeadWarrior) par1Entity);
-	}
-	
-	protected void renderEntityUndeadWarrior(EntityUndeadWarrior entityundeadwarrior, float par2) {
-		// any other model related renderers can go here.
-		// super.func_130005_c(entityundeadwarrior, par2);
 	}
 }

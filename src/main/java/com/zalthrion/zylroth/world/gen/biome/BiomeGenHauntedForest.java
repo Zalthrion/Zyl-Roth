@@ -8,7 +8,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenHauntedForest extends BiomeGenBase {
 	
-	@SuppressWarnings("unchecked") public BiomeGenHauntedForest(int id) {
+	public BiomeGenHauntedForest(int id) {
 		super(id);
 		
 		this.enableRain = false;

@@ -5,9 +5,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,7 +17,7 @@ import com.zalthrion.zylroth.model.entity.ModelVoidDragon;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderVoidDragon extends RenderLiving {
+public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 	private float scale = 0.5F;
 	
 	private static final ResourceLocation explosionTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_exploding.png");
@@ -37,13 +34,13 @@ public class RenderVoidDragon extends RenderLiving {
 	}
 	
 	/** Applies the scale to the transform matrix */
-	protected void preRenderScale(EntityVoidDragon dragon, float par2) {
+	@Override protected void preRenderCallback(EntityVoidDragon dragon, float par2) {
 		GlStateManager.scale(scale, scale, scale);
 	}
 	
 	/** Used to rotate the dragon as a whole in RenderDragon. It's called in the
 	 * rotateCorpse method. */
-	protected void rotateDragonBody(EntityVoidDragon dragon, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityVoidDragon dragon, float par2, float par3, float par4) {
 		float f3 = (float) dragon.getMovementOffsets(7, par4)[0];
 		float f4 = (float) (dragon.getMovementOffsets(5, par4)[1] - dragon.getMovementOffsets(10, par4)[1]);
 		GlStateManager.rotate(-f3, 0, 1, 0);
@@ -61,7 +58,7 @@ public class RenderVoidDragon extends RenderLiving {
 	}
 	
 	/** Renders the dragon model. Called by renderModel. */
-	protected void renderDragonModel(EntityVoidDragon dragon, float par2, float par3, float par4, float par5, float par6, float par7) {
+	@Override protected void renderModel(EntityVoidDragon dragon, float par2, float par3, float par4, float par5, float par6, float par7) {
 		if (dragon.deathTicks > 0) {
 			float f6 = dragon.deathTicks / 200.0F;
 			GlStateManager.depthFunc(GL11.GL_LEQUAL);
@@ -93,11 +90,11 @@ public class RenderVoidDragon extends RenderLiving {
 	}
 	
 	/** Renders the dragon, along with its dying animation */
-	public void renderDragon(EntityVoidDragon dragon, double par2, double par4, double par6, float par8, float par9) {
+	@Override public void doRender(EntityVoidDragon dragon, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(dragon, par2, par4, par6, par8, par9);
 	}
 	
-	protected ResourceLocation func_110841_a(EntityVoidDragon dragon) {
+	@Override protected ResourceLocation getEntityTexture(EntityVoidDragon dragon) {
 		return dragonTexture;
 	}
 	
@@ -180,47 +177,5 @@ public class RenderVoidDragon extends RenderLiving {
 			GlStateManager.color(1, 1, 1, f1);
 			return 1;
 		}
-	}
-	
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		renderDragon((EntityVoidDragon) par1EntityLiving, par2, par4, par6, par8, par9);
-	}
-	
-	@Override
-	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
-		rotateDragonBody((EntityVoidDragon) par1EntityLivingBase, par2, par3, par4);
-	}
-	
-	/** Renders the model in RenderLiving */
-	@Override
-	protected void renderModel(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {
-		renderDragonModel((EntityVoidDragon) par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
-	}
-	
-	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		renderDragon((EntityVoidDragon) par1EntityLivingBase, par2, par4, par6, par8, par9);
-	}
-	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
-		preRenderScale((EntityVoidDragon) par1EntityLivingBase, par2);
-	}
-	
-	@Override
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return func_110841_a((EntityVoidDragon) par1Entity);
-	}
-	
-	/** Actually renders the given argument. This is a synthetic bridge method,
-	 * always casting down its argument and then handing it off to a worker
-	 * function which does the actual work. In all probabilty, the class Render
-	 * is generic (Render<T extends Entity) and this method has signature public
-	 * void doRender(T entity, double d, double d1, double d2, float f, float
-	 * f1). But JAD is pre 1.5 so doesn't do that. */
-	@Override
-	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		renderDragon((EntityVoidDragon) par1Entity, par2, par4, par6, par8, par9);
 	}
 }

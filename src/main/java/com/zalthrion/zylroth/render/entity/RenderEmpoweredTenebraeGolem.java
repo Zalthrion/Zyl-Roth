@@ -4,9 +4,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -17,7 +14,7 @@ import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderEmpoweredTenebraeGolem extends RenderLiving {
+public class RenderEmpoweredTenebraeGolem extends RenderLiving<EntityEmpoweredTenebraeGolem> {
 	
 	//  private static final ResourceLocation explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
 	private static final ResourceLocation etGolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
@@ -32,12 +29,12 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		this.empowered_tenebrae_golemModel = (ModelEmpoweredTenebraeGolem) this.mainModel;
 	}
 	
-	protected ResourceLocation getEmpoweredTenebraeGolemTextures(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem) {
+	@Override protected ResourceLocation getEntityTexture(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem) {
 		return etGolemTextures;
 	}
 	
 	/** Rotates Empowered Tenebrae Golem corpse. */
-	protected void rotateEmpoweredTenebraeGolemCorpse(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4) {
 		super.rotateCorpse(golem, par2, par3, par4);
 		
 		if ((double) golem.limbSwingAmount >= 0.01D) {
@@ -76,31 +73,11 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		GlStateManager.disableBlend();
 	}*/
 	
-	public void renderEmpoweredTenebraeGolem(EntityEmpoweredTenebraeGolem golem, double par2, double par4, double par6, float par8, float par9) {
+	@Override public void doRender(EntityEmpoweredTenebraeGolem golem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(golem, par2, par4, par6, par8, par9);
 	}
 	
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
-	}
-	
-	@Override protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
-		this.rotateEmpoweredTenebraeGolemCorpse((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par3, par4);
-	}
-	
-	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
-	}
-	
-	@Override protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.getEmpoweredTenebraeGolemTextures((EntityEmpoweredTenebraeGolem) par1Entity);
-	}
-	
-	@Override public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
-	}
-	
-	@Override protected void renderLivingAt(EntityLivingBase entity, double x, double y, double z) {
+	@Override protected void renderLivingAt(EntityEmpoweredTenebraeGolem entity, double x, double y, double z) {
 		super.renderLivingAt(entity, x, y, z);
 		GlStateManager.scale(0.55F,  0.55F, 0.55F);
 	}
