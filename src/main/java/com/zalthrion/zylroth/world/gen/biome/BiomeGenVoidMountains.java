@@ -17,7 +17,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		this.spawnableCaveCreatureList.clear();
 		this.flowers.clear();
 		
-		this.theBiomeDecorator.flowersPerChunk = 0;
+		this.theBiomeDecorator.flowersPerChunk = 0; //TODO If flowers and trees still generate, change this to -999
 		this.theBiomeDecorator.treesPerChunk = 0;
 		this.theBiomeDecorator.generateLakes = false;
 		
