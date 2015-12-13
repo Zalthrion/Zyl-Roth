@@ -18,7 +18,7 @@ public class ModBiomes {
 	public static BiomeGenBase sapphireOcean;
 	public static BiomeGenBase rainbowForest;
 	
-	public static BiomeGenBase frozenOcean;
+	public static BiomeGenBase frozenSea;
 	public static BiomeGenBase coldOcean;
 	public static BiomeGenBase frozenWastes;
 	
@@ -38,7 +38,7 @@ public class ModBiomes {
 		sapphireOcean = new BiomeGenSapphireOcean(212);
 		rainbowForest = new BiomeGenRainbowForest(213);
 		
-		frozenOcean = new BiomeGenFrozenOcean(240);
+		frozenSea = new BiomeGenFrozenSea(240);
 		coldOcean = new BiomeGenColdOcean(241);
 		frozenWastes = new BiomeGenFrozenWastes(242);
 	}
@@ -54,7 +54,7 @@ public class ModBiomes {
 		BiomeDictionary.registerBiomeType(sapphireOcean, Type.OCEAN);
 		BiomeDictionary.registerBiomeType(rainbowForest, Type.MAGICAL);
 		
-		BiomeDictionary.registerBiomeType(frozenOcean, Type.COLD);
+		BiomeDictionary.registerBiomeType(frozenSea, Type.COLD);
 		BiomeDictionary.registerBiomeType(coldOcean, Type.OCEAN);
 		BiomeDictionary.registerBiomeType(frozenWastes, Type.COLD);
 		// BiomeManager.addSpawnBiome(DreadWastes);

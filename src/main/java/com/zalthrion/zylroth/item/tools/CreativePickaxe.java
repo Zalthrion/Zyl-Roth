@@ -38,9 +38,10 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	}
 	
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
-		World world = player.worldObj;
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+		if (this.isBroken(stack)) {
+			if (player.worldObj.isRemote) {
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			}
 			return true;
 		}
 		
@@ -153,7 +154,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ModItems.tenebrae_Ingot;
+		return stack.getItem() == ModItems.tenebraeIngot;
 	}
 	
 	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {

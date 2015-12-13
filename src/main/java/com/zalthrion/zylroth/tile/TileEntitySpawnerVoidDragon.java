@@ -11,11 +11,9 @@ import net.minecraft.util.MathHelper;
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 
 public class TileEntitySpawnerVoidDragon extends TileEntity implements ITickable {
+	private int activationRange = 12;
 	
-	private int activationRange = 16;
-	
-	@Override
-	public Packet<INetHandlerPlayClient> getDescriptionPacket() {
+	@Override public Packet<INetHandlerPlayClient> getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
@@ -25,8 +23,7 @@ public class TileEntitySpawnerVoidDragon extends TileEntity implements ITickable
 		return worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, activationRange) != null;
 	}
 	
-	@Override
-	public void update() {
+	@Override public void update() {
 		if (!worldObj.isRemote && isActivated()) {
 			EntityVoidDragon mob = new EntityVoidDragon(worldObj);
 			mob.setLocationAndAngles(this.pos.getX(), this.pos.getY(), this.pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
@@ -34,5 +31,4 @@ public class TileEntitySpawnerVoidDragon extends TileEntity implements ITickable
 			worldObj.setBlockToAir(this.pos);
 		}
 	}
-	
 }

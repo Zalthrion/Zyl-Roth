@@ -9,7 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 
 /** TenebraeGolem - Zalthrion Created using Tabula 4.1.0 */
 @SideOnly(Side.CLIENT)

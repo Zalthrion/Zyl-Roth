@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,12 +16,12 @@ import com.zalthrion.zylroth.reference.Reference;
 @SideOnly(Side.CLIENT)
 public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
 	private static final ResourceLocation undeadwarriorTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
-	
 	/** Scale of the model to use */
 	private float scale = 0.8F;
 	
 	public RenderUndeadWarrior(RenderManager renderManager, ModelBiped par1ModelBase, float par2, float par3) {
 		super(renderManager, par1ModelBase, par2 * par3);
+		this.addLayer(new LayerBipedArmor(this));
 		this.addLayer(new LayerHeldItem(this));
 	}
 	

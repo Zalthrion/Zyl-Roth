@@ -23,10 +23,10 @@ public class ContainerInfuser extends ContainerBase {
 	public ContainerInfuser(InventoryPlayer inventoryPlayer, TileEntityInfuser tile) {
 		this.infuser = tile;
 		
-		this.addSlotToContainer(new Slot(tile, INPUT, 34, 27)); // Input
-		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 27)); // Output
-		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 1)); // First Fuel
-		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 55)); // Second Fuel
+		this.addSlotToContainer(new Slot(tile, INPUT, 34, 33));
+		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 33));
+		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 7));
+		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 61));
 		
 		bindPlayerInventory(inventoryPlayer);
 	}
@@ -34,12 +34,12 @@ public class ContainerInfuser extends ContainerBase {
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 3; i ++) {
 			for (int j = 0; j < 9; j ++) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 85 + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 91 + i * 18));
 			}
 		}
 		
 		for (int i = 0; i < 9; i ++) {
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 143));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 149));
 		}
 	}
 	

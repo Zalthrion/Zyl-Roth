@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.block;
+package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
@@ -9,6 +9,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.block.BlockBase;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 
@@ -38,12 +39,12 @@ public class TenebraeOre extends BlockBase {
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ModItems.raw_Tenebrae;
+		return ModItems.tenebraeChunk;
 	}
 	
 	@Override
 	public int quantityDropped(Random rand) {
-		return 2 + rand.nextInt(5);
+		return 2 + rand.nextInt(3);
 	}
 	
 	@Override

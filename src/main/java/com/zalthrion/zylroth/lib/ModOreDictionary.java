@@ -5,10 +5,10 @@ import net.minecraftforge.oredict.OreDictionary;
 public final class ModOreDictionary {
 	public static void init() {
 		/* Tenebrae */
-		OreDictionary.registerOre("oreTenebrae", ModBlocks.tenebrae_Ore);
-		OreDictionary.registerOre("ingotTenebrae", ModItems.tenebrae_Ingot);
-		OreDictionary.registerOre("blockTenebrae", ModBlocks.tenebrae_Block);
+		OreDictionary.registerOre("oreTenebrae", ModBlocks.tenebraeOre);
+		OreDictionary.registerOre("ingotTenebrae", ModItems.tenebraeIngot);
+		OreDictionary.registerOre("blockTenebrae", ModBlocks.tenebraeBlock);
 		/* Voidium */
-		OreDictionary.registerOre("oreVoidium", ModBlocks.voidium_Ore);
+		OreDictionary.registerOre("oreVoidium", ModBlocks.voidiumOre);
 	}
 }

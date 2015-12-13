@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-public class BiomeGenFrozenOcean extends BiomeGenBase {
+public class BiomeGenFrozenSea extends BiomeGenBase {
 	
-	public BiomeGenFrozenOcean(int id) {
+	public BiomeGenFrozenSea(int id) {
 		super(id);
 		
 		this.setDisableRain();
@@ -24,7 +24,7 @@ public class BiomeGenFrozenOcean extends BiomeGenBase {
 		this.topBlock = Blocks.ice.getDefaultState();
 		this.fillerBlock = Blocks.packed_ice.getDefaultState();
 		
-		this.setBiomeName("Frozen Ocean");
+		this.setBiomeName("Frozen Sea");
 		this.setHeight(height_Oceans);
 		
 		this.waterColorMultiplier = 0x3CA7B5;

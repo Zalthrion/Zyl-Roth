@@ -14,8 +14,8 @@ public class FuelHandler implements IFuelHandler {
 	private HashMap<Item, Integer> fuelMap = new HashMap<Item, Integer>() {
 		private static final long serialVersionUID = 1L;
 		{
-			put(ModItems.soul_Essence, 6400);
-			put(ModItems.cursed_Soul_Essence, 6400);
+			put(ModItems.soulEssence, 6400);
+			put(ModItems.cursedSoulEssence, 6400);
 		}
 	};
 	

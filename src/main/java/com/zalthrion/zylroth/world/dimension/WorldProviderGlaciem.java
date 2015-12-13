@@ -1,6 +1,5 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
@@ -44,23 +43,7 @@ public class WorldProviderGlaciem extends WorldProvider {
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
-		float f2 = MathHelper.cos(p_76562_1_ * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
-		
-		if (f2 < 0.0F) {
-			f2 = 0.0F;
-		}
-		
-		if (f2 > 1.0F) {
-			f2 = 1.0F;
-		}
-		
-		float f3 = 255.0F;
-		float f4 = 255.0F;
-		float f5 = 255.0F;
-		f3 *= f2 * 0.0F + 0.15F;
-		f4 *= f2 * 0.0F + 0.15F;
-		f5 *= f2 * 0.0F + 0.15F;
-		return new Vec3(f3, f4, f5);
+		return new Vec3((double) 0.9, (double) 1, (double) 1);
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public boolean doesXZShowFog(int x, int z) {

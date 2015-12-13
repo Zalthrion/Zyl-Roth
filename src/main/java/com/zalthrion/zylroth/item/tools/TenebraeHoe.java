@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -29,6 +30,16 @@ public class TenebraeHoe extends ItemHoe implements ZylrothTool {
 	
 	@Override public boolean isBroken(ItemStack stack) {
 		return stack.getMetadata() >= tenebraeDurability;
+	}
+	
+	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
+		if (this.isBroken(stack)) {
+			if (player.worldObj.isRemote) {
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
@@ -67,7 +78,7 @@ public class TenebraeHoe extends ItemHoe implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ModItems.tenebrae_Ingot;
+		return stack.getItem() == ModItems.tenebraeIngot;
 	}
 	
 	@Override public String getUnlocalizedName() {

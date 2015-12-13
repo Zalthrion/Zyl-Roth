@@ -6,8 +6,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 
@@ -28,9 +28,9 @@ public class ChiseledTenebrae extends BlockBase {
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
 		
-		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.empowered_Tenebrae_Core && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.infused_Tenebrae) {
-			boolean flag = world.getBlockState(pos.add(-1, -1, 0)).getBlock() == ModBlocks.infused_Tenebrae && world.getBlockState(pos.add(1, -1, 0)).getBlock() == ModBlocks.infused_Tenebrae;
-			boolean flag1 = world.getBlockState(pos.add(0, -1, -1)).getBlock() == ModBlocks.infused_Tenebrae && world.getBlockState(pos.add(0, -1, 1)).getBlock() == ModBlocks.infused_Tenebrae;
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.empoweredTenebraeCore && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.infusedTenebrae) {
+			boolean flag = world.getBlockState(pos.add(-1, -1, 0)).getBlock() == ModBlocks.infusedTenebrae && world.getBlockState(pos.add(1, -1, 0)).getBlock() == ModBlocks.infusedTenebrae;
+			boolean flag1 = world.getBlockState(pos.add(0, -1, -1)).getBlock() == ModBlocks.infusedTenebrae && world.getBlockState(pos.add(0, -1, 1)).getBlock() == ModBlocks.infusedTenebrae;
 			
 			if (flag || flag1) {
 				world.setBlockToAir(pos);
@@ -56,9 +56,9 @@ public class ChiseledTenebrae extends BlockBase {
 			}
 		}
 		
-		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.tenebrae_Core && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.tenebrae_Block) {
-			boolean flag = world.getBlockState(pos.west().down()).getBlock() == ModBlocks.tenebrae_Block && world.getBlockState(pos.east().down()).getBlock() == ModBlocks.tenebrae_Block;
-			boolean flag1 = world.getBlockState(pos.down().north()).getBlock() == ModBlocks.tenebrae_Block && world.getBlockState(pos.down().south()).getBlock() == ModBlocks.tenebrae_Block;
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.tenebraeCore && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.tenebraeBlock) {
+			boolean flag = world.getBlockState(pos.west().down()).getBlock() == ModBlocks.tenebraeBlock && world.getBlockState(pos.east().down()).getBlock() == ModBlocks.tenebraeBlock;
+			boolean flag1 = world.getBlockState(pos.down().north()).getBlock() == ModBlocks.tenebraeBlock && world.getBlockState(pos.down().south()).getBlock() == ModBlocks.tenebraeBlock;
 			
 			if (flag || flag1) {
 				world.setBlockToAir(pos);

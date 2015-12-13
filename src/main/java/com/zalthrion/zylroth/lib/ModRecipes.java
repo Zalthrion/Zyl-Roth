@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
-import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
+import com.zalthrion.zylroth.handler.recipe.OreInfusionRecipeHandler;
 
 public final class ModRecipes {
 	
@@ -20,44 +20,44 @@ public final class ModRecipes {
 	}
 	
 	public static void registerSmeltingRecipes() {
-		GameRegistry.addSmelting(ModBlocks.tenebrae_Ore, new ItemStack(ModItems.raw_Tenebrae), 0.5F);
-		GameRegistry.addSmelting(ModItems.raw_Tenebrae_Ingot, new ItemStack(ModItems.tenebrae_Ingot), 0.1F);
+		GameRegistry.addSmelting(ModBlocks.tenebraeOre, new ItemStack(ModItems.tenebraeChunk), 0.5F);
+		GameRegistry.addSmelting(ModItems.tenebraeOre, new ItemStack(ModItems.tenebraeIngot), 0.1F);
 	}
 	
 	public static void registerShapedRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.gold_Talisman), "GEG", "EDE", "GEG", 'E', Items.ender_pearl, 'G', Items.gold_ingot, 'D', Items.diamond);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.raw_Tenebrae_Ingot), "RRR", 'R', ModItems.raw_Tenebrae);
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chiseled_Tenebrae), "IRI", "RBR", "IRI", 'I', Items.iron_ingot, 'R', ModItems.raw_Tenebrae, 'B', ModBlocks.tenebrae_Block);
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Core), "DTD", "TBT", "DTD", 'D', Items.diamond, 'T', ModItems.tenebrae_Ingot, 'B', ModBlocks.tenebrae_Block);
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebrae_Block), "III", "III", "III", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "ICI", "RIR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'C', ModItems.unstable_Tenebrae_Core);
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.goldTalisman), "GEG", "EDE", "GEG", 'E', Items.ender_pearl, 'G', Items.gold_ingot, 'D', Items.diamond);
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.tenebraeOre), "CC", "CC", 'C', ModItems.tenebraeChunk);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chiseledTenebrae), "IRI", "RBR", "IRI", 'I', Items.iron_ingot, 'R', ModItems.tenebraeChunk, 'B', ModBlocks.tenebraeBlock);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeCore), "DTD", "TBT", "DTD", 'D', Items.diamond, 'T', ModItems.tenebraeIngot, 'B', ModBlocks.tenebraeBlock);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeBlock), "III", "III", "III", 'I', ModItems.tenebraeIngot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuserIdle), "RTR", "ICI", "RIR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'C', ModItems.unstableTenebraeCore);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.oreInfuserIdle), "IRI", "RER", "IRI", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'E', Items.ender_pearl);
 	}
 	
 	public static void registerShapelessRecipes() {
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.tenebrae_Ingot, 9), new ItemStack(ModBlocks.tenebrae_Block));
-		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.tenebrae_Block, 1), new ItemStack(ModBlocks.chiseled_Tenebrae));
-		if (ConfigurationHandler.getKyrulEnabled()) GameRegistry.addShapelessRecipe(new ItemStack(ModItems.void_Talisman, 1), new ItemStack(ModItems.gold_Talisman), new ItemStack(ModItems.void_Gem));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.tenebraeIngot, 9), new ItemStack(ModBlocks.tenebraeBlock));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.tenebraeBlock, 1), new ItemStack(ModBlocks.chiseledTenebrae));
+		if (ConfigurationHandler.getKyrulEnabled()) GameRegistry.addShapelessRecipe(new ItemStack(ModItems.voidTalisman, 1), new ItemStack(ModItems.goldTalisman), new ItemStack(ModItems.voidGem));
 	}
 	
 	public static void registerArmorRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeHelmet), "III", "IEI", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeChestplate), "IEI", "III", "III", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeLeggings), "III", "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeBoots), "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeHelmet), "III", "IEI", 'I', ModItems.tenebraeIngot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeChestplate), "IEI", "III", "III", 'I', ModItems.tenebraeIngot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeLeggings), "III", "IEI", "IEI", 'I', ModItems.tenebraeIngot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeBoots), "IEI", "IEI", 'I', ModItems.tenebraeIngot);
 	}
 	
 	public static void registerToolRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeSword), "NTN", "OTO", "NBN", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraePickaxe), "TTT", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeAxe), "TTN", "TBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeAxe), "NTT", "NBT", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeShovel), "NTN", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeHoe), "TTN", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
-		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeHoe), "NTT", "NBN", "NON", 'T', ModItems.tenebrae_Ingot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeSword), "NTN", "OTO", "NBN", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraePickaxe), "TTT", "NBN", "NON", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeAxe), "TTN", "TBN", "NON", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeAxe), "NTT", "NBT", "NON", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeShovel), "NTN", "NBN", "NON", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeHoe), "TTN", "NBN", "NON", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
+		GameRegistry.addShapedRecipe(new ItemStack(ModTools.tenebraeHoe), "NTT", "NBN", "NON", 'T', ModItems.tenebraeIngot, 'O', Blocks.obsidian, 'B', Items.blaze_rod);
 	}
 	
 	public static void registerInfusionRecipes() {
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModBlocks.tenebrae_Block), new ItemStack(ModBlocks.infused_Tenebrae), 0, new ItemStack(Items.redstone, 5, 0), new ItemStack(Items.iron_ingot, 5, 0));
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModItems.unstable_Tenebrae_Core), new ItemStack(ModBlocks.empowered_Tenebrae_Core), 0, new ItemStack(Blocks.diamond_block, 1, 0), new ItemStack(ModBlocks.infused_Tenebrae, 1, 0));
+		OreInfusionRecipeHandler.instance().addOreInfusion(new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebriumIngot, 1), 0, new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(ModItems.inferniumIngot, 1, 0));
 	}
 }

@@ -44,9 +44,9 @@ public class SCDeathcharger extends SummoningCrystalBase {
 							
 							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountDeathcharger", mount.getUniqueID().toString());
-							
-						}			
-					} 
+							mount.setTamedBy(player);
+						}		
+					}
 				}
 			}
 		}

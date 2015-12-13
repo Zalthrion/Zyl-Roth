@@ -3,6 +3,8 @@ package com.zalthrion.zylroth.world.gen.biome;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 
+import com.zalthrion.zylroth.entity.EntityBadger;
+
 public class BiomeGenAutumnForest extends BiomeGenBase {
 	
 	public BiomeGenAutumnForest(int id) {
@@ -20,6 +22,8 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 		
 		this.setHeight(height_MidPlains);
 		this.setBiomeName("Autumn Forest");
+		
+		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBadger.class, 1, 1, 1));
 		
 		this.waterColorMultiplier = 0x38CAE0;
 	}

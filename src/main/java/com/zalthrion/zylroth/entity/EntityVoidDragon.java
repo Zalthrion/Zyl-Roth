@@ -16,6 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
 public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMob {

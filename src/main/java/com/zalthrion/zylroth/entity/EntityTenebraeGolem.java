@@ -2,16 +2,13 @@ package com.zalthrion.zylroth.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.lib.ModItems;
 
 public class EntityTenebraeGolem extends EntityMob {
@@ -33,16 +31,14 @@ public class EntityTenebraeGolem extends EntityMob {
 	public EntityTenebraeGolem(World world) {
 		super(world);
 		this.setSize(1.4F, 2.9F);
-		((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
 		this.isImmuneToFire = true;
 		this.experienceValue = 15;
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 1.5D, 32.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.9D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityLiving>(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
 	}
 	
 	@Override
@@ -161,12 +157,12 @@ public class EntityTenebraeGolem extends EntityMob {
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.unstable_Tenebrae_Core, 1);
+		this.dropItem(ModItems.unstableTenebraeCore, 1);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; def ++) {
-			this.entityDropItem(new ItemStack(ModItems.raw_Tenebrae, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.tenebraeOre, 1, 6), 0f);
 		}
 	}
 	

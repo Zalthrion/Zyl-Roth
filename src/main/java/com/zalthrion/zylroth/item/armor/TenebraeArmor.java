@@ -28,11 +28,10 @@ public class TenebraeArmor extends ItemBaseArmor {
 	
 	@Override
 	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		
-		return stack.getItem() == ModItems.tenebrae_Ingot;	
+		return stack.getItem() == ModItems.tenebraeIngot;	
 	}
 	
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@Override @SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
 		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		
@@ -44,6 +43,6 @@ public class TenebraeArmor extends ItemBaseArmor {
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return Reference.MOD_ID.toLowerCase() + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
+		return Reference.RESOURCE_PREFIX + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 }

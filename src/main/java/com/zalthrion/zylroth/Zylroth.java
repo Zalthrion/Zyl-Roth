@@ -39,9 +39,9 @@ public class Zylroth {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
-		ModBiomes.init();
-		ModArmors.init();
 		ModTools.init();
+		ModArmors.init();
+		ModBiomes.init();
 		ModDimension.init();
 		GameRegistry.registerWorldGenerator(new WorldOreGenerator(), 12);
 		GameRegistry.registerWorldGenerator(new WorldStructureGenerator(), 12);
@@ -52,17 +52,17 @@ public class Zylroth {
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		ModBlocks.init();
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		ModItems.init();
-		ModRegistry.register();
+		ModBlocks.init();
 		ModEntity.init();
+		ModRegistry.register();
 		ModOreDictionary.init();
 		ModRecipes.init();
 		proxy.bindTileEntitySpecialRenderers();
 		proxy.registerRenderInformation();
 		proxy.registerItemRenderers();
 		proxy.registerRenderers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
 	
 	/*---------------------------------------------------------------------------*/

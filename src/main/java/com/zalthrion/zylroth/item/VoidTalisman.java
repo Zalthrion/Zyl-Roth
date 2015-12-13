@@ -7,6 +7,7 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class VoidTalisman extends ItemBase {
@@ -20,28 +21,24 @@ public class VoidTalisman extends ItemBase {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		
-		if (!world.isRemote) {
-			
-			if (player instanceof EntityPlayerMP) {
-				
-				EntityPlayerMP playerMP = (EntityPlayerMP) player;
-				
-				WorldServer ws = playerMP.mcServer.worldServerForDimension(47);
-				
-				Teleporter teleporter = new SpecialTeleporter(ws);
-				
-				if (!(player.dimension == 47) && player.ridingEntity == null) {
-					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
-					SpecialTeleporter.adjustPosY(player);
-				}
-				
-				else if (player.dimension == 47 && player.ridingEntity == null) {
-					playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
-					SpecialTeleporter.adjustPosY(player);
+		if (ConfigurationHandler.getKyrulEnabled()) {
+			if (!world.isRemote) {
+				if (player instanceof EntityPlayerMP) {
+					EntityPlayerMP playerMP = (EntityPlayerMP) player;
+					WorldServer ws = playerMP.mcServer.worldServerForDimension(47);
+					Teleporter teleporter = new SpecialTeleporter(ws);
+					
+					if (!(player.dimension == 47) && player.ridingEntity == null) {
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
+						SpecialTeleporter.adjustPosY(player);
+					} else if (player.dimension == 47 && player.ridingEntity == null) {
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
+						SpecialTeleporter.adjustPosY(player);
+					}
 				}
 			}
 		}
+		
 		return super.onItemRightClick(stack, world, player);
 	}
 }

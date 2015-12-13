@@ -7,17 +7,13 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import com.zalthrion.zylroth.Zylroth;
-import com.zalthrion.zylroth.entity.EntityBird;
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
-import com.zalthrion.zylroth.entity.EntityPyroKnight;
-import com.zalthrion.zylroth.entity.EntityRainbowPig;
-import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
-import com.zalthrion.zylroth.entity.EntityUndeadMinion;
-import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
-import com.zalthrion.zylroth.entity.EntityVoidDragon;
+import com.zalthrion.zylroth.entity.*;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
+import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
 public class ModEntity {
@@ -51,6 +47,8 @@ public class ModEntity {
 		
 		registerEntity(EntityBird.class, "Bird", true, 0xeaeae9, 0xc99a03);
 		registerEntity(EntityRainbowPig.class, "RainbowPig", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityBadger.class, "Badger", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityFancyBadger.class, "FancyBadger", false, 0, 0);
 		
 		// Mobs
 
@@ -60,6 +58,7 @@ public class ModEntity {
 		registerEntity(EntityTenebraeGolem.class, "TenebraeGolem", true, 0xeaeae9, 0xc99a03);
 		registerEntity(EntityUndeadMinion.class, "UndeadMinion", true, 0xeaeae9, 0xc99a03);
 		registerEntity(EntityUndeadWarrior.class, "UndeadWarrior", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityUnicorn.class, "Unicorn", true, 0xeaeae9, 0xc99a03);
 		registerEntity(EntityVoidDragon.class, "VoidDragon", true, 0xeaeae9, 0xc99a03);
 		
 		// Mounts
@@ -67,6 +66,8 @@ public class ModEntity {
 		registerEntity(MountDeathcharger.class, "Deathcharger", false, 0, 0);
 		registerEntity(MountPlaguedHorse.class, "PlaguedHorse", false, 0, 0);
 		registerEntity(MountWarTortoise.class, "WarTortoise", false, 0, 0);
+		registerEntity(MountSavageBadger.class, "SavageBadger", false, 0, 0);
+		registerEntity(MountSwiftUnicorn.class, "SwiftUnicorn", false, 0, 0);
 	}
 	
 	public static void init() {

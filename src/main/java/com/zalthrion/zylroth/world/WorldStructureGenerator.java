@@ -24,6 +24,10 @@ public class WorldStructureGenerator implements IWorldGenerator {
 				break;
 			case 47:
 				// GenerateKyrul(random, x * 16, z * 16, world);
+			case 48:
+				// GenerateIridus(random, x * 16, z * 16, world);
+			case 49:
+				// GenerateGlaciem(random, x * 16, z * 16, world);
 		}
 	}
 	
@@ -52,4 +56,43 @@ public class WorldStructureGenerator implements IWorldGenerator {
 		}
 	}*/
 	
+/*	private void GenerateIridis(Random random, int x, int z, World world) {
+		
+		 BiomeGenBase biomegenbase =
+		 * world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16); if
+		 * (biomegenbase == ModBiomes.RainbowForest) { for (int i = 0; i < 1; i
+		 * ++) { int Xcoord = x + random.nextInt(16); int Zcoord = z +
+		 * random.nextInt(16); int Ycoord = world.getHeightValue(Xcoord,
+		 * Zcoord); new RainbowBlueTree(true).generate(world, random, Xcoord,
+		 * Ycoord, Zcoord); new RainbowRedTree(true).generate(world, random,
+		 * Xcoord, Ycoord, Zcoord); new RainbowPurpleTree(true).generate(world,
+		 * random, Xcoord, Ycoord, Zcoord); new
+		 * RainbowYellowTree(true).generate(world, random, Xcoord, Ycoord,
+		 * Zcoord); } } 
+	}
+	
+	private void GenerateGlaciem(Random random, int x, int z, World world) {
+		
+		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
+		
+		if (biomegenbase == ModBiomes.FrozenWastes) {
+			for (int i = 0; i < 5; i ++) {
+				int Xcoord = x + random.nextInt(16);
+				int Ycoord = random.nextInt(90);
+				int Zcoord = z + random.nextInt(16);
+				
+				new IcePillar().generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
+		}
+		
+		if (biomegenbase == ModBiomes.FrozenWastes) {
+			for (int i = 0; i < 5; i ++) {
+				int Xcoord = x + random.nextInt(16);
+				int Ycoord = random.nextInt(90);
+				int Zcoord = +random.nextInt(16);
+				
+				new PackedIcePillar().generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
+		}
+	}*/
 }

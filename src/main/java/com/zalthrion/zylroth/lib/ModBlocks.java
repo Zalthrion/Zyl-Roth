@@ -9,56 +9,83 @@ import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
 import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
-import com.zalthrion.zylroth.block.TenebraeOre;
-import com.zalthrion.zylroth.block.VoidiumOre;
 import com.zalthrion.zylroth.block.item.ItemBlockInfuser;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
+import com.zalthrion.zylroth.block.machine.OreInfuserMachine;
+import com.zalthrion.zylroth.block.ore.EndiriteOre;
+import com.zalthrion.zylroth.block.ore.InferniumOre;
+import com.zalthrion.zylroth.block.ore.TenebraeOre;
+import com.zalthrion.zylroth.block.ore.VoidiumOre;
 import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.itemblock.CoreItemBlock;
 import com.zalthrion.zylroth.itemblock.HeadItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 
 public final class ModBlocks {
 	/* Tenebrae */
-	public static Block tenebrae_Ore = new TenebraeOre();
-	public static Block tenebrae_Block = new TenebraeBlock();
-	public static Block tenebrae_Core = new TenebraeCore();
-	public static Block empowered_Tenebrae_Core = new EmpoweredTenebraeCore();
-	public static Block chiseled_Tenebrae = new ChiseledTenebrae();
-	public static Block infused_Tenebrae = new InfusedTenebrae();
+	public static Block tenebraeOre = new TenebraeOre();
+	public static Block tenebraeBlock = new TenebraeBlock();
+	public static Block tenebraeCore = new TenebraeCore();
+	public static Block empoweredTenebraeCore = new EmpoweredTenebraeCore();
+	public static Block chiseledTenebrae = new ChiseledTenebrae();
+	public static Block infusedTenebrae = new InfusedTenebrae();
+	/* Infernium */
+	public static Block inferniumOre = new InferniumOre();
+	/* Endirite */
+	public static Block endiriteOre = new EndiriteOre();
 	/* Voidium */
-	public static Block voidium_Ore = new VoidiumOre();
+	public static Block voidiumOre = new VoidiumOre();
+	/* Trees */
+	public static Block rainbowLeafBlockZL = new RainbowLeafBlockZL();
+	public static Block rainbowSaplingBlockZL = new RainbowSaplingBlockZL();
 	/* Others */
-	public static Block ash_Block = new AshBlock();
+	public static Block ashBlock = new AshBlock();
 	/* Spawners */
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
 	/* Machines */
 	public static Block infuser = new InfuserMachine(true);
-	public static Block infuser_Idle = new InfuserMachine(false);
+	public static Block infuserIdle = new InfuserMachine(false);
+	public static Block oreInfuser = new OreInfuserMachine(true);
+	public static Block oreInfuserIdle = new OreInfuserMachine(false);
 	
 	public static void init() {
 		/* TileEntity */
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
+		GameRegistry.registerTileEntity(TileEntityOreInfuser.class, "oreInfuser");
 		/* Tenebrae */
-		ModRegistry.addRegister(15, tenebrae_Ore, "tenebraeOre");
-		ModRegistry.addRegister(17, tenebrae_Block, BeaconBaseItemBlock.class, "tenebraeBlock");
-		ModRegistry.addRegister(18, tenebrae_Core, CoreItemBlock.class, "tenebraeCore");
-		ModRegistry.addRegister(19, empowered_Tenebrae_Core, CoreItemBlock.class, "empoweredTenebraeCore");
-		ModRegistry.addRegister(20, chiseled_Tenebrae, HeadItemBlock.class, "chiseledTenebrae");
-		ModRegistry.addRegister(21, infused_Tenebrae, TenebraeItemBlock.class, "infusedTenebrae");
+		ModRegistry.addRegister(20, tenebraeOre, "tenebraeOre");
+		ModRegistry.addRegister(26, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
+		ModRegistry.addRegister(27, tenebraeCore, CoreItemBlock.class, "tenebraeCore");
+		ModRegistry.addRegister(28, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
+		ModRegistry.addRegister(29, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
+		ModRegistry.addRegister(30, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
+		/* Infernium */
+		ModRegistry.addRegister(22, inferniumOre, "inferniumOre");
+		/* Endirite */
+		ModRegistry.addRegister(23, endiriteOre, "endiriteOre");
 		/* Voidium */
-		ModRegistry.addRegister(16, voidium_Ore, "voidiumOre");
+		ModRegistry.addRegister(21, voidiumOre, "voidiumOre");
+		/* Trees */
+		ModRegistry.addRegister(24, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
+		ModRegistry.addRegister(25, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
 		/* Others */
-		ModRegistry.addRegister(22, ash_Block, "ashBlock");
+		ModRegistry.addRegister(31, ashBlock, "ashBlock");
 		/* Spawners */
-		ModRegistry.addRegister(23, spawner_VoidDragon, "spawnerVoidDragon");
+		ModRegistry.addRegister(32, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
-		ModRegistry.addRegister(24, infuser_Idle, ItemBlockInfuser.class, "infuserMachine");
-		ModRegistry.addRegister(25, infuser, "infuserMachineActive");
+		ModRegistry.addRegister(33, infuserIdle, ItemBlockInfuser.class, "infuserMachine");
+		ModRegistry.addRegister(34, infuser, "infuserMachineActive");
+		ModRegistry.addRegister(35, oreInfuserIdle, "oreInfuserMachine"); //TODO Probably make an ItemBlock for this
+		ModRegistry.addRegister(36, oreInfuser, "oreInfuserMachineActive");
 		
 	}
 }

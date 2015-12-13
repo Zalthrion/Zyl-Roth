@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -23,7 +24,6 @@ import com.zalthrion.zylroth.reference.GuiIDs;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class InfuserMachine extends BlockBaseContainer {
-	
 	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
 	
@@ -41,37 +41,30 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setStepSound(soundTypeMetal);
 	}
 	
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
+	@Override public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityInfuser();
 	}
 	
-	@Override
-	public int getRenderType() {
+	@Override public int getRenderType() {
 		return 2;
 	}
 	
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (worldIn.isRemote)
-			return true;
-		else {
-			TileEntityInfuser tile = (TileEntityInfuser) worldIn.getTileEntity(pos);
-			
-			if ((tile == null) || playerIn.isSneaking()) return false;
-			
-			playerIn.openGui(Zylroth.instance, GuiIDs.INFUSER, worldIn, pos.getX(), pos.getY(), pos.getZ());
-			return true;
-		}
+	@Override public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (worldIn.isRemote) return true;
+		TileEntityInfuser tile = (TileEntityInfuser) worldIn.getTileEntity(pos);
+		
+		if ((tile == null) || playerIn.isSneaking()) return false;
+		
+		playerIn.openGui(Zylroth.instance, GuiIDs.INFUSER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		return true;
 	}
 	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.infuser_Idle);
+	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(ModBlocks.infuserIdle);
 	}
 	
 	public static void updateBlockState(boolean active, World world, BlockPos pos) {
-		world.setBlockState(pos, active ? ModBlocks.infuser.getDefaultState() : ModBlocks.infuser_Idle.getDefaultState());
+		world.setBlockState(pos, active ? ModBlocks.infuser.getDefaultState() : ModBlocks.infuserIdle.getDefaultState());
 		
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile != null) {
@@ -80,23 +73,19 @@ public class InfuserMachine extends BlockBaseContainer {
 		}
 	}
 	
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-		return new ItemStack(ModBlocks.infuser_Idle);
+	@Override public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
+		return new ItemStack(ModBlocks.infuserIdle);
 	}
 	
-	@Override
-	public boolean hasComparatorInputOverride() {
+	@Override public boolean hasComparatorInputOverride() {
 		return true;
 	}
 	
-	@Override
-	public int getComparatorInputOverride(World world, BlockPos pos) {
+	@Override public int getComparatorInputOverride(World world, BlockPos pos) {
 		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
 	}
 	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+	@Override public void breakBlock(World world, BlockPos pos, IBlockState state) {
 		if (!keepInventory) {
 			TileEntity tileEntity = world.getTileEntity(pos);
 			if (!(tileEntity instanceof IInventory)) { return; }
@@ -133,6 +122,34 @@ public class InfuserMachine extends BlockBaseContainer {
 			TileEntityInfuser tei = (TileEntityInfuser) te;
 			tei.setFacing(facing);
 			world.markBlockForUpdate(pos);
+		}
+	}
+	
+	@Override public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		TileEntity tile = world.getTileEntity(pos);
+		TileEntityInfuser tei = (TileEntityInfuser) tile;
+		
+		if (tei.isBurning()) {
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			for (int l = x - 2; l <= x + 2; ++ l) {
+				for (int i1 = z - 2; i1 <= z + 2; ++ i1) {
+					if (l > x - 2 && l < x + 2 && i1 == z - 1) {
+						i1 = z + 2;
+					}
+					
+					if (rand.nextInt(16) == 0) {
+						for (int j1 = y; j1 <= y + 1; ++ j1) {
+							if (!world.isAirBlock(new BlockPos((l - x) / 2 + x, j1, (i1 - z) / 2 + z))) {
+								break;
+							}
+							
+							world.spawnParticle(EnumParticleTypes.PORTAL, (double) x - -0.5F, (double) y - -0.5F, (double) z - -0.5F, (double) ((float) (l - x) + rand.nextFloat() - 0.1F), (double) ((float) (j1 - y) - rand.nextFloat() - 0.1F), (double) ((float) (i1 - z) + rand.nextFloat()) - 0.1F);
+						}
+					}
+				}
+			}
 		}
 	}
 }

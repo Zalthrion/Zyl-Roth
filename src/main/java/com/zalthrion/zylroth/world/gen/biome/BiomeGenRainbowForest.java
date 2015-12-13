@@ -1,9 +1,15 @@
 package com.zalthrion.zylroth.world.gen.biome;
 
+import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
+import com.zalthrion.zylroth.entity.EntityUnicorn;
+import com.zalthrion.zylroth.lib.ModBlocks;
 
 public class BiomeGenRainbowForest extends BiomeGenBase {
 	
@@ -24,8 +30,15 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 		this.setBiomeName("Rainbow Forest");
 		
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRainbowPig.class, 4, 1, 2));
+		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityUnicorn.class, 1, 1, 1));
 		
 		this.waterColorMultiplier = 0x38CAE0;
+	}
+	
+	@Override
+	public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+		int i = par1Random.nextInt(6);
+		return new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), ModBlocks.rainbowLeafBlockZL.getStateFromMeta(i), false);
 	}
 	
 	@Override
@@ -35,7 +48,7 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 	
 	@Override
 	public int getModdedBiomeFoliageColor(int original) {
-		return color = 0x11ADC2;
+		return color = 0x60E409;
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ public class ModTabs {
 	public static CreativeTabs zylRoth = new CreativeTabs("Zyl'Roth") {
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.unstable_Tenebrae_Core;
+			return ModItems.unstableTenebraeCore;
 		}
 	};
 }

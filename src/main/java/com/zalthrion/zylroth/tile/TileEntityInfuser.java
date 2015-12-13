@@ -51,7 +51,7 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 	}
 	
 	public boolean isBurning() {
-		return this.burnTime > 0;
+		return this.cookTime > 0;
 	}
 	
 	@Override public String getName() {
@@ -242,7 +242,7 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 			
 			Item i = stack.getItem();
 			
-			if (i == ModItems.raw_Tenebrae) return 400;
+			if (i == ModItems.tenebraeChunk) return 400;
 			
 			GameRegistry.getFuelValue(stack);
 		}

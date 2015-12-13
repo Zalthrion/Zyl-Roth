@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.entity;
+package com.zalthrion.zylroth.entity.boss;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -9,7 +9,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -29,6 +28,11 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
+import com.zalthrion.zylroth.entity.EntityUndeadMinion;
+import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
+import com.zalthrion.zylroth.entity.EntityVoidDragon;
+import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTools;
 
@@ -38,16 +42,21 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 		super(world);
 		this.setSize(0.5F, 2.1F);
 		this.isImmuneToFire = true;
-		((PathNavigateGround)this.getNavigator()).setBreakDoors(true);
+		((PathNavigateGround) this.getNavigator()).setBreakDoors(true);
+		
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIBreakDoor(this));;
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
-		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		this.tasks.addTask(1, new EntityAIBreakDoor(this));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
+		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityMob>(this, EntityMob.class, true));
+		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		
+		this.setCurrentItemOrArmor(4, new ItemStack(ModArmors.voidLordHelmet));
+		this.setCurrentItemOrArmor(3, new ItemStack(ModArmors.voidLordChestplate));
+		this.setCurrentItemOrArmor(2, new ItemStack(ModArmors.voidLordLeggings));
+		this.setCurrentItemOrArmor(1, new ItemStack(ModArmors.voidLordBoots));
 	}
 	
 	@Override
@@ -182,7 +191,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ModItems.dark_Shard, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.darkShard, 1, 6), 0f);
 		}
 	}
 	

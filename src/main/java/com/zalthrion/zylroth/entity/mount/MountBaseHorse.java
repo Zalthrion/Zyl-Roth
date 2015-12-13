@@ -1,28 +1,24 @@
 package com.zalthrion.zylroth.entity.mount;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class MountBaseHorse extends EntityTameableHorse {
+	public boolean isSummoned = false;
+	public boolean canDespawn;
+	protected Entity entity;
+	protected EntityPlayer player;
+	protected EntityTameableHorse tameableHorse;
+	protected NBTTagCompound tagCompound;
 	
 	public MountBaseHorse(World world) {
 		super(world);
+		this.isImmuneToFire = true;
 	}
-	
-	public boolean isSummoned = false;
-	
-	public boolean canDespawn;
-	
-	protected Entity entity;
-	
-	protected EntityPlayer player;
-	
-	protected EntityTameableHorse tameableHorse;
-	
-	protected NBTTagCompound tagCompound;
 	
 	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
@@ -62,6 +58,12 @@ public class MountBaseHorse extends EntityTameableHorse {
 		return summoned;
 	}
 	
+	@Override public boolean setTamedBy(EntityPlayer p_110263_1_) {
+		this.setOwnerId(p_110263_1_.getUniqueID().toString());
+		this.setHorseTamed(true);
+		return true;
+	}
+	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		super.writeEntityToNBT(tagCompound);
@@ -85,6 +87,11 @@ public class MountBaseHorse extends EntityTameableHorse {
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
 			this.setOwnerId(tagCompund.getString("OwnerUUID"));
 		}
+	}
+	
+	@Override protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 	}
 	
 	/** Sets what GUI should open when the player opens his inventory while
@@ -113,7 +120,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 	/** Returns true if the entity can breath underwater */
 	@Override
 	public boolean canBreatheUnderwater() {
-		return false;
+		return true;
 	}
 	
 	/** Returns true if the entity can despawn */

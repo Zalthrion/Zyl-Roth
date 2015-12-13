@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,12 +16,12 @@ import com.zalthrion.zylroth.reference.Reference;
 @SideOnly(Side.CLIENT)
 public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
 	private static final ResourceLocation undeadminionTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
-	
 	/** Scale of the model to use */
 	private float scale = 0.8F;
 	
 	public RenderUndeadMinion(RenderManager renderManager, ModelBiped par1ModelBase, float par2, float par3) {
 		super(renderManager, par1ModelBase, par2 * par3);
+		this.addLayer(new LayerBipedArmor(this));
 		this.addLayer(new LayerHeldItem(this));
 	}
 	
@@ -42,10 +43,5 @@ public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
 			GlStateManager.rotate(6.5F * f5, 0, 0, 1);
 		}
-	}
-	
-	protected void renderEntityUndeadMinion(EntityUndeadMinion entityundeadminion, float par2) {
-		// any other model related renderers can go here.
-		// super.func_130005_c(entityundeadminion, par2);
 	}
 }
