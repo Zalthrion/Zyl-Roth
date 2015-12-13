@@ -1,9 +1,11 @@
 package com.zalthrion.zylroth.lib;
 
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
-import com.zalthrion.zylroth.world.dimension.*;
-
 import net.minecraftforge.common.DimensionManager;
+
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.world.dimension.WorldProviderGlaciem;
+import com.zalthrion.zylroth.world.dimension.WorldProviderIridis;
+import com.zalthrion.zylroth.world.dimension.WorldProviderKyrul;
 
 public class ModDimension {
 	

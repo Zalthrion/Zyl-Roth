@@ -1,7 +1,5 @@
 package com.zalthrion.zylroth.entity.mount;
 
-import com.zalthrion.zylroth.lib.ModItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.zalthrion.zylroth.lib.ModItems;
 
 public class MountWarTortoise extends MountBase {
 	

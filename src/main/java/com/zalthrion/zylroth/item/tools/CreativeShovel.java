@@ -2,12 +2,6 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -19,6 +13,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
+
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	private String name = "creativeShovel";
@@ -83,6 +83,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		
 		else if (!(this.isBroken(stack))) {
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore2"));
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
 			
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));

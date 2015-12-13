@@ -4,16 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.zalthrion.zylroth.item.tools.CreativeAxe;
-import com.zalthrion.zylroth.item.tools.CreativeHoe;
-import com.zalthrion.zylroth.item.tools.CreativePickaxe;
-import com.zalthrion.zylroth.item.tools.CreativeShovel;
-import com.zalthrion.zylroth.item.tools.CreativeSword;
-import com.zalthrion.zylroth.item.tools.TenebraeAxe;
-import com.zalthrion.zylroth.item.tools.TenebraeHoe;
-import com.zalthrion.zylroth.item.tools.TenebraePickaxe;
-import com.zalthrion.zylroth.item.tools.TenebraeShovel;
-import com.zalthrion.zylroth.item.tools.TenebraeSword;
+import com.zalthrion.zylroth.item.tools.*;
 
 public class ModTools {
 	private static final ToolMaterial creativeSwordMaterial = EnumHelper.addToolMaterial("CreativeSword", 3, 12250, 10, 996, 50);

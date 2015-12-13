@@ -2,8 +2,6 @@ package com.zalthrion.zylroth.entity;
 
 import java.util.List;
 
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
@@ -17,6 +15,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
 public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMob {
 	private Entity entity;

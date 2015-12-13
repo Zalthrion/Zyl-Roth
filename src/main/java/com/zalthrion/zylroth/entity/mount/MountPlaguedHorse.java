@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.mount.MountBaseHorse;
 import com.zalthrion.zylroth.lib.ModItems;
 
 public class MountPlaguedHorse extends MountBaseHorse {

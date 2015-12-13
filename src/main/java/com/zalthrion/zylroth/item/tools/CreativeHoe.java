@@ -2,12 +2,6 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
+
+import org.lwjgl.input.Keyboard;
+
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class CreativeHoe extends ItemHoe implements ZylrothTool {
 	private String name = "creativeHoe";
@@ -99,6 +99,7 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 		
 		else if (!(this.isBroken(stack))) {
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
+			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore2"));
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
 			
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));

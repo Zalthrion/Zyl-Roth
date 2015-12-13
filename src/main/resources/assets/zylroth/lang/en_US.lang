@@ -2,7 +2,7 @@ itemGroup.Zyl'Roth=Zyl'Roth
 
 # Tooltips
 
-tooltip.zylroth:shift=- Hold Shift for more info -
+tooltip.zylroth:shift=- Hold Shift For More Info -
 
 tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=A powerful artifact with immense power running inside it.
@@ -13,13 +13,14 @@ tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more dur
 tooltip.zylroth:broken_sword=You must repair this sword to continue using it!
 tooltip.zylroth:broken_tool=You must repair this tool to continue using it!
 
-tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
+tooltip.zylroth:tenebrae_generic=Its weak glow is barely noticeable.
 
 tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
-tooltip.zylroth:tenebrae_sword_lore=The sword seems to be vibrating while on your hand.
+tooltip.zylroth:tenebrae_sword_lore=The sword vibrates in your hand.
 
 tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
-tooltip.zylroth:tenebrae_tool_lore=A tool made of the ancient ore, the Tenebrae, a dark essence surrounds it.
+tooltip.zylroth:tenebrae_tool_lore=Made from the ancient ore Tenebrae
+tooltip.zylroth:tenebrae_tool_lore2=A dark essence surrounds it.
 
 # Blocks
 

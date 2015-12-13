@@ -1,13 +1,13 @@
 package com.zalthrion.zylroth.item;
 
-import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
+import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class IceTalisman extends ItemBase {
 	private String name = "iceTalisman";

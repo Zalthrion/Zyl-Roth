@@ -2,19 +2,7 @@ package com.zalthrion.zylroth.lib;
 
 import net.minecraft.item.Item;
 
-import com.zalthrion.zylroth.item.CursedSoulEssence;
-import com.zalthrion.zylroth.item.DarkShard;
-import com.zalthrion.zylroth.item.GoldTalisman;
-import com.zalthrion.zylroth.item.IceTalisman;
-import com.zalthrion.zylroth.item.RainbowTalisman;
-import com.zalthrion.zylroth.item.RawTenebrae;
-import com.zalthrion.zylroth.item.RawTenebraeIngot;
-import com.zalthrion.zylroth.item.SoulEssence;
-import com.zalthrion.zylroth.item.TenebraeIngot;
-import com.zalthrion.zylroth.item.UnstableTenebraeCore;
-import com.zalthrion.zylroth.item.VoidEssence;
-import com.zalthrion.zylroth.item.VoidGem;
-import com.zalthrion.zylroth.item.VoidTalisman;
+import com.zalthrion.zylroth.item.*;
 import com.zalthrion.zylroth.item.mount.EmptySC;
 import com.zalthrion.zylroth.item.mount.SCDeathcharger;
 import com.zalthrion.zylroth.item.mount.SCPlaguedHorse;

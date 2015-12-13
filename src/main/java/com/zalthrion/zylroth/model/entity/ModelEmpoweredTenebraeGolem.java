@@ -1,7 +1,5 @@
 package com.zalthrion.zylroth.model.entity;
 
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,6 +8,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 
 /** TenebraeGolem - Zalthrion Created using Tabula 4.1.0 */
 @SideOnly(Side.CLIENT)

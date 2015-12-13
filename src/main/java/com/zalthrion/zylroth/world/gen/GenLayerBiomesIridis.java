@@ -1,10 +1,10 @@
 package com.zalthrion.zylroth.world.gen;
 
-import com.zalthrion.zylroth.lib.ModBiomes;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+
+import com.zalthrion.zylroth.lib.ModBiomes;
 
 public class GenLayerBiomesIridis extends GenLayer {
 	

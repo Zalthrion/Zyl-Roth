@@ -2,13 +2,6 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.lib.ModTools;
-import com.zalthrion.zylroth.reference.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -23,6 +16,13 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
+
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.lib.ModTools;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	

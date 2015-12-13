@@ -1,10 +1,10 @@
 package com.zalthrion.zylroth.lib;
 
-import com.zalthrion.zylroth.world.gen.biome.*;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import com.zalthrion.zylroth.world.gen.biome.*;
 
 public class ModBiomes {
 	public static BiomeGenBase dreadWastes;

@@ -3,12 +3,6 @@ package com.zalthrion.zylroth.item.tools;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
-
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.Reference;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
@@ -23,6 +17,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
+
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class CreativeSword extends ItemSword implements ZylrothTool {
 		private String name = "creativeSword";
