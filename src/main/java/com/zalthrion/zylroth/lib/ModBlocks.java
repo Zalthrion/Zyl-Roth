@@ -40,23 +40,25 @@ public final class ModBlocks {
 	public static Block infuser_Idle = new InfuserMachine(false);
 	
 	public static void init() {
-		/* Tenebrae */
-		GameRegistry.registerBlock(tenebrae_Ore, "tenebraeOre");
-		GameRegistry.registerBlock(tenebrae_Block, BeaconBaseItemBlock.class, "tenebraeBlock");
-		GameRegistry.registerBlock(tenebrae_Core, CoreItemBlock.class, "tenebraeCore");
-		GameRegistry.registerBlock(empowered_Tenebrae_Core, CoreItemBlock.class, "empoweredTenebraeCore");
-		GameRegistry.registerBlock(chiseled_Tenebrae, HeadItemBlock.class, "chiseledTenebrae");
-		GameRegistry.registerBlock(infused_Tenebrae, TenebraeItemBlock.class, "infusedTenebrae");
-		/* Voidium */
-		GameRegistry.registerBlock(voidium_Ore, "voidiumOre");
-		/* Others */
-		GameRegistry.registerBlock(ash_Block, "ashBlock");
-		/* Spawners */
-		GameRegistry.registerBlock(spawner_VoidDragon, "spawnerVoidDragon");
+		/* TileEntity */
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
-		/* Machines */
-		GameRegistry.registerBlock(infuser_Idle, ItemBlockInfuser.class, "infuserMachine");
-		GameRegistry.registerBlock(infuser, "infuserMachineActive");
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
+		/* Tenebrae */
+		ModRegistry.addRegister(15, tenebrae_Ore, "tenebraeOre");
+		ModRegistry.addRegister(17, tenebrae_Block, BeaconBaseItemBlock.class, "tenebraeBlock");
+		ModRegistry.addRegister(18, tenebrae_Core, CoreItemBlock.class, "tenebraeCore");
+		ModRegistry.addRegister(19, empowered_Tenebrae_Core, CoreItemBlock.class, "empoweredTenebraeCore");
+		ModRegistry.addRegister(20, chiseled_Tenebrae, HeadItemBlock.class, "chiseledTenebrae");
+		ModRegistry.addRegister(21, infused_Tenebrae, TenebraeItemBlock.class, "infusedTenebrae");
+		/* Voidium */
+		ModRegistry.addRegister(16, voidium_Ore, "voidiumOre");
+		/* Others */
+		ModRegistry.addRegister(22, ash_Block, "ashBlock");
+		/* Spawners */
+		ModRegistry.addRegister(23, spawner_VoidDragon, "spawnerVoidDragon");
+		/* Machines */
+		ModRegistry.addRegister(24, infuser_Idle, ItemBlockInfuser.class, "infuserMachine");
+		ModRegistry.addRegister(25, infuser, "infuserMachineActive");
+		
 	}
 }

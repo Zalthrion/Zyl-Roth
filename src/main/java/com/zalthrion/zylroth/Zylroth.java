@@ -21,6 +21,7 @@ import com.zalthrion.zylroth.lib.ModEntity;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModOreDictionary;
 import com.zalthrion.zylroth.lib.ModRecipes;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
@@ -62,6 +63,7 @@ public class Zylroth {
 	public void init(FMLInitializationEvent event) {
 		ModBlocks.init();
 		ModItems.init();
+		ModRegistry.register();
 		ModEntity.init();
 		ModOreDictionary.init();
 		ModRecipes.init();

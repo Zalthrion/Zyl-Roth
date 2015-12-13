@@ -40,10 +40,10 @@ public final class ModRecipes {
 	}
 	
 	public static void registerArmorRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebrae_Helmet), "III", "IEI", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebrae_Chestplate), "IEI", "III", "III", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebrae_Leggings), "III", "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
-		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebrae_Boots), "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeHelmet), "III", "IEI", 'I', ModItems.tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeChestplate), "IEI", "III", "III", 'I', ModItems.tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeLeggings), "III", "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.tenebraeBoots), "IEI", "IEI", 'I', ModItems.tenebrae_Ingot);
 	}
 	
 	public static void registerToolRecipes() {

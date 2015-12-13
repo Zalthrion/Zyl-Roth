@@ -1,5 +1,9 @@
 package com.zalthrion.zylroth.lib;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.util.EnumHelper;
+
 import com.zalthrion.zylroth.item.tools.CreativeAxe;
 import com.zalthrion.zylroth.item.tools.CreativeHoe;
 import com.zalthrion.zylroth.item.tools.CreativePickaxe;
@@ -11,13 +15,7 @@ import com.zalthrion.zylroth.item.tools.TenebraePickaxe;
 import com.zalthrion.zylroth.item.tools.TenebraeShovel;
 import com.zalthrion.zylroth.item.tools.TenebraeSword;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class ModTools {
-	
 	private static final ToolMaterial creativeSwordMaterial = EnumHelper.addToolMaterial("CreativeSword", 3, 12250, 10, 996, 50);
 	private static final ToolMaterial creativeDamageTools = EnumHelper.addToolMaterial("creativeDamageTools", 3, 12250, 10, 500.0F, 50);
 	private static final ToolMaterial creativeTools = EnumHelper.addToolMaterial("creativeTools", 3, 12250, 10, 250.0F, 50);
@@ -42,16 +40,16 @@ public class ModTools {
 	}
 	
 	public static void tenebraeTools() {
-		GameRegistry.registerItem(tenebraeSword, "tenebrae_sword");
-		GameRegistry.registerItem(tenebraePickaxe, "tenebrae_pickaxe");
-		GameRegistry.registerItem(tenebraeAxe, "tenebrae_axe");
-		GameRegistry.registerItem(tenebraeShovel, "tenebrae_shovel");
-		GameRegistry.registerItem(tenebraeHoe, "tenebrae_hoe");
+		ModRegistry.addRegister(5, tenebraePickaxe, "tenebraePickaxe");
+		ModRegistry.addRegister(6, tenebraeShovel, "tenebraeShovel");
+		ModRegistry.addRegister(7, tenebraeSword, "tenebraeSword");
+		ModRegistry.addRegister(8, tenebraeAxe, "tenebraeAxe");
+		ModRegistry.addRegister(9, tenebraeHoe, "tenebraeHoe");
 		
-		GameRegistry.registerItem(creativeSword, "creative_sword");
-		GameRegistry.registerItem(creativePickaxe, "creative_pickaxe");
-		GameRegistry.registerItem(creativeAxe, "creative_axe");
-		GameRegistry.registerItem(creativeShovel, "creative_shovel");
-		GameRegistry.registerItem(creativeHoe, "creative_hoe");
+		ModRegistry.addRegister(10, creativePickaxe, "creativePickaxe");
+		ModRegistry.addRegister(11, creativeShovel, "creativeShovel");
+		ModRegistry.addRegister(12, creativeSword, "creativeSword");
+		ModRegistry.addRegister(13, creativeAxe, "creativeAxe");
+		ModRegistry.addRegister(14, creativeHoe, "creativeHoe");
 	}
 }

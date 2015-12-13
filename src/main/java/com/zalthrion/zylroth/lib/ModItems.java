@@ -1,11 +1,24 @@
 package com.zalthrion.zylroth.lib;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
-import com.zalthrion.zylroth.item.*;
-import com.zalthrion.zylroth.item.mount.*;
+import com.zalthrion.zylroth.item.CursedSoulEssence;
+import com.zalthrion.zylroth.item.DarkShard;
+import com.zalthrion.zylroth.item.GoldTalisman;
+import com.zalthrion.zylroth.item.IceTalisman;
+import com.zalthrion.zylroth.item.RainbowTalisman;
+import com.zalthrion.zylroth.item.RawTenebrae;
+import com.zalthrion.zylroth.item.RawTenebraeIngot;
+import com.zalthrion.zylroth.item.SoulEssence;
+import com.zalthrion.zylroth.item.TenebraeIngot;
+import com.zalthrion.zylroth.item.UnstableTenebraeCore;
+import com.zalthrion.zylroth.item.VoidEssence;
+import com.zalthrion.zylroth.item.VoidGem;
+import com.zalthrion.zylroth.item.VoidTalisman;
+import com.zalthrion.zylroth.item.mount.EmptySC;
+import com.zalthrion.zylroth.item.mount.SCDeathcharger;
+import com.zalthrion.zylroth.item.mount.SCPlaguedHorse;
+import com.zalthrion.zylroth.item.mount.SCWarTortoise;
 
 public final class ModItems {
 	/* Tenebrae */
@@ -33,25 +46,25 @@ public final class ModItems {
 	
 	public static void init() {
 		/* Tenebrae */
-		GameRegistry.registerItem(raw_Tenebrae, "rawTenebrae");
-		GameRegistry.registerItem(raw_Tenebrae_Ingot, "rawTenebraeIngot");
-		GameRegistry.registerItem(tenebrae_Ingot, "tenebraeIngot");
-		GameRegistry.registerItem(unstable_Tenebrae_Core, "unstableTenebraeCore");
+		ModRegistry.addRegister(26, raw_Tenebrae, "rawTenebrae");
+		ModRegistry.addRegister(27, raw_Tenebrae_Ingot, "rawTenebraeIngot");
+		ModRegistry.addRegister(28, tenebrae_Ingot, "tenebraeIngot");
+		ModRegistry.addRegister(29, unstable_Tenebrae_Core, "unstableTenebraeCore");
 		/* Mounts */
-		GameRegistry.registerItem(Empty_SC, "emptySC");
-		GameRegistry.registerItem(SC_Deathcharger, "SC_Deathcharger");
-		GameRegistry.registerItem(SC_PlaguedHorse, "SC_PlaguedHorse");
-		GameRegistry.registerItem(SC_WarTortoise, "SC_WarTortoise");
+		ModRegistry.addRegister(30, Empty_SC, "emptySC");
+		ModRegistry.addRegister(31, SC_Deathcharger, "SC_Deathcharger");
+		ModRegistry.addRegister(32, SC_PlaguedHorse, "SC_PlaguedHorse");
+		ModRegistry.addRegister(33, SC_WarTortoise, "SC_WarTortoise");
 		/* Portals */
-		GameRegistry.registerItem(gold_Talisman, "goldTalisman");
-		if (ConfigurationHandler.getKyrulEnabled()) GameRegistry.registerItem(void_Talisman, "voidTalisman");
-		if (ConfigurationHandler.getIridisEnabled()) GameRegistry.registerItem(rainbow_Talisman, "rainbowTalisman");
-		if (ConfigurationHandler.getGlaciemEnabled()) GameRegistry.registerItem(ice_Talisman, "iceTalisman");
+		ModRegistry.addRegister(34, gold_Talisman, "goldTalisman");
+		ModRegistry.addRegister(35, void_Talisman, "voidTalisman");
+		ModRegistry.addRegister(36, rainbow_Talisman, "rainbowTalisman");
+		ModRegistry.addRegister(37, ice_Talisman, "iceTalisman");
 		/* Others */
-		GameRegistry.registerItem(dark_Shard, "darkShard");
-		GameRegistry.registerItem(soul_Essence, "soulEssence");
-		GameRegistry.registerItem(cursed_Soul_Essence, "cursedSoulEssence");
-		GameRegistry.registerItem(void_Gem, "voidGem");
-		GameRegistry.registerItem(void_Essence, "voidEssence");
+		ModRegistry.addRegister(38, dark_Shard, "darkShard");
+		ModRegistry.addRegister(39, soul_Essence, "soulEssence");
+		ModRegistry.addRegister(40, cursed_Soul_Essence, "cursedSoulEssence");
+		ModRegistry.addRegister(41, void_Gem, "voidGem");
+		ModRegistry.addRegister(42, void_Essence, "voidEssence");
 	}
 }
