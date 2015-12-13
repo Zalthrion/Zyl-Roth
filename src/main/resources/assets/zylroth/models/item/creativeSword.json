@@ -4,7 +4,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/tenebrae_sword"
+        "layer0": "zylroth:items/creativeSword"
     },
     "display": {
         "thirdperson": {

@@ -4,7 +4,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/creative_sword"
+        "layer0": "zylroth:items/creativeAxe"
     },
     "display": {
         "thirdperson": {

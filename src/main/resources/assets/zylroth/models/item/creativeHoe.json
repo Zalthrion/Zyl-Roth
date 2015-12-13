@@ -4,7 +4,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/tenebrae_shovel"
+        "layer0": "zylroth:items/creativeHoe"
     },
     "display": {
         "thirdperson": {

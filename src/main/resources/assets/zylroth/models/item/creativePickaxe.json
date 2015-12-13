@@ -4,7 +4,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/tenebrae_boots"
+        "layer0": "zylroth:items/creativePickaxe"
     },
     "display": {
         "thirdperson": {

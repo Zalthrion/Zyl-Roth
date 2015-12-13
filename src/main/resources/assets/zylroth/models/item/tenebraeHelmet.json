@@ -4,7 +4,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/tenebrae_leggings"
+        "layer0": "zylroth:items/tenebraeHelmet"
     },
     "display": {
         "thirdperson": {

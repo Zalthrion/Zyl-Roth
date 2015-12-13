@@ -4,7 +4,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/tenebrae_hoe"
+        "layer0": "zylroth:items/tenebraeChestplate"
     },
     "display": {
         "thirdperson": {
