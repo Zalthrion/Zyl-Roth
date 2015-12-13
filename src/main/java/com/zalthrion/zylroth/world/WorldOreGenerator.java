@@ -2,13 +2,14 @@ package com.zalthrion.zylroth.world;
 
 import java.util.Random;
 
-import com.zalthrion.zylroth.lib.ModBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+
+import com.zalthrion.zylroth.lib.ModBlocks;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldOreGenerator implements IWorldGenerator {
@@ -31,27 +32,24 @@ public class WorldOreGenerator implements IWorldGenerator {
 	}
 	
 	private void GenerateOverworld(Random random, int x, int z, World world) {
-		
-		this.addOreSpawn(ModBlocks.tenebrae_Ore, world, random, x, z, 2, 6, 7, 0, 32);
-		
+		this.addOreSpawn(ModBlocks.tenebraeOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.stone);
 	}
 	
 	private void GenerateNether(Random random, int x, int z, World world) {
-		
+		this.addOreSpawn(ModBlocks.inferniumOre, world, random, x, z, 2, 6, 20, 0, 128, Blocks.netherrack);
 	}
 	
 	private void GenerateEnd(Random random, int x, int z, World world) {
-		
+		this.addOreSpawn(ModBlocks.endiriteOre, world, random, x, z, 2, 6, 20, 0, 75, Blocks.end_stone);
 	}
 	
 	private void GenerateKyrul(Random random, int x, int z, World world) {
-		
-		this.addOreSpawn(ModBlocks.voidium_Ore, world, random, x, z, 2, 6, 7, 0, 32);
-		
+		this.addOreSpawn(ModBlocks.voidiumOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.stone);
 	}
 	
-	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
-		WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)), Blocks.stone);
+	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY, Block spawnBlock) {		
+		WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)), spawnBlock);
+		
 		for (int i = 0; i < chancesToSpawn; i ++) {
 			int posX = blockXPos + random.nextInt(16);
 			int posY = minY + random.nextInt(maxY - minY);

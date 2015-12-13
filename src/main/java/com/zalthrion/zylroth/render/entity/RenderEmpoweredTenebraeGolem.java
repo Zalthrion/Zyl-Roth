@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	
-//	private static final ResourceLocation Explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
+	//	private static final ResourceLocation Explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
 	
 	private static final ResourceLocation ETgolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
 	
@@ -128,6 +128,6 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 		GL11.glScalef(0.55F, 0.55F, 0.55F);
 		
 		// The lols are real.
-//		GL11.glScalef(p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat());
+		//		GL11.glScalef(p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat(), p_77039_1_.worldObj.rand.nextFloat());
 	}
 }

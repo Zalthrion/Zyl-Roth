@@ -32,11 +32,8 @@ import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import com.zalthrion.zylroth.lib.ModBiomes;
 import com.zalthrion.zylroth.world.gen.map.MapGenIceCavesGlaciem;
 import com.zalthrion.zylroth.world.gen.map.MapGenIceRavineGlaciem;
-import com.zalthrion.zylroth.world.gen.structures.IcePillar;
-import com.zalthrion.zylroth.world.gen.structures.PackedIcePillar;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 
@@ -361,26 +358,6 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		boolean flag = false;
 		
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(chunkProvider, worldObj, rand, x, z, flag));
-		
-		if (biomegenbase == ModBiomes.FrozenWastes) {
-			for (int i = 0; i < 5; i ++) {
-				int Xcoord = k + rand.nextInt(16);
-				int Ycoord = rand.nextInt(90);
-				int Zcoord = l + rand.nextInt(16);
-				
-				new IcePillar().generate(worldObj, rand, Xcoord, Ycoord, Zcoord);
-			}
-		}
-		
-		if (biomegenbase == ModBiomes.FrozenWastes) {
-			for (int i = 0; i < 5; i ++) {
-				int Xcoord = k + rand.nextInt(16);
-				int Ycoord = rand.nextInt(90);
-				int Zcoord = l + rand.nextInt(16);
-				
-				new PackedIcePillar().generate(worldObj, rand, Xcoord, Ycoord, Zcoord);
-			}
-		}
 		
 		if (this.mapFeaturesEnabled) {
 			

@@ -32,7 +32,7 @@ public class EmpoweredTenebraeCore extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		IIcon tbIcon = ModBlocks.tenebrae_Core.getIcon(0, 0);
+		IIcon tbIcon = ModBlocks.tenebraeCore.getIcon(0, 0);
 		IIcon ret = side == 1 ? tbIcon : (side == 0 ? tbIcon : (meta == 2 && side == 2 ? this.blockIcon : (meta == 3 && side == 5 ? this.blockIcon : (meta == 0 && side == 3 ? this.blockIcon : (meta == 1 && side == 4 ? this.blockIcon : tbIcon)))));
 		return ret;
 	}

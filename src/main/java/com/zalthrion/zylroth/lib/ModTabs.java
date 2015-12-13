@@ -13,23 +13,23 @@ public class ModTabs {
 	
 	public static CreativeTabs ZylRoth = new CreativeTabs("Zyl'Roth") {
 		
-		private ItemSorter itemSorter = new ItemSorter();
+//		private ItemSorter itemSorter = new ItemSorter();
 		
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.unstable_Tenebrae_Core;
+			return ModItems.unstableTenebraeCore;
 		}
 		
-		@SuppressWarnings("unchecked")
+/*		@SuppressWarnings("unchecked")
 		@Override
 		public void displayAllReleventItems(@SuppressWarnings("rawtypes") List items) {
 			super.displayAllReleventItems(items);
 			
 			// Sort the item list using the ItemSorter instance
 			Collections.sort(items, itemSorter);
-		}
+		}*/
 	};
-	
+/*	
 	// Sorts items in alphabetical order using their display names
 	private static class ItemSorter implements Comparator<ItemStack> {
 		
@@ -50,6 +50,6 @@ public class ModTabs {
 			int result = displayName1.compareToIgnoreCase(displayName2);
 			return result;
 		}
-	}
+	}*/
 	
 }

@@ -1,10 +1,10 @@
 package com.zalthrion.zylroth.entity.mount;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
@@ -25,24 +25,22 @@ public class MountDeathcharger extends MountBaseHorse {
 		
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		this.func_152115_b(player.getUniqueID().toString());
-		
 		ItemStack stack = player.inventory.getCurrentItem();
 		
-		if (stack != null && stack.getItem() == ModItems.SC_Deathcharger && player.isSneaking() && persistentData.hasKey("ownsMountDeathcharger")) {
-			
+		if (stack != null && stack.getItem() == ModItems.SC_Deathcharger && player.isSneaking() && persistentData.hasKey("ownsMountDeathcharger") && this.riddenByEntity == null && this.func_152114_e(player)) {
 			this.setDead();
 			persistentData.removeTag("ownsMountDeathcharger");
 		}
 		
-		if (!func_152114_e(player) && !worldObj.isRemote) { // Checks if the
-															// player is the
-															// Owner of the
-															// mount
-			player.addChatMessage(new ChatComponentTranslation(Reference.MOD_ID + ":" + "mount.owned"));
+		if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && !this.isChild() && !player.isSneaking() && stack == null && this.func_152114_e(player)) {
+			player.mountEntity(this);
 		}
 		
-		return super.interact(player);
+		if (!this.func_152114_e(player) && !this.worldObj.isRemote) {
+			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID + ":" + "mount.owned")));
+		}
+		
+		return true;
 	}
 	
 	/** Returns the horse type. 0 = Normal, 1 = Donkey, 2 = Mule, 3 = Undead
@@ -51,23 +49,4 @@ public class MountDeathcharger extends MountBaseHorse {
 	public int getHorseType() {
 		return 4;
 	}
-	
-	/** Returns true if the horse is an Undead horse */
-	@Override
-	public boolean isUndead() {
-		return false;
-	}
-	
-	/** Returns true if the rider of the entity should be dismounted on water */
-	@Override
-	public boolean shouldDismountInWater(Entity rider) {
-		return true;
-	}
-	
-	/** Returns true if the entity can breath underwater */
-	@Override
-	public boolean canBreatheUnderwater() {
-		return true;
-	}
-	
 }

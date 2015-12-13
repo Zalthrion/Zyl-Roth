@@ -2,7 +2,7 @@ package com.zalthrion.zylroth.model.entity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

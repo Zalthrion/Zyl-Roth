@@ -1,10 +1,16 @@
 package com.zalthrion.zylroth.world.dimension;
 
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.DUNGEON;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ICE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
+
 import java.util.List;
 import java.util.Random;
-
-import com.zalthrion.zylroth.lib.ModBiomes;
-import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -28,11 +34,11 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.*;
-import net.minecraftforge.common.*;
-import cpw.mods.fml.common.eventhandler.Event.*;
-import net.minecraftforge.event.terraingen.*;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.ChunkProviderEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderKyrul implements IChunkProvider {
 	
@@ -362,16 +368,6 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		
 		if (this.mapFeaturesEnabled) {
 			this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, x, z);
-		}
-		
-		if (biomegenbase == ModBiomes.VoidMountains) {
-			for (int i = 0; i < 5; i ++) {
-				int Xcoord = k + rand.nextInt(16);
-				int Ycoord = rand.nextInt(90);
-				int Zcoord = l + rand.nextInt(16);
-				
-				new DragonNest().generate(worldObj, rand, Xcoord, Ycoord, Zcoord);
-			}
 		}
 		
 		int k1;

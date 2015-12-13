@@ -1,4 +1,4 @@
-B
+
 #Creative Tabs
 
 itemGroup.Zyl'Roth=Zyl'Roth
@@ -20,10 +20,23 @@ tooltip.zylroth:broken_tool=You must repair this tool to continue using it!
 tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
 
 tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
-tooltip.zylroth:tenebrae_sword_lore=The sword seems to be vibrating while on your hand.
+tooltip.zylroth:tenebrae_sword_lore=The sword seems to be attracting dark energy while on your hand.
 
 tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
-tooltip.zylroth:tenebrae_tool_lore=A tool made of the ancient ore, the Tenebrae, a dark essence surrounds it.
+tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore, you can feel a dark essence surround you.
+
+tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore, a powerful material that holds the power of creation.
+
+#Messages
+
+msg.Zylroth:mount.owned=You're not the owner of this mount!
+
+#Ore Blocks
+
+tile.zylroth:tenebraeOre.name=Tenebrae Ore
+tile.zylroth:inferniumOre.name=Infernium Ore
+tile.zylroth:endiriteOre.name=Endirite Ore
+tile.zylroth:voidiumOre.name=Voidium Ore
 
 
 #Blocks
@@ -34,58 +47,48 @@ tile.zylroth:empoweredTenebraeCore.name=Empowered Tenebrae Core
 tile.zylroth:infusedTenebrae.name=Infused Tenebrae
 tile.zylroth:infuserMachine.name=Tenebrae Infuser
 tile.zylroth:infuserMachineActive.name=Tenebrae Infuser [Active]
+tile.zylroth:oreInfuserMachine.name=Ore Infuser
+tile.zylroth:oreInfuserMachineActive.name=Ore Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
 tile.zylroth:tenebraeCore.name=Tenebrae Core
-tile.zylroth:tenebraeOre.name=Tenebrae Ore
-tile.zylroth:voidiumOre.name=Voidium Ore
+
+tile.zylroth:rainbowBlueLeaves.name=Rainbow Blue Leaves
+tile.zylroth:rainbowRedLeaves.name=Rainbow Red Leaves
+tile.zylroth:rainbowPurpleLeaves.name=Rainbow Purple Leaves
+tile.zylroth:rainbowYellowLeaves.name=Rainbow Yellow Leaves
+tile.zylroth:rainbowGreenLeaves.name=Rainbow Green Leaves
+
+tile.zylroth:rainbowBlueSapling.name=Rainbow Blue Sapling
+tile.zylroth:rainbowRedSapling.name=Rainbow Red Sapling
+tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
+tile.zylroth:rainbowYellowSapling.name=Rainbow Yellow Sapling
+tile.zylroth:rainbowGreenSapling.name=Rainbow Green Sapling
+
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
+#Ore Items
 
-#Entity
+item.zylroth:tenebraeChunk.name=Tenebrae Chunk
+item.zylroth:tenebraeIOre.name=Tenebrae Ore
+item.zylroth:tenebraeIngot.name=Tenebrae Ingot
 
-entity.Zylroth.bird.name=Bird
-entity.Zylroth.empoweredTenebraeGolem.name=Empowered Tenebrae Golem
-entity.Zylroth.pyroKnight.name=Pyro Knight
-entity.Zylroth.rainbowPig.name=Rainbow Pig
-entity.Zylroth.skeletalHorse.name=Skeletal Horse
-entity.Zylroth.tenebraeGolem.name=Tenebrae Golem
-entity.Zylroth.undeadMinion.name=Undead Minion
-entity.Zylroth.undeadWarrior.name=Undead Warrior
-entity.Zylroth.voidDragon.name=Void Dragon
+item.zylroth:rawInfernium.name=Raw Infernium
+item.zylroth:inferniumIngot.name=Infernium Ingot
 
-entity.Zylroth:Deathcharger.name=Deathcharger
-entity.Zylroth:Plagued_Horse.name=Plagued Horse
+item.zylroth:endiriteChunk.name=Endirite Chunk
+item.zylroth:endiriteIOre.name=Endirite Ore
+item.zylroth:endiriteIngot.name=Endirite Ingot
 
+item.zylroth:tenebriumIngot.name=Tenebrium Ingot
 
-#Armors
-
-item.zylroth:tenebraeHelmet.name=Tenebrae Helmet
-item.zylroth:tenebraeChestplate.name=Tenebrae Chestplate
-item.zylroth:tenebraeLeggings.name=Tenebrae Leggings
-item.zylroth:tenebraeBoots.name=Tenebrae Boots
-
-
-#Tools
-
-item.zylroth:creativeSword.name=Creative Sword
-item.zylroth:creativePickaxe.name=Creative Pickaxe
-item.zylroth:creativeAxe.name=Creative Axe
-item.zylroth:creativeShovel.name=Creative Shovel
-item.zylroth:creativeHoe.name=Creative Hoe
-
-item.zylroth:tenebraeSword.name=Tenebrae Sword
-item.zylroth:tenebraePickaxe.name=Tenebrae Pickaxe
-item.zylroth:tenebraeAxe.name=Tenebrae Axe
-item.zylroth:tenebraeShovel.name=Tenebrae Shovel
-item.zylroth:tenebraeHoe.name=Tenebrae Hoe
+item.zylroth:voidiumChunk.name=Voidium Chunk
+item.zylroth:voidiumIOre.name=Voidium Ore
+item.zylroth:voidiumIngot.name=Voidium Ingot
 
 
 #Items
 
-item.zylroth:rawTenebrae.name=Raw Tenebrae
-item.zylroth:rawTenebraeIngot.name=Raw Tenebrae Ingot
-item.zylroth:tenebraeIngot.name=Tenebrae Ingot
 item.zylroth:unstableTenebraeCore.name=Unstable Tenebrae Core
 
 item.zylroth:darkShard.name=Dark Shard
@@ -102,3 +105,56 @@ item.zylroth:voidTalisman.name=Void Talisman
 item.zylroth:emptySC.name=Empty Summoning Crystal
 item.zylroth:Summoning-Crystal_SC_Deathcharger.name=(Summoning Crystal) Deathcharger
 item.zylroth:Summoning-Crystal_SC_PlaguedHorse.name=(Summoning Crystal) Plagued Horse
+item.zylroth:Summoning-Crystal_SC_WarTortoise.name=(Summoning Crystal) War Tortoise
+item.zylroth:Summoning-Crystal_SC_SavageBadger.name=(Summoning Crystal) Savage Badger
+item.zylroth:Summoning-Crystal_SC_SwiftUnicorn.name=(Summoning Crystal) Swift Unicorn
+
+
+#Entity
+
+entity.Zylroth.bird.name=Bird
+entity.Zylroth.empoweredTenebraeGolem.name=Empowered Tenebrae Golem
+entity.Zylroth.pyroKnight.name=Pyro Knight
+entity.Zylroth.rainbowPig.name=Rainbow Pig
+entity.Zylroth.skeletalHorse.name=Skeletal Horse
+entity.Zylroth.tenebraeGolem.name=Tenebrae Golem
+entity.Zylroth.undeadMinion.name=Undead Minion
+entity.Zylroth.undeadWarrior.name=Undead Warrior
+entity.Zylroth.voidDragon.name=Void Dragon
+
+entity.Zylroth:Deathcharger.name=Deathcharger
+entity.Zylroth:Plagued_Horse.name=Plagued Horse
+entity.Zylroth:WarTortoise.name=War Tortoise
+entity.Zylroth:SavageBadger.name=Savage Badger
+entity.Zylroth:SwiftUnicorn.name=Swift Unicorn
+
+
+#Armors
+
+item.zylroth:tenebraeHelmet.name=Tenebrae Helmet
+item.zylroth:tenebraeChestplate.name=Tenebrae Chestplate
+item.zylroth:tenebraeLeggings.name=Tenebrae Leggings
+item.zylroth:tenebraeBoots.name=Tenebrae Boots
+
+item.zylroth:voidLordHelmet.name=Void Lord Helmet
+item.zylroth:voidLordChestplate.name=Void Lord Chestplate
+item.zylroth:voidLordLeggings.name=Void Lord Leggings
+item.zylroth:voidLordBoots.name=Void Lord Boots
+
+
+#Tools
+
+item.zylroth:creativeSword.name=Creative Sword
+item.zylroth:creativePickaxe.name=Creative Pickaxe
+item.zylroth:creativeAxe.name=Creative Axe
+item.zylroth:creativeShovel.name=Creative Shovel
+item.zylroth:creativeHoe.name=Creative Hoe
+
+item.zylroth:tenebraeSword.name=Tenebrae Sword
+item.zylroth:tenebraePickaxe.name=Tenebrae Pickaxe
+item.zylroth:tenebraeAxe.name=Tenebrae Axe
+item.zylroth:tenebraeShovel.name=Tenebrae Shovel
+item.zylroth:tenebraeHoe.name=Tenebrae Hoe
+item.zylroth:tenebraeLeafCutter.name=Tenebrae Leaf Cutter
+
+item.zylroth:woodenCrossbow.name=Wooden Crossbow

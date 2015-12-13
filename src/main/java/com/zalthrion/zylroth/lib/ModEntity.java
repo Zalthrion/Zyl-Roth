@@ -7,18 +7,10 @@ import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.zalthrion.zylroth.Zylroth;
-import com.zalthrion.zylroth.entity.EntityBird;
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
-import com.zalthrion.zylroth.entity.EntityPyroKnight;
-import com.zalthrion.zylroth.entity.EntityRainbowPig;
-import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
-import com.zalthrion.zylroth.entity.EntityUndeadMinion;
-import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
-import com.zalthrion.zylroth.entity.EntityVoidDragon;
-import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
-import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
-import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.entity.*;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.mount.*;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -60,6 +52,10 @@ public class ModEntity {
 		
 		registerEntity(EntityRainbowPig.class, "rainbowPig", true, 0xeaeae9, 0xc99a03);
 		
+		registerEntity(EntityBadger.class, "badger", true, 0xeaeae9, 0xc99a03);
+		
+		registerEntity(EntityFancyBadger.class, "fancyBadger", false, 0, 0);
+		
 		// Mobs
 		
 		registerEntity(EntityEmpoweredTenebraeGolem.class, "empoweredTenebraeGolem", true, 0xeaeae9, 0xc99a03);
@@ -74,6 +70,8 @@ public class ModEntity {
 		
 		registerEntity(EntityUndeadWarrior.class, "undeadWarrior", true, 0xeaeae9, 0xc99a03);
 		
+		registerEntity(EntityUnicorn.class, "unicorn", true, 0xeaeae9, 0xc99a03);
+		
 		registerEntity(EntityVoidDragon.class, "voidDragon", true, 0xeaeae9, 0xc99a03);
 		
 		// Mounts
@@ -83,6 +81,10 @@ public class ModEntity {
 		registerEntity(MountPlaguedHorse.class, "Plagued Horse", false, 0, 0);
 		
 		registerEntity(MountWarTortoise.class, "War Tortoise", false, 0, 0);
+		
+		registerEntity(MountSavageBadger.class, "Savage Badger", false, 0, 0);
+		
+		registerEntity(MountSwiftUnicorn.class, "Swift Unicorn", false, 0, 0);
 		
 	}
 }

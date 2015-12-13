@@ -10,7 +10,7 @@ import net.minecraft.util.MathHelper;
 
 public class TileEntitySpawnerVoidDragon extends TileEntity {
 	
-	private int activationRange = 16;
+	private int activationRange = 12;
 	
 	@Override
 	public Packet getDescriptionPacket() {

@@ -8,8 +8,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
@@ -33,7 +33,7 @@ public class ChiseledTenebrae extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		IIcon tbIcon = ModBlocks.tenebrae_Block.getIcon(0, 0);
+		IIcon tbIcon = ModBlocks.tenebraeBlock.getIcon(0, 0);
 		IIcon ret = side == 1 ? tbIcon : (side == 0 ? tbIcon : (meta == 2 && side == 2 ? this.blockIcon : (meta == 3 && side == 5 ? this.blockIcon : (meta == 0 && side == 3 ? this.blockIcon : (meta == 1 && side == 4 ? this.blockIcon : tbIcon)))));
 		return ret;
 	}
@@ -48,9 +48,9 @@ public class ChiseledTenebrae extends BlockBase {
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
 		
-		if (world.getBlock(x, y - 1, z) == ModBlocks.empowered_Tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.infused_Tenebrae) {
-			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.infused_Tenebrae && world.getBlock(x + 1, y - 1, z) == ModBlocks.infused_Tenebrae;
-			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.infused_Tenebrae && world.getBlock(x, y - 1, z + 1) == ModBlocks.infused_Tenebrae;
+		if (world.getBlock(x, y - 1, z) == ModBlocks.empoweredTenebraeCore && world.getBlock(x, y - 2, z) == ModBlocks.infusedTenebrae) {
+			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.infusedTenebrae && world.getBlock(x + 1, y - 1, z) == ModBlocks.infusedTenebrae;
+			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.infusedTenebrae && world.getBlock(x, y - 1, z + 1) == ModBlocks.infusedTenebrae;
 			
 			if (flag || flag1) {
 				world.setBlock(x, y, z, getBlockById(0), 0, 2);
@@ -67,7 +67,7 @@ public class ChiseledTenebrae extends BlockBase {
 				}
 				
 				EntityEmpoweredTenebraeGolem golem = new EntityEmpoweredTenebraeGolem(world);
-//				golem.setPlayerCreated(true);
+				//				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
 				
@@ -77,9 +77,9 @@ public class ChiseledTenebrae extends BlockBase {
 			}
 		}
 		
-		else if (world.getBlock(x, y - 1, z) == ModBlocks.tenebrae_Core && world.getBlock(x, y - 2, z) == ModBlocks.tenebrae_Block) {
-			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.tenebrae_Block && world.getBlock(x + 1, y - 1, z) == ModBlocks.tenebrae_Block;
-			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.tenebrae_Block && world.getBlock(x, y - 1, z + 1) == ModBlocks.tenebrae_Block;
+		else if (world.getBlock(x, y - 1, z) == ModBlocks.tenebraeCore && world.getBlock(x, y - 2, z) == ModBlocks.tenebraeBlock) {
+			boolean flag = world.getBlock(x - 1, y - 1, z) == ModBlocks.tenebraeBlock && world.getBlock(x + 1, y - 1, z) == ModBlocks.tenebraeBlock;
+			boolean flag1 = world.getBlock(x, y - 1, z - 1) == ModBlocks.tenebraeBlock && world.getBlock(x, y - 1, z + 1) == ModBlocks.tenebraeBlock;
 			
 			if (flag || flag1) {
 				world.setBlock(x, y, z, getBlockById(0), 0, 2);

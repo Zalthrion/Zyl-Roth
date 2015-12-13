@@ -14,10 +14,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderKyrul extends WorldProvider {
 	
+	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true);
 	}
 	
+	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), terrainType);
 		this.dimensionId = ModDimension.dimensionId_Kyrul;
@@ -73,6 +75,7 @@ public class WorldProviderKyrul extends WorldProvider {
 		return Vec3.createVectorHelper((double) f3, (double) f4, (double) f5);
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
 		return true;
@@ -80,6 +83,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	
 	/** Returns 'true' if in the "main surface world", but 'false' if in the
 	 * Nether or End dimensions. */
+	@Override
 	public boolean isSurfaceWorld() {
 		return true;
 	}
@@ -96,11 +100,13 @@ public class WorldProviderKyrul extends WorldProvider {
 	
 	/** Calculates the angle of sun and moon in the sky relative to a specified
 	 * time (usually worldTime) */
+	@Override
 	public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
 		return 0.0F;
 	}
 	
 	/** Returns array with sunrise/sunset colors */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
 		return null;

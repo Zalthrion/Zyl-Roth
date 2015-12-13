@@ -1,15 +1,12 @@
 package com.zalthrion.zylroth.entity.mount;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class MountBaseHorse extends EntityTameableHorse {
-	
-	public MountBaseHorse(World world) {
-		super(world);
-	}
 	
 	public boolean isSummoned = false;
 	
@@ -22,6 +19,11 @@ public class MountBaseHorse extends EntityTameableHorse {
 	protected EntityTameableHorse tameableHorse;
 	
 	protected NBTTagCompound tagCompound;
+	
+	public MountBaseHorse(World world) {
+		super(world);
+		this.isImmuneToFire = true;
+	}
 	
 	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
@@ -62,6 +64,13 @@ public class MountBaseHorse extends EntityTameableHorse {
 	}
 	
 	@Override
+	public boolean setTamedBy(EntityPlayer p_110263_1_) {
+		this.func_152115_b(p_110263_1_.getUniqueID().toString());
+		this.setTamed(true);
+		return true;
+	}
+	
+	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		super.writeEntityToNBT(tagCompound);
 		tagCompound.setBoolean("Tame", this.isTame());
@@ -84,6 +93,11 @@ public class MountBaseHorse extends EntityTameableHorse {
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
 			this.func_152120_b(tagCompund.getString("OwnerUUID"));
 		}
+	}
+	
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 	}
 	
 	/** Sets what GUI should open when the player opens his inventory while
@@ -112,7 +126,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 	/** Returns true if the entity can breath underwater */
 	@Override
 	public boolean canBreatheUnderwater() {
-		return false;
+		return true;
 	}
 	
 	/** Returns true if the entity can despawn */

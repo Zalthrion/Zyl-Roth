@@ -46,24 +46,7 @@ public class PackedIcePillar extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		// check that each corner is one of the valid spawn blocks
-		if (!locationIsValidSpawn(world, x, y, z) 
-				|| !locationIsValidSpawn(world, x + 1, y, z) 
-				|| !locationIsValidSpawn(world, x + 1, y, z + 1) 
-				|| !locationIsValidSpawn(world, x, y, z + 1) 
-				|| !locationIsValidSpawn(world, x - 1, y, z) 
-				|| !locationIsValidSpawn(world, x - 1, y, z - 1) 
-				|| !locationIsValidSpawn(world, x, y, z - 1) 
-				|| !locationIsValidSpawn(world, x + 1, y, z - 1) 
-				|| !locationIsValidSpawn(world, x - 1, y, z + 1)
-				|| !locationIsValidSpawn(world, x + 2, y + 1, z + 0)
-		        || !locationIsValidSpawn(world, x - 2, y + 1, z + 0)
-		        || !locationIsValidSpawn(world, x + 0, y + 1, z + 2)
-		        || !locationIsValidSpawn(world, x + 1, y + 1, z - 1)
-		        || !locationIsValidSpawn(world, x - 1, y + 1, z + 1)
-		        || !locationIsValidSpawn(world, x + 0, y + 1, z - 2)
-		        || !locationIsValidSpawn(world, x + 1, y + 1, z - 2)
-		        || !locationIsValidSpawn(world, x - 1, y + 1, z - 2))
-				{ return false; }
+		if (!locationIsValidSpawn(world, x, y, z) || !locationIsValidSpawn(world, x + 1, y, z) || !locationIsValidSpawn(world, x + 1, y, z + 1) || !locationIsValidSpawn(world, x, y, z + 1) || !locationIsValidSpawn(world, x - 1, y, z) || !locationIsValidSpawn(world, x - 1, y, z - 1) || !locationIsValidSpawn(world, x, y, z - 1) || !locationIsValidSpawn(world, x + 1, y, z - 1) || !locationIsValidSpawn(world, x - 1, y, z + 1) || !locationIsValidSpawn(world, x + 2, y + 1, z + 0) || !locationIsValidSpawn(world, x - 2, y + 1, z + 0) || !locationIsValidSpawn(world, x + 0, y + 1, z + 2) || !locationIsValidSpawn(world, x + 1, y + 1, z - 1) || !locationIsValidSpawn(world, x - 1, y + 1, z + 1) || !locationIsValidSpawn(world, x + 0, y + 1, z - 2) || !locationIsValidSpawn(world, x + 1, y + 1, z - 2) || !locationIsValidSpawn(world, x - 1, y + 1, z - 2)) { return false; }
 		
 		/* z = z - 10; x = x - 10; */
 		
@@ -87,7 +70,7 @@ public class PackedIcePillar extends WorldGenerator {
 		world.setBlock(x + 0, y + 1, z - 2, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 1, y + 1, z - 2, Blocks.packed_ice, 0, 0);
 		world.setBlock(x - 1, y + 1, z - 2, Blocks.packed_ice, 0, 0);
-
+		
 		world.setBlock(x + 0, y + 2, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 1, y + 2, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 2, y + 2, z + 0, Blocks.packed_ice, 0, 0);
@@ -112,26 +95,25 @@ public class PackedIcePillar extends WorldGenerator {
 		world.setBlock(x + 0, y + 3, z + 2, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 0, y + 3, z - 1, Blocks.packed_ice, 0, 0);
 		world.setBlock(x - 1, y + 3, z - 1, Blocks.packed_ice, 0, 0);
-
+		
 		world.setBlock(x + 0, y + 4, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 1, y + 4, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x - 1, y + 4, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 0, y + 4, z + 1, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 0, y + 4, z - 1, Blocks.packed_ice, 0, 0);
-
+		
 		world.setBlock(x + 0, y + 5, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 1, y + 5, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x - 1, y + 5, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x + 0, y + 5, z + 1, Blocks.packed_ice, 0, 0);
-
+		
 		world.setBlock(x + 0, y + 6, z + 0, Blocks.packed_ice, 0, 0);
 		world.setBlock(x - 1, y + 6, z + 0, Blocks.packed_ice, 0, 0);
-
+		
 		world.setBlock(x + 0, y + 7, z + 0, Blocks.packed_ice, 0, 0);
 		
 		world.setBlock(x + 0, y + 8, z + 0, Blocks.packed_ice, 0, 0);
-
-				
+		
 		return true;
 	}
 }

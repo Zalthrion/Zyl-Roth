@@ -30,7 +30,7 @@ public class ModBiomes {
 	
 	// Glaciem
 	
-	public static BiomeGenBase FrozenOcean;
+	public static BiomeGenBase FrozenSea;
 	
 	public static BiomeGenBase ColdOcean;
 	
@@ -59,7 +59,7 @@ public class ModBiomes {
 		
 		RainbowForest = new BiomeGenRainbowForest(213);
 		
-		FrozenOcean = new BiomeGenFrozenOcean(240);
+		FrozenSea = new BiomeGenFrozenSea(240);
 		
 		ColdOcean = new BiomeGenColdOcean(241);
 		
@@ -79,7 +79,7 @@ public class ModBiomes {
 		BiomeDictionary.registerBiomeType(SapphireOcean, Type.OCEAN);
 		BiomeDictionary.registerBiomeType(RainbowForest, Type.MAGICAL);
 		
-		BiomeDictionary.registerBiomeType(FrozenOcean, Type.COLD);
+		BiomeDictionary.registerBiomeType(FrozenSea, Type.COLD);
 		BiomeDictionary.registerBiomeType(ColdOcean, Type.OCEAN);
 		BiomeDictionary.registerBiomeType(FrozenWastes, Type.COLD);
 		

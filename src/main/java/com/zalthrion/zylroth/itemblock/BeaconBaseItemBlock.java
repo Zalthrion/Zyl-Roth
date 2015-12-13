@@ -29,7 +29,7 @@ public class BeaconBaseItemBlock extends ItemBlock {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 			
-			if (blockInstance == ModBlocks.tenebrae_Block) {
+			if (blockInstance == ModBlocks.tenebraeBlock) {
 				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae"));
 			}
 		}

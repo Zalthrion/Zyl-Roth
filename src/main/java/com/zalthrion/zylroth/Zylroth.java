@@ -41,15 +41,11 @@ public class Zylroth {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 		
-		ModBiomes.init();
-		
-		ModItems.init();
-		
-		ModBlocks.init();
-		
-		ModArmors.init();
-		
 		ModTools.init();
+
+		ModArmors.init();
+				
+		ModBiomes.init();
 		
 		ModDimension.init();
 		
@@ -68,7 +64,13 @@ public class Zylroth {
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		
+		ModItems.init();
+		
+		ModBlocks.init();
+				
 		ModEntity.init();
+				
+		ModRegistry.register();
 		
 		ModOreDictionary.init();
 		

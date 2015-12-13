@@ -8,24 +8,23 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTools;
 
 public class EntityUndeadWarrior extends EntityMob {
 	
@@ -34,17 +33,19 @@ public class EntityUndeadWarrior extends EntityMob {
 		this.setSize(0.5F, 2.1F);
 		this.isImmuneToFire = true;
 		this.getNavigator().setBreakDoors(true);
+		
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIBreakDoor(this));;
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
-		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		this.tasks.addTask(1, new EntityAIBreakDoor(this));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
+		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		
+		this.setCurrentItemOrArmor(3, new ItemStack(ModArmors.Tenebrae_Chestplate));
+		this.setCurrentItemOrArmor(2, new ItemStack(ModArmors.Tenebrae_Leggings));
+		this.setCurrentItemOrArmor(1, new ItemStack(ModArmors.Tenebrae_Boots));
 	}
 	
 	@Override
@@ -56,8 +57,7 @@ public class EntityUndeadWarrior extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		
-		if (ConfigurationHandler.getHardcoreModeEnabled()) {
-			
+		if (ConfigurationHandler.getHardcoreModeEnabled()) {	
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
 			this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
@@ -170,7 +170,7 @@ public class EntityUndeadWarrior extends EntityMob {
 		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ModItems.dark_Shard, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.darkShard, 1, 6), 0f);
 		}
 		
 	}
@@ -183,7 +183,7 @@ public class EntityUndeadWarrior extends EntityMob {
 	private static final ItemStack defaultHeldItem;
 	
 	static {
-		defaultHeldItem = new ItemStack(Items.iron_sword, 1);
+		defaultHeldItem = new ItemStack(ModTools.tenebraeSword, 1);
 	}
 	
 	@Override

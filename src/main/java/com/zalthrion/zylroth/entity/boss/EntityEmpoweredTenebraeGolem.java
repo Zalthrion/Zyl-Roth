@@ -1,14 +1,12 @@
-package com.zalthrion.zylroth.entity;
+package com.zalthrion.zylroth.entity.boss;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -25,6 +23,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
@@ -42,14 +41,11 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 		this.getNavigator().setAvoidsWater(true);
 		this.isImmuneToFire = true;
 		this.experienceValue = 75;
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 2.0D, 32.0F));
-		this.tasks.addTask(3, new EntityAISwimming(this));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.9D));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true));
-		
 	}
 	
 	/** Returns true if the newer Entity AI code should be run */
@@ -61,7 +57,6 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		// this.applyAttribute(SharedMonsterAttributes.attackDamage, 0.0D);
 		
 		if (ConfigurationHandler.getHardcoreModeEnabled()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250.0D);
@@ -197,13 +192,13 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ModItems.void_Gem, 1);
-		this.dropItem(ModItems.void_Essence, 4);
+		this.dropItem(ModItems.voidGem, 1);
+		this.dropItem(ModItems.voidEssence, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ModItems.raw_Tenebrae, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ModItems.tenebraeOre, 1, 6), 0f);
 		}
 	}
 	

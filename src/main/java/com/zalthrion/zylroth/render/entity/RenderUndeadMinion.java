@@ -60,14 +60,4 @@ public class RenderUndeadMinion extends RenderBiped {
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getUndeadMinionTextures((EntityUndeadMinion) par1Entity);
 	}
-	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderEntityUndeadMinion((EntityUndeadMinion) par1EntityLivingBase, par2);
-	}
-	
-	protected void renderEntityUndeadMinion(EntityUndeadMinion entityundeadminion, float par2) {
-		// any other model related renderers can go here.
-		// super.func_130005_c(entityundeadminion, par2);
-		super.renderEquippedItems(entityundeadminion, par2);
-	}
 }

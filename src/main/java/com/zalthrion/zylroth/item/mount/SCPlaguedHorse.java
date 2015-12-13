@@ -48,6 +48,7 @@ public class SCPlaguedHorse extends SummoningCrystalBase {
 							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountPlaguedHorse", mount.getUniqueID().toString());
 							
+							mount.setTamedBy(player);
 						}
 						
 					}

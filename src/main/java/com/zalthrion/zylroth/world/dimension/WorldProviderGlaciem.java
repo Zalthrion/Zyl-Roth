@@ -1,6 +1,5 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
@@ -14,10 +13,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderGlaciem extends WorldProvider {
 	
+	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderGlaciem(this.worldObj, this.worldObj.getSeed(), true);
 	}
 	
+	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerGlaciem(worldObj.getSeed(), terrainType);
 		this.dimensionId = ModDimension.dimensionId_Glaciem;
@@ -51,25 +52,10 @@ public class WorldProviderGlaciem extends WorldProvider {
 		return true;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
-		float f2 = MathHelper.cos(p_76562_1_ * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
-		
-		if (f2 < 0.0F) {
-			f2 = 0.0F;
-		}
-		
-		if (f2 > 1.0F) {
-			f2 = 1.0F;
-		}
-		
-		float f3 = 255.0F;
-		float f4 = 255.0F;
-		float f5 = 255.0F;
-		f3 *= f2 * 0.0F + 0.15F;
-		f4 *= f2 * 0.0F + 0.15F;
-		f5 *= f2 * 0.0F + 0.15F;
-		return Vec3.createVectorHelper((double) f3, (double) f4, (double) f5);
+		return Vec3.createVectorHelper((double) 0.9, (double) 1, (double) 1);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -95,11 +81,13 @@ public class WorldProviderGlaciem extends WorldProvider {
 	
 	/** Calculates the angle of sun and moon in the sky relative to a specified
 	 * time (usually worldTime) */
+	@Override
 	public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
 		return 0.0F;
 	}
 	
 	/** Returns array with sunrise/sunset colors */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
 		return null;

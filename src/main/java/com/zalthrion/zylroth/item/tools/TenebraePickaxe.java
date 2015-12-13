@@ -26,28 +26,25 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	private String name = "tenebraePickaxe";
 	
-	int tenebrae = 2249;
-	
 	public TenebraePickaxe(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebrae;
+		return stack.getMetadata() >= tenebraeDurability;
 	}
 	
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
-		
-		World world = player.worldObj;
-		
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+		if (this.isBroken(stack)) {
+			if (player.worldObj.isRemote) {
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
+			}		
 			
 			return true;
-			
 		}
+		
 		else return false;
 	}
 	
@@ -154,7 +151,7 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 	@Override
 	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		
-		return stack.getItem() == ModItems.tenebrae_Ingot;
+		return stack.getItem() == ModItems.tenebraeIngot;
 	}
 	
 	@Override

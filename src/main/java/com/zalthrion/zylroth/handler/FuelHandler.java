@@ -17,12 +17,12 @@ public class FuelHandler implements IFuelHandler {
 		Block blockFuel = Block.getBlockFromItem(fuel.getItem());
 		Item itemFuel = fuel.getItem();
 		
-		if (itemFuel == ModItems.soul_Essence) {
+		if (itemFuel == ModItems.soulEssence) {
 			
 			return 6400;
 		}
 		
-		else if (itemFuel == ModItems.cursed_Soul_Essence) {
+		else if (itemFuel == ModItems.cursedSoulEssence) {
 			
 			return 6400;
 		}

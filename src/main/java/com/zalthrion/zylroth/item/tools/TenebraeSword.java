@@ -27,25 +27,25 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	
 	private String name = "tenebraeSword";
 	
-	int tenebrae = 2249;
-	
 	public TenebraeSword(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
 	public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebrae;
+		return stack.getMetadata() >= tenebraeDurability;
 	}
 	
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (this.isBroken(stack)) {
-			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+			if (player.worldObj.isRemote) {
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
+			}		
 			
 			return true;
-			
 		}
+		
 		else return false;
 	}
 	
@@ -170,7 +170,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	@Override
 	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		
-		return stack.getItem() == ModItems.tenebrae_Ingot;
+		return stack.getItem() == ModItems.tenebraeIngot;
 	}
 	
 	@Override

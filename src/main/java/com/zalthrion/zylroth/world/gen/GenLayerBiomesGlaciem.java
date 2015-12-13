@@ -8,7 +8,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesGlaciem extends GenLayer {
 	
-	protected BiomeGenBase[] allowedBiomes = {ModBiomes.FrozenOcean, ModBiomes.ColdOcean, ModBiomes.FrozenWastes};
+	protected BiomeGenBase[] allowedBiomes = {ModBiomes.FrozenSea, ModBiomes.ColdOcean, ModBiomes.FrozenWastes};
 	
 	public GenLayerBiomesGlaciem(long seed) {
 		super(seed);

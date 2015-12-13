@@ -49,8 +49,9 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 		return true;
 	};
 	
+	//TODO: this.burnTime isn't working, replaced to this.cookTime.
 	public boolean isBurning() {
-		return this.burnTime > 0;
+		return this.cookTime > 0;
 	};
 	
 	@Override
@@ -267,7 +268,7 @@ public class TileEntityInfuser extends TileEntityBase implements ISidedInventory
 			
 			Item i = stack.getItem();
 			
-			if (i == ModItems.raw_Tenebrae)
+			if (i == ModItems.tenebraeChunk)
 				return 400;
 			
 			GameRegistry.getFuelValue(stack);

@@ -60,14 +60,4 @@ public class RenderUndeadWarrior extends RenderBiped {
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getUndeadWarriorTextures((EntityUndeadWarrior) par1Entity);
 	}
-	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderEntityUndeadWarrior((EntityUndeadWarrior) par1EntityLivingBase, par2);
-	}
-	
-	protected void renderEntityUndeadWarrior(EntityUndeadWarrior entityundeadwarrior, float par2) {
-		// any other model related renderers can go here.
-		// super.func_130005_c(entityundeadwarrior, par2);
-		super.renderEquippedItems(entityundeadwarrior, par2);
-	}
 }

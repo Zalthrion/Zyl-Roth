@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.zalthrion.zylroth.entity.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
 import com.zalthrion.zylroth.reference.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -59,15 +59,5 @@ public class RenderPyroKnight extends RenderBiped {
 	 * unless you call Render.bindEntityTexture. */
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getPyroKnightTextures((EntityPyroKnight) par1Entity);
-	}
-	
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderEntityPyroKnight((EntityPyroKnight) par1EntityLivingBase, par2);
-	}
-	
-	protected void renderEntityPyroKnight(EntityPyroKnight entitypyroknight, float par2) {
-		// any other model related renderers can go here.
-		// super.func_130005_c(entitypyroknight, par2);
-		super.renderEquippedItems(entitypyroknight, par2);
 	}
 }

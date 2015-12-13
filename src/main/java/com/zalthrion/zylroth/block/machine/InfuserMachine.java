@@ -77,10 +77,9 @@ public class InfuserMachine extends BlockBaseContainer {
 		
 		if (active) {
 			world.setBlock(x, y, z, ModBlocks.infuser);
-			
 		}
+		
 		else {
-			
 			world.setBlock(x, y, z, ModBlocks.infuser_Idle);
 		}
 		
@@ -154,22 +153,40 @@ public class InfuserMachine extends BlockBaseContainer {
 		}
 	}
 	
+	@Override
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+		
+		TileEntity tile = world.getTileEntity(x, y, z);
+		TileEntityInfuser tei = (TileEntityInfuser) tile;
+		
+		if (tei.isBurning()) {
+			for (int l = x - 2; l <= x + 2; ++ l) {
+				for (int i1 = z - 2; i1 <= z + 2; ++ i1) {
+					if (l > x - 2 && l < x + 2 && i1 == z - 1) {
+						i1 = z + 2;
+					}
+					
+					if (rand.nextInt(16) == 0) {
+						for (int j1 = y; j1 <= y + 1; ++ j1) {
+							{
+								if (!world.isAirBlock((l - x) / 2 + x, j1, (i1 - z) / 2 + z)) {
+									break;
+								}
+								
+								world.spawnParticle("portal", (double) x - -0.5F, (double) y - -0.5F, (double) z - -0.5F, (double) ((float) (l - x) + rand.nextFloat() - 0.1F), (double) ((float) (j1 - y) - rand.nextFloat() - 0.1F), (double) ((float) (i1 - z) + rand.nextFloat()) - 0.1F);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	/* @Override public int getLightValue(IBlockAccess world, int x, int y, int
 	 * z) { TileEntity te = world.getTileEntity(x, y, z); if (te instanceof
 	 * TileEntityInfuser) { TileEntityInfuser tei = (TileEntityInfuser) te;
-	 * return tei.isBurning() ? 15 : 0; } return getLightValue(); } */// TODO
-																		// Activate
-																		// this
-																		// if
-																		// you
-																		// want
-																		// to
-																		// remove
-																		// the
-																		// "active"
-																		// block
-																		// and
-																		// make
-																		// it
-																		// one
+	 * return tei.isBurning() ? 15 : 0; } return getLightValue(); } */
+	
+	// TODO Activate this if you want to remove the "activate" block and make it one
+	
 }

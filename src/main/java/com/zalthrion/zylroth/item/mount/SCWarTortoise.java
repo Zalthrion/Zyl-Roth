@@ -32,7 +32,7 @@ public class SCWarTortoise extends SummoningCrystalBase {
 				mount.copyLocationAndAnglesFrom(player);
 				mount.onSpawnWithEgg((IEntityLivingData) null);
 				
-				if (!player.worldObj.isRemote && mount.isAdultHorse()) {
+				if (!player.worldObj.isRemote && !mount.isChild()) {
 					
 					if (!(persistentData.hasKey("ownsMountWarTortoise"))) {
 						
@@ -47,6 +47,7 @@ public class SCWarTortoise extends SummoningCrystalBase {
 							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountWarTortoise", mount.getUniqueID().toString());
 							
+							mount.setTamedBy(player);
 						}
 					}
 				}

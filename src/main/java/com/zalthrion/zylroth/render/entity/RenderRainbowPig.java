@@ -42,7 +42,7 @@ public class RenderRainbowPig extends RenderLiving {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(EntityRainbowPig p_110775_1_) {
+	protected ResourceLocation getEntityTexture(EntityRainbowPig rainbowPig) {
 		return pigTextures;
 	}
 	
@@ -55,7 +55,7 @@ public class RenderRainbowPig extends RenderLiving {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-		return this.getEntityTexture((EntityRainbowPig) p_110775_1_);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getEntityTexture((EntityRainbowPig) entity);
 	}
 }
