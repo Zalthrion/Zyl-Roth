@@ -7,6 +7,7 @@ bin/
 build/
 config/
 crash-reports/
+eclipse/
 logs/
 saves/
 
