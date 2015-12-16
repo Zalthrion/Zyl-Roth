@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.block.item;
+package com.zalthrion.zylroth.itemblock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;

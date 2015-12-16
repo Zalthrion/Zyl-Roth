@@ -9,7 +9,6 @@ import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
 import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
-import com.zalthrion.zylroth.block.item.ItemBlockInfuser;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.block.machine.OreInfuserMachine;
 import com.zalthrion.zylroth.block.ore.EndiriteOre;
@@ -18,10 +17,12 @@ import com.zalthrion.zylroth.block.ore.TenebraeOre;
 import com.zalthrion.zylroth.block.ore.VoidiumOre;
 import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL2;
 import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.itemblock.CoreItemBlock;
 import com.zalthrion.zylroth.itemblock.HeadItemBlock;
+import com.zalthrion.zylroth.itemblock.ItemBlockInfuser;
 import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
 import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
@@ -45,6 +46,7 @@ public final class ModBlocks {
 	public static Block voidiumOre = new VoidiumOre();
 	/* Trees */
 	public static Block rainbowLeafBlockZL = new RainbowLeafBlockZL();
+	public static Block rainbowLeafBlockZL2 = new RainbowLeafBlockZL2();
 	public static Block rainbowSaplingBlockZL = new RainbowSaplingBlockZL();
 	/* Others */
 	public static Block ashBlock = new AshBlock();
@@ -77,6 +79,7 @@ public final class ModBlocks {
 		/* Trees */
 		ModRegistry.addRegister(24, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
 		ModRegistry.addRegister(25, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
+		ModRegistry.addRegister(65, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2"); // Temporairly 65
 		/* Others */
 		ModRegistry.addRegister(31, ashBlock, "ashBlock");
 		/* Spawners */

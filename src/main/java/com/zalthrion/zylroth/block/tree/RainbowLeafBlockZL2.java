@@ -26,24 +26,25 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.utility.LogHelper;
 
-public class RainbowLeafBlockZL extends BlockLeaves {
+public class RainbowLeafBlockZL2 extends BlockLeaves {
 	public static final PropertyEnum<TreeColor> TYPE = PropertyEnum.<TreeColor>create("type", TreeColor.class, new Predicate<TreeColor>() {
 		@Override public boolean apply(TreeColor param_apply) {
-			return param_apply.getMeta() < 4;
+			return (param_apply.getMeta() > 3) && (param_apply.getMeta() < 6);
 		}
 	});
 	
-	public RainbowLeafBlockZL() {
+	public RainbowLeafBlockZL2() {
 		this.setTickRandomly(true);
 		this.setCreativeTab(ModTabs.zylRoth);
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setStepSound(soundTypeGrass);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, TreeColor.RED).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, TreeColor.BLUE).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 	}
 	
 	@Override protected ItemStack createStackedBlock(IBlockState state) {
-		return new ItemStack(this, 1, state.getBlock().getMetaFromState(state) & 3);
+		LogHelper.warn("Called createStackedBlock");
+		return new ItemStack(this, 1, (state.getBlock().getMetaFromState(state) & 3) + 4);
 	}
 	
 	@Override public IBlockState getStateFromMeta(int meta) {
@@ -52,7 +53,7 @@ public class RainbowLeafBlockZL extends BlockLeaves {
 	
 	@Override public int getMetaFromState(IBlockState state) {
 		int i = 0;
-		i = i | ((TreeColor) state.getValue(TYPE)).getMeta();
+		i = i | ((TreeColor) state.getValue(TYPE)).getMeta() - 4;
 		
 		if (!((Boolean) state.getValue(DECAYABLE)).booleanValue()) {
 			i |= 4;
@@ -61,13 +62,12 @@ public class RainbowLeafBlockZL extends BlockLeaves {
 		if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue()) {
 			i |= 8;
 		}
-		LogHelper.warn("Called getMetaFromState(" + i + ")");
 		
 		return i;
 	}
 	
 	@SuppressWarnings({"rawtypes", "unchecked"}) @Override public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
-		for (int i = 0; i < 4; i ++) {
+		for (int i = 4; i < 6; i ++) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}

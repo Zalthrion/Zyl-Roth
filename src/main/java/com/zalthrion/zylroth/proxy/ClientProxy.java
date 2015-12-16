@@ -5,12 +5,17 @@ import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelHorse;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL2;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
 import com.zalthrion.zylroth.entity.*;
 import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
@@ -20,6 +25,8 @@ import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.handler.ModelHelper;
+import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModItems;
@@ -77,6 +84,12 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerBlock(ModBlocks.ashBlock);
 		ModelHelper.registerBlock(ModBlocks.empoweredTenebraeCore);
 		ModelHelper.registerBlock(ModBlocks.voidiumOre);
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowSaplingBlockZL), RainbowSaplingItemBlock.getVariants());
+		ModelHelper.registerBlock(ModBlocks.rainbowSaplingBlockZL, (new StateMap.Builder()).withName(RainbowSaplingBlockZL.TYPE).withSuffix("_sapling").ignore(RainbowSaplingBlockZL.STAGE).build(), 0, 1, 2, 3, 4, 5);
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowLeafBlockZL), RainbowLeafItemBlock.getVariants(0));
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowLeafBlockZL2), RainbowLeafItemBlock.getVariants(1));
+		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL, (new StateMap.Builder()).withName(RainbowLeafBlockZL.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL.CHECK_DECAY).ignore(RainbowLeafBlockZL.DECAYABLE).build(), 0, 1, 2, 3);
+		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL2, (new StateMap.Builder()).withName(RainbowLeafBlockZL2.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL2.CHECK_DECAY).ignore(RainbowLeafBlockZL2.DECAYABLE).build(), 4, 5);
 		/* Items */
 		/* Armors */
 		ModelHelper.registerItem(ModArmors.tenebraeHelmet);

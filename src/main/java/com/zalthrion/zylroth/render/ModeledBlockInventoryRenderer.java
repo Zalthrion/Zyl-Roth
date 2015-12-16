@@ -6,13 +6,12 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 
 import com.zalthrion.zylroth.lib.ModBlocks;
-import com.zalthrion.zylroth.lib.ModTools;
-import com.zalthrion.zylroth.tile.TileEntityCrossbow;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 
 public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 	private TileEntityInfuser tei = new TileEntityInfuser();
-	private TileEntityCrossbow tec = new TileEntityCrossbow();
+	private TileEntityOreInfuser teoi = new TileEntityOreInfuser();
 	private TileEntityItemStackRenderer superInstance;
 	
 	public ModeledBlockInventoryRenderer() {
@@ -28,15 +27,13 @@ public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 		Block block = Block.getBlockFromItem(itemStack.getItem());
 		if (block == ModBlocks.infuser || block == ModBlocks.infuserIdle) {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(this.tei, 0, 0, 0, 0F);
+		} else if (block == ModBlocks.oreInfuser || block == ModBlocks.oreInfuserIdle) {
+			TileEntityRendererDispatcher.instance.renderTileEntityAt(this.teoi, 0, 0, 0, 0F);
 		} else {
-			if (itemStack.getItem() == ModTools.woodenCrossbow) {
-				TileEntityRendererDispatcher.instance.renderTileEntityAt(this.tec, 0, 0, 0, 0F);
+			if (superInstance != null) {
+				superInstance.renderByItem(itemStack);
 			} else {
-				if (superInstance != null) {
-					superInstance.renderByItem(itemStack);
-				} else {
-					super.renderByItem(itemStack);
-				}
+				super.renderByItem(itemStack);
 			}
 		}
 	}
