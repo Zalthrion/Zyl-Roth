@@ -12,10 +12,12 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -70,10 +72,6 @@ public class RainbowLeafBlockZL2 extends BlockLeaves {
 		}
 	}
 	
-	@Override public boolean isOpaqueCube() {
-		return false;
-	}
-	
 	@Override @SideOnly(Side.CLIENT) public int getRenderColor(IBlockState state) {
 		return 16777215;
 	}
@@ -82,13 +80,17 @@ public class RainbowLeafBlockZL2 extends BlockLeaves {
 		return Item.getItemFromBlock(ModBlocks.rainbowSaplingBlockZL);
 	}
 	
+	@Override public int damageDropped(IBlockState state) {
+		return ((TreeColor) state.getValue(TYPE)).getMeta();
+	}
+	
 	@Override public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass) {
 		return 16777215;
 	}
 	
 	@Override protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
 		if (worldIn.rand.nextInt(chance) == 0) {
-			spawnAsEntity(worldIn, pos, new ItemStack(Items.apple, 1, 0));
+			spawnAsEntity(worldIn, pos, new ItemStack(Items.golden_apple, 1, 0));
 		}
 	}
 
@@ -103,5 +105,13 @@ public class RainbowLeafBlockZL2 extends BlockLeaves {
 	
 	@Override protected BlockState createBlockState() {
 		return new BlockState(this, new IProperty[] {TYPE, CHECK_DECAY, DECAYABLE});
+	}
+	
+	@Override public boolean isOpaqueCube() {
+		return Blocks.leaves.isOpaqueCube();
+	}
+	
+	@Override @SideOnly(Side.CLIENT) public EnumWorldBlockLayer getBlockLayer() {
+		return Blocks.leaves.getBlockLayer();
 	}
 }
