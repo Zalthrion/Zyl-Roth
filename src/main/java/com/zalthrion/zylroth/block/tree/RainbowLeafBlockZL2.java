@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.base.Predicate;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.utility.LogHelper;
 
 public class RainbowLeafBlockZL2 extends BlockLeaves {
 	public static final PropertyEnum<TreeColor> TYPE = PropertyEnum.<TreeColor>create("type", TreeColor.class, new Predicate<TreeColor>() {
@@ -43,12 +42,11 @@ public class RainbowLeafBlockZL2 extends BlockLeaves {
 	}
 	
 	@Override protected ItemStack createStackedBlock(IBlockState state) {
-		LogHelper.warn("Called createStackedBlock");
 		return new ItemStack(this, 1, (state.getBlock().getMetaFromState(state) & 3) + 4);
 	}
 	
 	@Override public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(TYPE, TreeColor.get(meta)).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+		return this.getDefaultState().withProperty(TYPE, TreeColor.get((meta % 4) + 4)).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
 	}
 	
 	@Override public int getMetaFromState(IBlockState state) {

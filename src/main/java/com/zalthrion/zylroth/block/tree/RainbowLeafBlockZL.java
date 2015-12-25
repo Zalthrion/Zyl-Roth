@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.base.Predicate;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.utility.LogHelper;
 
 public class RainbowLeafBlockZL extends BlockLeaves {
 	public static final PropertyEnum<TreeColor> TYPE = PropertyEnum.<TreeColor>create("type", TreeColor.class, new Predicate<TreeColor>() {
@@ -47,7 +46,7 @@ public class RainbowLeafBlockZL extends BlockLeaves {
 	}
 	
 	@Override public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(TYPE, TreeColor.get(meta)).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+		return this.getDefaultState().withProperty(TYPE, TreeColor.get((meta % 4))).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
 	}
 	
 	@Override public int getMetaFromState(IBlockState state) {
@@ -61,7 +60,6 @@ public class RainbowLeafBlockZL extends BlockLeaves {
 		if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue()) {
 			i |= 8;
 		}
-		LogHelper.warn("Called getMetaFromState(" + i + ")");
 		
 		return i;
 	}

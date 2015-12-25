@@ -71,8 +71,26 @@ public class RainbowSaplingBlockZL extends BlockBush implements IGrowable {
 		boolean flag = false;
 		
 		IBlockState leafState = Blocks.air.getDefaultState();
-		if (l < 4) leafState = ModBlocks.rainbowLeafBlockZL.getStateFromMeta(l);
-		if (l > 3) leafState = ModBlocks.rainbowLeafBlockZL2.getStateFromMeta(l);
+		switch (l) {
+			case 0:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.RED);
+				break;
+			case 1:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.ORANGE);
+				break;
+			case 2:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.YELLOW);
+				break;
+			case 3:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.GREEN);
+				break;
+			case 4:
+				leafState = ModBlocks.rainbowLeafBlockZL2.getDefaultState().withProperty(RainbowLeafBlockZL2.TYPE, TreeColor.BLUE);
+				break;
+			case 5:
+				leafState = ModBlocks.rainbowLeafBlockZL2.getDefaultState().withProperty(RainbowLeafBlockZL2.TYPE, TreeColor.PURPLE);
+				break;
+		}
 		Object object = new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), leafState, false);
 		
 		if (flag) {
