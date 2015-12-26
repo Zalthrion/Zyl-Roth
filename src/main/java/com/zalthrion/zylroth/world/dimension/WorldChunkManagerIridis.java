@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.world.dimension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -203,9 +204,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	/** Finds a valid position within a range, that is in one of the listed
 	 * biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y
 	 * positions. */
-/*	@Override
-	@SuppressWarnings("rawtypes")
-	public ChunkPosition findBiomePosition(int x, int y, int z, List par4List, Random random) {
+	@Override @SuppressWarnings("rawtypes") public BlockPos findBiomePosition(int x, int y, int z, List par4List, Random random) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
 		int i1 = y - z >> 2;
@@ -214,7 +213,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
 		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
-		ChunkPosition chunkposition = null;
+		BlockPos blockpos = null;
 		int j2 = 0;
 		
 		for (int k2 = 0; k2 < l1 * i2; ++ k2) {
@@ -222,14 +221,14 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 			int i3 = i1 + k2 / l1 << 2;
 			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k2]);
 			
-			if (par4List.contains(biomegenbase) && (chunkposition == null || random.nextInt(j2 + 1) == 0)) {
-				chunkposition = new ChunkPosition(l2, 0, i3);
-				++ j2;
+			if (par4List.contains(biomegenbase) && (blockpos == null || random.nextInt(j2 + 1) == 0)) {
+				blockpos = new BlockPos(l2, 0, i3);
+				j2 ++;
 			}
 		}
 		
-		return chunkposition;
-	}*/
+		return blockpos;
+	}
 	
 	/** Calls the WorldChunkManager's biomeCache.cleanupCache() */
 	@Override

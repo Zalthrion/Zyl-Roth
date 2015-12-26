@@ -205,8 +205,6 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		if (this.settings.useCaves) this.caveGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
 		if (this.settings.useRavines) this.ravineGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
 		if (this.settings.useMineShafts && this.mapFeaturesEnabled) this.mineshaftGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
-		// if (this.worldObj.getWorldChunkManager().func_180300_a(new BlockPos(chunkX * 16, 64, chunkZ * 16), ModBiomes.voidMountains) == ModBiomes.voidMountains) this.dragonNestGenerator.generate(this.worldObj, this.rand, new BlockPos(chunkX * 16, this.worldObj.getHeight(new BlockPos(chunkX * 16, 0, chunkZ * 16)).getY(), chunkZ * 16), primer);
-		// TODO Determine how villages generate and make the DragonNest like that
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 		byte[] abyte = chunk.getBiomeArray();
 		
@@ -371,7 +369,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 			}
 		}
 		
-		bgb.decorate(this.worldObj, this.rand, new BlockPos(xPos, 0, zPos)); //TODO See if removing this gets rid of flowers
+		bgb.decorate(this.worldObj, this.rand, new BlockPos(xPos, 0, zPos));
 		if (TerrainGen.populate(provider, worldObj, rand, chunkX, chunkZ, flag, ANIMALS)) {
 			SpawnerAnimals.performWorldGenSpawning(this.worldObj, bgb, xPos + 8, zPos + 8, 16, 16, this.rand);
 		}

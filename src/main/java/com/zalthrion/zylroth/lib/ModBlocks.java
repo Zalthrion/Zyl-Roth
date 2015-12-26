@@ -65,11 +65,11 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityOreInfuser.class, "oreInfuser");
 		/* Tenebrae */
 		ModRegistry.addRegister(20, tenebraeOre, "tenebraeOre");
-		ModRegistry.addRegister(26, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
-		ModRegistry.addRegister(27, tenebraeCore, CoreItemBlock.class, "tenebraeCore");
-		ModRegistry.addRegister(28, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
-		ModRegistry.addRegister(29, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
-		ModRegistry.addRegister(30, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
+		ModRegistry.addRegister(27, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
+		ModRegistry.addRegister(28, tenebraeCore, CoreItemBlock.class, "tenebraeCore");
+		ModRegistry.addRegister(29, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
+		ModRegistry.addRegister(30, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
+		ModRegistry.addRegister(31, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
 		/* Infernium */
 		ModRegistry.addRegister(22, inferniumOre, "inferniumOre");
 		/* Endirite */
@@ -79,16 +79,16 @@ public final class ModBlocks {
 		/* Trees */
 		ModRegistry.addRegister(24, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
 		ModRegistry.addRegister(25, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
-		ModRegistry.addRegister(65, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2"); // Temporairly 65
+		ModRegistry.addRegister(26, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2");
 		/* Others */
-		ModRegistry.addRegister(31, ashBlock, "ashBlock");
+		ModRegistry.addRegister(32, ashBlock, "ashBlock");
 		/* Spawners */
-		ModRegistry.addRegister(32, spawner_VoidDragon, "spawnerVoidDragon");
+		ModRegistry.addRegister(33, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
-		ModRegistry.addRegister(33, infuserIdle, ItemBlockInfuser.class, "infuserMachine");
-		ModRegistry.addRegister(34, infuser, "infuserMachineActive");
-		ModRegistry.addRegister(35, oreInfuserIdle, "oreInfuserMachine"); //TODO Probably make an ItemBlock for this
-		ModRegistry.addRegister(36, oreInfuser, "oreInfuserMachineActive");
+		ModRegistry.addRegister(34, infuserIdle, ItemBlockInfuser.class, "infuserMachine");
+		ModRegistry.addRegister(35, infuser, "infuserMachineActive");
+		ModRegistry.addRegister(36, oreInfuserIdle, "oreInfuserMachine"); //TODO Probably make an ItemBlock for this
+		ModRegistry.addRegister(37, oreInfuser, "oreInfuserMachineActive");
 		
 	}
 }

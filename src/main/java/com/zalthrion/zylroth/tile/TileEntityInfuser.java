@@ -141,7 +141,6 @@ public class TileEntityInfuser extends TileEntityBase implements ITickable, ISid
 			}
 			
 			-- slots[ContainerInfuser.INPUT].stackSize;
-			// TODO Work this out.
 			InfusionRecipeLib recipeCopy = recipe.copy();
 			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipeCopy.getInfusionMaterials());
 			HashMap<Integer, ItemStack> providedStacks = new HashMap<Integer, ItemStack>() {

@@ -81,9 +81,13 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerBlock(ModBlocks.infusedTenebrae);
 		ModelHelper.registerBlock(ModBlocks.infuser);
 		ModelHelper.registerBlock(ModBlocks.infuserIdle);
+		ModelHelper.registerBlock(ModBlocks.oreInfuser);
+		ModelHelper.registerBlock(ModBlocks.oreInfuserIdle);
 		ModelHelper.registerBlock(ModBlocks.ashBlock);
 		ModelHelper.registerBlock(ModBlocks.empoweredTenebraeCore);
 		ModelHelper.registerBlock(ModBlocks.voidiumOre);
+		ModelHelper.registerBlock(ModBlocks.inferniumOre);
+		ModelHelper.registerBlock(ModBlocks.endiriteOre);
 		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowSaplingBlockZL), RainbowSaplingItemBlock.getVariants());
 		ModelHelper.registerBlock(ModBlocks.rainbowSaplingBlockZL, (new StateMap.Builder()).withName(RainbowSaplingBlockZL.TYPE).withSuffix("_sapling").ignore(RainbowSaplingBlockZL.STAGE).build(), 0, 1, 2, 3, 4, 5);
 		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowLeafBlockZL), RainbowLeafItemBlock.getVariants(0));
@@ -96,6 +100,10 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerItem(ModArmors.tenebraeChestplate);
 		ModelHelper.registerItem(ModArmors.tenebraeLeggings);
 		ModelHelper.registerItem(ModArmors.tenebraeBoots);
+		ModelHelper.registerItem(ModArmors.voidLordHelmet);
+		ModelHelper.registerItem(ModArmors.voidLordChestplate);
+		ModelHelper.registerItem(ModArmors.voidLordLeggings);
+		ModelHelper.registerItem(ModArmors.voidLordBoots);
 		/* Tools */
 		ModelHelper.registerItem(ModTools.creativePickaxe);
 		ModelHelper.registerItem(ModTools.creativeShovel);
@@ -109,8 +117,21 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerItem(ModTools.tenebraeHoe);
 		ModelHelper.registerItem(ModTools.tenebraeAxe);
 		/* Tenebrae */
+		ModelHelper.registerItem(ModItems.tenebraeOre);
 		ModelHelper.registerItem(ModItems.tenebraeIngot);
+		ModelHelper.registerItem(ModItems.tenebraeChunk);
 		ModelHelper.registerItem(ModItems.unstableTenebraeCore);
+		/* Infernium */
+		ModelHelper.registerItem(ModItems.rawInfernium);
+		ModelHelper.registerItem(ModItems.inferniumIngot);
+		/* Endirite */
+		ModelHelper.registerItem(ModItems.endiriteChunk);
+		ModelHelper.registerItem(ModItems.endiriteOre);
+		ModelHelper.registerItem(ModItems.endiriteIngot);
+		/* Voidium */
+		ModelHelper.registerItem(ModItems.voidiumChunk);
+		ModelHelper.registerItem(ModItems.voidiumOre);
+		ModelHelper.registerItem(ModItems.voidiumIngot);
 		/* Mounts */
 		ModelHelper.registerItem(ModItems.Empty_SC);
 		ModelHelper.registerItem(ModItems.SC_Deathcharger);
@@ -120,12 +141,14 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerItem(ModItems.goldTalisman);
 		ModelHelper.registerItem(ModItems.voidTalisman);
 		ModelHelper.registerItem(ModItems.rainbowTalisman);
+		ModelHelper.registerItem(ModItems.iceTalisman);
 		/* Others */
 		ModelHelper.registerItem(ModItems.darkShard);
 		ModelHelper.registerItem(ModItems.soulEssence);
 		ModelHelper.registerItem(ModItems.cursedSoulEssence);
 		ModelHelper.registerItem(ModItems.voidGem);
 		ModelHelper.registerItem(ModItems.voidEssence);
+		ModelHelper.registerItem(ModItems.tenebriumIngot);
 	}
 	
 	@Override

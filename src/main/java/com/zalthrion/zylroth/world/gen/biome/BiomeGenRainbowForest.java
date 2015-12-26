@@ -2,11 +2,15 @@ package com.zalthrion.zylroth.world.gen.biome;
 
 import java.util.Random;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL2;
+import com.zalthrion.zylroth.block.tree.TreeColor;
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.entity.EntityUnicorn;
 import com.zalthrion.zylroth.lib.ModBlocks;
@@ -38,7 +42,28 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
 		int i = par1Random.nextInt(6);
-		return new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), ModBlocks.rainbowLeafBlockZL.getStateFromMeta(i), false);
+		IBlockState leafState = Blocks.air.getDefaultState();
+		switch (i) {
+			case 0:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.RED);
+				break;
+			case 1:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.ORANGE);
+				break;
+			case 2:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.YELLOW);
+				break;
+			case 3:
+				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.GREEN);
+				break;
+			case 4:
+				leafState = ModBlocks.rainbowLeafBlockZL2.getDefaultState().withProperty(RainbowLeafBlockZL2.TYPE, TreeColor.BLUE);
+				break;
+			case 5:
+				leafState = ModBlocks.rainbowLeafBlockZL2.getDefaultState().withProperty(RainbowLeafBlockZL2.TYPE, TreeColor.PURPLE);
+				break;
+		}
+		return new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), leafState, false);
 	}
 	
 	@Override
