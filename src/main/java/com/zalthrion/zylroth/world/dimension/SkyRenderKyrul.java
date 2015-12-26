@@ -48,7 +48,7 @@ public class SkyRenderKyrul extends IRenderHandler {
 		float f10;
 		
 		GlStateManager.enableTexture2D();
-		OpenGlHelper.glBlendFunc(770, 1, 1, 0);
+		// OpenGlHelper.glBlendFunc(770, 1, 1, 0); //TODO See if this is important to rendering the sky, as currently it causes a transparency issue on items and entities
 		
 		GlStateManager.pushMatrix();
 		f6 = 1.0F - world.getRainStrength(partialTicks);
