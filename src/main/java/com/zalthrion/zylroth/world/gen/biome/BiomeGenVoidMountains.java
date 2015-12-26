@@ -1,7 +1,13 @@
 package com.zalthrion.zylroth.world.gen.biome;
 
+import java.util.Random;
+
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
 public class BiomeGenVoidMountains extends BiomeGenBase {
 	
@@ -17,7 +23,7 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		this.spawnableCaveCreatureList.clear();
 		this.flowers.clear();
 		
-		this.theBiomeDecorator.flowersPerChunk = 0; //TODO If flowers and trees still generate, change this to -999
+		this.theBiomeDecorator.flowersPerChunk = 0;
 		this.theBiomeDecorator.treesPerChunk = 0;
 		this.theBiomeDecorator.generateLakes = false;
 		
@@ -28,6 +34,17 @@ public class BiomeGenVoidMountains extends BiomeGenBase {
 		this.setBiomeName("Void Mountains");
 		
 		this.waterColorMultiplier = 0xE42D17;
+	}
+	
+	@Override public void decorate(World worldIn, Random rand, BlockPos pos) {
+		super.decorate(worldIn, rand, pos);
+		
+		if (rand.nextInt(100) == 0) {
+			int i = rand.nextInt(16) + 8;
+			int j = rand.nextInt(16) + 8;
+			BlockPos blockpos = worldIn.getHeight(pos.add(i, 0, j)).up();
+			(new DragonNest()).generate(worldIn, rand, blockpos);
+		}
 	}
 	
 	@Override
