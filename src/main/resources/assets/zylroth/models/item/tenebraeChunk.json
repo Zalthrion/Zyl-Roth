@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/creativeAxe"
+        "layer0": "zylroth:items/tenebraeChunk"
     },
     "display": {
         "thirdperson": {

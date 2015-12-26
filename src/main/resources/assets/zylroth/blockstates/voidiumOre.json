@@ -1,5 +1,3 @@
-# blockstates/tenebraeOre.json
- 
 {
     "variants": {
         "normal": { "model": "zylroth:voidiumOre" }
