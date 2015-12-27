@@ -9,13 +9,13 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.lib.ModDimension;
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
 public class WorldProviderKyrul extends WorldProvider {
 	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
-		this.dimensionId = ModDimension.dimensionId_Kyrul;
+		this.dimensionId = ConfigurationHandler.getKyrulId();
 		this.hasNoSky = true;
 	}
 	
@@ -56,7 +56,7 @@ public class WorldProviderKyrul extends WorldProvider {
 		return new Vec3((double) f3, (double) f4, (double) f5);
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
 		return true;
 	}

@@ -8,7 +8,7 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.lib.ModDimension;
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
 public class WorldProviderGlaciem extends WorldProvider {
 	
@@ -18,7 +18,7 @@ public class WorldProviderGlaciem extends WorldProvider {
 	
 	@Override public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerGlaciem(worldObj.getSeed(), this.worldObj.getWorldType());
-		this.dimensionId = ModDimension.dimensionId_Glaciem;
+		this.dimensionId = ConfigurationHandler.getGlaciemId();
 		this.hasNoSky = false;
 	}
 	

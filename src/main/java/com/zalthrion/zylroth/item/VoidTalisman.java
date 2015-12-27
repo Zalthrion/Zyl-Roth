@@ -23,15 +23,16 @@ public class VoidTalisman extends ItemBase {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (ConfigurationHandler.getKyrulEnabled()) {
 			if (!world.isRemote) {
+				int kyrulId = ConfigurationHandler.getKyrulId();
 				if (player instanceof EntityPlayerMP) {
 					EntityPlayerMP playerMP = (EntityPlayerMP) player;
-					WorldServer ws = playerMP.mcServer.worldServerForDimension(47);
+					WorldServer ws = playerMP.mcServer.worldServerForDimension(kyrulId);
 					Teleporter teleporter = new SpecialTeleporter(ws);
 					
-					if (!(player.dimension == 47) && player.ridingEntity == null) {
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
+					if (!(player.dimension == kyrulId) && player.ridingEntity == null) {
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, kyrulId, teleporter);
 						SpecialTeleporter.adjustPosY(player);
-					} else if (player.dimension == 47 && player.ridingEntity == null) {
+					} else if (player.dimension == kyrulId && player.ridingEntity == null) {
 						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 						SpecialTeleporter.adjustPosY(player);
 					}

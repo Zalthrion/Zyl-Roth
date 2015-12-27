@@ -20,17 +20,18 @@ public class IceTalisman extends ItemBase {
 	}
 	
 	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (ConfigurationHandler.getKyrulEnabled()) {
+		if (ConfigurationHandler.getGlaciemEnabled()) {
 			if (!world.isRemote) {
+				int glaciemId = ConfigurationHandler.getGlaciemId();
 				if (player instanceof EntityPlayerMP) {
 					EntityPlayerMP playerMP = (EntityPlayerMP) player;
-					WorldServer ws = playerMP.mcServer.worldServerForDimension(49);
+					WorldServer ws = playerMP.mcServer.worldServerForDimension(glaciemId);
 					Teleporter teleporter = new SpecialTeleporter(ws);
 					
-					if (!(player.dimension == 49) && player.ridingEntity == null) {
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 49, teleporter);
+					if (!(player.dimension == glaciemId) && player.ridingEntity == null) {
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, glaciemId, teleporter);
 						SpecialTeleporter.adjustPosY(player);
-					} else if (player.dimension == 49 && player.ridingEntity == null) {
+					} else if (player.dimension == glaciemId && player.ridingEntity == null) {
 						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 						SpecialTeleporter.adjustPosY(player);
 					}

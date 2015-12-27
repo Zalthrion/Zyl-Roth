@@ -19,17 +19,18 @@ public class RainbowTalisman extends ItemBase {
 	}
 	
 	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (ConfigurationHandler.getKyrulEnabled()) {
+		if (ConfigurationHandler.getIridisEnabled()) {
 			if (!world.isRemote) {
+				int iridisId = ConfigurationHandler.getIridisId();
 				if (player instanceof EntityPlayerMP) {
 					EntityPlayerMP playerMP = (EntityPlayerMP) player;
-					WorldServer ws = playerMP.mcServer.worldServerForDimension(48);
+					WorldServer ws = playerMP.mcServer.worldServerForDimension(iridisId);
 					Teleporter teleporter = new SpecialTeleporter(ws);
 					
-					if (!(player.dimension == 48) && player.ridingEntity == null) {
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 48, teleporter);
+					if (!(player.dimension == iridisId) && player.ridingEntity == null) {
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, iridisId, teleporter);
 						SpecialTeleporter.adjustPosY(player);
-					} else if (player.dimension == 48 && player.ridingEntity == null) {
+					} else if (player.dimension == iridisId && player.ridingEntity == null) {
 						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 						SpecialTeleporter.adjustPosY(player);
 					}
