@@ -22,7 +22,7 @@ group= "com.zalthrion.zylroth" // http://maven.apache.org/guides/mini/guide-nami
 archivesBaseName = "Zylroth"
 
 minecraft {
-    version = "1.7.10-10.13.2.1291"
+    version = "10.13.4.1614-1.7.10"
     mappings = "stable_12"
     
     runDir = "eclipse"
