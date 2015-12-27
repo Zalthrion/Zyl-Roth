@@ -34,6 +34,7 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
+		this.dataWatcher.addObject(27, "");
 		
 		this.isImmuneToFire = true;
 	}
