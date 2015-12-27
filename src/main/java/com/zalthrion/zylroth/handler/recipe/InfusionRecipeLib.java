@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 public class InfusionRecipeLib {
 	private ItemStack input;
 	private ItemStack output;
-	private int experience;
 	private ArrayList<ItemStack> infusionMaterials;
 	
 	/** Creates a new InfusionRecipe
@@ -15,19 +14,13 @@ public class InfusionRecipeLib {
 	 * @param out - ItemStack after infusion
 	 * @param experience - Experience earned from performing this infusion.
 	 * @param infusingMaterials - Materials used to infuse */
-	public InfusionRecipeLib(ItemStack in, ItemStack out, int experience, ItemStack... infusionMaterials) {
+	public InfusionRecipeLib(ItemStack in, ItemStack out, ItemStack... infusionMaterials) {
 		this.input = in;
 		this.output = out;
-		this.experience = experience;
 		this.infusionMaterials = new ArrayList<ItemStack>();
 		for (ItemStack stack : infusionMaterials) {
 			this.infusionMaterials.add(stack);
 		}
-	}
-	
-	/** Returns amount of experience earned from performing this infusion **/
-	public int getExperience() {
-		return this.experience;
 	}
 	
 	/** Returns ItemStack after infusion **/
@@ -46,6 +39,6 @@ public class InfusionRecipeLib {
 	}
 	
 	public InfusionRecipeLib copy() {
-		return new InfusionRecipeLib(this.input, this.output, this.experience, this.infusionMaterials.toArray(new ItemStack[this.infusionMaterials.size()]));
+		return new InfusionRecipeLib(this.input, this.output, this.infusionMaterials.toArray(new ItemStack[this.infusionMaterials.size()]));
 	}
 }

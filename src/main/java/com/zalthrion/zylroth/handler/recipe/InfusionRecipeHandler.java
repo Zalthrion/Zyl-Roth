@@ -1,6 +1,7 @@
 package com.zalthrion.zylroth.handler.recipe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.minecraft.item.ItemStack;
 
@@ -9,6 +10,7 @@ public class InfusionRecipeHandler {
 	private static final InfusionRecipeHandler instance = new InfusionRecipeHandler();
 	/** List of recipes **/
 	private ArrayList<InfusionRecipeLib> recipes = new ArrayList<InfusionRecipeLib>();
+	private HashMap<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 	
 	/**
 	 * Gets the instance of the class, this is where new {@link InfusionRecipeLib}'s are registered.
@@ -22,8 +24,9 @@ public class InfusionRecipeHandler {
 	 * @param experience - Experience for performing infusion.
 	 * @param infusionMaterials - Maximum of two, Item Stacks that you infuse the input with to get the output. Supports stack sizes.
 	 */
-	public void addInfusion(ItemStack input, ItemStack output, int experience, ItemStack... infusionMaterials) {
-		this.recipes.add(new InfusionRecipeLib(input, output, experience, infusionMaterials));
+	public void addInfusion(ItemStack input, ItemStack output, float experience, ItemStack... infusionMaterials) {
+		this.recipes.add(new InfusionRecipeLib(input, output, infusionMaterials));
+		this.experienceList.put(output, experience);
 	}
 	
 	public static boolean arrayListContainsItemStack(ArrayList<ItemStack> list, ItemStack checkFor) {
@@ -87,6 +90,16 @@ public class InfusionRecipeHandler {
 			if (recipeRequirements.isEmpty()) return recipe;
 		}
 		return null;
+	}
+	
+	/**
+	 * Returns how much experience is dropped
+	 * @param output - The stack crafted by the Infusion
+	 * @return Experience dropped
+	 */
+	public float getInfusionExperience(ItemStack output) {
+		if (!this.experienceList.containsKey(output)) return 0F;
+		return this.experienceList.get(output);
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.gui.slot.SlotInfuser;
+import com.zalthrion.zylroth.gui.slot.SlotInfuser.InfuserType;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class ContainerInfuser extends ContainerBase {
@@ -24,7 +25,7 @@ public class ContainerInfuser extends ContainerBase {
 		this.infuser = tile;
 		
 		this.addSlotToContainer(new Slot(tile, INPUT, 34, 33));
-		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 33));
+		this.addSlotToContainer(new SlotInfuser(inventoryPlayer.player, tile, OUTPUT, 126, 33, InfuserType.REGULAR));
 		this.addSlotToContainer(new Slot(tile, FIRST_FUEL, 80, 7));
 		this.addSlotToContainer(new Slot(tile, SECOND_FUEL, 80, 61));
 		

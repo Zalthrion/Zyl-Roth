@@ -1,21 +1,30 @@
 package com.zalthrion.zylroth.gui.slot;
 
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+
+import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
+import com.zalthrion.zylroth.handler.recipe.OreInfusionRecipeHandler;
 
 public class SlotInfuser extends Slot {
+	public enum InfuserType {
+		REGULAR,
+		ORE
+	}
+	
 	/** The player that is using the GUI where this slot resides. */
-	@SuppressWarnings("unused")
-	private EntityPlayer thePlayer;
-	
-	@SuppressWarnings("unused")
+	private EntityPlayer thePlayer;	
 	private int amount_crafted;
+	private InfuserType type;
 	
-	public SlotInfuser(EntityPlayer player, IInventory inv, int index, int xPos, int yPos) {
+	public SlotInfuser(EntityPlayer player, IInventory inv, int index, int xPos, int yPos, InfuserType type) {
 		super(inv, index, xPos, yPos);
-		thePlayer = player;
+		this.thePlayer = player;
+		this.type = type;
 	}
 	
 	@Override
@@ -45,10 +54,11 @@ public class SlotInfuser extends Slot {
 	
 	@Override
 	protected void onCrafting(ItemStack stack) {
-/*		stack.onCrafting(thePlayer.worldObj, thePlayer, amount_crafted);
+		stack.onCrafting(thePlayer.worldObj, thePlayer, amount_crafted);
 		if (!thePlayer.worldObj.isRemote) {
 			int i = amount_crafted;
-			float f = InfusionRecipeHandler.instnace().getInfusionExperience(stack);
+			float f = type == InfuserType.REGULAR ? InfusionRecipeHandler.instance().getInfusionExperience(stack) :
+				(type == InfuserType.ORE ? OreInfusionRecipeHandler.instance().getInfusionExperience(stack) : 0);
 			int j;
 			
 			if (f == 0.0F) {
@@ -69,6 +79,6 @@ public class SlotInfuser extends Slot {
 			}
 		}
 		
-		amount_crafted = 0;*/
+		amount_crafted = 0;
 	}
 }
