@@ -70,19 +70,23 @@ public class ChunkProviderIridis implements IChunkProvider {
 		this.stoneNoise = new double[256];
 		this.caveGenerator = new MapGenCaves();
 		this.ravineGenerator = new MapGenRavine();
+		
 		{
 			caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, EventType.CAVE);
 			ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, EventType.RAVINE);
 		}
+		
 		this.worldObj = world;
 		this.worldType = world.getWorldInfo().getTerrainType();
 		this.rand = new Random(seed);
+		
 		this.ngo1 = new NoiseGeneratorOctaves(this.rand, 16);
 		this.ngo2 = new NoiseGeneratorOctaves(this.rand, 16);
 		this.ngo3 = new NoiseGeneratorOctaves(this.rand, 8);
 		this.ngp = new NoiseGeneratorPerlin(this.rand, 4);
 		this.ngo4 = new NoiseGeneratorOctaves(this.rand, 10);
 		this.ngo5 = new NoiseGeneratorOctaves(this.rand, 10);
+		
 		this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
 		this.doubleArray1 = new double[825];
 		this.parabolicField = new float[25];
@@ -309,7 +313,7 @@ public class ChunkProviderIridis implements IChunkProvider {
 		}
 	}
 	
-	public boolean chunkExists(int x, int z) {
+	@Override public boolean chunkExists(int x, int z) {
 		return true;
 	}
 	
