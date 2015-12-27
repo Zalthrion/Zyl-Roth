@@ -8,7 +8,7 @@ import com.zalthrion.zylroth.lib.ModBiomes;
 
 public class GenLayerBiomesKyrul extends GenLayer {
 	
-	protected BiomeGenBase[] allowedBiomes = {ModBiomes.dreadWastes, ModBiomes.hauntedForest, ModBiomes.ashBarrens, ModBiomes.voidMountains}; 
+	protected BiomeGenBase[] allowedBiomes = {ModBiomes.dreadWastes, ModBiomes.hauntedForest, ModBiomes.ashBarrens, ModBiomes.voidMountains};
 	
 	public GenLayerBiomesKyrul(long seed) {
 		super(seed);

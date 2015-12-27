@@ -41,6 +41,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
+import com.zalthrion.zylroth.lib.ModBiomes;
 import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
 public class ChunkProviderKyrul implements IChunkProvider {
@@ -65,12 +66,12 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	private MapGenBase caveGenerator;
 	private MapGenMineshaft mineshaftGenerator;
 	private MapGenBase ravineGenerator;
-	private DragonNest dragonNestGenerator;
 	private BiomeGenBase[] biomesForGeneration;
 	double[] ngo3Octaves;
 	double[] ngo1Octaves;
 	double[] ngo2Octaves;
 	double[] ngo5Octaves;
+	private int dragonSpawnerChance = 10;
 	
 	public ChunkProviderKyrul(World world, long seed, boolean mapFeatures, String param5) {
 		this.fluidBlock = Blocks.water;
@@ -78,7 +79,6 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		this.caveGenerator = new MapGenCaves();
 		this.mineshaftGenerator = new MapGenMineshaft();
 		this.ravineGenerator = new MapGenRavine();
-		this.dragonNestGenerator = new DragonNest();
 		{
 			caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, EventType.CAVE);
 			mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, EventType.MINESHAFT);
@@ -389,6 +389,20 @@ public class ChunkProviderKyrul implements IChunkProvider {
 					this.worldObj.setBlockState(blockpos1, Blocks.snow_layer.getDefaultState(), 2);
 				}
 			}
+		}
+		
+		if (bgb == ModBiomes.voidMountains && this.rand.nextInt(this.dragonSpawnerChance) == 0) {
+			k1 = this.rand.nextInt(16) + 8;
+			i2 = this.rand.nextInt(16) + 8;
+			int yPos = -1;
+			for (int i = 256; i > 0; i --) {
+				Block blockInPlace = this.worldObj.getBlockState(new BlockPos(blockpos.getX() + k1, i, blockpos.getZ() + i2)).getBlock();
+				if (blockInPlace != Blocks.air) {
+					yPos = i + 1;
+					break;
+				}
+			}
+			if (yPos != -1) (new DragonNest()).generate(this.worldObj, this.rand, new BlockPos(blockpos.getX() + k1, yPos, blockpos.getZ() + i2));
 		}
 		
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(provider, worldObj, rand, chunkX, chunkZ, flag));

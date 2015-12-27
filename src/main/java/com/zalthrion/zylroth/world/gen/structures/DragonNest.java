@@ -14,37 +14,17 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 public class DragonNest extends WorldGenerator {
 	public DragonNest() {}
 	
-	protected Block[] getValidSpawnBlocks() {
-		return new Block[] {Blocks.grass};
-	}
-	
-	public boolean locationIsValidSpawn(World world, BlockPos pos) {
-		int distanceToAir = 0;
-		Block check = world.getBlockState(pos).getBlock();
-		
-		while (check != Blocks.air) {
-			if (distanceToAir > 3) return false;
-			distanceToAir ++;
-			check = world.getBlockState(pos).getBlock();
-		}
-		
-		pos = pos.up(distanceToAir - 1);
-		
+	boolean locationIsValidSpawn(World world, int floorPos, BlockPos pos) { 
 		Block block = world.getBlockState(pos).getBlock();
-		Block blockAbove = world.getBlockState(pos.up()).getBlock();
-		Block blockBelow = world.getBlockState(pos.down()).getBlock();
-		
-		for (Block x : getValidSpawnBlocks()) {
-			if (blockAbove != Blocks.air) { return false; }
-			if (block == x) {
-				return true;
-			} else if (block == Blocks.snow && blockBelow == x) { return true; }
+		if (!(block == Blocks.air) || !(block.isReplaceable(world, pos))) return false;
+		if (pos.getY() == floorPos) {
+			Block blockUnder = world.getBlockState(pos.down()).getBlock();
+			if (blockUnder == Blocks.air) return false;
 		}
-		
-		return false;
+		return true;
 	}
 	
-	public boolean locationsAreValid(World world, BlockPos corner1, BlockPos corner2) {
+	boolean locationIsValidSpawn(World world, BlockPos corner1, BlockPos corner2) {
 		int x1 = corner1.getX();
 		int y1 = corner1.getY();
 		int z1 = corner1.getZ();
@@ -55,102 +35,103 @@ public class DragonNest extends WorldGenerator {
 		for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x ++) {
 			for (int y = Math.min(y1, y2); y <= Math.max(y1, y2); y ++) {
 				for (int z = Math.min(z1, z2); z <= Math.max(z1, z2); z ++) {
-					if (!locationIsValidSpawn(world, new BlockPos(x, y, z))) return false;
+					if (!locationIsValidSpawn(world, y1, new BlockPos(x, y, z))) return false;
 				}
 			}
 		}
 		return true;
 	}
 	
-	private void setBlocks(World world, IBlockState blockState, BlockPos[] pos) {
-		for (BlockPos aPos : pos) {
-			world.setBlockState(aPos, blockState);
+	void setBlocksRandomly(World world, Random rand, IBlockState[] possibleStates, BlockPos[] positions) {
+		for (BlockPos aPos : positions) {
+			world.setBlockState(aPos, possibleStates[rand.nextInt(possibleStates.length)]);
 		}
 	}
 	
 	@Override public boolean generate(World world, Random rand, BlockPos pos) {
-		if (!locationsAreValid(world, pos.add(-3, 1, -3), pos.add(3, 1, 3)) && world.isAirBlock(pos.add(0, 4, 0))) { return false; }
+		if (!locationIsValidSpawn(world, pos.add(-3, 0, -3), pos.add(3, 4, 3))) return false;
 		
-		/* z = z - 10; x = x - 10; */
-		
-		setBlocks(world, Blocks.stone.getDefaultState(), new BlockPos[] {
-			pos.up().north().west(3),
-			pos.up().west(3),
-			pos.up().south().west(3),
-			pos.up().south(2).west(2),
-			pos.up().north(3).west(2),
-			pos.up().north(2).west(2),
-			pos.up().north().west(2),
-			pos.up().west(2),
-			pos.up().south().west(2),
-			pos.up().south(2).west(2),
-			pos.up().south(3).west(2),
-			pos.up().north(2).west(),
-			pos.up().north().west(),
-			pos.up().west(),
-			pos.up().south().west(),
-			pos.up().south(2).west(),
-			pos.up().south(3).west(),
-			pos.up().north(3),
-			pos.up().north(2),
-			pos.up().north(),
-			pos.up(), // Central Block
-			pos.up().south(),
-			pos.up().south(2),
-			pos.up().south(3),
-			pos.up().north(3).east(),
-			pos.up().north(2).east(),
-			pos.up().north().east(),
-			pos.up().east(),
-			pos.up().south().east(),
-			pos.up().south(2).east(),
-			pos.up().north(3).east(2),
-			pos.up().north(2).east(2),
-			pos.up().north().east(2),
-			pos.up().east(2),
-			pos.up().south().east(2),
-			pos.up().south(2).east(2),
-			pos.up().south(3).east(2),
-			pos.up().north(2).east(3),
-			pos.up().east(2),
-			pos.up().south().east(3),
-			pos.up().south(2).east(3),
-			pos.up(2).north().east(2),
-			pos.up(2).east(2),
-			pos.up(2).north(2).east(),
-			pos.up(2).south().west(),
-			pos.up(2).west(),
-			pos.up(2).south().west(),
-			pos.up(2).south(2).west(),
-			pos.up(2).north(2),
-			pos.up(2).north(),
-			pos.up(2).south(),
-			pos.up(2).south(2),
-			pos.up(2).north(2).east(),
-			pos.up(2).north().east(),
-			pos.up(2).east(),
-			pos.up(2).south().east(),
-			pos.up(2).south(2).east(),
-			pos.up(2).north().east(2),
-			pos.up(2).east(2),
-			pos.up(2).south().east(2),
-			pos.up(3).west(),
-			pos.up(3).north(),
-			pos.up(3).south(),
-			pos.up(3).east()
+		setBlocksRandomly(world, rand, new IBlockState[] {
+				Blocks.stone.getDefaultState(),
+				Blocks.cobblestone.getDefaultState()
+		}, new BlockPos[] {
+				/* Layer 1 */
+				pos.north(3).west(2),
+				pos.north(3).west(),
+				pos.north(3),
+				pos.north(3).east(),
+				pos.north(3).east(2),
+				pos.north(2).west(3),
+				pos.north(2).west(2),
+				pos.north(2).west(),
+				pos.north(2),
+				pos.north(2).east(),
+				pos.north(2).east(2),
+				pos.north(2).east(3),
+				pos.north().west(3),
+				pos.north().west(2),
+				pos.north().west(),
+				pos.north(),
+				pos.north().east(),
+				pos.north().east(2),
+				pos.north().east(3),
+				pos.west(3),
+				pos.west(2),
+				pos.west(),
+				pos,
+				pos.east(),
+				pos.east(2),
+				pos.east(3),
+				pos.south().west(3),
+				pos.south().west(2),
+				pos.south().west(),
+				pos.south(),
+				pos.south().east(),
+				pos.south().east(2),
+				pos.south().east(3),
+				pos.south(2).west(3),
+				pos.south(2).west(2),
+				pos.south(2).west(),
+				pos.south(2),
+				pos.south(2).east(),
+				pos.south(2).east(2),
+				pos.south(2).east(3),
+				pos.south(3).west(2),
+				pos.south(3).west(),
+				pos.south(3),
+				pos.south(3).east(),
+				pos.south(3).east(2),
+				/* Layer 2 */
+				pos.north(2).west().up(),
+				pos.north(2).up(),
+				pos.north(2).east().up(),
+				pos.north().west(2).up(),
+				pos.north().west().up(),
+				pos.north().up(),
+				pos.north().east().up(),
+				pos.north().east(2).up(),
+				pos.west(2).up(),
+				pos.west().up(),
+				pos.up(),
+				pos.east().up(),
+				pos.east(2).up(),
+				pos.south().west(2).up(),
+				pos.south().west().up(),
+				pos.south().up(),
+				pos.south().east().up(),
+				pos.south().east(2).up(),
+				pos.south(2).west().up(),
+				pos.south(2).up(),
+				pos.south(2).east().up(),
+				/* Layer 3 */
+				pos.north().up(2),
+				pos.west().up(2),
+				pos.east().up(2),
+				pos.south().up(2)
 		});
 		
-		setBlocks(world, Blocks.cobblestone.getDefaultState(), new BlockPos[] {
-			pos.up().north(2).west(3),
-			pos.up().north(3).west(),
-			pos.up().south(3).east(),
-			pos.up().north().east(3),
-			pos.up(2).south().east(2),
-			pos.up(2)
-		});
-		
-		world.setBlockState(pos.up(3), ModBlocks.spawner_VoidDragon.getDefaultState());
-		world.setBlockState(pos.up(4), Blocks.gravel.getDefaultState()); // Top Block
+		world.setBlockState(pos.up(2), ModBlocks.spawner_VoidDragon.getDefaultState());
+		world.setBlockState(pos.up(3), Blocks.gravel.getDefaultState());
 		
 		return true;
 	}
