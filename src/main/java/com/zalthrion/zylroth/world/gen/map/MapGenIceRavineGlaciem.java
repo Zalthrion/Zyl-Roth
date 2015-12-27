@@ -200,7 +200,7 @@ public class MapGenIceRavineGlaciem extends MapGenBase {
 			if (y < 10) {
 				data.setBlockState(x, y, z, Blocks.flowing_water.getDefaultState());
 			} else {
-				data.setBlockState(x, y, chunkZ, Blocks.air.getDefaultState());
+				data.setBlockState(x, y, z, Blocks.air.getDefaultState());
 				
 				if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock()) {
 					data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
