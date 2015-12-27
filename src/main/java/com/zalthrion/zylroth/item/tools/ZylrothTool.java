@@ -19,7 +19,7 @@ public interface ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
 		
 		return true;
 	}

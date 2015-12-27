@@ -66,7 +66,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		}
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool")));
 		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
 			if (player.inventory.hasItem(torch)) {
 				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
@@ -87,7 +87,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	@SuppressWarnings({"unchecked", "rawtypes"}) @Override public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
 		}
 		
 		else if (!(this.isBroken(stack))) {
@@ -113,7 +113,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		if (!this.isBroken(stack)) return false;
 		
 		if (player.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword")); 
+			player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword")); 
 		}
 		return true;
 	}
@@ -127,7 +127,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
 		
 		return true;
 	}

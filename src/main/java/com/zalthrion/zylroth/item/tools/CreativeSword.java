@@ -40,7 +40,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+				player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
 			}
 			return true;
 		}
@@ -64,7 +64,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 			if (player.capabilities.isCreativeMode) { return stack; }
 			
 			if (this.isBroken(stack) && !(world.isRemote)) {
-				player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+				player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
 				return stack;
 				
 			} else if (stack.getMetadata() < 2200) {
@@ -98,7 +98,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		}
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword")));
 		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
 			if (player.inventory.hasItem(torch)) {
 				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
@@ -119,7 +119,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	@SuppressWarnings({"unchecked", "rawtypes"}) @Override public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
 		}
 		
 		else if (!(this.isBroken(stack))) {
@@ -150,7 +150,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
 		
 		return true;
 	}

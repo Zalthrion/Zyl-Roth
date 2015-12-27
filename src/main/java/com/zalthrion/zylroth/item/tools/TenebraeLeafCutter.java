@@ -40,7 +40,7 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool")));	
 			}		
 			return true;
 		}
@@ -61,7 +61,7 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 		World world = player.worldObj;
 		
 		if (world.isRemote)
-			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			player.addChatMessage(new ChatComponentText("msg" + "." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
 		
 		return true;
 	}
@@ -71,12 +71,11 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
 		}
 		
 		else if (!(this.isBroken(stack))) {
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore2"));
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
 			
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));

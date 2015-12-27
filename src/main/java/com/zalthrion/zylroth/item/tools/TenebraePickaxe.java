@@ -70,12 +70,11 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 	@SuppressWarnings({"unchecked", "rawtypes"}) @Override public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
 		}
 		
 		else if (!(this.isBroken(stack))) {
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore2"));
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
 			
 			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
@@ -96,7 +95,7 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 		if (!this.isBroken(stack)) return false;
 		
 		if (player.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool")));
 		}
 		return true;
 	}
@@ -110,7 +109,7 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
 		
 		return true;
 	}
