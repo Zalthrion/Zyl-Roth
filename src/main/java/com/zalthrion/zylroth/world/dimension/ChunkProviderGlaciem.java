@@ -7,6 +7,7 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -33,8 +34,10 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
+import com.zalthrion.zylroth.lib.ModBiomes;
 import com.zalthrion.zylroth.world.gen.map.MapGenIceCavesGlaciem;
 import com.zalthrion.zylroth.world.gen.map.MapGenIceRavineGlaciem;
+import com.zalthrion.zylroth.world.gen.structures.IcePillar;
 
 public class ChunkProviderGlaciem implements IChunkProvider {
 	private Random rand;
@@ -46,7 +49,6 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	public NoiseGeneratorOctaves noiseGen6;
 	public NoiseGeneratorOctaves mobSpawnerNoise;
 	private World worldObj;
-	private final boolean mapFeaturesEnabled;
 	private WorldType type;
 	private final double[] doubleArray1;
 	private final float[] parabolicField;
@@ -59,6 +61,8 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	double[] noiseGen3Octaves;
 	double[] noiseGen6Octaves;
 	int[][] field_73219_j = new int[32][32];
+	private int icePillarChance = 10;
+	private int packedIcePillarChance = 10;
 	
 	public ChunkProviderGlaciem(World world, long seed, boolean mapFeatures) {
 		{
@@ -67,7 +71,6 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		}
 		
 		this.worldObj = world;
-		this.mapFeaturesEnabled = mapFeatures;
 		this.type = world.getWorldInfo().getTerrainType();
 		this.rand = new Random(seed);
 		
@@ -361,6 +364,36 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 				if (this.worldObj.canSnowAt(blockpos1, true)) {
 					this.worldObj.setBlockState(blockpos1, Blocks.snow_layer.getDefaultState(), 2);
 				}
+			}
+		}
+		
+		if (biomegenbase == ModBiomes.frozenWastes) {
+			if (this.rand.nextInt(icePillarChance) == 0) {
+				k1 = this.rand.nextInt(16) + 8;
+				i2 = this.rand.nextInt(16) + 8;
+				int yPos = -1;
+				for (int i = 256; i > 0; i --) {
+					Block blockInPlace = this.worldObj.getBlockState(new BlockPos(blockpos.getX() + k1, i, blockpos.getZ() + i2)).getBlock();
+					if (blockInPlace != Blocks.air) {
+						yPos = i + 1;
+						break;
+					}
+				}
+				BlockPos mainPos = new BlockPos(blockpos.getX() + k1, yPos, blockpos.getZ() + i2);
+				if (yPos != -1) (new IcePillar(this.rand.nextInt(3), mainPos)).generate(this.worldObj, this.rand, mainPos);
+			} else if (this.rand.nextInt(packedIcePillarChance) == 0) {
+				k1 = this.rand.nextInt(16) + 8;
+				i2 = this.rand.nextInt(16) + 8;
+				int yPos = -1;
+				for (int i = 256; i > 0; i --) {
+					Block blockInPlace = this.worldObj.getBlockState(new BlockPos(blockpos.getX() + k1, i, blockpos.getZ() + i2)).getBlock();
+					if (blockInPlace != Blocks.air) {
+						yPos = i + 1;
+						break;
+					}
+				}
+				BlockPos mainPos = new BlockPos(blockpos.getX() + k1, yPos, blockpos.getZ() + i2);
+				if (yPos != -1) (new IcePillar(this.rand.nextInt(3), mainPos).setPacked()).generate(this.worldObj, this.rand, mainPos);
 			}
 		}
 		
