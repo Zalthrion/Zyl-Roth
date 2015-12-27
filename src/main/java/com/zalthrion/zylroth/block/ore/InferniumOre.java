@@ -24,11 +24,11 @@ public class InferniumOre extends BlockBase {
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ModItems.tenebraeChunk;
+		return ModItems.rawInfernium;
 	}
 	
 	@Override public int quantityDropped(Random rand) {
-		return 2 + rand.nextInt(2);
+		return 1;
 	}
 	
 	@Override public int quantityDroppedWithBonus(int fortune, Random random) {

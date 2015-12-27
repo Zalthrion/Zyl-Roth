@@ -44,15 +44,6 @@ public class TenebraeOre extends BlockBase {
 	
 	@Override
 	public int quantityDropped(Random rand) {
-		return 2 + rand.nextInt(3);
-	}
-	
-	@Override
-	public int quantityDroppedWithBonus(int fortune, Random rand) {
-		if (fortune <= 0) return quantityDropped(rand);
-		
-		int j = rand.nextInt(fortune + 2) - 1;
-		if (j < 0) j = 0;
-		return quantityDropped(rand) * (j + 1);
+		return 2 + rand.nextInt(4);
 	}
 }
