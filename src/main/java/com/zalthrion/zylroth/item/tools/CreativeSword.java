@@ -41,7 +41,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
 			}		
 			
 			return true;
@@ -64,7 +64,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		World world = player.worldObj;
 		
 		if (world.isRemote)
-			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			player.addChatMessage(new ChatComponentText("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		
 		return true;
 	}
@@ -88,7 +88,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 			if (player.capabilities.isCreativeMode) { return stack; }
 			
 			if (this.isBroken(stack) && !(world.isRemote)) {
-				player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+				player.addChatMessage(new ChatComponentText("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
 				return stack;
 				
 			}
@@ -140,7 +140,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		if (this.isBroken(stack) && !(world.isRemote)) {
 			player.addChatMessage(new
 			
-			ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			ChatComponentText(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 		}
 		
 		else if (player.canPlayerEdit(x, y, z, side, stack) & !(this.isBroken(stack))) {
@@ -173,7 +173,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
+			list.add(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_sword"));
 		}
 		
 		else if (!(this.isBroken(stack))) {

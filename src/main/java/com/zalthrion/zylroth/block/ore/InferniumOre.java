@@ -24,11 +24,7 @@ public class InferniumOre extends BlockBase {
 	}
 	
 	public Item getItemDropped(int metadata, Random rand, int fortune) {
-		return ModItems.tenebraeChunk;
-	}
-	
-	public int quantityDropped(Random rand) {
-		return 2 + rand.nextInt(2);
+		return ModItems.rawInfernium;
 	}
 	
 	public int quantityDroppedWithBonus(int fortune, Random random) {

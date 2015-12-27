@@ -39,7 +39,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
 			}		
 			
 			return true;
@@ -62,7 +62,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		World world = player.worldObj;
 		
 		if (world.isRemote)
-			player.addChatMessage(new ChatComponentText("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			player.addChatMessage(new ChatComponentText("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		
 		return true;
 	}
@@ -75,7 +75,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		if (player.capabilities.isCreativeMode) { return false; }
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));
 			
 		}
 		else if (stack.getMetadata() <= 12233 && !(world.isRemote) && !(player.isSneaking())) {
@@ -111,7 +111,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			list.add(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
 		}
 		
 		else if (!(this.isBroken(stack))) {

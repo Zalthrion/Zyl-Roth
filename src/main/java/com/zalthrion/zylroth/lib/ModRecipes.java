@@ -35,6 +35,10 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.tenebraeOre), "CC", "CC", 'C', ModItems.tenebraeChunk);
 		
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.endiriteOre), "CC", "CC", 'C', ModItems.endiriteChunk);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.voidiumOre), "CC", "CC", 'C', ModItems.voidiumChunk);
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chiseledTenebrae), "IRI", "RBR", "IRI", 'I', Items.iron_ingot, 'R', ModItems.tenebraeChunk, 'B', ModBlocks.tenebraeBlock);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeCore), "DTD", "TBT", "DTD", 'D', Items.diamond, 'T', ModItems.tenebraeIngot, 'B', ModBlocks.tenebraeBlock);
@@ -89,6 +93,8 @@ public final class ModRecipes {
 		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModBlocks.tenebraeBlock), new ItemStack(ModBlocks.infusedTenebrae), 0, new ItemStack(Items.redstone, 5, 0), new ItemStack(Items.iron_ingot, 5, 0));
 		
 		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModItems.unstableTenebraeCore), new ItemStack(ModBlocks.empoweredTenebraeCore), 0, new ItemStack(Blocks.diamond_block, 1, 0), new ItemStack(ModBlocks.infusedTenebrae, 1, 0));
+		
+		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.end_stone), new ItemStack(ModBlocks.endiriteOre), 0, new ItemStack(ModItems.tenebraeOre, 1, 0), new ItemStack(Items.ender_pearl, 1, 0));
 		
 	}
 	
