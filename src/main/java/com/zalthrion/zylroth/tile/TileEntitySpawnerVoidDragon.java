@@ -7,6 +7,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 
@@ -24,11 +25,13 @@ public class TileEntitySpawnerVoidDragon extends TileEntity implements ITickable
 	}
 	
 	@Override public void update() {
-		if (!worldObj.isRemote && isActivated()) {
-			EntityVoidDragon mob = new EntityVoidDragon(worldObj);
-			mob.setLocationAndAngles(this.pos.getX(), this.pos.getY(), this.pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
-			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(this.pos);
+		if (!this.worldObj.isRemote && this.isActivated()) {
+			if (this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL) {
+				EntityVoidDragon mob = new EntityVoidDragon(worldObj);
+				mob.setLocationAndAngles(this.pos.getX(), this.pos.getY(), this.pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
+				worldObj.spawnEntityInWorld(mob);
+				worldObj.setBlockToAir(this.pos);
+			}
 		}
 	}
 }
