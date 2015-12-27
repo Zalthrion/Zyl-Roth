@@ -10,6 +10,10 @@ import com.zalthrion.zylroth.item.mount.SCSavageBadger;
 import com.zalthrion.zylroth.item.mount.SCSwiftUnicorn;
 import com.zalthrion.zylroth.item.mount.SCWarTortoise;
 import com.zalthrion.zylroth.item.ore.*;
+import com.zalthrion.zylroth.item.talisman.GoldTalisman;
+import com.zalthrion.zylroth.item.talisman.IceTalisman;
+import com.zalthrion.zylroth.item.talisman.RainbowTalisman;
+import com.zalthrion.zylroth.item.talisman.VoidTalisman;
 
 public final class ModItems {
 	/* Tenebrae Ore */
