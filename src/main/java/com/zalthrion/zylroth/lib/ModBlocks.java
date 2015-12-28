@@ -22,7 +22,6 @@ import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.itemblock.CoreItemBlock;
 import com.zalthrion.zylroth.itemblock.HeadItemBlock;
-import com.zalthrion.zylroth.itemblock.ItemBlockInfuser;
 import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
 import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
@@ -85,9 +84,9 @@ public final class ModBlocks {
 		/* Spawners */
 		ModRegistry.addRegister(33, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
-		ModRegistry.addRegister(34, infuserIdle, ItemBlockInfuser.class, "infuserMachine");
+		ModRegistry.addRegister(34, infuserIdle, "infuserMachine");
 		ModRegistry.addRegister(35, infuser, "infuserMachineActive");
-		ModRegistry.addRegister(36, oreInfuserIdle, "oreInfuserMachine"); //TODO Probably make an ItemBlock for this
+		ModRegistry.addRegister(36, oreInfuserIdle, "oreInfuserMachine");
 		ModRegistry.addRegister(37, oreInfuser, "oreInfuserMachineActive");
 		
 	}

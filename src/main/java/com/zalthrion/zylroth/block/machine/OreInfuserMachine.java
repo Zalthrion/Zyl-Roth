@@ -37,6 +37,7 @@ public class OreInfuserMachine extends BlockBaseContainer {
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
 		this.setStepSound(soundTypeMetal);
+		this.setParticleBlockState(ModBlocks.tenebraeCore.getDefaultState()); // TODO Change this to a visually similar block
 	}
 	
 	@Override
@@ -66,12 +67,22 @@ public class OreInfuserMachine extends BlockBaseContainer {
 	}
 	
 	public static void updateBlockState(boolean active, World world, BlockPos pos) {
-		world.setBlockState(pos, active ? ModBlocks.oreInfuser.getDefaultState() : ModBlocks.oreInfuserIdle.getDefaultState());
+		TileEntity tileentity = world.getTileEntity(pos);
+		keepInventory = true;
 		
-		TileEntity tile = world.getTileEntity(pos);
-		if (tile != null) {
-			tile.validate();
-			world.setTileEntity(pos, tile);
+		if (active) {
+			world.setBlockState(pos, ModBlocks.oreInfuser.getDefaultState(), 3);
+			world.setBlockState(pos, ModBlocks.oreInfuser.getDefaultState(), 3);
+		} else {
+			world.setBlockState(pos, ModBlocks.oreInfuserIdle.getDefaultState(), 3);
+			world.setBlockState(pos, ModBlocks.oreInfuserIdle.getDefaultState(), 3);
+		}
+
+        keepInventory = false;
+
+		if (tileentity != null) {
+			tileentity.validate();
+			world.setTileEntity(pos, tileentity);
 		}
 	}
 	

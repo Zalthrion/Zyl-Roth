@@ -39,6 +39,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
 		this.setStepSound(soundTypeMetal);
+		this.setParticleBlockState(ModBlocks.tenebraeCore.getDefaultState());
 	}
 	
 	@Override public TileEntity createNewTileEntity(World world, int meta) {
@@ -64,12 +65,22 @@ public class InfuserMachine extends BlockBaseContainer {
 	}
 	
 	public static void updateBlockState(boolean active, World world, BlockPos pos) {
-		world.setBlockState(pos, active ? ModBlocks.infuser.getDefaultState() : ModBlocks.infuserIdle.getDefaultState());
+		TileEntity tileentity = world.getTileEntity(pos);
+		keepInventory = true;
 		
-		TileEntity tile = world.getTileEntity(pos);
-		if (tile != null) {
-			tile.validate();
-			world.setTileEntity(pos, tile);
+		if (active) {
+			world.setBlockState(pos, ModBlocks.infuser.getDefaultState(), 3);
+			world.setBlockState(pos, ModBlocks.infuser.getDefaultState(), 3);
+		} else {
+			world.setBlockState(pos, ModBlocks.infuserIdle.getDefaultState(), 3);
+			world.setBlockState(pos, ModBlocks.infuserIdle.getDefaultState(), 3);
+		}
+
+        keepInventory = false;
+
+		if (tileentity != null) {
+			tileentity.validate();
+			world.setTileEntity(pos, tileentity);
 		}
 	}
 	
