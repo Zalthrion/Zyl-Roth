@@ -57,13 +57,13 @@ public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 		}
 	}
 	
-	/** Renders the dragon model. Called by renderModel. */
 	@Override protected void renderModel(EntityVoidDragon dragon, float par2, float par3, float par4, float par5, float par6, float par7) {
 		if (dragon.deathTicks > 0) {
 			float f6 = dragon.deathTicks / 200.0F;
 			GlStateManager.depthFunc(GL11.GL_LEQUAL);
 			GlStateManager.enableAlpha();
 			GlStateManager.alphaFunc(GL11.GL_GREATER, f6);
+			GlStateManager.color(0.0F, 0.0F, 0.0F, 0.9F);
 			bindTexture(explosionTexture);
 			mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
 			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
@@ -72,6 +72,7 @@ public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 		
 		bindEntityTexture(dragon);
 		GlStateManager.enableBlend();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
 		GlStateManager.disableBlend();
