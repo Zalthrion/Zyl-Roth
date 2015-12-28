@@ -91,11 +91,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 			int k = MathHelper.floor_double(this.posZ);
 			
 			if (this.worldObj.getBlockState(new BlockPos(i, j, k)).getBlock().getRenderType() != -1) {
-				//TODO NOTE
-				/*
-				 * See if this still Causes ArrayIndexOutOfBoundsException: 0
-				 */
-				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D);
+				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(this.worldObj.getBlockState(new BlockPos(i, j, k))));
 			}
 		}
 		
