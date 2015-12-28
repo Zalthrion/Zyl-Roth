@@ -23,8 +23,9 @@ tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore, you can feel a d
 
 tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore, a powerful material that holds the power of creation.
 
-tooltip.zylroth:spawnpoint.set=Shift + Right Click to set your spawn point on this dimension
-
+tooltip.zylroth:spawnpoint.set=Shift + Right Click to set your spawnpoint on this dimension
+tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
+tooltip.zylroth:spawnpoint.dimension=%s Bind: %s
 
 #Messages
 
@@ -37,6 +38,13 @@ msg.Zylroth:mount.owned=You're not the owner of this mount!
 msg.zylroth:broken_sword=You must repair this sword to continue using it!
 msg.zylroth:broken_tool=You must repair this tool to continue using it!
 
+#General
+
+general.zylroth:dimension.kyrul=Ky'rul
+general.zylroth:dimension.iridis=Iri'dis
+general.zylroth:dimension.glaciem=Glaciem
+
+general.zylroth:unavailable=Unavailable
 
 #Ore Blocks
 

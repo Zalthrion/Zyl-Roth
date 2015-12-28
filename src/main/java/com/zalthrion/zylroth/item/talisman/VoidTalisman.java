@@ -13,6 +13,7 @@ public class VoidTalisman extends ItemBaseTalisman {
 		super();
 		this.setUnlocalizedName(name);
 		this.setMaxStackSize(1);
+		this.setDimensionName("Kyrul");
 	}
 	
 	@Override

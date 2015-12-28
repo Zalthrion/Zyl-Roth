@@ -2,41 +2,45 @@ package com.zalthrion.zylroth.world.dimension;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
 public class SpecialTeleporter extends Teleporter {
 	protected final WorldServer worldServer;
+	public int xPos;
+	public int yPos;
+	public int zPos;
 	
 	public SpecialTeleporter(WorldServer worldServer) {
 		super(worldServer);
 		this.worldServer = worldServer;
 	}
 	
-	public static void adjustPosY(Entity entity) {
-		int x = MathHelper.floor_double(entity.posX);
-		int z = MathHelper.floor_double(entity.posZ);
-		int y = entity.worldObj.getHeight(new BlockPos(x, 128, z)).getY();
-		switch (entity.worldObj.provider.getDimensionId()) {
-			case -1:
-				y -= 10;
-				boolean flag = true;
-				while (y > 30 && flag) {
-					if (entity.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock().getMaterial().blocksMovement() && entity.worldObj.isAirBlock(new BlockPos(x, y + 1, z)) && entity.worldObj.isAirBlock(new BlockPos(x, y + 2, z))) {
-						flag = false;
-					} else {
-						-- y;
-					}
+	public SpecialTeleporter(WorldServer server, int posX, int posY, int posZ) {
+		this(server);
+		this.xPos = posX;
+		this.yPos = posY;
+		this.zPos = posZ;
+	}
+	
+	public void adjustPos(Entity entity) {
+		int y = 0;
+		if (yPos == -1) {
+			for (int i = 256; i > 0; i --) {
+				if (entity.worldObj.getBlockState(new BlockPos(xPos, i, zPos)).getBlock() != Blocks.air) {
+					y = i + 1;
+					break;
 				}
-				break;
-			default:
+			}
+		} else {
+			y = yPos;
 		}
 		if (entity instanceof EntityPlayer) {
-			((EntityPlayer) entity).setPositionAndUpdate((double) x + 0.5D, y + 1, (double) z + 0.5D);
+			((EntityPlayer) entity).setPositionAndUpdate((double) xPos + 0.5D, y + 1, (double) zPos + 0.5D);
 		} else {
-			entity.setPosition((double) x + 0.5D, y + 1, (double) z + 0.5D);
+			entity.setPosition((double) xPos + 0.5D, y + 1, (double) zPos + 0.5D);
 		}
 	}
 	

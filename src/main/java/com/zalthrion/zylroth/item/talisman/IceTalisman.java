@@ -13,6 +13,7 @@ public class IceTalisman extends ItemBaseTalisman {
 		super();
 		this.setUnlocalizedName(name);
 		this.setMaxStackSize(1);
+		this.setDimensionName("Glaciem");
 	}
 	
 	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

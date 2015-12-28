@@ -12,6 +12,7 @@ public class RainbowTalisman extends ItemBaseTalisman {
 	public RainbowTalisman() {
 		super();
 		this.setUnlocalizedName(name);
+		this.setDimensionName("Iridis");
 	}
 	
 	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
