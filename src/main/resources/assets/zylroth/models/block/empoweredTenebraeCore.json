@@ -1,6 +1,8 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/orientable",
     "textures": {
-        "all": "zylroth:blocks/empoweredTenebraeCore"
+        "top": "zylroth:blocks/tenebraeCore",
+        "front": "zylroth:blocks/empoweredTenebraeCore",
+        "side": "zylroth:blocks/tenebraeCore"
     }
 }

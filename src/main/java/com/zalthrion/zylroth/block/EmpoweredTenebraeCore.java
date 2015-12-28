@@ -3,8 +3,14 @@ package com.zalthrion.zylroth.block;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
@@ -13,9 +19,11 @@ import com.zalthrion.zylroth.lib.ModTabs;
 public class EmpoweredTenebraeCore extends BlockBase {
 	
 	private String name = "empoweredTenebraeCore";
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
 	public EmpoweredTenebraeCore() {
 		super(Material.rock);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setUnlocalizedName(name);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
@@ -46,8 +54,29 @@ public class EmpoweredTenebraeCore extends BlockBase {
 		}
 	}
 	
-/*	@Override public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
-		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
-	}*/ //TODO Make this block rotatable or whatever this was supposed to do
+	@Override public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+	
+	@Override public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+	}
+	
+	@Override public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
+		
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
+	
+	@Override public int getMetaFromState(IBlockState state) {
+		return ((EnumFacing) state.getValue(FACING)).getIndex();
+	}
+	
+	@Override protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[] {FACING});
+	}
 }

@@ -1,5 +1,8 @@
 {
     "variants": {
-        "normal": { "model": "zylroth:empoweredTenebraeCore" }
+        "facing=north": { "model": "zylroth:empoweredTenebraeCore" },
+        "facing=south": { "model": "zylroth:empoweredTenebraeCore", "y": 180 },
+        "facing=west":  { "model": "zylroth:empoweredTenebraeCore", "y": 270 },
+        "facing=east":  { "model": "zylroth:empoweredTenebraeCore", "y": 90 }
     }
 }

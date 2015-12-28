@@ -28,25 +28,26 @@ public class ChiseledTenebrae extends BlockBase {
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
 		
+		/* Boss */
+		
 		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.empoweredTenebraeCore && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.infusedTenebrae) {
-			boolean flag = world.getBlockState(pos.add(-1, -1, 0)).getBlock() == ModBlocks.infusedTenebrae && world.getBlockState(pos.add(1, -1, 0)).getBlock() == ModBlocks.infusedTenebrae;
-			boolean flag1 = world.getBlockState(pos.add(0, -1, -1)).getBlock() == ModBlocks.infusedTenebrae && world.getBlockState(pos.add(0, -1, 1)).getBlock() == ModBlocks.infusedTenebrae;
+			boolean flag = world.getBlockState(pos.down().west()).getBlock() == ModBlocks.infusedTenebrae && world.getBlockState(pos.down().east()).getBlock() == ModBlocks.infusedTenebrae;
+			boolean flag1 = world.getBlockState(pos.down().north()).getBlock() == ModBlocks.infusedTenebrae && world.getBlockState(pos.down().south()).getBlock() == ModBlocks.infusedTenebrae;
 			
 			if (flag || flag1) {
 				world.setBlockToAir(pos);
-				world.setBlockToAir(pos.add(0, -1, 0));
-				world.setBlockToAir(pos.add(0, -2, 0));
+				world.setBlockToAir(pos.down());
+				world.setBlockToAir(pos.down(2));
 				
 				if (flag) {
-					world.setBlockToAir(pos.add(-1, -1, 0));
-					world.setBlockToAir(pos.add(1, -1, 0));
+					world.setBlockToAir(pos.down().west());
+					world.setBlockToAir(pos.down().east());
 				} else {
-					world.setBlockToAir(pos.add(0, -1, -1));
-					world.setBlockToAir(pos.add(0, -1, 1));
+					world.setBlockToAir(pos.down().north());
+					world.setBlockToAir(pos.down().south());
 				}
 				
 				EntityEmpoweredTenebraeGolem golem = new EntityEmpoweredTenebraeGolem(world);
-				// golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
 				
@@ -55,6 +56,8 @@ public class ChiseledTenebrae extends BlockBase {
 				}
 			}
 		}
+		
+		/* Non-Boss "Golem-Guardian" */
 		
 		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.tenebraeCore && world.getBlockState(pos.down(2)).getBlock() == ModBlocks.tenebraeBlock) {
 			boolean flag = world.getBlockState(pos.west().down()).getBlock() == ModBlocks.tenebraeBlock && world.getBlockState(pos.east().down()).getBlock() == ModBlocks.tenebraeBlock;
