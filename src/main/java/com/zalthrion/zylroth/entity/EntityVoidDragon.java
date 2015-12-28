@@ -367,12 +367,18 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 	
 	@Override
 	protected String getLivingSound() {
-		return "mob.enderdragon.growl";
+		this.worldObj.playSound(this.posX, this.posY, this.posZ, "mob.enderdragon.growl", 3.0F, 0.5F, false);
+		return null;
 	}
 	
 	@Override
 	protected String getHurtSound() {
-		return "mob.enderdragon.hit";
+		this.worldObj.playSound(this.posX, this.posY, this.posZ, "mob.enderdragon.hit", 1.0F, 0.2F, false);
+		return null;
+	}
+	
+	@Override protected float getSoundVolume() {
+		return 5.0F;
 	}
 	
 	@Override
