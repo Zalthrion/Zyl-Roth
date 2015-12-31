@@ -122,7 +122,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	
 	public boolean shouldAttackEntity(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
 		return true;
-	} //TODO Ask Zalthrion if this is what it was supposed to be, MCP mappings made this shouldAttackEntity but it doesn't override anything
+	} //TODO EntityAIOwnerHurtTarget & EntityAIOwnerHurtByTarget
 	
 	@Override
 	public Team getTeam() {

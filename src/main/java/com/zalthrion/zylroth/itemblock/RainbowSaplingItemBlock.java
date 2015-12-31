@@ -6,8 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import com.zalthrion.zylroth.reference.Reference;
-
 public class RainbowSaplingItemBlock extends ItemBlock {
 	private final static String[] subNames = {"rainbowRedSapling", "rainbowOrangeSapling", "rainbowYellowSapling", "rainbowGreenSapling", "rainbowBlueSapling", "rainbowPurpleSapling"};
 	
@@ -31,7 +29,7 @@ public class RainbowSaplingItemBlock extends ItemBlock {
 	public static String[] getVariants() {
 		ArrayList<String> variants = new ArrayList<String>();
 		for (String variant : subNames) {
-			variants.add(Reference.RESOURCE_PREFIX + variant.replace("rainbow", "").replace("Sapling", "").toLowerCase() + "_sapling");
+			variants.add(variant.replace("rainbow", "").replace("Sapling", "").toLowerCase() + "_sapling");
 		}
 		return variants.toArray(new String[] {});
 	}

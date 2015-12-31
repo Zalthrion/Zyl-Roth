@@ -8,7 +8,6 @@ import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -59,10 +58,10 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override public void bindTileEntitySpecialRenderers() {
-		ModelHelper.removeblockstate(ModBlocks.infuser);
-		ModelHelper.removeblockstate(ModBlocks.infuserIdle);
-		ModelHelper.removeblockstate(ModBlocks.oreInfuser);
-		ModelHelper.removeblockstate(ModBlocks.oreInfuserIdle);
+		ModelHelper.removeBlockState(ModBlocks.infuser);
+		ModelHelper.removeBlockState(ModBlocks.infuserIdle);
+		ModelHelper.removeBlockState(ModBlocks.oreInfuser);
+		ModelHelper.removeBlockState(ModBlocks.oreInfuserIdle);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOreInfuser.class, new RenderTileEntityOreInfuser());
 	}
@@ -88,12 +87,9 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerBlock(ModBlocks.voidiumOre);
 		ModelHelper.registerBlock(ModBlocks.inferniumOre);
 		ModelHelper.registerBlock(ModBlocks.endiriteOre);
-		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowSaplingBlockZL), RainbowSaplingItemBlock.getVariants());
-		ModelHelper.registerBlock(ModBlocks.rainbowSaplingBlockZL, (new StateMap.Builder()).withName(RainbowSaplingBlockZL.TYPE).withSuffix("_sapling").ignore(RainbowSaplingBlockZL.STAGE).build(), 0, 1, 2, 3, 4, 5);
-		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowLeafBlockZL), RainbowLeafItemBlock.getVariants(0));
-		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.rainbowLeafBlockZL2), RainbowLeafItemBlock.getVariants(1));
-		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL, (new StateMap.Builder()).withName(RainbowLeafBlockZL.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL.CHECK_DECAY).ignore(RainbowLeafBlockZL.DECAYABLE).build(), 0, 1, 2, 3);
-		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL2, (new StateMap.Builder()).withName(RainbowLeafBlockZL2.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL2.CHECK_DECAY).ignore(RainbowLeafBlockZL2.DECAYABLE).build(), 4, 5);
+		ModelHelper.registerBlock(ModBlocks.rainbowSaplingBlockZL, (new StateMap.Builder()).withName(RainbowSaplingBlockZL.TYPE).withSuffix("_sapling").ignore(RainbowSaplingBlockZL.STAGE).build(), RainbowSaplingItemBlock.getVariants(), new int[] {0, 1, 2, 3, 4, 5});
+		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL, (new StateMap.Builder()).withName(RainbowLeafBlockZL.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL.CHECK_DECAY).ignore(RainbowLeafBlockZL.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(0), new int[] {0, 1, 2, 3});
+		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL2, (new StateMap.Builder()).withName(RainbowLeafBlockZL2.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL2.CHECK_DECAY).ignore(RainbowLeafBlockZL2.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(1), new int[] {4, 5});
 		/* Items */
 		/* Armors */
 		ModelHelper.registerItem(ModArmors.tenebraeHelmet);

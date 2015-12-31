@@ -24,6 +24,7 @@ import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.reference.Reference;
 
+//TODO If Zalthrion changes this file on 1.7.10 DO NOT CHANGE IT HERE. MITCH DON'T FORGET TO READ THIS MULTIPLE TIMES
 public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	private String name = "placeholderPickaxe";
