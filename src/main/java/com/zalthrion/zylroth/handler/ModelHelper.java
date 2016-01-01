@@ -47,15 +47,23 @@ import com.zalthrion.zylroth.utility.LogHelper;
 	}
 	
 	public static void registerBlock(Block block) {
-		registerBlock(block, null, new String[] {block.getUnlocalizedName().substring(5).replace("zylroth:", "")}, new int[] {0});
+		registerBlock(block, null, new String[] {block.getUnlocalizedName().substring(5).replace(Reference.RESOURCE_PREFIX, "")}, new int[] {0});
 	}
 	
 	public static void registerItem(Item item, String registryName) {
 		registerItem(item, new String[] {registryName}, new int[] {0});
 	}
 	
+	public static void registerItem(Item item, int[] registryMetas) {
+		String[] registryNames = new String[registryMetas.length];
+		for (int i = 0; i < registryNames.length; i ++) {
+			registryNames[i] = item.getUnlocalizedName().substring(5).replace(Reference.RESOURCE_PREFIX, "");
+		}
+		registerItem(item, registryNames, registryMetas);
+	}
+	
 	public static void registerItem(Item item) {
-		registerItem(item, new String[] {item.getUnlocalizedName().substring(5).replace("zylroth:", "")}, new int[] {0});
+		registerItem(item, new String[] {item.getUnlocalizedName().substring(5).replace(Reference.RESOURCE_PREFIX, "")}, new int[] {0});
 	}
 	
 	public static void removeBlockState(Block block) {
