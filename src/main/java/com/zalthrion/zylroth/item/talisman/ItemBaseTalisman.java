@@ -40,7 +40,7 @@ public class ItemBaseTalisman extends ItemBase {
 			}
 		} else {
 			if (condition) {
-				if (player.dimension == -1) {
+				if (player.dimension == 1) {
 					if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:invaliddimension")));
 					return;
 				} else {
