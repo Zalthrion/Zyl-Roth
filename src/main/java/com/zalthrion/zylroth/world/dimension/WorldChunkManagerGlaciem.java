@@ -1,6 +1,5 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.crash.CrashReport;
@@ -17,6 +16,7 @@ import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.collect.Lists;
 import com.zalthrion.zylroth.world.gen.GenLayerGlaciem;
 
 public class WorldChunkManagerGlaciem extends WorldChunkManager {
@@ -29,9 +29,9 @@ public class WorldChunkManagerGlaciem extends WorldChunkManager {
 	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
-	@SuppressWarnings({"unchecked", "rawtypes"}) public WorldChunkManagerGlaciem() {
+	public WorldChunkManagerGlaciem() {
 		this.biomeCache = new BiomeCache(this);
-		this.biomesToSpawnIn = new ArrayList();
+		this.biomesToSpawnIn = Lists.<BiomeGenBase>newArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
 	}
 	
@@ -159,7 +159,7 @@ public class WorldChunkManagerGlaciem extends WorldChunkManager {
 	}
 	
 	/** checks given Chunk's Biomes against List of allowed ones */
-	@Override @SuppressWarnings("rawtypes") public boolean areBiomesViable(int x, int y, int z, List par4List) {
+	@Override public boolean areBiomesViable(int x, int y, int z, List<BiomeGenBase> par4List) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
 		int i1 = y - z >> 2;

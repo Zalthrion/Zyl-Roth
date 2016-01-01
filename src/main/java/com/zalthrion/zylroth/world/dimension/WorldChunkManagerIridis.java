@@ -1,6 +1,5 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +17,7 @@ import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.collect.Lists;
 import com.zalthrion.zylroth.world.gen.GenLayerIridis;
 
 public class WorldChunkManagerIridis extends WorldChunkManager {
@@ -30,10 +30,9 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	public WorldChunkManagerIridis() {
 		this.biomeCache = new BiomeCache(this);
-		this.biomesToSpawnIn = new ArrayList();
+		this.biomesToSpawnIn = Lists.<BiomeGenBase>newArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
 	}
 	
@@ -170,8 +169,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	
 	/** checks given Chunk's Biomes against List of allowed ones */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean areBiomesViable(int x, int y, int z, List par4List) {
+	public boolean areBiomesViable(int x, int y, int z, List<BiomeGenBase> par4List) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
 		int i1 = y - z >> 2;
@@ -204,7 +202,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	/** Finds a valid position within a range, that is in one of the listed
 	 * biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y
 	 * positions. */
-	@Override @SuppressWarnings("rawtypes") public BlockPos findBiomePosition(int x, int y, int z, List par4List, Random random) {
+	@Override public BlockPos findBiomePosition(int x, int y, int z, List<BiomeGenBase> par4List, Random random) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
 		int i1 = y - z >> 2;

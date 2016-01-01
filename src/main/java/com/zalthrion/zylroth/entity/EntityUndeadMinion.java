@@ -152,8 +152,7 @@ public class EntityUndeadMinion extends EntityMob {
 	}
 	
 	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean canAttackClass(Class par1Class) {
+	public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {
 		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class;
 	}
 }

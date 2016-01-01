@@ -31,8 +31,8 @@ public class TenebraeArmor extends ItemBaseArmor {
 		return stack.getItem() == ModItems.tenebraeIngot;	
 	}
 	
-	@Override @SuppressWarnings({"unchecked", "rawtypes"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {

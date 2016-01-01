@@ -258,8 +258,7 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	
 	/** Returns true if this entity can attack entities of the specified class. */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean canAttackClass(Class par1Class) {
+	public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {
 		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
 	}
 }

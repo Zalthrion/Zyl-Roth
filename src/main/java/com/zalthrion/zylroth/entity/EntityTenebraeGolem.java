@@ -191,7 +191,7 @@ public class EntityTenebraeGolem extends EntityMob {
 		return false;
 	}
 	
-	@Override @SuppressWarnings("rawtypes") public boolean canAttackClass(Class clazz) {
+	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> clazz) {
 		return EntityEmpoweredTenebraeGolem.class != clazz && EntityTenebraeGolem.class != clazz;
 	}
 }

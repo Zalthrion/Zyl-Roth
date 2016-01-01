@@ -66,9 +66,8 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 		return true;
 	}
 	
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		
 		if (this.isBroken(stack)) {
 			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));

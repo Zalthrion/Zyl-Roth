@@ -126,9 +126,8 @@ public class RainbowSaplingBlockZL extends BlockBush implements IGrowable {
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
 	@Override
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
 		for (TreeColor color : TreeColor.values()) {
 			list.add(new ItemStack(item, 1, color.getMeta()));
 		}

@@ -76,7 +76,8 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		return super.onBlockDestroyed(stack, world, block, pos, entity);
 	}
 	
-	@SuppressWarnings({"unchecked", "rawtypes"}) @Override public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		
 		if (this.isBroken(stack)) {
 			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));

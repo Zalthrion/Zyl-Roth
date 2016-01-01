@@ -206,7 +206,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 		defaultHeldItem = new ItemStack(ModTools.tenebraeSword, 1);
 	}
 	
-	@Override @SuppressWarnings("rawtypes") public boolean canAttackClass(Class par1Class) {
+	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {
 		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class && EntitySkeletalHorse.class != par1Class;
 	}
 	

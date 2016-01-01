@@ -19,9 +19,8 @@ public class BeaconBaseItemBlock extends ItemBlock {
 		super(b);
 	}
 	
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "beacon"));
 		
 		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));

@@ -19,8 +19,7 @@ import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
 @SideOnly(Side.CLIENT)
 public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 	
-	@SuppressWarnings("rawtypes")
-	private static final Map field_110852_a = Maps.newHashMap();
+	private static final Map<String, ResourceLocation> field_110852_a = Maps.<String, ResourceLocation>newHashMap();
 	private static final ResourceLocation whiteHorseTextures = new ResourceLocation("textures/entity/horse/horse_white.png");
 	private static final ResourceLocation muleTextures = new ResourceLocation("textures/entity/horse/mule.png");
 	private static final ResourceLocation donkeyTextures = new ResourceLocation("textures/entity/horse/donkey.png");
@@ -79,7 +78,6 @@ public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private ResourceLocation func_110848_b(MountDeathcharger p_110848_1_) {
 		String s = p_110848_1_.getHorseTexture();
 		ResourceLocation resourcelocation = (ResourceLocation) field_110852_a.get(s);

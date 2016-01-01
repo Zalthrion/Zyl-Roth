@@ -18,8 +18,7 @@ import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
 public class RenderUnicorn extends RenderLiving<EntityUnicorn> {
-	@SuppressWarnings("rawtypes")
-	private static final Map field_110852_a = Maps.newHashMap();
+	private static final Map<String, ResourceLocation> field_110852_a = Maps.<String, ResourceLocation>newHashMap();
 	private static final ResourceLocation unicornTextures = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/Unicorn.png");
 	
 	public RenderUnicorn(RenderManager manager, ModelBase p_i1256_1_, float p_i1256_2_) {
@@ -71,7 +70,6 @@ public class RenderUnicorn extends RenderLiving<EntityUnicorn> {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private ResourceLocation func_110848_b(EntityUnicorn p_110848_1_) {
 		String s = p_110848_1_.getHorseTexture();
 		ResourceLocation resourcelocation = (ResourceLocation) field_110852_a.get(s);
