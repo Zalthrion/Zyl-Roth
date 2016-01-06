@@ -33,9 +33,9 @@ import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTools;
 
-public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
+public class EntityVoidLordBoss extends EntityMob implements IBossDisplayData {
 	
-	public EntityPyroKnight(World world) {
+	public EntityVoidLordBoss(World world) {
 		super(world);
 		this.setSize(0.5F, 2.1F);
 		this.isImmuneToFire = true;
@@ -74,7 +74,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		
-		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon) || (entity instanceof EntitySkeletalHorse));
+		boolean KyrulMinions = ((entity instanceof EntityVoidLordBoss) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon) || (entity instanceof EntitySkeletalHorse));
 		
 		if (!KyrulMinions) {
 			this.worldObj.setEntityState(this, (byte) 4);
@@ -129,7 +129,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon) || (entity instanceof EntitySkeletalHorse));
+		boolean KyrulMinions = ((entity instanceof EntityVoidLordBoss) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon) || (entity instanceof EntitySkeletalHorse));
 		
 		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(KyrulMinions)) {
 			this.setAttackTarget((EntityLivingBase) entity);
@@ -212,7 +212,7 @@ public class EntityPyroKnight extends EntityMob implements IBossDisplayData {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public boolean canAttackClass(Class par1Class) {
-		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class && EntitySkeletalHorse.class != par1Class;
+		return EntityVoidLordBoss.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class && EntitySkeletalHorse.class != par1Class;
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package com.zalthrion.zylroth.model.entity;
 
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -131,7 +131,7 @@ public class ModelTenebraeGolem extends ModelBase {
 		this.BottomLeftLeg.rotateAngleX = 1.5F * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = 1.5F * p_78087_2_;
 		
-		EntityTenebraeGolem entityTenebraeGolem = (EntityTenebraeGolem) p_78087_7_;
+		EntityTenebraeProtector entityTenebraeGolem = (EntityTenebraeProtector) p_78087_7_;
 		int i = entityTenebraeGolem.getAttackTimer();
 		
 		this.BottomRightArm.rotateAngleX = -0.5F;
@@ -147,7 +147,7 @@ public class ModelTenebraeGolem extends ModelBase {
 	}
 	
 	public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
-		EntityTenebraeGolem entityTenebraeGolem = (EntityTenebraeGolem) p_78086_1_;
+		EntityTenebraeProtector entityTenebraeGolem = (EntityTenebraeProtector) p_78086_1_;
 		int i = entityTenebraeGolem.getAttackTimer();
 		
 		if (i > 0) {

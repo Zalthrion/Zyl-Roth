@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
-import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
+import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
 import com.zalthrion.zylroth.entity.mount.*;
 import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModTools;
@@ -58,15 +58,15 @@ public class ClientProxy extends CommonProxy {
 		
 		/** Mobs */
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityEmpoweredTenebraeGolem.class, new RenderEmpoweredTenebraeGolem(new ModelEmpoweredTenebraeGolem(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGuardian.class, new RenderTenebraeGuardian(new ModelEmpoweredTenebraeGolem(), shadowSize));
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityPyroKnight.class, new RenderPyroKnight(new ModelUndead(), shadowSize, shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new RenderVoidLordBoss(new ModelUndead(), shadowSize, shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(new ModelUndead(), shadowSize, shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(new ModelUndead(), shadowSize, shadowSize));
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGolem.class, new RenderTenebraeGolem(new ModelTenebraeGolem(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeProtector.class, new RenderTenebraeProtector(new ModelTenebraeGolem(), shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidDragon.class, new RenderVoidDragon());
 		

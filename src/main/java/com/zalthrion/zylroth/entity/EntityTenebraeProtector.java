@@ -18,16 +18,16 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.lib.ModItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityTenebraeGolem extends EntityMob {
+public class EntityTenebraeProtector extends EntityMob {
 	private int attackTimer;
 	
-	public EntityTenebraeGolem(World world) {
+	public EntityTenebraeProtector(World world) {
 		super(world);
 		this.setSize(1.4F, 2.9F);
 		this.getNavigator().setAvoidsWater(true);
@@ -204,6 +204,6 @@ public class EntityTenebraeGolem extends EntityMob {
 	/** Returns true if this entity can attack entities of the specified class. */
 	@SuppressWarnings("rawtypes")
 	public boolean canAttackClass(Class par1Class) {
-		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
+		return EntityTenebraeGuardian.class != par1Class && EntityTenebraeProtector.class != par1Class;
 	}
 }

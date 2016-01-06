@@ -8,16 +8,14 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
-import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
+import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
 import com.zalthrion.zylroth.entity.mount.*;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModEntity {
-	
-	// Main
 	
 	private static int nextEntityID = 1;
 	
@@ -58,13 +56,13 @@ public class ModEntity {
 		
 		// Mobs
 		
-		registerEntity(EntityEmpoweredTenebraeGolem.class, "empoweredTenebraeGolem", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityTenebraeGuardian.class, "tenebraeGuardian", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntity(EntityPyroKnight.class, "pyroKnight", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityVoidLordBoss.class, "voidLord", true, 0xeaeae9, 0xc99a03);
 		
 		registerEntity(EntitySkeletalHorse.class, "skeletalHorse", true, 0xeaeae9, 0xc99a03);
 		
-		registerEntity(EntityTenebraeGolem.class, "tenebraeGolem", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityTenebraeProtector.class, "tenebraeProtector", true, 0xeaeae9, 0xc99a03);
 		
 		registerEntity(EntityUndeadMinion.class, "undeadMinion", true, 0xeaeae9, 0xc99a03);
 		

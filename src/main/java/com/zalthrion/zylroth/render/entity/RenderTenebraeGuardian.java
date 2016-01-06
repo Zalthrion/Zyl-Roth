@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderEmpoweredTenebraeGolem extends RenderLiving {
+public class RenderTenebraeGuardian extends RenderLiving {
 	
 	//	private static final ResourceLocation Explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
 	
@@ -27,13 +27,13 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	@SuppressWarnings("unused")
 	private final ModelEmpoweredTenebraeGolem empowered_tenebrae_golemModel;
 	
-	public RenderEmpoweredTenebraeGolem(ModelEmpoweredTenebraeGolem modelEmpoweredTenebraeGolem, float shadowSize) {
+	public RenderTenebraeGuardian(ModelEmpoweredTenebraeGolem modelEmpoweredTenebraeGolem, float shadowSize) {
 		super(new ModelEmpoweredTenebraeGolem(), 0.5F);
 		this.empowered_tenebrae_golemModel = (ModelEmpoweredTenebraeGolem) this.mainModel;
 	}
 	
 	/** Rotates Empowered Tenebrae Golem corpse. */
-	protected void rotateEmpoweredTenebraeGolemCorpse(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4) {
+	protected void rotateEmpoweredTenebraeGolemCorpse(EntityTenebraeGuardian golem, float par2, float par3, float par4) {
 		super.rotateCorpse(golem, par2, par3, par4);
 		
 		if ((double) golem.limbSwingAmount >= 0.01D) {
@@ -69,36 +69,36 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	 * par5, par6, par7); GL11.glDisable(GL11.GL_BLEND); } */
 	
 	/** Renders the Empowered Tenebrae Golem. */
-	public void renderEmpoweredTenebraeGolem(EntityEmpoweredTenebraeGolem golem, double par2, double par4, double par6, float par8, float par9) {
+	public void renderEmpoweredTenebraeGolem(EntityTenebraeGuardian golem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(golem, par2, par4, par6, par8, par9);
 	}
 	
-	protected ResourceLocation getEmpoweredTenebraeGolemTextures(EntityEmpoweredTenebraeGolem golem) {
+	protected ResourceLocation getEmpoweredTenebraeGolemTextures(EntityTenebraeGuardian golem) {
 		return ETgolemTextures;
 	}
 	
 	/** Renders Equipped items. */
-	protected void renderEmpoweredTenebraeGolemEquippedItems(EntityEmpoweredTenebraeGolem golem, float par2) {
+	protected void renderEmpoweredTenebraeGolemEquippedItems(EntityTenebraeGuardian golem, float par2) {
 		super.renderEquippedItems(golem, par2);
 		
 	}
 	
 	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2) {
-		this.renderEmpoweredTenebraeGolemEquippedItems((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2);
+		this.renderEmpoweredTenebraeGolemEquippedItems((EntityTenebraeGuardian) par1EntityLivingBase, par2);
 	}
 	
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
-		this.rotateEmpoweredTenebraeGolemCorpse((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par3, par4);
+		this.rotateEmpoweredTenebraeGolemCorpse((EntityTenebraeGuardian) par1EntityLivingBase, par2, par3, par4);
 	}
 	
 	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLivingBase, par2, par4, par6, par8, par9);
+		this.renderEmpoweredTenebraeGolem((EntityTenebraeGuardian) par1EntityLivingBase, par2, par4, par6, par8, par9);
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.getEmpoweredTenebraeGolemTextures((EntityEmpoweredTenebraeGolem) par1Entity);
+		return this.getEmpoweredTenebraeGolemTextures((EntityTenebraeGuardian) par1Entity);
 	}
 	
 	/** Actually renders the given argument. This is a synthetic bridge method,
@@ -108,7 +108,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	 * void doRender(T entity, double d, double d1, double d2, float f, float
 	 * f1). But JAD is pre 1.5 so doesn't do that. */
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1Entity, par2, par4, par6, par8, par9);
+		this.renderEmpoweredTenebraeGolem((EntityTenebraeGuardian) par1Entity, par2, par4, par6, par8, par9);
 	}
 	
 	/** Renders the model in RenderLiving */
@@ -119,7 +119,7 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving {
 	 * par1EntityLivingBase, par2, par3, par4, par5, par6, par7); } */
 	
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		this.renderEmpoweredTenebraeGolem((EntityEmpoweredTenebraeGolem) par1EntityLiving, par2, par4, par6, par8, par9);
+		this.renderEmpoweredTenebraeGolem((EntityTenebraeGuardian) par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 	
 	@Override

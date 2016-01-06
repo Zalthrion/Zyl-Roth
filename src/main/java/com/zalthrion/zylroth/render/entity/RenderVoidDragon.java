@@ -67,6 +67,7 @@ public class RenderVoidDragon extends RenderLiving {
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 			GL11.glAlphaFunc(GL11.GL_GREATER, f6);
+			GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.9F);
 			bindTexture(Explosion);
 			mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
@@ -75,6 +76,7 @@ public class RenderVoidDragon extends RenderLiving {
 		
 		bindEntityTexture(dragon);
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
 		GL11.glDisable(GL11.GL_BLEND);

@@ -8,8 +8,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
@@ -66,7 +66,7 @@ public class ChiseledTenebrae extends BlockBase {
 					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
 				}
 				
-				EntityEmpoweredTenebraeGolem golem = new EntityEmpoweredTenebraeGolem(world);
+				EntityTenebraeGuardian golem = new EntityTenebraeGuardian(world);
 				//				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
@@ -95,7 +95,7 @@ public class ChiseledTenebrae extends BlockBase {
 					world.setBlock(x, y - 1, z + 1, getBlockById(0), 0, 2);
 				}
 				
-				EntityTenebraeGolem golem = new EntityTenebraeGolem(world);
+				EntityTenebraeProtector golem = new EntityTenebraeProtector(world);
 				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) x + 0.5D, (double) y - 1.95D, (double) z + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);

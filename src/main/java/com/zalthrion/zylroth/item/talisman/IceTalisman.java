@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.item;
+package com.zalthrion.zylroth.item.talisman;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.item.ItemBase;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class IceTalisman extends ItemBase {

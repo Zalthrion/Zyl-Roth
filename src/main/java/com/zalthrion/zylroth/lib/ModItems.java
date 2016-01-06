@@ -5,6 +5,10 @@ import net.minecraft.item.Item;
 import com.zalthrion.zylroth.item.*;
 import com.zalthrion.zylroth.item.mount.*;
 import com.zalthrion.zylroth.item.ore.*;
+import com.zalthrion.zylroth.item.talisman.GoldTalisman;
+import com.zalthrion.zylroth.item.talisman.IceTalisman;
+import com.zalthrion.zylroth.item.talisman.RainbowTalisman;
+import com.zalthrion.zylroth.item.talisman.VoidTalisman;
 
 public final class ModItems {
 	

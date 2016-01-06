@@ -14,6 +14,9 @@ tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
 tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
 tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond.
 
+tooltip.zylroth:broken_sword=You must repair this sword to continue using it!
+tooltip.zylroth:broken_tool=You must repair this tool to continue using it!
+
 tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
 
 tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
@@ -24,19 +27,9 @@ tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore, you can feel a d
 
 tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore, a powerful material that holds the power of creation.
 
-tooltip.zylroth:spawnpoint.set=Shift + Right Click to set your spawn point on this dimension
-
-
 #Messages
 
-msg.Zylroth:spawnpoint.warn=You must set a spawnpoint on this dimension before using this talisman!
-msg.Zylroth:spawnpoint.set=You have set your spawnpoint on this dimension successfully.
-
 msg.Zylroth:mount.owned=You're not the owner of this mount!
-
-msg.zylroth:broken_sword=You must repair this sword to continue using it!
-msg.zylroth:broken_tool=You must repair this tool to continue using it!
-
 
 #Ore Blocks
 
@@ -71,8 +64,8 @@ tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
 tile.zylroth:rainbowYellowSapling.name=Rainbow Yellow Sapling
 tile.zylroth:rainbowGreenSapling.name=Rainbow Green Sapling
 
-tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
+tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
 #Ore Items
 
@@ -120,11 +113,11 @@ item.zylroth:Summoning-Crystal_SC_SwiftUnicorn.name=(Summoning Crystal) Swift Un
 #Entity
 
 entity.Zylroth.bird.name=Bird
-entity.Zylroth.empoweredTenebraeGolem.name=Empowered Tenebrae Golem
-entity.Zylroth.pyroKnight.name=Pyro Knight
+entity.Zylroth.tenebraeGuardian.name=Tenebrae Guardian
+entity.Zylroth.voidLord.name=Void Lord Zakuun
 entity.Zylroth.rainbowPig.name=Rainbow Pig
 entity.Zylroth.skeletalHorse.name=Skeletal Horse
-entity.Zylroth.tenebraeGolem.name=Tenebrae Golem
+entity.Zylroth.tenebraeProtector.name=Tenebrae Protector
 entity.Zylroth.undeadMinion.name=Undead Minion
 entity.Zylroth.undeadWarrior.name=Undead Warrior
 entity.Zylroth.voidDragon.name=Void Dragon

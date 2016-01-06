@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.item;
+package com.zalthrion.zylroth.item.talisman;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,13 +8,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.item.ItemBase;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
-public class VoidTalisman extends ItemBase {
+public class RainbowTalisman extends ItemBase {
 	
-	private String name = "voidTalisman";
+	private String name = "rainbowTalisman";
 	
-	public VoidTalisman() {
+	public RainbowTalisman() {
 		this.setNames(name);
 		this.setMaxStackSize(1);
 	}
@@ -27,16 +28,16 @@ public class VoidTalisman extends ItemBase {
 					
 					EntityPlayerMP playerMP = (EntityPlayerMP) player;
 					
-					WorldServer ws = playerMP.mcServer.worldServerForDimension(47);
+					WorldServer ws = playerMP.mcServer.worldServerForDimension(48);
 					
 					Teleporter teleporter = new SpecialTeleporter(ws);
 					
-					if (!(player.dimension == 47) && player.ridingEntity == null) {
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 47, teleporter);
+					if (!(player.dimension == 48) && player.ridingEntity == null) {
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 48, teleporter);
 						SpecialTeleporter.adjustPosY(player);
 					}
 					
-					else if (player.dimension == 47 && player.ridingEntity == null) {
+					else if (player.dimension == 48 && player.ridingEntity == null) {
 						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 						SpecialTeleporter.adjustPosY(player);
 					}
