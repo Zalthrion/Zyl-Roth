@@ -22,7 +22,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModItems;
@@ -61,7 +61,7 @@ public class EntityUndeadWarrior extends EntityMob {
 	
 	@Override public boolean attackEntityAsMob(Entity entity) {
 		
-		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
+		boolean KyrulMinions = ((entity instanceof EntityVoidLordBoss) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
 		
 		if (!KyrulMinions) {
 			this.worldObj.setEntityState(this, (byte) 4);
@@ -106,7 +106,7 @@ public class EntityUndeadWarrior extends EntityMob {
 	}
 	
 	@Override protected void collideWithEntity(Entity entity) {
-		boolean KyrulMinions = ((entity instanceof EntityPyroKnight) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
+		boolean KyrulMinions = ((entity instanceof EntityVoidLordBoss) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon));
 		
 		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(KyrulMinions)) {
 			this.setAttackTarget((EntityLivingBase) entity);
@@ -159,6 +159,6 @@ public class EntityUndeadWarrior extends EntityMob {
 	}
 	
 	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {
-		return EntityPyroKnight.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class;
+		return EntityVoidLordBoss.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class;
 	}
 }

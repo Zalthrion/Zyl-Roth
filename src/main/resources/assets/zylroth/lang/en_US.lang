@@ -128,11 +128,11 @@ item.zylroth:Summoning-Crystal_SC_SwiftUnicorn.name=(Summoning Crystal) Swift Un
 #Entity
 
 entity.Zylroth.bird.name=Bird
-entity.Zylroth.empoweredTenebraeGolem.name=Empowered Tenebrae Golem
-entity.Zylroth.pyroKnight.name=Pyro Knight
+entity.Zylroth.tenebraeGuardian.name=Tenebrae Guardian
+entity.Zylroth.voidLord.name=Void Lord Zakuun
 entity.Zylroth.rainbowPig.name=Rainbow Pig
 entity.Zylroth.skeletalHorse.name=Skeletal Horse
-entity.Zylroth.tenebraeGolem.name=Tenebrae Golem
+entity.Zylroth.tenebraeProtector.name=Tenebrae Protector
 entity.Zylroth.undeadMinion.name=Undead Minion
 entity.Zylroth.undeadWarrior.name=Undead Warrior
 entity.Zylroth.voidDragon.name=Void Dragon

@@ -6,8 +6,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 
@@ -47,7 +47,7 @@ public class ChiseledTenebrae extends BlockBase {
 					world.setBlockToAir(pos.down().south());
 				}
 				
-				EntityEmpoweredTenebraeGolem golem = new EntityEmpoweredTenebraeGolem(world);
+				EntityTenebraeGuardian golem = new EntityTenebraeGuardian(world);
 				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);
 				
@@ -76,7 +76,7 @@ public class ChiseledTenebrae extends BlockBase {
 					world.setBlockToAir(pos.down().south());
 				}
 				
-				EntityTenebraeGolem golem = new EntityTenebraeGolem(world);
+				EntityTenebraeProtector golem = new EntityTenebraeProtector(world);
 				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(golem);

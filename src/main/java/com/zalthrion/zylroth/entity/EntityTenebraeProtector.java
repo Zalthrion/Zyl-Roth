@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.lib.ModItems;
 
-public class EntityTenebraeGolem extends EntityMob {
+public class EntityTenebraeProtector extends EntityMob {
 	private int attackTimer;
 	
-	public EntityTenebraeGolem(World world) {
+	public EntityTenebraeProtector(World world) {
 		super(world);
 		this.setSize(1.4F, 2.9F);
 		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
@@ -192,6 +192,6 @@ public class EntityTenebraeGolem extends EntityMob {
 	}
 	
 	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> clazz) {
-		return EntityEmpoweredTenebraeGolem.class != clazz && EntityTenebraeGolem.class != clazz;
+		return EntityTenebraeGuardian.class != clazz && EntityTenebraeProtector.class != clazz;
 	}
 }

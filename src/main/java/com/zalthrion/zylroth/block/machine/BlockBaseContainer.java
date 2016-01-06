@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.zalthrion.zylroth.block.BlockBase;
 
 public class BlockBaseContainer extends BlockBase implements ITileEntityProvider {
-	private Factory digFX = new Factory();
 	private Random rand = new Random();
 	private IBlockState particleBlockState = null;
 	
@@ -71,6 +70,7 @@ public class BlockBaseContainer extends BlockBase implements ITileEntityProvider
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
+		Factory digFX = new Factory();
 		if (particleBlockState == null) return true;
 		EnumFacing side = target.sideHit;
 		BlockPos pos = target.getBlockPos();
@@ -98,6 +98,7 @@ public class BlockBaseContainer extends BlockBase implements ITileEntityProvider
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public boolean addDestroyEffects(World world, BlockPos pos, EffectRenderer effectRenderer) {
+		Factory digFX = new Factory();
 		if (particleBlockState == null) return true;
 		IBlockState state = particleBlockState;
 		

@@ -9,12 +9,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderEmpoweredTenebraeGolem extends RenderLiving<EntityEmpoweredTenebraeGolem> {
+public class RenderTenebraeGuardian extends RenderLiving<EntityTenebraeGuardian> {
 	
 	//  private static final ResourceLocation explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
 	private static final ResourceLocation etGolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
@@ -23,18 +23,18 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving<EntityEmpoweredTe
 	@SuppressWarnings("unused")
 	private final ModelEmpoweredTenebraeGolem empowered_tenebrae_golemModel;
 	
-	public RenderEmpoweredTenebraeGolem(RenderManager manager, ModelEmpoweredTenebraeGolem modelEmpoweredTenebraeGolem, float shadowSize) {
+	public RenderTenebraeGuardian(RenderManager manager, ModelEmpoweredTenebraeGolem modelEmpoweredTenebraeGolem, float shadowSize) {
 		super(manager, new ModelEmpoweredTenebraeGolem(), 0.5F);
 		this.addLayer(new LayerHeldItem(this));
 		this.empowered_tenebrae_golemModel = (ModelEmpoweredTenebraeGolem) this.mainModel;
 	}
 	
-	@Override protected ResourceLocation getEntityTexture(EntityEmpoweredTenebraeGolem par1EntityEmpoweredTenebraeGolem) {
+	@Override protected ResourceLocation getEntityTexture(EntityTenebraeGuardian par1EntityEmpoweredTenebraeGolem) {
 		return etGolemTextures;
 	}
 	
 	/** Rotates Empowered Tenebrae Golem corpse. */
-	@Override protected void rotateCorpse(EntityEmpoweredTenebraeGolem golem, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityTenebraeGuardian golem, float par2, float par3, float par4) {
 		super.rotateCorpse(golem, par2, par3, par4);
 		
 		if ((double) golem.limbSwingAmount >= 0.01D) {
@@ -73,11 +73,11 @@ public class RenderEmpoweredTenebraeGolem extends RenderLiving<EntityEmpoweredTe
 		GlStateManager.disableBlend();
 	}*/
 	
-	@Override public void doRender(EntityEmpoweredTenebraeGolem golem, double par2, double par4, double par6, float par8, float par9) {
+	@Override public void doRender(EntityTenebraeGuardian golem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(golem, par2, par4, par6, par8, par9);
 	}
 	
-	@Override protected void renderLivingAt(EntityEmpoweredTenebraeGolem entity, double x, double y, double z) {
+	@Override protected void renderLivingAt(EntityTenebraeGuardian entity, double x, double y, double z) {
 		super.renderLivingAt(entity, x, y, z);
 		GlStateManager.scale(0.55F,  0.55F, 0.55F);
 	}

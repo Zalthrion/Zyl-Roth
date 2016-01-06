@@ -8,7 +8,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
 
 /** TenebraeGolem - Zalthrion Created using Tabula 4.1.1 */
 @SideOnly(Side.CLIENT)
@@ -130,7 +130,7 @@ public class ModelTenebraeGolem extends ModelBase {
 		this.BottomLeftLeg.rotateAngleX = 1.5F * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = 1.5F * p_78087_2_;
 		
-		EntityTenebraeGolem entityTenebraeGolem = (EntityTenebraeGolem) p_78087_7_;
+		EntityTenebraeProtector entityTenebraeGolem = (EntityTenebraeProtector) p_78087_7_;
 		int i = entityTenebraeGolem.getAttackTimer();
 		
 		this.BottomRightArm.rotateAngleX = -0.5F;
@@ -146,7 +146,7 @@ public class ModelTenebraeGolem extends ModelBase {
 	}
 	
 	@Override public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
-		EntityTenebraeGolem entityTenebraeGolem = (EntityTenebraeGolem) p_78086_1_;
+		EntityTenebraeProtector entityTenebraeGolem = (EntityTenebraeProtector) p_78086_1_;
 		int i = entityTenebraeGolem.getAttackTimer();
 		
 		if (i > 0) {

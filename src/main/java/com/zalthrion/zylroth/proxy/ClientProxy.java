@@ -16,8 +16,8 @@ import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL2;
 import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
 import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
-import com.zalthrion.zylroth.entity.boss.EntityPyroKnight;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
+import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
@@ -157,11 +157,11 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBadger.class, new RenderBadger(rm, new ModelBadger(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFancyBadger.class, new RenderFancyBadger(rm, new ModelBadger(), shadowSize));
 		/* Mobs */
-		RenderingRegistry.registerEntityRenderingHandler(EntityEmpoweredTenebraeGolem.class, new RenderEmpoweredTenebraeGolem(rm, new ModelEmpoweredTenebraeGolem(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPyroKnight.class, new RenderPyroKnight(rm, new ModelUndead(), shadowSize, shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGuardian.class, new RenderTenebraeGuardian(rm, new ModelEmpoweredTenebraeGolem(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new RenderVoidLordBoss(rm, new ModelUndead(), shadowSize, shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(rm, new ModelUndead(), shadowSize, shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(rm, new ModelUndead(), shadowSize, shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGolem.class, new RenderTenebraeGolem(rm, new ModelTenebraeGolem(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeProtector.class, new RenderTenebraeProtector(rm, new ModelTenebraeGolem(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidDragon.class, new RenderVoidDragon(rm));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletalHorse.class, new RenderSkeletalHorse(rm, new ModelHorse(), new ModelSkeletalHorse(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnicorn.class, new RenderUnicorn(rm, new ModelUnicorn(), shadowSize));

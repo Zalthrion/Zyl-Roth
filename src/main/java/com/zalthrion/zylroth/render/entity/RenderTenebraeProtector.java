@@ -8,12 +8,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
 import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
-public class RenderTenebraeGolem extends RenderLiving<EntityTenebraeGolem> {
+public class RenderTenebraeProtector extends RenderLiving<EntityTenebraeProtector> {
 	
 	private static final ResourceLocation tenebrae_golemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Tenebrae_Golem.png");
 	
@@ -21,23 +21,23 @@ public class RenderTenebraeGolem extends RenderLiving<EntityTenebraeGolem> {
 	@SuppressWarnings("unused")
 	private final ModelTenebraeGolem tenebrae_golemModel;
 	
-	public RenderTenebraeGolem(RenderManager renderManager, ModelTenebraeGolem ModelTenebraeGolem, float shadowSize) {
+	public RenderTenebraeProtector(RenderManager renderManager, ModelTenebraeGolem ModelTenebraeGolem, float shadowSize) {
 		super(renderManager, new ModelTenebraeGolem(), shadowSize);
 		this.addLayer(new LayerHeldItem(this));
 		this.tenebrae_golemModel = (ModelTenebraeGolem) this.mainModel;
 	}
 	
 	/** Renders the Tenebrae Golem. */
-	@Override public void doRender(EntityTenebraeGolem par1EntityTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
+	@Override public void doRender(EntityTenebraeProtector par1EntityTenebraeGolem, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender(par1EntityTenebraeGolem, par2, par4, par6, par8, par9);
 	}
 	
-	@Override protected ResourceLocation getEntityTexture(EntityTenebraeGolem par1EntityTenebraeGolem) {
+	@Override protected ResourceLocation getEntityTexture(EntityTenebraeProtector par1EntityTenebraeGolem) {
 		return tenebrae_golemTextures;
 	}
 	
 	/** Rotates Tenebrae Golem corpse. */
-	@Override protected void rotateCorpse(EntityTenebraeGolem par1EntityTenebraeGolem, float par2, float par3, float par4) {
+	@Override protected void rotateCorpse(EntityTenebraeProtector par1EntityTenebraeGolem, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityTenebraeGolem, par2, par3, par4);
 		
 		if ((double) par1EntityTenebraeGolem.limbSwingAmount >= 0.01D) {

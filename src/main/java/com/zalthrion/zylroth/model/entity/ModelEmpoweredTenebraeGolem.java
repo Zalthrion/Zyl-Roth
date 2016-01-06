@@ -9,7 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.boss.EntityEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 
 /** TenebraeGolem - Zalthrion Created using Tabula 4.1.0 */
 @SideOnly(Side.CLIENT)
@@ -141,7 +141,7 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 		this.BottomLeftLeg.rotateAngleX = 1.5F * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = 1.5F * p_78087_2_;
 		
-		EntityEmpoweredTenebraeGolem entityEmpoweredTenebraeGolem = (EntityEmpoweredTenebraeGolem) p_78087_7_;
+		EntityTenebraeGuardian entityEmpoweredTenebraeGolem = (EntityTenebraeGuardian) p_78087_7_;
 		int i = entityEmpoweredTenebraeGolem.getAttackTimer();
 		
 		this.BottomRightArm.rotateAngleX = -0.5F;
@@ -157,7 +157,7 @@ public class ModelEmpoweredTenebraeGolem extends ModelBase {
 	}
 	
 	@Override public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
-		EntityEmpoweredTenebraeGolem entityEmpoweredTenebraeGolem = (EntityEmpoweredTenebraeGolem) p_78086_1_;
+		EntityTenebraeGuardian entityEmpoweredTenebraeGolem = (EntityTenebraeGuardian) p_78086_1_;
 		int i = entityEmpoweredTenebraeGolem.getAttackTimer();
 		
 		if (i > 0) {

@@ -27,15 +27,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.entity.EntityTenebraeGolem;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
-public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisplayData {
+public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayData {
 	private int attackTimer;
 	public int deathTicks;
 	
-	public EntityEmpoweredTenebraeGolem(World world) {
+	public EntityTenebraeGuardian(World world) {
 		super(world);
 		this.setSize(2.1F, 4.2F);
 		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
@@ -259,6 +259,6 @@ public class EntityEmpoweredTenebraeGolem extends EntityMob implements IBossDisp
 	/** Returns true if this entity can attack entities of the specified class. */
 	@Override
 	public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {
-		return EntityEmpoweredTenebraeGolem.class != par1Class && EntityTenebraeGolem.class != par1Class;
+		return EntityTenebraeGuardian.class != par1Class && EntityTenebraeProtector.class != par1Class;
 	}
 }
