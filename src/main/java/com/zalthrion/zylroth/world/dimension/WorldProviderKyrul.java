@@ -7,7 +7,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 
-import com.zalthrion.zylroth.lib.ModDimension;
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +22,7 @@ public class WorldProviderKyrul extends WorldProvider {
 	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), terrainType);
-		this.dimensionId = ModDimension.dimensionId_Kyrul;
+		this.dimensionId = ConfigurationHandler.getKyrulId();
 		this.hasNoSky = true;
 	}
 	
@@ -53,7 +53,7 @@ public class WorldProviderKyrul extends WorldProvider {
 		return true;
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
 		int i = 10518688;
 		float f2 = MathHelper.cos(p_76562_1_ * (float) Math.PI * 2.0F) * 2.0F + 0.5F;

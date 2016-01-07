@@ -2,9 +2,10 @@ package com.zalthrion.zylroth.handler;
 
 import java.io.File;
 
+import net.minecraftforge.common.config.Configuration;
+
 import com.zalthrion.zylroth.reference.Reference;
 
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -16,6 +17,9 @@ public class ConfigurationHandler {
 	private static boolean enableKyrul = true;
 	private static boolean enableIridis = true;
 	private static boolean enableGlaciem = true;
+	private static int kyrulDimensionId = 47;
+	private static int iridisDimensionId = 48;
+	private static int glaciemDimensionId = 49;
 	
 	public static void init(File configFile) {
 		if (configuration == null) {
@@ -41,6 +45,10 @@ public class ConfigurationHandler {
 		
 		enableGlaciem = configuration.getBoolean("Enable Glaciem", "Dimensions", true, "Enable/Disable the Glaciem Dimension");
 		
+		kyrulDimensionId = configuration.getInt("Ky'rul Dimension ID", "Dimension", 47, Integer.MIN_VALUE, Integer.MAX_VALUE, "The dimension ID for the Ky'rul Dimension.");
+		iridisDimensionId = configuration.getInt("Iri'dis Dimension ID", "Dimension", 48, Integer.MIN_VALUE, Integer.MAX_VALUE, "The dimension ID for the Iri'dis Dimension.");
+		glaciemDimensionId = configuration.getInt("Glaciem Dimension ID", "Dimension", 49, Integer.MIN_VALUE, Integer.MAX_VALUE, "The dimension ID for the Glaciem Dimension.");
+		
 		if (configuration.hasChanged()) {
 			configuration.save();
 		}
@@ -62,4 +70,15 @@ public class ConfigurationHandler {
 		return enableGlaciem;
 	}
 	
+	public static int getKyrulId() {
+		return kyrulDimensionId;
+	}
+	
+	public static int getIridisId() {
+		return iridisDimensionId;
+	}
+	
+	public static int getGlaciemId() {
+		return glaciemDimensionId;
+	}
 }

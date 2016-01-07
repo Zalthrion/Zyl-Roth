@@ -6,7 +6,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 
-import com.zalthrion.zylroth.lib.ModDimension;
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +21,7 @@ public class WorldProviderGlaciem extends WorldProvider {
 	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerGlaciem(worldObj.getSeed(), terrainType);
-		this.dimensionId = ModDimension.dimensionId_Glaciem;
+		this.dimensionId = ConfigurationHandler.getGlaciemId();
 		this.hasNoSky = false;
 	}
 	
@@ -58,14 +58,14 @@ public class WorldProviderGlaciem extends WorldProvider {
 		return Vec3.createVectorHelper((double) 0.9, (double) 1, (double) 1);
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
 		return true;
 	}
 	
 	/** Returns 'true' if in the "main surface world", but 'false' if in the
 	 * Nether or End dimensions. */
-	public boolean isSurfaceWorld() {
+	@Override public boolean isSurfaceWorld() {
 		return true;
 	}
 	

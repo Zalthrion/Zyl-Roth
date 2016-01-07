@@ -1,50 +1,23 @@
 package com.zalthrion.zylroth.item.talisman;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
-import com.zalthrion.zylroth.item.ItemBase;
-import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
-public class RainbowTalisman extends ItemBase {
+public class RainbowTalisman extends ItemBaseTalisman {
 	
 	private String name = "rainbowTalisman";
 	
 	public RainbowTalisman() {
 		this.setNames(name);
 		this.setMaxStackSize(1);
+		this.setDimensionName("Iridis");
 	}
 	
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (ConfigurationHandler.getKyrulEnabled()) {
-			if (!world.isRemote) {
-				
-				if (player instanceof EntityPlayerMP) {
-					
-					EntityPlayerMP playerMP = (EntityPlayerMP) player;
-					
-					WorldServer ws = playerMP.mcServer.worldServerForDimension(48);
-					
-					Teleporter teleporter = new SpecialTeleporter(ws);
-					
-					if (!(player.dimension == 48) && player.ridingEntity == null) {
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 48, teleporter);
-						SpecialTeleporter.adjustPosY(player);
-					}
-					
-					else if (player.dimension == 48 && player.ridingEntity == null) {
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
-						SpecialTeleporter.adjustPosY(player);
-					}
-				}
-			}
-		}
-		
+	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		this.handleDimensionTeleport(ConfigurationHandler.getIridisEnabled(), ConfigurationHandler.getIridisId(), stack, world, player);
 		return super.onItemRightClick(stack, world, player);
 	}
 }
