@@ -30,55 +30,62 @@ public class ItemBaseTalisman extends ItemBase {
 	}
 	
 	public void handleDimensionTeleport(boolean condition, int dimensionID, ItemStack stack, World world, EntityPlayer player) {
-		if (player.isSneaking()) {
-			if (player.dimension == 0) {
-				if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindOverworld(stack, player);
-				if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.set")));
-			} else if (player.dimension == dimensionID) {
-				if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindDimension(stack, player);
-				if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.set")));
-			}
-		} else {
-			if (condition) {
-				if (player.dimension == 1) {
-					if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:invaliddimension")));
-					return;
-				} else {
-					if (player.dimension == 0) {
-						if (!isOverworldBound(stack)) {
-							if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.warn")));
-							return;
+		if (!player.isInWater() && !player.isOnLadder()) {
+			if (player.isSneaking()) {
+				if (player.dimension == 0) {
+					if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindOverworld(stack, player);
+					if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.set")));
+				} else if (player.dimension == dimensionID) {
+					if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindDimension(stack, player);
+					if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.set")));
+				}
+			} else {
+				if (condition) {
+					if (player.dimension == 1) {
+						if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:invaliddimension")));
+						return;
+					} else {
+						if (player.dimension == 0) {
+							if (!isOverworldBound(stack)) {
+								if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.warn")));
+								return;
+							}
+						} else if (player.dimension == dimensionID) {
+							if (!isDimensionBound(stack)) {
+								if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.warn")));
+								return;
+							}
 						}
-					} else if (player.dimension == dimensionID) {
-						if (!isDimensionBound(stack)) {
-							if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.warn")));
-							return;
-						}
-					}
-					if (!world.isRemote) {
-						if (player instanceof EntityPlayerMP) {
-							EntityPlayerMP playerMP = (EntityPlayerMP) player;
-							WorldServer ws = playerMP.mcServer.worldServerForDimension(dimensionID);
-							
-							if (!(player.dimension == dimensionID) && player.ridingEntity == null) {
-								int[] bindPos = isDimensionBound(stack) ? getDimensionBind(stack) : new int[] {0, -1, 0};
-								SpecialTeleporter teleporter = new SpecialTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
-								playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimensionID, teleporter);
-								teleporter.adjustPos(player);
-							} else if (player.dimension == dimensionID && player.ridingEntity == null) {
-								int[] bindPos = isOverworldBound(stack) ? getOverworldBind(stack) : new int[] {0, -1, 0};
-								SpecialTeleporter teleporter = new SpecialTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
-								playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
-								teleporter.adjustPos(player);
+						if (!world.isRemote) {
+							if (player instanceof EntityPlayerMP) {
+								EntityPlayerMP playerMP = (EntityPlayerMP) player;
+								WorldServer ws = playerMP.mcServer.worldServerForDimension(dimensionID);
+								
+								if (!(player.dimension == dimensionID) && player.ridingEntity == null) {
+									int[] bindPos = isDimensionBound(stack) ? getDimensionBind(stack) : new int[] {0, -1, 0};
+									SpecialTeleporter teleporter = new SpecialTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
+									playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimensionID, teleporter);
+									teleporter.adjustPos(player);
+								} else if (player.dimension == dimensionID && player.ridingEntity == null) {
+									int[] bindPos = isOverworldBound(stack) ? getOverworldBind(stack) : new int[] {0, -1, 0};
+									SpecialTeleporter teleporter = new SpecialTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
+									playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
+									teleporter.adjustPos(player);
+								}
 							}
 						}
 					}
 				}
 			}
+		} else {
+			if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:action.invalid")));
 		}
 	}
 	
-	@SuppressWarnings({"rawtypes", "unchecked"}) @Override @SideOnly(Side.CLIENT) public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 		if (!isOverworldBound(stack)) {
 			tooltip.add(StatCollector.translateToLocal("tooltip.zylroth:spawnpoint.set"));
 		} else {

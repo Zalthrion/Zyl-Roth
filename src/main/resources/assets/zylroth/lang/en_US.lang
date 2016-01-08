@@ -27,14 +27,17 @@ tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore, you can feel a d
 
 tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore, a powerful material that holds the power of creation.
 
-tooltip.zylroth:spawnpoint.set=Shift + Right Click to set your spawnpoint on this dimension
+tooltip.zylroth:spawnpoint.set=Sneak + Right Click to set your spawnpoint on this dimension
 tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
 tooltip.zylroth:spawnpoint.dimension=%s Bind: %s
 
 #Messages
 
+msg.zylroth:action.invalid=You can't do that right now!
+
 msg.zylroth:spawnpoint.warn=You must set a spawnpoint on this dimension before using this talisman!
 msg.zylroth:spawnpoint.set=You have set your spawnpoint on this dimension successfully.
+
 msg.zylroth:invaliddimension=You can not use this talisman in this dimension.
 
 msg.Zylroth:mount.owned=You're not the owner of this mount!
@@ -115,7 +118,7 @@ item.zylroth:voidGem.name=Void Gem
 
 item.zylroth:goldTalisman.name=Gold Talisman
 item.zylroth:iceTalisman.name=Ice Talisman
-item.zylroth:rainbowTalisman.name=Rainbow Talisman
+item.zylroth:autumnTalisman.name=Autumn Talisman
 item.zylroth:voidTalisman.name=Void Talisman
 
 item.zylroth:emptySC.name=Empty Summoning Crystal

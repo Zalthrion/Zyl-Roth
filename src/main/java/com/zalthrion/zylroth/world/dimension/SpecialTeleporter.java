@@ -31,8 +31,9 @@ public class SpecialTeleporter extends Teleporter {
 		this.zPos = posZ;
 	}
 	
+	//TODO: As far as I know, this will fix the bug that causes the player to be tp'ed to the Y:0 coord of a dimension. (Tested & Confirmed to be working)
 	public void adjustPos(Entity entity) {
-		int y = 0;
+		int y = entity.worldObj.getHeightValue(xPos, zPos);
 		boolean generatePlatform = false;
 		if (yPos == -1) {
 			for (int i = 256; i > entity.worldObj.provider.getAverageGroundLevel(); i --) {
@@ -47,6 +48,22 @@ public class SpecialTeleporter extends Teleporter {
 						generatePlatform = true;
 					}
 				}
+			}
+			
+			switch (entity.worldObj.provider.dimensionId) {
+				case -1:
+					y -= 10;
+					boolean flag = true;
+					while (y > 30 && flag) {
+						if (entity.worldObj.getBlock(xPos, y, zPos).getMaterial().blocksMovement() && entity.worldObj.isAirBlock(xPos, y + 1, zPos) && entity.worldObj.isAirBlock(xPos, y + 2, zPos)) {
+							flag = false;
+						}
+						else {
+							-- y;
+						}
+					}
+					break;
+				default:
 			}
 		} else {
 			Block block = entity.worldObj.getBlock(xPos, yPos - 1, zPos);

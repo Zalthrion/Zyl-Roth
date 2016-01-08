@@ -7,7 +7,7 @@ import com.zalthrion.zylroth.item.mount.*;
 import com.zalthrion.zylroth.item.ore.*;
 import com.zalthrion.zylroth.item.talisman.GoldTalisman;
 import com.zalthrion.zylroth.item.talisman.IceTalisman;
-import com.zalthrion.zylroth.item.talisman.RainbowTalisman;
+import com.zalthrion.zylroth.item.talisman.AutumnTalisman;
 import com.zalthrion.zylroth.item.talisman.VoidTalisman;
 
 public final class ModItems {
@@ -48,7 +48,7 @@ public final class ModItems {
 	/* Portals */
 	public static Item goldTalisman = new GoldTalisman();
 	public static Item voidTalisman = new VoidTalisman();
-	public static Item rainbowTalisman = new RainbowTalisman();
+	public static Item autumnTalisman = new AutumnTalisman();
 	public static Item iceTalisman = new IceTalisman();
 	
 	/* Others */
@@ -88,7 +88,7 @@ public final class ModItems {
 		/* Portals */
 		ModRegistry.addRegister(53, goldTalisman, "goldTalisman");
 		ModRegistry.addRegister(54, voidTalisman, "voidTalisman");
-		ModRegistry.addRegister(55, rainbowTalisman, "rainbowTalisman");
+		ModRegistry.addRegister(55, autumnTalisman, "autumnTalisman");
 		ModRegistry.addRegister(56, iceTalisman, "iceTalisman");
 		
 		/* Others */
