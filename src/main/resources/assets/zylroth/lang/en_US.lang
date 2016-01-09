@@ -27,7 +27,7 @@ tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore\nYou can feel a d
 
 tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore\nA powerful material that holds the power of creation.
 
-tooltip.zylroth:spawnpoint.set=Sneak + Right Click to set your spawnpoint on this dimension
+tooltip.zylroth:spawnpoint.set=Sneak + Right Click\nTo set your spawnpoint on this dimension
 tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
 tooltip.zylroth:spawnpoint.dimension=%s Bind: %s
 
@@ -71,18 +71,19 @@ tile.zylroth:oreInfuserMachineActive.name=Ore Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
 tile.zylroth:tenebraeCore.name=Tenebrae Core
 
-tile.zylroth:rainbowBlueLeaves.name=Rainbow Blue Leaves
 tile.zylroth:rainbowRedLeaves.name=Rainbow Red Leaves
-tile.zylroth:rainbowPurpleLeaves.name=Rainbow Purple Leaves
+tile.zylroth:rainbowOrangeLeaves.name=Rainbow Orange Leaves
 tile.zylroth:rainbowYellowLeaves.name=Rainbow Yellow Leaves
 tile.zylroth:rainbowGreenLeaves.name=Rainbow Green Leaves
+tile.zylroth:rainbowBlueLeaves.name=Rainbow Blue Leaves
+tile.zylroth:rainbowPurpleLeaves.name=Rainbow Purple Leaves
 
-tile.zylroth:rainbowBlueSapling.name=Rainbow Blue Sapling
 tile.zylroth:rainbowRedSapling.name=Rainbow Red Sapling
-tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
+tile.zylroth:rainbowOrangeSapling.name=Rainbow Orange Sapling
 tile.zylroth:rainbowYellowSapling.name=Rainbow Yellow Sapling
 tile.zylroth:rainbowGreenSapling.name=Rainbow Green Sapling
-
+tile.zylroth:rainbowBlueSapling.name=Rainbow Blue Sapling
+tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 

@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class RainbowSaplingBlockZL extends BlockBush implements IGrowable {
 	
-	public static final String[] sapling_names = new String[] {"rainbowBlueSapling", "rainbowRedSapling", "rainbowPurpleSapling", "rainbowYellowSapling"};
+	public static final String[] sapling_names = new String[] {"rainbowRedSapling", "rainbowOrangeSapling", "rainbowYellowSapling", "rainbowGreenSapling"};
 	private static final IIcon[] icon = new IIcon[sapling_names.length];
 	
 	public RainbowSaplingBlockZL() {
@@ -153,7 +153,7 @@ public class RainbowSaplingBlockZL extends BlockBush implements IGrowable {
 		list.add(new ItemStack(item, 1, 3));
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
 		for (int i = 0; i < icon.length; ++ i) {
 			icon[i] = reg.registerIcon(Reference.MOD_ID + ":trees/" + sapling_names[i]);

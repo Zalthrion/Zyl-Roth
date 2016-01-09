@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class RainbowSaplingItemBlock extends ItemBlockWithMetadata {
 	
-	private final static String[] subNames = {"rainbowBlueSapling", "rainbowRedSapling", "rainbowPurpleSapling", "rainbowYellowSapling"};
+	private final static String[] subNames = {"rainbowRedSapling", "rainbowOrangeSapling", "rainbowYellowSapling", "rainbowGreenSapling"};
 	
 	public RainbowSaplingItemBlock(Block id) {
 		super(id, id);
@@ -20,7 +20,7 @@ public class RainbowSaplingItemBlock extends ItemBlockWithMetadata {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "tile.zylroth:" + subNames[stack.getCurrentDurability()];
+		return stack.getCurrentDurability() <= subNames.length ? "tile.zylroth:" + subNames[stack.getCurrentDurability()] : "general.zylroth:unavailable";
 	}
 	
 }

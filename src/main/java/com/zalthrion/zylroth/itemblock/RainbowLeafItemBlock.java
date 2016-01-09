@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class RainbowLeafItemBlock extends ItemBlock {
 	
-	private final static String[] subNames = {"rainbowBlueLeaves", "rainbowRedLeaves", "rainbowPurpleLeaves", "rainbowYellowLeaves", "rainbowGreenLeaves"};
+	private final static String[] subNames = {"rainbowRedLeaves", "rainbowOrangeLeaves", "rainbowYellowLeaves", "rainbowGreenLeaves"};
 	
 	public RainbowLeafItemBlock(Block id) {
 		super(id);
@@ -20,6 +20,6 @@ public class RainbowLeafItemBlock extends ItemBlock {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "tile.zylroth:" + subNames[stack.getCurrentDurability()];
+		return stack.getCurrentDurability() <= subNames.length ? "tile.zylroth:" + subNames[stack.getCurrentDurability()] : "general.zylroth:unavailable";
 	}
 }

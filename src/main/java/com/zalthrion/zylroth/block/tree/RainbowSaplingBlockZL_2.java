@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 	
-	public static final String[] sapling_names = new String[] {"rainbowGreenSapling"};
+	public static final String[] sapling_names = new String[] {"rainbowBlueSapling", "rainbowPurpleSapling"};
 	private static final IIcon[] icon = new IIcon[sapling_names.length];
 	
 	public RainbowSaplingBlockZL_2() {
@@ -59,7 +59,7 @@ public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		meta &= 7;
-		return icon[MathHelper.clamp_int(meta, 0, 0)];
+		return icon[MathHelper.clamp_int(meta, 0, 1)];
 	}
 	
 	public void markOrGrowMarked(World p_149879_1_, int p_149879_2_, int p_149879_3_, int p_149879_4_, Random p_149879_5_) {
@@ -87,6 +87,7 @@ public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL_2, 0, 0, false);
 				break;
 			case 1:
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL_2, 0, 1, false);
 				break;
 			case 2:
 				break;
@@ -145,9 +146,10 @@ public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		list.add(new ItemStack(item, 1, 0));
+		list.add(new ItemStack(item, 1, 1));
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
 		for (int i = 0; i < icon.length; ++ i) {
 			icon[i] = reg.registerIcon(Reference.MOD_ID + ":trees/" + sapling_names[i]);

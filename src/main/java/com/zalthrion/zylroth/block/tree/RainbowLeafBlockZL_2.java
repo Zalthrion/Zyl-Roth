@@ -23,8 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class RainbowLeafBlockZL_2 extends BlockLeaves {
 	
-	public static final String[][] leaf_names = new String[][] { {"rainbowGreenLeaves"}, {"rainbowGreenLeaves_opaque"}};
-	public static final String[] leaf_types = new String[] {"rainbowGreen"};
+	public static final String[][] leaf_names = new String[][] { {"rainbowBlueLeaves", "rainbowPurpleLeaves"}, {"rainbowBlueLeaves_opaque", "rainbowPurpleLeaves_opaque"}};
+	public static final String[] leaf_types = new String[] {"rainbowBlue", "rainbowPurple"};
 	protected IIcon[][] icon = new IIcon[2][];
 	
 	public RainbowLeafBlockZL_2() {
