@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/rainbowTalisman"
+        "layer0": "zylroth:items/autumnTalisman"
     },
     "display": {
         "thirdperson": {

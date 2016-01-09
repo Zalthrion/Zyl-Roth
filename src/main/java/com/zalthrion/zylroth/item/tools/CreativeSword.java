@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
@@ -23,6 +23,7 @@ import org.lwjgl.input.Keyboard;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class CreativeSword extends ItemSword implements ZylrothTool {
 		private String name = "creativeSword";
@@ -40,7 +41,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
+				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 			}
 			return true;
 		}
@@ -64,7 +65,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 			if (player.capabilities.isCreativeMode) { return stack; }
 			
 			if (this.isBroken(stack) && !(world.isRemote)) {
-				player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
+				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 				return stack;
 				
 			} else if (stack.getMetadata() < 2200) {
@@ -98,7 +99,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		}
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword")));
+			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword")));
 		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
 			if (player.inventory.hasItem(torch)) {
 				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
@@ -117,24 +118,17 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	}
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
-		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
-		}
-		
-		else if (!(this.isBroken(stack))) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_sword_lore"));
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
-			
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-			
+			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+		} else {
+			list.addAll(TooltipHelper.addAll("tenebrae_sword_lore"));
+			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-				
-				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_sword_info"));
+				list.addAll(TooltipHelper.addAll("tenebrae_sword_info"));
+			} else {
+				list.addAll(TooltipHelper.addAll("shift"));
 			}
 		}
-		
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
@@ -150,7 +144,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("tooltip." + Reference.MOD_ID.toLowerCase() + ":broken_sword"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("tooltip." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		
 		return true;
 	}

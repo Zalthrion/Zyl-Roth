@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -23,6 +23,7 @@ import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.TooltipHelper;
 
 //TODO If Zalthrion changes this file on 1.7.10 DO NOT CHANGE IT HERE. MITCH DON'T FORGET TO READ THIS MULTIPLE TIMES
 public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
@@ -47,7 +48,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 		World world = player.worldObj;
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool")));
+			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
 			
 			return true;
 			
@@ -61,11 +62,11 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 		if (player.capabilities.isCreativeMode) { return false; }
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool")));
+			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
 			
 		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
 			
-			Material material = world.getBlockState(pos).getBlock().getMaterial(); //TODO Were we going to use this?
+			Material material = world.getBlockState(pos).getBlock().getMaterial();
 			
 			boolean isStone = block == Blocks.stone;
 			boolean isCobblestone = block == Blocks.cobblestone;
@@ -125,7 +126,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 		}
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool")));
+			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
 		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
 			if (player.inventory.hasItem(torch)) {
 				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
@@ -143,22 +144,16 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 		return false;
 	}
 	
-	@SuppressWarnings({"unchecked", "rawtypes"}) @Override public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		
+	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
-		}
-		
-		else if (!(this.isBroken(stack))) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
-			
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-			
+			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		} else {
+			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
+			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-				
-				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_info"));
+				list.addAll(TooltipHelper.addAll("tenebrae_tool_info"));
+			} else {
+				list.addAll(TooltipHelper.addAll("shift"));
 			}
 		}
 	}
@@ -176,7 +171,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentText("msg." + Reference.MOD_ID.toLowerCase() + ":broken_tool"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		
 		return true;
 	}

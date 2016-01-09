@@ -136,7 +136,7 @@ public class ClientProxy extends CommonProxy {
 		/* Portals */
 		ModelHelper.registerItem(ModItems.goldTalisman);
 		ModelHelper.registerItem(ModItems.voidTalisman);
-		ModelHelper.registerItem(ModItems.rainbowTalisman);
+		ModelHelper.registerItem(ModItems.autumnTalisman);
 		ModelHelper.registerItem(ModItems.iceTalisman);
 		/* Others */
 		ModelHelper.registerItem(ModItems.darkShard);

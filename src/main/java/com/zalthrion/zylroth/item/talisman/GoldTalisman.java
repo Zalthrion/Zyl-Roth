@@ -1,6 +1,8 @@
 package com.zalthrion.zylroth.item.talisman;
 
-public class GoldTalisman extends ItemBaseTalisman {
+import com.zalthrion.zylroth.item.ItemBase;
+
+public class GoldTalisman extends ItemBase {
 	private String name = "goldTalisman";
 	
 	public GoldTalisman() {

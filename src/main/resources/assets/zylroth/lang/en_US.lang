@@ -11,23 +11,25 @@ tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=A powerful artifact with immense power running inside it.
 tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
 tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
-tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond.
+tooltip.zylroth:tenebrae_armor=Made of a dark material\nSeems like it's more durable than diamond.
 
 tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
 
-tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
-tooltip.zylroth:tenebrae_sword_lore=The sword seems to be attracting dark energy while on your hand.
+tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding\nto throw an ender pearl.
+tooltip.zylroth:tenebrae_sword_lore=The sword seems to be attracting\ndark energy while on your hand.
 
 tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
-tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore, you can feel a dark essence surround you.
+tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore\nYou can feel a dark essence surround you.
 
-tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore, a powerful material that holds the power of creation.
+tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore\nA powerful material that holds the power of creation.
 
-tooltip.zylroth:spawnpoint.set=Shift + Right Click to set your spawnpoint on this dimension
+tooltip.zylroth:spawnpoint.set=Sneak + Right Click to set your spawnpoint on this dimension
 tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
 tooltip.zylroth:spawnpoint.dimension=%s Bind: %s
 
 #Messages
+
+msg.zylroth:action.invalid=You can't do that right now!
 
 msg.zylroth:spawnpoint.warn=You must set a spawnpoint on this dimension before using this talisman!
 msg.zylroth:spawnpoint.set=You have set your spawnpoint on this dimension successfully.
@@ -67,17 +69,19 @@ tile.zylroth:oreInfuserMachineActive.name=Ore Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
 tile.zylroth:tenebraeCore.name=Tenebrae Core
 
-tile.zylroth:rainbowBlueLeaves.name=Rainbow Blue Leaves
 tile.zylroth:rainbowRedLeaves.name=Rainbow Red Leaves
-tile.zylroth:rainbowPurpleLeaves.name=Rainbow Purple Leaves
+tile.zylroth:rainbowOrangeLeaves.name=Rainbow Orange Leaves
 tile.zylroth:rainbowYellowLeaves.name=Rainbow Yellow Leaves
 tile.zylroth:rainbowGreenLeaves.name=Rainbow Green Leaves
+tile.zylroth:rainbowBlueLeaves.name=Rainbow Blue Leaves
+tile.zylroth:rainbowPurpleLeaves.name=Rainbow Purple Leaves
 
-tile.zylroth:rainbowBlueSapling.name=Rainbow Blue Sapling
 tile.zylroth:rainbowRedSapling.name=Rainbow Red Sapling
-tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
+tile.zylroth:rainbowOrangeSapling.name=Rainbow Orange Sapling
 tile.zylroth:rainbowYellowSapling.name=Rainbow Yellow Sapling
 tile.zylroth:rainbowGreenSapling.name=Rainbow Green Sapling
+tile.zylroth:rainbowBlueSapling.name=Rainbow Blue Sapling
+tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
@@ -114,7 +118,7 @@ item.zylroth:voidGem.name=Void Gem
 
 item.zylroth:goldTalisman.name=Gold Talisman
 item.zylroth:iceTalisman.name=Ice Talisman
-item.zylroth:rainbowTalisman.name=Rainbow Talisman
+item.zylroth:autumnTalisman.name=Autumn Talisman
 item.zylroth:voidTalisman.name=Void Talisman
 
 item.zylroth:emptySC.name=Empty Summoning Crystal

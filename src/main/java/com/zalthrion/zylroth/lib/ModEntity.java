@@ -45,21 +45,21 @@ public class ModEntity {
 		
 		// Animals
 		
-		registerEntity(EntityBird.class, "Bird", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityRainbowPig.class, "RainbowPig", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityBadger.class, "Badger", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityFancyBadger.class, "FancyBadger", false, 0, 0);
+		registerEntity(EntityBird.class, "bird", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityRainbowPig.class, "rainbowPig", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityBadger.class, "badger", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityFancyBadger.class, "fancyBadger", false, 0, 0);
 		
 		// Mobs
 
-		registerEntity(EntityTenebraeGuardian.class, "TenebraeGuardian", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntitySkeletalHorse.class, "SkeletalHorse", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityVoidLordBoss.class, "VoidLord", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityTenebraeProtector.class, "TenebraeProtector", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityUndeadMinion.class, "UndeadMinion", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityUndeadWarrior.class, "UndeadWarrior", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityUnicorn.class, "Unicorn", true, 0xeaeae9, 0xc99a03);
-		registerEntity(EntityVoidDragon.class, "VoidDragon", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityTenebraeGuardian.class, "tenebraeGuardian", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntitySkeletalHorse.class, "skeletalHorse", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityVoidLordBoss.class, "voidLord", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityTenebraeProtector.class, "tenebraeProtector", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityUndeadMinion.class, "undeadMinion", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityUndeadWarrior.class, "undeadWarrior", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityUnicorn.class, "unicorn", true, 0xeaeae9, 0xc99a03);
+		registerEntity(EntityVoidDragon.class, "voidDragon", true, 0xeaeae9, 0xc99a03);
 		
 		// Mounts
 		

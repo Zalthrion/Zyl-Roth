@@ -30,7 +30,7 @@ public class ItemBaseTalisman extends ItemBase {
 	}
 	
 	public void handleDimensionTeleport(boolean condition, int dimensionID, ItemStack stack, World world, EntityPlayer player) {
-		if (player.isSneaking()) {
+		if (player.isSneaking() && !player.isInWater() && !player.isOnLadder()) {
 			if (player.dimension == 0) {
 				if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindOverworld(stack, player);
 				if (world.isRemote) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.zylroth:spawnpoint.set")));

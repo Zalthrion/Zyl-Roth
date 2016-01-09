@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 
@@ -16,6 +15,7 @@ import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.proxy.ClientProxy;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class VoidLordArmor extends ItemBaseArmor {
 	
@@ -38,11 +38,10 @@ public class VoidLordArmor extends ItemBaseArmor {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
-		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_armor"));
-			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+			list.addAll(TooltipHelper.addAll("tenebrae_armor"));
+		} else {
+			list.addAll(TooltipHelper.addAll("shift"));
 		}
 	}
 	

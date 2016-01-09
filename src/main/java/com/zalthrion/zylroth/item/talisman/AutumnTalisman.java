@@ -6,10 +6,10 @@ import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
-public class RainbowTalisman extends ItemBaseTalisman {
-	private String name = "rainbowTalisman";
+public class AutumnTalisman extends ItemBaseTalisman {
+	private String name = "autumnTalisman";
 	
-	public RainbowTalisman() {
+	public AutumnTalisman() {
 		super();
 		this.setUnlocalizedName(name);
 		this.setDimensionName("Iridis");

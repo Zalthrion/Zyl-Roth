@@ -2,7 +2,12 @@ package com.zalthrion.zylroth.lib;
 
 import net.minecraft.item.Item;
 
-import com.zalthrion.zylroth.item.*;
+import com.zalthrion.zylroth.item.CursedSoulEssence;
+import com.zalthrion.zylroth.item.DarkShard;
+import com.zalthrion.zylroth.item.SoulEssence;
+import com.zalthrion.zylroth.item.UnstableTenebraeCore;
+import com.zalthrion.zylroth.item.VoidEssence;
+import com.zalthrion.zylroth.item.VoidGem;
 import com.zalthrion.zylroth.item.mount.EmptySC;
 import com.zalthrion.zylroth.item.mount.SCDeathcharger;
 import com.zalthrion.zylroth.item.mount.SCPlaguedHorse;
@@ -10,9 +15,9 @@ import com.zalthrion.zylroth.item.mount.SCSavageBadger;
 import com.zalthrion.zylroth.item.mount.SCSwiftUnicorn;
 import com.zalthrion.zylroth.item.mount.SCWarTortoise;
 import com.zalthrion.zylroth.item.ore.*;
+import com.zalthrion.zylroth.item.talisman.AutumnTalisman;
 import com.zalthrion.zylroth.item.talisman.GoldTalisman;
 import com.zalthrion.zylroth.item.talisman.IceTalisman;
-import com.zalthrion.zylroth.item.talisman.RainbowTalisman;
 import com.zalthrion.zylroth.item.talisman.VoidTalisman;
 
 public final class ModItems {
@@ -45,7 +50,7 @@ public final class ModItems {
 	/* Portals */
 	public static Item goldTalisman = new GoldTalisman();
 	public static Item voidTalisman = new VoidTalisman();
-	public static Item rainbowTalisman = new RainbowTalisman();
+	public static Item autumnTalisman = new AutumnTalisman();
 	public static Item iceTalisman = new IceTalisman();
 	/* Others */
 	public static Item darkShard = new DarkShard();
@@ -85,7 +90,7 @@ public final class ModItems {
 		/* Portals */
 		ModRegistry.addRegister(57, goldTalisman, "goldTalisman");
 		ModRegistry.addRegister(58, voidTalisman, "voidTalisman");
-		ModRegistry.addRegister(59, rainbowTalisman, "rainbowTalisman");
+		ModRegistry.addRegister(59, autumnTalisman, "autumnTalisman");
 		ModRegistry.addRegister(60, iceTalisman, "iceTalisman");
 		/* Others */
 		ModRegistry.addRegister(61, darkShard, "darkShard");
