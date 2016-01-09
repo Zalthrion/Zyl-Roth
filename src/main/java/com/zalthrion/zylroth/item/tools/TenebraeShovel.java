@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -16,6 +16,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.TooltipHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,7 +30,7 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 		this.setNames(name);
 	}
 	
-	public boolean isBroken(ItemStack stack) {
+	@Override public boolean isBroken(ItemStack stack) {
 		return stack.getMetadata() >= tenebraeDurability;
 	}
 	
@@ -37,7 +38,7 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool")));	
+				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 			}		
 			
 			return true;
@@ -60,7 +61,7 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 		World world = player.worldObj;
 		
 		if (world.isRemote)
-			player.addChatMessage(new ChatComponentText("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
+			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		
 		return true;
 	}
@@ -68,21 +69,15 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg" + "." + Reference.MOD_ID.toLowerCase() + ":" + "broken_tool"));
-		}
-		
-		else if (!(this.isBroken(stack))) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_lore"));
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_generic"));
-			
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-			
+			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		} else {
+			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
+			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-				
-				list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_tool_info"));
+				list.addAll(TooltipHelper.addAll("tenebrae_tool_info"));
+			} else {
+				list.addAll(TooltipHelper.addAll("shift"));
 			}
 		}
 	}

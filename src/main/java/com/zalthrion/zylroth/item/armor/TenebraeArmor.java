@@ -5,13 +5,13 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class TenebraeArmor extends ItemBaseArmor {
 	
@@ -33,13 +33,12 @@ public class TenebraeArmor extends ItemBaseArmor {
 		return stack.getItem() == ModItems.tenebraeIngot;
 	}
 	
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@Override @SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
-		list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
-		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.add(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae_armor"));
-			list.remove(StatCollector.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+			list.addAll(TooltipHelper.addAll("tenebrae_armor"));
+		} else {
+			list.addAll(TooltipHelper.addAll("shift"));
 		}
 	}
 	

@@ -12,20 +12,20 @@ tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=A powerful artifact with immense power running inside it.
 tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
 tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
-tooltip.zylroth:tenebrae_armor=Made of a dark material, seems like it's more durable than diamond.
+tooltip.zylroth:tenebrae_armor=Made of a dark material\nSeems like it's more durable than diamond.
 
 tooltip.zylroth:broken_sword=You must repair this sword to continue using it!
 tooltip.zylroth:broken_tool=You must repair this tool to continue using it!
 
 tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
 
-tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding to throw an ender pearl.
-tooltip.zylroth:tenebrae_sword_lore=The sword seems to be attracting dark energy while on your hand.
+tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding\nto throw an ender pearl.
+tooltip.zylroth:tenebrae_sword_lore=The sword seems to be attracting\ndark energy while on your hand.
 
 tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
-tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore, you can feel a dark essence surround you.
+tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore\nYou can feel a dark essence surround you.
 
-tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore, a powerful material that holds the power of creation.
+tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore\nA powerful material that holds the power of creation.
 
 tooltip.zylroth:spawnpoint.set=Sneak + Right Click to set your spawnpoint on this dimension
 tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
