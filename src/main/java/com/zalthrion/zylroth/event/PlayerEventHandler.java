@@ -1,28 +1,35 @@
 package com.zalthrion.zylroth.event;
 
-import java.util.Iterator;
-import java.util.UUID;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
-import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
-import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
-import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
-
 public class PlayerEventHandler {
 	@SubscribeEvent
-	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedInEvent event) {
-		EntityPlayer player = event.player;
+	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+/*		EntityPlayer player = event.player;
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		if (persistentData.hasKey("ownsMountDeathcharger")) {
+		if (persistentData.hasKey("ownsMount")) {
+			UUID ownedMount = UUID.fromString(persistentData.getString("ownsMount"));
+			WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+			for (WorldServer world : worlds) {
+				Iterator<Entity> iterator = world.loadedEntityList.iterator();
+				while (iterator.hasNext()) {
+					Entity entity = iterator.next();
+					if (entity.getUniqueID().equals(ownedMount)) entity.setDead();
+				}
+			}
+			
+			persistentData.removeTag("ownsMount");
+			persistentData.removeTag("ownedMountId");
+			persistentData.removeTag("ownsMountSavageBadger");
+			persistentData.removeTag("ownsMountPlaguedHorse");
+			persistentData.removeTag("ownsMountDeathcharger");
+			persistentData.removeTag("ownsMountSwiftUnicorn");
+			persistentData.removeTag("ownsMountWarTortoise");
+		}*/
+		
+/*		if (persistentData.hasKey("ownsMountDeathcharger")) {
 			UUID ownedMount = UUID.fromString(persistentData.getString("ownsMountDeathcharger"));
 			persistentData.removeTag("ownsMountDeathcharger");
 			WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
@@ -100,6 +107,6 @@ public class PlayerEventHandler {
 					}
 				}
 			}
-		}
+		}*/
 	}
 }

@@ -23,7 +23,7 @@ tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore\nYou can feel a d
 
 tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore\nA powerful material that holds the power of creation.
 
-tooltip.zylroth:spawnpoint.set=Sneak + Right Click to set your spawnpoint on this dimension
+tooltip.zylroth:spawnpoint.set=Sneak + Right Click\nTo set your spawnpoint on this dimension
 tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
 tooltip.zylroth:spawnpoint.dimension=%s Bind: %s
 
@@ -47,6 +47,16 @@ general.zylroth:dimension.iridis=Iri'dis
 general.zylroth:dimension.glaciem=Glaciem
 
 general.zylroth:unavailable=Unavailable
+
+#Gui
+
+gui.zylroth:summon=Summon
+gui.zylroth:dismiss=Dismiss
+
+# Keybinds
+
+key.categories.zylroth=Zyl'roth
+key.zylroth:summongui=Open Summon GUI
 
 #Ore Blocks
 

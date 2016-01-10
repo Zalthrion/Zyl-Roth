@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.zalthrion.zylroth.container.ContainerInfuser;
 import com.zalthrion.zylroth.container.ContainerOreInfuser;
+import com.zalthrion.zylroth.gui.GuiSummon;
 import com.zalthrion.zylroth.gui.inventory.GuiInfuser;
 import com.zalthrion.zylroth.gui.inventory.GuiOreInfuser;
 import com.zalthrion.zylroth.reference.GuiIDs;
@@ -38,6 +39,8 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiInfuser(player.inventory, (TileEntityInfuser) tile);
 			case GuiIDs.ORE_INFUSER:
 				return new GuiOreInfuser(player.inventory, (TileEntityOreInfuser) tile);
+			case 2:
+				return new GuiSummon();
 		}
 		return null;
 	}

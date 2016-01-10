@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -23,6 +24,7 @@ import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.event.KeyInputEvent;
 import com.zalthrion.zylroth.handler.ModelHelper;
 import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
 import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
@@ -54,6 +56,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		super.init();
+		MinecraftForge.EVENT_BUS.register(new KeyInputEvent());
 		this.registerRenderers();
 	}
 	
@@ -100,6 +103,7 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerItem(ModArmors.voidLordChestplate);
 		ModelHelper.registerItem(ModArmors.voidLordLeggings);
 		ModelHelper.registerItem(ModArmors.voidLordBoots);
+		ModelHelper.registerItem(ModArmors.rainbowGlasses);
 		/* Tools */
 		ModelHelper.registerItem(ModTools.creativePickaxe);
 		ModelHelper.registerItem(ModTools.creativeShovel);

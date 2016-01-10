@@ -13,7 +13,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
+import com.zalthrion.zylroth.handler.KeyHandler;
 import com.zalthrion.zylroth.lib.*;
+import com.zalthrion.zylroth.packet.PacketHandler;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
@@ -39,6 +41,8 @@ public class Zylroth {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
+		PacketHandler.init();
+		KeyHandler.init();
 		ModTools.init();
 		ModArmors.init();
 		ModBiomes.init();
