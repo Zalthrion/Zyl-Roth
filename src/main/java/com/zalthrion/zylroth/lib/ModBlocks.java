@@ -63,31 +63,31 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
 		GameRegistry.registerTileEntity(TileEntityOreInfuser.class, "oreInfuser");
 		/* Tenebrae */
-		ModRegistry.addRegister(20, tenebraeOre, "tenebraeOre");
-		ModRegistry.addRegister(27, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
-		ModRegistry.addRegister(28, tenebraeCore, CoreItemBlock.class, "tenebraeCore");
-		ModRegistry.addRegister(29, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
-		ModRegistry.addRegister(30, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
-		ModRegistry.addRegister(31, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
+		ModRegistry.addRegister(21, tenebraeOre, "tenebraeOre");
+		ModRegistry.addRegister(28, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
+		ModRegistry.addRegister(29, tenebraeCore, CoreItemBlock.class, "tenebraeCore");
+		ModRegistry.addRegister(30, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
+		ModRegistry.addRegister(31, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
+		ModRegistry.addRegister(32, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
 		/* Infernium */
-		ModRegistry.addRegister(22, inferniumOre, "inferniumOre");
+		ModRegistry.addRegister(23, inferniumOre, "inferniumOre");
 		/* Endirite */
-		ModRegistry.addRegister(23, endiriteOre, "endiriteOre");
+		ModRegistry.addRegister(24, endiriteOre, "endiriteOre");
 		/* Voidium */
-		ModRegistry.addRegister(21, voidiumOre, "voidiumOre");
+		ModRegistry.addRegister(22, voidiumOre, "voidiumOre");
 		/* Trees */
-		ModRegistry.addRegister(24, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
-		ModRegistry.addRegister(25, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
-		ModRegistry.addRegister(26, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2");
+		ModRegistry.addRegister(25, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
+		ModRegistry.addRegister(26, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
+		ModRegistry.addRegister(27, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2");
 		/* Others */
-		ModRegistry.addRegister(32, ashBlock, "ashBlock");
+		ModRegistry.addRegister(33, ashBlock, "ashBlock");
 		/* Spawners */
-		ModRegistry.addRegister(33, spawner_VoidDragon, "spawnerVoidDragon");
+		ModRegistry.addRegister(34, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
-		ModRegistry.addRegister(34, infuserIdle, "infuserMachine");
-		ModRegistry.addRegister(35, infuser, "infuserMachineActive");
-		ModRegistry.addRegister(36, oreInfuserIdle, "oreInfuserMachine");
-		ModRegistry.addRegister(37, oreInfuser, "oreInfuserMachineActive");
+		ModRegistry.addRegister(35, infuserIdle, "infuserMachine");
+		ModRegistry.addRegister(36, infuser, "infuserMachineActive");
+		ModRegistry.addRegister(37, oreInfuserIdle, "oreInfuserMachine");
+		ModRegistry.addRegister(38, oreInfuser, "oreInfuserMachineActive");
 		
 	}
 }

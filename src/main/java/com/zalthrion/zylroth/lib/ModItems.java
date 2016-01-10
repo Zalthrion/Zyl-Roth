@@ -62,41 +62,41 @@ public final class ModItems {
 	
 	public static void init() {
 		/* Tenebrae Ore */
-		ModRegistry.addRegister(38, tenebraeChunk, "tenebraeChunk");
-		ModRegistry.addRegister(39, tenebraeOre, "tenebraeIOre");
-		ModRegistry.addRegister(40, tenebraeIngot, "tenebraeIngot");
+		ModRegistry.addRegister(39, tenebraeChunk, "tenebraeChunk");
+		ModRegistry.addRegister(40, tenebraeOre, "tenebraeIOre");
+		ModRegistry.addRegister(41, tenebraeIngot, "tenebraeIngot");
 		/* Infernium Ore */
-		ModRegistry.addRegister(41, rawInfernium, "rawInfernium");
-		ModRegistry.addRegister(42, inferniumIngot, "inferniumIngot");
+		ModRegistry.addRegister(42, rawInfernium, "rawInfernium");
+		ModRegistry.addRegister(43, inferniumIngot, "inferniumIngot");
 		/* Endirite Ore */
-		ModRegistry.addRegister(43, endiriteChunk, "endiriteChunk");
-		ModRegistry.addRegister(44, endiriteOre, "endiriteIOre");
-		ModRegistry.addRegister(45, endiriteIngot, "endiriteIngot");
+		ModRegistry.addRegister(44, endiriteChunk, "endiriteChunk");
+		ModRegistry.addRegister(45, endiriteOre, "endiriteIOre");
+		ModRegistry.addRegister(46, endiriteIngot, "endiriteIngot");
 		/* Tenebrium Ore */
-		ModRegistry.addRegister(46, tenebriumIngot, "tenebriumIngot");
+		ModRegistry.addRegister(47, tenebriumIngot, "tenebriumIngot");
 		/* Voidium Ore */
-		ModRegistry.addRegister(47, voidiumChunk, "voidiumChunk");
-		ModRegistry.addRegister(48, voidiumOre, "voidiumIOre");
-		ModRegistry.addRegister(49, voidiumIngot, "voidiumIngot");
+		ModRegistry.addRegister(48, voidiumChunk, "voidiumChunk");
+		ModRegistry.addRegister(49, voidiumOre, "voidiumIOre");
+		ModRegistry.addRegister(50, voidiumIngot, "voidiumIngot");
 		/* Tenebrae Items */
-		ModRegistry.addRegister(50, unstableTenebraeCore, "unstableTenebraeCore");
+		ModRegistry.addRegister(51, unstableTenebraeCore, "unstableTenebraeCore");
 		/* Mounts */
-		ModRegistry.addRegister(51, Empty_SC, "emptySC");
-		ModRegistry.addRegister(52, SC_Deathcharger, "SC_Deathcharger"); //TODO This needs be changed in order to get item model to work.
-		ModRegistry.addRegister(53, SC_PlaguedHorse, "SC_PlaguedHorse");
-		ModRegistry.addRegister(54, SC_WarTortoise, "SC_WarTortoise");
-		ModRegistry.addRegister(55, SC_SavageBadger, "SC_SavageBadger");
-		ModRegistry.addRegister(56, SC_SwiftUnicorn, "SC_SwiftUnicorn");
+		ModRegistry.addRegister(52, Empty_SC, "emptySC");
+		ModRegistry.addRegister(53, SC_Deathcharger, "SC_Deathcharger");
+		ModRegistry.addRegister(54, SC_PlaguedHorse, "SC_PlaguedHorse");
+		ModRegistry.addRegister(55, SC_WarTortoise, "SC_WarTortoise");
+		ModRegistry.addRegister(56, SC_SavageBadger, "SC_SavageBadger");
+		ModRegistry.addRegister(57, SC_SwiftUnicorn, "SC_SwiftUnicorn");
 		/* Portals */
-		ModRegistry.addRegister(57, goldTalisman, "goldTalisman");
-		ModRegistry.addRegister(58, voidTalisman, "voidTalisman");
-		ModRegistry.addRegister(59, autumnTalisman, "autumnTalisman");
-		ModRegistry.addRegister(60, iceTalisman, "iceTalisman");
+		ModRegistry.addRegister(58, goldTalisman, "goldTalisman");
+		ModRegistry.addRegister(59, voidTalisman, "voidTalisman");
+		ModRegistry.addRegister(60, autumnTalisman, "autumnTalisman");
+		ModRegistry.addRegister(61, iceTalisman, "iceTalisman");
 		/* Others */
-		ModRegistry.addRegister(61, darkShard, "darkShard");
-		ModRegistry.addRegister(62, soulEssence, "soulEssence");
-		ModRegistry.addRegister(63, cursedSoulEssence, "cursedSoulEssence");
-		ModRegistry.addRegister(64, voidGem, "voidGem");
-		ModRegistry.addRegister(65, voidEssence, "voidEssence");
+		ModRegistry.addRegister(62, darkShard, "darkShard");
+		ModRegistry.addRegister(63, soulEssence, "soulEssence");
+		ModRegistry.addRegister(64, cursedSoulEssence, "cursedSoulEssence");
+		ModRegistry.addRegister(65, voidGem, "voidGem");
+		ModRegistry.addRegister(66, voidEssence, "voidEssence");
 	}
 }

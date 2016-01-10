@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.item.ItemBase;
+import com.zalthrion.zylroth.utility.TooltipHelper;
 import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
 
 public class ItemBaseTalisman extends ItemBase {
@@ -80,7 +81,7 @@ public class ItemBaseTalisman extends ItemBase {
 	
 	@Override @SideOnly(Side.CLIENT) public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		if (!isOverworldBound(stack)) {
-			tooltip.add(StatCollector.translateToLocal("tooltip.zylroth:spawnpoint.set"));
+			tooltip.addAll(TooltipHelper.addAll("spawnpoint.set"));
 		} else {
 			int[] overworldBindPoint = getOverworldBind(stack);
 			tooltip.add(StatCollector.translateToLocalFormatted("tooltip.zylroth:spawnpoint.overworld", overworldBindPoint[0] + ", " + overworldBindPoint[1] + ", " + overworldBindPoint[2]));

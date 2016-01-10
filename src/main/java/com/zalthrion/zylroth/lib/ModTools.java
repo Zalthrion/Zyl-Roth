@@ -34,19 +34,19 @@ public class ModTools {
 	}
 	
 	public static void tenebraeTools() {
-		ModRegistry.addRegister(8, tenebraePickaxe, "tenebraePickaxe");
-		ModRegistry.addRegister(9, tenebraeShovel, "tenebraeShovel");
-		ModRegistry.addRegister(10, tenebraeSword, "tenebraeSword");
-		ModRegistry.addRegister(11, tenebraeAxe, "tenebraeAxe");
-		ModRegistry.addRegister(12, tenebraeHoe, "tenebraeHoe");
-		ModRegistry.addRegister(13, tenebraeLeafCutter, "tenebraeLeafCutter");
+		ModRegistry.addRegister(9, tenebraePickaxe, "tenebraePickaxe");
+		ModRegistry.addRegister(10, tenebraeShovel, "tenebraeShovel");
+		ModRegistry.addRegister(11, tenebraeSword, "tenebraeSword");
+		ModRegistry.addRegister(12, tenebraeAxe, "tenebraeAxe");
+		ModRegistry.addRegister(13, tenebraeHoe, "tenebraeHoe");
+		ModRegistry.addRegister(14, tenebraeLeafCutter, "tenebraeLeafCutter");
 		
-		ModRegistry.addRegister(14, creativePickaxe, "creativePickaxe");
-		ModRegistry.addRegister(15, creativeShovel, "creativeShovel");
-		ModRegistry.addRegister(16, creativeSword, "creativeSword");
-		ModRegistry.addRegister(17, creativeAxe, "creativeAxe");
-		ModRegistry.addRegister(18, creativeHoe, "creativeHoe");
+		ModRegistry.addRegister(15, creativePickaxe, "creativePickaxe");
+		ModRegistry.addRegister(16, creativeShovel, "creativeShovel");
+		ModRegistry.addRegister(17, creativeSword, "creativeSword");
+		ModRegistry.addRegister(18, creativeAxe, "creativeAxe");
+		ModRegistry.addRegister(19, creativeHoe, "creativeHoe");
 		
-		ModRegistry.addRegister(19, woodenCrossbow, "woodenCrossbow");
+		ModRegistry.addRegister(20, woodenCrossbow, "woodenCrossbow");
 	}
 }
