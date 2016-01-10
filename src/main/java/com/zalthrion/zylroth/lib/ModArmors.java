@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.zalthrion.zylroth.item.armor.RainbowGlasses;
 import com.zalthrion.zylroth.item.armor.TenebraeArmor;
 import com.zalthrion.zylroth.item.armor.VoidLordArmor;
 
@@ -13,6 +14,7 @@ public final class ModArmors {
 	
 	public static ArmorMaterial tenebrae = EnumHelper.addArmorMaterial("Tenebrae", "Tenebrae", 42, new int[] {3, 8, 6, 3}, 16);
 	public static ArmorMaterial voidLord = EnumHelper.addArmorMaterial("VoidLord", "VoidLord", 42, new int[] {3, 8, 6, 3}, 16);
+	public static ArmorMaterial glasses = EnumHelper.addArmorMaterial("Glasses", "Glasses", 0, new int[] {0, 0, 0, 0}, 0);
 	
 	public static Item tenebraeHelmet = new TenebraeArmor(tenebrae, "tenebrae", 0).setUnlocalizedName("tenebraeHelmet");
 	public static Item tenebraeChestplate = new TenebraeArmor(tenebrae, "tenebrae", 1).setUnlocalizedName("tenebraeChestplate");
@@ -24,9 +26,12 @@ public final class ModArmors {
 	public static Item voidLordLeggings = new VoidLordArmor(voidLord, "voidlord", 2).setUnlocalizedName("voidLordLeggings");
 	public static Item voidLordBoots = new VoidLordArmor(voidLord, "voidlord", 3).setUnlocalizedName("voidLordBoots");
 	
+	public static Item rainbowGlasses = new RainbowGlasses();
+	
 	public static void init() {
 		tenebraeArmor();
 		voidLordArmor();
+		ModRegistry.addRegister(8, rainbowGlasses, "rainbowGlasses");
 	}
 	
 	public static void tenebraeArmor() {

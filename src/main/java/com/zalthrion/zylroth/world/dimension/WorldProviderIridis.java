@@ -2,6 +2,9 @@ package com.zalthrion.zylroth.world.dimension;
 
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
@@ -28,5 +31,9 @@ public class WorldProviderIridis extends WorldProvider {
 	
 	@Override public String getSaveFolder() {
 		return "Iri'dis";
+	}
+	
+	@Override @SideOnly(Side.CLIENT) public IRenderHandler getSkyRenderer() {
+		return new SkyRenderIridis();
 	}
 }
