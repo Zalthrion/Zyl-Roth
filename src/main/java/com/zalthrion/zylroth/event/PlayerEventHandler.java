@@ -1,14 +1,21 @@
 package com.zalthrion.zylroth.event;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
+import com.zalthrion.zylroth.handler.MountData;
+
 public class PlayerEventHandler {
-	@SubscribeEvent
-	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-/*		EntityPlayer player = event.player;
+	@SubscribeEvent public void onEntityConstruct(EntityConstructing event) {
+		if (event.entity instanceof EntityPlayer && MountData.get((EntityPlayer) event.entity) == null) MountData.register((EntityPlayer) event.entity);
+	}
+	
+	@SubscribeEvent public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+		/* EntityPlayer player = event.player;
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-		
+		LogHelper.warn(persistentData.hasKey("ownsMount"));
 		if (persistentData.hasKey("ownsMount")) {
 			UUID ownedMount = UUID.fromString(persistentData.getString("ownsMount"));
 			WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;

@@ -9,7 +9,10 @@ public class SummonedMountMessage implements IMessage {
 	public static int summonedMountStatic = -1;
 	private int summonedMount;
 	
-	public SummonedMountMessage() {}
+	public SummonedMountMessage() {
+		this.summonedMount = -1;
+	}
+	
 	public SummonedMountMessage(int summonedMount) {
 		this.summonedMount = summonedMount;
 	}

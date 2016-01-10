@@ -9,7 +9,7 @@ import com.zalthrion.zylroth.packet.SummonedMountMessage;
 public class SummonDismissButton extends GuiButton {
 	private String summonText = "gui.zylroth:summon";
 	private String dismountText = "gui.zylroth:dismiss";
-	private int track = -1;
+	private int track = 0;
 	
 	public void setTrack(int track) { this.track = track; }
 	
