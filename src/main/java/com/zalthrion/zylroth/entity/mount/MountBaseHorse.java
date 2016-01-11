@@ -1,10 +1,14 @@
 package com.zalthrion.zylroth.entity.mount;
 
+import java.util.Iterator;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import com.zalthrion.zylroth.handler.MountData;
 
 public class MountBaseHorse extends EntityTameableHorse {
 	
@@ -95,7 +99,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 		}
 	}
 	
-	protected void applyEntityAttributes() {
+	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 	}
@@ -152,4 +156,32 @@ public class MountBaseHorse extends EntityTameableHorse {
 		else return true;
 	}
 	
+	/* Functionality replaced in 1.8.9 by EntityMountEvent */
+	@Override public void onLivingUpdate() {
+		if (this.riddenByEntity == null && this.entityAge > 20) {
+			this.setDead();
+		} else {
+			this.entityAge ++;
+			super.onLivingUpdate();
+		}
+	}
+	
+	/* Functionality replaced in 1.8.9 by EntityMountEvent */
+	@Override public void setDead() {
+		String ownerUUID = this.func_152113_b();
+		if (ownerUUID.length() > 0) {
+			Iterator<?> iterator = this.worldObj.loadedEntityList.iterator();
+			while (iterator.hasNext()) {
+				Object obj = iterator.next();
+				if (obj instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) obj;
+					if (player.getUniqueID().toString().equalsIgnoreCase(ownerUUID)) {
+						MountData data = MountData.get(player);
+						data.disownMount();
+					}
+				}
+			}
+		}
+		super.setDead();
+	}
 }

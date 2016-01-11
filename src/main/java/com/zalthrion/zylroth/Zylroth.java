@@ -3,11 +3,13 @@ package com.zalthrion.zylroth;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
+import com.zalthrion.zylroth.handler.KeyHandler;
 import com.zalthrion.zylroth.lib.*;
+import com.zalthrion.zylroth.packet.PacketHandler;
 import com.zalthrion.zylroth.proxy.IProxy;
 import com.zalthrion.zylroth.reference.Reference;
-import com.zalthrion.zylroth.world.WorldStructureGenerator;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
+import com.zalthrion.zylroth.world.WorldStructureGenerator;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -40,6 +42,10 @@ public class Zylroth {
 		
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+		
+		PacketHandler.init();
+		
+		KeyHandler.init();
 		
 		ModTools.init();
 

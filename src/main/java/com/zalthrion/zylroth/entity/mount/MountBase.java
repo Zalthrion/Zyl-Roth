@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.entity.mount;
 
+import java.util.Iterator;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +13,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.zalthrion.zylroth.handler.MountData;
 
 public class MountBase extends EntityTameable {
 	
@@ -97,17 +101,17 @@ public class MountBase extends EntityTameable {
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
-	public boolean isAIEnabled() {
+	@Override public boolean isAIEnabled() {
 		return true;
 	}
 	
-	protected void applyEntityAttributes() {
+	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
 	}
 	
-	protected void updateAITasks() {
+	@Override protected void updateAITasks() {
 		super.updateAITasks();
 	}
 	
@@ -155,7 +159,7 @@ public class MountBase extends EntityTameable {
 	 * returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
 	 * by a player and the player is holding a carrot-on-a-stick
 	 */
-	public boolean canBeSteered() {
+	@Override public boolean canBeSteered() {
 		EntityPlayer riding = ((EntityPlayer) this.riddenByEntity);
 		return riding != null && !this.isChild();
 	}
@@ -163,7 +167,7 @@ public class MountBase extends EntityTameable {
 	/**
 	* Moves the entity based on the specified heading.  Args: strafe, forward
 	*/
-	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
+	@Override public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
 		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase) {
 			this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
 			this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
@@ -200,5 +204,34 @@ public class MountBase extends EntityTameable {
 			this.jumpMovementFactor = 0.02F;
 			super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 		}
+	}
+	
+	/* Functionality replaced in 1.8.9 by EntityMountEvent */
+	@Override public void onLivingUpdate() {
+		if (this.riddenByEntity == null && this.entityAge > 20) {
+			this.setDead();
+		} else {
+			this.entityAge ++;
+			super.onLivingUpdate();
+		}
+	}
+	
+	/* Functionality replaced in 1.8.9 by EntityMountEvent */
+	@Override public void setDead() {
+		String ownerUUID = this.func_152113_b();
+		if (ownerUUID.length() > 0) {
+			Iterator<?> iterator = this.worldObj.loadedEntityList.iterator();
+			while (iterator.hasNext()) {
+				Object obj = iterator.next();
+				if (obj instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) obj;
+					if (player.getUniqueID().toString().equalsIgnoreCase(ownerUUID)) {
+						MountData data = MountData.get(player);
+						data.disownMount();
+					}
+				}
+			}
+		}
+		super.setDead();
 	}
 }

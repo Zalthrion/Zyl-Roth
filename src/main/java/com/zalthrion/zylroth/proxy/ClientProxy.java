@@ -10,23 +10,45 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import com.zalthrion.zylroth.entity.*;
 import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
-import com.zalthrion.zylroth.entity.mount.*;
+import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
+import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
+import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
+import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.event.KeyInputEvent;
 import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
-import com.zalthrion.zylroth.model.entity.*;
-import com.zalthrion.zylroth.model.entity.mount.*;
+import com.zalthrion.zylroth.model.entity.ModelBadger;
+import com.zalthrion.zylroth.model.entity.ModelBird;
+import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
+import com.zalthrion.zylroth.model.entity.ModelRainbowPig;
+import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
+import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
+import com.zalthrion.zylroth.model.entity.ModelUndead;
+import com.zalthrion.zylroth.model.entity.ModelUnicorn;
+import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
+import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
+import com.zalthrion.zylroth.model.entity.mount.ModelSavageBadger;
+import com.zalthrion.zylroth.model.entity.mount.ModelSwiftUnicorn;
+import com.zalthrion.zylroth.model.entity.mount.ModelWarTortoise;
 import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.render.BlockTESRRenderer;
 import com.zalthrion.zylroth.render.entity.*;
-import com.zalthrion.zylroth.render.entity.mount.*;
+import com.zalthrion.zylroth.render.entity.mount.RenderDeathcharger;
+import com.zalthrion.zylroth.render.entity.mount.RenderPlaguedHorse;
+import com.zalthrion.zylroth.render.entity.mount.RenderSavageBadger;
+import com.zalthrion.zylroth.render.entity.mount.RenderSwiftUnicorn;
+import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
 import com.zalthrion.zylroth.render.item.RenderWoodenCrossbow;
-import com.zalthrion.zylroth.render.tile.*;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityOreInfuser;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -35,6 +57,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		super.init();
+		FMLCommonHandler.instance().bus().register(new KeyInputEvent());
 		this.registerRenderers();
 		this.registerBlocks();
 	}
@@ -101,7 +124,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModTools.woodenCrossbow, new RenderWoodenCrossbow());
 	}
 	
-	public void registerBlocks() {
+	@Override public void registerBlocks() {
 		RenderIDs.setIDs();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());

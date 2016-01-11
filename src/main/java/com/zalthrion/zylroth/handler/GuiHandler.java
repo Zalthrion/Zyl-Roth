@@ -1,14 +1,19 @@
 package com.zalthrion.zylroth.handler;
 
-import com.zalthrion.zylroth.container.*;
-import com.zalthrion.zylroth.gui.inventory.*;
-import com.zalthrion.zylroth.reference.GuiIDs;
-import com.zalthrion.zylroth.tile.*;
-
-import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.zalthrion.zylroth.container.ContainerInfuser;
+import com.zalthrion.zylroth.container.ContainerOreInfuser;
+import com.zalthrion.zylroth.gui.GuiSummon;
+import com.zalthrion.zylroth.gui.inventory.GuiInfuser;
+import com.zalthrion.zylroth.gui.inventory.GuiOreInfuser;
+import com.zalthrion.zylroth.reference.GuiIDs;
+import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 	
@@ -34,6 +39,8 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiInfuser(player.inventory, (TileEntityInfuser) tile);
 			case GuiIDs.ORE_INFUSER:
 				return new GuiOreInfuser(player.inventory, (TileEntityOreInfuser) tile);
+			case 2:
+				return new GuiSummon();
 		}
 		return null;
 	}

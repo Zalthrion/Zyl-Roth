@@ -50,6 +50,16 @@ general.zylroth:dimension.glaciem=Glaciem
 
 general.zylroth:unavailable=Unavailable
 
+#Gui
+
+gui.zylroth:summon=Summon
+gui.zylroth:dismiss=Dismiss
+
+# Keybinds
+
+key.categories.zylroth=Zyl'roth
+key.zylroth:summongui=Open Summon GUI
+
 #Ore Blocks
 
 tile.zylroth:tenebraeOre.name=Tenebrae Ore
