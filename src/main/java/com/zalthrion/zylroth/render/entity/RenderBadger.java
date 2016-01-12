@@ -9,19 +9,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityBadger;
+import com.zalthrion.zylroth.model.entity.ModelBadger;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
 public class RenderBadger extends RenderLiving<EntityBadger> {
-	private static final ResourceLocation badgerTextures = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/Badger.png");
+	private static final ResourceLocation badgerTexture = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/Badger.png");
 	public ModelBase modelBase;
 	
-	public RenderBadger(RenderManager manager, ModelBase model, float shadowSize) {
-		super(manager, model, shadowSize);
+	public RenderBadger(RenderManager manager) {
+		super(manager, new ModelBadger(), 0.5F);
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityBadger badger) {
-		return badgerTextures;
+		return badgerTexture;
 	}
 	
 	@Override

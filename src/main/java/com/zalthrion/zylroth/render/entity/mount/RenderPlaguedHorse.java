@@ -14,7 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Maps;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
-import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
 
 @SideOnly(Side.CLIENT)
 public class RenderPlaguedHorse extends RenderLiving<MountPlaguedHorse> {
@@ -26,8 +25,8 @@ public class RenderPlaguedHorse extends RenderLiving<MountPlaguedHorse> {
 	private static final ResourceLocation zombieHorseTextures = new ResourceLocation("textures/entity/horse/horse_zombie.png");
 	private static final ResourceLocation skeletonHorseTextures = new ResourceLocation("textures/entity/horse/horse_skeleton.png");
 	
-	public RenderPlaguedHorse(RenderManager renderManager, ModelHorse horse, ModelPlaguedHorse mph, float shadowSize) {
-		super(renderManager, horse, shadowSize);
+	public RenderPlaguedHorse(RenderManager manager) {
+		super(manager, new ModelHorse(), 0.5F);
 	}
 	
 	/** Allows the render to do any OpenGL state modifications necessary before

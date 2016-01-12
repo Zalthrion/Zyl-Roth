@@ -11,6 +11,9 @@ public class CommonProxy implements IProxy {
 	@Override public void registerRenderers() {} // For registering renderers
 	
 	@Override
+	public void preInit() {}
+	
+	@Override
 	public void init() { // For registering stuff on the init
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new MountEntityEvent());

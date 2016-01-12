@@ -1,6 +1,5 @@
 package com.zalthrion.zylroth.render.entity;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,6 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
+import com.zalthrion.zylroth.model.entity.ModelUndead;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
@@ -19,8 +19,8 @@ public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
 	/** Scale of the model to use */
 	private float scale = 0.8F;
 	
-	public RenderUndeadWarrior(RenderManager renderManager, ModelBiped par1ModelBase, float par2, float par3) {
-		super(renderManager, par1ModelBase, par2 * par3);
+	public RenderUndeadWarrior(RenderManager manager) {
+		super(manager, new ModelUndead(), 0.25F);
 		this.addLayer(new LayerBipedArmor(this));
 		this.addLayer(new LayerHeldItem(this));
 	}

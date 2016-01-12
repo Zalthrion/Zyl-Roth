@@ -9,6 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
+import com.zalthrion.zylroth.model.entity.ModelSavageBadger;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
@@ -16,8 +17,8 @@ public class RenderSavageBadger extends RenderLiving<MountSavageBadger> {
 	private static final ResourceLocation savageBadgerTextures = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/mounts/SavageBadger.png");
 	public ModelBase modelBase;
 	
-	public RenderSavageBadger(RenderManager manager, ModelBase model, float shadowSize) {
-		super(manager, model, shadowSize);
+	public RenderSavageBadger(RenderManager manager) {
+		super(manager, new ModelSavageBadger(), 0.5F);
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called

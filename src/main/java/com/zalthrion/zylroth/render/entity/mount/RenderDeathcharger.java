@@ -14,7 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Maps;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
-import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
 
 @SideOnly(Side.CLIENT)
 public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
@@ -26,8 +25,8 @@ public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 	private static final ResourceLocation zombieHorseTextures = new ResourceLocation("textures/entity/horse/horse_zombie.png");
 	private static final ResourceLocation skeletonHorseTextures = new ResourceLocation("textures/entity/horse/horse_skeleton.png");
 	
-	public RenderDeathcharger(RenderManager renderManager, ModelHorse horse, ModelDeathcharger mdc, float shadowSize) {
-		super(renderManager, horse, shadowSize);
+	public RenderDeathcharger(RenderManager manager) {
+		super(manager, new ModelHorse(), 0.5F);
 	}
 	
 	/** Allows the render to do any OpenGL state modifications necessary before

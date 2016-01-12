@@ -2,11 +2,8 @@ package com.zalthrion.zylroth.proxy;
 
 import java.util.HashMap;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,17 +30,8 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
-import com.zalthrion.zylroth.model.entity.*;
-import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
-import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
-import com.zalthrion.zylroth.model.entity.mount.ModelWarTortoise;
 import com.zalthrion.zylroth.render.ModeledBlockInventoryRenderer;
-import com.zalthrion.zylroth.render.entity.*;
-import com.zalthrion.zylroth.render.entity.mount.RenderDeathcharger;
-import com.zalthrion.zylroth.render.entity.mount.RenderPlaguedHorse;
-import com.zalthrion.zylroth.render.entity.mount.RenderSavageBadger;
-import com.zalthrion.zylroth.render.entity.mount.RenderSwiftUnicorn;
-import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
+import com.zalthrion.zylroth.render.factory.*;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityOreInfuser;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
@@ -52,6 +40,29 @@ import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 public class ClientProxy extends CommonProxy {
 	
 	public static final HashMap<Item, ModelBiped> armorModels = new HashMap<Item, ModelBiped>();
+	
+	@Override public void preInit() {
+		/* Animals */
+		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new EntityBirdRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new EntityRainbowPigRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBadger.class, new EntityBadgerRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFancyBadger.class, new EntityFancyBadgerRenderFactory());
+		/* Mobs */
+		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGuardian.class, new EntityTenebraeGuardianRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new EntityVoidLordBossRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new EntityUndeadWarriorRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new EntityUndeadMinionRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeProtector.class, new EntityTenebraeProtectorRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidDragon.class, new EntityVoidDragonRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletalHorse.class, new EntitySkeletalHorseRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityUnicorn.class, new EntityUnicornRenderFactory());
+		/* Mounts */
+		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new MountDeathchargerRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(MountPlaguedHorse.class, new MountPlaguedHorseRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(MountWarTortoise.class, new MountWarTortoiseRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(MountSavageBadger.class, new MountSavageBadgerRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(MountSwiftUnicorn.class, new MountSwiftUnicornRenderFactory());
+	}
 	
 	@Override
 	public void init() {
@@ -153,33 +164,8 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerRenderers() {
-		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
-		float shadowSize = 0.5F;
-		/* Animals */
-		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(rm, new ModelBird(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(rm, new ModelRainbowPig(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBadger.class, new RenderBadger(rm, new ModelBadger(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFancyBadger.class, new RenderFancyBadger(rm, new ModelBadger(), shadowSize));
-		/* Mobs */
-		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGuardian.class, new RenderTenebraeGuardian(rm, new ModelEmpoweredTenebraeGolem(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new RenderVoidLordBoss(rm, new ModelUndead(), shadowSize, shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(rm, new ModelUndead(), shadowSize, shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(rm, new ModelUndead(), shadowSize, shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeProtector.class, new RenderTenebraeProtector(rm, new ModelTenebraeGolem(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityVoidDragon.class, new RenderVoidDragon(rm));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletalHorse.class, new RenderSkeletalHorse(rm, new ModelHorse(), new ModelSkeletalHorse(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityUnicorn.class, new RenderUnicorn(rm, new ModelUnicorn(), shadowSize));
-		/* Mounts */
-		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new RenderDeathcharger(rm, new ModelHorse(), new ModelDeathcharger(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(MountPlaguedHorse.class, new RenderPlaguedHorse(rm, new ModelHorse(), new ModelPlaguedHorse(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(MountWarTortoise.class, new RenderWarTortoise(rm, new ModelWarTortoise(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(MountSavageBadger.class, new RenderSavageBadger(rm, new ModelSavageBadger(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(MountSwiftUnicorn.class, new RenderSwiftUnicorn(rm, new ModelSwiftUnicorn(), shadowSize));
-		
 		/* Void Lord Armor */
-		
 		ModelVoidLordArmor voidLordArmor = new ModelVoidLordArmor();
-		
 		armorModels.put(ModArmors.voidLordHelmet, voidLordArmor);
 		armorModels.put(ModArmors.voidLordChestplate, voidLordArmor);
 		armorModels.put(ModArmors.voidLordLeggings, voidLordArmor);

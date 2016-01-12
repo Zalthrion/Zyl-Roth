@@ -39,6 +39,7 @@ public class Zylroth {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		proxy.preInit();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
 		PacketHandler.init();

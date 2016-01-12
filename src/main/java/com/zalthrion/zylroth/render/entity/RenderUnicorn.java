@@ -3,7 +3,6 @@ package com.zalthrion.zylroth.render.entity;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -14,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Maps;
 import com.zalthrion.zylroth.entity.EntityUnicorn;
+import com.zalthrion.zylroth.model.entity.ModelUnicorn;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
@@ -21,8 +21,8 @@ public class RenderUnicorn extends RenderLiving<EntityUnicorn> {
 	private static final Map<String, ResourceLocation> field_110852_a = Maps.<String, ResourceLocation>newHashMap();
 	private static final ResourceLocation unicornTextures = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/Unicorn.png");
 	
-	public RenderUnicorn(RenderManager manager, ModelBase p_i1256_1_, float p_i1256_2_) {
-		super(manager, p_i1256_1_, p_i1256_2_);
+	public RenderUnicorn(RenderManager manager) {
+		super(manager, new ModelUnicorn(), 0.5F);
 	}
 	
 	/**

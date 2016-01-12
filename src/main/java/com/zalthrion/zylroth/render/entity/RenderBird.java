@@ -10,12 +10,12 @@ import com.zalthrion.zylroth.model.entity.ModelBird;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class RenderBird extends RenderLiving<EntityBird> {
-	private static final ResourceLocation birdTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Bird.png");
+	private static final ResourceLocation birdTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Bird.png");
 	
 	private int renderedBirdSize;
 	
-	public RenderBird(RenderManager renderManager, ModelBird birdModel, float shadowSize) {
-		super(renderManager, new ModelBird(), shadowSize);
+	public RenderBird(RenderManager renderManager) {
+		super(renderManager, new ModelBird(), 0.5F);
 		this.renderedBirdSize = ((ModelBird) this.mainModel).getBirdSize();
 	}
 	
@@ -28,7 +28,7 @@ public class RenderBird extends RenderLiving<EntityBird> {
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityBird par1Entity) {
-		return birdTextures;
+		return birdTexture;
 	}
 	
 	@Override public void doRender(EntityBird par1EntityBird, double par2, double par4, double par6, float par8, float par9) {

@@ -21,8 +21,8 @@ public class RenderTenebraeProtector extends RenderLiving<EntityTenebraeProtecto
 	@SuppressWarnings("unused")
 	private final ModelTenebraeGolem tenebrae_golemModel;
 	
-	public RenderTenebraeProtector(RenderManager renderManager, ModelTenebraeGolem ModelTenebraeGolem, float shadowSize) {
-		super(renderManager, new ModelTenebraeGolem(), shadowSize);
+	public RenderTenebraeProtector(RenderManager manager) {
+		super(manager, new ModelTenebraeGolem(), 0.5F);
 		this.addLayer(new LayerHeldItem(this));
 		this.tenebrae_golemModel = (ModelTenebraeGolem) this.mainModel;
 	}

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityFancyBadger;
+import com.zalthrion.zylroth.model.entity.ModelBadger;
 import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
@@ -17,8 +18,8 @@ public class RenderFancyBadger extends RenderLiving<EntityFancyBadger> {
 	private static final ResourceLocation fancybadgerTextures = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/Badger.png");
 	public ModelBase modelBase;
 	
-	public RenderFancyBadger(RenderManager manager, ModelBase model, float shadowSize) {
-		super(manager, model, shadowSize);
+	public RenderFancyBadger(RenderManager manager) {
+		super(manager, new ModelBadger(), 0.5F);
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
