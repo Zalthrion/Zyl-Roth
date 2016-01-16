@@ -7,13 +7,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.zalthrion.zylroth.container.ContainerInfuser;
-import com.zalthrion.zylroth.container.ContainerOreInfuser;
 import com.zalthrion.zylroth.gui.GuiSummon;
 import com.zalthrion.zylroth.gui.inventory.GuiInfuser;
-import com.zalthrion.zylroth.gui.inventory.GuiOreInfuser;
 import com.zalthrion.zylroth.reference.GuiIDs;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 
 public class GuiHandler implements IGuiHandler {
 	
@@ -24,8 +21,6 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID) {
 			case GuiIDs.INFUSER:
 				return new ContainerInfuser(player.inventory, (TileEntityInfuser) tile);
-			case GuiIDs.ORE_INFUSER:
-				return new ContainerOreInfuser(player.inventory, (TileEntityOreInfuser) tile);
 		}
 		return null;
 	}
@@ -37,9 +32,7 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID) {
 			case GuiIDs.INFUSER:
 				return new GuiInfuser(player.inventory, (TileEntityInfuser) tile);
-			case GuiIDs.ORE_INFUSER:
-				return new GuiOreInfuser(player.inventory, (TileEntityOreInfuser) tile);
-			case 2:
+			case GuiIDs.SUMMON:
 				return new GuiSummon();
 		}
 		return null;

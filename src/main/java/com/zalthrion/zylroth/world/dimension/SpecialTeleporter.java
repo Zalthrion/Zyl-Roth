@@ -10,8 +10,6 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
 
-import com.zalthrion.zylroth.utility.LogHelper;
-
 public class SpecialTeleporter extends Teleporter {
 	protected final WorldServer worldServer;
 	public int xPos;
@@ -34,7 +32,6 @@ public class SpecialTeleporter extends Teleporter {
 		int y = 0;
 		boolean generatePlatform = false;
 		if (yPos == -1) {
-			LogHelper.warn(entity.worldObj.getSeaLevel());
 			for (int i = 256; i > entity.worldObj.getSeaLevel() - 1; i --) {
 				Block block = entity.worldObj.getBlockState(new BlockPos(xPos, i, zPos)).getBlock();
 				if (block != Blocks.air) {
@@ -54,7 +51,6 @@ public class SpecialTeleporter extends Teleporter {
 			y = yPos;
 		}
 		if (entity instanceof EntityPlayer) {
-			LogHelper.warn(generatePlatform);
 			if (generatePlatform) {
 				BlockPos center = new BlockPos(xPos, yPos, zPos);
 				entity.worldObj.setBlockState(center.north(2).west(), Blocks.stone.getDefaultState());

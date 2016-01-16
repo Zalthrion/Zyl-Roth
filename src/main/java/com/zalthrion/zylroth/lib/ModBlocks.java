@@ -10,7 +10,7 @@ import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
-import com.zalthrion.zylroth.block.machine.OreInfuserMachine;
+import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.block.ore.EndiriteOre;
 import com.zalthrion.zylroth.block.ore.InferniumOre;
 import com.zalthrion.zylroth.block.ore.TenebraeOre;
@@ -26,7 +26,6 @@ import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
 import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 
 public final class ModBlocks {
@@ -52,16 +51,15 @@ public final class ModBlocks {
 	/* Spawners */
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
 	/* Machines */
-	public static Block infuser = new InfuserMachine(true);
-	public static Block infuserIdle = new InfuserMachine(false);
-	public static Block oreInfuser = new OreInfuserMachine(true);
-	public static Block oreInfuserIdle = new OreInfuserMachine(false);
+	public static Block infuser = new InfuserMachine(true, InfuserType.NORMAL);
+	public static Block infuserIdle = new InfuserMachine(false, InfuserType.NORMAL);
+	public static Block oreInfuser = new InfuserMachine(true, InfuserType.ORE);
+	public static Block oreInfuserIdle = new InfuserMachine(false, InfuserType.ORE);
 	
 	public static void init() {
 		/* TileEntity */
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
-		GameRegistry.registerTileEntity(TileEntityOreInfuser.class, "oreInfuser");
 		/* Tenebrae */
 		ModRegistry.addRegister(21, tenebraeOre, "tenebraeOre");
 		ModRegistry.addRegister(28, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");

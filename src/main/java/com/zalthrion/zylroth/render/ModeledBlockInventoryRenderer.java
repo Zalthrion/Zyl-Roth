@@ -4,14 +4,15 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 
+import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 
 public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
-	private TileEntityInfuser tei = new TileEntityInfuser();
-	private TileEntityOreInfuser teoi = new TileEntityOreInfuser();
+	private TileEntityInfuser tei = new TileEntityInfuser(InfuserType.NORMAL);
+	private TileEntityInfuser teoi = new TileEntityInfuser(InfuserType.ORE);
 	private TileEntityItemStackRenderer superInstance;
 	
 	public ModeledBlockInventoryRenderer() {
@@ -20,6 +21,8 @@ public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 	
 	public ModeledBlockInventoryRenderer(TileEntityItemStackRenderer chainTo) {
 		this.superInstance = chainTo;
+		tei.setFacing(EnumFacing.SOUTH);
+		teoi.setFacing(EnumFacing.SOUTH);
 	}
 	
 	

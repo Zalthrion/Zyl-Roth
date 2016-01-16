@@ -33,11 +33,9 @@ import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.render.ModeledBlockInventoryRenderer;
 import com.zalthrion.zylroth.render.factory.*;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
-import com.zalthrion.zylroth.render.tile.RenderTileEntityOreInfuser;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends ServerProxy {
 	
 	public static final HashMap<Item, ModelBiped> armorModels = new HashMap<Item, ModelBiped>();
 	
@@ -69,22 +67,23 @@ public class ClientProxy extends CommonProxy {
 		super.init();
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvent());
 		this.registerRenderers();
+		this.bindTileEntitySpecialRenderers();
+		this.registerRenderInformation();
+		this.registerItemRenderers();
 	}
 	
-	@Override public void bindTileEntitySpecialRenderers() {
+	public void bindTileEntitySpecialRenderers() {
 		ModelHelper.removeBlockState(ModBlocks.infuser);
 		ModelHelper.removeBlockState(ModBlocks.infuserIdle);
 		ModelHelper.removeBlockState(ModBlocks.oreInfuser);
 		ModelHelper.removeBlockState(ModBlocks.oreInfuserIdle);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOreInfuser.class, new RenderTileEntityOreInfuser());
 	}
 	
-	@Override public void registerRenderInformation() {
+	public void registerRenderInformation() {
 		TileEntityItemStackRenderer.instance = new ModeledBlockInventoryRenderer(TileEntityItemStackRenderer.instance);
 	}
 	
-	@Override
 	public void registerItemRenderers() {
 		/* Blocks */
 		ModelHelper.registerBlock(ModBlocks.tenebraeOre);
@@ -162,7 +161,6 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerItem(ModItems.tenebriumIngot);
 	}
 	
-	@Override
 	public void registerRenderers() {
 		/* Void Lord Armor */
 		ModelVoidLordArmor voidLordArmor = new ModelVoidLordArmor();

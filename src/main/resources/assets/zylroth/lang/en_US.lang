@@ -95,6 +95,10 @@ tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
+#Container
+
+container.zylroth:infuser=Infuser
+container.zylroth:oreInfuser=Ore Infuser
 
 #Ore Items
 

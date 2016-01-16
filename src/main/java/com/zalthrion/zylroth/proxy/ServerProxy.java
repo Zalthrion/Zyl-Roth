@@ -1,11 +1,15 @@
 package com.zalthrion.zylroth.proxy;
 
-public class ServerProxy extends CommonProxy {
-	@Override
+import net.minecraftforge.common.MinecraftForge;
+
+import com.zalthrion.zylroth.event.MountEntityEvent;
+import com.zalthrion.zylroth.event.PlayerEventHandler;
+
+public class ServerProxy {
+	public void preInit() {}
 	public void init() {
-		super.init();
+		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MountEntityEvent());
 	}
-	
-	@Override
-	public void registerRenderers() {}
+	public void postInit() {}
 }

@@ -2,10 +2,15 @@ package com.zalthrion.zylroth.block.machine;
 
 import java.util.Random;
 
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -14,10 +19,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
+import com.google.common.base.Predicate;
 import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.reference.GuiIDs;
@@ -26,24 +31,30 @@ import com.zalthrion.zylroth.tile.TileEntityInfuser;
 public class InfuserMachine extends BlockBaseContainer {
 	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
-	
+	private String oreName = "oreInfuserMachineActive";
+	private String oreName_idle = "oreInfuserMachine";
+	private InfuserType type;
 	private static boolean keepInventory;
 	
-	public InfuserMachine(boolean isActive) {
-		
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyEnum<InfuserType> INFUSER_TYPE = PropertyEnum.<InfuserType>create("type", InfuserType.class, new Predicate<InfuserType>() {
+		@Override public boolean apply(InfuserType type) { return true; }
+	});
+	
+	public InfuserMachine(boolean isActive, InfuserType type) {
 		super(!isActive);
-		
-		this.setUnlocalizedName(isActive ? name : name_idle);
+		this.type = type;
+		this.setUnlocalizedName(isActive ? (type.isNormal() ? name : oreName) : (type.isNormal() ? name_idle : oreName_idle));
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
 		this.setStepSound(soundTypeMetal);
-		this.setParticleBlockState(ModBlocks.tenebraeCore.getDefaultState());
+		this.setParticleBlockState(type.isNormal() ? ModBlocks.tenebraeCore.getDefaultState() : Blocks.quartz_block.getDefaultState());
 	}
 	
 	@Override public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityInfuser();
+		return new TileEntityInfuser(this.type);
 	}
 	
 	@Override public int getRenderType() {
@@ -61,19 +72,26 @@ public class InfuserMachine extends BlockBaseContainer {
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.infuserIdle);
+		return Item.getItemFromBlock(this.type.isNormal() ? ModBlocks.infuserIdle : ModBlocks.oreInfuserIdle);
 	}
 	
-	public static void updateBlockState(boolean active, World world, BlockPos pos) {
+	public static void setState(InfuserType type, boolean active, World world, BlockPos pos) {
+		IBlockState iblockstate = world.getBlockState(pos);
 		TileEntity tileentity = world.getTileEntity(pos);
 		keepInventory = true;
 		
-		if (active) {
-			world.setBlockState(pos, ModBlocks.infuser.getDefaultState(), 3);
-			world.setBlockState(pos, ModBlocks.infuser.getDefaultState(), 3);
-		} else {
-			world.setBlockState(pos, ModBlocks.infuserIdle.getDefaultState(), 3);
-			world.setBlockState(pos, ModBlocks.infuserIdle.getDefaultState(), 3);
+		if (active && type.isNormal()) {
+			world.setBlockState(pos, ModBlocks.infuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, ModBlocks.infuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+		} else if (!active && type.isNormal()) {
+			world.setBlockState(pos, ModBlocks.infuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, ModBlocks.infuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+		} else if (active && !type.isNormal()) {
+			world.setBlockState(pos, ModBlocks.oreInfuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, ModBlocks.oreInfuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+		} else if (!active && !type.isNormal()) {
+			world.setBlockState(pos, ModBlocks.oreInfuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, ModBlocks.oreInfuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
 		}
 
         keepInventory = false;
@@ -82,10 +100,15 @@ public class InfuserMachine extends BlockBaseContainer {
 			tileentity.validate();
 			world.setTileEntity(pos, tileentity);
 		}
+		
+		tileentity = world.getTileEntity(pos);
+		if (tileentity instanceof TileEntityInfuser) {
+			((TileEntityInfuser) tileentity).setFacing(iblockstate.getValue(FACING));
+		}
 	}
 	
 	@Override public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-		return new ItemStack(ModBlocks.infuserIdle);
+		return new ItemStack(this.type.isNormal() ? ModBlocks.infuserIdle : ModBlocks.oreInfuserIdle);
 	}
 	
 	@Override public boolean hasComparatorInputOverride() {
@@ -125,18 +148,24 @@ public class InfuserMachine extends BlockBaseContainer {
 		super.breakBlock(world, pos, state);
 	}
 	
-	@Override public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		int facing = MathHelper.floor_double((double) ((placer.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-		facing ++;
-		TileEntity te = world.getTileEntity(pos);
-		if (te != null && te instanceof TileEntityInfuser) {
-			TileEntityInfuser tei = (TileEntityInfuser) te;
-			tei.setFacing(facing);
-			world.markBlockForUpdate(pos);
+	@Override public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(INFUSER_TYPE, this.type).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+	
+	@Override public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		worldIn.setBlockState(pos, state.withProperty(INFUSER_TYPE, this.type).withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+		
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		if (tileentity instanceof TileEntityInfuser) {
+			if (stack.hasDisplayName()) {
+				((TileEntityInfuser) tileentity).setCustomInventoryName(stack.getDisplayName());
+			}
+			((TileEntityInfuser) tileentity).setFacing(placer.getHorizontalFacing().getOpposite());
 		}
 	}
 	
 	@Override public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		if (!this.type.isNormal()) return;
 		TileEntity tile = world.getTileEntity(pos);
 		TileEntityInfuser tei = (TileEntityInfuser) tile;
 		
@@ -162,5 +191,25 @@ public class InfuserMachine extends BlockBaseContainer {
 				}
 			}
 		}
+	}
+	
+	@Override public IBlockState getStateFromMeta(int meta) {
+		int i = meta & 7;
+		EnumFacing facing = (i > 3) ? EnumFacing.NORTH : EnumFacing.getFront(i);
+		
+		return this.getDefaultState().withProperty(FACING, facing).withProperty(INFUSER_TYPE, ((meta & 8) > 0) ? InfuserType.ORE : InfuserType.NORMAL);
+	}
+	
+	@Override public int getMetaFromState(IBlockState state) {
+		int i = 0;
+		i = i | ((EnumFacing) state.getValue(FACING)).getIndex();
+		if (!((InfuserType) state.getValue(INFUSER_TYPE)).isNormal()) {
+			i |= 8;
+		}
+		return i;
+	}
+	
+	@Override protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[] {FACING, INFUSER_TYPE});
 	}
 }

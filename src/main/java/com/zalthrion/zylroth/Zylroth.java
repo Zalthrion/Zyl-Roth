@@ -16,7 +16,7 @@ import com.zalthrion.zylroth.handler.GuiHandler;
 import com.zalthrion.zylroth.handler.KeyHandler;
 import com.zalthrion.zylroth.lib.*;
 import com.zalthrion.zylroth.packet.PacketHandler;
-import com.zalthrion.zylroth.proxy.IProxy;
+import com.zalthrion.zylroth.proxy.ServerProxy;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.world.WorldOreGenerator;
 import com.zalthrion.zylroth.world.WorldStructureGenerator;
@@ -33,24 +33,29 @@ public class Zylroth {
 	/*---------------------------------------------------------------------------*/
 	
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
-	public static IProxy proxy;
+	public static ServerProxy proxy;
 	
 	/*---------------------------------------------------------------------------*/
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
 		PacketHandler.init();
 		KeyHandler.init();
-		ModTools.init();
+		
 		ModArmors.init();
+		ModBlocks.init();
 		ModBiomes.init();
 		ModDimension.init();
+		ModItems.init();
+		ModTools.init();
+		ModRegistry.register();
+		
 		GameRegistry.registerWorldGenerator(new WorldOreGenerator(), 12);
 		GameRegistry.registerWorldGenerator(new WorldStructureGenerator(), 12);
 		GameRegistry.registerFuelHandler(new FuelHandler());
+		proxy.preInit();
 	}
 	
 	/*---------------------------------------------------------------------------*/
@@ -58,16 +63,10 @@ public class Zylroth {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		ModItems.init();
-		ModBlocks.init();
 		ModEntity.init();
-		ModRegistry.register();
 		ModOreDictionary.init();
 		ModRecipes.init();
-		proxy.bindTileEntitySpecialRenderers();
-		proxy.registerRenderInformation();
-		proxy.registerItemRenderers();
-		proxy.registerRenderers();
+		proxy.init();
 	}
 	
 	/*---------------------------------------------------------------------------*/

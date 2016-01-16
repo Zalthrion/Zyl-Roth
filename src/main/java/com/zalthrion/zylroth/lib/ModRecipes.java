@@ -5,9 +5,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.handler.recipe.InfusionFuels;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
-import com.zalthrion.zylroth.handler.recipe.OreInfusionRecipeHandler;
 
 public final class ModRecipes {
 	
@@ -61,8 +62,14 @@ public final class ModRecipes {
 	}
 	
 	public static void registerInfusionRecipes() {
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.wool), new ItemStack(Blocks.wool, 1, 3), 0.5F, new ItemStack(Items.dye, 1, 3));
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.end_stone), new ItemStack(ModBlocks.endiriteOre), 0, new ItemStack(ModItems.tenebraeOre, 1, 0), new ItemStack(Items.ender_pearl, 1, 0));
-		OreInfusionRecipeHandler.instance().addOreInfusion(new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebriumIngot, 1), 0.5F, new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(ModItems.inferniumIngot, 1, 0));
+		/* Debug Recipes */
+		
+		InfusionFuels.registerFuel(new ItemStack(Items.coal), 200);
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(Items.emerald), new ItemStack(Items.diamond), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(Blocks.diamond_ore), new ItemStack(Blocks.iron_ore), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));;
+		
+		/* Real Recipes */
+		/*InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.end_stone), new ItemStack(ModBlocks.endiriteOre), 0, new ItemStack(ModItems.tenebraeOre, 1, 0), new ItemStack(Items.ender_pearl, 1, 0));
+		OreInfusionRecipeHandler.instance().addOreInfusion(new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebriumIngot, 1), 0.5F, new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(ModItems.inferniumIngot, 1, 0));*/
 	}
 }

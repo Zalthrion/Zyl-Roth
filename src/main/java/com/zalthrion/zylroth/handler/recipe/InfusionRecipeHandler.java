@@ -1,105 +1,42 @@
 package com.zalthrion.zylroth.handler.recipe;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
+
+import com.zalthrion.zylroth.block.machine.InfuserType;
 
 public class InfusionRecipeHandler {
 	/** Instance of this class **/
 	private static final InfusionRecipeHandler instance = new InfusionRecipeHandler();
 	/** List of recipes **/
 	private ArrayList<InfusionRecipeLib> recipes = new ArrayList<InfusionRecipeLib>();
-	private HashMap<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 	
 	/**
 	 * Gets the instance of the class, this is where new {@link InfusionRecipeLib}'s are registered.
 	 * @return Instance of {@link InfusionRecipeHandler}
 	 */
-	public static InfusionRecipeHandler instance() { return instance; }
+	public static InfusionRecipeHandler instance() {
+		return instance;
+	}
+	
 	/**
 	 * Registers an infusion recipe.
-	 * @param input - Input ItemStack.
+	 * @param type - Type of infuser required
+	 * @param experience - Experience earned for performing infusion
+	 * @param infusionTime - Ticks it takes to perform this infusion
 	 * @param output - Output ItemStack.
-	 * @param experience - Experience for performing infusion.
+	 * @param input - Input ItemStack.
 	 * @param infusionMaterials - Maximum of two, Item Stacks that you infuse the input with to get the output. Supports stack sizes.
 	 */
-	public void addInfusion(ItemStack input, ItemStack output, float experience, ItemStack... infusionMaterials) {
-		this.recipes.add(new InfusionRecipeLib(input, output, infusionMaterials));
-		this.experienceList.put(output, experience);
+	public void addInfusion(InfuserType type, float experience, int infusionTime, ItemStack output, ItemStack input, ItemStack... infusionMaterials) {
+		this.recipes.add(new InfusionRecipeLib(type, experience, infusionTime, output, input, infusionMaterials));
 	}
 	
-	public static boolean arrayListContainsItemStack(ArrayList<ItemStack> list, ItemStack checkFor) {
-		for (ItemStack stack : list) {
-			if (stack.getItem() == checkFor.getItem()) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Is a recipe registered for the input and infusionMaterials?
-	 * @param input - ItemStack to be infused
-	 * @param infusionMaterials - Infusion Materials
-	 * @return Whether the ingredients will produce an infusion or not.
-	 */
-	public boolean isValidRecipe(ItemStack input, ItemStack... infusionMaterials) {
-		if (input == null) return false;
-		recipeLoop: for (InfusionRecipeLib recipe : this.recipes) {
-			if (!(recipe.getInput().getItem() == input.getItem())) continue recipeLoop;
-			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipe.getInfusionMaterials());
-			providedStacks: for (ItemStack provided : infusionMaterials) {
-				if (provided == null) continue providedStacks;
-				if (!arrayListContainsItemStack(recipeRequirements, provided)) return false;
-				rRLoop: for (ItemStack reqStack : recipeRequirements) {
-					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
-					if (provided.stackSize >= reqStack.stackSize) {
-						recipeRequirements.remove(reqStack);
-						continue providedStacks;
-					}
-				}
-			}
-			if (recipeRequirements.isEmpty()) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Gets the a copy of the recipe from an input and infusion materials.
-	 * Useful for manipulating stack sizes or giving experience later.
-	 * This runs isValidRecipe and returns null if no valid recipe is found.
-	 * @param input - Item to be infused
-	 * @param infusionMaterials - Infusion Materials
-	 * @return A copy of the recipe.
-	 */
-	public InfusionRecipeLib getRecipe(ItemStack input, ItemStack... infusionMaterials) {
-		if (input == null) return null;
-		recipeLoop: for (InfusionRecipeLib recipe : this.recipes) {
-			if (!(recipe.getInput().getItem() == input.getItem())) continue recipeLoop;
-			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipe.getInfusionMaterials());
-			providedStacks: for (ItemStack provided : infusionMaterials) {
-				if (provided == null) continue providedStacks;
-				if (!arrayListContainsItemStack(recipeRequirements, provided)) return null;
-				rRLoop: for (ItemStack reqStack : recipeRequirements) {
-					if (provided.getItem() != reqStack.getItem()) continue rRLoop;
-					if (provided.stackSize >= reqStack.stackSize) {
-						recipeRequirements.remove(reqStack);
-						continue providedStacks;
-					}
-				}
-			}
-			if (recipeRequirements.isEmpty()) return recipe;
-		}
-		return null;
-	}
-	
-	/**
-	 * Returns how much experience is dropped
-	 * @param output - The stack crafted by the Infusion
-	 * @return Experience dropped
-	 */
-	public float getInfusionExperience(ItemStack output) {
-		if (!this.experienceList.containsKey(output)) return 0F;
-		return this.experienceList.get(output);
+	public float getExperience(InfuserType infuserType, ItemStack input, ItemStack... infusionMaterials) {
+		if (getRecipe(infuserType, input, infusionMaterials) == null) return 0;
+		return getRecipe(infuserType, input, infusionMaterials).getExperience();
 	}
 	
 	/**
@@ -107,4 +44,85 @@ public class InfusionRecipeHandler {
 	 * @return A copy of registered recipes.
 	 */
 	public ArrayList<InfusionRecipeLib> getInfusingList() { return new ArrayList<InfusionRecipeLib>(this.recipes); }
+	
+	/**
+	 * How long it takes to perform this infusion recipe
+	 * @param input - The main infusion material
+	 * @param infusionMaterialOne - The first infusion material
+	 * @param infusionMaterialTwo - The second infusion material
+	 * @return
+	 */
+	public int getInfusionTime(InfuserType infuserType, ItemStack input, ItemStack... infusionMaterials) {
+		if (getRecipe(infuserType, input, infusionMaterials) == null) return 0;
+		return getRecipe(infuserType, input, infusionMaterials).getInfuseTime();
+	}
+	
+	public ArrayList<Integer> getMaterialCosts(InfuserType type, ItemStack input, ItemStack... infusionMaterials) {
+		InfusionRecipeLib recipe = getRecipe(type, input, infusionMaterials);
+		if (recipe == null) return null;
+		ArrayList<ItemStack> requiredList = recipe.getInfusionMaterials();
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		ret.add(recipe.getInput().copy().stackSize);
+		
+		for (ItemStack passed : infusionMaterials) {
+			Iterator<ItemStack> requiredIterator = requiredList.iterator();
+			requiredLoop: while (requiredIterator.hasNext()) {
+				ItemStack required = requiredIterator.next();
+				if (passed.getItem() != required.getItem()) continue requiredLoop;
+				if (passed.stackSize < required.stackSize) continue requiredLoop;
+				ret.add(required.stackSize);
+				requiredIterator.remove();
+			}
+		}
+		return ret;
+	}
+	
+	/**
+	 * Gets a copy of the recipe from an input and infusion materials.
+	 * Useful for manipulating stack sizes or giving experience later.
+	 * @param infuserType - The type of infuser being used
+	 * @param input - Item to be infused
+	 * @param infusionMaterials - Infusion Materials
+	 * @return A copy of the recipe.
+	 */
+	public InfusionRecipeLib getRecipe(InfuserType infuserType, ItemStack input, ItemStack... infusionMaterials) {
+		if (input == null || infusionMaterials.length <= 0 || infusionMaterials == null) return null;
+		recipeLoop: for (InfusionRecipeLib recipe : this.getInfusingList()) {
+			if (recipe.getRequiredType() != infuserType) continue recipeLoop; // If the infuserType isn't the required type for the recipe, continue the loop.
+			if (recipe.getInput().getItem() == input.getItem()) {
+				if (recipe.getInput().stackSize > input.stackSize) continue recipeLoop; // If the required input stack size is more than the input stack size, continue the loop.
+				if (!arrayListContainsAll(recipe.getInfusionMaterials(), infusionMaterials)) continue recipeLoop;
+				return recipe.copy();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Is a recipe registered for the input and infusionMaterials?
+	 * @param infuserType - The type of infuser being used
+	 * @param input - ItemStack to be infused
+	 * @param infusionMaterials - Infusion Materials
+	 * @return Whether the ingredients will produce an infusion or not.
+	 */
+	public boolean isValidRecipe(InfuserType infuserType, ItemStack input, ItemStack... infusionMaterials) {
+		return getRecipe(infuserType, input, infusionMaterials) != null;
+	}
+	
+	public static boolean arrayListContainsAll(ArrayList<ItemStack> list, ItemStack[] members) {
+		ArrayList<ItemStack> copyList = new ArrayList<ItemStack>(list);
+		Iterator<ItemStack> requiredIterator = copyList.iterator();
+		while (requiredIterator.hasNext()) {
+			ItemStack required = requiredIterator.next();
+			boolean found = false;
+			memberLoop: for (ItemStack member : members) {
+				if (member == null || required == null) continue memberLoop; // I don't know why I need to do a null check here but yea.
+				if (!(member.getItem() == required.getItem())) continue memberLoop;
+				if (required.stackSize > member.stackSize) continue memberLoop;
+				found = true;
+			}
+			if (!found) return false;
+		}
+		return true;
+	}
 }
