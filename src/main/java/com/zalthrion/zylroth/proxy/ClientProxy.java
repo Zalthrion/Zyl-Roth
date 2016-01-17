@@ -31,6 +31,7 @@ import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.render.ModeledBlockInventoryRenderer;
+import com.zalthrion.zylroth.render.entity.RenderBoar;
 import com.zalthrion.zylroth.render.factory.*;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityGoldBag;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
@@ -47,6 +48,7 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new EntityRainbowPigRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBadger.class, new EntityBadgerRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFancyBadger.class, new EntityFancyBadgerRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoar.class, new RenderBoar.EntityBoarRenderFactory());
 		/* Mobs */
 		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGuardian.class, new EntityTenebraeGuardianRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new EntityVoidLordBossRenderFactory());

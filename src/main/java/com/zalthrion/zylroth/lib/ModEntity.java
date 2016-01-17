@@ -20,18 +20,18 @@ public class ModEntity {
 	
 	// Main
 	
-	private static int nextEntityID = 1;
+	private static int nextEntityID = 0;
 	
 	private static int getNextEntityID() {
 		nextEntityID ++;
-		return nextEntityID - 1;
+		return nextEntityID;
 	}
 	
 	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, boolean hasEgg, int bgEggColor, int fgEggColor) {
-		EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true);
 		if (hasEgg) {
-			// Item spawnEgg = new SpawnEgg(entityName, bgEggColor, fgEggColor);
-			// GameRegistry.registerItem(spawnEgg, "spawnEgg" + entityName); //TODO Figure out why this makes more than one spawn egg.
+			EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true, bgEggColor, fgEggColor);
+		} else {
+			EntityRegistry.registerModEntity(entityClass, entityName, getNextEntityID(), Zylroth.instance, 80, 4, true);
 		}
 	}
 	
@@ -49,6 +49,7 @@ public class ModEntity {
 		registerEntity(EntityRainbowPig.class, "rainbowPig", true, 0xeaeae9, 0xc99a03);
 		registerEntity(EntityBadger.class, "badger", true, 0xeaeae9, 0xc99a03);
 		registerEntity(EntityFancyBadger.class, "fancyBadger", false, 0, 0);
+		registerEntity(EntityBoar.class, "boar", true, 0xeaeae9, 0xc99a03);
 		
 		// Mobs
 
