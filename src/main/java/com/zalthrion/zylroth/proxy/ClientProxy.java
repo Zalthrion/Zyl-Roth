@@ -32,7 +32,9 @@ import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.render.ModeledBlockInventoryRenderer;
 import com.zalthrion.zylroth.render.factory.*;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityGoldBag;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityGoldBag;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class ClientProxy extends ServerProxy {
@@ -78,6 +80,7 @@ public class ClientProxy extends ServerProxy {
 		ModelHelper.removeBlockState(ModBlocks.oreInfuser);
 		ModelHelper.removeBlockState(ModBlocks.oreInfuserIdle);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldBag.class, new RenderTileEntityGoldBag());
 	}
 	
 	public void registerRenderInformation() {

@@ -9,6 +9,7 @@ import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
 import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
+import com.zalthrion.zylroth.block.machine.GoldBag;
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.block.ore.EndiriteOre;
@@ -48,6 +49,7 @@ public final class ModBlocks {
 	public static Block rainbowSaplingBlockZL = new RainbowSaplingBlockZL();
 	/* Others */
 	public static Block ashBlock = new AshBlock();
+	public static Block goldBag = new GoldBag();
 	/* Spawners */
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
 	/* Machines */
@@ -79,6 +81,7 @@ public final class ModBlocks {
 		ModRegistry.addRegister(27, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2");
 		/* Others */
 		ModRegistry.addRegister(33, ashBlock, "ashBlock");
+		ModRegistry.addRegister(39, goldBag, "goldBag");
 		/* Spawners */
 		ModRegistry.addRegister(34, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
