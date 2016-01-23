@@ -21,6 +21,7 @@ import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.model.entity.ModelBadger;
 import com.zalthrion.zylroth.model.entity.ModelBird;
+import com.zalthrion.zylroth.model.entity.ModelBoar;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelRainbowPig;
 import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
@@ -41,7 +42,9 @@ import com.zalthrion.zylroth.render.entity.mount.RenderSavageBadger;
 import com.zalthrion.zylroth.render.entity.mount.RenderSwiftUnicorn;
 import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
 import com.zalthrion.zylroth.render.item.RenderWoodenCrossbow;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityGoldBag;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityGoldBag;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -76,6 +79,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBadger.class, new RenderBadger(new ModelBadger(), shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityFancyBadger.class, new RenderFancyBadger(new ModelBadger(), shadowSize));
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoar.class, new RenderBoar(new ModelBoar(), shadowSize));
 		
 		/** Mobs */
 		
@@ -126,6 +131,7 @@ public class ClientProxy extends CommonProxy {
 		RenderIDs.setIDs();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldBag.class, new RenderTileEntityGoldBag());
 		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.blockInfuserRI));
 	}
 }

@@ -2,10 +2,13 @@ package com.zalthrion.zylroth.lib;
 
 import java.util.HashMap;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+
+import com.zalthrion.zylroth.utility.LogHelper;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModRegistry {
 	static HashMap<Integer, RegisterInfo> registerMap = new HashMap<Integer, RegisterInfo>();
@@ -48,14 +51,26 @@ public class ModRegistry {
 	}
 	
 	public static void addRegister(Integer pos, Block block, String key) {
+		if (registerMap.containsKey(pos)) LogHelper.warn("Object already placed in map at position " + pos + ".\nAttempting to fix this.");
+		while (registerMap.containsKey(pos)) {
+			pos ++;
+		}
 		registerMap.put(pos, new RegisterInfo(block, key));
 	}
 	
 	public static void addRegister(Integer pos, Block block, Class<? extends ItemBlock> itemBlock, String key) {
+		if (registerMap.containsKey(pos)) LogHelper.warn("Object already placed in map at position " + pos + ".\nAttempting to fix this.");
+		while (registerMap.containsKey(pos)) {
+			pos ++;
+		}
 		registerMap.put(pos, new RegisterInfo(block, itemBlock, key));
 	}
 	
 	public static void addRegister(Integer pos, Item item, String key) {
+		if (registerMap.containsKey(pos)) LogHelper.warn("Object already placed in map at position " + pos + ".\nAttempting to fix this.");
+		while (registerMap.containsKey(pos)) {
+			pos ++;
+		}
 		registerMap.put(pos, new RegisterInfo(item, key));
 	}
 	

@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import com.zalthrion.zylroth.block.AshBlock;
 import com.zalthrion.zylroth.block.ChiseledTenebrae;
 import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
+import com.zalthrion.zylroth.block.GoldBag;
 import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
@@ -59,6 +60,7 @@ public final class ModBlocks {
 	
 	/* Others */
 	public static Block ashBlock = new AshBlock();
+	public static Block goldBag = new GoldBag();
 	
 	/* Spawners */
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
@@ -97,6 +99,7 @@ public final class ModBlocks {
 		
 		/* Others */
 		ModRegistry.addRegister(34, ashBlock, "ashBlock");
+		ModRegistry.addRegister(40, goldBag, "goldBag");
 		
 		/* Spawners */
 		ModRegistry.addRegister(35, spawner_VoidDragon, "spawnerVoidDragon");

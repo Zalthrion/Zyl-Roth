@@ -10,18 +10,22 @@ import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.entity.*;
 import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
-import com.zalthrion.zylroth.entity.mount.*;
+import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
+import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
+import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
+import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
+import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModEntity {
 	
-	private static int nextEntityID = 1;
+	private static int nextEntityID = 0;
 	
 	private static int getNextEntityID() {
 		nextEntityID ++;
-		return nextEntityID - 1;
+		return nextEntityID;
 	}
 	
 	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, boolean hasEgg, int bkEggColor, int fgEggColor) {
@@ -53,6 +57,8 @@ public class ModEntity {
 		registerEntity(EntityBadger.class, "badger", true, 0xeaeae9, 0xc99a03);
 		
 		registerEntity(EntityFancyBadger.class, "fancyBadger", false, 0, 0);
+		
+		registerEntity(EntityBoar.class, "boar", true, 0xeaeae9, 0xc99a03);
 		
 		// Mobs
 		
