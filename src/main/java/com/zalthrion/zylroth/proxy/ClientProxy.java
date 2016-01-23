@@ -42,9 +42,7 @@ import com.zalthrion.zylroth.render.entity.mount.RenderSwiftUnicorn;
 import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
 import com.zalthrion.zylroth.render.item.RenderWoodenCrossbow;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
-import com.zalthrion.zylroth.render.tile.RenderTileEntityOreInfuser;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.tile.TileEntityOreInfuser;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -128,10 +126,6 @@ public class ClientProxy extends CommonProxy {
 		RenderIDs.setIDs();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
-		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(new TileEntityInfuser(), RenderIDs.blockInfuserRI));
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOreInfuser.class, new RenderTileEntityOreInfuser());
-		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(new TileEntityOreInfuser(), RenderIDs.blockOreInfuserRI));
+		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.blockInfuserRI));
 	}
-	
 }

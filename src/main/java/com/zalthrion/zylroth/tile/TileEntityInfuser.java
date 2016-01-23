@@ -1,362 +1,335 @@
 package com.zalthrion.zylroth.tile;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 
 import com.zalthrion.zylroth.block.machine.InfuserMachine;
-import com.zalthrion.zylroth.container.ContainerInfuser;
+import com.zalthrion.zylroth.block.machine.InfuserType;
+import com.zalthrion.zylroth.handler.recipe.InfusionFuels;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeLib;
-import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.utility.EnumFacingUtil;
+import com.zalthrion.zylroth.utility.EnumFacingUtil.Axis;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityInfuser extends TileEntityBase implements ISidedInventory {
+public class TileEntityInfuser extends TileEntity implements IInventory, ISidedInventory {
+	/** The type of infuser */
+	private InfuserType type;
+	/** The slot used to input the base material. */
+	private static final int[] slotsTop = new int[] {0};
+	/** The slot used to input fuel */
+	private static final int[] slotsBottom = new int[] {3};
+	/** The slots used to input infusion materials */
+	private static final int[] slotsSidesIn = new int[] {1, 2};
+	/** The slots used to extract the output */
+	private static final int[] slotsSidesOut = new int[] {4};
+	/** The inventory */
+	private ItemStack[] inventory = new ItemStack[5];
+	/** The number of ticks the fuel used burns for */
+	public int itemBurnTime;
+	/** The number of ticks fuel in the infuser will burn for */
+	public int burnTime;
+	/** The number of ticks this infusion has been processing **/
+	public int infusionTime;
+	/** The number of ticks it takes this infusion to process **/
+	public int totalInfusionTime;
+	/** The direction this infuser is facing */
+	private EnumFacing facing;
+	/** The amount of experience stored in this infuser */
+	private float experienceStored;
+	/** A custom name given to the infuser */
+	private String infuserCustomName;
 	
-	private String localizedName;
-	
-	private ItemStack[] slots = new ItemStack[4];
-	
-	public static final int[] slots_top = new int[] {0};
-	public static final int[] slots_bottom = new int[] {2, 1};
-	public static final int[] slots_sides = new int[] {1};
-	
-	public int burnTime; // Time left for this furnace to burn for
-	public int furnaceSpeed; // Cooking speed
-	public int currentItemBurnTime; // Start time for this fuel
-	public int cookTime; // How much time left until cooked
-	
-	private int facing;
-	
-	public void setFacing(int newFacing) {
-		this.facing = newFacing;
+	public TileEntityInfuser() {
+		this.type = InfuserType.NORMAL;
 	}
 	
-	public int getFacing() {
-		return this.facing;
+	public TileEntityInfuser(InfuserType type) {
+		this.type = type;
 	}
 	
-	public boolean canUpdate() {
-		return true;
-	};
+	/* TileEntity */
 	
-	//TODO: this.burnTime isn't working, replaced to this.cookTime.
-	public boolean isBurning() {
-		return this.cookTime > 0;
-	};
-	
-	@Override
-	public String getInventoryName() {
-		return this.isInventoryNameLocalized() ? this.localizedName : "container.infuser";
-	}
-	
-	public boolean isInventoryNameLocalized() {
-		return this.localizedName != null && this.localizedName.length() > 0;
-	}
-	
-	public void setGuiDisplayName(String displayName) {
-		this.localizedName = displayName;
-	}
-	
-	@Override
-	public void updateEntity() {
-		boolean flag = isBurning();
-		boolean flag1 = false;
+	@Override public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		NBTTagList nbttaglist = compound.getTagList("Items", 10);
+		this.inventory = new ItemStack[this.getSizeInventory()];
 		
-		if (this.burnTime > 0) {
-			-- burnTime;
+		for (int i = 0; i < nbttaglist.tagCount(); i ++) {
+			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+			int j = nbttagcompound.getByte("Slot");
+			if (j >= 0 && j < this.inventory.length) {
+				this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+			}
 		}
 		
-		if (!worldObj.isRemote) {// && GuiInfuser.craftEnable == true) {
+		this.facing = EnumFacingUtil.fromInt(compound.getShort("Facing"));
+		this.type = compound.getBoolean("Normal") ? InfuserType.NORMAL : InfuserType.ORE;
+		this.experienceStored = compound.getFloat("Experience");
+		this.burnTime = compound.getShort("BurnTime");
+		this.itemBurnTime = InfusionFuels.getItemBurnTime(this.inventory[3]);
+		this.infusionTime = compound.getShort("InfusionTime");
+		this.totalInfusionTime = compound.getShort("InfusionTimeTotal");
+		if (compound.hasKey("CustomName")) {
+			this.infuserCustomName = compound.getString("CustomName");
+		}
+	}
+	
+	@Override public void updateEntity() {
+		boolean burning = this.isBurning();
+		boolean dirty = false;
 		
-			if (burnTime == 0 && canInfuse()) {
-				currentItemBurnTime = burnTime = getItemBurnTime(slots[ContainerInfuser.FIRST_FUEL]);
+		if (this.isBurning()) {
+			this.burnTime --;
+		}
+		
+		if (!this.worldObj.isRemote) {
+			if (this.isBurning() || this.inventory[3] != null && this.isValidInfusingRecipe()) {
+				if (!this.isBurning() && this.isValidInfusingRecipe()) {
+					this.itemBurnTime = this.burnTime = InfusionFuels.getItemBurnTime(this.inventory[3]);
+					if (this.isBurning()) {
+						dirty = true;
+						if (this.inventory[3] != null) {
+							this.inventory[3].stackSize --;
+							if (this.inventory[3].stackSize == 0) {
+								this.inventory[3] = this.inventory[3].getItem().getContainerItem(this.inventory[3]);
+							}
+						}
+					}
+				}
 				
-				if (isBurning()) {
-					flag1 = true;
-					
-					/* if (slots[ContainerInfuser.FIRST_FUEL] != null) { --
-					 * slots[ContainerInfuser.FIRST_FUEL].stackSize; if
-					 * (slots[ContainerInfuser.FIRST_FUEL].stackSize == 0) {
-					 * slots[ContainerInfuser.FIRST_FUEL] =
-					 * slots[ContainerInfuser
-					 * .FIRST_FUEL].getItem().getContainerItem
-					 * (slots[ContainerInfuser.FIRST_FUEL]); } } */
+				if (this.isBurning() && this.isValidInfusingRecipe()) {
+					this.infusionTime ++;
+					if (this.infusionTime >= this.totalInfusionTime) {
+						this.infusionTime = 0;
+						this.completeInfusion();
+						dirty = true;
+					}
+				} else {
+					this.infusionTime = 0;
 				}
+			} else if (!this.isBurning() && this.infusionTime > 0) {
+				this.infusionTime = MathHelper.clamp_int(this.infusionTime - 2, 0, this.totalInfusionTime);
 			}
 			
-			if (/* isBurning() && */canInfuse()) {
-				++ cookTime;
-				if (cookTime == 400) {
-					cookTime = 0;
-					infuseItem();
-					flag1 = true;
-				}
-			}
-			else {
-				cookTime = 0;
-			}
-			
-			if (flag != isBurning()) {
-				InfuserMachine.updateBlockState(this.isBurning(), worldObj, xCoord, yCoord, zCoord);
-				flag1 = true;
+			if (burning != this.isBurning()) {
+				dirty = true;
+				InfuserMachine.setState(this.getType(), this.isBurning(), this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 			}
 		}
 		
-		if (flag1) {
+		if (dirty) {
 			this.markDirty();
 		}
 	}
 	
-	private boolean canInfuse() {
-		if (slots[0] == null)
-			return false;
-		if (slots[2] == null && slots[3] == null)
-			return false;
-		InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
-		InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
-		if (recipe == null)
-			return false;
-		ItemStack stack = recipe.getOutput();
-		if (slots[ContainerInfuser.OUTPUT] == null)
-			return true;
-		if (!slots[ContainerInfuser.OUTPUT].isItemEqual(stack))
-			return false;
-		int result = slots[ContainerInfuser.OUTPUT].stackSize + stack.stackSize;
-		return (result <= getInventoryStackLimit() && result <= stack.getMaxStackSize());
-	}
-	
-	public void infuseItem() {
-		if (canInfuse()) {
-			InfusionRecipeHandler infusionRecipes = InfusionRecipeHandler.instance();
-			
-			InfusionRecipeLib recipe = infusionRecipes.getRecipe(slots[0], slots[2], slots[3]);
-			if (recipe == null)
-				return;
-			ItemStack stack = recipe.getOutput();
-			if (slots[ContainerInfuser.OUTPUT] == null) {
-				slots[ContainerInfuser.OUTPUT] = stack.copy();
-			}
-			else if (slots[ContainerInfuser.OUTPUT].isItemEqual(stack)) {
-				slots[ContainerInfuser.OUTPUT].stackSize += stack.stackSize;
-			}
-			
-			-- slots[ContainerInfuser.INPUT].stackSize;
-			// TODO Work this out.
-			InfusionRecipeLib recipeCopy = recipe.copy();
-			ArrayList<ItemStack> recipeRequirements = new ArrayList<ItemStack>(recipeCopy.getInfusionMaterials());
-			HashMap<Integer, ItemStack> providedStacks = new HashMap<Integer, ItemStack>() {
-				private static final long serialVersionUID = 1L;
-				{
-					if (slots[2] != null)
-						put(2, slots[2].copy());
-					if (slots[3] != null)
-						put(3, slots[3].copy());
-				}
-			};
-			providedStacks: for (ItemStack provided : providedStacks.values()) {
-				if (provided == null)
-					continue providedStacks;
-				if (!InfusionRecipeHandler.arrayListContainsItemStack(recipeRequirements, provided))
-					break providedStacks; // Something
-											// went
-											// wrong
-				rRLoop: for (ItemStack reqStack : recipeRequirements) {
-					if (provided.getItem() != reqStack.getItem())
-						continue rRLoop;
-					if (provided.stackSize >= reqStack.stackSize) {
-						provided.stackSize -= reqStack.stackSize;
-						recipeRequirements.remove(reqStack);
-						continue providedStacks;
-					}
-				}
-			}
-			
-			if (slots[2] != null)
-				slots[2] = providedStacks.get(2);
-			if (slots[3] != null)
-				slots[3] = providedStacks.get(3);
-			
-			if (slots[0].stackSize <= 0)
-				slots[0] = null;
-			if (slots[2] != null) {
-				if (slots[2].stackSize <= 0)
-					slots[2] = null;
-			}
-			if (slots[3] != null) {
-				if (slots[3].stackSize <= 0)
-					slots[3] = null;
-			}
-		}
-	}
-	
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		return this.slots[i];
-	}
-	
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		if (this.slots[i] != null) {
-			ItemStack stack;
-			
-			if (this.slots[i].stackSize <= j) {
-				stack = this.slots[i];
-				this.slots[i] = null;
-				return stack;
-				
-			}
-			else {
-				stack = this.slots[i].splitStack(j);
-				
-				if (this.slots[i].stackSize == 0) {
-					this.slots[i] = null;
-				}
-				
-				return stack;
+	@Override public void writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		compound.setShort("Facing", (short) EnumFacingUtil.toInt(this.facing));
+		compound.setBoolean("Normal", this.type.isNormal());
+		compound.setFloat("Experience", this.experienceStored);
+		compound.setShort("BurnTime", (short) this.burnTime);
+		compound.setShort("InfusionTime", (short) this.infusionTime);
+		compound.setShort("InfusionTimeTotal", (short) this.totalInfusionTime);
+		NBTTagList nbttaglist = new NBTTagList();
+		
+		for (int i = 0; i < this.inventory.length; i ++) {
+			if (this.inventory[i] != null) {
+				NBTTagCompound nbttagcompound = new NBTTagCompound();
+				nbttagcompound.setByte("Slot", (byte) i);
+				this.inventory[i].writeToNBT(nbttagcompound);
+				nbttaglist.appendTag(nbttagcompound);
 			}
 		}
 		
-		return null;
-		
+		compound.setTag("Items", nbttaglist);
+		if (this.isCustomInventoryName()) {
+			compound.setString("CustomName", this.infuserCustomName);
+		}
 	}
 	
-	public ItemStack getStackInSlotOnClosing(int i) {
-		if (this.slots[i] != null) {
-			ItemStack stack = this.slots[i];
-			this.slots[i] = null;
-			
+	@Override public Packet getDescriptionPacket() {
+		NBTTagCompound tag = new NBTTagCompound();
+		this.writeToNBT(tag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, tag);
+	}
+	
+	@Override public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+		this.readFromNBT(packet.getNbtCompound());
+		if (this.getWorld().isRemote) this.getWorld().markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+	}
+	
+	/* IInventory */
+	
+	@Override public ItemStack decrStackSize(int index, int count) {
+		if (index < 0 || index >= this.inventory.length) return null;
+		if (this.inventory[index] != null) {
+			if (this.inventory[index].stackSize <= count) {
+				ItemStack stack = this.inventory[index];
+				this.inventory[index] = null;
+				return stack;
+			} else {
+				ItemStack stack = this.inventory[index].splitStack(count);
+				if (this.inventory[index].stackSize == 0) {
+					this.inventory[index] = null;
+				}
+				return stack;
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	@Override public String getInventoryName() {
+		return this.isCustomInventoryName() ? this.infuserCustomName : (this.getType().isNormal() ? StatCollector.translateToLocal("container.zylroth:infuser") : StatCollector.translateToLocal("container.zylroth:oreInfuser"));
+	}
+	
+	@Override public int getSizeInventory() {
+		return this.inventory.length;
+	}
+	
+	@Override public ItemStack getStackInSlot(int index) {
+		return (index >= 0 && index < this.inventory.length) ? this.inventory[index] : null;
+	}
+	
+	@Override public ItemStack getStackInSlotOnClosing(int index) {
+		if (index < 0 || index >= this.inventory.length) return null;
+		if (this.inventory[index] != null) {
+			ItemStack stack = this.inventory[index];
+			this.inventory[index] = null;
 			return stack;
+		} else {
+			return null;
 		}
-		
-		return null;
 	}
 	
-	@Override
-	public void setInventorySlotContents(int i, ItemStack stack) {
-		this.slots[i] = stack;
-		
+	@Override public boolean isCustomInventoryName() {
+		return this.infuserCustomName != null && this.infuserCustomName.length() > 0;
+	}
+	
+	@Override public void setInventorySlotContents(int index, ItemStack stack) {
+		boolean flag = stack != null && this.inventory[index] != null && stack.isItemEqual(this.inventory[index]) && ItemStack.areItemStackTagsEqual(stack, this.inventory[index]);
+		this.inventory[index] = stack;
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = this.getInventoryStackLimit();
 		}
+		if ((index == 0 || index == 1 || index == 2 || index == 3) && !flag) {
+			this.totalInfusionTime = InfusionRecipeHandler.instance().getInfusionTime(this.type, this.inventory[0], this.inventory[1], this.inventory[2]);
+			this.infusionTime = 0;
+			this.markDirty();
+		}
 	}
 	
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	@Override public int getInventoryStackLimit() {
+		return 64;
+	}
+	
+	@Override public boolean isItemValidForSlot(int index, ItemStack stack) {
+		return (index == 4) ? false : ((index == 3) ? InfusionFuels.isFuel(stack) : true);
+	}
+	
+	@Override public boolean isUseableByPlayer(EntityPlayer player) {
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 	
-	@Override
-	public int getSizeInventory() {
-		return this.slots.length;
-	};
+	@Override public void openChest() {}
+	@Override public void closeChest() {}
 	
-	public static int getItemBurnTime(ItemStack stack) {
-		if (stack == null) {
-			return 0;
-			
-		}
-		else {
-			
-			Item i = stack.getItem();
-			
-			if (i == ModItems.tenebraeChunk)
-				return 400;
-			
-			GameRegistry.getFuelValue(stack);
-		}
-		
-		return 0;
+	/* ISidedInventory*/
+	
+	@Override public int[] getSlotsForFace(int side) {
+		return (side == 0) ? slotsBottom : ((side == 1) ? slotsTop : ((side == EnumFacingUtil.toInt(EnumFacingUtil.rotateAround(this.facing, Axis.X))) ? slotsSidesOut : slotsSidesIn));
+	}
+
+	@Override public boolean canInsertItem(int index, ItemStack itemStackIn, int direction) {
+		return this.isItemValidForSlot(index, itemStackIn);
+	}
+
+	@Override public boolean canExtractItem(int index, ItemStack stack, int direction) {
+		return true;
 	}
 	
-	private boolean isInfusionItem(ItemStack stack) {
-		return getItemBurnTime(stack) > 0;
+	/* TileEntityInfuser */
+	
+	public void setFacing(EnumFacing facing) {
+		this.facing = facing;
 	}
 	
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	};
-	
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == 1 ? isInfusionItem(stack) : i == 2 ? false : i == 3 ? false : true;
-	};
-	
-	@Override
-	public int[] getSlotsForFace(int var1) {
-		return var1 == 0 ? slots_bottom : (var1 == 1 ? slots_top : slots_sides);
+	public EnumFacing getFacing() {
+		return this.facing;
 	}
 	
-	public boolean canInsertItem(int i, ItemStack items, int j) {
-		return this.isItemValidForSlot(i, items);
+	public void setCustomInventoryName(String customName) {
+		this.infuserCustomName = customName;
 	}
 	
-	public boolean canExtractItem(int i, ItemStack items, int j) {
-		return j == 0 || i != 0 || i != 1 || i != 2;
+	public boolean isBurning() {
+		return this.burnTime > 0;
 	}
 	
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		
-		NBTTagList list = nbt.getTagList("Stacks", nbt.getId());
-		this.slots = new ItemStack[this.getSizeInventory()];
-		
-		for (int i = 0; i < list.tagCount(); i ++) {
-			NBTTagCompound compound = list.getCompoundTagAt(i);
-			byte b = compound.getByte("Slot");
-			
-			if (b >= 0 && b < this.slots.length) {
-				this.slots[b] = ItemStack.loadItemStackFromNBT(compound);
-				
+	private boolean isValidInfusingRecipe() {
+		InfusionRecipeLib recipe = InfusionRecipeHandler.instance().getRecipe(this.type, this.inventory[0], this.inventory[1], this.inventory[2]);
+		if (recipe == null) return false;
+		if (this.inventory[4] == null) return true;
+		if (!this.inventory[4].isItemEqual(recipe.getOutput().copy())) return false;
+		int result = this.inventory[4].stackSize + recipe.getOutput().copy().stackSize;
+		return result <= getInventoryStackLimit() && result <= this.inventory[4].getMaxStackSize();
+	}
+	
+	private void completeInfusion() {
+		if (this.isValidInfusingRecipe()) {
+			InfusionRecipeLib infusionRecipe = InfusionRecipeHandler.instance().getRecipe(this.type, this.inventory[0], this.inventory[1], this.inventory[2]);
+			ItemStack itemstack = infusionRecipe.getOutput().copy();
+			if (this.inventory[4] == null) {
+				this.inventory[4] = itemstack;
+			} else if (this.inventory[4].getItem() == itemstack.getItem()) {
+				this.inventory[4].stackSize += itemstack.stackSize;
 			}
-		}
-		
-		facing = nbt.getInteger("Facing");
-		burnTime = nbt.getShort("BurnTime");
-		cookTime = nbt.getShort("CookTime");
-		currentItemBurnTime = getItemBurnTime(slots[1]);
-		
-		/* if (nbt.hasKey("CustomName")) { this.localizedName =
-		 * nbt.getString("CustomName"); } */
-	}
-	
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-		
-		NBTTagList list = new NBTTagList();
-		
-		nbt.setInteger("Facing", facing);
-		nbt.setShort("BurnTime", (short) burnTime);
-		nbt.setShort("CookTime", (short) cookTime);
-		
-		for (int i = 0; i < this.slots.length; i ++) {
-			NBTTagCompound compound = new NBTTagCompound();
 			
-			if (this.slots[i] != null) {
-				compound.setByte("Slot", (byte) i);
-				this.slots[i].writeToNBT(compound);
-				list.appendTag(compound);
+			ArrayList<Integer> materialCosts = InfusionRecipeHandler.instance().getMaterialCosts(this.type, this.inventory[0], this.inventory[1], this.inventory[2]);
+			for (int i = 0; i <= 2; i ++) {
+				this.inventory[i].stackSize -= materialCosts.get(i);
+				if (this.inventory[i].stackSize <= 0) this.inventory[i] = null;
 			}
+			
+			this.experienceStored += infusionRecipe.getExperience();
 		}
-		
-		nbt.setTag("Stacks", list);
-		
-		/* if (this.isInventoryNameLocalized()) { nbt.setString("CustomName",
-		 * this.localizedName); } */
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public int getCookProgressScaled(int i) {
-		return cookTime * i / 400;
+	public InfuserType getType() {
+		return type;
+	}
+
+	public float getExperienceStored() {
+		return this.experienceStored;
+	}
+
+	public void setExperienceStored(int experienceStored) {
+		this.experienceStored = experienceStored;
 	}
 	
+	@SideOnly(Side.CLIENT) public int getBurnTimeRemainingScaled(int pixels) {
+		if (this.itemBurnTime == 0) return 0;
+		return this.burnTime * pixels / this.itemBurnTime;
+	}
+	
+	@SideOnly(Side.CLIENT) public int getCookProgressScaled(int pixels) {
+		if (this.totalInfusionTime == 0) return 0;
+		return this.infusionTime * pixels / this.totalInfusionTime;
+	}
 }

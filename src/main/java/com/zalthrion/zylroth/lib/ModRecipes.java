@@ -1,12 +1,14 @@
 package com.zalthrion.zylroth.lib;
 
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
-import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
-import com.zalthrion.zylroth.handler.recipe.OreInfusionRecipeHandler;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
+import com.zalthrion.zylroth.block.machine.InfuserType;
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.handler.recipe.InfusionFuels;
+import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class ModRecipes {
@@ -18,7 +20,6 @@ public final class ModRecipes {
 		registerArmorRecipes();
 		registerToolRecipes();
 		registerInfusionRecipes();
-		registerOreInfusionRecipes();
 	}
 	
 	public static void registerSmeltingRecipes() {
@@ -89,18 +90,14 @@ public final class ModRecipes {
 	}
 	
 	public static void registerInfusionRecipes() {
+		/* Debug Recipes */
 		
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModBlocks.tenebraeBlock), new ItemStack(ModBlocks.infusedTenebrae), 0, new ItemStack(Items.redstone, 5, 0), new ItemStack(Items.iron_ingot, 5, 0));
+		InfusionFuels.registerFuel(new ItemStack(Items.coal), 200);
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(Items.emerald), new ItemStack(Items.diamond), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(Blocks.diamond_ore), new ItemStack(Blocks.iron_ore), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));;
 		
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(ModItems.unstableTenebraeCore), new ItemStack(ModBlocks.empoweredTenebraeCore), 0, new ItemStack(Blocks.diamond_block, 1, 0), new ItemStack(ModBlocks.infusedTenebrae, 1, 0));
-		
-		InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.end_stone), new ItemStack(ModBlocks.endiriteOre), 0, new ItemStack(ModItems.tenebraeOre, 1, 0), new ItemStack(Items.ender_pearl, 1, 0));
-		
-	}
-	
-	public static void registerOreInfusionRecipes() {
-		
-		OreInfusionRecipeHandler.instance().addOreInfusion(new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebriumIngot, 1), 0, new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(ModItems.inferniumIngot, 1, 0));
-		
+		/* Real Recipes */
+		/*InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.end_stone), new ItemStack(ModBlocks.endiriteOre), 0, new ItemStack(ModItems.tenebraeOre, 1, 0), new ItemStack(Items.ender_pearl, 1, 0));
+		OreInfusionRecipeHandler.instance().addOreInfusion(new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebriumIngot, 1), 0.5F, new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(ModItems.inferniumIngot, 1, 0));*/
 	}
 }

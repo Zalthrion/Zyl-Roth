@@ -2,13 +2,33 @@ package com.zalthrion.zylroth.lib;
 
 import net.minecraft.block.Block;
 
-import com.zalthrion.zylroth.block.*;
-import com.zalthrion.zylroth.block.machine.*;
-import com.zalthrion.zylroth.block.ore.*;
-import com.zalthrion.zylroth.block.spawner.*;
-import com.zalthrion.zylroth.block.tree.*;
-import com.zalthrion.zylroth.itemblock.*;
-import com.zalthrion.zylroth.tile.*;
+import com.zalthrion.zylroth.block.AshBlock;
+import com.zalthrion.zylroth.block.ChiseledTenebrae;
+import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
+import com.zalthrion.zylroth.block.InfusedTenebrae;
+import com.zalthrion.zylroth.block.TenebraeBlock;
+import com.zalthrion.zylroth.block.TenebraeCore;
+import com.zalthrion.zylroth.block.machine.InfuserMachine;
+import com.zalthrion.zylroth.block.machine.InfuserType;
+import com.zalthrion.zylroth.block.ore.EndiriteOre;
+import com.zalthrion.zylroth.block.ore.InferniumOre;
+import com.zalthrion.zylroth.block.ore.TenebraeOre;
+import com.zalthrion.zylroth.block.ore.VoidiumOre;
+import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL_2;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL_2;
+import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
+import com.zalthrion.zylroth.itemblock.CoreItemBlock;
+import com.zalthrion.zylroth.itemblock.HeadItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowLeaf2ItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowSapling2ItemBlock;
+import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
+import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
+import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -44,11 +64,10 @@ public final class ModBlocks {
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
 	
 	/* Machines */	
-	public static Block infuser = new InfuserMachine(true);
-	public static Block infuser_Idle = new InfuserMachine(false);
-	
-	public static Block oreInfuser = new OreInfuserMachine(true);
-	public static Block oreInfuser_Idle = new OreInfuserMachine(false);
+	public static Block infuser = new InfuserMachine(true, InfuserType.NORMAL);
+	public static Block infuser_Idle = new InfuserMachine(false, InfuserType.NORMAL);
+	public static Block oreInfuser = new InfuserMachine(true, InfuserType.ORE);
+	public static Block oreInfuser_Idle = new InfuserMachine(false, InfuserType.ORE);
 	
 	public static void init() {
 		
@@ -92,6 +111,5 @@ public final class ModBlocks {
 		/* Tile Entities */
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "Infuser");
-		GameRegistry.registerTileEntity(TileEntityOreInfuser.class, "Ore Infuser");
 	}
 }

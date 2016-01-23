@@ -11,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -20,19 +21,20 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.reference.GuiIDs;
 import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.utility.EnumFacingUtil;
 
 public class InfuserMachine extends BlockBaseContainer {
-	
 	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
-	
+	private String oreName = "oreInfuserMachineActive";
+	private String oreName_idle = "oreInfuserMachine";
+	private InfuserType type;
 	private static boolean keepInventory;
 	
-	public InfuserMachine(boolean isActive) {
-		
+	public InfuserMachine(boolean isActive, InfuserType type) {
 		super(!isActive);
-		
-		this.setNames(isActive ? name : name_idle);
+		this.type = type;
+		this.setNames(isActive ? (type.isNormal() ? name : oreName) : (type.isNormal() ? name_idle : oreName_idle));
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
@@ -40,8 +42,8 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setStepSound(soundTypeMetal);
 	}
 	
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityInfuser();
+	@Override public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileEntityInfuser(this.type);
 	}
 	
 	@Override
@@ -69,36 +71,33 @@ public class InfuserMachine extends BlockBaseContainer {
 		return Item.getItemFromBlock(ModBlocks.infuser_Idle);
 	}
 	
-	public static void updateBlockState(boolean active, World world, int x, int y, int z) {
-		int i = world.getBlockMetadata(x, y, z);
-		
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public static void setState(InfuserType type, boolean active, World world, int x, int y, int z) {
+		int l = world.getBlockMetadata(x, y, z);
+		TileEntity tileentity = world.getTileEntity(x, y, z);
 		keepInventory = true;
 		
-		if (active) {
+		if (active && type.isNormal()) {
 			world.setBlock(x, y, z, ModBlocks.infuser);
-		}
-		
-		else {
+		} else if (!active && type.isNormal()) {
 			world.setBlock(x, y, z, ModBlocks.infuser_Idle);
+		} else if (active && !type.isNormal()) {
+			world.setBlock(x, y, z, ModBlocks.oreInfuser);
+		} else if (!active && !type.isNormal()) {
+			world.setBlock(x, y, z, ModBlocks.oreInfuser_Idle);
 		}
 		
 		keepInventory = false;
+		world.setBlockMetadataWithNotify(x, y, z, l, 2);
 		
-		world.setBlockMetadataWithNotify(x, y, z, i, 2);
-		
-		if (tile != null) {
-			tile.validate();
-			world.setTileEntity(x, y, z, tile);
+		if (tileentity != null) {
+			tileentity.validate();
+			world.setTileEntity(x, y, z, tileentity);
 		}
-	} // I'm not sure two blocks are needed? Why not just make getIcon depend
-		// upon if the TileEntity is active or not.
-		// public IIcon getIcon(IBlockAccess worldIn, int x, int y, int z, int
-		// side)
+	}
 	
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition mop, World world, int x, int y, int z, EntityPlayer player) {
-		return new ItemStack(ModBlocks.infuser_Idle);
+		return new ItemStack(type.isNormal() ? ModBlocks.infuser_Idle : ModBlocks.oreInfuser_Idle);
 	}
 	
 	@Override
@@ -141,21 +140,22 @@ public class InfuserMachine extends BlockBaseContainer {
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 	
-	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack itemStack) {
-		int facing = MathHelper.floor_double((double) ((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-		facing ++;
-		TileEntity te = world.getTileEntity(i, j, k);
-		if (te != null && te instanceof TileEntityInfuser) {
-			TileEntityInfuser tei = (TileEntityInfuser) te;
-			tei.setFacing(facing);
-			world.markBlockForUpdate(i, j, k);
+	@Override public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
+		EnumFacing facing = EnumFacingUtil.forPlacing((MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 2);
+		
+		TileEntity tileentity = world.getTileEntity(x, y, z);
+		if (tileentity instanceof TileEntityInfuser) {
+			if (stack.hasDisplayName()) {
+				((TileEntityInfuser) tileentity).setCustomInventoryName(stack.getDisplayName());
+			}
+			((TileEntityInfuser) tileentity).setFacing(facing);
+			world.markBlockForUpdate(x, y, z);
 		}
 	}
 	
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		
+		if (!this.type.isNormal()) return;
 		TileEntity tile = world.getTileEntity(x, y, z);
 		TileEntityInfuser tei = (TileEntityInfuser) tile;
 		
@@ -181,12 +181,4 @@ public class InfuserMachine extends BlockBaseContainer {
 			}
 		}
 	}
-	
-	/* @Override public int getLightValue(IBlockAccess world, int x, int y, int
-	 * z) { TileEntity te = world.getTileEntity(x, y, z); if (te instanceof
-	 * TileEntityInfuser) { TileEntityInfuser tei = (TileEntityInfuser) te;
-	 * return tei.isBurning() ? 15 : 0; } return getLightValue(); } */
-	
-	// TODO Activate this if you want to remove the "activate" block and make it one
-	
 }
