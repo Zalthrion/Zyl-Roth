@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 /**
  * Boar - Zalthrion
@@ -60,6 +61,7 @@ public class ModelBoar extends ModelBase {
         this.LeftTuskBase = new ModelRenderer(this, 0, 0);
         this.LeftTuskBase.setRotationPoint(2.0F, 0.7F, -9.3F);
         this.LeftTuskBase.addBox(0.0F, 0.0F, 0.0F, 1, 1, 2, 0.0F);
+        this.Head.addChild(this.Snout);
         this.Head.addChild(this.LeftTusk);
         this.Head.addChild(this.RightTuskBase);
         this.Head.addChild(this.RightTusk);
@@ -76,7 +78,17 @@ public class ModelBoar extends ModelBase {
         this.Body.render(f5);
         this.FrontLeftLeg.render(f5);
     }
-
+    
+	@Override public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity entityIn) {
+		this.Head.rotateAngleX = p_78087_5_ / (180F / (float) Math.PI);
+		this.Head.rotateAngleY = p_78087_4_ / (180F / (float) Math.PI);
+		this.Body.rotateAngleX = ((float) Math.PI / 2F);
+		this.FrontLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
+		this.FrontRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
+		this.BackLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
+		this.BackRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
+	}
+    
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */

@@ -2,7 +2,6 @@ package com.zalthrion.zylroth.tile;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -77,6 +76,7 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 			}
 		}
 		
+		this.facing = EnumFacing.byName(compound.getString("Facing"));
 		this.type = compound.getBoolean("Normal") ? InfuserType.NORMAL : InfuserType.ORE;
 		this.experienceStored = compound.getFloat("Experience");
 		this.burnTime = compound.getShort("BurnTime");
@@ -90,6 +90,7 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 	
 	@Override public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
+		compound.setString("Facing", this.facing.getName2());
 		compound.setBoolean("Normal", this.type.isNormal());
 		compound.setFloat("Experience", this.experienceStored);
 		compound.setShort("BurnTime", (short) this.burnTime);
@@ -236,7 +237,7 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 	/* ISidedInventory*/
 	
 	@Override public int[] getSlotsForFace(EnumFacing side) {
-		return (side == EnumFacing.DOWN) ? slotsBottom : ((side == EnumFacing.UP) ? slotsTop : ((side == this.facing.rotateAround(Axis.X)) ? slotsSidesIn : slotsSidesOut));
+		return (side == EnumFacing.DOWN) ? slotsBottom : ((side == EnumFacing.UP) ? slotsTop : ((side == this.facing.rotateAround(Axis.X)) ? slotsSidesOut : slotsSidesIn));
 	}
 
 	@Override public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
@@ -252,13 +253,6 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 	@Override public void update() {
 		boolean burning = this.isBurning();
 		boolean dirty = false;
-		
-		if (this.facing == null) {
-			IBlockState state = this.worldObj.getBlockState(this.pos);
-			if (state.getBlock() instanceof InfuserMachine) {
-				this.facing = state.getValue(InfuserMachine.FACING);
-			}
-		}
 		
 		if (this.isBurning()) {
 			this.burnTime --;

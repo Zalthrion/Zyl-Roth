@@ -65,11 +65,12 @@ public final class ModRecipes {
 		/* Debug Recipes */
 		
 		InfusionFuels.registerFuel(new ItemStack(Items.coal), 200);
-		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(Items.emerald), new ItemStack(Items.diamond), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));
-		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(Blocks.diamond_ore), new ItemStack(Blocks.iron_ore), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));;
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(Items.emerald), new ItemStack(Items.diamond), new ItemStack(Blocks.dirt, 2), new ItemStack(Blocks.stone));
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(Blocks.diamond_ore), new ItemStack(Blocks.iron_ore), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));
 		
 		/* Real Recipes */
-		/*InfusionRecipeHandler.instance().addInfusion(new ItemStack(Blocks.end_stone), new ItemStack(ModBlocks.endiriteOre), 0, new ItemStack(ModItems.tenebraeOre, 1, 0), new ItemStack(Items.ender_pearl, 1, 0));
-		OreInfusionRecipeHandler.instance().addOreInfusion(new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebriumIngot, 1), 0.5F, new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(ModItems.inferniumIngot, 1, 0));*/
+		
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 0F, 100, new ItemStack(ModBlocks.endiriteOre), new ItemStack(Blocks.end_stone), new ItemStack(ModItems.tenebraeOre), new ItemStack(Items.ender_pearl));
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 0F, 100, new ItemStack(ModItems.tenebriumIngot), new ItemStack(ModItems.tenebraeIngot), new ItemStack(Items.iron_ingot), new ItemStack(ModItems.inferniumIngot));
 	}
 }
