@@ -3,7 +3,6 @@ package com.zalthrion.zylroth;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.handler.FuelHandler;
 import com.zalthrion.zylroth.handler.GuiHandler;
-import com.zalthrion.zylroth.handler.KeyHandler;
 import com.zalthrion.zylroth.lib.*;
 import com.zalthrion.zylroth.packet.PacketHandler;
 import com.zalthrion.zylroth.proxy.IProxy;
@@ -45,8 +44,6 @@ public class Zylroth {
 		
 		PacketHandler.init();
 		
-		KeyHandler.init();
-		
 		ModTools.init();
 
 		ModArmors.init();
@@ -61,6 +58,7 @@ public class Zylroth {
 		
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		
+		proxy.preInit();
 	}
 	
 	/*---------------------------------------------------------------------------*/
@@ -81,6 +79,8 @@ public class Zylroth {
 		ModOreDictionary.init();
 		
 		ModRecipes.init();
+		
+		proxy.init();
 		
 		proxy.registerBlocks();
 		

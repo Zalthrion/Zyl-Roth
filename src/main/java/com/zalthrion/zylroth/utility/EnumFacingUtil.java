@@ -4,7 +4,6 @@ import net.minecraft.util.EnumFacing;
 
 public class EnumFacingUtil {
 	public static EnumFacing getOpposite(EnumFacing origin) {
-		LogHelper.warn(origin);
 		if (origin == EnumFacing.DOWN) return EnumFacing.UP;
 		if (origin == EnumFacing.UP) return EnumFacing.DOWN;
 		if (origin == EnumFacing.SOUTH) return EnumFacing.NORTH;

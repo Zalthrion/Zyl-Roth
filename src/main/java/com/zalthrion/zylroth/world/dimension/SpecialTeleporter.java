@@ -11,7 +11,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 import com.zalthrion.zylroth.utility.BlockPos;
-import com.zalthrion.zylroth.utility.LogHelper;
 
 public class SpecialTeleporter extends Teleporter {
 	protected final WorldServer worldServer;
@@ -71,7 +70,6 @@ public class SpecialTeleporter extends Teleporter {
 			y = yPos;
 		}
 		if (entity instanceof EntityPlayer) {
-			LogHelper.warn(generatePlatform);
 			if (generatePlatform) {
 				BlockPos center = new BlockPos(xPos, yPos, zPos);
 				this.setBlock(entity.worldObj, center.north(2).west(), Blocks.stone);

@@ -16,6 +16,7 @@ import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.event.KeyInputEvent;
+import com.zalthrion.zylroth.handler.KeyHandler;
 import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
@@ -54,6 +55,11 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class ClientProxy extends CommonProxy {
 	
 	public static final Map<Item, ModelBiped> armorModels = new HashMap<Item, ModelBiped>();
+	
+	@Override
+	public void preInit() {
+		KeyHandler.init();
+	}
 	
 	@Override
 	public void init() {
