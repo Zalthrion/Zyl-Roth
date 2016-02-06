@@ -3,23 +3,17 @@ package com.zalthrion.zylroth.entity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.google.common.base.Predicate;
+
 public class EntityBoar extends EntityHostileAnimal {
-	public EntityBoar(World world) {
+	public EntityBoar(final World world) {
 		super(world);
 		this.setSize(1F, 1F);
 		this.tasks.addTask(0, new EntityAISwimming(this));
@@ -32,6 +26,11 @@ public class EntityBoar extends EntityHostileAnimal {
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 10, true, false, new Predicate<EntityPlayer>() {
+			@Override public boolean apply(EntityPlayer p_apply_1) {
+				return world.getDifficulty() != EnumDifficulty.PEACEFUL;
+			}
+		}));
 	}
 	
 	@Override protected void applyEntityAttributes() {

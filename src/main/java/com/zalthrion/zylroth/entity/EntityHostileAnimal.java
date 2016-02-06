@@ -16,7 +16,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,21 +40,6 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 	
 	@Override public void onLivingUpdate() {
 		super.onLivingUpdate();
-		
-		if (this.getGrowingAge() != 0) {
-			this.inLove = 0;
-		}
-		
-		if (this.inLove > 0) {
-			-- this.inLove;
-			
-			if (this.inLove % 10 == 0) {
-				double d0 = this.rand.nextGaussian() * 0.02D;
-				double d1 = this.rand.nextGaussian() * 0.02D;
-				double d2 = this.rand.nextGaussian() * 0.02D;
-				this.worldObj.spawnParticle(EnumParticleTypes.HEART, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2, new int[0]);
-			}
-		}
 	}
 	
 	@Override public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -172,10 +156,6 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 	
 	@Override public void onUpdate() {
 		super.onUpdate();
-		
-		if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL) {
-			this.setDead();
-		}
 	}
 	
 	@Override protected String getSwimSound() {
