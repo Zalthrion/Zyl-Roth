@@ -28,6 +28,8 @@ public class WorldOreGenerator implements IWorldGenerator {
 				break;
 			case 47:
 				GenerateKyrul(random, chunkX * 16, chunkZ * 16, world);
+			case 48:
+				GenerateIridis(random, chunkX * 16, chunkZ *16, world);
 		}
 	}
 	
@@ -45,6 +47,10 @@ public class WorldOreGenerator implements IWorldGenerator {
 	
 	private void GenerateKyrul(Random random, int x, int z, World world) {
 		this.addOreSpawn(ModBlocks.voidiumOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.stone);
+	}
+	
+	private void GenerateIridis(Random random, int x, int z, World world) {
+		this.addOreSpawn(ModBlocks.tenebraeOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.stone);
 	}
 	
 	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY, Block spawnBlock) {		

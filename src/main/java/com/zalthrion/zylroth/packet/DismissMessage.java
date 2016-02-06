@@ -20,6 +20,7 @@ public class DismissMessage implements IMessage {
 	@Override public void toBytes(ByteBuf buffer) {}
 	
 	public static class Handler implements IMessageHandler<DismissMessage, IMessage> {
+		@SuppressWarnings("unchecked")
 		@Override public IMessage onMessage(DismissMessage message, MessageContext context) {
 			EntityPlayer player = context.getServerHandler().playerEntity;
 			if (player != null) {

@@ -28,6 +28,7 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	private String name = "tenebraeLeafCutter";
 	
 	public TenebraeLeafCutter() {
+		super();
 		this.setNames(name);
 	}
 	

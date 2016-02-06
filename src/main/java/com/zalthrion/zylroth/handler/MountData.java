@@ -8,6 +8,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class MountData implements IExtendedEntityProperties {
 	public static final String EXT_PROP_NAME = "ZylrothMountData";
+	
+	@SuppressWarnings("unused")
 	private final EntityPlayer player;
 	private String ownedMount;
 	private int ownedMountID;
