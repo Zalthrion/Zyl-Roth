@@ -17,15 +17,21 @@ import com.zalthrion.zylroth.block.ore.InferniumOre;
 import com.zalthrion.zylroth.block.ore.TenebraeOre;
 import com.zalthrion.zylroth.block.ore.VoidiumOre;
 import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
-import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
-import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL2;
-import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
+import com.zalthrion.zylroth.block.tree.IridisLeafBlock;
+import com.zalthrion.zylroth.block.tree.IridisSaplingBlock;
+import com.zalthrion.zylroth.block.tree.KyrulLogBlock;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlock2;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlock;
 import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
 import com.zalthrion.zylroth.itemblock.CoreItemBlock;
 import com.zalthrion.zylroth.itemblock.HeadItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.IridisLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.IridisSaplingItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.KyrulLogItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 
@@ -44,9 +50,13 @@ public final class ModBlocks {
 	/* Voidium */
 	public static Block voidiumOre = new VoidiumOre();
 	/* Trees */
-	public static Block rainbowLeafBlockZL = new RainbowLeafBlockZL();
-	public static Block rainbowLeafBlockZL2 = new RainbowLeafBlockZL2();
-	public static Block rainbowSaplingBlockZL = new RainbowSaplingBlockZL();
+	public static Block rainbowLeafBlock = new RainbowLeafBlock();
+	public static Block rainbowLeafBlock2 = new RainbowLeafBlock2();
+	public static Block rainbowSaplingBlock = new RainbowSaplingBlock();
+	
+	public static Block iridisLeafBlock = new IridisLeafBlock();
+	public static Block iridisSaplingBlock = new IridisSaplingBlock();
+	public static Block kyrulLogBlock = new KyrulLogBlock();
 	/* Others */
 	public static Block ashBlock = new AshBlock();
 	public static Block goldBag = new GoldBag();
@@ -64,11 +74,11 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
 		/* Tenebrae */
 		ModRegistry.addRegister(21, tenebraeOre, "tenebraeOre");
-		ModRegistry.addRegister(28, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
+		ModRegistry.addRegister(31, tenebraeBlock, BeaconBaseItemBlock.class, "tenebraeBlock");
 		ModRegistry.addRegister(29, tenebraeCore, CoreItemBlock.class, "tenebraeCore");
-		ModRegistry.addRegister(30, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
-		ModRegistry.addRegister(31, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
-		ModRegistry.addRegister(32, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
+		ModRegistry.addRegister(32, empoweredTenebraeCore, CoreItemBlock.class, "empoweredTenebraeCore");
+		ModRegistry.addRegister(33, chiseledTenebrae, HeadItemBlock.class, "chiseledTenebrae");
+		ModRegistry.addRegister(34, infusedTenebrae, TenebraeItemBlock.class, "infusedTenebrae");
 		/* Infernium */
 		ModRegistry.addRegister(23, inferniumOre, "inferniumOre");
 		/* Endirite */
@@ -76,19 +86,22 @@ public final class ModBlocks {
 		/* Voidium */
 		ModRegistry.addRegister(22, voidiumOre, "voidiumOre");
 		/* Trees */
-		ModRegistry.addRegister(25, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
-		ModRegistry.addRegister(26, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
-		ModRegistry.addRegister(27, rainbowLeafBlockZL2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2");
+		ModRegistry.addRegister(25, rainbowSaplingBlock, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
+		ModRegistry.addRegister(27, rainbowLeafBlock, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
+		ModRegistry.addRegister(28, rainbowLeafBlock2, RainbowLeafItemBlock.class, "rainbowLeafBlockZL2");
+		ModRegistry.addRegister(30, kyrulLogBlock, KyrulLogItemBlock.class, "kyrulLogBlock");
+		ModRegistry.addRegister(29, iridisLeafBlock, IridisLeafItemBlock.class, "iridisLeafBlock");
+		ModRegistry.addRegister(26, iridisSaplingBlock, IridisSaplingItemBlock.class, "iridisSaplingBlock");
 		/* Others */
-		ModRegistry.addRegister(33, ashBlock, "ashBlock");
-		ModRegistry.addRegister(39, goldBag, "goldBag");
+		ModRegistry.addRegister(35, ashBlock, "ashBlock");
+		ModRegistry.addRegister(41, goldBag, "goldBag");
 		/* Spawners */
-		ModRegistry.addRegister(34, spawner_VoidDragon, "spawnerVoidDragon");
+		ModRegistry.addRegister(36, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
-		ModRegistry.addRegister(35, infuserIdle, "infuserMachine");
-		ModRegistry.addRegister(36, infuser, "infuserMachineActive");
-		ModRegistry.addRegister(37, oreInfuserIdle, "oreInfuserMachine");
-		ModRegistry.addRegister(38, oreInfuser, "oreInfuserMachineActive");
+		ModRegistry.addRegister(37, infuserIdle, "infuserMachine");
+		ModRegistry.addRegister(38, infuser, "infuserMachineActive");
+		ModRegistry.addRegister(39, oreInfuserIdle, "oreInfuserMachine");
+		ModRegistry.addRegister(40, oreInfuser, "oreInfuserMachineActive");
 		
 	}
 }

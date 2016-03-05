@@ -10,12 +10,14 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
-import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL2;
-import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlock2;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlock;
 import com.zalthrion.zylroth.entity.*;
 import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
+import com.zalthrion.zylroth.entity.dev.EntitySixOneThree;
+import com.zalthrion.zylroth.entity.dev.EntityZalthrion;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
@@ -23,8 +25,8 @@ import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.event.KeyInputEvent;
 import com.zalthrion.zylroth.handler.ModelHelper;
-import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.lib.ModArmors;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModItems;
@@ -58,12 +60,17 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidDragon.class, new EntityVoidDragonRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletalHorse.class, new EntitySkeletalHorseRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnicorn.class, new EntityUnicornRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new EntityDeerRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityStag.class, new EntityStagRenderFactory());
 		/* Mounts */
 		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new MountDeathchargerRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(MountPlaguedHorse.class, new MountPlaguedHorseRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(MountWarTortoise.class, new MountWarTortoiseRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(MountSavageBadger.class, new MountSavageBadgerRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(MountSwiftUnicorn.class, new MountSwiftUnicornRenderFactory());
+		/* Developers */
+		RenderingRegistry.registerEntityRenderingHandler(EntityZalthrion.class, new EntityZalthrionRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySixOneThree.class, new EntitySixOneThreeRenderFactory());
 	}
 	
 	@Override
@@ -105,9 +112,9 @@ public class ClientProxy extends ServerProxy {
 		ModelHelper.registerBlock(ModBlocks.voidiumOre);
 		ModelHelper.registerBlock(ModBlocks.inferniumOre);
 		ModelHelper.registerBlock(ModBlocks.endiriteOre);
-		ModelHelper.registerBlock(ModBlocks.rainbowSaplingBlockZL, (new StateMap.Builder()).withName(RainbowSaplingBlockZL.TYPE).withSuffix("_sapling").ignore(RainbowSaplingBlockZL.STAGE).build(), RainbowSaplingItemBlock.getVariants(), new int[] {0, 1, 2, 3, 4, 5});
-		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL, (new StateMap.Builder()).withName(RainbowLeafBlockZL.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL.CHECK_DECAY).ignore(RainbowLeafBlockZL.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(0), new int[] {0, 1, 2, 3});
-		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlockZL2, (new StateMap.Builder()).withName(RainbowLeafBlockZL2.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlockZL2.CHECK_DECAY).ignore(RainbowLeafBlockZL2.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(1), new int[] {4, 5});
+		ModelHelper.registerBlock(ModBlocks.rainbowSaplingBlock, (new StateMap.Builder()).withName(RainbowSaplingBlock.TYPE).withSuffix("_sapling").ignore(RainbowSaplingBlock.STAGE).build(), RainbowSaplingItemBlock.getVariants(), new int[] {0, 1, 2, 3, 4, 5});
+		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlock, (new StateMap.Builder()).withName(RainbowLeafBlock.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlock.CHECK_DECAY).ignore(RainbowLeafBlock.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(0), new int[] {0, 1, 2, 3});
+		ModelHelper.registerBlock(ModBlocks.rainbowLeafBlock2, (new StateMap.Builder()).withName(RainbowLeafBlock2.TYPE).withSuffix("_leaves").ignore(RainbowLeafBlock2.CHECK_DECAY).ignore(RainbowLeafBlock2.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(1), new int[] {4, 5});
 		/* Items */
 		/* Armors */
 		ModelHelper.registerItem(ModArmors.tenebraeHelmet);

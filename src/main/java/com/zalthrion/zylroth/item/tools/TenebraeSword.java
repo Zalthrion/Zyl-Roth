@@ -43,6 +43,31 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		
 		if (!(player.isSneaking()) && !(player.capabilities.isCreativeMode)) {
 			
+			/** Test-Item Start */
+			 /*			Vec3 vec3 = player.getPosition(1.0F);
+			 			vec3.yCoord ++;
+			 			Vec3 lookVec = player.getLook(1.0F);
+			 			Vec3 aVector = vec3.addVector(lookVec.xCoord * 50.0D, lookVec.yCoord * 50.0D, lookVec.zCoord * 50.0D);
+			 			MovingObjectPosition movingObjPos = world.rayTraceBlocks(vec3, aVector, true);
+			 			
+			 			if (movingObjPos == null) {
+			 				return stack;
+			 			}
+			 			
+			 			else {				
+			 				if (movingObjPos.entityHit instanceof EntityLivingBase) {
+			 					return stack;
+			 				} else {
+			 					player.setPositionAndUpdate((double) movingObjPos.blockX, ((double) (float) movingObjPos.blockY + 1F), (double) movingObjPos.blockZ);
+			 				}
+			 				
+			 				for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
+			 					world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+			 					world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+			 					world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
+			 				}
+			 			}*/
+			
 			for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
 				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
 				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
@@ -93,7 +118,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 			list.addAll(TooltipHelper.addAll("tenebrae_sword_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.addAll(TooltipHelper.addAll("tenebrae_sword_info"));
+				list.addAll(TooltipHelper.addAll("tenebrae_sword_stats"));
 			} else {
 				list.addAll(TooltipHelper.addAll("shift"));
 			}

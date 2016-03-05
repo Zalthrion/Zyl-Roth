@@ -34,7 +34,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.addAll(TooltipHelper.addAll("tenebrae_armor"));
+			list.addAll(TooltipHelper.addAll("tenebrae_armor_stats"));
 		} else {
 			list.addAll(TooltipHelper.addAll("shift"));
 		}

@@ -437,7 +437,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
 	}
 
-	@Override public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_) {
+	@Override public boolean populateChunk(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_) {
 		return false;
 	}
 

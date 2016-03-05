@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.itemblock;
+package com.zalthrion.zylroth.itemblock.tree;
 
 import java.util.ArrayList;
 
@@ -21,11 +21,7 @@ public class RainbowLeafItemBlock extends ItemBlock {
 	}
 	
 	@Override public String getUnlocalizedName(ItemStack stack) {
-		try {
-			return "tile.zylroth:" + subNames[/*this.block == ModBlocks.rainbowLeafBlockZL ? stack.getItemDamage() : stack.getItemDamage() + 4*/ stack.getItemDamage()];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			return "tile.zylroth:null.name";
-		}
+		return stack.getItemDamage() <= subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
 	}
 	
 	public static String[] getVariants() {

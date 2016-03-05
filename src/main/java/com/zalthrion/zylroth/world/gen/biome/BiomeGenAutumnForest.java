@@ -1,9 +1,14 @@
 package com.zalthrion.zylroth.world.gen.biome;
 
+import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.zalthrion.zylroth.entity.EntityBadger;
+import com.zalthrion.zylroth.lib.ModBlocks;
 
 public class BiomeGenAutumnForest extends BiomeGenBase {
 	
@@ -26,6 +31,10 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBadger.class, 1, 1, 1));
 		
 		this.waterColorMultiplier = 0x38CAE0;
+	}
+	
+	@Override public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+		return new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), ModBlocks.iridisLeafBlock.getDefaultState(), false);
 	}
 	
 	@Override

@@ -96,7 +96,7 @@ public class BlockBaseContainer extends BlockBase implements ITileEntityProvider
 		
 		EntityFX fx = digFX.getEntityFX(0, worldObj, d0, d1, d2, 0, 0, 0, Block.getStateId(iblockstate));
 		EntityDiggingFX dfx = (EntityDiggingFX) fx;
-		effectRenderer.addEffect(dfx.func_174846_a(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F));
+		effectRenderer.addEffect(dfx.setBlockPos(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F));
 		return true;
 	}
 	

@@ -42,17 +42,17 @@ public class SummonMessage implements IMessage {
 					EntityPlayer player = context.getServerHandler().playerEntity;
 					if (player != null) {
 						MountData data = MountData.get(player);
-						if (message.summon == MountIDs.savageBadger) {
-							MountSavageBadger badger = new MountSavageBadger(player.worldObj);
-							badger.copyLocationAndAnglesFrom(player);
-							badger.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
+						if (message.summon == MountIDs.deathcharger) {
+							MountDeathcharger deathcharger = new MountDeathcharger(player.worldObj);
+							deathcharger.copyLocationAndAnglesFrom(player);
+							deathcharger.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								badger.setOwnerId(player.getUniqueID().toString());
-								badger.isSummoned(true);
-								badger.setTamedBy(player);
-								player.worldObj.spawnEntityInWorld(badger);
-								data.setOwnedMount(badger.getUniqueID().toString(), 0);
-								player.mountEntity(badger);
+								deathcharger.setOwnerId(player.getUniqueID().toString());
+								deathcharger.isSummoned(true);
+								deathcharger.setTamedBy(player);
+								player.worldObj.spawnEntityInWorld(deathcharger);
+								data.setOwnedMount(deathcharger.getUniqueID().toString(), 2);
+								player.mountEntity(deathcharger);
 							}
 						} else if (message.summon == MountIDs.plaguedHorse) {
 							MountPlaguedHorse plaguedHorse = new MountPlaguedHorse(player.worldObj);
@@ -66,17 +66,17 @@ public class SummonMessage implements IMessage {
 								data.setOwnedMount(plaguedHorse.getUniqueID().toString(), 1);
 								player.mountEntity(plaguedHorse);
 							}
-						} else if (message.summon == MountIDs.deathcharger) {
-							MountDeathcharger deathcharger = new MountDeathcharger(player.worldObj);
-							deathcharger.copyLocationAndAnglesFrom(player);
-							deathcharger.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
+						} else if (message.summon == MountIDs.savageBadger) {
+							MountSavageBadger badger = new MountSavageBadger(player.worldObj);
+							badger.copyLocationAndAnglesFrom(player);
+							badger.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								deathcharger.setOwnerId(player.getUniqueID().toString());
-								deathcharger.isSummoned(true);
-								deathcharger.setTamedBy(player);
-								player.worldObj.spawnEntityInWorld(deathcharger);
-								data.setOwnedMount(deathcharger.getUniqueID().toString(), 2);
-								player.mountEntity(deathcharger);
+								badger.setOwnerId(player.getUniqueID().toString());
+								badger.isSummoned(true);
+								badger.setTamedBy(player);
+								player.worldObj.spawnEntityInWorld(badger);
+								data.setOwnedMount(badger.getUniqueID().toString(), 0);
+								player.mountEntity(badger);
 							}
 						} else if (message.summon == MountIDs.swiftUnicorn) {
 							MountSwiftUnicorn swiftUnicorn = new MountSwiftUnicorn(player.worldObj);

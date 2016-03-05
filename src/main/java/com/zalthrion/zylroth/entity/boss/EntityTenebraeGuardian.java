@@ -46,6 +46,7 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		this.ignoreFrustumCheck = true;
 	}
 	
 	@Override
@@ -168,15 +169,15 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 		this.playSound("mob.irongolem.walk", 1.0F, 1.0F);
 	}
 	
-	/** Drop 0-2 items of this living's type. @param par1 - Whether this entity
-	 * has recently been hit by a player. @param par2 - Level of Looting used to
+	/** Drop 0-2 items of this living's type. @param hit - Whether this entity
+	 * has recently been hit by a player. @param loot - Level of Looting used to
 	 * kill this mob. */
 	@Override
-	protected void dropFewItems(boolean par1, int par2) {
+	protected void dropFewItems(boolean hit, int loot) {
 		this.dropItem(ModItems.voidGem, 1);
 		this.dropItem(ModItems.voidEssence, 4);
 		
-		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
+		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + loot * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
 			this.entityDropItem(new ItemStack(ModItems.tenebraeOre, 1, 6), 0f);
@@ -185,6 +186,13 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 	
 	@Override protected void onDeathUpdate() {
 		this.deathTicks ++;
+		
+		if (this.deathTicks > 0) {
+			this.motionY = 0.0F;
+			this.motionX = 0.0F;
+			this.motionZ = 0.0F;
+			this.noClip = true;
+		}
 		
 		if (this.deathTicks >= 180 && this.deathTicks <= 200) {
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
@@ -202,7 +210,7 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 			}
 		}
 		
-		this.moveEntity(0.D, 0.1D, 0.0D);
+		this.moveEntity(0.D, 0.01D, 0.0D);
 		for (int countparticles = 900; countparticles <= 1000; ++ countparticles) {
 			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
 			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, (double) this.posX - 0.0F, (double) this.posY - -1.5F, (double) this.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);

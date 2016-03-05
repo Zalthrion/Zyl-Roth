@@ -25,11 +25,11 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class RainbowSaplingBlockZL extends BlockBush implements IGrowable {
+public class RainbowSaplingBlock extends BlockBush implements IGrowable {
 	public static final PropertyEnum<TreeColor> TYPE = PropertyEnum.<TreeColor>create("type", TreeColor.class);
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 	
-	public RainbowSaplingBlockZL() {
+	public RainbowSaplingBlock() {
 		super();
 		float f = 0.4F;
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
@@ -73,22 +73,22 @@ public class RainbowSaplingBlockZL extends BlockBush implements IGrowable {
 		IBlockState leafState = Blocks.air.getDefaultState();
 		switch (l) {
 			case 0:
-				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.RED);
+				leafState = ModBlocks.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.TYPE, TreeColor.RED);
 				break;
 			case 1:
-				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.ORANGE);
+				leafState = ModBlocks.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.TYPE, TreeColor.ORANGE);
 				break;
 			case 2:
-				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.YELLOW);
+				leafState = ModBlocks.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.TYPE, TreeColor.YELLOW);
 				break;
 			case 3:
-				leafState = ModBlocks.rainbowLeafBlockZL.getDefaultState().withProperty(RainbowLeafBlockZL.TYPE, TreeColor.GREEN);
+				leafState = ModBlocks.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.TYPE, TreeColor.GREEN);
 				break;
 			case 4:
-				leafState = ModBlocks.rainbowLeafBlockZL2.getDefaultState().withProperty(RainbowLeafBlockZL2.TYPE, TreeColor.BLUE);
+				leafState = ModBlocks.rainbowLeafBlock2.getDefaultState().withProperty(RainbowLeafBlock2.TYPE, TreeColor.BLUE);
 				break;
 			case 5:
-				leafState = ModBlocks.rainbowLeafBlockZL2.getDefaultState().withProperty(RainbowLeafBlockZL2.TYPE, TreeColor.PURPLE);
+				leafState = ModBlocks.rainbowLeafBlock2.getDefaultState().withProperty(RainbowLeafBlock2.TYPE, TreeColor.PURPLE);
 				break;
 		}
 		Object object = new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), leafState, false);

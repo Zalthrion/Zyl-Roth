@@ -5,23 +5,31 @@ itemGroup.Zyl'Roth=Zyl'Roth
 
 #Tooltips
 
-tooltip.zylroth:shift=- Hold Shift for more info -
+tooltip.zylroth:shift=\n- Hold Shift for more info -
 
 tooltip.zylroth:beacon=Can be used for Beacon bases
 tooltip.zylroth:core=A powerful artifact with immense power running inside it.
-tooltip.zylroth:head=A simple Tenebrae Block with the shape of a head.
+tooltip.zylroth:head=A block chiseled to look like a head.
 tooltip.zylroth:tenebrae=You can feel a dark essence coming out of it...
 tooltip.zylroth:tenebrae_armor=Made of a dark material\nSeems like it's more durable than diamond.
+tooltip.zylroth:generic_tool_info=Sneak + Right click while holding to use normally.
 
-tooltip.zylroth:tenebrae_generic=You can barely notice a weak glow coming out from it.
+tooltip.zylroth:tenebrae=An ancient ore, legends tell that it has driven people crazy.
+tooltip.zylroth:tenebrae_generic=You can feel a dark essence surrounding it.
 
-tooltip.zylroth:tenebrae_sword_info=Sneak + Right click while holding\nto throw an ender pearl.
-tooltip.zylroth:tenebrae_sword_lore=The sword seems to be attracting\ndark energy while on your hand.
+tooltip.zylroth:tenebrae_armor=Made of an ancient dark ore rumored to be better than Diamond.
+tooltip.zylroth:tenebrae_armor_stats=\nDefense Level: Diamond \nDurability: 42 \nEnchantability: 16
 
-tooltip.zylroth:tenebrae_tool_info=Sneak + Right click while holding to use normally.
-tooltip.zylroth:tenebrae_tool_lore=A tool made of the dark ore\nYou can feel a dark essence surround you.
+tooltip.zylroth:tenebrae_sword_lore=It seems to be attracting dark energy while being held.
+tooltip.zylroth:tenebrae_sword_stats=\nDamage Level: Above Diamond \nDurability: 2250 \nEnchantability: 15
+tooltip.zylroth:tenebrae_tool_lore=A tool made of an ancient dark ore.
+tooltip.zylroth:tenebrae_tool_stats=\nHarvest Level: Diamond \nDurability: 2250 \nEnchantability: 15
 
-tooltip.zylroth:creative_tool_lore=A tool made of the ancient ore\nA powerful material that holds the power of creation.
+tooltip.zylroth:creative_generic=It glows from the power held within it.
+
+tooltip.zylroth:creative_sword_info=Sneak + Right click while holding\nto throw an ender pearl.
+tooltip.zylroth:creative_sword_lore=A sword made of the ancient material.\nIt is told that it holds the power of creation itself.
+tooltip.zylroth:creative_tool_lore=A tool made of the ancient material.\nIt is told that it holds the power of creation itself.
 
 tooltip.zylroth:spawnpoint.set=Sneak + Right Click\nTo set your spawnpoint on this dimension
 tooltip.zylroth:spawnpoint.overworld=Overworld Bind: %s
@@ -78,6 +86,8 @@ tile.zylroth:oreInfuserMachine.name=Ore Infuser
 tile.zylroth:oreInfuserMachineActive.name=Ore Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
 tile.zylroth:tenebraeCore.name=Tenebrae Core
+
+tile.zylroth:autumnTreeLeaves.name=Autumn Tree Leaves
 
 tile.zylroth:rainbowRedLeaves.name=Rainbow Red Leaves
 tile.zylroth:rainbowOrangeLeaves.name=Rainbow Orange Leaves

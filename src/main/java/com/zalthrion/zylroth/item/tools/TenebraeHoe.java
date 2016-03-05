@@ -65,7 +65,7 @@ public class TenebraeHoe extends ItemHoe implements ZylrothTool {
 			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.addAll(TooltipHelper.addAll("tenebrae_tool_info"));
+				list.addAll(TooltipHelper.addAll("tenebrae_tool_stats"));
 			} else {
 				list.addAll(TooltipHelper.addAll("shift"));
 			}

@@ -27,33 +27,33 @@ import com.google.common.base.Predicate;
 import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTabs;
 
-public class RainbowLeafBlockZL2 extends BlockLeaves {
+public class RainbowLeafBlock extends BlockLeaves {
 	public static final PropertyEnum<TreeColor> TYPE = PropertyEnum.<TreeColor>create("type", TreeColor.class, new Predicate<TreeColor>() {
 		@Override public boolean apply(TreeColor param_apply) {
-			return (param_apply.getMeta() > 3) && (param_apply.getMeta() < 6);
+			return param_apply.getMeta() < 4;
 		}
 	});
 	
-	public RainbowLeafBlockZL2() {
+	public RainbowLeafBlock() {
 		this.setTickRandomly(true);
 		this.setCreativeTab(ModTabs.zylRoth);
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setStepSound(soundTypeGrass);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, TreeColor.BLUE).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, TreeColor.RED).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 	}
 	
 	@Override protected ItemStack createStackedBlock(IBlockState state) {
-		return new ItemStack(this, 1, (state.getBlock().getMetaFromState(state) & 3) + 4);
+		return new ItemStack(this, 1, state.getBlock().getMetaFromState(state) & 3);
 	}
 	
 	@Override public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(TYPE, TreeColor.get((meta % 4) + 4)).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+		return this.getDefaultState().withProperty(TYPE, TreeColor.get((meta % 4))).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
 	}
 	
 	@Override public int getMetaFromState(IBlockState state) {
 		int i = 0;
-		i = i | ((TreeColor) state.getValue(TYPE)).getMeta() - 4;
+		i = i | ((TreeColor) state.getValue(TYPE)).getMeta();
 		
 		if (!((Boolean) state.getValue(DECAYABLE)).booleanValue()) {
 			i |= 4;
@@ -67,7 +67,7 @@ public class RainbowLeafBlockZL2 extends BlockLeaves {
 	}
 	
 	@Override public void getSubBlocks(Item item, CreativeTabs tabs, List<ItemStack> list) {
-		for (int i = 4; i < 6; i ++) {
+		for (int i = 0; i < 4; i ++) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}
@@ -77,7 +77,7 @@ public class RainbowLeafBlockZL2 extends BlockLeaves {
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.rainbowSaplingBlockZL);
+		return Item.getItemFromBlock(ModBlocks.rainbowSaplingBlock);
 	}
 	
 	@Override public int damageDropped(IBlockState state) {

@@ -410,7 +410,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		BlockFalling.fallInstantly = false;
 	}
 	
-	@Override public boolean func_177460_a(IChunkProvider provider, Chunk chunk, int chunkX, int chunkZ) {
+	@Override public boolean populateChunk(IChunkProvider provider, Chunk chunk, int chunkX, int chunkZ) {
 		return false;
 	}
 	

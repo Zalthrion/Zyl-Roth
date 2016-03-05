@@ -1,4 +1,4 @@
-package com.zalthrion.zylroth.itemblock;
+package com.zalthrion.zylroth.itemblock.tree;
 
 import java.util.ArrayList;
 

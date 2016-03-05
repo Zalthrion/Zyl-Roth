@@ -227,4 +227,8 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 			return null;
 		}
 	}
+	
+	@Override public boolean isChild() {
+		return false;
+	}
 }
