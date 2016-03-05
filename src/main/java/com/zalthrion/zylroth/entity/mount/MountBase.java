@@ -234,4 +234,9 @@ public class MountBase extends EntityTameable {
 		}
 		super.setDead();
 	}
+	
+	@Override
+	public boolean isChild() {
+		return false;
+	}
 }

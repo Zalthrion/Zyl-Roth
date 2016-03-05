@@ -3,6 +3,14 @@ package com.zalthrion.zylroth.item.tools;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.TooltipHelper;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,25 +23,17 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import org.lwjgl.input.Keyboard;
-
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.reference.Reference;
-import com.zalthrion.zylroth.utility.TooltipHelper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class TenebraeSword extends ItemSword implements ZylrothTool {
 	
 	private String name = "tenebraeSword";
-	
+		
 	public TenebraeSword(ToolMaterial material) {
 		super(material);
 		this.setNames(name);
 	}
 	
-	@Override public boolean isBroken(ItemStack stack) {
+	@Override
+	public boolean isBroken(ItemStack stack) {
 		return stack.getMetadata() >= tenebraeDurability;
 	}
 	
@@ -42,7 +42,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
-			}		
+			}
 			
 			return true;
 		}
@@ -52,19 +52,16 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (!(this.isBroken(stack)))
-			stack.damageItem(1, attacker);
+		if (!(this.isBroken(stack))) stack.damageItem(1, attacker);
 		return true;
 	}
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!isBroken(stack))
-			return false;
+		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 		
-		if (world.isRemote)
-			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		
 		return true;
 	}
@@ -74,7 +71,32 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		
 		Random rand = new Random();
 		
-		if (!(player.isSneaking()) && !(player.capabilities.isCreativeMode)) {
+		if (!(this.isBroken(stack)) && !(player.isSneaking()) && !(player.capabilities.isCreativeMode)) {
+			
+			/** Test-Item Start */
+/*			Vec3 vec3 = player.getPosition(1.0F);
+			vec3.yCoord ++;
+			Vec3 lookVec = player.getLook(1.0F);
+			Vec3 aVector = vec3.addVector(lookVec.xCoord * 50.0D, lookVec.yCoord * 50.0D, lookVec.zCoord * 50.0D);
+			MovingObjectPosition movingObjPos = world.rayTraceBlocks(vec3, aVector, true);
+			
+			if (movingObjPos == null) {
+				return stack;
+			}
+			
+			else {				
+				if (movingObjPos.entityHit instanceof EntityLivingBase) {
+					return stack;
+				} else {
+					player.setPositionAndUpdate((double) movingObjPos.blockX, ((double) (float) movingObjPos.blockY + 1F), (double) movingObjPos.blockZ);
+				}
+				
+				for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
+					world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+					world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+					world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
+				}
+			}*/
 			
 			for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
 				world.spawnParticle("portal", (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
@@ -110,8 +132,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 			if (side == 5) {
 				++ x;
 			}
-			if (!world.isAirBlock(x, y, z))
-				return false;
+			if (!world.isAirBlock(x, y, z)) return false;
 		}
 		
 		if (this.isBroken(stack) && !(world.isRemote)) {
@@ -152,7 +173,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 			list.addAll(TooltipHelper.addAll("tenebrae_sword_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.addAll(TooltipHelper.addAll("tenebrae_sword_info"));
+				list.addAll(TooltipHelper.addAll("tenebrae_sword_stats"));
 			} else {
 				list.addAll(TooltipHelper.addAll("shift"));
 			}

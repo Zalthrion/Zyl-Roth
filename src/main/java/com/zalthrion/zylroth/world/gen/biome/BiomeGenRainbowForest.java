@@ -40,22 +40,16 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 	public WorldGenAbstractTree func_150567_a(Random par1Random) {
 		int i = par1Random.nextInt(7);
 		if (i <= 1) {
-			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL, 0, 0, false);
-		}
-		else if (i <= 2) {
-			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL, 0, 1, false);
-		}
-		else if (i <= 3) {
-			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL, 0, 2, false);
-		}
-		else if (i <= 4) {
-			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL, 0, 3, false);
-		}
-		else if (i <= 5) {
-			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL_2, 0, 0, false);
-		}
-		
-		else return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL_2, 0, 1, false);
+			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 0, false);
+		} else if (i <= 2) {
+			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 1, false);
+		} else if (i <= 3) {
+			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 2, false);
+		} else if (i <= 4) {
+			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 3, false);
+		} else if (i <= 5) {
+			return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock_2, 0, 0, false);
+		} else return new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock_2, 0, 1, false);
 	}
 	
 	@Override
@@ -68,7 +62,8 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 		return color = 0x60E409;
 	}
 	
-	@Override public int getSkyColorByTemp(float par1) {
+	@Override
+	public int getSkyColorByTemp(float par1) {
 		return 0x3CA7B5;
 	}
 	

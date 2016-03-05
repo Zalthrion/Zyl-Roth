@@ -61,14 +61,15 @@ public class ItemBaseTalisman extends ItemBase {
 							if (player instanceof EntityPlayerMP) {
 								EntityPlayerMP playerMP = (EntityPlayerMP) player;
 								WorldServer ws = playerMP.mcServer.worldServerForDimension(dimensionID);
-								
+								int y = world.getTopSolidOrLiquidBlock(0, 0);
+
 								if (!(player.dimension == dimensionID) && player.ridingEntity == null) {
-									int[] bindPos = isDimensionBound(stack) ? getDimensionBind(stack) : new int[] {0, -1, 0};
+									int[] bindPos = isDimensionBound(stack) ? getDimensionBind(stack) : new int[] {0, y, 0};
 									SpecialTeleporter teleporter = new SpecialTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
 									playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimensionID, teleporter);
 									teleporter.adjustPos(player);
 								} else if (player.dimension == dimensionID && player.ridingEntity == null) {
-									int[] bindPos = isOverworldBound(stack) ? getOverworldBind(stack) : new int[] {0, -1, 0};
+									int[] bindPos = isOverworldBound(stack) ? getOverworldBind(stack) : new int[] {0, y, 0};
 									SpecialTeleporter teleporter = new SpecialTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
 									playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, teleporter);
 									teleporter.adjustPos(player);

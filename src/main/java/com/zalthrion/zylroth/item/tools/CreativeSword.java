@@ -173,10 +173,10 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		if (this.isBroken(stack)) {
 			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		} else {
-			list.addAll(TooltipHelper.addAll("tenebrae_sword_lore"));
-			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
+			list.addAll(TooltipHelper.addAll("creative_sword_lore"));
+			list.addAll(TooltipHelper.addAll("creative_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.addAll(TooltipHelper.addAll("tenebrae_sword_info"));
+				list.addAll(TooltipHelper.addAll("creative_sword_info"));
 			} else {
 				list.addAll(TooltipHelper.addAll("shift"));
 			}

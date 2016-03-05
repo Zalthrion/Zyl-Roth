@@ -1,14 +1,14 @@
-package com.zalthrion.zylroth.itemblock;
+package com.zalthrion.zylroth.itemblock.tree;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class RainbowLeaf2ItemBlock extends ItemBlock {
+public class RainbowLeafItemBlock extends ItemBlock {
 	
-	private final static String[] subNames = {"rainbowBlueLeaves", "rainbowPurpleLeaves"};
+	private final static String[] subNames = {"rainbowRedLeaves", "rainbowOrangeLeaves", "rainbowYellowLeaves", "rainbowGreenLeaves", "rainbowBlueLeaves", "rainbowPurpleLeaves"};
 	
-	public RainbowLeaf2ItemBlock(Block id) {
+	public RainbowLeafItemBlock(Block id) {
 		super(id);
 		setHasSubtypes(true);
 	}

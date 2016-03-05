@@ -13,6 +13,7 @@ import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
 
+//TODO: Modified class used for the mounts & other "rideable" entities from the mod.
 public class EntityCustomAIControlledByPlayer extends EntityAIBase {
 	
 	private final EntityLiving thisEntity;

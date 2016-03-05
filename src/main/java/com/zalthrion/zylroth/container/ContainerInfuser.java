@@ -32,7 +32,7 @@ public class ContainerInfuser extends ContainerBase {
 		this.addSlotToContainer(new Slot(infuserInventory, INPUT, 46, 33));
 		this.addSlotToContainer(new Slot(infuserInventory, INFUSION_MATERIAL_ONE, 46, 7));
 		this.addSlotToContainer(new Slot(infuserInventory, INFUSION_MATERIAL_TWO, 46, 61));
-		this.addSlotToContainer(new SlotInfuserFuel(infuserInventory, FUEL, 16, 61));
+		this.addSlotToContainer(new SlotInfuserFuel(infuserInventory, FUEL, 16, 62));
 		this.addSlotToContainer(new SlotInfuserOutput(playerInventory.player, infuserInventory, OUTPUT, 126, 33));
 		
 		for (int i = 0; i < 3; i ++) {

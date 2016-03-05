@@ -26,12 +26,12 @@ import com.zalthrion.zylroth.world.gen.structures.TreeGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
+public class RainbowSaplingBlock extends BlockBush implements IGrowable {
 	
-	public static final String[] sapling_names = new String[] {"rainbowBlueSapling", "rainbowPurpleSapling"};
+	public static final String[] sapling_names = new String[] {"rainbowRedSapling", "rainbowOrangeSapling", "rainbowYellowSapling", "rainbowGreenSapling", "rainbowBlueSapling", "rainbowPurpleSapling"};
 	private static final IIcon[] icon = new IIcon[sapling_names.length];
 	
-	public RainbowSaplingBlockZL_2() {
+	public RainbowSaplingBlock() {
 		float f = 0.4F;
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.setCreativeTab(ModTabs.ZylRoth);
@@ -59,7 +59,7 @@ public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		meta &= 7;
-		return icon[MathHelper.clamp_int(meta, 0, 1)];
+		return icon[MathHelper.clamp_int(meta, 0, 5)];
 	}
 	
 	public void markOrGrowMarked(World p_149879_1_, int p_149879_2_, int p_149879_3_, int p_149879_4_, Random p_149879_5_) {
@@ -84,18 +84,22 @@ public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 		
 		switch (l) {
 			case 0:
-				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL_2, 0, 0, false);
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 0, false);
 				break;
 			case 1:
-				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlockZL_2, 0, 1, false);
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 1, false);
 				break;
 			case 2:
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 2, false);
 				break;
 			case 3:
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock, 0, 3, false);
 				break;
 			case 4:
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock_2, 0, 0, false);
 				break;
 			case 5:
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.rainbowLeafBlock_2, 0, 1, false);
 				break;
 			default:
 				break;
@@ -145,8 +149,9 @@ public class RainbowSaplingBlockZL_2 extends BlockBush implements IGrowable {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		list.add(new ItemStack(item, 1, 0));
-		list.add(new ItemStack(item, 1, 1));
+		for (int i = 0; i < sapling_names.length; i ++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 	
 	@Override @SideOnly(Side.CLIENT)

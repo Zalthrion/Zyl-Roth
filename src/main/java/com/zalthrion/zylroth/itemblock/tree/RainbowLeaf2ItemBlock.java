@@ -1,15 +1,15 @@
-package com.zalthrion.zylroth.itemblock;
+package com.zalthrion.zylroth.itemblock.tree;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlockWithMetadata;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class RainbowSaplingItemBlock extends ItemBlockWithMetadata {
+public class RainbowLeaf2ItemBlock extends ItemBlock {
 	
-	private final static String[] subNames = {"rainbowRedSapling", "rainbowOrangeSapling", "rainbowYellowSapling", "rainbowGreenSapling"};
+	private final static String[] subNames = {"rainbowBlueLeaves", "rainbowPurpleLeaves"};
 	
-	public RainbowSaplingItemBlock(Block id) {
-		super(id, id);
+	public RainbowLeaf2ItemBlock(Block id) {
+		super(id);
 		setHasSubtypes(true);
 	}
 	
@@ -22,5 +22,4 @@ public class RainbowSaplingItemBlock extends ItemBlockWithMetadata {
 	public String getUnlocalizedName(ItemStack stack) {
 		return stack.getCurrentDurability() <= subNames.length ? "tile.zylroth:" + subNames[stack.getCurrentDurability()] : "general.zylroth:unavailable";
 	}
-	
 }

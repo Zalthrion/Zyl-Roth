@@ -83,9 +83,7 @@ public class ModelBadger extends ModelBase {
 	
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		
 		this.Head.render(f5);
 		this.Tail.render(f5);
 		this.Body.render(f5);
@@ -97,7 +95,6 @@ public class ModelBadger extends ModelBase {
 		if (entity instanceof EntityFancyBadger) {
 			this.TopHatBase.render(f5);
 		}
-		
 	}
 	
 	/**
@@ -111,13 +108,10 @@ public class ModelBadger extends ModelBase {
 	
 	@Override
 	public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-		
 		this.Tail.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * -0.5F;
-		
 		this.TopLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
 		this.BottomLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
 		this.TopRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
 	}
-	
 }

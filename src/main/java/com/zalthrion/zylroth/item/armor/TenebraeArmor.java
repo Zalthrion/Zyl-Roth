@@ -35,8 +35,10 @@ public class TenebraeArmor extends ItemBaseArmor {
 	
 	@Override @SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
+		list.addAll(TooltipHelper.addAll("tenebrae_armor"));
+		list.addAll(TooltipHelper.addAll("tenebrae_generic"));
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			list.addAll(TooltipHelper.addAll("tenebrae_armor"));
+			list.addAll(TooltipHelper.addAll("tenebrae_armor_stats"));
 		} else {
 			list.addAll(TooltipHelper.addAll("shift"));
 		}

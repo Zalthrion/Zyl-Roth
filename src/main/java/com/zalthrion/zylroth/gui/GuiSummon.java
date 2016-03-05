@@ -22,9 +22,9 @@ public class GuiSummon extends GuiScreen {
 	private int currentlySelected = 0;
 	private int summons = 5;
 	private EntityLivingBase[] entities = new EntityLivingBase[] {
-			new MountSavageBadger(Minecraft.getMinecraft().theWorld),
-			new MountPlaguedHorse(Minecraft.getMinecraft().theWorld),
 			new MountDeathcharger(Minecraft.getMinecraft().theWorld),
+			new MountPlaguedHorse(Minecraft.getMinecraft().theWorld),
+			new MountSavageBadger(Minecraft.getMinecraft().theWorld),
 			new MountSwiftUnicorn(Minecraft.getMinecraft().theWorld),
 			new MountWarTortoise(Minecraft.getMinecraft().theWorld)
 	};
@@ -76,11 +76,11 @@ public class GuiSummon extends GuiScreen {
 		int ySize = 160;
 		int xPos = ((this.width - xSize) / 2) + 20;
 		int yPos = ((this.height - ySize) / 2) + 20;
-		GuiButton initialButton = new GuiButton(0, xPos + 25, yPos, 100, 20, StatCollector.translateToLocal("entity.Zylroth:SavageBadger.name"));
+		GuiButton initialButton = new GuiButton(0, xPos + 25, yPos, 100, 20, StatCollector.translateToLocal("entity.Zylroth:Deathcharger.name"));
 		initialButton.enabled = false;
 		this.buttonList.add(initialButton);
 		this.buttonList.add(new GuiButton(1, xPos + 25, yPos + 25, 100, 20, StatCollector.translateToLocal("entity.Zylroth:Plagued_Horse.name")));
-		this.buttonList.add(new GuiButton(2, xPos + 25, yPos + 50, 100, 20, StatCollector.translateToLocal("entity.Zylroth:Deathcharger.name")));
+		this.buttonList.add(new GuiButton(2, xPos + 25, yPos + 50, 100, 20, StatCollector.translateToLocal("entity.Zylroth:SavageBadger.name")));
 		this.buttonList.add(new GuiButton(3, xPos + 25, yPos + 75, 100, 20, StatCollector.translateToLocal("entity.Zylroth:SwiftUnicorn.name")));
 		this.buttonList.add(new GuiButton(4, xPos + 25, yPos + 100, 100, 20, StatCollector.translateToLocal("entity.Zylroth:WarTortoise.name")));
 		this.buttonList.add(new SummonDismissButton(this.summons, xPos + 150, yPos + 100, 100, 20, StatCollector.translateToLocal("gui.zylroth:summon")));

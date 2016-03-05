@@ -2,34 +2,14 @@ package com.zalthrion.zylroth.lib;
 
 import net.minecraft.block.Block;
 
-import com.zalthrion.zylroth.block.AshBlock;
-import com.zalthrion.zylroth.block.ChiseledTenebrae;
-import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
-import com.zalthrion.zylroth.block.GoldBag;
-import com.zalthrion.zylroth.block.InfusedTenebrae;
-import com.zalthrion.zylroth.block.TenebraeBlock;
-import com.zalthrion.zylroth.block.TenebraeCore;
-import com.zalthrion.zylroth.block.machine.InfuserMachine;
-import com.zalthrion.zylroth.block.machine.InfuserType;
-import com.zalthrion.zylroth.block.ore.EndiriteOre;
-import com.zalthrion.zylroth.block.ore.InferniumOre;
-import com.zalthrion.zylroth.block.ore.TenebraeOre;
-import com.zalthrion.zylroth.block.ore.VoidiumOre;
-import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
-import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL;
-import com.zalthrion.zylroth.block.tree.RainbowLeafBlockZL_2;
-import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL;
-import com.zalthrion.zylroth.block.tree.RainbowSaplingBlockZL_2;
-import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
-import com.zalthrion.zylroth.itemblock.CoreItemBlock;
-import com.zalthrion.zylroth.itemblock.HeadItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowLeaf2ItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowLeafItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowSapling2ItemBlock;
-import com.zalthrion.zylroth.itemblock.RainbowSaplingItemBlock;
-import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
-import com.zalthrion.zylroth.tile.TileEntityInfuser;
-import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
+import com.zalthrion.zylroth.block.*;
+import com.zalthrion.zylroth.block.machine.*;
+import com.zalthrion.zylroth.block.ore.*;
+import com.zalthrion.zylroth.block.spawner.*;
+import com.zalthrion.zylroth.block.tree.*;
+import com.zalthrion.zylroth.itemblock.*;
+import com.zalthrion.zylroth.itemblock.tree.*;
+import com.zalthrion.zylroth.tile.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -53,10 +33,12 @@ public final class ModBlocks {
 	public static Block voidiumOre = new VoidiumOre();
 	
 	/* Trees */
-	public static Block rainbowLeafBlockZL = new RainbowLeafBlockZL();
-	public static Block rainbowLeafBlockZL_2 = new RainbowLeafBlockZL_2();
-	public static Block rainbowSaplingBlockZL = new RainbowSaplingBlockZL();
-	public static Block rainbowSaplingBlockZL_2 = new RainbowSaplingBlockZL_2();
+	public static Block rainbowLeafBlock = new RainbowLeafBlock();
+	public static Block rainbowLeafBlock_2 = new RainbowLeafBlock_2();
+	public static Block rainbowSaplingBlockZL = new RainbowSaplingBlock();
+	public static Block iridisLeafBlock = new IridisLeafBlock();
+	public static Block iridisSaplingBlock = new IridisSaplingBlock();
+	public static Block kyrulLogBlock = new KyrulLogBlock();
 	
 	/* Others */
 	public static Block ashBlock = new AshBlock();
@@ -92,10 +74,12 @@ public final class ModBlocks {
 		ModRegistry.addRegister(24, voidiumOre, "voidiumOre");
 		
 		/* Trees */
-		ModRegistry.addRegister(30, rainbowLeafBlockZL, RainbowLeafItemBlock.class, "rainbowLeafBlockZL");
-		ModRegistry.addRegister(31, rainbowLeafBlockZL_2, RainbowLeaf2ItemBlock.class, "rainbowLeafBlockZL_2");
+		ModRegistry.addRegister(31, rainbowLeafBlock, RainbowLeafItemBlock.class, "rainbowLeafBlock");
+		ModRegistry.addRegister(30, rainbowLeafBlock_2, RainbowLeaf2ItemBlock.class, "rainbowLeafBlock_2");
 		ModRegistry.addRegister(32, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
-		ModRegistry.addRegister(33, rainbowSaplingBlockZL_2, RainbowSapling2ItemBlock.class, "rainbowSaplingBlockZL_2");
+		ModRegistry.addRegister(33, kyrulLogBlock, KyrulLogItemBlock.class, "kyrulLogBlock");
+		ModRegistry.addRegister(41, iridisLeafBlock, IridisLeafItemBlock.class, "iridisLeafBlock");
+		ModRegistry.addRegister(42, iridisSaplingBlock, IridisSaplingItemBlock.class, "iridisSaplingBlock");
 		
 		/* Others */
 		ModRegistry.addRegister(34, ashBlock, "ashBlock");

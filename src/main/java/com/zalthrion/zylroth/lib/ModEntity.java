@@ -8,13 +8,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.entity.*;
-import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
-import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
-import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
-import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
-import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
-import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
-import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.entity.boss.*;
+import com.zalthrion.zylroth.entity.dev.*;
+import com.zalthrion.zylroth.entity.mount.*;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -60,6 +56,12 @@ public class ModEntity {
 		
 		registerEntity(EntityBoar.class, "boar", true, 0xeaeae9, 0xc99a03);
 		
+		registerEntity(EntityUnicorn.class, "unicorn", true, 0xeaeae9, 0xc99a03);
+		
+		registerEntity(EntityDeer.class, "deer", true, 0xeaeae9, 0xc99a03);
+		
+		registerEntity(EntityStag.class, "stag", true, 0xeaeae9, 0xc99a03);
+		
 		// Mobs
 		
 		registerEntity(EntityTenebraeGuardian.class, "tenebraeGuardian", true, 0xeaeae9, 0xc99a03);
@@ -73,9 +75,7 @@ public class ModEntity {
 		registerEntity(EntityUndeadMinion.class, "undeadMinion", true, 0xeaeae9, 0xc99a03);
 		
 		registerEntity(EntityUndeadWarrior.class, "undeadWarrior", true, 0xeaeae9, 0xc99a03);
-		
-		registerEntity(EntityUnicorn.class, "unicorn", true, 0xeaeae9, 0xc99a03);
-		
+				
 		registerEntity(EntityVoidDragon.class, "voidDragon", true, 0xeaeae9, 0xc99a03);
 		
 		// Mounts
@@ -89,6 +89,12 @@ public class ModEntity {
 		registerEntity(MountSavageBadger.class, "Savage Badger", false, 0, 0);
 		
 		registerEntity(MountSwiftUnicorn.class, "Swift Unicorn", false, 0, 0);
+		
+		/** Developers */
+		
+		registerEntity(EntityZalthrion.class, "Zalthrion", true, 0xeaeae9, 0xc99a03);
+		
+		registerEntity(EntitySixOneThree.class, "Six-One-Three", true, 0xeaeae9, 0xc99a03);
 		
 	}
 }

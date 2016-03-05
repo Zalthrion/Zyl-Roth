@@ -21,13 +21,13 @@ import com.zalthrion.zylroth.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class RainbowLeafBlockZL extends BlockLeaves {
+public class RainbowLeafBlock_2 extends BlockLeaves {
 	
-	public static final String[][] leaf_names = new String[][] { {"rainbowRedLeaves", "rainbowOrangeLeaves", "rainbowYellowLeaves", "rainbowGreenLeaves"}, {"rainbowRedLeaves_opaque", "rainbowOrangeLeaves_opaque", "rainbowYellowLeaves_opaque", "rainbowGreenLeaves_opaque"}};
-	public static final String[] leaf_types = new String[] {"rainbowRed", "rainbowOrange", "rainbowYellow", "rainbowGreen"};
-	protected IIcon[][] icon = new IIcon[2][];
+	public static final String[][] leaf_names = new String[][] { {"rainbowBlueLeaves", "rainbowPurpleLeaves"}, {"rainbowBlueLeaves_opaque", "rainbowPurpleLeaves_opaque"}};
+	public static final String[] leaf_types = new String[] {"rainbowBlue", "rainbowPurple"};
+	protected IIcon[][] icon = new IIcon[4][];
 	
-	public RainbowLeafBlockZL() {
+	public RainbowLeafBlock_2() {
 		this.setTickRandomly(true);
 		this.setCreativeTab(ModTabs.ZylRoth);
 		this.setHardness(0.2F);
@@ -39,12 +39,12 @@ public class RainbowLeafBlockZL extends BlockLeaves {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
-		return (meta & 3) == 1 ? this.icon[this.field_150127_b][1] : ((meta & 3) == 3 ? this.icon[this.field_150127_b][3] : ((meta & 3) == 2 ? this.icon[this.field_150127_b][2] : this.icon[this.field_150127_b][0]));
+		return (meta & 3) == 1 ? this.icon[this.field_150127_b][1] : this.icon[this.field_150127_b][0];
 	}
 	
 	@Override
-	protected ItemStack createStackedBlock(int par1) {
-		return new ItemStack(this, 1, par1 & 3);
+	protected ItemStack createStackedBlock(int meta) {
+		return new ItemStack(this, 1, meta & 3);
 	}
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})

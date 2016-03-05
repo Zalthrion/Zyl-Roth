@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModBlocks;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -16,21 +17,12 @@ public class WorldOreGenerator implements IWorldGenerator {
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		switch (world.provider.dimensionId) {
-			case 0:
-				GenerateOverworld(random, chunkX * 16, chunkZ * 16, world);
-				break;
-			case 1:
-				GenerateEnd(random, chunkX * 16, chunkZ * 16, world);
-				break;
-			case -1:
-				GenerateNether(random, chunkX * 16, chunkZ * 16, world);
-				break;
-			case 47:
-				GenerateKyrul(random, chunkX * 16, chunkZ * 16, world);
-			case 48:
-				GenerateIridis(random, chunkX * 16, chunkZ *16, world);
-		}
+		int dimId = world.provider.dimensionId;
+		if (dimId == 0) GenerateOverworld(random, chunkX * 16, chunkZ * 16, world);
+		if (dimId == 1) GenerateEnd(random, chunkX * 16, chunkZ * 16, world);
+		if (dimId == -1) GenerateNether(random, chunkX * 16, chunkZ * 16, world);
+		if (dimId == ConfigurationHandler.getKyrulId()) GenerateKyrul(random, chunkX * 16, chunkZ * 16, world);
+		if (dimId == ConfigurationHandler.getIridisId()) GenerateIridis(random, chunkX * 16, chunkZ * 16, world);
 	}
 	
 	private void GenerateOverworld(Random random, int x, int z, World world) {
@@ -53,7 +45,7 @@ public class WorldOreGenerator implements IWorldGenerator {
 		this.addOreSpawn(ModBlocks.tenebraeOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.stone);
 	}
 	
-	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY, Block spawnBlock) {		
+	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY, Block spawnBlock) {
 		WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)), spawnBlock);
 		
 		for (int i = 0; i < chancesToSpawn; i ++) {

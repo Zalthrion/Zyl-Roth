@@ -3,7 +3,10 @@ package com.zalthrion.zylroth.entity.mount;
 import java.util.Iterator;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -26,6 +29,11 @@ public class MountBaseHorse extends EntityTameableHorse {
 	
 	public MountBaseHorse(World world) {
 		super(world);
+		this.setSize(1.0F, 1.0F);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
+		
 		this.isImmuneToFire = true;
 	}
 	
@@ -102,6 +110,11 @@ public class MountBaseHorse extends EntityTameableHorse {
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+	}
+	
+	@Override
+	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
+		return null;
 	}
 	
 	/** Sets what GUI should open when the player opens his inventory while
@@ -183,5 +196,15 @@ public class MountBaseHorse extends EntityTameableHorse {
 			}
 		}
 		super.setDead();
+	}
+	
+	@Override
+	public boolean isChild() {
+		return false;
+	}
+	
+	@Override
+	public double getMountedYOffset() {
+		return 1.2F;
 	}
 }

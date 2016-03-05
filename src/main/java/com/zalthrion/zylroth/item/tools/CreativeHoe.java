@@ -133,10 +133,10 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 		if (this.isBroken(stack)) {
 			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
-			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
-			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
+			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
+			list.addAll(TooltipHelper.addAll("creative_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-				list.addAll(TooltipHelper.addAll("tenebrae_tool_info"));
+				list.addAll(TooltipHelper.addAll("generic_tool_info"));
 			} else {
 				list.addAll(TooltipHelper.addAll("shift"));
 			}
