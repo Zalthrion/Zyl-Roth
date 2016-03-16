@@ -4,6 +4,8 @@ import net.minecraft.item.ItemStack;
 
 public interface ZylrothTool {
 	public static final int tenebraeDurability = 2249;
+	public static final int voidiumDurability = 4249;
+	public static final int voidiriteDurability = 5249;
 	public static final int creativeDurability = 12249;
 	
 	public boolean isBroken(ItemStack stack);
