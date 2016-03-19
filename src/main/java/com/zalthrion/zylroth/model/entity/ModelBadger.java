@@ -3,7 +3,7 @@ package com.zalthrion.zylroth.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 import com.zalthrion.zylroth.entity.EntityFancyBadger;
 

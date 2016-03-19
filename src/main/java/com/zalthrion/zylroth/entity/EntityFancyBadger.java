@@ -12,28 +12,25 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.stats.AchievementList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.entity.ai.EntityCustomAIControlledByPlayer;
-
 public class EntityFancyBadger extends EntityAnimal {
-	
-	/** AI task for player control. */
-	private final EntityCustomAIControlledByPlayer aiControlledByPlayer;
 	
 	public EntityFancyBadger(World world) {
 		super(world);
 		this.setSize(0.9F, 0.9F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-		this.tasks.addTask(2, this.aiControlledByPlayer = new EntityCustomAIControlledByPlayer(this, 0.3F));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot_on_a_stick, false));
 		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
@@ -44,8 +41,8 @@ public class EntityFancyBadger extends EntityAnimal {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 	
 	@Override protected void updateAITasks() {
@@ -57,7 +54,7 @@ public class EntityFancyBadger extends EntityAnimal {
 	 * by a player and the player is holding a carrot-on-a-stick
 	 */
 	@Override public boolean canBeSteered() {
-		EntityPlayer riding = ((EntityPlayer) this.riddenByEntity);
+		EntityPlayer riding = ((EntityPlayer) this.getControllingPassenger());
 		return riding != null && !this.isChild();
 	}
 	
@@ -68,36 +65,33 @@ public class EntityFancyBadger extends EntityAnimal {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	@Override protected String getLivingSound() {
-		return "mob.pig.say";
+	@Override protected SoundEvent getAmbientSound() {
+		return SoundEvents.entity_pig_ambient;
 	}
 	
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	@Override protected String getHurtSound() {
-		return "mob.pig.say";
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_pig_hurt;
 	}
 	
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
-	@Override protected String getDeathSound() {
-		return "mob.pig.death";
+	@Override protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_pig_death;
 	}
 	
 	@Override
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound("mob.pig.step", 0.15F, 1.0F);
+		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
 	}
 	
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
-	@Override public boolean interact(EntityPlayer player) {
-		
-		ItemStack stack = player.inventory.getCurrentItem();
-		
+	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		if (stack != null && stack.getItem() == Items.carrot && player.isSneaking()) {
 			if (!this.worldObj.isRemote) {
 				EntityBadger entitybadger = new EntityBadger(this.worldObj);
@@ -116,12 +110,12 @@ public class EntityFancyBadger extends EntityAnimal {
 			stack.stackSize --;
 		}
 		
-		if (super.interact(player)) {
+		if (super.processInteract(player, hand, stack)) {
 			return true;
 		}
 		
-		else if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && !this.isChild() && !player.isSneaking() && stack == null) {
-			player.mountEntity(this);
+		else if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null) {
+			player.startRiding(this);
 			
 			return true;
 		}
@@ -157,8 +151,8 @@ public class EntityFancyBadger extends EntityAnimal {
 	@Override public void fall(float distance, float damageMultiplier) {
 		super.fall(distance, damageMultiplier);
 		
-		if (distance > 5.0F && this.riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) this.riddenByEntity).triggerAchievement(AchievementList.flyPig);
+		if (distance > 5.0F && this.getControllingPassenger() instanceof EntityPlayer) {
+			((EntityPlayer) this.getControllingPassenger()).addStat(AchievementList.flyPig);
 		}
 	}
 	
@@ -172,12 +166,5 @@ public class EntityFancyBadger extends EntityAnimal {
 	 */
 	@Override public boolean isBreedingItem(ItemStack stack) {
 		return stack != null && stack.getItem() == Items.wheat;
-	}
-	
-	/**
-	 * Return the AI task for player control.
-	 */
-	public EntityCustomAIControlledByPlayer getAIControlledByPlayer() {
-		return this.aiControlledByPlayer;
 	}
 }

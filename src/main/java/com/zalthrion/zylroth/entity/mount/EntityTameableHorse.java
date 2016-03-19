@@ -2,18 +2,26 @@ package com.zalthrion.zylroth.entity.mount;
 
 import java.util.UUID;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.scoreboard.Team;
-import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.base.Optional;
+
 public abstract class EntityTameableHorse extends EntityHorse implements IEntityOwnable {
+	private static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityTameableHorse.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+	private static final DataParameter<Boolean> TAMED = EntityDataManager.<Boolean>createKey(EntityTameableHorse.class, DataSerializers.BOOLEAN);
+	
 	public EntityTameableHorse(World worldIn) {
 		super(worldIn);
 	}
@@ -21,45 +29,26 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.addObject(26, Byte.valueOf((byte) 0));
-		this.dataWatcher.addObject(27, "");
+		this.dataWatcher.register(TAMED, Boolean.FALSE);
+		this.dataWatcher.register(OWNER_UNIQUE_ID, Optional.<UUID>absent());
 	}
 	
-	/** (abstract) Protected helper method to write subclass entity data to NBT. */
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+	@Override public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		super.writeEntityToNBT(tagCompound);
-		
-		if (this.getOwnerId() == null) {
-			tagCompound.setString("OwnerUUID", "");
-		} else {
-			tagCompound.setString("OwnerUUID", this.getOwnerId());
+		if (this.getOwnerId() != null) {
+			tagCompound.setUniqueId("OwnerUUID", this.getOwnerId());
 		}
 	}
 	
-	/** (abstract) Protected helper method to read subclass entity data from NBT. */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-		super.readEntityFromNBT(tagCompund);
-		String s = "";
-		
-		if (tagCompund.hasKey("OwnerUUID", 8)) {
-			s = tagCompund.getString("OwnerUUID");
-		} else {
-			String s1 = tagCompund.getString("Owner");
-			s = PreYggdrasilConverter.getStringUUIDFromName(s1);
-		}
-		
-		if (s.length() > 0) {
-			this.setOwnerId(s);
+	@Override public void readEntityFromNBT(NBTTagCompound tagCompound) {
+		super.readEntityFromNBT(tagCompound);
+		if (tagCompound.hasKey("OwnerUUID")) {
+			this.setOwnerUniqueId(tagCompound.getUniqueId("OwnerUUID"));
 			this.setHorseTamed(true);
 		}
 	}
 	
-	/** Play the taming effect, will either be hearts or smoke depending on
-	 * status */
-	@Override
-	protected void spawnHorseParticles(boolean happy) {
+	@Override protected void spawnHorseParticles(boolean happy) {
 		for (int i = 0; i < 7; ++ i) {
 			double d0 = this.rand.nextGaussian() * 0.02D;
 			double d1 = this.rand.nextGaussian() * 0.02D;
@@ -68,9 +57,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		}
 	}
 	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void handleStatusUpdate(byte id) {
+	@Override @SideOnly(Side.CLIENT) public void handleStatusUpdate(byte id) {
 		if (id == 7) {
 			this.spawnHorseParticles(true);
 		} else if (id == 6) {
@@ -82,34 +69,24 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	
 	@Override
 	public boolean isTame() {
-		return (this.dataWatcher.getWatchableObjectByte(26) & 4) != 0;
+		return this.dataWatcher.get(TAMED).booleanValue();
 	}
 	
-	@Override
-	public void setHorseTamed(boolean tamed) {
-		byte b0 = this.dataWatcher.getWatchableObjectByte(26);
-		
-		if (tamed) {
-			this.dataWatcher.updateObject(26, Byte.valueOf((byte) (b0 | 4)));
-		} else {
-			this.dataWatcher.updateObject(26, Byte.valueOf((byte) (b0 & -5)));
-		}
+	@Override public void setHorseTamed(boolean tamed) {
+		this.dataWatcher.set(TAMED, tamed);
 	}
 	
-	@Override
-	public String getOwnerId() {
-		return this.dataWatcher.getWatchableObjectString(27);
+	@Override public UUID getOwnerUniqueId() {
+		return (UUID) ((Optional<UUID>) this.dataWatcher.get(OWNER_UNIQUE_ID)).orNull();
 	}
 	
-	@Override
-	public void setOwnerId(String id) {
-		this.dataWatcher.updateObject(27, id);
+	@Override public void setOwnerUniqueId(UUID id) {
+		this.dataWatcher.set(OWNER_UNIQUE_ID, Optional.fromNullable(id));
 	}
 	
-	@Override
-	public EntityLivingBase getOwner() {
+	@Override public Entity getOwner() {
 		try {
-			UUID uuid = UUID.fromString(this.getOwnerId());
+			UUID uuid = this.getOwnerUniqueId();
 			return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
 		} catch (IllegalArgumentException illegalargumentexception) {
 			return null;
@@ -127,7 +104,7 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	@Override
 	public Team getTeam() {
 		if (this.isTame()) {
-			EntityLivingBase entitylivingbase = this.getOwner();
+			EntityLivingBase entitylivingbase = (EntityLivingBase) this.getOwner();
 			
 			if (entitylivingbase != null) { return entitylivingbase.getTeam(); }
 		}
@@ -135,16 +112,15 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 		return super.getTeam();
 	}
 	
-	@Override
-	public boolean isOnSameTeam(EntityLivingBase p_142014_1_) {
+	@Override public boolean isOnSameTeam(Entity p_184191_1_) {
 		if (this.isTame()) {
-			EntityLivingBase entitylivingbase1 = this.getOwner();
+			EntityLivingBase entitylivingbase1 = (EntityLivingBase) this.getOwner();
 			
-			if (p_142014_1_ == entitylivingbase1) { return true; }
+			if (p_184191_1_ == entitylivingbase1) { return true; }
 			
-			if (entitylivingbase1 != null) { return entitylivingbase1.isOnSameTeam(p_142014_1_); }
+			if (entitylivingbase1 != null) { return entitylivingbase1.isOnSameTeam(p_184191_1_); }
 		}
 		
-		return super.isOnSameTeam(p_142014_1_);
+		return super.isOnSameTeam(p_184191_1_);
 	}
 }

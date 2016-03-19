@@ -4,7 +4,10 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
@@ -18,17 +21,17 @@ public class SCSwiftUnicorn extends SummoningCrystalBase {
 		this.setUnlocalizedName(name);
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (world.isRemote) return stack;
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+		if (world.isRemote) return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		MountSwiftUnicorn mount = new MountSwiftUnicorn(player.worldObj);
 		if (player instanceof EntityPlayer) {
-			if (player.ridingEntity == null) {
+			if (player.getRidingEntity() == null) {
 				mount.copyLocationAndAnglesFrom(player);
 				mount.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(player.serverPosX, player.serverPosY, player.serverPosZ)), (IEntityLivingData) null);
 				if (!player.worldObj.isRemote && mount.isAdultHorse()) {
 					if (!(persistentData.hasKey("ownsMountUnicorn"))) {
-						mount.setOwnerId(player.getUniqueID().toString());
+						mount.setOwnerUniqueId(player.getUniqueID());
 						mount.isSummoned = true;
 						if (mount.isSummoned == true) {
 							mount.isSummoned(true);
@@ -42,6 +45,6 @@ public class SCSwiftUnicorn extends SummoningCrystalBase {
 			}
 		}
 		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(stack, world, player, hand);
 	}
 }

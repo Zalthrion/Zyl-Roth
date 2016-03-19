@@ -15,6 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.ai.EntityAIMateAnimals;
@@ -23,7 +24,7 @@ public class EntityDeer extends EntityTameable {
 	public EntityDeer(World world) {
 		super(world);
 		this.setSize(1.0F, 1.1F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.75D));
 		this.tasks.addTask(3, new EntityAIMateAnimals(this, 1.0D));
@@ -35,8 +36,8 @@ public class EntityDeer extends EntityTameable {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 	
 	@Override protected void updateAITasks() {
@@ -44,7 +45,7 @@ public class EntityDeer extends EntityTameable {
 	}
 	
 	@Override public boolean canBeSteered() {
-		EntityPlayer riding = ((EntityPlayer) this.riddenByEntity);
+		EntityPlayer riding = ((EntityPlayer) this.getControllingPassenger());
 		return riding != null && !this.isChild();
 	}
 	
@@ -72,10 +73,8 @@ public class EntityDeer extends EntityTameable {
 		}
 	}
 	
-	@Override public boolean interact(EntityPlayer player) {
-		ItemStack stack = player.inventory.getCurrentItem();
-		
-		if (super.interact(player)) {
+	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
+		if (super.processInteract(player, hand, stack)) {
 			return true;
 		} else if (!this.isChild() && stack != null && stack.getItem() == Items.carrot && player.getDistanceSqToEntity(this) < 9.0D && !this.isTamed() && player.isSneaking()) {
 			if (!this.worldObj.isRemote) {
@@ -88,13 +87,13 @@ public class EntityDeer extends EntityTameable {
 				}
 				
 				this.setTamed(true);
-				this.setOwnerId(player.getUniqueID().toString());
+				this.setOwnerId(player.getUniqueID());
 			}
 			
 			this.playTameEffect(true);
 			return true;
-		} else if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && !this.isChild() && this.isTamed() && !player.isSneaking()) {
-			player.mountEntity(this);
+		} else if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && this.isTamed() && !player.isSneaking()) {
+			player.startRiding(this);
 			return true;
 		} else {
 			return false;

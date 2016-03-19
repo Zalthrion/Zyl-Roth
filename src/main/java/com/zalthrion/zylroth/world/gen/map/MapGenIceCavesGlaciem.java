@@ -5,9 +5,10 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -165,7 +166,7 @@ public class MapGenIceCavesGlaciem extends MapGenBase {
 	}
 	
 	protected boolean func_175793_a(IBlockState blockState1, IBlockState blockState2) {
-		return blockState1.getBlock() == Blocks.stone ? true : (blockState1.getBlock() == Blocks.dirt ? true : (blockState1.getBlock() == Blocks.grass ? true : (blockState1.getBlock() == Blocks.hardened_clay ? true : (blockState1.getBlock() == Blocks.stained_hardened_clay ? true : (blockState1.getBlock() == Blocks.sandstone ? true : (blockState1.getBlock() == Blocks.red_sandstone ? true : (blockState1.getBlock() == Blocks.mycelium ? true : (blockState1.getBlock() == Blocks.snow_layer ? true : (blockState1.getBlock() == Blocks.sand || blockState1.getBlock() == Blocks.gravel) && blockState2.getBlock().getMaterial() != Material.water))))))));
+		return blockState1.getBlock() == Blocks.stone ? true : (blockState1.getBlock() == Blocks.dirt ? true : (blockState1.getBlock() == Blocks.grass ? true : (blockState1.getBlock() == Blocks.hardened_clay ? true : (blockState1.getBlock() == Blocks.stained_hardened_clay ? true : (blockState1.getBlock() == Blocks.sandstone ? true : (blockState1.getBlock() == Blocks.red_sandstone ? true : (blockState1.getBlock() == Blocks.mycelium ? true : (blockState1.getBlock() == Blocks.snow_layer ? true : (blockState1.getBlock() == Blocks.sand || blockState1.getBlock() == Blocks.gravel) && blockState2.getMaterial() != Material.water))))))));
 	}
 	
 	@Override protected void recursiveGenerate(World world, int chunkX, int chunkZ, int param4, int param5, ChunkPrimer primer) {
@@ -206,8 +207,8 @@ public class MapGenIceCavesGlaciem extends MapGenBase {
 	}
 	
 	private boolean isExceptionBiome(BiomeGenBase biome) {
-		if (biome == BiomeGenBase.beach) return true;
-		if (biome == BiomeGenBase.desert) return true;
+		if (biome == Biomes.beach) return true;
+		if (biome == Biomes.desert) return true;
 		return false;
 	}
 	

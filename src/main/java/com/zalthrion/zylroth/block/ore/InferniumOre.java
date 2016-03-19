@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ public class InferniumOre extends BlockBase {
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setCreativeTab(ModTabs.zylRoth);
 	}
 	

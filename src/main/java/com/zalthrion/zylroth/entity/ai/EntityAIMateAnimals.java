@@ -87,10 +87,10 @@ public class EntityAIMateAnimals extends EntityAIBase {
 			}
 			
 			if (entityplayer != null) {
-				entityplayer.triggerAchievement(StatList.animalsBredStat);
+				entityplayer.addStat(StatList.animalsBred);
 				
 				if (this.theAnimal instanceof EntityCow) {
-					entityplayer.triggerAchievement(AchievementList.breedCow);
+					entityplayer.addStat(AchievementList.breedCow);
 				}
 			}
 			

@@ -10,7 +10,7 @@ public class EntitySixOneThree extends EntityDeveloper {
 	public EntitySixOneThree(World world) {
 		super(world);
 		this.setSize(1F, 2F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIWander(this, 1.0D));
 		
@@ -19,7 +19,7 @@ public class EntitySixOneThree extends EntityDeveloper {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 }

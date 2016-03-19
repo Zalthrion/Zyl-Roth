@@ -1,5 +1,8 @@
 package com.zalthrion.zylroth.entity.mount;
 
+import java.util.List;
+import java.util.UUID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -23,9 +26,14 @@ public class MountBaseHorse extends EntityTameableHorse {
 		super(world);
 		this.isImmuneToFire = true;
 		this.setSize(1.0F, 1.0F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
+	}
+	
+	@Override public Entity getControllingPassenger() {
+		List<Entity> list = this.getPassengers();
+		return list.isEmpty() ? null : (Entity) list.get(0);
 	}
 	
 	/** Checks if the entity summoned is alive. */
@@ -66,8 +74,8 @@ public class MountBaseHorse extends EntityTameableHorse {
 		return summoned;
 	}
 	
-	@Override public boolean setTamedBy(EntityPlayer p_110263_1_) {
-		this.setOwnerId(p_110263_1_.getUniqueID().toString());
+	@Override public boolean setTamedBy(EntityPlayer player) {
+		this.setOwnerUniqueId(player.getUniqueID());
 		this.setHorseTamed(true);
 		return true;
 	}
@@ -78,7 +86,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 		tagCompound.setBoolean("Tame", this.isTame());
 		tagCompound.setBoolean("Saddled", this.isHorseSaddled());
 		tagCompound.setBoolean("Summoned", this.isSummoned(true));
-		tagCompound.setString("OwnerUUID", this.getOwnerId());
+		tagCompound.setUniqueId("OwnerUUID", this.getOwnerUniqueId());
 	}
 	
 	@Override
@@ -93,7 +101,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 		this.tagCompound.getBoolean("Summoned");
 		
 		if (tagCompund.hasKey("OwnerUUID", 8)) {
-			this.setOwnerId(tagCompund.getString("OwnerUUID"));
+			this.setOwnerUniqueId(tagCompund.getUniqueId("OwnerUUID"));
 		}
 	}
 	
@@ -103,7 +111,7 @@ public class MountBaseHorse extends EntityTameableHorse {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 	}
 	
 	/** Sets what GUI should open when the player opens his inventory while
@@ -115,12 +123,6 @@ public class MountBaseHorse extends EntityTameableHorse {
 			;
 		
 		else super.openGUI(p_110199_1_);
-	}
-	
-	/** Returns true if the horse is an Undead horse */
-	@Override
-	public boolean isUndead() {
-		return false;
 	}
 	
 	/** Returns true if the rider of the entity should be dismounted on water */
@@ -142,10 +144,10 @@ public class MountBaseHorse extends EntityTameableHorse {
 	}
 	
 	/** Checks if the entity can be leashed or not */
-	@Override
+	/* @Override
 	public boolean allowLeashing() {
 		return false;
-	}
+	} */
 	
 	/** Checks if the entity is invulnerable or not */
 	@Override
@@ -163,5 +165,10 @@ public class MountBaseHorse extends EntityTameableHorse {
 	
 	@Override public double getMountedYOffset() {
 		return 1.2F;
+	}
+
+	@Override public UUID getOwnerId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

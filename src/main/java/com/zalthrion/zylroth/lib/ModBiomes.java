@@ -28,19 +28,19 @@ public class ModBiomes {
 	}
 	
 	public static void initBiomes() {
-		dreadWastes = new BiomeGenDreadWastes(180);
-		hauntedForest = new BiomeGenHauntedForest(181);
-		ashBarrens = new BiomeGenAshBarrens(182);
-		voidMountains = new BiomeGenVoidMountains(183);
+		dreadWastes = new BiomeGenDreadWastes((new BiomeProps.PropsBuilder("Dread Wastes")).withHeight(BiomeProps.HEIGHT_LOW_PLAINS).withWaterColor(Integer.valueOf(0xE42D17)).withRainDisabled().build());
+		hauntedForest = new BiomeGenHauntedForest((new BiomeProps.PropsBuilder("Haunted Forest").withHeight(BiomeProps.HEIGHT_DEFAULT).withWaterColor(Integer.valueOf(0xE42D17)).withRainDisabled().build()));
+		ashBarrens = new BiomeGenAshBarrens((new BiomeProps.PropsBuilder("Ash Barrens")).withWaterColor(Integer.valueOf(0xE42D17)).withRainfall(Float.valueOf(0.0F)).withRainDisabled().build());
+		voidMountains = new BiomeGenVoidMountains((new BiomeProps.PropsBuilder("Void Mountains")).withHeight(BiomeProps.HEIGHT_HIGH_PLATEAUS).withWaterColor(Integer.valueOf(0xE42D17)).withRainDisabled().build());
 		
-		jadePlains = new BiomeGenJadePlains(210);
-		autumnForest = new BiomeGenAutumnForest(211);
-		sapphireOcean = new BiomeGenSapphireOcean(212);
-		rainbowForest = new BiomeGenRainbowForest(213);
+		jadePlains = new BiomeGenJadePlains((new BiomeProps.PropsBuilder("Jade Plains")).withHeight(BiomeProps.HEIGHT_LOW_PLAINS).withWaterColor(Integer.valueOf(0x38CAE0)).build());
+		autumnForest = new BiomeGenAutumnForest((new BiomeProps.PropsBuilder("Autumn Forest")).withHeight(BiomeProps.HEIGHT_MID_PLAINS).withWaterColor(Integer.valueOf(0xE42D17)).build());
+		sapphireOcean = new BiomeGenSapphireOcean((new BiomeProps.PropsBuilder("Sapphire Ocean")).withHeight(BiomeProps.HEIGHT_OCEAN).withWaterColor(Integer.valueOf(0x38CAE0)).build());
+		rainbowForest = new BiomeGenRainbowForest((new BiomeProps.PropsBuilder("Rainbow Forest")).withHeight(BiomeProps.HEIGHT_LOW_ISLANDS).withWaterColor(Integer.valueOf(0x38CAE0)).build());
 		
-		frozenSea = new BiomeGenFrozenSea(240);
-		coldOcean = new BiomeGenColdOcean(241);
-		frozenWastes = new BiomeGenFrozenWastes(242);
+		frozenSea = new BiomeGenFrozenSea((new BiomeProps.PropsBuilder("Frozen Sea")).withHeight(BiomeProps.HEIGHT_OCEAN).withWaterColor(Integer.valueOf(0x3CA7B5)).withRainDisabled().withSnowEnabled().withTemperature(Float.valueOf(0.0F)).build());
+		coldOcean = new BiomeGenColdOcean((new BiomeProps.PropsBuilder("Cold Ocean")).withHeight(BiomeProps.HEIGHT_OCEAN).withWaterColor(Integer.valueOf(0x38CAE0)).withRainDisabled().withSnowEnabled().withTemperature(Float.valueOf(0.3F)).build());
+		frozenWastes = new BiomeGenFrozenWastes((new BiomeProps.PropsBuilder("Frozen Wastes")).withHeight(BiomeProps.HEIGHT_LOW_PLAINS).withWaterColor(Integer.valueOf(0x38CAE0)).withRainDisabled().withSnowEnabled().withTemperature(Float.valueOf(0.0F)).build());
 	}
 	
 	public static void registerBiomes() {

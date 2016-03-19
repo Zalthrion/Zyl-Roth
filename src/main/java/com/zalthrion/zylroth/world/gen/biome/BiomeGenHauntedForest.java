@@ -8,11 +8,8 @@ import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 
 public class BiomeGenHauntedForest extends BiomeGenBase {
 	
-	public BiomeGenHauntedForest(int id) {
-		super(id);
-		
-		this.enableRain = false;
-		this.enableSnow = false;
+	public BiomeGenHauntedForest(BiomeGenBase.BiomeProperties properties) {
+		super(properties);
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -27,23 +24,18 @@ public class BiomeGenHauntedForest extends BiomeGenBase {
 		this.topBlock = (Blocks.grass).getDefaultState();
 		this.fillerBlock = (Blocks.dirt).getDefaultState();
 		
-		this.setHeight(height_Default);
-		this.setBiomeName("Haunted Forest");
-		
 		this.spawnableMonsterList.add(new BiomeGenBase.SpawnListEntry(EntityUndeadMinion.class, 2, 1, 1));
 		this.spawnableMonsterList.add(new BiomeGenBase.SpawnListEntry(EntityUndeadWarrior.class, 1, 1, 1));
-		
-		this.waterColorMultiplier = 0xE42D17;
 	}
 	
 	@Override
 	public int getModdedBiomeGrassColor(int original) {
-		return color = 0x3B314D;
+		return 0x3B314D;
 	}
 	
 	@Override
 	public int getModdedBiomeFoliageColor(int original) {
-		return color = 0x473A52;
+		return 0x473A52;
 	}
 	
 	@Override

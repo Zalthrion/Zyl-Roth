@@ -7,9 +7,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -34,16 +36,16 @@ public class EntityDeveloper extends EntityAnimal {
 		super.onUpdate();
 		
 		if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL) {
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0D);
 		}
 	}
 	
-	@Override protected String getSwimSound() {
-		return "game.hostile.swim";
+	@Override protected SoundEvent getSwimSound() {
+		return SoundEvents.entity_hostile_swim;
 	}
 	
-	@Override protected String getSplashSound() {
-		return "game.hostile.swim.splash";
+	@Override protected SoundEvent getSplashSound() {
+		return SoundEvents.entity_hostile_splash;
 	}
 	
 	@Override public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -52,7 +54,7 @@ public class EntityDeveloper extends EntityAnimal {
 		} else if (super.attackEntityFrom(source, amount)) {
 			Entity entity = source.getEntity();
 			
-			if (this.riddenByEntity != entity && this.ridingEntity != entity) {
+			if (this.getControllingPassenger() != entity && this.getRidingEntity() != entity) {
 				if (entity != this) {
 					this.setAttackTarget((EntityLiving) entity);
 				}
@@ -65,12 +67,12 @@ public class EntityDeveloper extends EntityAnimal {
 		}
 	}
 	
-	@Override protected String getHurtSound() {
-		return "game.hostile.hurt";
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_hostile_hurt;
 	}
 	
-	@Override protected String getDeathSound() {
-		return "game.hostile.die";
+	@Override protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_hostile_death;
 	}
 	
 	protected String func_146067_o(int p_146067_1_) {
@@ -78,11 +80,11 @@ public class EntityDeveloper extends EntityAnimal {
 	}
 	
 	@Override public boolean attackEntityAsMob(Entity p_70652_1_) {
-		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 		
 		if (p_70652_1_ instanceof EntityLivingBase) {
-			f += EnchantmentHelper.getModifierForCreature(this.getHeldItem(), ((EntityLivingBase) p_70652_1_).getCreatureAttribute());
+			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) p_70652_1_).getCreatureAttribute());
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 		
@@ -117,7 +119,7 @@ public class EntityDeveloper extends EntityAnimal {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
+		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 	
 	protected boolean func_146066_aG() {

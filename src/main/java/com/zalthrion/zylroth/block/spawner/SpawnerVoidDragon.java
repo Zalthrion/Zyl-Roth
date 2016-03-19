@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.block.spawner;
 
 import java.util.Random;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +18,7 @@ public class SpawnerVoidDragon extends BlockBaseContainer {
 	public SpawnerVoidDragon() {
 		this.setHardness(3.0F);
 		this.setResistance(5.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(name);
 	}
 	

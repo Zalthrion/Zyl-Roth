@@ -1,41 +1,25 @@
 package com.zalthrion.zylroth.world.dimension;
 
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.Zylroth;
 
 public class WorldProviderKyrul extends WorldProvider {
-	@Override
-	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
-		this.dimensionId = ConfigurationHandler.getKyrulId();
+	
+	@Override public void registerWorldChunkManager() {
+		this.worldChunkMgr = new BiomeProviderKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 		this.hasNoSky = true;
 	}
 	
-	@Override
-	public IChunkProvider createChunkGenerator() {
-		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true, this.worldObj.getWorldInfo().getGeneratorOptions());
-	}
-	
-	@Override
-	public String getDimensionName() {
-		return "Ky'rul";
-	}
-	
-	@Override public String getSaveFolder() {
-		return "Ky'rul";
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
+	@Override @SideOnly(Side.CLIENT) public Vec3d getFogColor(float p_76562_1_, float p_76562_2_) {
 		int i = 10518688;
 		float f2 = MathHelper.cos(p_76562_1_ * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
 		
@@ -53,8 +37,18 @@ public class WorldProviderKyrul extends WorldProvider {
 		f3 *= f2 * 0.0F + 0.15F;
 		f4 *= f2 * 0.0F + 0.15F;
 		f5 *= f2 * 0.0F + 0.15F;
-		return new Vec3((double) f3, (double) f4, (double) f5);
+		return new Vec3d((double) f3, (double) f4, (double) f5);
 	}
+	
+	@Override
+	public IChunkGenerator createChunkGenerator() {
+		return new ChunkProviderKyrul(this.worldObj, this.worldObj.getSeed(), true, this.worldObj.getWorldInfo().getGeneratorOptions());
+	}
+	
+	@Override public String getSaveFolder() {
+		return "Ky'rul";
+	}
+	
 	
 	@Override @SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
@@ -109,15 +103,15 @@ public class WorldProviderKyrul extends WorldProvider {
 		}
 	}
 
-	@Override public String getInternalNameSuffix() {
-		return "";
-	}
-	
 	@Override @SideOnly(Side.CLIENT) public IRenderHandler getSkyRenderer() {
 		return new SkyRenderKyrul();
 	}
 	
 	@Override public IRenderHandler getCloudRenderer() {
 		return new SkyRenderKyrul();
+	}
+
+	@Override public DimensionType getDimensionType() {
+		return Zylroth.KYRUL;
 	}
 }

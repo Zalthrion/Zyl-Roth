@@ -4,25 +4,32 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,33 +38,53 @@ import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.lib.ModItems;
 
-public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayData {
+public class EntityTenebraeGuardian extends EntityMob {
+	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.<Byte>createKey(EntityTenebraeGuardian.class, DataSerializers.BYTE);
 	private int attackTimer;
 	public int deathTicks;
+	private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 	
 	public EntityTenebraeGuardian(World world) {
 		super(world);
 		this.setSize(2.1F, 4.2F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		this.isImmuneToFire = true;
 		this.experienceValue = 75;
+		this.ignoreFrustumCheck = true;
+	}
+	
+	@Override protected void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
 		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.ignoreFrustumCheck = true;
+	}
+	
+	@Override protected void entityInit() {
+		super.entityInit();
+		this.dataWatcher.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
+	}
+	
+	@Override public void setBossVisibleTo(EntityPlayerMP player) {
+		super.setBossVisibleTo(player);
+		this.bossInfo.addPlayer(player);
+	}
+	
+	@Override public void setBossNonVisibleTo(EntityPlayerMP player) {
+		super.setBossNonVisibleTo(player);
+		this.bossInfo.removePlayer(player);
 	}
 	
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 1250.0D : 750.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(hardcore ? 0.28D : 0.27D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(hardcore ? 25.0D : 15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(hardcore ? 15.0D : 5.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(60.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(hardcore ? 1250.0D : 750.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(hardcore ? 0.28D : 0.27D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(hardcore ? 25.0D : 15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(hardcore ? 15.0D : 5.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(60.0D);
 	}
 	
 	/** Decrements the entity's air supply when underwater */
@@ -91,13 +118,9 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.getYOffset());
 			int k = MathHelper.floor_double(this.posZ);
 			
-			if (this.worldObj.getBlockState(new BlockPos(i, j, k)).getBlock().getRenderType() != -1) {
+			if (this.worldObj.getBlockState(new BlockPos(i, j, k)).getRenderType() != EnumBlockRenderType.INVISIBLE) {
 				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(this.worldObj.getBlockState(new BlockPos(i, j, k))));
 			}
-		}
-		
-		if (worldObj.isRemote) {
-			BossStatus.setBossStatus(this, true);
 		}
 	}
 	
@@ -120,12 +143,12 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 		if (strike && this.attackTimer > 25) {
 			if (this.getRNG().nextBoolean()) {
 				this.attackTimer = 400;
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("wither"), 200));
 				return strike;
 			}
 		}
 		
-		this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
+		this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Golem throw?
 		return flag;
 	}
 	
@@ -134,7 +157,7 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 	public void handleStatusUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
-			this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
+			this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Golem throw?
 		} else {
 			super.handleStatusUpdate(par1);
 		}
@@ -145,33 +168,26 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 		return this.attackTimer;
 	}
 	
-	/** Returns the sound this mob makes while it's alive. */
 	@Override
-	protected String getLivingSound() {
-		return "mob.wither.idle";
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.entity_wither_ambient;
 	}
 	
-	/** Returns the sound this mob makes when it is hurt. */
 	@Override
-	protected String getHurtSound() {
-		return "mob.zombie.metal";
+	protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_zombie_attack_iron_door; // TODO Zombie metal?
 	}
 	
-	/** Returns the sound this mob makes on death. */
 	@Override
-	protected String getDeathSound() {
-		return "mob.irongolem.death";
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_irongolem_death;
 	}
 	
-	/** Plays step sound at given x, y, z for the entity */
 	@Override
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound("mob.irongolem.walk", 1.0F, 1.0F);
+		this.playSound(SoundEvents.entity_irongolem_step, 1.0F, 1.0F);
 	}
 	
-	/** Drop 0-2 items of this living's type. @param hit - Whether this entity
-	 * has recently been hit by a player. @param loot - Level of Looting used to
-	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean hit, int loot) {
 		this.dropItem(ModItems.voidGem, 1);
@@ -232,16 +248,16 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 	}
 	
 	public boolean isPlayerCreated() {
-		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return (((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue() & 1) != 0;
 	}
 	
 	public void setPlayerCreated(boolean par1) {
-		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+		byte b0 = ((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue();
 		
 		if (par1) {
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 | 1)));
+			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 | 1)));
 		} else {
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 & -2)));
+			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 & -2)));
 		}
 	}
 	
@@ -257,12 +273,6 @@ public class EntityTenebraeGuardian extends EntityMob implements IBossDisplayDat
 	@Override protected boolean canDespawn() {
 		return false;
 	}
-	
-	/* private void applyAttribute(IAttribute attribute, double baseValue) {
-	 * IAttributeInstance attr = this.getEntityAttribute(attribute); if (attr ==
-	 * null) { this.getAttributeMap().registerAttribute(attribute);
-	 * this.getEntityAttribute(attribute).setBaseValue(baseValue); } else {
-	 * attr.setBaseValue(baseValue); } } */
 	
 	/** Returns true if this entity can attack entities of the specified class. */
 	@Override

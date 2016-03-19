@@ -12,8 +12,8 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 
 public class BiomeGenAutumnForest extends BiomeGenBase {
 	
-	public BiomeGenAutumnForest(int id) {
-		super(id);
+	public BiomeGenAutumnForest(BiomeGenBase.BiomeProperties properties) {
+		super(properties);
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -25,12 +25,7 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 		this.topBlock = (Blocks.grass).getDefaultState();
 		this.fillerBlock = (Blocks.dirt).getDefaultState();
 		
-		this.setHeight(height_MidPlains);
-		this.setBiomeName("Autumn Forest");
-		
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBadger.class, 1, 1, 1));
-		
-		this.waterColorMultiplier = 0x38CAE0;
 	}
 	
 	@Override public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
@@ -39,12 +34,12 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 	
 	@Override
 	public int getModdedBiomeGrassColor(int original) {
-		return color = 0x4DAD0C;
+		return 0x4DAD0C;
 	}
 	
 	@Override
 	public int getModdedBiomeFoliageColor(int original) {
-		return color = 0xDB8018;
+		return 0xDB8018;
 	}
 	
 	@Override

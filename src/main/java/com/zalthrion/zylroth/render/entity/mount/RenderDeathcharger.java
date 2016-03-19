@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
+import net.minecraft.entity.passive.HorseArmorType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,11 +34,11 @@ public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 	 * the model is rendered. Args: entityLiving, partialTickTime */
 	@Override protected void preRenderCallback(MountDeathcharger p_77041_1_, float p_77041_2_) {
 		float f1 = 1.0F;
-		int i = p_77041_1_.getHorseType();
+		HorseArmorType type = p_77041_1_.getType();
 		
-		if (i == 1) {
+		if (type == HorseArmorType.DONKEY) {
 			f1 *= 0.87F;
-		} else if (i == 2) {
+		} else if (type == HorseArmorType.MULE) {
 			f1 *= 0.92F;
 		}
 		
@@ -59,17 +60,17 @@ public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(MountDeathcharger p_110775_1_) {
 		if (!p_110775_1_.func_110239_cn()) {
-			switch (p_110775_1_.getHorseType()) {
-				case 0:
+			switch (p_110775_1_.getType()) {
+				case HORSE:
 				default:
 					return whiteHorseTextures;
-				case 1:
+				case DONKEY:
 					return donkeyTextures;
-				case 2:
+				case MULE:
 					return muleTextures;
-				case 3:
+				case ZOMBIE:
 					return zombieHorseTextures;
-				case 4:
+				case SKELETON:
 					return skeletonHorseTextures;
 			}
 		} else {

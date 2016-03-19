@@ -10,10 +10,12 @@ import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
@@ -81,7 +83,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 200.0D : 50.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(hardcore ? 200.0D : 50.0D);
 	}
 	
 	@Override
@@ -115,7 +117,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 			f = MathHelper.cos(this.animTime * (float) Math.PI * 2.0F);
 			f1 = MathHelper.cos(this.prevAnimTime * (float) Math.PI * 2.0F);
 			
-			if (f1 <= -0.3F && f >= -0.3F) worldObj.playSound(posX, posY, posZ, "mob.enderdragon.wings", 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
+			if (f1 <= -0.3F && f >= -0.3F) this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.entity_enderdragon_flap, this.getSoundCategory(), 5.0F, 0.8F + this.rand.nextFloat() * 0.3F, false);
 		}
 		
 		this.prevAnimTime = this.animTime;
@@ -151,12 +153,12 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 			
 			if (worldObj.isRemote) {
 				if (newPosRotationIncrements > 0) {
-					d3 = posX + (newPosX - posX) / newPosRotationIncrements;
-					d0 = posY + (newPosY - posY) / newPosRotationIncrements;
-					d1 = posZ + (newPosZ - posZ) / newPosRotationIncrements;
-					d2 = MathHelper.wrapAngleTo180_double(newRotationYaw - rotationYaw);
+					d3 = posX + (interpTargetX - posX) / newPosRotationIncrements;
+					d0 = posY + (interpTargetY - posY) / newPosRotationIncrements;
+					d1 = posZ + (interpTargetZ - posZ) / newPosRotationIncrements;
+					d2 = MathHelper.wrapAngleTo180_double(interpTargetYaw - rotationYaw);
 					rotationYaw = (float) (rotationYaw + d2 / newPosRotationIncrements);
-					rotationPitch = (float) (rotationPitch + (newRotationPitch - rotationPitch) / newPosRotationIncrements);
+					rotationPitch = (float)((double)this.rotationPitch + (this.newPosX - (double)this.rotationPitch) / (double)this.newPosRotationIncrements);
 					-- newPosRotationIncrements;
 					setPosition(d3, d0, d1);
 					setRotation(rotationYaw, rotationPitch);
@@ -201,8 +203,8 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 				
 				if (d9 < -50.0D) d9 = -50.0D;
 				
-				Vec3 vec3 = new Vec3(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = new Vec3(MathHelper.sin(rotationYaw * (float) Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float) Math.PI / 180.0F)).normalize();
+				Vec3d vec3 = new Vec3d(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3d vec31 = new Vec3d(MathHelper.sin(rotationYaw * (float) Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float) Math.PI / 180.0F)).normalize();
 				float f4 = (float) (vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 				
 				if (f4 < 0.0F) f4 = 0.0F;
@@ -221,7 +223,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 				
 				moveEntity(motionX, motionY, motionZ);
 				
-				Vec3 vec32 = new Vec3(motionX, motionY, motionZ).normalize();
+				Vec3d vec32 = new Vec3d(motionX, motionY, motionZ).normalize();
 				float f8 = (float) (vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
@@ -365,16 +367,12 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 		return worldObj;
 	}
 	
-	@Override
-	protected String getLivingSound() {
-		this.worldObj.playSound(this.posX, this.posY, this.posZ, "mob.enderdragon.growl", 3.0F, 0.5F, false);
-		return null;
+	@Override protected SoundEvent getAmbientSound() {
+		return SoundEvents.entity_enderdragon_growl;
 	}
 	
-	@Override
-	protected String getHurtSound() {
-		this.worldObj.playSound(this.posX, this.posY, this.posZ, "mob.enderdragon.hit", 1.0F, 0.2F, false);
-		return null;
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_enderdragon_hurt;
 	}
 	
 	@Override protected float getSoundVolume() {

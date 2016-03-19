@@ -7,14 +7,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -38,7 +40,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		return stack.getMetadata() >= tenebraeDurability;
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		Random rand = new Random();
 		
 		if (!(player.isSneaking()) && !(player.capabilities.isCreativeMode)) {
@@ -75,45 +77,33 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 			}
 		}
 		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(stack, world, player, hand);
 	}
 	
-	@Override public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		Item torch = Item.getItemFromBlock(Blocks.torch);
-		
-		if (world.getBlockState(pos).getBlock() != Blocks.snow_layer) {
-			if (side == EnumFacing.DOWN) pos = pos.down();
-			if (side == EnumFacing.UP) pos = pos.up();
-			if (side == EnumFacing.SOUTH) pos = pos.south();
-			if (side == EnumFacing.NORTH) pos = pos.north();
-			if (side == EnumFacing.WEST) pos = pos.west();
-			if (side == EnumFacing.EAST) pos = pos.east();
-			if (!world.isAirBlock(pos)) return false;
+	@Override public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (worldIn.getBlockState(pos).getBlock() != Blocks.snow_layer) {
+			if (facing == EnumFacing.DOWN) pos = pos.down();
+			if (facing == EnumFacing.UP) pos = pos.up();
+			if (facing == EnumFacing.SOUTH) pos = pos.south();
+			if (facing == EnumFacing.NORTH) pos = pos.north();
+			if (facing == EnumFacing.WEST) pos = pos.west();
+			if (facing == EnumFacing.EAST) pos = pos.east();
+			if (!worldIn.isAirBlock(pos)) return EnumActionResult.FAIL;
 		}
 		
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
-		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
-			if (player.inventory.hasItem(torch)) {
-				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
-					if (!(world.isRemote) && Blocks.torch.canPlaceBlockAt(world, pos)) {
-						world.setBlockState(pos, Blocks.torch.getDefaultState());
-					}
-				} else if (player.capabilities.isCreativeMode) {
-					if (!(world.isRemote) && Blocks.torch.canPlaceBlockAt(world, pos)) {
-						world.setBlockState(pos, Blocks.torch.getDefaultState());
-					}
-				}
-			}
-			return true;
+		if (this.isBroken(stack) && !(worldIn.isRemote)) {
+			playerIn.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+		} else if (playerIn.canPlayerEdit(pos, facing, stack) & !(this.isBroken(stack))) {
+			TorchPlacer.tryPlaceTorch(stack, playerIn, worldIn, pos, hand, facing);
+			return EnumActionResult.PASS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_sword_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));
@@ -133,7 +123,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		if (!this.isBroken(stack)) return false;
 		
 		if (player.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		}
 		return true;
 	}
@@ -147,7 +137,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		
 		return true;
 	}

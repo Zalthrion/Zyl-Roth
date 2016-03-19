@@ -23,7 +23,7 @@ public class GenLayerBiomesGlaciem extends GenLayer {
 		for (int dz = 0; dz < depth; dz ++) {
 			for (int dx = 0; dx < width; dx ++) {
 				this.initChunkSeed(dx + x, dz + z);
-				dest[(dx + dz * width)] = this.allowedBiomes[nextInt(this.allowedBiomes.length)].biomeID;
+				dest[(dx + dz * width)] = BiomeGenBase.getIdForBiome(this.allowedBiomes[nextInt(this.allowedBiomes.length)]);
 			}
 		}
 		return dest;

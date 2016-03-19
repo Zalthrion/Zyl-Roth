@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
+// TODO Look into capabilities because this seems to be dead
 public class MountData implements IExtendedEntityProperties {
 	public static final String EXT_PROP_NAME = "ZylrothMountData";
 	private final EntityPlayer player;
@@ -17,11 +18,12 @@ public class MountData implements IExtendedEntityProperties {
 	}
 	
 	public static final void register(EntityPlayer player) {
-		player.registerExtendedProperties(EXT_PROP_NAME, new MountData(player));
+		// player.registerExtendedProperties(EXT_PROP_NAME, new MountData(player));
 	}
 	
 	public static final MountData get(EntityPlayer player) {
-		return (MountData) player.getExtendedProperties(EXT_PROP_NAME);
+		return new MountData(player);
+		// return (MountData) player.getExtendedProperties(EXT_PROP_NAME);
 	}
 	
 	@Override public void saveNBTData(NBTTagCompound compound) {

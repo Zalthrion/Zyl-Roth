@@ -7,12 +7,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -41,7 +45,7 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 			}
 			return true;
 		}
@@ -49,55 +53,55 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 		return false;
 	}
 	
-	@Override public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!player.canPlayerEdit(pos, side, stack)) return false;
+	@Override public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!playerIn.canPlayerEdit(pos, facing, stack)) return EnumActionResult.FAIL;
 		
-		UseHoeEvent event = new UseHoeEvent(player, stack, world, pos);
-		if (MinecraftForge.EVENT_BUS.post(event)) { return false; }
+		UseHoeEvent event = new UseHoeEvent(playerIn, stack, worldIn, pos);
+		if (MinecraftForge.EVENT_BUS.post(event)) { return EnumActionResult.FAIL; }
 		
 		if (event.getResult() == Result.ALLOW) {
-			stack.damageItem(1, player);
-			return true;
+			stack.damageItem(1, playerIn);
+			return EnumActionResult.SUCCESS;
 		}
 		
-		Block block = world.getBlockState(pos).getBlock();
+		Block block = worldIn.getBlockState(pos).getBlock();
 		
-		if (side != EnumFacing.DOWN && world.isAirBlock(pos.up()) && (block == Blocks.grass || block == Blocks.dirt) && !(this.isBroken(stack))) {
+		if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.grass || block == Blocks.dirt) && !(this.isBroken(stack))) {
 			Block block1 = Blocks.farmland;
-			world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, block1.stepSound.getStepSound(), (block1.stepSound.getVolume() + 1.0F) / 2.0F, block1.stepSound.getFrequency() * 0.8F);
+			worldIn.playSound(playerIn, pos, SoundEvents.item_hoe_till, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			
-			if (world.isRemote) return true;
+			if (worldIn.isRemote) return EnumActionResult.SUCCESS;
 			for (int ix = -1; ix < 2; ++ ix) {
 				for (int iz = -1; iz < 2; ++ iz) {
 					
-					boolean isAGrass = world.getBlockState(pos.add(ix, 0, iz)) == Blocks.grass;
-					boolean isADirt = world.getBlockState(pos.add(ix, 0, iz)) == Blocks.dirt;
+					boolean isAGrass = worldIn.getBlockState(pos.add(ix, 0, iz)) == Blocks.grass;
+					boolean isADirt = worldIn.getBlockState(pos.add(ix, 0, iz)) == Blocks.dirt;
 					
-					if (isADirt || isAGrass && !(player.isSneaking())) {
-						world.setBlockState(pos.add(ix, 0, iz), block1.getDefaultState());
-						stack.damageItem(1, player);
+					if (isADirt || isAGrass && !(playerIn.isSneaking())) {
+						worldIn.setBlockState(pos.add(ix, 0, iz), block1.getDefaultState());
+						stack.damageItem(1, playerIn);
 					}
 				}
 			}
 			
-			boolean isGrass = world.getBlockState(pos).getBlock() == Blocks.grass;
-			boolean isDirt = world.getBlockState(pos).getBlock() == Blocks.dirt;
+			boolean isGrass = worldIn.getBlockState(pos).getBlock() == Blocks.grass;
+			boolean isDirt = worldIn.getBlockState(pos).getBlock() == Blocks.dirt;
 			
-			if (isDirt || isGrass && player.isSneaking()) {
-				world.setBlockState(pos, block1.getDefaultState());
-				stack.damageItem(1, player);
+			if (isDirt || isGrass && playerIn.isSneaking()) {
+				worldIn.setBlockState(pos, block1.getDefaultState());
+				stack.damageItem(1, playerIn);
 			}
 			
-			return true;
+			return EnumActionResult.SUCCESS;
 			
 		} else {
-			return false;
+			return EnumActionResult.FAIL;
 		}
 	}
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));
@@ -122,7 +126,7 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		
 		return true;
 	}

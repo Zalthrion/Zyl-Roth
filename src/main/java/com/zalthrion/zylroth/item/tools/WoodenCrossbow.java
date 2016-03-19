@@ -2,18 +2,25 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -35,52 +42,74 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		this.setUnlocalizedName(name);
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		if (!this.isBroken(stack)) {        
-			if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow)) {
-				
-				EntityArrow entityarrow = new EntityArrow(world, player, 0.7F);
-				
-				entityarrow.setDamage(entityarrow.getDamage() + 3.5D);
-				world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + 0.5F);
-				
-	            int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, stack);
-
-	            if (k > 0)
-	            {
-	                entityarrow.setDamage(entityarrow.getDamage() + (double)k * 0.5D + 0.5D);
-	            }
-
-	            int l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, stack);
-
-	            if (l > 0)
-	            {
-	                entityarrow.setKnockbackStrength(l);
-	            }
-
-	            if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, stack) > 0)
-	            {
-	                entityarrow.setFire(100);
-	            }
-	            	            	            
+			boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.infinity, stack) > 0;
+			ItemStack itemstack = this.getArrowStack(player);
+			
+			if (itemstack != null || flag) {
+				if (itemstack == null) itemstack = new ItemStack(Items.arrow);
+				float f = 1.0F;
+				boolean flag1 = flag && itemstack.getItem() instanceof ItemArrow;
 				if (!world.isRemote) {
+					ItemArrow itemarrow = (ItemArrow)((ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.arrow));
+					EntityArrow entityarrow = itemarrow.createArrow(world, itemstack, player);
+					entityarrow.func_184547_a(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+					entityarrow.setDamage(entityarrow.getDamage() + 3.5D);
+					entityarrow.setIsCritical(true);
+					int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.power, stack);
+					if (j > 0) {
+						entityarrow.setDamage(entityarrow.getDamage() + (double) j * 0.5D + 0.5D);
+					}
+					int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.punch, stack);
+					if (k > 0) {
+						entityarrow.setKnockbackStrength(k);
+					}
+					if (EnchantmentHelper.getEnchantmentLevel(Enchantments.flame, stack) > 0) {
+						entityarrow.setFire(100);
+					}
+					stack.damageItem(1, player);
+					if (flag1) entityarrow.canBePickedUp = EntityArrow.PickupStatus.CREATIVE_ONLY;
 					world.spawnEntityInWorld(entityarrow);
 				}
 				
-				player.inventory.consumeInventoryItem(Items.arrow);
-				
-				stack.damageItem(1, player);
-			}	
+				world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.entity_arrow_shoot, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+				if (!flag1) {
+					itemstack.stackSize --;
+					if (itemstack.stackSize == 0) {
+						player.inventory.deleteStack(itemstack);
+					}
+				}
+				player.addStat(StatList.getObjectUseStats(this));
+			}
 		}
 		
 		if (this.isBroken(stack) && world.isRemote) {
 			
-			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		}
 		
-		return stack;
-		
+		return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+	}
+	
+	private ItemStack getArrowStack(EntityPlayer player) {
+		if (this.isArrows(player.getHeldItem(EnumHand.OFF_HAND))) {
+			return player.getHeldItem(EnumHand.OFF_HAND);
+		} else if (this.isArrows(player.getHeldItem(EnumHand.MAIN_HAND))) {
+			return player.getHeldItem(EnumHand.MAIN_HAND);
+		} else {
+			for (int i = 0; i < player.inventory.getSizeInventory(); ++ i) {
+				ItemStack itemstack = player.inventory.getStackInSlot(i);
+				
+				if (this.isArrows(itemstack)) { return itemstack; }
+			}
+			
+			return null;
+		}
+	}
+	
+	protected boolean isArrows(ItemStack stack) {
+		return stack != null && stack.getItem() instanceof ItemArrow;
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
@@ -91,7 +120,7 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 	public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 			}
 			return true;
 		}
@@ -112,14 +141,14 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		
 		World world = player.worldObj;
 		if (world.isRemote)
-			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		return true;
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));

@@ -2,11 +2,13 @@ package com.zalthrion.zylroth.entity.mount;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
@@ -21,49 +23,38 @@ public class MountWarTortoise extends MountBase {
 	}
 	
 	@Override
-	public boolean interact(EntityPlayer player) {
-		
+	public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		ItemStack stack = player.inventory.getCurrentItem();
-		
-		if (stack != null && stack.getItem() == ModItems.SC_WarTortoise && player.isSneaking() && persistentData.hasKey("ownsMountWarTortoise") && this.riddenByEntity == null) {
+		if (stack != null && stack.getItem() == ModItems.SC_WarTortoise && player.isSneaking() && persistentData.hasKey("ownsMountWarTortoise") && this.getControllingPassenger() == null) {
 			this.setDead();
 			persistentData.removeTag("ownsMountWarTortoise");
 		}
 		
-		if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
-			player.mountEntity(this);
+		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
+			player.startRiding(this);
 		}
 		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.MOD_ID + ":mount.owned")));
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}
 		
 		return true;
 	}
 	
-	/** Returns the sound this mob makes while it's alive. */
-	@Override
-	protected String getLivingSound() {
-		return "mob.pig.say";
+	@Override protected SoundEvent getAmbientSound() {
+		return SoundEvents.entity_pig_ambient;
 	}
 	
-	/** Returns the sound this mob makes when it is hurt. */
-	@Override
-	protected String getHurtSound() {
-		return "mob.pig.say";
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_pig_hurt;
 	}
 	
-	/** Returns the sound this mob makes on death. */
-	@Override
-	protected String getDeathSound() {
-		return "mob.pig.death";
+	@Override protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_pig_death;
 	}
 	
-	/** The sound this mob makes when it moves */
-	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn) {
-		this.playSound("mob.pig.step", 0.15F, 1.0F);
+	@Override protected void playStepSound(BlockPos pos, Block blockIn) {
+		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
 	}
 }

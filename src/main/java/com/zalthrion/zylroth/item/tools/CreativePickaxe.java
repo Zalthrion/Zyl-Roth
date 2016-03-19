@@ -2,19 +2,20 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -41,7 +42,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
+				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 			}
 			return true;
 		}
@@ -49,15 +50,15 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 		return false;
 	}
 	
-	@Override public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase entity) {
-		EntityPlayer player = (EntityPlayer) entity;
+	@Override public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockIn, BlockPos pos, EntityLivingBase entityLiving) {
+		EntityPlayer player = (EntityPlayer) entityLiving;
 		
 		if (player.capabilities.isCreativeMode) return false; 
 		
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
-		} else if (stack.getMetadata() <= 12233 && !(world.isRemote) && (!player.isSneaking())) {
-			Material material = world.getBlockState(pos).getBlock().getMaterial();
+		if (this.isBroken(stack) && !(worldIn.isRemote)) {
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		} else if (stack.getMetadata() <= 12233 && !(worldIn.isRemote) && (!player.isSneaking())) {
+			Material material = worldIn.getBlockState(pos).getMaterial();
 			boolean valid = (material == Material.rock || material == Material.ice || material == Material.packedIce || material == Material.clay);
 			
 			if (valid) {
@@ -81,15 +82,15 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 					for (int iy = -1; iy < 2; ++ iy) {
 						for (int iz = -1; iz < 2; ++ iz) {
 							
-							Material neighbourMaterial = world.getBlockState(pos.add(ix, iy, iz)).getBlock().getMaterial();
+							Material neighbourMaterial = worldIn.getBlockState(pos.add(ix, iy, iz)).getMaterial();
 							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.packedIce || neighbourMaterial == Material.clay);
 							boolean neighbourValidShovel = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
 							
 							if (neighbourValid) {
-								world.destroyBlock(pos.add(ix, iy, iz), true);
+								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
 								stack.damageItem(1, player);
 							} else if (hasShovel && neighbourValidShovel && theShovel != null) {
-								world.destroyBlock(pos.add(ix, iy, iz), true);
+								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
 								theShovel.damageItem(1, player);
 							}
 						}
@@ -98,44 +99,32 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 			}
 		}
 		
-		return super.onBlockDestroyed(stack, world, block, pos, entity);
+		return super.onBlockDestroyed(stack, worldIn, blockIn, pos, entityLiving);
 	}
 	
-	@Override public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		Item torch = Item.getItemFromBlock(Blocks.torch);
-		
-		if (world.getBlockState(pos).getBlock() != Blocks.snow_layer) {
-			if (side == EnumFacing.DOWN) pos = pos.down();
-			if (side == EnumFacing.UP) pos = pos.up();
-			if (side == EnumFacing.NORTH) pos = pos.north();
-			if (side == EnumFacing.SOUTH) pos = pos.south();
-			if (side == EnumFacing.WEST) pos = pos.west();
-			if (side == EnumFacing.EAST) pos = pos.east();
-			if (!world.isAirBlock(pos)) return false;
+	@Override public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (worldIn.getBlockState(pos).getBlock() != Blocks.snow_layer) {
+			if (facing == EnumFacing.DOWN) pos = pos.down();
+			if (facing == EnumFacing.UP) pos = pos.up();
+			if (facing == EnumFacing.NORTH) pos = pos.north();
+			if (facing == EnumFacing.SOUTH) pos = pos.south();
+			if (facing == EnumFacing.WEST) pos = pos.west();
+			if (facing == EnumFacing.EAST) pos = pos.east();
+			if (!worldIn.isAirBlock(pos)) return EnumActionResult.FAIL;
 		}
 		
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
-		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
-			if (player.inventory.hasItem(torch)) {
-				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
-					if (!(world.isRemote) && Blocks.torch.canPlaceBlockAt(world, pos)) {
-						world.setBlockState(pos, Blocks.torch.getDefaultState());
-					}
-				} else if (player.capabilities.isCreativeMode) {
-					if (!(world.isRemote) && Blocks.torch.canPlaceBlockAt(world, pos)) {
-						world.setBlockState(pos, Blocks.torch.getDefaultState());
-					}
-				}
-			}
-			return true;
+		if (this.isBroken(stack) && !(worldIn.isRemote)) {
+			playerIn.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		} else if (!(this.isBroken(stack))) {
+			TorchPlacer.tryPlaceTorch(stack, playerIn, worldIn, pos, hand, facing);
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));
@@ -160,7 +149,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		
 		return true;
 	}

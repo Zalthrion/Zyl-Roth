@@ -12,47 +12,45 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IProgressUpdate;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.MapGenRavine;
-import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import com.zalthrion.zylroth.lib.ModBiomes;
 import com.zalthrion.zylroth.world.gen.structures.DragonNest;
 
-public class ChunkProviderKyrul implements IChunkProvider {
+// TODO Remap from ChunkProviderOverworld
+public class ChunkProviderKyrul implements IChunkGenerator {
 	/** RNG. */
 	private Random rand;
-	private NoiseGeneratorOctaves ngo1;
-	private NoiseGeneratorOctaves ngo2;
-	private NoiseGeneratorOctaves ngo3;
-	private NoiseGeneratorPerlin ngp;
-	public NoiseGeneratorOctaves ngo4;
-	public NoiseGeneratorOctaves ngo5;
+	private NoiseGeneratorOctaves noiseGen1;
+	private NoiseGeneratorOctaves noiseGen2;
+	private NoiseGeneratorOctaves noiseGen3;
+	private NoiseGeneratorPerlin noiseGen4;
+	public NoiseGeneratorOctaves noiseGen5;
+	public NoiseGeneratorOctaves noiseGen6;
 	public NoiseGeneratorOctaves mobSpawnerNoise;
 	
 	private World worldObj;
@@ -88,12 +86,12 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		this.mapFeaturesEnabled = mapFeatures;
 		this.worldType = world.getWorldInfo().getTerrainType();
 		this.rand = new Random(seed);
-		this.ngo1 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.ngo2 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.ngo3 = new NoiseGeneratorOctaves(this.rand, 8);
-		this.ngp = new NoiseGeneratorPerlin(this.rand, 4);
-		this.ngo4 = new NoiseGeneratorOctaves(this.rand, 10);
-		this.ngo5 = new NoiseGeneratorOctaves(this.rand, 10);
+		this.noiseGen1 = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
+		this.noiseGen4 = new NoiseGeneratorPerlin(this.rand, 4);
+		this.noiseGen5 = new NoiseGeneratorOctaves(this.rand, 10);
+		this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 10);
 		this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
 		this.doubleArray1 = new double[825];
 		this.parabolicField = new float[25];
@@ -110,19 +108,19 @@ public class ChunkProviderKyrul implements IChunkProvider {
 			this.fluidBlock = this.settings.useLavaOceans ? Blocks.lava : Blocks.water;
 		}
 		
-		NoiseGenerator[] noiseGens = {ngo1, ngo2, ngo3, ngp, ngo4, ngo5, mobSpawnerNoise};
-		noiseGens = TerrainGen.getModdedNoiseGenerators(world, this.rand, noiseGens);
-		this.ngo1 = (NoiseGeneratorOctaves) noiseGens[0];
-		this.ngo2 = (NoiseGeneratorOctaves) noiseGens[1];
-		this.ngo3 = (NoiseGeneratorOctaves) noiseGens[2];
-		this.ngp = (NoiseGeneratorPerlin) noiseGens[3];
-		this.ngo4 = (NoiseGeneratorOctaves) noiseGens[4];
-		this.ngo5 = (NoiseGeneratorOctaves) noiseGens[5];
-		this.mobSpawnerNoise = (NoiseGeneratorOctaves) noiseGens[6];
+		ContextZylroth ctx = new ContextZylroth(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
+		ctx = TerrainGen.getModdedNoiseGenerators(world, this.rand, ctx);
+		this.noiseGen1 = ctx.getNoiseGenOctave1();
+		this.noiseGen2 = ctx.getNoiseGenOctave2();
+		this.noiseGen3 = ctx.getNoiseGenOctave3();
+		this.noiseGen4 = ctx.getNoiseGenPerlin1();
+		this.noiseGen5 = ctx.getNoiseGenOctave4();
+		this.noiseGen6 = ctx.getNoiseGenOctave5();
+		this.mobSpawnerNoise = ctx.getNoiseGenOctave6();
 	}
 	
 	public void setBlocksInChunk(int chunkX, int chunkZ, ChunkPrimer primer) {
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
 		this.setupNoiseFields(chunkX * 4, 0, chunkZ * 4);
 		
 		for (int k = 0; k < 4; k ++) {
@@ -180,18 +178,16 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		}
 	}
 	
-	public void replaceBlocksForBiome(int chunkX, int chunkZ, ChunkPrimer primer, BiomeGenBase[] biomes) {
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, chunkX, chunkZ, primer, this.worldObj);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY) return;
+	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, BiomeGenBase[] biomes) {
+		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.worldObj)) return;
 		
 		double d0 = 0.03125D;
-		this.stoneNoise = this.ngp.func_151599_a(this.stoneNoise, (double) (chunkX * 16), (double) (chunkZ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.stoneNoise = this.noiseGen4.func_151599_a(this.stoneNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int k = 0; k < 16; k ++) {
 			for (int l = 0; l < 16; l ++) {
 				BiomeGenBase bgb = biomes[l + k * 16];
-				bgb.genTerrainBlocks(this.worldObj, this.rand, primer, chunkX * 16 + k, chunkZ * 16 + l, this.stoneNoise[l + k * 16]);
+				bgb.genTerrainBlocks(this.worldObj, this.rand, primer, x * 16 + k, z * 16 + l, this.stoneNoise[l + k * 16]);
 			}
 		}
 	}
@@ -200,16 +196,16 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		this.setBlocksInChunk(chunkX, chunkZ, primer);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 		this.replaceBlocksForBiome(chunkX, chunkZ, primer, this.biomesForGeneration);
-		if (this.settings.useCaves) this.caveGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
-		if (this.settings.useRavines) this.ravineGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
-		if (this.settings.useMineShafts && this.mapFeaturesEnabled) this.mineshaftGenerator.generate(this, this.worldObj, chunkX, chunkZ, primer);
+		if (this.settings.useCaves) this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
+		if (this.settings.useRavines) this.ravineGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
+		if (this.settings.useMineShafts && this.mapFeaturesEnabled) this.mineshaftGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 		byte[] abyte = chunk.getBiomeArray();
 		
 		for (int k = 0; k < abyte.length; k ++) {
-			abyte[k] = (byte) this.biomesForGeneration[k].biomeID;
+			abyte[k] = (byte) BiomeGenBase.getIdForBiome(this.biomesForGeneration[k]);
 		}
 		
 		chunk.generateSkylightMap();
@@ -217,12 +213,12 @@ public class ChunkProviderKyrul implements IChunkProvider {
 	}
 	
 	private void setupNoiseFields(int posX, int posY, int posZ) {
-		this.ngo5Octaves = this.ngo5.generateNoiseOctaves(this.ngo5Octaves, posX, posZ, 5, 5, (double) this.settings.depthNoiseScaleX, (double) this.settings.depthNoiseScaleZ, (double) this.settings.depthNoiseScaleExponent);
+		this.ngo5Octaves = this.noiseGen6.generateNoiseOctaves(this.ngo5Octaves, posX, posZ, 5, 5, (double) this.settings.depthNoiseScaleX, (double) this.settings.depthNoiseScaleZ, (double) this.settings.depthNoiseScaleExponent);
 		float f = this.settings.coordinateScale;
 		float f1 = this.settings.heightScale;
-		this.ngo3Octaves = this.ngo3.generateNoiseOctaves(this.ngo3Octaves, posX, posY, posZ, 5, 33, 5, (double) (f / this.settings.mainNoiseScaleX), (double) (f1 / this.settings.mainNoiseScaleY), (double) (f / this.settings.mainNoiseScaleZ));
-		this.ngo1Octaves = this.ngo1.generateNoiseOctaves(this.ngo1Octaves, posX, posY, posZ, 5, 33, 5, (double) f, (double) f1, (double) f);
-		this.ngo2Octaves = this.ngo2.generateNoiseOctaves(this.ngo2Octaves, posX, posY, posZ, 5, 33, 5, (double) f, (double) f1, (double) f);
+		this.ngo3Octaves = this.noiseGen3.generateNoiseOctaves(this.ngo3Octaves, posX, posY, posZ, 5, 33, 5, (double) (f / this.settings.mainNoiseScaleX), (double) (f1 / this.settings.mainNoiseScaleY), (double) (f / this.settings.mainNoiseScaleZ));
+		this.ngo1Octaves = this.noiseGen1.generateNoiseOctaves(this.ngo1Octaves, posX, posY, posZ, 5, 33, 5, (double) f, (double) f1, (double) f);
+		this.ngo2Octaves = this.noiseGen2.generateNoiseOctaves(this.ngo2Octaves, posX, posY, posZ, 5, 33, 5, (double) f, (double) f1, (double) f);
 		int l = 0;
 		int i1 = 0;
 		
@@ -237,8 +233,8 @@ public class ChunkProviderKyrul implements IChunkProvider {
 				for (int l1 = -b0; l1 <= b0; l1 ++) {
 					for (int i2 = -b0; i2 < b0; i2 ++) {
 						BiomeGenBase bgb1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
-						float f5 = this.settings.biomeDepthOffSet + bgb1.minHeight * this.settings.biomeDepthWeight;
-						float f6 = this.settings.biomeScaleOffset + bgb1.maxHeight * this.settings.biomeScaleWeight;
+						float f5 = this.settings.biomeDepthOffSet + bgb1.getBaseHeight() * this.settings.biomeDepthWeight;
+						float f6 = this.settings.biomeScaleOffset + bgb1.getHeightVariation() * this.settings.biomeScaleWeight;
 						
 						if (this.worldType == WorldType.AMPLIFIED && f5 > 0.0F) {
 							f5 = 1.0F + f5 * 2.0F;
@@ -247,7 +243,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 						
 						float f7 = this.parabolicField[l1 + 2 + (i2 + 2) * 5] / (f5 + 2.0F);
 						
-						if (bgb1.minHeight > bgb.minHeight) {
+						if (bgb1.getBaseHeight() > bgb.getBaseHeight()) {
 							f7 /= 2.0F;
 						}
 						
@@ -317,11 +313,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		}
 	}
 	
-	@Override public boolean chunkExists(int chunkX, int chunkZ) {
-		return true;
-	}
-	
-	@Override public void populate(IChunkProvider provider, int chunkX, int chunkZ) {
+	@Override public void populate(int chunkX, int chunkZ) {
 		BlockFalling.fallInstantly = true;
 		int xPos = chunkX * 16;
 		int zPos = chunkZ * 16;
@@ -334,7 +326,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		boolean flag = false;
 		ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(chunkX, chunkZ);
 		
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(provider, worldObj, rand, chunkX, chunkZ, flag));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, worldObj, rand, chunkX, chunkZ, flag));
 		
 		if (this.settings.useMineShafts) this.mineshaftGenerator.generateStructure(this.worldObj, this.rand, chunkcoordintpair);
 		
@@ -342,14 +334,14 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		int l1;
 		int i2;
 		
-		if (bgb != BiomeGenBase.desert && bgb != BiomeGenBase.desertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0 && TerrainGen.populate(provider, worldObj, rand, chunkX, chunkZ, flag, LAKE)) {
+		if (bgb != Biomes.desert && bgb != Biomes.desertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0 && TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAKE)) {
 			k1 = this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(256);
 			i2 = this.rand.nextInt(16) + 8;
 			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
 		}
 		
-		if (TerrainGen.populate(provider, worldObj, rand, chunkX, chunkZ, flag, LAVA) && !flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes) {
+		if (TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAVA) && !flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes) {
 			k1 = this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
 			i2 = this.rand.nextInt(16) + 8;
@@ -360,7 +352,7 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		}
 		
 		if (this.settings.useDungeons) {
-			boolean doGen = TerrainGen.populate(provider, worldObj, rand, chunkX, chunkZ, flag, DUNGEON);
+			boolean doGen = TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, DUNGEON);
 			for (k1 = 0; doGen && k1 < this.settings.dungeonChance; ++ k1) {
 				l1 = this.rand.nextInt(16) + 8;
 				i2 = this.rand.nextInt(256);
@@ -370,12 +362,12 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		}
 		
 		bgb.decorate(this.worldObj, this.rand, new BlockPos(xPos, 0, zPos));
-		if (TerrainGen.populate(provider, worldObj, rand, chunkX, chunkZ, flag, ANIMALS)) {
-			SpawnerAnimals.performWorldGenSpawning(this.worldObj, bgb, xPos + 8, zPos + 8, 16, 16, this.rand);
+		if (TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, ANIMALS)) {
+			WorldEntitySpawner.performWorldGenSpawning(this.worldObj, bgb, xPos + 8, zPos + 8, 16, 16, this.rand);
 		}
 		blockpos = blockpos.add(8, 0, 8);
 		
-		boolean doGen = TerrainGen.populate(provider, worldObj, rand, chunkX, chunkZ, flag, ICE);
+		boolean doGen = TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, ICE);
 		for (k1 = 0; doGen && k1 < 16; ++ k1) {
 			for (l1 = 0; l1 < 16; ++ l1) {
 				BlockPos blockpos1 = this.worldObj.getPrecipitationHeight(blockpos.add(k1, 0, l1));
@@ -405,31 +397,9 @@ public class ChunkProviderKyrul implements IChunkProvider {
 			if (yPos != -1) (new DragonNest()).generate(this.worldObj, this.rand, new BlockPos(blockpos.getX() + k1, yPos, blockpos.getZ() + i2));
 		}
 		
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(provider, worldObj, rand, chunkX, chunkZ, flag));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(this, worldObj, rand, chunkX, chunkZ, flag));
 		
 		BlockFalling.fallInstantly = false;
-	}
-	
-	@Override public boolean populateChunk(IChunkProvider provider, Chunk chunk, int chunkX, int chunkZ) {
-		return false;
-	}
-	
-	@Override public boolean saveChunks(boolean p_73151_1_, IProgressUpdate progressCallback) {
-		return true;
-	}
-	
-	@Override public void saveExtraData() {}
-	
-	@Override public boolean unloadQueuedChunks() {
-		return false;
-	}
-	
-	@Override public boolean canSave() {
-		return true;
-	}
-	
-	@Override public String makeString() {
-		return "RandomLevelSource";
 	}
 	
 	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
@@ -441,17 +411,13 @@ public class ChunkProviderKyrul implements IChunkProvider {
 		return null;
 	}
 	
-	@Override public int getLoadedChunkCount() {
-		return 0;
-	}
-	
 	@Override public void recreateStructures(Chunk chunk, int chunkX, int chunkZ) {
 		if (this.settings.useMineShafts && this.mapFeaturesEnabled) {
-			this.mineshaftGenerator.generate(this, this.worldObj, chunkX, chunkZ, (ChunkPrimer) null);
+			this.mineshaftGenerator.generate(this.worldObj, chunkX, chunkZ, (ChunkPrimer) null);
 		}
 	}
-	
-	@Override public Chunk provideChunk(BlockPos blockPosIn) {
-		return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+
+	@Override public boolean generateStructures(Chunk chunkIn, int x, int z) {
+		return false;
 	}
 }

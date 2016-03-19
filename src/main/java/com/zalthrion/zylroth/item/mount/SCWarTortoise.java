@@ -4,7 +4,10 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
@@ -19,19 +22,19 @@ public class SCWarTortoise extends SummoningCrystalBase {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (world.isRemote) return stack;
-		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-		MountWarTortoise mount = new MountWarTortoise(player.worldObj);
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if (worldIn.isRemote) return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
+		NBTTagCompound persistentData = playerIn.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+		MountWarTortoise mount = new MountWarTortoise(playerIn.worldObj);
 		
-		if (player instanceof EntityPlayer) {
+		if (playerIn instanceof EntityPlayer) {
 			
-			if (player.ridingEntity == null) {
+			if (playerIn.getRidingEntity() == null) {
 				
-				mount.copyLocationAndAnglesFrom(player);
-				mount.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(player.serverPosX, player.serverPosY, player.serverPosZ)), (IEntityLivingData) null);
+				mount.copyLocationAndAnglesFrom(playerIn);
+				mount.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(playerIn.serverPosX, playerIn.serverPosY, playerIn.serverPosZ)), (IEntityLivingData) null);
 				
-				if (!player.worldObj.isRemote && !mount.isChild()) {
+				if (!playerIn.worldObj.isRemote && !mount.isChild()) {
 					
 					if (!(persistentData.hasKey("ownsMountWarTortoise"))) {
 						
@@ -41,16 +44,16 @@ public class SCWarTortoise extends SummoningCrystalBase {
 							
 							mount.isSummoned(true);
 							
-							player.worldObj.spawnEntityInWorld(mount);
+							playerIn.worldObj.spawnEntityInWorld(mount);
 							
-							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
+							playerIn.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountWarTortoise", mount.getUniqueID().toString());
-							mount.setTamedBy(player);
+							mount.setTamedBy(playerIn);
 						}			
 					} 
 				}
 			}
 		}
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 }

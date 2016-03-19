@@ -2,7 +2,7 @@ package com.zalthrion.zylroth.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import com.zalthrion.zylroth.packet.SummonedMountMessage;
 
@@ -19,9 +19,9 @@ public class SummonDismissButton extends GuiButton {
 	
 	@Override public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if (SummonedMountMessage.summonedMountStatic == track && track > -1) {
-			this.displayString = StatCollector.translateToLocal(dismountText);
+			this.displayString = I18n.translateToLocal(dismountText);
 		} else {
-			this.displayString = StatCollector.translateToLocal(summonText);
+			this.displayString = I18n.translateToLocal(summonText);
 		}
 		super.drawButton(mc, mouseX, mouseY);
 	}

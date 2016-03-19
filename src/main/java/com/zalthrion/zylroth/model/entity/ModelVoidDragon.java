@@ -3,12 +3,11 @@ package com.zalthrion.zylroth.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.CullFace;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 
@@ -181,11 +180,11 @@ public class ModelVoidDragon extends ModelBase {
 			rearLeg.render(par7);
 			GlStateManager.scale(-1, 1, 1);
 			
-			if (j == 0) GlStateManager.cullFace(GL11.GL_FRONT);
+			if (j == 0) GlStateManager.cullFace(CullFace.FRONT);
 		}
 		
 		GlStateManager.popMatrix();
-		GlStateManager.cullFace(GL11.GL_BACK);
+		GlStateManager.cullFace(CullFace.BACK);
 		GlStateManager.disableCull();
 		float f16 = -((float) Math.sin(f6 * (float) Math.PI * 2.0F)) * 0.0F;
 		f13 = f6 * (float) Math.PI * 2.0F;

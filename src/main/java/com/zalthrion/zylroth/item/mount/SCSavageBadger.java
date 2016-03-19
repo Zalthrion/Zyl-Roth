@@ -4,7 +4,10 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
@@ -18,30 +21,30 @@ public class SCSavageBadger extends SummoningCrystalBase {
 		this.setUnlocalizedName(name);
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (world.isRemote) return stack;
-		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-		MountSavageBadger mount = new MountSavageBadger(player.worldObj);
-		if (player instanceof EntityPlayer) {
-			if (player.ridingEntity == null) {
-				mount.copyLocationAndAnglesFrom(player);
-				mount.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(player.serverPosX, player.serverPosY, player.serverPosZ)), (IEntityLivingData) null);
-				if (!player.worldObj.isRemote && !mount.isChild()) {
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if (worldIn.isRemote) return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
+		NBTTagCompound persistentData = playerIn.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+		MountSavageBadger mount = new MountSavageBadger(playerIn.worldObj);
+		if (playerIn instanceof EntityPlayer) {
+			if (playerIn.getRidingEntity() == null) {
+				mount.copyLocationAndAnglesFrom(playerIn);
+				mount.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(playerIn.serverPosX, playerIn.serverPosY, playerIn.serverPosZ)), (IEntityLivingData) null);
+				if (!playerIn.worldObj.isRemote && !mount.isChild()) {
 					if (!(persistentData.hasKey("ownsMountSavageBadger"))) {
-						mount.setOwnerId(player.getUniqueID().toString());
+						mount.setOwnerUniqueId(playerIn.getUniqueID());
 						mount.isSummoned = true;
 						if (mount.isSummoned == true) {
 							mount.isSummoned(true);
-							player.worldObj.spawnEntityInWorld(mount);
-							player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
+							playerIn.worldObj.spawnEntityInWorld(mount);
+							playerIn.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
 							persistentData.setString("ownsMountSavageBadger", mount.getUniqueID().toString());
-							mount.setTamedBy(player);
+							mount.setTamedBy(playerIn);
 						}
 					}
 				}
 			}
 		}
 		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 }

@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 public class TileEntityBase extends TileEntity implements IInventory {
 	@Override
@@ -56,8 +56,8 @@ public class TileEntityBase extends TileEntity implements IInventory {
 		return false;
 	}
 
-	@Override public IChatComponent getDisplayName() {
-		return new ChatComponentText(getName());
+	@Override public ITextComponent getDisplayName() {
+		return new TextComponentString(getName());
 	}
 
 	@Override public void openInventory(EntityPlayer player) {

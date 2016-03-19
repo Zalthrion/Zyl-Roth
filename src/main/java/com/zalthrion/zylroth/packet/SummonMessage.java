@@ -3,8 +3,8 @@ package com.zalthrion.zylroth.packet;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -47,60 +47,60 @@ public class SummonMessage implements IMessage {
 							deathcharger.copyLocationAndAnglesFrom(player);
 							deathcharger.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								deathcharger.setOwnerId(player.getUniqueID().toString());
+								deathcharger.setOwnerUniqueId(player.getUniqueID());
 								deathcharger.isSummoned(true);
 								deathcharger.setTamedBy(player);
 								player.worldObj.spawnEntityInWorld(deathcharger);
 								data.setOwnedMount(deathcharger.getUniqueID().toString(), 2);
-								player.mountEntity(deathcharger);
+								player.startRiding(deathcharger);
 							}
 						} else if (message.summon == MountIDs.plaguedHorse) {
 							MountPlaguedHorse plaguedHorse = new MountPlaguedHorse(player.worldObj);
 							plaguedHorse.copyLocationAndAnglesFrom(player);
 							plaguedHorse.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								plaguedHorse.setOwnerId(player.getUniqueID().toString());
+								plaguedHorse.setOwnerUniqueId(player.getUniqueID());
 								plaguedHorse.isSummoned(true);
 								plaguedHorse.setTamedBy(player);
 								player.worldObj.spawnEntityInWorld(plaguedHorse);
 								data.setOwnedMount(plaguedHorse.getUniqueID().toString(), 1);
-								player.mountEntity(plaguedHorse);
+								player.startRiding(plaguedHorse);
 							}
 						} else if (message.summon == MountIDs.savageBadger) {
 							MountSavageBadger badger = new MountSavageBadger(player.worldObj);
 							badger.copyLocationAndAnglesFrom(player);
 							badger.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								badger.setOwnerId(player.getUniqueID().toString());
+								badger.setOwnerUniqueId(player.getUniqueID());
 								badger.isSummoned(true);
 								badger.setTamedBy(player);
 								player.worldObj.spawnEntityInWorld(badger);
 								data.setOwnedMount(badger.getUniqueID().toString(), 0);
-								player.mountEntity(badger);
+								player.startRiding(badger);
 							}
 						} else if (message.summon == MountIDs.swiftUnicorn) {
 							MountSwiftUnicorn swiftUnicorn = new MountSwiftUnicorn(player.worldObj);
 							swiftUnicorn.copyLocationAndAnglesFrom(player);
 							swiftUnicorn.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								swiftUnicorn.setOwnerId(player.getUniqueID().toString());
+								swiftUnicorn.setOwnerUniqueId(player.getUniqueID());
 								swiftUnicorn.isSummoned(true);
 								swiftUnicorn.setTamedBy(player);
 								player.worldObj.spawnEntityInWorld(swiftUnicorn);
 								data.setOwnedMount(swiftUnicorn.getUniqueID().toString(), 3);
-								player.mountEntity(swiftUnicorn);
+								player.startRiding(swiftUnicorn);
 							}
 						} else if (message.summon == MountIDs.warTortoise) {
 							MountWarTortoise warTortoise = new MountWarTortoise(player.worldObj);
 							warTortoise.copyLocationAndAnglesFrom(player);
 							warTortoise.onInitialSpawn(player.worldObj.getDifficultyForLocation(new BlockPos((int) player.posX, (int) player.posY, (int) player.posZ)), (IEntityLivingData) null);
 							if (!data.ownsMount()) {
-								warTortoise.setOwnerId(player.getUniqueID().toString());
+								warTortoise.setOwnerUniqueId(player.getUniqueID());
 								warTortoise.isSummoned(true);
 								warTortoise.setTamedBy(player);
 								player.worldObj.spawnEntityInWorld(warTortoise);
 								data.setOwnedMount(warTortoise.getUniqueID().toString(), 4);
-								player.mountEntity(warTortoise);
+								player.startRiding(warTortoise);
 							}
 						}
 					}					

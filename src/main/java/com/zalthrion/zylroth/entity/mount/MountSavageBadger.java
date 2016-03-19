@@ -3,8 +3,8 @@ package com.zalthrion.zylroth.entity.mount;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModItems;
@@ -17,21 +17,20 @@ public class MountSavageBadger extends MountBase {
 		this.setCustomNameTag("Savage Badger");
 	}
 	
-	@Override public boolean interact(EntityPlayer player) {
+	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-		ItemStack stack = player.inventory.getCurrentItem();
 		
-		if (stack != null && stack.getItem() == ModItems.SC_SavageBadger && player.isSneaking() && persistentData.hasKey("ownsMountSavageBadger") && this.riddenByEntity == null && this.isOwner(player)) {
+		if (stack != null && stack.getItem() == ModItems.SC_SavageBadger && player.isSneaking() && persistentData.hasKey("ownsMountSavageBadger") && this.getControllingPassenger() == null && this.isOwner(player)) {
 			this.setDead();
 			persistentData.removeTag("ownsMountSavageBadger");
 		}
 		
-		if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
-			player.mountEntity(this);
+		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
+			player.startRiding(this);
 		}
 		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.MOD_ID + ":mount.owned")));
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}
 		
 		return true;

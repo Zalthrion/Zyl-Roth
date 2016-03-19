@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -15,10 +15,14 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -37,26 +41,29 @@ public class EntityUndeadWarrior extends EntityMob {
 		
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIBreakDoor(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
+		this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
+		// this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true)); // TODO See if it continues to work for villagers
 		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		
-		this.setCurrentItemOrArmor(3, new ItemStack(ModArmors.tenebraeChestplate));
-		this.setCurrentItemOrArmor(2, new ItemStack(ModArmors.tenebraeLeggings));
-		this.setCurrentItemOrArmor(1, new ItemStack(ModArmors.tenebraeBoots));
+	}
+	
+	@Override protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ModArmors.tenebraeChestplate));
+		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ModArmors.tenebraeLeggings));
+		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ModArmors.tenebraeBoots));
+		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ModTools.tenebraeSword));
 	}
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(hardcore ? 45.0D : 25.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(hardcore ? 15.0D : 12.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(hardcore ? 7.5D : 3.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(hardcore ? 0.4D : 0.2D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(hardcore ? 45.0D : 25.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(hardcore ? 15.0D : 12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(hardcore ? 7.5D : 3.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(hardcore ? 0.4D : 0.2D);
 	}
 	
 	@Override public boolean attackEntityAsMob(Entity entity) {
@@ -82,7 +89,7 @@ public class EntityUndeadWarrior extends EntityMob {
 				}
 				
 				if (!player.worldObj.isRemote && !hasArmor) {
-					this.playSound("mob.blaze.hit", 0.3F, 1.0F);
+					this.playSound(SoundEvents.entity_blaze_hurt, 0.3F, 1.0F);
 				}
 			}
 		}
@@ -90,19 +97,16 @@ public class EntityUndeadWarrior extends EntityMob {
 		return KyrulMinions;
 	}
 	
-	/** Returns the sound this mob makes while it's alive. */
-	@Override protected String getLivingSound() {
-		return "mob.skeleton.say";
+	@Override protected SoundEvent getAmbientSound() {
+		return SoundEvents.entity_skeleton_ambient;
 	}
 	
-	/** Returns the sound this mob makes when it is hurt. */
-	@Override protected String getHurtSound() {
-		return "mob.skeleton.hurt";
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_skeleton_hurt;
 	}
 	
-	/** Returns the sound this mob makes on death. */
-	@Override protected String getDeathSound() {
-		return "mob.skeleton.death";
+	@Override protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_skeleton_death;
 	}
 	
 	@Override protected void collideWithEntity(Entity entity) {
@@ -146,16 +150,6 @@ public class EntityUndeadWarrior extends EntityMob {
 			this.entityDropItem(new ItemStack(ModItems.darkShard, 1, 6), 0f);
 		}
 		
-	}
-	
-	@Override public ItemStack getHeldItem() {
-		return defaultHeldItem;
-	}
-	
-	private static final ItemStack defaultHeldItem;
-	
-	static {
-		defaultHeldItem = new ItemStack(ModTools.tenebraeSword, 1);
 	}
 	
 	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {

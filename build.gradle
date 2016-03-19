@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()//
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -27,7 +28,7 @@ group= "${config.group}"
 archivesBaseName = "${config.archive_base}"
 
 minecraft {
-    version = "${config.mc_version}-${config.forge_version}"
+    version = "${config.mc_version}-${config.forge_version}-${config.mc_version}"
     runDir = "eclipse"
 	mappings = "${config.mappings}"
 }

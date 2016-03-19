@@ -5,11 +5,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenFrozenSea extends BiomeGenBase {
 	
-	public BiomeGenFrozenSea(int id) {
-		super(id);
-		
-		this.setDisableRain();
-		this.setEnableSnow();
+	public BiomeGenFrozenSea(BiomeGenBase.BiomeProperties properties) {
+		super(properties);
 		
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
@@ -17,13 +14,6 @@ public class BiomeGenFrozenSea extends BiomeGenBase {
 		
 		this.topBlock = Blocks.ice.getDefaultState();
 		this.fillerBlock = Blocks.packed_ice.getDefaultState();
-		
-		this.setBiomeName("Frozen Sea");
-		this.setHeight(height_Oceans);
-		
-		this.waterColorMultiplier = 0x3CA7B5;
-		
-		this.setTemperatureRainfall(0.0F, 0.5F);
 	}
 	
 	@Override public BiomeGenBase.TempCategory getTempCategory() {

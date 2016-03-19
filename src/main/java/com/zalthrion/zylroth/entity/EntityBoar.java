@@ -6,7 +6,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -17,7 +19,7 @@ public class EntityBoar extends EntityHostileAnimal {
 		super(world);
 		this.setSize(1F, 1F);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false));
+		this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.2D, false));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, Items.potato, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, Items.baked_potato, false));
@@ -35,30 +37,30 @@ public class EntityBoar extends EntityHostileAnimal {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		if (!(this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL)) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		if (!(this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL)) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(15.0D);
 	}
 	
 	@Override public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntityBoar(this.worldObj);
 	}
 	
-	@Override protected String getLivingSound() {
-		return "mob.pig.say";
+	@Override protected SoundEvent getAmbientSound() {
+		return SoundEvents.entity_pig_ambient;
 	}
 	
-	@Override protected String getHurtSound() {
-		return "mob.pig.say";
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_pig_hurt;
 	}
 	
-	@Override protected String getDeathSound() {
-		return "mob.pig.death";
+	@Override protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_pig_death;
 	}
 	
 	protected void playStepSound(int x, int y, int z, Block blockIn) {
-		this.playSound("mob.pig.step", 0.15F, 1.0F);
+		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
 	}
 	
 	@Override public boolean isBreedingItem(ItemStack p_70877_1_) {

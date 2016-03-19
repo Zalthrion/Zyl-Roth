@@ -4,13 +4,13 @@ import java.util.List;
 
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ReportedException;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.Lists;
 import com.zalthrion.zylroth.world.gen.GenLayerKyrul;
 
-public class WorldChunkManagerKyrul extends WorldChunkManager {
+public class BiomeProviderKyrul extends BiomeProvider {
 	
 	private GenLayer genBiomes;
 	/** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
@@ -29,13 +29,13 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
-	public WorldChunkManagerKyrul() {
+	public BiomeProviderKyrul() {
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = Lists.<BiomeGenBase>newArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
 	}
 	
-	public WorldChunkManagerKyrul(long seed, WorldType worldType) {
+	public BiomeProviderKyrul(long seed, WorldType worldType) {
 		this();
 		
 		GenLayer[] genlayer = GenLayerKyrul.makeTheWorld(seed, worldType);
@@ -44,7 +44,7 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 		this.biomeIndexLayer = genlayer[1];
 	}
 	
-	public WorldChunkManagerKyrul(World world) {
+	public BiomeProviderKyrul(World world) {
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
 	}
 	
@@ -55,12 +55,12 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 	
 	/** Returns the BiomeGenBase related to the x, z position on the world. */
 	@Override public BiomeGenBase getBiomeGenerator(BlockPos pos) {
-		return this.biomeCache.func_180284_a(pos.getX(), pos.getZ(), (BiomeGenBase) null);
+		return this.biomeCache.getBiome(pos.getX(), pos.getZ(), (BiomeGenBase) null);
 	}
 	
 	/** Returns a list of rainfall values for the specified blocks. Args:
 	 * listToReuse, x, z, width, length. */
-	@Override public float[] getRainfall(float[] listToReuse, int x, int z, int width, int length) {
+	/* @Override public float[] getRainfall(float[] listToReuse, int x, int z, int width, int length) {
 		IntCache.resetIntCache();
 		
 		if (listToReuse == null || listToReuse.length < width * length) {
@@ -92,7 +92,7 @@ public class WorldChunkManagerKyrul extends WorldChunkManager {
 		}
 		
 		return listToReuse;
-	}
+	} */
 	
 	/** Return an adjusted version of a given temperature based on the y height */
 	@Override @SideOnly(Side.CLIENT) public float getTemperatureAtHeight(float par1, int par2) {

@@ -10,12 +10,15 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -89,24 +92,22 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 		return stack == null ? false : stack.getItem() == Items.wheat;
 	}
 	
-	@Override public boolean interact(EntityPlayer player) {
-		ItemStack itemstack = player.inventory.getCurrentItem();
-		
-		if (itemstack != null) {
-			if (this.isBreedingItem(itemstack) && this.getGrowingAge() == 0 && this.inLove <= 0) {
-				this.consumeItemFromStack(player, itemstack);
+	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
+		if (stack != null) {
+			if (this.isBreedingItem(stack) && this.getGrowingAge() == 0 && this.inLove <= 0) {
+				this.consumeItemFromStack(player, stack);
 				this.setInLove(player);
 				return true;
 			}
 			
-			if (this.isChild() && this.isBreedingItem(itemstack)) {
-				this.consumeItemFromStack(player, itemstack);
+			if (this.isChild() && this.isBreedingItem(stack)) {
+				this.consumeItemFromStack(player, stack);
 				this.func_175501_a((int) ((float) (-this.getGrowingAge() / 20) * 0.1F), true);
 				return true;
 			}
 		}
 		
-		return super.interact(player);
+		return super.processInteract(player, hand, stack);
 	}
 	
 	@Override protected void consumeItemFromStack(EntityPlayer player, ItemStack stack) {
@@ -158,32 +159,32 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 		super.onUpdate();
 	}
 	
-	@Override protected String getSwimSound() {
-		return "game.hostile.swim";
+	@Override protected SoundEvent getSwimSound() {
+		return SoundEvents.entity_hostile_swim;
 	}
 	
-	@Override protected String getSplashSound() {
-		return "game.hostile.swim.splash";
+	@Override protected SoundEvent getSplashSound() {
+		return SoundEvents.entity_hostile_splash;
 	}
 	
-	@Override protected String getHurtSound() {
-		return "game.hostile.hurt";
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_hostile_hurt;
 	}
 	
-	@Override protected String getDeathSound() {
-		return "game.hostile.die";
+	@Override protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_hostile_death;
 	}
 	
-	@Override protected String getFallSoundString(int damageValue) {
-		return damageValue > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
+	@Override protected SoundEvent getFallSound(int heightIn) {
+		return heightIn > 4 ? SoundEvents.entity_hostile_big_fall : SoundEvents.entity_hostile_small_fall;
 	}
 	
 	@Override public boolean attackEntityAsMob(Entity entityIn) {
-		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 		
 		if (entityIn instanceof EntityLivingBase) {
-			f += EnchantmentHelper.getModifierForCreature(this.getHeldItem(), ((EntityLivingBase) entityIn).getCreatureAttribute());
+			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) entityIn).getCreatureAttribute());
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 		
@@ -229,7 +230,7 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
+		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 	
 	@Override protected boolean canDropLoot() {

@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.world;
 import java.util.Random;
 
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
@@ -10,8 +11,8 @@ public class WorldStructureGenerator implements IWorldGenerator {
 	
 	public static final int MAX_HEIGHT = 256;
 	
-	@Override public void generate(Random random, int x, int z, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		switch (world.provider.getDimensionId()) {
+	@Override public void generate(Random random, int x, int z, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+		switch (world.provider.getDimensionType().getId()) {
 			case 0:
 				generateOverworld(random, x * 16, z * 16, world);
 				break;
@@ -21,13 +22,13 @@ public class WorldStructureGenerator implements IWorldGenerator {
 			case -1:
 				generateNether(random, x * 16, z * 16, world);
 				break;
-			case 47:
+			case 47: //TODO Fix the constantness
 				generateKyrul(random, x * 16, z * 16, world);
 				break;
-			case 48:
+			case 48: //TODO Fix the constantness
 				generateIridis(random, x * 16, z * 16, world);
 				break;
-			case 49:
+			case 49: //TODO Fix the constantness
 				generateGlaciem(random, x * 16, z * 16, world);
 				break;
 		}

@@ -1,32 +1,23 @@
 package com.zalthrion.zylroth.world.dimension;
 
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.Zylroth;
 
 public class WorldProviderIridis extends WorldProvider {
-	@Override
-	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerIridis(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
-		this.dimensionId = ConfigurationHandler.getIridisId();
+	
+	@Override public void registerWorldChunkManager() {
+		this.worldChunkMgr = new BiomeProviderIridis(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 	}
 	
 	@Override
-	public IChunkProvider createChunkGenerator() {
+	public IChunkGenerator createChunkGenerator() {
 		return new ChunkProviderIridis(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().getGeneratorOptions());
-	}
-	
-	@Override
-	public String getDimensionName() {
-		return "Iri'dis";
-	}
-
-	@Override public String getInternalNameSuffix() {
-		return "";
 	}
 	
 	@Override public String getSaveFolder() {
@@ -35,5 +26,9 @@ public class WorldProviderIridis extends WorldProvider {
 	
 	@Override @SideOnly(Side.CLIENT) public IRenderHandler getSkyRenderer() {
 		return new SkyRenderIridis();
+	}
+	
+	@Override public DimensionType getDimensionType() {
+		return Zylroth.IRIDIS;
 	}
 }

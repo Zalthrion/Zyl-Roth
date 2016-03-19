@@ -6,7 +6,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
@@ -23,7 +23,7 @@ public class VoidLordArmor extends ItemBaseArmor {
 	
 	private String textureName;
 	
-	public VoidLordArmor(ArmorMaterial armorMaterial, String textureName, int type) {
+	public VoidLordArmor(ArmorMaterial armorMaterial, String textureName, EntityEquipmentSlot type) {
 		super(armorMaterial, textureName, type);
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
@@ -46,42 +46,43 @@ public class VoidLordArmor extends ItemBaseArmor {
 	}
 	
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return Reference.MOD_ID.toLowerCase() + ":" + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		return Reference.MOD_ID.toLowerCase() + ":" + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == EntityEquipmentSlot.LEGS ? "2" : "1") + ".png";
 	}
 	
 	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
 		ModelBiped armorModel = ClientProxy.armorModels.get(this);
 		
 		if (armorModel != null) {
-			armorModel.bipedHead.showModel = armorSlot == 0;
+			armorModel.bipedHead.showModel = armorSlot == EntityEquipmentSlot.HEAD;
 			armorModel.bipedHeadwear.showModel = false;
-			armorModel.bipedBody.showModel = armorSlot == 1 || armorSlot == 2;
-			armorModel.bipedRightArm.showModel = armorSlot == 1;
-			armorModel.bipedLeftArm.showModel = armorSlot == 1;
-			armorModel.bipedRightLeg.showModel = armorSlot == 2 || armorSlot == 3;
-			armorModel.bipedLeftLeg.showModel = armorSlot == 2 || armorSlot == 3;
+			armorModel.bipedBody.showModel = armorSlot == EntityEquipmentSlot.CHEST || armorSlot == EntityEquipmentSlot.LEGS;
+			armorModel.bipedRightArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			armorModel.bipedLeftArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			armorModel.bipedRightLeg.showModel = armorSlot == EntityEquipmentSlot.LEGS || armorSlot == EntityEquipmentSlot.FEET;
+			armorModel.bipedLeftLeg.showModel = armorSlot == EntityEquipmentSlot.LEGS || armorSlot == EntityEquipmentSlot.FEET;
 			armorModel.isSneak = entityLiving.isSneaking();
 			armorModel.isRiding = entityLiving.isRiding();
 			armorModel.isChild = entityLiving.isChild();
-			armorModel.heldItemRight = 0;
-			armorModel.aimedBow = false;
+			// armorModel.heldItemRight = 0;
+			// armorModel.aimedBow = false;
 			
 			if (entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entityLiving;
-				ItemStack held_item = player.getEquipmentInSlot(0);
-				if (held_item != null) {
-					armorModel.heldItemRight = 1;
-					if (player.getItemInUseCount() > 0) {
-						EnumAction enumaction = held_item.getItemUseAction();
-						if (enumaction == EnumAction.BOW) {
-							armorModel.aimedBow = true;
-						} else if (enumaction == EnumAction.BLOCK) {
-							armorModel.heldItemRight = 3;
-						}
-					}
-				}
+				// TODO FIGURE OUT
+				// ItemStack held_item = player.getEquipmentInSlot(0);
+				// if (held_item != null) {
+					// armorModel.heldItemRight = 1;
+					// if (player.getItemInUseCount() > 0) {
+						// EnumAction enumaction = held_item.getItemUseAction();
+						// if (enumaction == EnumAction.BOW) {
+							// armorModel.aimedBow = true;
+						// } else if (enumaction == EnumAction.BLOCK) {
+							// armorModel.heldItemRight = 3;
+						// }
+					// }
+				// }
 			}
 		}
 		

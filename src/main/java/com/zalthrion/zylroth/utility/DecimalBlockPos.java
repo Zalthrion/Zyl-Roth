@@ -1,6 +1,6 @@
 package com.zalthrion.zylroth.utility;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class DecimalBlockPos {
 	

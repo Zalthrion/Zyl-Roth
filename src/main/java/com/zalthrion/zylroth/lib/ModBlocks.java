@@ -10,8 +10,6 @@ import com.zalthrion.zylroth.block.InfusedTenebrae;
 import com.zalthrion.zylroth.block.TenebraeBlock;
 import com.zalthrion.zylroth.block.TenebraeCore;
 import com.zalthrion.zylroth.block.machine.GoldBag;
-import com.zalthrion.zylroth.block.machine.InfuserMachine;
-import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.block.ore.EndiriteOre;
 import com.zalthrion.zylroth.block.ore.InferniumOre;
 import com.zalthrion.zylroth.block.ore.TenebraeOre;
@@ -63,10 +61,10 @@ public final class ModBlocks {
 	/* Spawners */
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
 	/* Machines */
-	public static Block infuser = new InfuserMachine(true, InfuserType.NORMAL);
-	public static Block infuserIdle = new InfuserMachine(false, InfuserType.NORMAL);
-	public static Block oreInfuser = new InfuserMachine(true, InfuserType.ORE);
-	public static Block oreInfuserIdle = new InfuserMachine(false, InfuserType.ORE);
+	// public static Block infuser = new InfuserMachine(true, InfuserType.NORMAL); // TODO Figure out why this is causing a crash
+	// public static Block infuserIdle = new InfuserMachine(false, InfuserType.NORMAL);
+	// public static Block oreInfuser = new InfuserMachine(true, InfuserType.ORE);
+	// public static Block oreInfuserIdle = new InfuserMachine(false, InfuserType.ORE);
 	
 	public static void init() {
 		/* TileEntity */
@@ -98,10 +96,10 @@ public final class ModBlocks {
 		/* Spawners */
 		ModRegistry.addRegister(36, spawner_VoidDragon, "spawnerVoidDragon");
 		/* Machines */
-		ModRegistry.addRegister(37, infuserIdle, "infuserMachine");
-		ModRegistry.addRegister(38, infuser, "infuserMachineActive");
-		ModRegistry.addRegister(39, oreInfuserIdle, "oreInfuserMachine");
-		ModRegistry.addRegister(40, oreInfuser, "oreInfuserMachineActive");
+		// ModRegistry.addRegister(37, infuserIdle, "infuserMachine");
+		// ModRegistry.addRegister(38, infuser, "infuserMachineActive");
+		// ModRegistry.addRegister(39, oreInfuserIdle, "oreInfuserMachine");
+		// ModRegistry.addRegister(40, oreInfuser, "oreInfuserMachineActive");
 		
 	}
 }

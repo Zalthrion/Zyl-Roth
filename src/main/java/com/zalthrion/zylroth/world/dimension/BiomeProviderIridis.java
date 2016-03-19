@@ -5,13 +5,13 @@ import java.util.Random;
 
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ReportedException;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.Lists;
 import com.zalthrion.zylroth.world.gen.GenLayerIridis;
 
-public class WorldChunkManagerIridis extends WorldChunkManager {
+public class BiomeProviderIridis extends BiomeProvider {
 	
 	private GenLayer genBiomes;
 	/** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
@@ -30,13 +30,13 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
-	public WorldChunkManagerIridis() {
+	public BiomeProviderIridis() {
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = Lists.<BiomeGenBase>newArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
 	}
 	
-	public WorldChunkManagerIridis(long seed, WorldType worldType) {
+	public BiomeProviderIridis(long seed, WorldType worldType) {
 		this();
 		
 		GenLayer[] genlayer = GenLayerIridis.makeTheWorld(seed, worldType);
@@ -45,7 +45,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 		this.biomeIndexLayer = genlayer[1];
 	}
 	
-	public WorldChunkManagerIridis(World world) {
+	public BiomeProviderIridis(World world) {
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
 	}
 	
@@ -58,12 +58,12 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 	/** Returns the BiomeGenBase related to the x, z position on the world. */
 	@Override
 	public BiomeGenBase getBiomeGenerator(BlockPos pos) {
-		return this.biomeCache.func_180284_a(pos.getX(), pos.getZ(), (BiomeGenBase) null);
+		return this.biomeCache.getBiome(pos.getX(), pos.getZ(), (BiomeGenBase) null);
 	}
 	
 	/** Returns a list of rainfall values for the specified blocks. Args:
 	 * listToReuse, x, z, width, length. */
-	@Override
+	/* @Override
 	public float[] getRainfall(float[] listToReuse, int x, int z, int width, int length) {
 		IntCache.resetIntCache();
 		
@@ -96,7 +96,7 @@ public class WorldChunkManagerIridis extends WorldChunkManager {
 		}
 		
 		return listToReuse;
-	}
+	} */
 	
 	/** Return an adjusted version of a given temperature based on the y height */
 	@Override

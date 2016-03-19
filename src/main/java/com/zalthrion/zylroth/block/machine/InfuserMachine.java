@@ -1,35 +1,8 @@
 package com.zalthrion.zylroth.block.machine;
 
-import java.util.Random;
-
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-
-import com.google.common.base.Predicate;
-import com.zalthrion.zylroth.Zylroth;
-import com.zalthrion.zylroth.lib.ModBlocks;
-import com.zalthrion.zylroth.reference.GuiIDs;
-import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class InfuserMachine extends BlockBaseContainer {
-	private String name = "infuserMachineActive";
+/*	private String name = "infuserMachineActive";
 	private String name_idle = "infuserMachine";
 	private String oreName = "oreInfuserMachineActive";
 	private String oreName_idle = "oreInfuserMachine";
@@ -37,9 +10,7 @@ public class InfuserMachine extends BlockBaseContainer {
 	private static boolean keepInventory;
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	public static final PropertyEnum<InfuserType> INFUSER_TYPE = PropertyEnum.<InfuserType>create("type", InfuserType.class, new Predicate<InfuserType>() {
-		@Override public boolean apply(InfuserType type) { return true; }
-	});
+	public static final PropertyEnum<InfuserType> INFUSER_TYPE = PropertyEnum.<InfuserType>create("type", InfuserType.class);
 	
 	public InfuserMachine(boolean isActive, InfuserType type) {
 		super(!isActive);
@@ -49,7 +20,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
-		this.setStepSound(soundTypeMetal);
+		this.setSoundType(SoundType.METAL);
 		this.setParticleBlockState(type.isNormal() ? ModBlocks.tenebraeCore.getDefaultState() : Blocks.quartz_block.getDefaultState());
 	}
 	
@@ -57,11 +28,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		return new TileEntityInfuser(this.type);
 	}
 	
-	@Override public int getRenderType() {
-		return 2;
-	}
-	
-	@Override public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+	@Override public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (worldIn.isRemote) return true;
 		TileEntityInfuser tile = (TileEntityInfuser) worldIn.getTileEntity(pos);
 		
@@ -107,15 +74,15 @@ public class InfuserMachine extends BlockBaseContainer {
 		}
 	}
 	
-	@Override public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
+	@Override public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(this.type.isNormal() ? ModBlocks.infuserIdle : ModBlocks.oreInfuserIdle);
 	}
 	
-	@Override public boolean hasComparatorInputOverride() {
+	@Override public boolean hasComparatorInputOverride(IBlockState state) {
 		return true;
 	}
 	
-	@Override public int getComparatorInputOverride(World world, BlockPos pos) {
+	@Override public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
 		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
 	}
 	
@@ -164,7 +131,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		}
 	}
 	
-	@Override public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	@Override public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		if (!this.type.isNormal()) return;
 		TileEntity tile = world.getTileEntity(pos);
 		TileEntityInfuser tei = (TileEntityInfuser) tile;
@@ -209,7 +176,7 @@ public class InfuserMachine extends BlockBaseContainer {
 		return i;
 	}
 	
-	@Override protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[] {FACING, INFUSER_TYPE});
-	}
+	@Override protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] {FACING, INFUSER_TYPE});
+	}*/
 }

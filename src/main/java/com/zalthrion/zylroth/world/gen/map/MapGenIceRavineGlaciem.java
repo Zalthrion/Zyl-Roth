@@ -4,9 +4,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -177,10 +178,10 @@ public class MapGenIceRavineGlaciem extends MapGenBase {
 	}
 	
 	private boolean isExceptionBiome(BiomeGenBase biome) {
-		if (biome == BiomeGenBase.beach) return true;
-		if (biome == BiomeGenBase.desert) return true;
-		if (biome == BiomeGenBase.mushroomIsland) return true;
-		if (biome == BiomeGenBase.mushroomIslandShore) return true;
+		if (biome == Biomes.beach) return true;
+		if (biome == Biomes.desert) return true;
+		if (biome == Biomes.mushroomIsland) return true;
+		if (biome == Biomes.mushroomIslandShore) return true;
 		return false;
 	}
 	

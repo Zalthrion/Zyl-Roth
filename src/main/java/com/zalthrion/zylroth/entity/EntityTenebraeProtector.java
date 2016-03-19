@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -12,12 +12,17 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,16 +31,20 @@ import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.lib.ModItems;
 
 public class EntityTenebraeProtector extends EntityMob {
+	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.<Byte>createKey(EntityTenebraeGuardian.class, DataSerializers.BYTE);
 	private int attackTimer;
 	
 	public EntityTenebraeProtector(World world) {
 		super(world);
 		this.setSize(1.4F, 2.9F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		this.isImmuneToFire = true;
 		this.experienceValue = 15;
+	}
+	
+	@Override protected void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
 		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
@@ -44,15 +53,15 @@ public class EntityTenebraeProtector extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+		this.dataWatcher.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
 	}
 	
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(10.0D);
 		this.getCustomNameTag();
 		
 	}
@@ -72,9 +81,6 @@ public class EntityTenebraeProtector extends EntityMob {
 		super.collideWithEntity(p_82167_1_);
 	}
 	
-	/** Called frequently so the entity can update its state every tick as
-	 * required. For example, zombies and skeletons use this to react to
-	 * sunlight and start to burn. */
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
@@ -94,10 +100,6 @@ public class EntityTenebraeProtector extends EntityMob {
 		}
 	}
 	
-	/** Returns true if this entity can attack entities of the specified class. */
-	/* public boolean canAttackClass(Class par1Class) { return
-	 * this.isPlayerCreated(); } */
-	
 	@Override
 	public boolean attackEntityAsMob(Entity p_70652_1_) {
 		this.attackTimer = 10;
@@ -108,7 +110,7 @@ public class EntityTenebraeProtector extends EntityMob {
 			p_70652_1_.motionY += 0.4000000059604645D;
 		}
 		
-		this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
+		this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Irongolem throw?
 		return flag;
 	}
 	
@@ -117,39 +119,30 @@ public class EntityTenebraeProtector extends EntityMob {
 	public void handleStatusUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
-			this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
+			this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Irongolem throw?
 		} else {
 			super.handleStatusUpdate(par1);
 		}
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public int getAttackTimer() {
-		return this.attackTimer;
-	} // TODO What was this?
-	
-	/** Returns the sound this mob makes while it's alive. */
 	@Override
-	protected String getLivingSound() {
+	protected SoundEvent getAmbientSound() {
 		return null;
 	}
 	
-	/** Returns the sound this mob makes when it is hurt. */
 	@Override
-	protected String getHurtSound() {
-		return "mob.irongolem.hit";
+	protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_irongolem_hurt;
 	}
 	
-	/** Returns the sound this mob makes on death. */
 	@Override
-	protected String getDeathSound() {
-		return "mob.irongolem.death";
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.entity_irongolem_death;
 	}
 	
-	/** Plays step sound at given x, y, z for the entity */
 	@Override
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound("mob.irongolem.walk", 1.0F, 1.0F);
+		this.playSound(SoundEvents.entity_irongolem_step, 1.0F, 1.0F);
 	}
 	
 	/** Drop 0-2 items of this living's type. @param par1 - Whether this entity
@@ -167,16 +160,16 @@ public class EntityTenebraeProtector extends EntityMob {
 	}
 	
 	public boolean isPlayerCreated() {
-		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return (((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue() & 1) != 0;
 	}
 	
 	public void setPlayerCreated(boolean par1) {
-		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+		byte b0 = ((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue();
 		
 		if (par1) {
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 | 1)));
+			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 | 1)));
 		} else {
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 & -2)));
+			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 & -2)));
 		}
 	}
 	
@@ -193,5 +186,9 @@ public class EntityTenebraeProtector extends EntityMob {
 	
 	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> clazz) {
 		return EntityTenebraeGuardian.class != clazz && EntityTenebraeProtector.class != clazz;
+	}
+	
+	@SideOnly(Side.CLIENT) public int getAttackTimer() {
+		return this.attackTimer;
 	}
 }

@@ -35,8 +35,8 @@ public final class ModRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeCore), "RTR", "TBT", "RTR", 'R', Blocks.redstone_block, 'T', ModItems.tenebraeIngot, 'B', ModBlocks.tenebraeBlock);
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeBlock), "III", "III", "III", 'I', ModItems.tenebraeIngot);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.voidGem), "NVN", "VDV", "NVN", 'V', ModItems.voidEssence, 'D', Items.diamond);
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuserIdle), "RTR", "ICI", "RTR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'T', ModBlocks.tenebraeBlock, 'C', ModItems.unstableTenebraeCore);
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.oreInfuserIdle), "IRI", "RER", "IRI", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'E', Items.ender_pearl);
+		// GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuserIdle), "RTR", "ICI", "RTR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'T', ModBlocks.tenebraeBlock, 'C', ModItems.unstableTenebraeCore);
+		// GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.oreInfuserIdle), "IRI", "RER", "IRI", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'E', Items.ender_pearl); // FIXME
 	}
 	
 	public static void registerShapelessRecipes() {

@@ -84,10 +84,10 @@ public class ClientProxy extends ServerProxy {
 	}
 	
 	public void bindTileEntitySpecialRenderers() {
-		ModelHelper.removeBlockState(ModBlocks.infuser);
+/*		ModelHelper.removeBlockState(ModBlocks.infuser);
 		ModelHelper.removeBlockState(ModBlocks.infuserIdle);
 		ModelHelper.removeBlockState(ModBlocks.oreInfuser);
-		ModelHelper.removeBlockState(ModBlocks.oreInfuserIdle);
+		ModelHelper.removeBlockState(ModBlocks.oreInfuserIdle);*/ // FIXME
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldBag.class, new RenderTileEntityGoldBag());
 	}
@@ -103,10 +103,10 @@ public class ClientProxy extends ServerProxy {
 		ModelHelper.registerBlock(ModBlocks.tenebraeCore);
 		ModelHelper.registerBlock(ModBlocks.chiseledTenebrae);
 		ModelHelper.registerBlock(ModBlocks.infusedTenebrae);
-		ModelHelper.registerBlock(ModBlocks.infuser);
+/*		ModelHelper.registerBlock(ModBlocks.infuser);
 		ModelHelper.registerBlock(ModBlocks.infuserIdle);
 		ModelHelper.registerBlock(ModBlocks.oreInfuser);
-		ModelHelper.registerBlock(ModBlocks.oreInfuserIdle);
+		ModelHelper.registerBlock(ModBlocks.oreInfuserIdle);*/ // FIXME
 		ModelHelper.registerBlock(ModBlocks.ashBlock);
 		ModelHelper.registerBlock(ModBlocks.empoweredTenebraeCore);
 		ModelHelper.registerBlock(ModBlocks.voidiumOre);

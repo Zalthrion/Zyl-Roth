@@ -4,7 +4,6 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
@@ -29,22 +28,6 @@ public class RenderPlaguedHorse extends RenderLiving<MountPlaguedHorse> {
 		super(manager, new ModelHorse(), 0.5F);
 	}
 	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	@Override protected void preRenderCallback(MountPlaguedHorse p_77041_1_, float p_77041_2_) {
-		float f1 = 1.0F;
-		int i = p_77041_1_.getHorseType();
-		
-		if (i == 1) {
-			f1 *= 0.87F;
-		} else if (i == 2) {
-			f1 *= 0.92F;
-		}
-		
-		GlStateManager.scale(f1, f1, f1);
-		super.preRenderCallback(p_77041_1_, p_77041_2_);
-	}
-	
 	/** Renders the model in RenderLiving */
 	@Override protected void renderModel(MountPlaguedHorse p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		if (p_77036_1_.isInvisible()) {
@@ -59,17 +42,17 @@ public class RenderPlaguedHorse extends RenderLiving<MountPlaguedHorse> {
 	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(MountPlaguedHorse p_110775_1_) {
 		if (!p_110775_1_.func_110239_cn()) {
-			switch (p_110775_1_.getHorseType()) {
-				case 0:
+			switch (p_110775_1_.getType()) {
+				case HORSE:
 				default:
 					return whiteHorseTextures;
-				case 1:
+				case DONKEY:
 					return donkeyTextures;
-				case 2:
+				case MULE:
 					return muleTextures;
-				case 3:
+				case ZOMBIE:
 					return zombieHorseTextures;
-				case 4:
+				case SKELETON:
 					return skeletonHorseTextures;
 			}
 		} else {

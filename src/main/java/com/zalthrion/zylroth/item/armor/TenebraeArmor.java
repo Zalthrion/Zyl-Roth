@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
@@ -18,7 +19,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 	private String name = "tenebraeArmor";
 	private String textureName;
 	
-	public TenebraeArmor(ArmorMaterial armorMaterial, String textureName, int type) {
+	public TenebraeArmor(ArmorMaterial armorMaterial, String textureName, EntityEquipmentSlot type) {
 		super(armorMaterial, textureName, type);
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
@@ -41,7 +42,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 	}
 	
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return Reference.RESOURCE_PREFIX + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		return Reference.RESOURCE_PREFIX + "textures/armor/" + this.textureName + "_layer_" + (this.armorType == EntityEquipmentSlot.LEGS ? "2" : "1") + ".png";
 	}
 }

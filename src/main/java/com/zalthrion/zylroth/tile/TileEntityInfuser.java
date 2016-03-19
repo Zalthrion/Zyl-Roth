@@ -9,17 +9,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.block.machine.InfuserMachine;
 import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.handler.recipe.InfusionFuels;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
@@ -115,8 +114,8 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 	
 	/* IWorldNameable */
 	
-	@Override public IChatComponent getDisplayName() {
-		return (IChatComponent) (this.hasCustomName() ? new ChatComponentText(this.infuserCustomName) : new ChatComponentTranslation(this.getName(), new Object[0]));
+	@Override public ITextComponent getDisplayName() {
+		return (ITextComponent) (this.hasCustomName() ? new TextComponentString(this.infuserCustomName) : new TextComponentTranslation(this.getName(), new Object[0]));
 	}
 	
 	@Override public String getName() {
@@ -289,7 +288,7 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 			
 			if (burning != this.isBurning()) {
 				dirty = true;
-				InfuserMachine.setState(this.getType(), this.isBurning(), this.worldObj, this.pos);
+				// InfuserMachine.setState(this.getType(), this.isBurning(), this.worldObj, this.pos); FIXME
 			}
 		}
 		

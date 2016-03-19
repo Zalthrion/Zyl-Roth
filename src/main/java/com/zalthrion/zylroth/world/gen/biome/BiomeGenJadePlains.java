@@ -5,8 +5,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenJadePlains extends BiomeGenBase {
 	
-	public BiomeGenJadePlains(int id) {
-		super(id);
+	public BiomeGenJadePlains(BiomeGenBase.BiomeProperties properties) {
+		super(properties);
 		
 		// this.blockMaterial = Material.water;
 		this.spawnableMonsterList.clear();
@@ -28,21 +28,16 @@ public class BiomeGenJadePlains extends BiomeGenBase {
 		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
 		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
 		this.addFlower(Blocks.yellow_flower.getDefaultState(), 30);
-		
-		this.setHeight(height_LowPlains);
-		this.setBiomeName("Jade Plains");
-		
-		this.waterColorMultiplier = 0x38CAE0;
 	}
 	
 	@Override
 	public int getModdedBiomeGrassColor(int original) {
-		return color = 0x0CA833;
+		return 0x0CA833;
 	}
 	
 	@Override
 	public int getModdedBiomeFoliageColor(int original) {
-		return color = 0x16BA40;
+		return 0x16BA40;
 	}
 	
 	@Override

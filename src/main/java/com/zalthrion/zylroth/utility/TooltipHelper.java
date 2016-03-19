@@ -2,15 +2,15 @@ package com.zalthrion.zylroth.utility;
 
 import java.util.ArrayList;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import com.zalthrion.zylroth.reference.Reference;
 
 public class TooltipHelper {
 	public static ArrayList<String> add(String unlocalized) {
 		ArrayList<String> ret = new ArrayList<String>();
-		if (StatCollector.canTranslate(unlocalized)) {
-			String translated = StatCollector.translateToLocal(unlocalized);
+		if (I18n.canTranslate(unlocalized)) {
+			String translated = I18n.translateToLocal(unlocalized);
 			if (translated.contains("\\n")) {
 				String[] split = translated.split("\\\\n");
 				for (int i = 0; i < split.length; i ++) {
@@ -18,7 +18,7 @@ public class TooltipHelper {
 				}
 				return ret;
 			} else {
-				ret.add(StatCollector.translateToLocal(unlocalized));
+				ret.add(I18n.translateToLocal(unlocalized));
 				return ret;
 			}
 		}

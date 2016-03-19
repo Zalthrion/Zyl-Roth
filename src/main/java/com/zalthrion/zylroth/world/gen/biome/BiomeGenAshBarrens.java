@@ -6,11 +6,8 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 
 public class BiomeGenAshBarrens extends BiomeGenBase {
 	
-	public BiomeGenAshBarrens(int id) {
-		super(id);
-		
-		this.enableRain = false;
-		this.enableSnow = false;
+	public BiomeGenAshBarrens(BiomeGenBase.BiomeProperties properties) {
+		super(properties);
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -24,21 +21,16 @@ public class BiomeGenAshBarrens extends BiomeGenBase {
 		
 		this.topBlock = (ModBlocks.ashBlock).getDefaultState();
 		this.fillerBlock = (ModBlocks.ashBlock).getDefaultState();
-		
-		this.setHeight(height_Default);
-		this.setBiomeName("Ash Barrens");
-		
-		this.waterColorMultiplier = 0xE42D17;
 	}
 	
 	@Override
 	public int getModdedBiomeGrassColor(int original) {
-		return color = 0x423E45;
+		return 0x423E45;
 	}
 	
 	@Override
 	public int getModdedBiomeFoliageColor(int original) {
-		return color = 0x423E45;
+		return 0x423E45;
 	}
 	
 	@Override

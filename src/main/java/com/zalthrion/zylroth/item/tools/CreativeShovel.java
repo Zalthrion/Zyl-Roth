@@ -2,16 +2,16 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -37,23 +37,23 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
+				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 			}
 			return true;
 		}
 		return false;
 	}
 	
-	@Override public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase entity) {
-		EntityPlayer player = (EntityPlayer) entity;
+	@Override public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockIn, BlockPos pos, EntityLivingBase entityLiving) {
+		EntityPlayer player = (EntityPlayer) entityLiving;
 		
 		if (player.capabilities.isCreativeMode) return false; 
 		
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
-		} else if (stack.getMetadata() <= 2233 && !(world.isRemote) && !(player.isSneaking())) {
+		if (this.isBroken(stack) && !(worldIn.isRemote)) {
+			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		} else if (stack.getMetadata() <= 2233 && !(worldIn.isRemote) && !(player.isSneaking())) {
 			
-			Material material = world.getBlockState(pos).getBlock().getMaterial();
+			Material material = worldIn.getBlockState(pos).getMaterial();
 			boolean valid = (material == Material.craftedSnow || material == Material.grass || material == Material.ground || material == Material.sand || material == Material.snow);
 			
 			if (valid) {
@@ -61,11 +61,11 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 					for (int iy = -1; iy < 2; ++ iy) {
 						for (int iz = -1; iz < 2; ++ iz) {
 							
-							Material neighbourMaterial = world.getBlockState(pos.add(ix, iy, iz)).getBlock().getMaterial();
+							Material neighbourMaterial = worldIn.getBlockState(pos.add(ix, iy, iz)).getMaterial();
 							boolean neighbourValid = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
 							
 							if (neighbourValid) {
-								world.destroyBlock(pos.add(ix, iy, iz), true);
+								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
 								stack.damageItem(1, player);
 							}
 						}
@@ -74,13 +74,13 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 			}
 		}
 		
-		return super.onBlockDestroyed(stack, world, block, pos, entity);
+		return super.onBlockDestroyed(stack, worldIn, blockIn, pos, entityLiving);
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));
@@ -105,7 +105,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		
 		return true;
 	}

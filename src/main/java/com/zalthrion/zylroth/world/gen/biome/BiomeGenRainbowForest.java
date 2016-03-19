@@ -17,8 +17,8 @@ import com.zalthrion.zylroth.lib.ModBlocks;
 
 public class BiomeGenRainbowForest extends BiomeGenBase {
 	
-	public BiomeGenRainbowForest(int id) {
-		super(id);
+	public BiomeGenRainbowForest(BiomeGenBase.BiomeProperties properties) {
+		super(properties);
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -30,13 +30,8 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 		this.topBlock = (Blocks.grass).getDefaultState();
 		this.fillerBlock = (Blocks.dirt).getDefaultState();
 		
-		this.setHeight(height_LowIslands);
-		this.setBiomeName("Rainbow Forest");
-		
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRainbowPig.class, 4, 1, 2));
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityUnicorn.class, 1, 1, 1));
-		
-		this.waterColorMultiplier = 0x38CAE0;
 	}
 	
 	@Override
@@ -68,12 +63,12 @@ public class BiomeGenRainbowForest extends BiomeGenBase {
 	
 	@Override
 	public int getModdedBiomeGrassColor(int original) {
-		return color = 0x9BD61C;
+		return 0x9BD61C;
 	}
 	
 	@Override
 	public int getModdedBiomeFoliageColor(int original) {
-		return color = 0x60E409;
+		return 0x60E409;
 	}
 	
 	@Override

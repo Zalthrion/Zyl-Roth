@@ -2,12 +2,13 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 import com.zalthrion.zylroth.block.BlockBase;
@@ -23,7 +24,7 @@ public class EndiriteOre extends BlockBase {
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setCreativeTab(ModTabs.zylRoth);
 	}
 	
@@ -35,7 +36,7 @@ public class EndiriteOre extends BlockBase {
 		return 2 + rand.nextInt(4);
 	}
 	
-	@Override public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity) {
+	@Override public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
 		if (entity instanceof EntityDragon) {
 			return false;
 		}

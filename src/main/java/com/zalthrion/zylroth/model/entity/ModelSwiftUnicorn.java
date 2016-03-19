@@ -6,7 +6,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.util.MathHelper;
+import net.minecraft.entity.passive.HorseArmorType;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -226,14 +227,14 @@ public class ModelSwiftUnicorn extends ModelBase {
 	 */
 	@Override public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
 		EntityHorse entityhorse = (EntityHorse) p_78088_1_;
-		int i = entityhorse.getHorseType();
+		HorseArmorType horsearmortype = entityhorse.getType();
 		float f6 = entityhorse.getGrassEatingAmount(0.0F);
 		boolean flag = entityhorse.isAdultHorse();
 		boolean flag1 = flag && entityhorse.isHorseSaddled();
 		boolean flag2 = flag && entityhorse.isChested();
-		boolean flag3 = i == 1 || i == 2;
+		boolean flag3 = horsearmortype.hasMuleEars();
 		float f7 = entityhorse.getHorseSize();
-		boolean flag4 = entityhorse.riddenByEntity != null;
+		boolean flag4 = entityhorse.isBeingRidden();
 		
 		if (flag1) {
 			this.horseFaceRopes.render(p_78088_7_);
@@ -379,7 +380,7 @@ public class ModelSwiftUnicorn extends ModelBase {
 		float f11 = entityhorse.getMouthOpennessAngle(p_78086_4_);
 		boolean flag = entityhorse.field_110278_bp != 0;
 		boolean flag1 = entityhorse.isHorseSaddled();
-		boolean flag2 = entityhorse.riddenByEntity != null;
+		boolean flag2 = entityhorse.isBeingRidden();
 		float f12 = (float) p_78086_1_.ticksExisted + p_78086_4_;
 		float f13 = MathHelper.cos(p_78086_2_ * 0.6662F + (float) Math.PI);
 		float f14 = f13 * 0.8F * p_78086_3_;

@@ -8,14 +8,18 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -41,85 +45,73 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 			}
 			return true;
 		}
 		return false;
 	}
 	
-	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		Random rand = new Random();
 		
-		if (!(player.isSneaking()) && !(player.capabilities.isCreativeMode)) {
+		if (!(playerIn.isSneaking()) && !(playerIn.capabilities.isCreativeMode)) {
 			
 			for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
-				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
-				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
-				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
+				worldIn.spawnParticle(EnumParticleTypes.PORTAL, (double) playerIn.posX - 0.0F, (double) playerIn.posY - 0.5F, (double) playerIn.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+				worldIn.spawnParticle(EnumParticleTypes.PORTAL, (double) playerIn.posX - 0.0F, (double) playerIn.posY - 0.5F, (double) playerIn.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
+				worldIn.spawnParticle(EnumParticleTypes.PORTAL, (double) playerIn.posX - 0.0F, (double) playerIn.posY - 0.5F, (double) playerIn.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
 			}
 		}
 		
-		if (player.isSneaking()) {
+		if (playerIn.isSneaking()) {
 			
-			if (player.capabilities.isCreativeMode) { return stack; }
+			if (playerIn.capabilities.isCreativeMode) { return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn); }
 			
-			if (this.isBroken(stack) && !(world.isRemote)) {
-				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
-				return stack;
+			if (this.isBroken(itemStackIn) && !(worldIn.isRemote)) {
+				playerIn.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+				return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
 				
-			} else if (stack.getMetadata() < 2200) {
+			} else if (itemStackIn.getMetadata() < 2200) {
 				
-				stack.damageItem(50, player);
-				world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				itemStackIn.damageItem(50, playerIn);
+				worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.entity_arrow_shoot, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + 1.0F * 0.5F);
 				
-				if (!world.isRemote) {
-					world.spawnEntityInWorld(new EntityEnderPearl(world, player));
+				if (!worldIn.isRemote) {
+					worldIn.spawnEntityInWorld(new EntityEnderPearl(worldIn, playerIn));
 				}
 				
-				world.spawnParticle(EnumParticleTypes.PORTAL, player.posX + (rand.nextDouble() - 0.5D) * (double) player.width, player.posY + rand.nextDouble() * (double) player.height - (double) player.getYOffset(), player.posZ + (rand.nextDouble() - 0.5D) * (double) player.width, 0.0D, 0.0D, 0.0D);
+				worldIn.spawnParticle(EnumParticleTypes.PORTAL, playerIn.posX + (rand.nextDouble() - 0.5D) * (double) playerIn.width, playerIn.posY + rand.nextDouble() * (double) playerIn.height - (double) playerIn.getYOffset(), playerIn.posZ + (rand.nextDouble() - 0.5D) * (double) playerIn.width, 0.0D, 0.0D, 0.0D);
 			}
 			
 		}
 		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 	
-	@Override public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		Item torch = Item.getItemFromBlock(Blocks.torch);
-		
-		if (world.getBlockState(pos).getBlock() != Blocks.snow_layer) {
-			if (side == EnumFacing.DOWN) pos = pos.down();
-			if (side == EnumFacing.UP) pos = pos.up();
-			if (side == EnumFacing.SOUTH) pos = pos.south();
-			if (side == EnumFacing.NORTH) pos = pos.north();
-			if (side == EnumFacing.WEST) pos = pos.west();
-			if (side == EnumFacing.EAST) pos = pos.east();
-			if (!world.isAirBlock(pos)) return false;
+	@Override public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (worldIn.getBlockState(pos).getBlock() != Blocks.snow_layer) {
+			if (facing == EnumFacing.DOWN) pos = pos.down();
+			if (facing == EnumFacing.UP) pos = pos.up();
+			if (facing == EnumFacing.SOUTH) pos = pos.south();
+			if (facing == EnumFacing.NORTH) pos = pos.north();
+			if (facing == EnumFacing.WEST) pos = pos.west();
+			if (facing == EnumFacing.EAST) pos = pos.east();
+			if (!worldIn.isAirBlock(pos)) return EnumActionResult.FAIL;
 		}
 		
-		if (this.isBroken(stack) && !(world.isRemote)) {
-			player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword")));
-		} else if (player.canPlayerEdit(pos, side, stack) & !(this.isBroken(stack))) {
-			if (player.inventory.hasItem(torch)) {
-				if (player.inventory.consumeInventoryItem(torch) && !(player.capabilities.isCreativeMode)) {
-					if (!(world.isRemote) && Blocks.torch.canPlaceBlockAt(world, pos)) {
-						world.setBlockState(pos, Blocks.torch.getDefaultState());
-					}
-				} else if (player.capabilities.isCreativeMode) {
-					if (!(world.isRemote) && Blocks.torch.canPlaceBlockAt(world, pos)) {
-						world.setBlockState(pos, Blocks.torch.getDefaultState());
-					}
-				}
-			}
-			return true;
+		if (this.isBroken(stack) && !(worldIn.isRemote)) {
+			playerIn.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+		} else if (!(this.isBroken(stack))) {
+			TorchPlacer.tryPlaceTorch(stack, playerIn, worldIn, pos, hand, facing);
+			return EnumActionResult.PASS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_sword_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));
@@ -144,7 +136,7 @@ public class CreativeSword extends ItemSword implements ZylrothTool {
 		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 			
-		if (world.isRemote) player.addChatMessage(new ChatComponentTranslation("tooltip." + Reference.RESOURCE_PREFIX + "broken_sword"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("tooltip." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		
 		return true;
 	}

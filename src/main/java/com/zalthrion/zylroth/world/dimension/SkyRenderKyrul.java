@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
@@ -25,7 +25,7 @@ public class SkyRenderKyrul extends IRenderHandler {
 	
 	@Override public void render(float partialTicks, WorldClient world, Minecraft mc) {
 		GlStateManager.disableTexture2D();
-		Vec3 vec3 = world.getSkyColor(mc.getRenderViewEntity(), partialTicks);
+		Vec3d vec3 = world.getSkyColor(mc.getRenderViewEntity(), partialTicks);
 		float f1 = (float) vec3.xCoord;
 		float f2 = (float) vec3.yCoord;
 		float f3 = (float) vec3.zCoord;
@@ -33,7 +33,7 @@ public class SkyRenderKyrul extends IRenderHandler {
 		
 		GlStateManager.color(f1, f2, f3);
 		Tessellator tessellator1 = Tessellator.getInstance();
-		WorldRenderer worldRenderer = tessellator1.getWorldRenderer();
+		VertexBuffer vertexBuffer = tessellator1.getBuffer();
 		GlStateManager.depthMask(false);
 		GlStateManager.enableFog();
 		GlStateManager.callList(this.glSkyList);
@@ -88,28 +88,28 @@ public class SkyRenderKyrul extends IRenderHandler {
 			f8 = 1.0F;
 			f9 = -((float) (d0 + 65.0D));
 			f10 = -f8;
-			worldRenderer.begin(7, DefaultVertexFormats.POSITION);
-			worldRenderer.color(0, 0, 0, 255);
-			worldRenderer.pos((double) (-f8), (double) f9, (double) f8);
-			worldRenderer.pos((double) f8, (double) f9, (double) f8);
-			worldRenderer.pos((double) f8, (double) f10, (double) f8);
-			worldRenderer.pos((double) (-f8), (double) f10, (double) f8);
-			worldRenderer.pos((double) (-f8), (double) f10, (double) (-f8));
-			worldRenderer.pos((double) f8, (double) f10, (double) (-f8));
-			worldRenderer.pos((double) f8, (double) f9, (double) (-f8));
-			worldRenderer.pos((double) (-f8), (double) f9, (double) (-f8));
-			worldRenderer.pos((double) f8, (double) f10, (double) (-f8));
-			worldRenderer.pos((double) f8, (double) f10, (double) f8);
-			worldRenderer.pos((double) f8, (double) f9, (double) f8);
-			worldRenderer.pos((double) f8, (double) f9, (double) (-f8));
-			worldRenderer.pos((double) (-f8), (double) f9, (double) (-f8));
-			worldRenderer.pos((double) (-f8), (double) f9, (double) f8);
-			worldRenderer.pos((double) (-f8), (double) f10, (double) f8);
-			worldRenderer.pos((double) (-f8), (double) f10, (double) (-f8));
-			worldRenderer.pos((double) (-f8), (double) f10, (double) (-f8));
-			worldRenderer.pos((double) (-f8), (double) f10, (double) f8);
-			worldRenderer.pos((double) f8, (double) f10, (double) f8);
-			worldRenderer.pos((double) f8, (double) f10, (double) (-f8));
+			vertexBuffer.begin(7, DefaultVertexFormats.POSITION);
+			vertexBuffer.color(0, 0, 0, 255);
+			vertexBuffer.pos((double) (-f8), (double) f9, (double) f8);
+			vertexBuffer.pos((double) f8, (double) f9, (double) f8);
+			vertexBuffer.pos((double) f8, (double) f10, (double) f8);
+			vertexBuffer.pos((double) (-f8), (double) f10, (double) f8);
+			vertexBuffer.pos((double) (-f8), (double) f10, (double) (-f8));
+			vertexBuffer.pos((double) f8, (double) f10, (double) (-f8));
+			vertexBuffer.pos((double) f8, (double) f9, (double) (-f8));
+			vertexBuffer.pos((double) (-f8), (double) f9, (double) (-f8));
+			vertexBuffer.pos((double) f8, (double) f10, (double) (-f8));
+			vertexBuffer.pos((double) f8, (double) f10, (double) f8);
+			vertexBuffer.pos((double) f8, (double) f9, (double) f8);
+			vertexBuffer.pos((double) f8, (double) f9, (double) (-f8));
+			vertexBuffer.pos((double) (-f8), (double) f9, (double) (-f8));
+			vertexBuffer.pos((double) (-f8), (double) f9, (double) f8);
+			vertexBuffer.pos((double) (-f8), (double) f10, (double) f8);
+			vertexBuffer.pos((double) (-f8), (double) f10, (double) (-f8));
+			vertexBuffer.pos((double) (-f8), (double) f10, (double) (-f8));
+			vertexBuffer.pos((double) (-f8), (double) f10, (double) f8);
+			vertexBuffer.pos((double) f8, (double) f10, (double) f8);
+			vertexBuffer.pos((double) f8, (double) f10, (double) (-f8));
 			tessellator1.draw();
 		}
 		

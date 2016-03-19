@@ -1,11 +1,11 @@
 package com.zalthrion.zylroth.entity.mount;
 
+import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -13,14 +13,21 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class MountBase extends EntityHorse implements IEntityOwnable {
+import com.google.common.base.Optional;
+
+public class MountBase extends EntityHorse {
 	public boolean isSummoned = false;
 	public boolean canDespawn;
+	
+	private static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityHorse.class, DataSerializers.OPTIONAL_UNIQUE_ID);
 	
 	protected Entity entity;
 	protected EntityPlayer player;
@@ -31,12 +38,24 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 	public MountBase(World world) {
 		super(world);
 		this.setSize(1F, 1F);
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
-		this.dataWatcher.addObject(27, "");
+		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
 		
 		this.isImmuneToFire = true;
+	}
+	
+	@Override protected void initEntityAI() {
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
+	}
+	
+	@Override protected void entityInit() {
+		super.entityInit();
+		this.dataWatcher.register(OWNER_UNIQUE_ID, Optional.<UUID> absent());
+	}
+	
+	@Override public Entity getControllingPassenger() {
+		List<Entity> list = this.getPassengers();
+		return list.isEmpty() ? null : (Entity) list.get(0);
 	}
 	
 	/** Checks if the entity summoned is alive. */
@@ -78,7 +97,7 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 	}
 	
 	@Override public boolean setTamedBy(EntityPlayer p_110263_1_) {
-		this.setOwnerId(p_110263_1_.getUniqueID().toString());
+		this.setOwnerUniqueId(p_110263_1_.getUniqueID());
 		this.setHorseTamed(true);
 		return true;
 	}
@@ -99,8 +118,8 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 	
 	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 	}
 	
 	@Override protected void updateAITasks() {
@@ -141,10 +160,10 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 	}
 	
 	/** Checks if the entity can be leashed or not */
-	@Override
+	/*@Override
 	public boolean allowLeashing() {
 		return false;
-	}
+	}*/
 	
 	/** Checks if the entity is invulnerable or not */
 	@Override
@@ -160,26 +179,26 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 	 * pigs, this is true if it is being ridden by a player and the player is
 	 * holding a carrot-on-a-stick */
 	@Override public boolean canBeSteered() {
-		EntityPlayer riding = ((EntityPlayer) this.riddenByEntity);
+		EntityPlayer riding = ((EntityPlayer) this.getControllingPassenger());
 		return riding != null && !this.isChild();
 	}
 	
 	/** Moves the entity based on the specified heading. Args: strafe, forward */
 	@Override public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
-		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase) {
-			this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
-			this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
+		if (this.getControllingPassenger() != null && this.getControllingPassenger() instanceof EntityLivingBase) {
+			this.prevRotationYaw = this.rotationYaw = this.getControllingPassenger().rotationYaw;
+			this.rotationPitch = this.getControllingPassenger().rotationPitch * 0.5F;
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 			this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
 			
-			p_70612_1_ = ((EntityLivingBase) this.riddenByEntity).moveStrafing * 0.5F;
-			p_70612_2_ = ((EntityLivingBase) this.riddenByEntity).moveForward;
+			p_70612_1_ = ((EntityLivingBase) this.getControllingPassenger()).moveStrafing * 0.5F;
+			p_70612_2_ = ((EntityLivingBase) this.getControllingPassenger()).moveForward;
 			
 			this.stepHeight = 1.0F;
 			this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
 			
 			if (!this.worldObj.isRemote) {
-				this.setAIMoveSpeed((float) this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue());
+				this.setAIMoveSpeed((float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
 				super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 			}
 			
@@ -205,27 +224,17 @@ public class MountBase extends EntityHorse implements IEntityOwnable {
 	}
 	
 	public boolean isOwner(EntityLivingBase entityIn) {
-		return entityIn == this.getOwner();
+		return entityIn.getUniqueID() == this.getOwnerUniqueId();
 	}
 	
 	@Override
-	public String getOwnerId() {
-		return this.dataWatcher.getWatchableObjectString(27);
+	public UUID getOwnerUniqueId() {
+		return (UUID)((Optional<UUID>) this.dataWatcher.get(OWNER_UNIQUE_ID)).orNull();
 	}
 	
 	@Override
-	public void setOwnerId(String id) {
-		this.dataWatcher.updateObject(27, id);
-	}
-	
-	@Override
-	public EntityLivingBase getOwner() {
-		try {
-			UUID uuid = UUID.fromString(this.getOwnerId());
-			return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
-		} catch (IllegalArgumentException illegalargumentexception) {
-			return null;
-		}
+	public void setOwnerUniqueId(UUID uniqueId) {
+		this.dataWatcher.set(OWNER_UNIQUE_ID, Optional.fromNullable(uniqueId));
 	}
 	
 	@Override public boolean isChild() {

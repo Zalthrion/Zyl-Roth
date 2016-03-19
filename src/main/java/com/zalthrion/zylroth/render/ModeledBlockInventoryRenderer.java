@@ -1,13 +1,10 @@
 package com.zalthrion.zylroth.render;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
 import com.zalthrion.zylroth.block.machine.InfuserType;
-import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
 public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
@@ -27,7 +24,7 @@ public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 	
 	
 	@Override public void renderByItem(ItemStack itemStack) {
-		Block block = Block.getBlockFromItem(itemStack.getItem());
+/*		Block block = Block.getBlockFromItem(itemStack.getItem());
 		if (block == ModBlocks.infuser || block == ModBlocks.infuserIdle) {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(this.tei, 0, 0, 0, 0F);
 		} else if (block == ModBlocks.oreInfuser || block == ModBlocks.oreInfuserIdle) {
@@ -38,6 +35,7 @@ public class ModeledBlockInventoryRenderer extends TileEntityItemStackRenderer {
 			} else {
 				super.renderByItem(itemStack);
 			}
-		}
+		}*/ // FIXME
+		superInstance.renderByItem(itemStack);
 	}
 }

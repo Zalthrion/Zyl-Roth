@@ -2,11 +2,12 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.block.BlockBase;
@@ -23,13 +24,13 @@ public class TenebraeOre extends BlockBase {
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setCreativeTab(ModTabs.zylRoth);
 	}
 	
 	@Override
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
-		super.randomDisplayTick(world, pos, state, rand);
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		super.randomDisplayTick(state, world, pos, rand);
 		
 		double d0 = (double) ((float) pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
 		double d1 = (double) ((float) pos.getY() + 0.4F);
