@@ -38,11 +38,12 @@ public class EntityUndeadWarrior extends EntityMob {
 		this.setSize(0.5F, 2.1F);
 		this.isImmuneToFire = true;
 		((PathNavigateGround)this.getNavigator()).setBreakDoors(true);
-		
+	}
+	
+	@Override public void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIBreakDoor(this));
 		this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-		// this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true)); // TODO See if it continues to work for villagers
 		this.tasks.addTask(7, new EntityAIWander(this, 0.9D));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, true));

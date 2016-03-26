@@ -24,11 +24,9 @@ public class MountSavageBadger extends MountBase {
 			this.setDead();
 			persistentData.removeTag("ownsMountSavageBadger");
 		}
-		
 		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
 			player.startRiding(this);
 		}
-		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
 			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}

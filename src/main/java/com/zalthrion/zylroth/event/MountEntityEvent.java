@@ -11,10 +11,10 @@ import com.zalthrion.zylroth.handler.MountData;
 public class MountEntityEvent {
 	@SubscribeEvent public void onEntityMount(EntityMountEvent event) {
 		if (!event.isMounting()) {
-			if (event.entityBeingMounted instanceof MountBase || event.entityBeingMounted instanceof MountBaseHorse) {
-				event.entityBeingMounted.setDead();
-				if (event.entityMounting instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) event.entityMounting;
+			if (event.getEntityBeingMounted() instanceof MountBase || event.getEntityBeingMounted() instanceof MountBaseHorse) {
+				event.getEntityBeingMounted().setDead();
+				if (event.getEntityMounting() instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) event.getEntityMounting();
 					MountData data = MountData.get(player);
 					if (data.ownsMount()) {
 						data.disownMount();

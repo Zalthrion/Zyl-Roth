@@ -185,9 +185,6 @@ public class ChunkProviderIridis implements IChunkGenerator {
 		}
 	}
 	
-	/** Will return back a chunk, if it doesn't exist and its not a MP client it
-	 * will generates all the blocks for the specified chunk from the map seed
-	 * and chunk seed */
 	@Override public Chunk provideChunk(int x, int z) {
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();

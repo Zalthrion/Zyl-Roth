@@ -12,12 +12,10 @@ import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class MountDeathcharger extends MountBaseHorse {
-	
 	public MountDeathcharger(World world) {
 		super(world);
 		this.isEntityUndead();
 		this.isImmuneToFire = true;
-		
 		this.setCustomNameTag("Deathcharger");
 	}
 	
@@ -29,11 +27,9 @@ public class MountDeathcharger extends MountBaseHorse {
 			this.setDead();
 			persistentData.removeTag("ownsMountDeathcharger");
 		}
-		
 		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
 			player.startRiding(this);
 		}
-		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
 			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}

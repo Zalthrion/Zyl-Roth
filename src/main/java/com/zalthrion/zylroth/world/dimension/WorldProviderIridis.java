@@ -7,12 +7,12 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.Zylroth;
+import com.zalthrion.zylroth.lib.ModDimension;
 
 public class WorldProviderIridis extends WorldProvider {
 	
-	@Override public void registerWorldChunkManager() {
-		this.worldChunkMgr = new BiomeProviderIridis(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
+	@Override public void createBiomeProvider() {
+		this.biomeProvider = new BiomeProviderIridis(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 	}
 	
 	@Override
@@ -29,6 +29,6 @@ public class WorldProviderIridis extends WorldProvider {
 	}
 	
 	@Override public DimensionType getDimensionType() {
-		return Zylroth.IRIDIS;
+		return ModDimension.IRIDIS;
 	}
 }

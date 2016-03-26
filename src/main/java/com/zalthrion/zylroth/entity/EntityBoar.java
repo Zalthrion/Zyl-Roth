@@ -18,6 +18,9 @@ public class EntityBoar extends EntityHostileAnimal {
 	public EntityBoar(final World world) {
 		super(world);
 		this.setSize(1F, 1F);
+	}
+	
+	@Override public void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.2D, false));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
@@ -30,7 +33,7 @@ public class EntityBoar extends EntityHostileAnimal {
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 10, true, false, new Predicate<EntityPlayer>() {
 			@Override public boolean apply(EntityPlayer p_apply_1) {
-				return world.getDifficulty() != EnumDifficulty.PEACEFUL;
+				return p_apply_1.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
 			}
 		}));
 	}

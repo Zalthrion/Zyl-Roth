@@ -7,7 +7,6 @@ import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class BlockBase extends Block {
-	
 	public BlockBase(Material material) {
 		super(material);
 	}
@@ -17,8 +16,7 @@ public class BlockBase extends Block {
 		if (setCreativeTab) this.setCreativeTab(ModTabs.zylRoth);
 	}
 	
-	@Override
-	public String getUnlocalizedName() {
+	@Override public String getUnlocalizedName() {
 		return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	

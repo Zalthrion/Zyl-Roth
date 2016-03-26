@@ -24,11 +24,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityFancyBadger extends EntityAnimal {
-	
 	public EntityFancyBadger(World world) {
 		super(world);
 		this.setSize(0.9F, 0.9F);
 		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
+		this.setCustomNameTag("FancyBadger");
+	}
+	
+	@Override public void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
@@ -36,7 +39,6 @@ public class EntityFancyBadger extends EntityAnimal {
 		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
-		this.setCustomNameTag("FancyBadger");
 	}
 	
 	@Override protected void applyEntityAttributes() {
@@ -45,40 +47,19 @@ public class EntityFancyBadger extends EntityAnimal {
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 	
-	@Override protected void updateAITasks() {
-		super.updateAITasks();
-	}
-	
-	/**
-	 * returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
-	 * by a player and the player is holding a carrot-on-a-stick
-	 */
 	@Override public boolean canBeSteered() {
 		EntityPlayer riding = ((EntityPlayer) this.getControllingPassenger());
 		return riding != null && !this.isChild();
 	}
 	
-	@Override protected void entityInit() {
-		super.entityInit();
-	}
-	
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
 	@Override protected SoundEvent getAmbientSound() {
 		return SoundEvents.entity_pig_ambient;
 	}
 	
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
 	@Override protected SoundEvent getHurtSound() {
 		return SoundEvents.entity_pig_hurt;
 	}
 	
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override protected SoundEvent getDeathSound() {
 		return SoundEvents.entity_pig_death;
 	}
@@ -88,9 +69,6 @@ public class EntityFancyBadger extends EntityAnimal {
 		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
 	}
 	
-	/**
-	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-	 */
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		if (stack != null && stack.getItem() == Items.carrot && player.isSneaking()) {
 			if (!this.worldObj.isRemote) {
@@ -112,15 +90,10 @@ public class EntityFancyBadger extends EntityAnimal {
 		
 		if (super.processInteract(player, hand, stack)) {
 			return true;
-		}
-		
-		else if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null) {
+		} else if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null) {
 			player.startRiding(this);
-			
 			return true;
-		}
-		
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -129,9 +102,6 @@ public class EntityFancyBadger extends EntityAnimal {
 		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
 	}
 	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
 	@Override protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int j = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + p_70628_2_);
 		
@@ -145,9 +115,6 @@ public class EntityFancyBadger extends EntityAnimal {
 		}
 	}
 	
-	/**
-	 * Called when the mob is falling. Calculates and applies fall damage.
-	 */
 	@Override public void fall(float distance, float damageMultiplier) {
 		super.fall(distance, damageMultiplier);
 		
@@ -160,10 +127,6 @@ public class EntityFancyBadger extends EntityAnimal {
 		return new EntityFancyBadger(this.worldObj);
 	}
 	
-	/**
-	 * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-	 * the animal type)
-	 */
 	@Override public boolean isBreedingItem(ItemStack stack) {
 		return stack != null && stack.getItem() == Items.wheat;
 	}

@@ -6,7 +6,6 @@ import net.minecraft.block.material.Material;
 import com.zalthrion.zylroth.lib.ModTabs;
 
 public class AshBlock extends BlockBase {
-	
 	private String name = "ashBlock";
 	
 	public AshBlock() {

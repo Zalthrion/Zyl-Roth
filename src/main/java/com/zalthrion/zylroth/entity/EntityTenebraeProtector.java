@@ -53,7 +53,7 @@ public class EntityTenebraeProtector extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
+		this.dataManager.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
 	}
 	
 	@Override
@@ -66,9 +66,7 @@ public class EntityTenebraeProtector extends EntityMob {
 		
 	}
 	
-	/** Decrements the entity's air supply when underwater */
-	@Override
-	protected int decreaseAirSupply(int par1) {
+	@Override protected int decreaseAirSupply(int par1) {
 		return par1;
 	}
 	
@@ -145,9 +143,6 @@ public class EntityTenebraeProtector extends EntityMob {
 		this.playSound(SoundEvents.entity_irongolem_step, 1.0F, 1.0F);
 	}
 	
-	/** Drop 0-2 items of this living's type. @param par1 - Whether this entity
-	 * has recently been hit by a player. @param par2 - Level of Looting used to
-	 * kill this mob. */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		this.dropItem(ModItems.unstableTenebraeCore, 1);
@@ -160,20 +155,19 @@ public class EntityTenebraeProtector extends EntityMob {
 	}
 	
 	public boolean isPlayerCreated() {
-		return (((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue() & 1) != 0;
+		return (((Byte) this.dataManager.get(PLAYER_CREATED)).byteValue() & 1) != 0;
 	}
 	
 	public void setPlayerCreated(boolean par1) {
-		byte b0 = ((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue();
+		byte b0 = ((Byte) this.dataManager.get(PLAYER_CREATED)).byteValue();
 		
 		if (par1) {
-			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 | 1)));
+			this.dataManager.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 | 1)));
 		} else {
-			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 & -2)));
+			this.dataManager.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 & -2)));
 		}
 	}
 	
-	/** Called when the mob's health reaches 0. */
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		super.onDeath(par1DamageSource);

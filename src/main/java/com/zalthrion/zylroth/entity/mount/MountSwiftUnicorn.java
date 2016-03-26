@@ -12,12 +12,10 @@ import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class MountSwiftUnicorn extends MountBaseHorse {
-	
 	public MountSwiftUnicorn(World world) {
 		super(world);
 		this.isEntityUndead();
 		this.isImmuneToFire = true;
-		
 		this.setCustomNameTag("Swift Unicorn");
 	}
 	
@@ -29,11 +27,9 @@ public class MountSwiftUnicorn extends MountBaseHorse {
 			this.setDead();
 			persistentData.removeTag("ownsMountSwiftUnicorn");
 		}
-		
 		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
 			player.startRiding(this);
 		}
-		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
 			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}
@@ -42,6 +38,6 @@ public class MountSwiftUnicorn extends MountBaseHorse {
 	}
 	
 	@Override public HorseArmorType getType() {
-		return HorseArmorType.HORSE; // TODO Change to UNICORN if possible
+		return HorseArmorType.HORSE;
 	}
 }

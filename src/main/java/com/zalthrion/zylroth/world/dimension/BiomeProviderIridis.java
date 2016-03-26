@@ -21,18 +21,14 @@ import com.google.common.collect.Lists;
 import com.zalthrion.zylroth.world.gen.GenLayerIridis;
 
 public class BiomeProviderIridis extends BiomeProvider {
-	
 	private GenLayer genBiomes;
-	/** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
 	private GenLayer biomeIndexLayer;
-	/** The BiomeCache object for this world. */
 	private BiomeCache biomeCache;
-	/** A list of biomes that the player can spawn in. */
 	private List<BiomeGenBase> biomesToSpawnIn;
 	
 	public BiomeProviderIridis() {
 		this.biomeCache = new BiomeCache(this);
-		this.biomesToSpawnIn = Lists.<BiomeGenBase>newArrayList();
+		this.biomesToSpawnIn = Lists.<BiomeGenBase> newArrayList();
 		this.biomesToSpawnIn.addAll(allowedBiomes);
 	}
 	
@@ -49,65 +45,19 @@ public class BiomeProviderIridis extends BiomeProvider {
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
 	}
 	
-	/** Gets the list of valid biomes for the player to spawn in. */
-	@Override
-	public List<BiomeGenBase> getBiomesToSpawnIn() {
+	@Override public List<BiomeGenBase> getBiomesToSpawnIn() {
 		return this.biomesToSpawnIn;
 	}
 	
-	/** Returns the BiomeGenBase related to the x, z position on the world. */
-	@Override
-	public BiomeGenBase getBiomeGenerator(BlockPos pos) {
+	@Override public BiomeGenBase getBiomeGenerator(BlockPos pos) {
 		return this.biomeCache.getBiome(pos.getX(), pos.getZ(), (BiomeGenBase) null);
 	}
 	
-	/** Returns a list of rainfall values for the specified blocks. Args:
-	 * listToReuse, x, z, width, length. */
-	/* @Override
-	public float[] getRainfall(float[] listToReuse, int x, int z, int width, int length) {
-		IntCache.resetIntCache();
-		
-		if (listToReuse == null || listToReuse.length < width * length) {
-			listToReuse = new float[width * length];
-		}
-		
-		int[] aint = this.biomeIndexLayer.getInts(x, z, width, length);
-		
-		for (int i1 = 0; i1 < width * length; ++ i1) {
-			try {
-				float f = (float) BiomeGenBase.getBiome(aint[i1]).getIntRainfall() / 65536.0F;
-				
-				if (f > 1.0F) {
-					f = 1.0F;
-				}
-				
-				listToReuse[i1] = f;
-			} catch (Throwable throwable) {
-				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Invalid Biome id");
-				CrashReportCategory crashreportcategory = crashreport.makeCategory("DownfallBlock");
-				crashreportcategory.addCrashSection("biome id", Integer.valueOf(i1));
-				crashreportcategory.addCrashSection("downfalls[] size", Integer.valueOf(listToReuse.length));
-				crashreportcategory.addCrashSection("x", Integer.valueOf(x));
-				crashreportcategory.addCrashSection("z", Integer.valueOf(z));
-				crashreportcategory.addCrashSection("w", Integer.valueOf(width));
-				crashreportcategory.addCrashSection("h", Integer.valueOf(length));
-				throw new ReportedException(crashreport);
-			}
-		}
-		
-		return listToReuse;
-	} */
-	
-	/** Return an adjusted version of a given temperature based on the y height */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getTemperatureAtHeight(float par1, int par2) {
+	@Override @SideOnly(Side.CLIENT) public float getTemperatureAtHeight(float par1, int par2) {
 		return par1;
 	}
 	
-	/** Returns an array of biomes for the location input. */
-	@Override
-	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5) {
+	@Override public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5) {
 		IntCache.resetIntCache();
 		
 		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5) {
@@ -134,19 +84,11 @@ public class BiomeProviderIridis extends BiomeProvider {
 		}
 	}
 	
-	/** Returns biomes to use for the blocks and loads the other data like
-	 * temperature and humidity onto the WorldChunkManager Args: oldBiomeList,
-	 * x, z, width, depth */
-	@Override
-	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] oldBiomeList, int x, int z, int width, int depth) {
+	@Override public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] oldBiomeList, int x, int z, int width, int depth) {
 		return this.getBiomeGenAt(oldBiomeList, x, z, width, depth, true);
 	}
 	
-	/** Return a list of biomes for the specified blocks. Args: listToReuse, x,
-	 * y, width, length, cacheFlag (if false, don't check biomeCache to avoid
-	 * infinite loop in BiomeCacheBlock) */
-	@Override
-	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] listToReuse, int x, int y, int width, int length, boolean cacheFlag) {
+	@Override public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] listToReuse, int x, int y, int width, int length, boolean cacheFlag) {
 		IntCache.resetIntCache();
 		
 		if (listToReuse == null || listToReuse.length < width * length) {
@@ -167,9 +109,7 @@ public class BiomeProviderIridis extends BiomeProvider {
 		}
 	}
 	
-	/** checks given Chunk's Biomes against List of allowed ones */
-	@Override
-	public boolean areBiomesViable(int x, int y, int z, List<BiomeGenBase> par4List) {
+	@Override public boolean areBiomesViable(int x, int y, int z, List<BiomeGenBase> par4List) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
 		int i1 = y - z >> 2;
@@ -199,9 +139,6 @@ public class BiomeProviderIridis extends BiomeProvider {
 		}
 	}
 	
-	/** Finds a valid position within a range, that is in one of the listed
-	 * biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y
-	 * positions. */
 	@Override public BlockPos findBiomePosition(int x, int y, int z, List<BiomeGenBase> par4List, Random random) {
 		IntCache.resetIntCache();
 		int l = x - z >> 2;
@@ -228,9 +165,7 @@ public class BiomeProviderIridis extends BiomeProvider {
 		return blockpos;
 	}
 	
-	/** Calls the WorldChunkManager's biomeCache.cleanupCache() */
-	@Override
-	public void cleanupCache() {
+	@Override public void cleanupCache() {
 		this.biomeCache.cleanupCache();
 	}
 }

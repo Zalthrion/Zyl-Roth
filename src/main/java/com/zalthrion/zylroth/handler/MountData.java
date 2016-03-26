@@ -4,10 +4,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 
 // TODO Look into capabilities because this seems to be dead
-public class MountData implements IExtendedEntityProperties {
+public class MountData {
 	public static final String EXT_PROP_NAME = "ZylrothMountData";
 	private final EntityPlayer player;
 	private String ownedMount;
@@ -26,20 +25,20 @@ public class MountData implements IExtendedEntityProperties {
 		// return (MountData) player.getExtendedProperties(EXT_PROP_NAME);
 	}
 	
-	@Override public void saveNBTData(NBTTagCompound compound) {
+	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setString("ownedMount", this.ownedMount);
 		properties.setInteger("ownedMountID", this.ownedMountID);
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
 
-	@Override public void loadNBTData(NBTTagCompound compound) {
+	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.ownedMount = properties.getString("ownedMount");
 		this.ownedMountID = properties.getInteger("ownedMountID");
 	}
 
-	@Override public void init(Entity entity, World world) {
+	public void init(Entity entity, World world) {
 		this.ownedMount = "";
 		this.ownedMountID = -1;
 	}

@@ -30,21 +30,11 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 	public double targetY;
 	public double targetZ;
 	
-	/** Ring buffer array for the last 64 Y-positions and yaw rotations. Used to
-	 * calculate offsets for the animations. */
 	public double[][] ringBuffer = new double[64][3];
-	
-	/** Index into the ring buffer. Incremented once per tick and restarts at 0
-	 * once it reaches the end of the buffer. */
 	public int ringBufferIndex = -1;
 	
-	/** An array containing all body parts of this dragon */
 	public EntityDragonPart[] dragonPartArray;
-	
-	/** The head bounding box of a dragon */
 	public EntityDragonPart dragonPartHead;
-	
-	/** The body bounding box of a dragon */
 	public EntityDragonPart dragonPartBody;
 	public EntityDragonPart dragonPartTail1;
 	public EntityDragonPart dragonPartTail2;
@@ -52,14 +42,8 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 	public EntityDragonPart dragonPartWing1;
 	public EntityDragonPart dragonPartWing2;
 	
-	/** Animation time at previous tick. */
 	public float prevAnimTime;
-	
-	/** Animation time, used to control the speed of the animation cycles (wings
-	 * flapping, jaw opening, etc.) */
 	public float animTime;
-	
-	/** Force selecting a new flight target at next tick if set to true. */
 	public boolean forceNewTarget;
 	
 	@SuppressWarnings("unused")
@@ -84,11 +68,6 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 		super.applyEntityAttributes();
 		boolean hardcore = ConfigurationHandler.getHardcoreModeEnabled();
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(hardcore ? 200.0D : 50.0D);
-	}
-	
-	@Override
-	protected void entityInit() {
-		super.entityInit();
 	}
 	
 	public double[] getMovementOffsets(int par1, float par2) {

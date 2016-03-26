@@ -11,10 +11,13 @@ public class EntityZalthrion extends EntityDeveloper {
 		super(world);
 		this.setSize(1F, 2F);
 		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIWander(this, 1.0D));
 		
 		this.setCustomNameTag("Zalthrion");
+	}
+	
+	@Override public void initEntityAI() {
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIWander(this, 1.0D));
 	}
 	
 	@Override protected void applyEntityAttributes() {

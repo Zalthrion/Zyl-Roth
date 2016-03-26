@@ -18,7 +18,6 @@ public class MountWarTortoise extends MountBase {
 	public MountWarTortoise(World world) {
 		super(world);
 		this.isImmuneToFire = true;
-		
 		this.setCustomNameTag("War Tortoise");
 	}
 	
@@ -30,11 +29,9 @@ public class MountWarTortoise extends MountBase {
 			this.setDead();
 			persistentData.removeTag("ownsMountWarTortoise");
 		}
-		
 		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
 			player.startRiding(this);
 		}
-		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
 			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}

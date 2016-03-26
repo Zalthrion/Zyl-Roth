@@ -27,17 +27,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityBadger extends EntityAnimal {
-	
-	/** AI task for player control. */
-	// private final EntityAIControlledByPlayer aiControlledByPlayer;
-	
 	public EntityBadger(World world) {
 		super(world);
 		this.setSize(0.9F, 0.9F);
 		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
+	}
+	
+	@Override public void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-		// this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot_on_a_stick, false));
 		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
@@ -60,9 +58,6 @@ public class EntityBadger extends EntityAnimal {
 		super.updateAITasks();
 	}
 	
-	/** returns true if all the conditions for steering the entity are met. For
-	 * pigs, this is true if it is being ridden by a player and the player is
-	 * holding a carrot-on-a-stick */
 	@Override public boolean canBeSteered() {
 		EntityPlayer riding = ((EntityPlayer) this.getControllingPassenger());
 		return riding != null && !this.isChild();
@@ -72,17 +67,14 @@ public class EntityBadger extends EntityAnimal {
 		super.entityInit();
 	}
 	
-	/** Returns the sound this mob makes while it's alive. */
 	@Override protected SoundEvent getAmbientSound() {
 		return SoundEvents.entity_pig_ambient;
 	}
 	
-	/** Returns the sound this mob makes when it is hurt. */
 	@Override protected SoundEvent getHurtSound() {
 		return SoundEvents.entity_pig_hurt;
 	}
 	
-	/** Returns the sound this mob makes on death. */
 	@Override protected SoundEvent getDeathSound() {
 		return SoundEvents.entity_pig_death;
 	}
@@ -129,7 +121,6 @@ public class EntityBadger extends EntityAnimal {
 		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
 	}
 	
-	/** Drop 0-2 items of this living's type */
 	@Override protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int j = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + p_70628_2_);
 		
@@ -142,7 +133,6 @@ public class EntityBadger extends EntityAnimal {
 		}
 	}
 	
-	/** Called when the mob is falling. Calculates and applies fall damage. */
 	@Override public void fall(float distance, float damageMultiplier) {
 		super.fall(distance, damageMultiplier);
 		
@@ -155,14 +145,7 @@ public class EntityBadger extends EntityAnimal {
 		return new EntityBadger(this.worldObj);
 	}
 	
-	/** Checks if the parameter is an item which this animal can be fed to breed
-	 * it (wheat, carrots or seeds depending on the animal type) */
 	@Override public boolean isBreedingItem(ItemStack stack) {
 		return stack != null && stack.getItem() == Items.wheat;
 	}
-	
-	/** Return the AI task for player control. */
-	/* public EntityAIControlledByPlayer getAIControlledByPlayer() {
-		return this.aiControlledByPlayer;
-	} */
 }

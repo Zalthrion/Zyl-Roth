@@ -9,7 +9,7 @@ import com.zalthrion.zylroth.handler.MountData;
 
 public class PlayerEventHandler {
 	@SubscribeEvent public void onEntityConstruct(EntityConstructing event) {
-		if (event.entity instanceof EntityPlayer && MountData.get((EntityPlayer) event.entity) == null) MountData.register((EntityPlayer) event.entity);
+		if (event.getEntity() instanceof EntityPlayer && MountData.get((EntityPlayer) event.getEntity()) == null) MountData.register((EntityPlayer) event.getEntity());
 	}
 	
 	@SubscribeEvent public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {

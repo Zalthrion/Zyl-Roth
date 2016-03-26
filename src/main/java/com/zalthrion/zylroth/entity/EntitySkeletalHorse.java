@@ -12,22 +12,15 @@ public class EntitySkeletalHorse extends EntityHorse {
 		this.isImmuneToFire = true;
 	}
 	
-	/** Returns the horse type. 0 = Normal, 1 = Donkey, 2 = Mule, 3 = Undead
-	 * Horse, 4 = Skeleton Horse */
-	@Override
-	public HorseArmorType getType() {
+	@Override public HorseArmorType getType() {
 		return HorseArmorType.SKELETON;
 	}
 	
-	/** Returns true if the rider of the entity should be dismounted on water */
-	@Override
-	public boolean shouldDismountInWater(Entity rider) {
+	@Override public boolean shouldDismountInWater(Entity rider) {
 		return true;
 	}
 	
-	/** Returns true if the entity can breath underwater */
-	@Override
-	public boolean canBreatheUnderwater() {
+	@Override public boolean canBreatheUnderwater() {
 		return true;
 	}
 }

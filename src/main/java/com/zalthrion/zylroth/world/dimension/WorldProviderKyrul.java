@@ -10,12 +10,12 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.Zylroth;
+import com.zalthrion.zylroth.lib.ModDimension;
 
 public class WorldProviderKyrul extends WorldProvider {
 	
-	@Override public void registerWorldChunkManager() {
-		this.worldChunkMgr = new BiomeProviderKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
+	@Override public void createBiomeProvider() {
+		this.biomeProvider = new BiomeProviderKyrul(worldObj.getSeed(), this.worldObj.getWorldInfo().getTerrainType());
 		this.hasNoSky = true;
 	}
 	
@@ -112,6 +112,6 @@ public class WorldProviderKyrul extends WorldProvider {
 	}
 
 	@Override public DimensionType getDimensionType() {
-		return Zylroth.KYRUL;
+		return ModDimension.KYRUL;
 	}
 }

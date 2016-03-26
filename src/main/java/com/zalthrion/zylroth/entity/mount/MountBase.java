@@ -50,7 +50,7 @@ public class MountBase extends EntityHorse {
 	
 	@Override protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.register(OWNER_UNIQUE_ID, Optional.<UUID> absent());
+		this.dataManager.register(OWNER_UNIQUE_ID, Optional.<UUID> absent());
 	}
 	
 	@Override public Entity getControllingPassenger() {
@@ -229,12 +229,12 @@ public class MountBase extends EntityHorse {
 	
 	@Override
 	public UUID getOwnerUniqueId() {
-		return (UUID)((Optional<UUID>) this.dataWatcher.get(OWNER_UNIQUE_ID)).orNull();
+		return (UUID)((Optional<UUID>) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
 	}
 	
 	@Override
 	public void setOwnerUniqueId(UUID uniqueId) {
-		this.dataWatcher.set(OWNER_UNIQUE_ID, Optional.fromNullable(uniqueId));
+		this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(uniqueId));
 	}
 	
 	@Override public boolean isChild() {

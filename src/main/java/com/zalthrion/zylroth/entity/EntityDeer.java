@@ -25,6 +25,9 @@ public class EntityDeer extends EntityTameable {
 		super(world);
 		this.setSize(1.0F, 1.1F);
 		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
+	}
+	
+	@Override public void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.75D));
 		this.tasks.addTask(3, new EntityAIMateAnimals(this, 1.0D));
@@ -40,17 +43,9 @@ public class EntityDeer extends EntityTameable {
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 	
-	@Override protected void updateAITasks() {
-		super.updateAITasks();
-	}
-	
 	@Override public boolean canBeSteered() {
 		EntityPlayer riding = ((EntityPlayer) this.getControllingPassenger());
 		return riding != null && !this.isChild();
-	}
-	
-	@Override protected void entityInit() {
-		super.entityInit();
 	}
 	
 	@Override public void updateAITick() {

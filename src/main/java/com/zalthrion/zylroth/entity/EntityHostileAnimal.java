@@ -41,10 +41,6 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 		super.updateAITasks();
 	}
 	
-	@Override public void onLivingUpdate() {
-		super.onLivingUpdate();
-	}
-	
 	@Override public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (this.isEntityInvulnerable(source)) {
 			return false;
@@ -153,10 +149,6 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 		} else {
 			super.handleStatusUpdate(id);
 		}
-	}
-	
-	@Override public void onUpdate() {
-		super.onUpdate();
 	}
 	
 	@Override protected SoundEvent getSwimSound() {

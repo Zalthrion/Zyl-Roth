@@ -63,7 +63,7 @@ public class EntityTenebraeGuardian extends EntityMob {
 	
 	@Override protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
+		this.dataManager.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
 	}
 	
 	@Override public void setBossVisibleTo(EntityPlayerMP player) {
@@ -248,16 +248,16 @@ public class EntityTenebraeGuardian extends EntityMob {
 	}
 	
 	public boolean isPlayerCreated() {
-		return (((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue() & 1) != 0;
+		return (((Byte) this.dataManager.get(PLAYER_CREATED)).byteValue() & 1) != 0;
 	}
 	
 	public void setPlayerCreated(boolean par1) {
-		byte b0 = ((Byte) this.dataWatcher.get(PLAYER_CREATED)).byteValue();
+		byte b0 = ((Byte) this.dataManager.get(PLAYER_CREATED)).byteValue();
 		
 		if (par1) {
-			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 | 1)));
+			this.dataManager.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 | 1)));
 		} else {
-			this.dataWatcher.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 & -2)));
+			this.dataManager.set(PLAYER_CREATED, Byte.valueOf((byte) (b0 & -2)));
 		}
 	}
 	

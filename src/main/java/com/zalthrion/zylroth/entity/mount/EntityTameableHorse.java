@@ -29,8 +29,8 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.register(TAMED, Boolean.FALSE);
-		this.dataWatcher.register(OWNER_UNIQUE_ID, Optional.<UUID>absent());
+		this.dataManager.register(TAMED, Boolean.FALSE);
+		this.dataManager.register(OWNER_UNIQUE_ID, Optional.<UUID>absent());
 	}
 	
 	@Override public void writeEntityToNBT(NBTTagCompound tagCompound) {
@@ -69,19 +69,19 @@ public abstract class EntityTameableHorse extends EntityHorse implements IEntity
 	
 	@Override
 	public boolean isTame() {
-		return this.dataWatcher.get(TAMED).booleanValue();
+		return this.dataManager.get(TAMED).booleanValue();
 	}
 	
 	@Override public void setHorseTamed(boolean tamed) {
-		this.dataWatcher.set(TAMED, tamed);
+		this.dataManager.set(TAMED, tamed);
 	}
 	
 	@Override public UUID getOwnerUniqueId() {
-		return (UUID) ((Optional<UUID>) this.dataWatcher.get(OWNER_UNIQUE_ID)).orNull();
+		return (UUID) ((Optional<UUID>) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
 	}
 	
 	@Override public void setOwnerUniqueId(UUID id) {
-		this.dataWatcher.set(OWNER_UNIQUE_ID, Optional.fromNullable(id));
+		this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(id));
 	}
 	
 	@Override public Entity getOwner() {

@@ -9,12 +9,12 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.zalthrion.zylroth.Zylroth;
+import com.zalthrion.zylroth.lib.ModDimension;
 
 public class WorldProviderGlaciem extends WorldProvider {
 	
-	@Override public void registerWorldChunkManager() {
-		this.worldChunkMgr = new BiomeProviderGlaciem(worldObj.getSeed(), this.worldObj.getWorldType());
+	@Override public void createBiomeProvider() {
+		this.biomeProvider = new BiomeProviderGlaciem(worldObj.getSeed(), this.worldObj.getWorldType());
 	}
 
 	@Override @SideOnly(Side.CLIENT) public Vec3d getFogColor(float p_76562_1_, float p_76562_2_) {
@@ -47,7 +47,7 @@ public class WorldProviderGlaciem extends WorldProvider {
 	}
 	
 	@Override public DimensionType getDimensionType() {
-		return Zylroth.GLACIEM;
+		return ModDimension.GLACIEM;
 	}
 	
 	// Extras

@@ -27,6 +27,9 @@ public class MountBaseHorse extends EntityTameableHorse {
 		this.isImmuneToFire = true;
 		this.setSize(1.0F, 1.0F);
 		((PathNavigateGround) this.getNavigator()).setCanSwim(false);
+	}
+	
+	@Override public void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
 	}
@@ -36,22 +39,17 @@ public class MountBaseHorse extends EntityTameableHorse {
 		return list.isEmpty() ? null : (Entity) list.get(0);
 	}
 	
-	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
 		return this.isSummoned;
 	}
 	
-	/** Entity check */
 	public boolean isEntity(Entity entity) {
-		
 		if (entity instanceof Entity) {
 			entity = this.entity;
 		}
-		
 		if (entity instanceof EntityPlayer) {
 			entity = this.player;
 		}
-		
 		if (entity instanceof EntityTameableHorse) {
 			entity = this.tameableHorse;
 		}
@@ -59,16 +57,12 @@ public class MountBaseHorse extends EntityTameableHorse {
 		return this.isEntity(entity);
 	}
 	
-	/** Gives the horse special attributes */
 	public boolean isSummoned(boolean summoned) {
-		
 		if (summoned == true) {
 			this.isSummoned = true;
 			this.setHorseTamed(true);
 			this.setHorseSaddled(true);
 			this.isHorseSaddled();
-			
-			this.isTame();
 		}
 		
 		return summoned;
@@ -114,30 +108,21 @@ public class MountBaseHorse extends EntityTameableHorse {
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 	}
 	
-	/** Sets what GUI should open when the player opens his inventory while
-	 * mounting the entity */
 	@Override
 	public void openGUI(EntityPlayer p_110199_1_) {
-		
-		if (this.isSummoned)
-			;
-		
-		else super.openGUI(p_110199_1_);
+		if (!this.isSummoned) super.openGUI(p_110199_1_);
 	}
 	
-	/** Returns true if the rider of the entity should be dismounted on water */
 	@Override
 	public boolean shouldDismountInWater(Entity rider) {
 		return true;
 	}
 	
-	/** Returns true if the entity can breath underwater */
 	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
 	}
 	
-	/** Returns true if the entity can despawn */
 	@Override
 	protected boolean canDespawn() {
 		return false;
@@ -149,7 +134,6 @@ public class MountBaseHorse extends EntityTameableHorse {
 		return false;
 	} */
 	
-	/** Checks if the entity is invulnerable or not */
 	@Override
 	public boolean isEntityInvulnerable(DamageSource source) {
 		if (!this.isSummoned || source == DamageSource.outOfWorld) {
@@ -168,7 +152,6 @@ public class MountBaseHorse extends EntityTameableHorse {
 	}
 
 	@Override public UUID getOwnerId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getOwnerUniqueId();
 	}
 }

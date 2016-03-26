@@ -16,7 +16,6 @@ public class MountPlaguedHorse extends MountBaseHorse {
 		super(world);
 		this.isEntityUndead();
 		this.isImmuneToFire = true;
-		
 		this.setCustomNameTag("Plagued Horse");
 	}
 	
@@ -28,11 +27,9 @@ public class MountPlaguedHorse extends MountBaseHorse {
 			this.setDead();
 			persistentData.removeTag("ownsMountPlaguedHorse");
 		}
-		
 		if (!this.worldObj.isRemote && (this.getControllingPassenger() == null || this.getControllingPassenger() == player) && !this.isChild() && !player.isSneaking() && stack == null && this.isOwner(player)) {
 			player.startRiding(this);
 		}
-		
 		if (!this.isOwner(player) && !this.worldObj.isRemote) {
 			player.addChatMessage(new TextComponentTranslation("msg." + Reference.MOD_ID + ":mount.owned"));
 		}
@@ -40,8 +37,6 @@ public class MountPlaguedHorse extends MountBaseHorse {
 		return true;
 	}
 	
-	/** Returns the horse type. 0 = Normal, 1 = Donkey, 2 = Mule, 3 = Undead
-	 * Horse, 4 = Skeleton Horse */
 	@Override
 	public HorseArmorType getType() {
 		return HorseArmorType.ZOMBIE;
