@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.lib;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
@@ -10,7 +11,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.zalthrion.zylroth.utility.LogHelper;
 
 public class ModRegistry {
-	static HashMap<Integer, RegisterInfo> registerMap = new HashMap<Integer, RegisterInfo>();
+	static HashMap<String, RegisterInfo> registerMap = new HashMap<String, RegisterInfo>();
+	static ArrayList<RegisterInfo> sortedRegisterMap = new ArrayList<RegisterInfo>();
+	
 	protected static class RegisterInfo {
 		private Block block;
 		private Class<? extends ItemBlock> itemBlock;
@@ -49,33 +52,33 @@ public class ModRegistry {
 		public boolean hasItemBlock() { return this.hasItemBlock; }
 	}
 	
-	public static void addRegister(Integer pos, Block block, String key) {
-		if (registerMap.containsKey(pos)) LogHelper.warn("Object already placed in map at position " + pos + ".\nAttempting to fix this.");
-		while (registerMap.containsKey(pos)) {
-			pos ++;
-		}
-		registerMap.put(pos, new RegisterInfo(block, key));
+	public static void addRegister(Block block, String registryName) {
+		if (registerMap.containsKey(registryName)) LogHelper.warn("Developer Error: Object already called " + registryName + " NOT REGISTERING.");
+		registerMap.put(registryName, new RegisterInfo(block, registryName));
 	}
 	
-	public static void addRegister(Integer pos, Block block, Class<? extends ItemBlock> itemBlock, String key) {
-		if (registerMap.containsKey(pos)) LogHelper.warn("Object already placed in map at position " + pos + ".\nAttempting to fix this.");
-		while (registerMap.containsKey(pos)) {
-			pos ++;
-		}
-		registerMap.put(pos, new RegisterInfo(block, itemBlock, key));
+	public static void addRegister(Integer pos, Block block, Class<? extends ItemBlock> itemBlock, String registryName) {
+		if (registerMap.containsKey(registryName)) LogHelper.warn("Developer Error: Object already called " + registryName + " NOT REGISTERING.");
+		registerMap.put(registryName, new RegisterInfo(block, itemBlock, registryName));
 	}
 	
-	public static void addRegister(Integer pos, Item item, String key) {
-		if (registerMap.containsKey(pos)) LogHelper.warn("Object already placed in map at position " + pos + ".\nAttempting to fix this.");
-		while (registerMap.containsKey(pos)) {
-			pos ++;
-		}
-		registerMap.put(pos, new RegisterInfo(item, key));
+	public static void addRegister(Integer pos, Item item, String registryName) {
+		if (registerMap.containsKey(registryName)) LogHelper.warn("Developer Error: Object already called " + registryName + " NOT REGISTERING.");
+		registerMap.put(registryName, new RegisterInfo(item, registryName));
 	}
 	
-	public static void register() {
-		for (int pos = 0; pos <= registerMap.size(); pos ++) {
-			RegisterInfo info = registerMap.get(pos);
+	public static void sortThenRegister(String[] sortOrder) {
+		for (int i = 0; i < sortOrder.length; i ++) {
+			if (registerMap.containsKey(sortOrder[i])) {
+				sortedRegisterMap.add(registerMap.get(sortOrder[i]));
+			}
+		}
+		register();
+	}
+	
+	private static void register() {
+		for (int pos = 0; pos <= sortedRegisterMap.size(); pos ++) {
+			RegisterInfo info = sortedRegisterMap.get(pos);
 			if (info == null) continue;
 			if (info.isItem()) {
 				GameRegistry.registerItem(info.getItem(), info.getKey());

@@ -12,47 +12,37 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.base.BlockBase;
 
 public class EmpoweredTenebraeCore extends BlockBase {
-	
-	private String name = "empoweredTenebraeCore";
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
 	public EmpoweredTenebraeCore() {
 		super(Material.rock);
+		this.setCreativeTab();
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setUnlocalizedName(name);
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
-		this.setCreativeTab(ModTabs.zylRoth);
+		this.setUnlocalizedName("empoweredTenebraeCore");
 	}
 	
-	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		super.randomDisplayTick(state, world, pos, rand);
-		
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		
-		for (int l = x - 2; l <= x + 2; ++ l) {
-			for (int i1 = z - 2; i1 <= z + 2; ++ i1) {
-				if (l > x - 2 && l < x + 2 && i1 == z - 1) i1 = z + 2;
-				if (rand.nextInt(16) == 0) {
-					for (int j1 = y; j1 <= y + 1; ++ j1) {
-						if (!world.isAirBlock(new BlockPos((l - x) / 2 + x, j1, (i1 - z) / 2 + z))) break;
-						
-						world.spawnParticle(EnumParticleTypes.PORTAL, (double) x - -0.5F, (double) y - -0.5F, (double) z - -0.5F, (double) ((float) (l - x) + rand.nextFloat() - 0.1F), (double) ((float) (j1 - y) - rand.nextFloat() - 0.1F), (double) ((float) (i1 - z) + rand.nextFloat()) - 0.1F);
-					}
-				}
-			}
-		}
+	@Override protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { FACING });
+	}
+	
+	@Override public int getMetaFromState(IBlockState state) {
+		return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
+	}
+	
+	@Override public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
 	}
 	
 	@Override public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -60,24 +50,35 @@ public class EmpoweredTenebraeCore extends BlockBase {
 	}
 	
 	@Override public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
 	}
 	
-	@Override public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+	@Override public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		super.randomDisplayTick(state, world, pos, rand);
 		
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
-			enumfacing = EnumFacing.NORTH;
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		
+		for (int i = x - 2; i <= x + 2; i ++) {
+			for (int j = z - 2; j <= z + 2; j ++) {
+				if (i > x - 2 && i < x + 2 && j == z - 1) j = z + 2;
+				if (rand.nextInt(16) == 0) {
+					for (int k = y; k <= y + 1; k ++) {
+						if (!world.isAirBlock(new BlockPos((i - x) / 2 + x, k, (j - z) / 2 + z))) break;
+						
+						world.spawnParticle(EnumParticleTypes.PORTAL, (double) x - -0.5F, (double) y - -0.5F, (double) z - -0.5F, (double) ((float) (i - x) + rand.nextFloat() - 0.1F), (double) ((float) (k - y) - rand.nextFloat() - 0.1F), (double) ((float) (j - z) + rand.nextFloat()) - 0.1F);
+					}
+				}
+			}
 		}
-		
-		return this.getDefaultState().withProperty(FACING, enumfacing);
 	}
 	
-	@Override public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing) state.getValue(FACING)).getIndex();
+	@Override public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+		return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
 	}
 	
-	@Override protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING});
+	@Override public IBlockState withRotation(IBlockState state, Rotation rot) {
+		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
 	}
 }
