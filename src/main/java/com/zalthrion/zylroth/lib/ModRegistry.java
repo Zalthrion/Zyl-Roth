@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.lib;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -57,12 +58,12 @@ public class ModRegistry {
 		registerMap.put(registryName, new RegisterInfo(block, registryName));
 	}
 	
-	public static void addRegister(Integer pos, Block block, Class<? extends ItemBlock> itemBlock, String registryName) {
+	public static void addRegister(Block block, Class<? extends ItemBlock> itemBlock, String registryName) {
 		if (registerMap.containsKey(registryName)) LogHelper.warn("Developer Error: Object already called " + registryName + " NOT REGISTERING.");
 		registerMap.put(registryName, new RegisterInfo(block, itemBlock, registryName));
 	}
 	
-	public static void addRegister(Integer pos, Item item, String registryName) {
+	public static void addRegister(Item item, String registryName) {
 		if (registerMap.containsKey(registryName)) LogHelper.warn("Developer Error: Object already called " + registryName + " NOT REGISTERING.");
 		registerMap.put(registryName, new RegisterInfo(item, registryName));
 	}
@@ -77,8 +78,9 @@ public class ModRegistry {
 	}
 	
 	private static void register() {
-		for (int pos = 0; pos <= sortedRegisterMap.size(); pos ++) {
-			RegisterInfo info = sortedRegisterMap.get(pos);
+		Iterator<RegisterInfo> iterator = sortedRegisterMap.iterator();
+		while (iterator.hasNext()) {
+			RegisterInfo info = iterator.next();
 			if (info == null) continue;
 			if (info.isItem()) {
 				GameRegistry.registerItem(info.getItem(), info.getKey());

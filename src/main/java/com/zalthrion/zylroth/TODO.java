@@ -3,23 +3,10 @@ package com.zalthrion.zylroth;
 public class TODO {
 	/*
 	 * GoldBag
-	 * InfuserMachine
-	 * InfuserType
-	 * 
-	 * EndiriteOre
-	 * InferniumOre
-	 * TenebraeOre
-	 * VoidiumOre
 	 * 
 	 * SpawnerVoidDragon
 	 * 
-	 * IridisLeafBlock
-	 * IridisSaplingBlock
-	 * KyrulLogBlock
-	 * RainbowLeafBlock
-	 * RainbowLeafBlock2
-	 * RainbowSaplingBlock
-	 * TreeColor
+	 * KyrulLogBlock Check 1.7.10
 	 * 
 	 * ContainerBase
 	 * ContainerInfuser
