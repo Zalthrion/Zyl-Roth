@@ -1,5 +1,11 @@
 package com.zalthrion.zylroth.block;
 
+import com.zalthrion.zylroth.block.machine.BlockBaseContainer;
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.reference.RenderIDs;
+import com.zalthrion.zylroth.tile.TileEntityGoldBag;
+import com.zalthrion.zylroth.utility.EnumFacingUtil;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -7,11 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.zalthrion.zylroth.block.machine.BlockBaseContainer;
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.tile.TileEntityGoldBag;
-import com.zalthrion.zylroth.utility.EnumFacingUtil;
 
 public class GoldBag extends BlockBaseContainer {
 	private String name = "goldBag";
@@ -33,7 +34,7 @@ public class GoldBag extends BlockBaseContainer {
 	
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
-		EnumFacing facing = EnumFacingUtil.forPlacing((MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 2);
+		EnumFacing facing = EnumFacingUtil.forPlacing((MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) + 2);
 		
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 		if (tileentity instanceof TileEntityGoldBag) {
@@ -44,7 +45,7 @@ public class GoldBag extends BlockBaseContainer {
 	
 	@Override
 	public int getRenderType() {
-		return -1;
+		return RenderIDs.goldBag;
 	}
 	
 	@Override

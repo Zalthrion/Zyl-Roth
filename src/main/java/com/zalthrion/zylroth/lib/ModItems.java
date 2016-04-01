@@ -1,14 +1,36 @@
 package com.zalthrion.zylroth.lib;
 
-import net.minecraft.item.Item;
-
-import com.zalthrion.zylroth.item.*;
-import com.zalthrion.zylroth.item.mount.*;
-import com.zalthrion.zylroth.item.ore.*;
+import com.zalthrion.zylroth.item.CelestialCore;
+import com.zalthrion.zylroth.item.CursedSoulEssence;
+import com.zalthrion.zylroth.item.DarkShard;
+import com.zalthrion.zylroth.item.SoulEssence;
+import com.zalthrion.zylroth.item.VoidEssence;
+import com.zalthrion.zylroth.item.VoidGem;
+import com.zalthrion.zylroth.item.mount.EmptySC;
+import com.zalthrion.zylroth.item.mount.SCDeathcharger;
+import com.zalthrion.zylroth.item.mount.SCPlaguedHorse;
+import com.zalthrion.zylroth.item.mount.SCSavageBadger;
+import com.zalthrion.zylroth.item.mount.SCSwiftUnicorn;
+import com.zalthrion.zylroth.item.mount.SCWarTortoise;
+import com.zalthrion.zylroth.item.ore.EndiriteChunk;
+import com.zalthrion.zylroth.item.ore.EndiriteIngot;
+import com.zalthrion.zylroth.item.ore.EndiriteOre;
+import com.zalthrion.zylroth.item.ore.InferniumIngot;
+import com.zalthrion.zylroth.item.ore.RawInfernium;
+import com.zalthrion.zylroth.item.ore.TenebraeChunk;
+import com.zalthrion.zylroth.item.ore.TenebraeIngot;
+import com.zalthrion.zylroth.item.ore.TenebraeOre;
+import com.zalthrion.zylroth.item.ore.TenebriumIngot;
+import com.zalthrion.zylroth.item.ore.VoidiriteIngot;
+import com.zalthrion.zylroth.item.ore.VoidiumChunk;
+import com.zalthrion.zylroth.item.ore.VoidiumIngot;
+import com.zalthrion.zylroth.item.ore.VoidiumOre;
+import com.zalthrion.zylroth.item.talisman.AutumnTalisman;
 import com.zalthrion.zylroth.item.talisman.GoldTalisman;
 import com.zalthrion.zylroth.item.talisman.IceTalisman;
-import com.zalthrion.zylroth.item.talisman.AutumnTalisman;
 import com.zalthrion.zylroth.item.talisman.VoidTalisman;
+
+import net.minecraft.item.Item;
 
 public final class ModItems {
 	
@@ -34,8 +56,11 @@ public final class ModItems {
 	public static Item voidiumOre = new VoidiumOre();
 	public static Item voidiumIngot = new VoidiumIngot();
 	
+	/* Voidirite Ore */
+	public static Item voidiriteIngot = new VoidiriteIngot();
+	
 	/* Tenebrae Items */
-	public static Item unstableTenebraeCore = new UnstableTenebraeCore();
+	public static Item celestialCore = new CelestialCore();
 	
 	/* Mounts */
 	public static Item Empty_SC = new EmptySC();
@@ -82,8 +107,11 @@ public final class ModItems {
 		ModRegistry.addRegister(50, voidiumOre, "voidiumIOre");
 		ModRegistry.addRegister(51, voidiumIngot, "voidiumIngot");
 		
+		/* Voidirite Ore */
+		ModRegistry.addRegister(70, voidiriteIngot, "voidiriteIngot");
+		
 		/* Tenebrae Items */
-		ModRegistry.addRegister(52, unstableTenebraeCore, "unstableTenebraeCore");
+		ModRegistry.addRegister(52, celestialCore, "celestialCore");
 		
 		/* Portals */
 		ModRegistry.addRegister(53, goldTalisman, "goldTalisman");

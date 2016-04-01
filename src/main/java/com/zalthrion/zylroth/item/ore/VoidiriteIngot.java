@@ -2,12 +2,11 @@ package com.zalthrion.zylroth.item.ore;
 
 import com.zalthrion.zylroth.item.ItemBase;
 
-public class VoidiumOre extends ItemBase {
+public class VoidiriteIngot extends ItemBase {
 	
-	private String name = "voidiumIOre";
+	private String name = "voidiriteIngot";
 	
-	public VoidiumOre() {
+	public VoidiriteIngot() {
 		this.setNames(name);
 	}
-	
 }

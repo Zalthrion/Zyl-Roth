@@ -1,13 +1,12 @@
 package com.zalthrion.zylroth.render.entity.mount;
 
+import java.util.Map;
+
 import com.google.common.collect.Maps;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import java.util.Map;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderHorse;
@@ -15,8 +14,6 @@ import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderDeathcharger extends RenderHorse {
@@ -36,17 +33,6 @@ public class RenderDeathcharger extends RenderHorse {
 	/** Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime */
 	protected void preRenderCallback(MountDeathcharger p_77041_1_, float p_77041_2_) {
-		float f1 = 1.0F;
-		int i = p_77041_1_.getHorseType();
-		
-		if (i == 1) {
-			f1 *= 0.87F;
-		}
-		else if (i == 2) {
-			f1 *= 0.92F;
-		}
-		
-		GL11.glScalef(f1, f1, f1);
 		super.preRenderCallback(p_77041_1_, p_77041_2_);
 	}
 	
@@ -98,19 +84,15 @@ public class RenderDeathcharger extends RenderHorse {
 		return resourcelocation;
 	}
 	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_) {
-		this.preRenderCallback((MountDeathcharger) p_77041_1_, p_77041_2_);
-	}
-	
 	/** Renders the model in RenderLiving */
+	@Override
 	protected void renderModel(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		this.renderModel((MountDeathcharger) p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
 	}
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
+	@Override
 	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
 		return this.getEntityTexture((MountDeathcharger) p_110775_1_);
 	}

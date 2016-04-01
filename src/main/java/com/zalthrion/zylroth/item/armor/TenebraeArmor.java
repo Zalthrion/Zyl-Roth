@@ -2,16 +2,16 @@ package com.zalthrion.zylroth.item.armor;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-
 import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class TenebraeArmor extends ItemBaseArmor {
 	
@@ -24,7 +24,7 @@ public class TenebraeArmor extends ItemBaseArmor {
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
 		this.setCreativeTab(ModTabs.ZylRoth);
-		this.setNames(Reference.MOD_ID.toLowerCase() + ":" + name);
+		this.setNames(Reference.RESOURCE_PREFIX + name);
 	}
 	
 	@Override

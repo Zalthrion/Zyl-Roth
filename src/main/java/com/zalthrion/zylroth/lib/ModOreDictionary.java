@@ -11,14 +11,31 @@ public final class ModOreDictionary {
 	public static void registerDictionary() {
 		
 		/* Tenebrae */
-		
 		OreDictionary.registerOre("oreTenebrae", ModBlocks.tenebraeOre);
+		OreDictionary.registerOre("iOreTenebrae", ModItems.tenebraeOre);
 		OreDictionary.registerOre("ingotTenebrae", ModItems.tenebraeIngot);
 		OreDictionary.registerOre("blockTenebrae", ModBlocks.tenebraeBlock);
 		
-		/* Voidium */
+		/*Infernium */
+		OreDictionary.registerOre("oreInfernium", ModBlocks.inferniumOre);
+		OreDictionary.registerOre("iOreInfernium", ModItems.rawInfernium);
+		OreDictionary.registerOre("ingotInfernium", ModItems.inferniumIngot);
 		
+		/* Tenebrium */
+		OreDictionary.registerOre("ingotTenebrium", ModItems.tenebriumIngot);
+		
+		/* Endirite */
+		OreDictionary.registerOre("oreEndirite", ModBlocks.endiriteOre);
+		OreDictionary.registerOre("iOreEndirite", ModItems.endiriteOre);
+		OreDictionary.registerOre("ingotEndirite", ModItems.endiriteIngot);
+		
+		/* Voidium */
 		OreDictionary.registerOre("oreVoidium", ModBlocks.voidiumOre);
+		OreDictionary.registerOre("iOreVoidium", ModItems.voidiumOre);
+		OreDictionary.registerOre("ingotVoidium", ModItems.voidiumIngot);
+		
+		/* Voidirite */
+		OreDictionary.registerOre("ingotVoidirite", ModItems.voidiriteIngot);
 		
 	}
 }

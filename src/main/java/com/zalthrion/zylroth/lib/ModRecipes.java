@@ -1,15 +1,14 @@
 package com.zalthrion.zylroth.lib;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-
 import com.zalthrion.zylroth.block.machine.InfuserType;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.handler.recipe.InfusionFuels;
 import com.zalthrion.zylroth.handler.recipe.InfusionRecipeHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 public final class ModRecipes {
 	
@@ -34,13 +33,6 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.goldTalisman), "GEG", "EDE", "GEG", 'E', Items.ender_pearl, 'G', Items.gold_ingot, 'D', Items.diamond);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.tenebraeOre), "CC", "CC", 'C', ModItems.tenebraeChunk);
-		
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.endiriteOre), "CC", "CC", 'C', ModItems.endiriteChunk);
-
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.voidiumOre), "CC", "CC", 'C', ModItems.voidiumChunk);
-		
-		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chiseledTenebrae), "IRI", "RBR", "IRI", 'I', Items.iron_ingot, 'R', ModItems.tenebraeChunk, 'B', ModBlocks.tenebraeBlock);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeCore), "RTR", "TBT", "RTR", 'R', Blocks.redstone_block, 'T', ModItems.tenebraeIngot, 'B', ModBlocks.tenebraeBlock);
@@ -50,7 +42,7 @@ public final class ModRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.voidGem), "NVN", "VDV", "NVN", 'V', ModItems.voidEssence, 'D', Items.diamond);
 		
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "ICI", "RTR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'T', ModBlocks.tenebraeBlock, 'C', ModItems.unstableTenebraeCore);
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "ICI", "RTR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'T', ModBlocks.tenebraeBlock, 'C', ModItems.celestialCore);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.oreInfuser_Idle), "IRI", "RER", "IRI", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'E', Items.ender_pearl);
 		
@@ -100,7 +92,15 @@ public final class ModRecipes {
 		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(ModBlocks.infusedTenebrae), new ItemStack(ModBlocks.tenebraeBlock), new ItemStack(Items.diamond), new ItemStack(Items.ender_pearl));
 		
 		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ModItems.tenebriumIngot), new ItemStack(ModItems.tenebraeIngot), new ItemStack(Items.iron_ingot), new ItemStack(ModItems.inferniumIngot));;
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ModItems.voidiriteIngot), new ItemStack(ModItems.voidiumIngot), new ItemStack(Items.iron_ingot), new ItemStack(ModItems.inferniumIngot));;
 	
+		/* Temporal Recipes (Ore Smelter) */
+		
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ModItems.tenebraeIngot), new ItemStack(ModItems.tenebraeOre), new ItemStack(ModItems.tenebraeOre), new ItemStack(ModItems.tenebraeOre));;
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ModItems.inferniumIngot), new ItemStack(ModItems.rawInfernium), new ItemStack(ModItems.rawInfernium), new ItemStack(ModItems.rawInfernium));;
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ModItems.endiriteIngot), new ItemStack(ModItems.endiriteOre), new ItemStack(ModItems.endiriteOre), new ItemStack(ModItems.endiriteOre));;
+		InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ModItems.voidiumIngot), new ItemStack(ModItems.voidiumOre), new ItemStack(ModItems.voidiumOre), new ItemStack(ModItems.voidiumOre));;
+		
 		/* Debug Recipes */
 /*		InfusionFuels.registerFuel(new ItemStack(Items.coal), 200);
 		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(Items.emerald), new ItemStack(Items.diamond), new ItemStack(Blocks.dirt), new ItemStack(Blocks.stone));

@@ -9,7 +9,7 @@ public class ModTabs {
 		
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.unstableTenebraeCore;
+			return ModItems.celestialCore;
 		}
 	};
 }

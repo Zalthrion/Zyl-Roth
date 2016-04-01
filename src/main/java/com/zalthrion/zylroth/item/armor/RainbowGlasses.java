@@ -1,15 +1,15 @@
 package com.zalthrion.zylroth.item.armor;
 
+import com.zalthrion.zylroth.lib.ModArmors;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
-import com.zalthrion.zylroth.lib.ModArmors;
-import com.zalthrion.zylroth.reference.Reference;
-
 public class RainbowGlasses extends ItemBaseArmor {
+	
 	public RainbowGlasses() {
 		super(ModArmors.glasses, "", 0);
-		this.setNames(Reference.RESOURCE_PREFIX + "rainbowGlasses");
+		this.setNames("rainbowGlasses");
 	}
 	
 	@Override public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
@@ -17,6 +17,6 @@ public class RainbowGlasses extends ItemBaseArmor {
 	}
 	
 	@Override public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return "zylroth:textures/models/rainbowGlasses.png";
+		return "zylroth:textures/armor/rainbowGlasses.png";
 	}
 }
