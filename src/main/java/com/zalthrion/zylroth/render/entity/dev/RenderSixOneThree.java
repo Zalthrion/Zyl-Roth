@@ -2,26 +2,23 @@ package com.zalthrion.zylroth.render.entity.dev;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
 import com.zalthrion.zylroth.entity.dev.EntitySixOneThree;
 import com.zalthrion.zylroth.reference.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class RenderSixOneThree extends RenderLiving {
+public class RenderSixOneThree extends RenderBiped {
 	
 	private static final ResourceLocation sixOneThreeTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/dev/61352151511.png");
-	
-	public ModelBase modelBase;
-	
-	public RenderSixOneThree(ModelBase model, float shadowSize) {
+		
+	public RenderSixOneThree(ModelBiped model, float shadowSize) {
 		super(model, shadowSize);
 	}
 	
@@ -33,6 +30,7 @@ public class RenderSixOneThree extends RenderLiving {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
+	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return this.getEntityTexture((EntitySixOneThree) entity);
 	}

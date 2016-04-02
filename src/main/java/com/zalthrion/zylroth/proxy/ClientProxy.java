@@ -37,9 +37,11 @@ import com.zalthrion.zylroth.model.entity.ModelDeer;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelRainbowPig;
 import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
+import com.zalthrion.zylroth.model.entity.ModelSpecialBiped;
 import com.zalthrion.zylroth.model.entity.ModelStag;
 import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
 import com.zalthrion.zylroth.model.entity.ModelUndead;
+import com.zalthrion.zylroth.model.entity.ModelUndead2;
 import com.zalthrion.zylroth.model.entity.ModelUnicorn;
 import com.zalthrion.zylroth.model.entity.mount.ModelDeathcharger;
 import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
@@ -123,11 +125,11 @@ public class ClientProxy extends CommonProxy {
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeGuardian.class, new RenderTenebraeGuardian(new ModelEmpoweredTenebraeGolem(), shadowSize));
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new RenderVoidLordBoss(new ModelUndead(), shadowSize, shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidLordBoss.class, new RenderVoidLordBoss(new ModelUndead2(), shadowSize));
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(new ModelUndead(), shadowSize, shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadWarrior.class, new RenderUndeadWarrior(new ModelUndead(), shadowSize));
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(new ModelUndead(), shadowSize, shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadMinion.class, new RenderUndeadMinion(new ModelUndead(), shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTenebraeProtector.class, new RenderTenebraeProtector(new ModelTenebraeGolem(), shadowSize));
 		
@@ -156,7 +158,7 @@ public class ClientProxy extends CommonProxy {
 		/** Developers */
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityZalthrion.class, new RenderZalthrion(new ModelBiped(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySixOneThree.class, new RenderSixOneThree(new ModelBiped(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySixOneThree.class, new RenderSixOneThree(new ModelSpecialBiped(), shadowSize));
 		
 		/** Void Lord Armor */
 		

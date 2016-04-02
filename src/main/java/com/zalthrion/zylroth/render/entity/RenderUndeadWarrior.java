@@ -1,11 +1,5 @@
 package com.zalthrion.zylroth.render.entity;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
@@ -13,6 +7,11 @@ import com.zalthrion.zylroth.reference.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class RenderUndeadWarrior extends RenderBiped {
@@ -21,8 +20,8 @@ public class RenderUndeadWarrior extends RenderBiped {
 	/** Scale of the model to use */
 	private float scale = 0.8F;
 	
-	public RenderUndeadWarrior(ModelBiped par1ModelBase, float par2, float par3) {
-		super(par1ModelBase, par2 * par3);
+	public RenderUndeadWarrior(ModelBiped model, float shadowSize) {
+		super(model, shadowSize);
 	}
 	
 	public void doRenderUndeadWarrior(EntityUndeadWarrior par1EntityUndeadWarrior, double par2, double par4, double par6, float par8, float par9) {
@@ -40,6 +39,7 @@ public class RenderUndeadWarrior extends RenderBiped {
 	
 	/** Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime */
+	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
 		this.preRenderScale((EntityUndeadWarrior) par1EntityLivingBase, par2);
 	}
@@ -47,7 +47,7 @@ public class RenderUndeadWarrior extends RenderBiped {
 	protected void rotateUndeadWarriorCorpse(EntityUndeadWarrior par1EntityUndeadWarrior, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityUndeadWarrior, par2, par3, par4);
 		
-		if ((double) par1EntityUndeadWarrior.limbSwingAmount >= 0.01D) {
+		if (par1EntityUndeadWarrior.limbSwingAmount >= 0.01D) {
 			float f3 = 13.0F;
 			float f4 = par1EntityUndeadWarrior.limbSwing - par1EntityUndeadWarrior.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);
@@ -57,6 +57,7 @@ public class RenderUndeadWarrior extends RenderBiped {
 	
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
+	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getUndeadWarriorTextures((EntityUndeadWarrior) par1Entity);
 	}
