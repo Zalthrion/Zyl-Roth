@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.lib;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.zalthrion.zylroth.block.AshBlock;
@@ -24,6 +25,7 @@ import com.zalthrion.zylroth.block.tree.IridisSaplingBlock;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock2;
 import com.zalthrion.zylroth.block.tree.RainbowSaplingBlock;
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
 import com.zalthrion.zylroth.item.block.IridisLeafItemBlock;
 import com.zalthrion.zylroth.item.block.IridisSaplingItemBlock;
 import com.zalthrion.zylroth.item.block.RainbowLeafItemBlock;
@@ -34,6 +36,7 @@ import com.zalthrion.zylroth.item.ore.TenebraeChunk;
 import com.zalthrion.zylroth.item.ore.VoidiumChunk;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
+import com.zalthrion.zylroth.world.provider.WorldProviderIridis;
 
 public class ModInit {
 	public static String[] sortOrder = new String[] { "ashBlock", "chiseledTenebrae", "empoweredTenebraeCore", "infusedTenebrae", "tenebraeBlock", "tenebraeCore",
@@ -111,6 +114,10 @@ public class ModInit {
 			ModRegistry.addRegister(tenebraeChunk, "tenebraeChunk");
 			ModRegistry.addRegister(voidiumChunk, "voidiumChunk");
 		}
+	}
+	
+	public static class DimensionInit {
+		public static DimensionType IRIDIS = DimensionType.register("Iridis", "_iridis", ConfigurationHandler.getIridisId(), WorldProviderIridis.class, false);
 	}
 	
 	public static class ZylrothTab {
