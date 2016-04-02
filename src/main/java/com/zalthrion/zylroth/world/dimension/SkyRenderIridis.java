@@ -1,5 +1,11 @@
 package com.zalthrion.zylroth.world.dimension;
 
+import org.lwjgl.opengl.GL11;
+
+import com.zalthrion.zylroth.lib.ModArmors;
+import com.zalthrion.zylroth.reference.Reference;
+
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -10,13 +16,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.IRenderHandler;
-
-import org.lwjgl.opengl.GL11;
-
-import com.zalthrion.zylroth.lib.ModArmors;
-import com.zalthrion.zylroth.reference.Reference;
-
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class SkyRenderIridis extends IRenderHandler {
 	private static final ResourceLocation textureRainbow = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/world/rainbow.png");
@@ -91,10 +90,10 @@ public class SkyRenderIridis extends IRenderHandler {
 			tessellator1.setColorRGBA_F(afloat[0], afloat[1], afloat[2], 0.0F);
 			
 			for (int j = 0; j <= b0; ++ j) {
-				f11 = (float) j * (float) Math.PI * 2.0F / (float) b0;
+				f11 = j * (float) Math.PI * 2.0F / b0;
 				float f12 = MathHelper.sin(f11);
 				float f13 = MathHelper.cos(f11);
-				tessellator1.addVertex((double) (f12 * 120.0F), (double) (f13 * 120.0F), (double) (-f13 * 40.0F * afloat[3]));
+				tessellator1.addVertex(f12 * 120.0F, f13 * 120.0F, -f13 * 40.0F * afloat[3]);
 			}
 			
 			tessellator1.draw();
@@ -102,7 +101,18 @@ public class SkyRenderIridis extends IRenderHandler {
 			GL11.glShadeModel(GL11.GL_FLAT);
 		}
 		
-		/* Rainbow (Originall written by Vazkii) */
+		/* The Anti-Render Ontop of Rainbows Initiative */
+		
+		GL11.glPushMatrix();
+		
+		GL11.glEnable(GL11.GL_FOG);
+		GL11.glCallList(glSkyList);
+		GL11.glDisable(GL11.GL_FOG);
+		GL11.glPopMatrix();
+		
+		/* End of the Anti-Render Ontop of Rainbows Initiative */
+		
+		/* Rainbow (Originally written by Vazkii) */
 		
 		boolean renderRainbow = false;
 		if (mc.thePlayer.inventory.armorInventory[3] != null) {
@@ -161,6 +171,7 @@ public class SkyRenderIridis extends IRenderHandler {
 		/* End Rainbow */
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+
 		OpenGlHelper.glBlendFunc(770, 1, 1, 0);
 		GL11.glPushMatrix();
 		f6 = 1.0F - world.getRainStrength(partialTicks);
@@ -174,25 +185,25 @@ public class SkyRenderIridis extends IRenderHandler {
 		f10 = 30.0F;
 		mc.renderEngine.bindTexture(textureSun);
 		tessellator1.startDrawingQuads();
-		tessellator1.addVertexWithUV((double) (-f10), 100.0D, (double) (-f10), 0.0D, 0.0D);
-		tessellator1.addVertexWithUV((double) f10, 100.0D, (double) (-f10), 1.0D, 0.0D);
-		tessellator1.addVertexWithUV((double) f10, 100.0D, (double) f10, 1.0D, 1.0D);
-		tessellator1.addVertexWithUV((double) (-f10), 100.0D, (double) f10, 0.0D, 1.0D);
+		tessellator1.addVertexWithUV((-f10), 100.0D, (-f10), 0.0D, 0.0D);
+		tessellator1.addVertexWithUV(f10, 100.0D, (-f10), 1.0D, 0.0D);
+		tessellator1.addVertexWithUV(f10, 100.0D, f10, 1.0D, 1.0D);
+		tessellator1.addVertexWithUV((-f10), 100.0D, f10, 0.0D, 1.0D);
 		tessellator1.draw();
 		f10 = 20.0F;
 		mc.renderEngine.bindTexture(textureMoonPhases);
 		int k = world.getMoonPhase();
 		int l = k % 4;
 		int i1 = k / 4 % 2;
-		float f14 = (float) (l + 0) / 4.0F;
-		float f15 = (float) (i1 + 0) / 2.0F;
-		float f16 = (float) (l + 1) / 4.0F;
-		float f17 = (float) (i1 + 1) / 2.0F;
+		float f14 = (l + 0) / 4.0F;
+		float f15 = (i1 + 0) / 2.0F;
+		float f16 = (l + 1) / 4.0F;
+		float f17 = (i1 + 1) / 2.0F;
 		tessellator1.startDrawingQuads();
-		tessellator1.addVertexWithUV((double) (-f10), -100.0D, (double) f10, (double) f16, (double) f17);
-		tessellator1.addVertexWithUV((double) f10, -100.0D, (double) f10, (double) f14, (double) f17);
-		tessellator1.addVertexWithUV((double) f10, -100.0D, (double) (-f10), (double) f14, (double) f15);
-		tessellator1.addVertexWithUV((double) (-f10), -100.0D, (double) (-f10), (double) f16, (double) f15);
+		tessellator1.addVertexWithUV((-f10), -100.0D, f10, f16, f17);
+		tessellator1.addVertexWithUV(f10, -100.0D, f10, f14, f17);
+		tessellator1.addVertexWithUV(f10, -100.0D, (-f10), f14, f15);
+		tessellator1.addVertexWithUV((-f10), -100.0D, (-f10), f16, f15);
 		tessellator1.draw();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		float f18 = world.getStarBrightness(partialTicks) * f6;
@@ -220,26 +231,26 @@ public class SkyRenderIridis extends IRenderHandler {
 			f10 = -f8;
 			tessellator1.startDrawingQuads();
 			tessellator1.setColorRGBA_I(0, 255);
-			tessellator1.addVertex((double) (-f8), (double) f9, (double) f8);
-			tessellator1.addVertex((double) f8, (double) f9, (double) f8);
-			tessellator1.addVertex((double) f8, (double) f10, (double) f8);
-			tessellator1.addVertex((double) (-f8), (double) f10, (double) f8);
-			tessellator1.addVertex((double) (-f8), (double) f10, (double) (-f8));
-			tessellator1.addVertex((double) f8, (double) f10, (double) (-f8));
-			tessellator1.addVertex((double) f8, (double) f9, (double) (-f8));
-			tessellator1.addVertex((double) (-f8), (double) f9, (double) (-f8));
-			tessellator1.addVertex((double) f8, (double) f10, (double) (-f8));
-			tessellator1.addVertex((double) f8, (double) f10, (double) f8);
-			tessellator1.addVertex((double) f8, (double) f9, (double) f8);
-			tessellator1.addVertex((double) f8, (double) f9, (double) (-f8));
-			tessellator1.addVertex((double) (-f8), (double) f9, (double) (-f8));
-			tessellator1.addVertex((double) (-f8), (double) f9, (double) f8);
-			tessellator1.addVertex((double) (-f8), (double) f10, (double) f8);
-			tessellator1.addVertex((double) (-f8), (double) f10, (double) (-f8));
-			tessellator1.addVertex((double) (-f8), (double) f10, (double) (-f8));
-			tessellator1.addVertex((double) (-f8), (double) f10, (double) f8);
-			tessellator1.addVertex((double) f8, (double) f10, (double) f8);
-			tessellator1.addVertex((double) f8, (double) f10, (double) (-f8));
+			tessellator1.addVertex((-f8), f9, f8);
+			tessellator1.addVertex(f8, f9, f8);
+			tessellator1.addVertex(f8, f10, f8);
+			tessellator1.addVertex((-f8), f10, f8);
+			tessellator1.addVertex((-f8), f10, (-f8));
+			tessellator1.addVertex(f8, f10, (-f8));
+			tessellator1.addVertex(f8, f9, (-f8));
+			tessellator1.addVertex((-f8), f9, (-f8));
+			tessellator1.addVertex(f8, f10, (-f8));
+			tessellator1.addVertex(f8, f10, f8);
+			tessellator1.addVertex(f8, f9, f8);
+			tessellator1.addVertex(f8, f9, (-f8));
+			tessellator1.addVertex((-f8), f9, (-f8));
+			tessellator1.addVertex((-f8), f9, f8);
+			tessellator1.addVertex((-f8), f10, f8);
+			tessellator1.addVertex((-f8), f10, (-f8));
+			tessellator1.addVertex((-f8), f10, (-f8));
+			tessellator1.addVertex((-f8), f10, f8);
+			tessellator1.addVertex(f8, f10, f8);
+			tessellator1.addVertex(f8, f10, (-f8));
 			tessellator1.draw();
 		}
 		
@@ -247,7 +258,6 @@ public class SkyRenderIridis extends IRenderHandler {
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.0F, -((float) (d0 - 16.0D)), 0.0F);
-		GL11.glCallList(glSkyList);
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(true);
