@@ -5,6 +5,6 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class TenebraeChunk extends ItemBase {
 	public TenebraeChunk() {
 		super();
-		this.setUnlocalizedName("tenebraeChunk");
+		this.setNames("tenebraeChunk");
 	}
 }

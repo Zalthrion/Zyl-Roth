@@ -10,6 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModInit.DimensionInit;
+import com.zalthrion.zylroth.world.generator.ChunkGeneratorGlaciem;
+import com.zalthrion.zylroth.world.render.SkyRenderGlaciem;
 
 // TODO Check all mappings
 public class WorldProviderGlaciem extends WorldProvider {

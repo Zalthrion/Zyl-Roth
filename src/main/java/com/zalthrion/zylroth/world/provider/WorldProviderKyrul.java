@@ -10,6 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModInit.DimensionInit;
+import com.zalthrion.zylroth.world.generator.ChunkGeneratorKyrul;
+import com.zalthrion.zylroth.world.render.SkyRenderKyrul;
 
 // TODO Check all mappings
 public class WorldProviderKyrul extends WorldProvider {

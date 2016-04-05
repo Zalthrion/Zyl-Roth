@@ -17,6 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Lists;
+import com.zalthrion.zylroth.world.genlayer.GenLayerKyrul;
 
 //TODO Check all mappings, reorganize methods, etc.
 public class BiomeProviderKyrul extends BiomeProvider {

@@ -1,20 +1,21 @@
 package com.zalthrion.zylroth.handler;
 
-import java.util.concurrent.Callable;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
 
-public class MountCapabilityHolder {
+public class MountCapability {
 	public interface MountData {
+		void disownMount();
 		String getOwnedMount();
 		int getOwnedMountId();
+		boolean ownsMount();
 		void updateMountData(String ownedMount, int ownedMountId);
 	}
 	
-	public static class MountCapabilityStorage implements Capability.IStorage<MountData> {
+	public static class Storage implements IStorage<MountData> {
 		@Override public void readNBT(Capability<MountData> capability, MountData instance, EnumFacing side, NBTBase nbt) {
 			instance.updateMountData(((NBTTagCompound) nbt).getString("ownedMount"), ((NBTTagCompound) nbt).getInteger("ownedMountId"));
 		}
@@ -27,9 +28,14 @@ public class MountCapabilityHolder {
 		}
 	}
 	
-	public static class MountCapabilityWrapper implements MountData {
-		private String ownedMount;
-		private int ownedMountId;
+	public static class DefaultMountData implements MountData {
+		private String ownedMount = "";
+		private int ownedMountId = -1;
+		
+		@Override public void disownMount() {
+			this.ownedMount = "";
+			this.ownedMountId = -1;
+		}
 		
 		@Override public String getOwnedMount() {
 			return this.ownedMount;
@@ -39,15 +45,13 @@ public class MountCapabilityHolder {
 			return this.ownedMountId;
 		}
 		
+		@Override public boolean ownsMount() {
+			return this.ownedMount.length() > 0;
+		}
+		
 		@Override public void updateMountData(String ownedMount, int ownedMountId) {
 			this.ownedMount = ownedMount;
 			this.ownedMountId = ownedMountId;
-		}
-	}
-	
-	public static class Factory implements Callable<MountData> {
-		@Override public MountData call() throws Exception {
-			return new MountCapabilityWrapper();
 		}
 	}
 }

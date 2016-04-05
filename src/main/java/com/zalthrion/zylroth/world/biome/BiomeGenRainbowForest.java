@@ -11,6 +11,8 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock2;
 import com.zalthrion.zylroth.block.tree.TreeColor;
+import com.zalthrion.zylroth.entity.EntityRainbowPig;
+import com.zalthrion.zylroth.entity.EntityUnicorn;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 
 public class BiomeGenRainbowForest extends BiomeGenBase {

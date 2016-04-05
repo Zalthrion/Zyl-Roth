@@ -1,15 +1,23 @@
 package com.zalthrion.zylroth.block;
 
+import java.util.List;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.base.BlockBase;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class ChiseledTenebrae extends BlockBase {
 	public ChiseledTenebrae() {
@@ -17,9 +25,17 @@ public class ChiseledTenebrae extends BlockBase {
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
+		this.setNames("chiseledTenebrae");
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
-		this.setUnlocalizedName("chiseledTenebrae");
+	}
+	
+	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "head"));
+		} else {
+			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+		}
 	}
 	
 	@Override public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {

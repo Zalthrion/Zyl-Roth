@@ -27,9 +27,15 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.event.terraingen.TerrainGen;
+
+import com.zalthrion.zylroth.lib.ModInit.BiomeInit;
+import com.zalthrion.zylroth.world.mapstructures.IcePillar;
+import com.zalthrion.zylroth.world.mapstructures.MapGenIceCavesGlaciem;
+import com.zalthrion.zylroth.world.mapstructures.MapGenIceRavineGlaciem;
 
 // TODO Rewrite this referring to vanilla overworld ChunkGenerator
 public class ChunkGeneratorGlaciem implements IChunkGenerator {
@@ -85,15 +91,15 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 			}
 		}
 		
-		ContextZylroth ctx = new ContextZylroth(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
-		ctx = TerrainGen.getModdedNoiseGenerators(worldIn, this.rand, ctx);
-		this.noiseGen1 = ctx.getNoiseGenOctave1();
-		this.noiseGen2 = ctx.getNoiseGenOctave2();
-		this.noiseGen3 = ctx.getNoiseGenOctave3();
-		this.noiseGen4 = ctx.getNoiseGenPerlin1();
-		this.noiseGen5 = ctx.getNoiseGenOctave4();
-		this.noiseGen6 = ctx.getNoiseGenOctave5();
-		this.mobSpawnerNoise = ctx.getNoiseGenOctave6();
+		ContextOverworld ctx = new ContextOverworld(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
+		ctx = TerrainGen.getModdedNoiseGenerators(worldObj, this.rand, ctx);
+		this.noiseGen1 = ctx.getLPerlin1();
+		this.noiseGen2 = ctx.getLPerlin2();
+		this.noiseGen3 = ctx.getPerlin();
+		this.noiseGen4 = ctx.getHeight();
+		this.noiseGen5 = ctx.getScale();
+		this.noiseGen6 = ctx.getDepth();
+		this.mobSpawnerNoise = ctx.getForest();
 	}
 	
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer) {
@@ -347,7 +353,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 			}
 		}
 		
-		if (biomegenbase == ModBiomes.frozenWastes) {
+		if (biomegenbase == BiomeInit.frozenWastes) {
 			if (this.rand.nextInt(icePillarChance) == 0) {
 				k1 = this.rand.nextInt(16) + 8;
 				i2 = this.rand.nextInt(16) + 8;

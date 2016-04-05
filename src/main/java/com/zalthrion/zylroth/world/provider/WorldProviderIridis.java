@@ -8,6 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModInit.DimensionInit;
+import com.zalthrion.zylroth.world.generator.ChunkGeneratorIridis;
 import com.zalthrion.zylroth.world.render.SkyRenderIridis;
 
 public class WorldProviderIridis extends WorldProvider {
@@ -16,7 +17,7 @@ public class WorldProviderIridis extends WorldProvider {
 	}
 	
 	@Override public IChunkGenerator createChunkGenerator() {
-		return new ChunkGeneratrIridis(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().getGeneratorOptions());
+		return new ChunkGeneratorIridis(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().getGeneratorOptions());
 	}
 	
 	@Override public DimensionType getDimensionType() {

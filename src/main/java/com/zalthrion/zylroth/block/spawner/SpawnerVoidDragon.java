@@ -14,9 +14,9 @@ import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 public class SpawnerVoidDragon extends BlockContainerBase {
 	public SpawnerVoidDragon() {
 		this.setHardness(3.0F);
+		this.setNames("spawnerVoidDragon");
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName("spawnerVoidDragon");
 	}
 	
 	@Override public TileEntity createNewTileEntity(World worldIn, int meta) {

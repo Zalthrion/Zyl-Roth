@@ -25,6 +25,11 @@ public class BlockBase extends Block {
 		return this;
 	}
 	
+	public void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
+	}
+	
 	/* Overridden */
 	
 	@Override public String getUnlocalizedName() {

@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.block;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.SoundType;
@@ -9,15 +10,20 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
+import org.lwjgl.input.Keyboard;
+
 import com.zalthrion.zylroth.base.BlockBase;
+import com.zalthrion.zylroth.reference.Reference;
 
 public class EmpoweredTenebraeCore extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -28,9 +34,17 @@ public class EmpoweredTenebraeCore extends BlockBase {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
+		this.setNames("empoweredTenebraeCore");
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
-		this.setUnlocalizedName("empoweredTenebraeCore");
+	}
+	
+	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "core"));
+		} else {
+			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+		}
 	}
 	
 	@Override protected BlockStateContainer createBlockState() {

@@ -18,6 +18,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Lists;
+import com.zalthrion.zylroth.world.genlayer.GenLayerIridis;
+import com.zalthrion.zylroth.world.genlayer.GenLayerIridis;
 
 //TODO Check all mappings, reorganize methods, etc.
 public class BiomeProviderIridis extends BiomeProvider {

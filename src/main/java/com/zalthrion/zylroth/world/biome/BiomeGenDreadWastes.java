@@ -3,6 +3,9 @@ package com.zalthrion.zylroth.world.biome;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 
+import com.zalthrion.zylroth.entity.EntityUndeadMinion;
+import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
+
 public class BiomeGenDreadWastes extends BiomeGenBase {
 	public BiomeGenDreadWastes(BiomeProperties properties) {
 		super(properties);

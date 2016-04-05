@@ -23,6 +23,11 @@ public class ItemBase extends Item {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 	}
 	
+	public void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
+	}
+	
 	/* Overridden */
 	
 	@Override public String getUnlocalizedName() {

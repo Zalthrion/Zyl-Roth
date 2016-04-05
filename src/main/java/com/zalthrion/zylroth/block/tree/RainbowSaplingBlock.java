@@ -36,6 +36,7 @@ public class RainbowSaplingBlock extends BlockBush implements IGrowable {
 	public RainbowSaplingBlock() {
 		super();
 		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setRegistryName("rainbowSapling");
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName("rainbowSapling");
 	}

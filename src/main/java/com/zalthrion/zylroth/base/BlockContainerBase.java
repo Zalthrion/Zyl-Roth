@@ -55,6 +55,11 @@ public class BlockContainerBase extends BlockContainer {
 		return this;
 	}
 	
+	public void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
+	}
+	
 	public BlockContainerBase setParticleBlockState(IBlockState state) {
 		this.particleBlockState = state;
 		return this;

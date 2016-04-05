@@ -7,6 +7,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
+import com.zalthrion.zylroth.entity.EntityBadger;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 
 public class BiomeGenAutumnForest extends BiomeGenBase {

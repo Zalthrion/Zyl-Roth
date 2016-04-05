@@ -12,6 +12,7 @@ public class IridisSaplingItemBlock extends ItemBlock {
 	public IridisSaplingItemBlock(Block block) {
 		super(block);
 		this.setHasSubtypes(true);
+		this.setRegistryName(block.getRegistryName());
 	}
 	
 	/* Custom Methods */

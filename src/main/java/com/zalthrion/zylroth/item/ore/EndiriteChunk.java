@@ -5,6 +5,6 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class EndiriteChunk extends ItemBase {
 	public EndiriteChunk() {
 		super();
-		this.setUnlocalizedName("endiriteChunk");
+		this.setNames("endiriteChunk");
 	}
 }

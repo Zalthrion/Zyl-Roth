@@ -15,6 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
+import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class SkyRenderIridis extends IRenderHandler {
@@ -87,7 +88,7 @@ public class SkyRenderIridis extends IRenderHandler {
 		
 		boolean renderRainbow = false;
 		if (mc.thePlayer.inventory.armorInventory[3] != null) {
-			if (mc.thePlayer.inventory.armorInventory[3].getItem() == ModArmors.rainbowGlasses) {
+			if (mc.thePlayer.inventory.armorInventory[3].getItem() == ItemInit.rainbowGlasses) {
 				renderRainbow = true;
 			}
 		}

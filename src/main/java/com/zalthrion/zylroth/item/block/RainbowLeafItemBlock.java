@@ -12,6 +12,7 @@ public class RainbowLeafItemBlock extends ItemBlock {
 	public RainbowLeafItemBlock(Block block) {
 		super(block);
 		this.setHasSubtypes(true);
+		this.setRegistryName(block.getRegistryName());
 	}
 	
 	/* Custom Methods */

@@ -19,9 +19,9 @@ public class VoidiumOre extends BlockBase {
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 3);
+		this.setNames("voidiumOre");
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName("voidiumOre");
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {

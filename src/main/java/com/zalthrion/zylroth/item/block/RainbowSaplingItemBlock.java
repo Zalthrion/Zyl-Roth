@@ -12,6 +12,7 @@ public class RainbowSaplingItemBlock extends ItemBlock {
 	public RainbowSaplingItemBlock(Block block) {
 		super(block);
 		this.setHasSubtypes(true);
+		this.setRegistryName(block.getRegistryName());
 	}
 	
 	/* Custom Methods */

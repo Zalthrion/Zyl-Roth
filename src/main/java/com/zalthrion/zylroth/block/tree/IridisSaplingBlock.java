@@ -31,6 +31,7 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 	public IridisSaplingBlock() {
 		super();
 		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setRegistryName("iridisSapling");
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName("iridisSapling");
 	}

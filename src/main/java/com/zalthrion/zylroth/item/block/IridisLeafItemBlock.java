@@ -12,6 +12,7 @@ public class IridisLeafItemBlock extends ItemBlock {
 	public IridisLeafItemBlock(Block block) {
 		super(block);
 		this.setHasSubtypes(true);
+		this.setRegistryName(block.getRegistryName());
 	}
 	
 	/* Custom Methods */

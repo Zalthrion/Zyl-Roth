@@ -33,6 +33,7 @@ import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -101,15 +102,15 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 			this.fluidBlock = this.settings.useLavaOceans ? Blocks.lava : Blocks.water;
 		}
 		
-		ContextZylroth ctx = new ContextZylroth(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
+		ContextOverworld ctx = new ContextOverworld(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
 		ctx = TerrainGen.getModdedNoiseGenerators(world, this.rand, ctx);
-		this.noiseGen1 = ctx.getNoiseGenOctave1();
-		this.noiseGen2 = ctx.getNoiseGenOctave2();
-		this.noiseGen3 = ctx.getNoiseGenOctave3();
-		this.noiseGen4 = ctx.getNoiseGenPerlin1();
-		this.noiseGen5 = ctx.getNoiseGenOctave4();
-		this.noiseGen6 = ctx.getNoiseGenOctave5();
-		this.mobSpawnerNoise = ctx.getNoiseGenOctave6();
+		this.noiseGen1 = ctx.getLPerlin1();
+		this.noiseGen2 = ctx.getLPerlin2();
+		this.noiseGen3 = ctx.getPerlin();
+		this.noiseGen4 = ctx.getHeight();
+		this.noiseGen5 = ctx.getScale();
+		this.noiseGen6 = ctx.getDepth();
+		this.mobSpawnerNoise = ctx.getForest();
 	}
 	
 	public void setBlocksInChunk(int chunkX, int chunkZ, ChunkPrimer primer) {

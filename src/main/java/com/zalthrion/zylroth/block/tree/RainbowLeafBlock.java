@@ -39,6 +39,7 @@ public class RainbowLeafBlock extends BlockLeaves {
 		super();
 		this.setCreativeTab(ZylrothTab.zylRoth);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, TreeColor.RED).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		this.setRegistryName("rainbowLeafBlock");
 		this.setUnlocalizedName("rainbowLeafBlock");
 	}
 	

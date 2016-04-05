@@ -30,6 +30,7 @@ public class IridisLeafBlock extends BlockLeaves {
 		super();
 		this.setCreativeTab(ZylrothTab.zylRoth);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LEAF_TYPE, IridisTreeType.AUTUMN).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		this.setRegistryName("iridisLeafBlock");
 		this.setUnlocalizedName("iridisLeafBlock");
 	}
 	

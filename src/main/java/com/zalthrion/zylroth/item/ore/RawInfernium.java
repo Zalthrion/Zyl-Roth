@@ -5,6 +5,6 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class RawInfernium extends ItemBase {
 	public RawInfernium() {
 		super();
-		this.setUnlocalizedName("rawInfernium");
+		this.setNames("rawInfernium");
 	}
 }

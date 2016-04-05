@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -44,10 +45,10 @@ public class InfuserMachine extends BlockContainerBase {
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
+		this.setNames(isActive ? (type.isNormal() ? "infuserMachineActive" : "oreInfuserMachineActive") : (type.isNormal() ? "infuserMachine" : "oreInfuserMachine"));
 		this.setParticleBlockState(type.isNormal() ? BlockInit.tenebraeCore.getDefaultState() : Blocks.quartz_block.getDefaultState());
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
-		this.setUnlocalizedName(isActive ? (type.isNormal() ? "infuserMachineActive" : "oreInfuserMachineActive") : (type.isNormal() ? "infuserMachine" : "oreInfuserMachine"));
 		
 		this.type = type;
 	}
@@ -150,7 +151,7 @@ public class InfuserMachine extends BlockContainerBase {
 		if (!stack.hasDisplayName()) return;
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te instanceof TileEntityInfuser) {
-			// ((TileEntityInfuser) te).setCustomInventoryName(stack.getDisplayName()); // TODO Add this
+			((TileEntityInfuser) te).setCustomInventoryName(stack.getDisplayName());
 		}
 	}
 	
@@ -159,7 +160,7 @@ public class InfuserMachine extends BlockContainerBase {
 		TileEntity te = worldIn.getTileEntity(pos);
 		TileEntityInfuser tei = (TileEntityInfuser) te;
 		
-/*		if (tei.isBurning()) {
+		if (tei.isBurning()) {
 			int x = pos.getX();
 			int y = pos.getY();
 			int z = pos.getZ();
@@ -177,7 +178,7 @@ public class InfuserMachine extends BlockContainerBase {
 					}
 				}
 			}
-		}*/ // TODO Add this
+		}
 	}
 	
 	@Override public IBlockState getStateFromMeta(int meta) {

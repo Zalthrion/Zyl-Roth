@@ -19,10 +19,10 @@ public class GoldBag extends BlockContainerBase {
 		this.setCreativeTab();
 		this.setHardness(1.0F);
 		this.setHarvestLevel("pickaxe", 2);
+		this.setNames("goldBag");
 		this.setParticleBlockState(Blocks.gold_block.getDefaultState());
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
-		this.setUnlocalizedName("goldBag");
 	}
 	
 	@Override public TileEntity createNewTileEntity(World worldIn, int meta) {

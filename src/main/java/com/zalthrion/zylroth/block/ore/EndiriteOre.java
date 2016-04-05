@@ -20,9 +20,9 @@ public class EndiriteOre extends BlockBase {
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
+		this.setNames("endiriteOre");
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName("endiriteOre");
 	}
 	
 	@Override public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {

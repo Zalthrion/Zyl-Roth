@@ -13,9 +13,13 @@ import net.minecraft.world.EnumDifficulty;
 public class TileEntitySpawnerVoidDragon extends TileEntity implements ITickable {
 	private int activationRange = 12;
 	
+	/* Custom Methods */
+	
 	public boolean isActivated() {
 		return this.worldObj.isAnyPlayerWithinRangeAt(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, this.activationRange);
 	}
+	
+	/* Overridden */
 	
 	@Override public Packet<INetHandlerPlayClient> getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
