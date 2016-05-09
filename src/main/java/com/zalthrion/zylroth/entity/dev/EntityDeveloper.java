@@ -15,7 +15,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-// TODO Check all mappings
 public class EntityDeveloper extends EntityAnimal {
 	public EntityDeveloper(World worldIn) {
 		super(worldIn);
@@ -27,20 +26,20 @@ public class EntityDeveloper extends EntityAnimal {
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 	
-	@Override public boolean attackEntityAsMob(Entity p_70652_1_) {
+	@Override public boolean attackEntityAsMob(Entity entityIn) {
 		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 		
-		if (p_70652_1_ instanceof EntityLivingBase) {
-			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) p_70652_1_).getCreatureAttribute());
+		if (entityIn instanceof EntityLivingBase) {
+			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) entityIn).getCreatureAttribute());
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 		
-		boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
 		
 		if (flag) {
 			if (i > 0) {
-				p_70652_1_.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
+				entityIn.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
 				this.motionX *= 0.6D;
 				this.motionZ *= 0.6D;
 			}
@@ -48,14 +47,14 @@ public class EntityDeveloper extends EntityAnimal {
 			int j = EnchantmentHelper.getFireAspectModifier(this);
 			
 			if (j > 0) {
-				p_70652_1_.setFire(j * 4);
+				entityIn.setFire(j * 4);
 			}
 			
-			if (p_70652_1_ instanceof EntityLivingBase) {
-				EnchantmentHelper.applyThornEnchantments((EntityLivingBase) p_70652_1_, this);
+			if (entityIn instanceof EntityLivingBase) {
+				EnchantmentHelper.applyThornEnchantments((EntityLivingBase) entityIn, this);
 			}
 			
-			EnchantmentHelper.applyArthropodEnchantments(this, p_70652_1_);
+			EnchantmentHelper.applyArthropodEnchantments(this, entityIn);
 		}
 		
 		return flag;
@@ -84,7 +83,7 @@ public class EntityDeveloper extends EntityAnimal {
 		return true;
 	}
 	
-	@Override public EntityAgeable createChild(EntityAgeable p_90011_1_) {
+	@Override public EntityAgeable createChild(EntityAgeable ageable) {
 		return null;
 	}
 	

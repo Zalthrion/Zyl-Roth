@@ -36,8 +36,9 @@ import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
-//TODO Check all mappings, reorganize methods, etc.
 public class EntityVoidLordBoss extends EntityMob {
+	
+	/* Constructors */
 	
 	public EntityVoidLordBoss(World world) {
 		super(world);
@@ -55,16 +56,9 @@ public class EntityVoidLordBoss extends EntityMob {
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 	}
 	
-	@Override protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemInit.voidLordHelmet));
-		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemInit.voidLordChestplate));
-		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemInit.voidLordLeggings));
-		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemInit.voidLordBoots));
-		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ItemInit.tenebraeSword));
-	}
+	/* Overridden */
 	
-	@Override
-	protected void applyEntityAttributes() {
+	@Override protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(450.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
@@ -73,74 +67,88 @@ public class EntityVoidLordBoss extends EntityMob {
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(40.0D);
 	}
 	
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
+	@Override public boolean attackEntityAsMob(Entity entityIn) {
+		boolean kyrulMinions = ((entityIn instanceof EntityVoidLordBoss) || (entityIn instanceof EntityUndeadWarrior) || (entityIn instanceof EntityUndeadMinion) || (entityIn instanceof EntityVoidDragon) || (entityIn instanceof EntitySkeletalHorse));
 		
-		boolean KyrulMinions = ((entity instanceof EntityVoidLordBoss) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon) || (entity instanceof EntitySkeletalHorse));
-		
-		if (!KyrulMinions) {
+		if (!kyrulMinions) {
 			this.worldObj.setEntityState(this, (byte) 4);
 			
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+			boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
 			
-			if (flag) {
-				entity.motionY += 0.1D;
-			}
+			if (flag) entityIn.motionY += 0.1D;
 			
-			if (entity instanceof EntityPlayer) {
-				
-				EntityPlayer player = (EntityPlayer) entity;
+			if (entityIn instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) entityIn;
 				
 				boolean hasArmor = true;
 				for (int i = 0; i < 4; i ++) {
 					if (player.inventory.armorInventory[i] != null) hasArmor = false;
 				}
 				
-				if (!player.worldObj.isRemote && !hasArmor) {
-					this.playSound(SoundEvents.entity_blaze_hurt, 0.5F, 1.0F);
-				}
+				if (!player.worldObj.isRemote && !hasArmor) this.playSound(SoundEvents.entity_blaze_hurt, 0.5F, 1.0F);
 			}
 			
 			int i = this.worldObj.getDifficulty().getDifficultyId();
-			entity.setFire(10 * i);
-			
+			entityIn.setFire(10 * i);
 		}
 		
-		return KyrulMinions;
+		return kyrulMinions;
+	}
+	
+	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> cls) {
+		return EntityVoidLordBoss.class != cls && EntityUndeadWarrior.class != cls && EntityUndeadMinion.class != cls && EntityVoidDragon.class != cls && EntitySkeletalHorse.class != cls;
+	}
+	
+	@Override protected boolean canDespawn() {
+		return false;
+	}
+	
+	@Override protected void collideWithEntity(Entity entityIn) {
+		boolean kyrulMinions = ((entityIn instanceof EntityVoidLordBoss) || (entityIn instanceof EntityUndeadWarrior) || (entityIn instanceof EntityUndeadMinion) || (entityIn instanceof EntityVoidDragon) || (entityIn instanceof EntitySkeletalHorse));
+		if (entityIn instanceof IMob && this.getRNG().nextInt(20) == 0 && !(kyrulMinions)) this.setAttackTarget((EntityLivingBase) entityIn);
+		super.collideWithEntity(entityIn);
+	}
+	
+	@Override protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
+		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + lootingModifier * 2);
+		for (int def = 0; def < amount; ++ def) this.entityDropItem(new ItemStack(ItemInit.darkShard, 1, 6), 0F);
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
 		return SoundEvents.entity_blaze_ambient;
 	}
 	
-	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_wither_hurt;
+	@Override public EnumCreatureAttribute getCreatureAttribute() {
+		return EnumCreatureAttribute.UNDEAD;
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
 		return SoundEvents.entity_wither_death;
 	}
 	
-	@Override
-	protected void collideWithEntity(Entity entity) {
-		boolean KyrulMinions = ((entity instanceof EntityVoidLordBoss) || (entity instanceof EntityUndeadWarrior) || (entity instanceof EntityUndeadMinion) || (entity instanceof EntityVoidDragon) || (entity instanceof EntitySkeletalHorse));
-		
-		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(KyrulMinions)) {
-			this.setAttackTarget((EntityLivingBase) entity);
-		}
-		
-		super.collideWithEntity(entity);
+	@Override protected SoundEvent getHurtSound() {
+		return SoundEvents.entity_wither_hurt;
 	}
 	
-	@Override
-	public void onLivingUpdate() {
+	@Override public void onKillEntity(EntityLivingBase entityLivingIn) {
+		super.onKillEntity(entityLivingIn);
 		
-		for (int i = 0; i < 2; ++ i) {
-			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
-		}
-		
-		for (int l = 0; l < 4; ++ l) {
+		if ((this.worldObj.getDifficulty() == EnumDifficulty.NORMAL || this.worldObj.getDifficulty() == EnumDifficulty.HARD) && entityLivingIn instanceof EntityVillager) {
+			if (this.worldObj.getDifficulty() != EnumDifficulty.HARD && this.rand.nextBoolean()) return; 
 			
+			EntityUndeadMinion entityundeadminion = new EntityUndeadMinion(this.worldObj);
+			entityundeadminion.copyLocationAndAnglesFrom(entityLivingIn);
+			this.worldObj.removeEntity(entityLivingIn);
+			entityundeadminion.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), (IEntityLivingData) null);
+			
+			this.worldObj.spawnEntityInWorld(entityundeadminion);
+			this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this.posX, this.posY, this.posZ), 0);
+		}
+	}
+	
+	@Override public void onLivingUpdate() {
+		for (int i = 0; i < 2; ++ i) this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+		for (int l = 0; l < 4; ++ l) {
 			int x = MathHelper.floor_double(this.posX);
 			int y = MathHelper.floor_double(this.posY);
 			int z = MathHelper.floor_double(this.posZ);
@@ -150,50 +158,17 @@ public class EntityVoidLordBoss extends EntityMob {
 			z = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 			BlockPos pos = new BlockPos(x, y, z);
 			
-			if (this.worldObj.getBlockState(pos).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(this.worldObj, pos)) {
-				this.worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
-			}
+			if (this.worldObj.getBlockState(pos).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(this.worldObj, pos)) this.worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
 		}
 		
 		super.onLivingUpdate();
 	}
 	
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
-		return EnumCreatureAttribute.UNDEAD;
-	}
-	
-	@Override
-	public void onKillEntity(EntityLivingBase p_70074_1_) {
-		super.onKillEntity(p_70074_1_);
-		
-		if ((this.worldObj.getDifficulty() == EnumDifficulty.NORMAL || this.worldObj.getDifficulty() == EnumDifficulty.HARD) && p_70074_1_ instanceof EntityVillager) {
-			if (this.worldObj.getDifficulty() != EnumDifficulty.HARD && this.rand.nextBoolean()) { return; }
-			
-			EntityUndeadMinion entityundeadminion = new EntityUndeadMinion(this.worldObj);
-			entityundeadminion.copyLocationAndAnglesFrom(p_70074_1_);
-			this.worldObj.removeEntity(p_70074_1_);
-			entityundeadminion.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), (IEntityLivingData) null);
-			
-			this.worldObj.spawnEntityInWorld(entityundeadminion);
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this.posX, this.posY, this.posZ), 0);
-		}
-	}
-	
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + par2 * 2);
-		
-		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ItemInit.darkShard, 1, 6), 0f);
-		}
-	}
-	
-	@Override public boolean canAttackClass(Class<? extends EntityLivingBase> par1Class) {
-		return EntityVoidLordBoss.class != par1Class && EntityUndeadWarrior.class != par1Class && EntityUndeadMinion.class != par1Class && EntityVoidDragon.class != par1Class && EntitySkeletalHorse.class != par1Class;
-	}
-	
-	@Override protected boolean canDespawn() {
-		return false;
+	@Override protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemInit.voidLordHelmet));
+		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemInit.voidLordChestplate));
+		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemInit.voidLordLeggings));
+		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemInit.voidLordBoots));
+		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ItemInit.tenebraeSword));
 	}
 }

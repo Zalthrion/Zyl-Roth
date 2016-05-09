@@ -13,16 +13,19 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-// TODO Check all mappings, reorganize method order, etc.
 public class SkyRenderKyrul extends IRenderHandler {
 	private int starGLCallList;
 	private int glSkyList;
 	private int glSkyList2;
 	
+	/* Constructors */
+	
 	public SkyRenderKyrul() {
 		RenderGlobal renderGlobal = Minecraft.getMinecraft().renderGlobal;
 		this.glSkyList2 = (this.glSkyList = (this.starGLCallList = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, renderGlobal, "starGLCallList", "field_72772_v")) + 1) + 1;
 	}
+	
+	/* Overridden */
 	
 	@Override public void render(float partialTicks, WorldClient world, Minecraft mc) {
 		GlStateManager.disableTexture2D();
@@ -49,8 +52,6 @@ public class SkyRenderKyrul extends IRenderHandler {
 		float f10;
 		
 		GlStateManager.enableTexture2D();
-		// OpenGlHelper.glBlendFunc(770, 1, 1, 0); //TODO See if this is important to rendering the sky, as currently it causes a transparency issue on items and entities
-		
 		GlStateManager.pushMatrix();
 		f6 = 1.0F - world.getRainStrength(partialTicks);
 		f7 = 0.0F;

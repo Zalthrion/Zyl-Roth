@@ -13,16 +13,19 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-// TODO Check all mappings, reorganize method order, etc.
 public class SkyRenderGlaciem extends IRenderHandler {
 	private int starGLCallList;
 	private int glSkyList;
 	private int glSkyList2;
 	
+	/* Constructors */
+	
 	public SkyRenderGlaciem() {
 		RenderGlobal renderGlobal = Minecraft.getMinecraft().renderGlobal;
 		this.glSkyList2 = (this.glSkyList = (this.starGLCallList = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, renderGlobal, "starGLCallList", "field_72772_v")) + 1) + 1;
 	}
+	
+	/* Overridden */
 	
 	@Override public void render(float partialTicks, WorldClient world, Minecraft mc) {
 		GlStateManager.disableTexture2D();

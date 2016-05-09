@@ -23,6 +23,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.zalthrion.zylroth.Zylroth;
 import com.zalthrion.zylroth.block.AshBlock;
@@ -161,6 +162,12 @@ public class ModInit {
 		public static Block rainbowLeafBlock2 = new RainbowLeafBlock2();
 		public static Block rainbowSaplingBlock = new RainbowSaplingBlock();
 		
+		public static ItemBlock iridisLeafBlockIB = new IridisLeafItemBlock(BlockInit.iridisLeafBlock);
+		public static ItemBlock iridisSaplingBlockIB = new IridisSaplingItemBlock(BlockInit.iridisSaplingBlock);
+		public static ItemBlock rainbowLeafBlockIB = new RainbowLeafItemBlock(BlockInit.rainbowLeafBlock);
+		public static ItemBlock rainbowLeafBlock2IB = new RainbowLeafItemBlock(BlockInit.rainbowLeafBlock2); // TODO Make a new ItemBlock?
+		public static ItemBlock rainbowSaplingBlockIB = new RainbowSaplingItemBlock(BlockInit.rainbowSaplingBlock);
+		
 		public static void preInit() {
 			GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 			GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
@@ -185,11 +192,11 @@ public class ModInit {
 			ModRegistry.addRegister(oreInfuserIdle, "oreInfuserIdle");
 			ModRegistry.addRegister(oreInfuser, "oreInfuser");
 			
-			ModRegistry.addRegister(iridisLeafBlock, "iridisLeafBlock");
-			ModRegistry.addRegister(iridisSaplingBlock, "iridisSaplingBlock");
-			ModRegistry.addRegister(rainbowLeafBlock, "rainbowLeafBlock");
-			ModRegistry.addRegister(rainbowLeafBlock2, "rainbowLeafBlock2");
-			ModRegistry.addRegister(rainbowSaplingBlock, "rainbowSaplingBlock");
+			ModRegistry.addRegister(iridisLeafBlock, iridisLeafBlockIB, "iridisLeafBlock");
+			ModRegistry.addRegister(iridisSaplingBlock, iridisSaplingBlockIB, "iridisSaplingBlock");
+			ModRegistry.addRegister(rainbowLeafBlock, rainbowLeafBlockIB, "rainbowLeafBlock");
+			ModRegistry.addRegister(rainbowLeafBlock2, rainbowLeafBlock2IB, "rainbowLeafBlock2");
+			ModRegistry.addRegister(rainbowSaplingBlock, rainbowSaplingBlockIB, "rainbowSaplingBlock");
 		}
 	}
 	
@@ -324,12 +331,6 @@ public class ModInit {
 		public static Item creativeHoe = new CreativeHoe(creativeTools);
 		public static Item tenebraeLeafCutter = new TenebraeLeafCutter();
 		public static Item woodenCrossbow = new WoodenCrossbow(2500);
-		/* Item Blocks */
-		public static ItemBlock iridisLeafBlockIB = new IridisLeafItemBlock(BlockInit.iridisLeafBlock);
-		public static ItemBlock iridisSaplingBlockIB = new IridisSaplingItemBlock(BlockInit.iridisSaplingBlock);
-		public static ItemBlock rainbowLeafBlockIB = new RainbowLeafItemBlock(BlockInit.rainbowLeafBlock);
-		public static ItemBlock rainbowLeafBlock2IB = new RainbowLeafItemBlock(BlockInit.rainbowLeafBlock2); // TODO Make a new ItemBlock?
-		public static ItemBlock rainbowSaplingBlockIB = new RainbowSaplingItemBlock(BlockInit.rainbowSaplingBlock);
 		
 		public static void preInit() {
 			/* Armors */
@@ -384,21 +385,15 @@ public class ModInit {
 			ModRegistry.addRegister(creativeAxe, "creativeAxe");
 			ModRegistry.addRegister(creativeHoe, "creativeHoe");
 			ModRegistry.addRegister(woodenCrossbow, "woodenCrossbow");
-			/* Item Blocks */
-			ModRegistry.addRegister(iridisLeafBlockIB, "iridisLeafBlockIB");
-			ModRegistry.addRegister(iridisSaplingBlockIB, "iridisSaplingBlockIB");
-			ModRegistry.addRegister(rainbowLeafBlockIB, "rainbowLeafBlockIB");
-			ModRegistry.addRegister(rainbowLeafBlock2IB, "rainbowLeafBlock2IB");
-			ModRegistry.addRegister(rainbowSaplingBlockIB, "rainbowSaplingBlockIB");
 		}
 	}
 	
 	public static class OreDictionaryInit {
 		public static void init() {
-/*			OreDictionary.registerOre("oreTenebrae", BlockInit.tenebraeOre);
+			OreDictionary.registerOre("oreTenebrae", BlockInit.tenebraeOre);
 			OreDictionary.registerOre("ingotTenebrae", ItemInit.tenebraeIngot);
 			OreDictionary.registerOre("blockTenebrae", BlockInit.tenebraeBlock);
-			OreDictionary.registerOre("oreVoidium", BlockInit.voidiumOre);*/ // TODO Find out what makes this invalid
+			OreDictionary.registerOre("oreVoidium", BlockInit.voidiumOre);
 		}
 	}
 	

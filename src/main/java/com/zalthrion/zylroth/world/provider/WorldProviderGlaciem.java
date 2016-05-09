@@ -13,13 +13,12 @@ import com.zalthrion.zylroth.lib.ModInit.DimensionInit;
 import com.zalthrion.zylroth.world.generator.ChunkGeneratorGlaciem;
 import com.zalthrion.zylroth.world.render.SkyRenderGlaciem;
 
-// TODO Check all mappings
 public class WorldProviderGlaciem extends WorldProvider {
-	@Override @SideOnly(Side.CLIENT) public float[] calcSunriseSunsetColors(float a, float b) {
+	@Override @SideOnly(Side.CLIENT) public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
 		return null;
 	}
 	
-	@Override public float calculateCelestialAngle(long a, float b) {
+	@Override public float calculateCelestialAngle(long worldTime, float partialTicks) {
 		return 0.0F;
 	}
 	
