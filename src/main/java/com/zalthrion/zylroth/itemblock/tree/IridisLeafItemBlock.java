@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class IridisLeafItemBlock extends ItemBlock {
 	
-	private final static String[] subNames = {"autumnTreeLeaves"};
+	private final static String[] subNames = {"autumnTreeLeaves", "sakuraTreeLeaves"};
 	
 	public IridisLeafItemBlock(Block id) {
 		super(id);

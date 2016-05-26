@@ -171,7 +171,6 @@ public class VoidiriteSword extends ItemSword implements ZylrothTool {
 			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		} else {
 			list.addAll(TooltipHelper.addAll("voidirite_sword_lore"));
-			list.addAll(TooltipHelper.addAll("voidirite_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				list.addAll(TooltipHelper.addAll("voidirite_sword_stats"));
 			} else {

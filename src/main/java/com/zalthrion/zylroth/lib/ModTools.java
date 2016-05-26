@@ -7,13 +7,15 @@ import com.zalthrion.zylroth.item.tools.CreativeShovel;
 import com.zalthrion.zylroth.item.tools.CreativeSword;
 import com.zalthrion.zylroth.item.tools.TenebraeAxe;
 import com.zalthrion.zylroth.item.tools.TenebraeHoe;
-import com.zalthrion.zylroth.item.tools.TenebraeLeafCutter;
 import com.zalthrion.zylroth.item.tools.TenebraePickaxe;
 import com.zalthrion.zylroth.item.tools.TenebraeShovel;
 import com.zalthrion.zylroth.item.tools.TenebraeSword;
 import com.zalthrion.zylroth.item.tools.VoidiriteSword;
 import com.zalthrion.zylroth.item.tools.VoidiumSword;
-import com.zalthrion.zylroth.item.tools.WoodenCrossbow;
+import com.zalthrion.zylroth.item.tools.others.RepulsorCannon;
+import com.zalthrion.zylroth.item.tools.others.TenebraeLeafCutter;
+import com.zalthrion.zylroth.item.tools.others.WoodenCrossbow;
+import com.zalthrion.zylroth.item.tools.shields.VoidiriteShield;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -44,6 +46,8 @@ public final class ModTools {
 	/* Others */
 	public static Item tenebraeLeafCutter = new TenebraeLeafCutter();
 	public static Item woodenCrossbow = new WoodenCrossbow(2500);
+	public static Item repulsorCannon = new RepulsorCannon(5500);
+	public static Item voidiriteShield = new VoidiriteShield();
 	
 	public static void init() {
 		TenebraeTools();
@@ -65,6 +69,7 @@ public final class ModTools {
 		
 		/* Others */
 		ModRegistry.addRegister(20, woodenCrossbow, "woodenCrossbow");
+		ModRegistry.addRegister(71, repulsorCannon, "repulsorCannon");
 	}
 	
 	public static void VoidiumTools() {
@@ -79,6 +84,8 @@ public final class ModTools {
 //		ToolMaterial VoidiriteTools = EnumHelper.addToolMaterial("VoidiriteTools", 3, 5250, 10, 8.0F, 17);
 		
 		ModRegistry.addRegister(69, voidiriteSword = new VoidiriteSword(VoidiriteDamageTools), "voidiriteSword");
+		
+		ModRegistry.addRegister(78, voidiriteShield, "voidiriteShield");
 	}
 	
 	public static void CreativeTools() {

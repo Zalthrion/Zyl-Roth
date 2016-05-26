@@ -1,5 +1,8 @@
 package com.zalthrion.zylroth.entity.mount;
 
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.reference.Reference;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,9 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.reference.Reference;
 
 public class MountWarTortoise extends MountBase {
 	
@@ -65,5 +65,10 @@ public class MountWarTortoise extends MountBase {
 	@Override
 	protected void playStepSound(int x, int y, int z, Block blockIn) {
 		this.playSound("mob.pig.step", 0.15F, 1.0F);
+	}
+	
+	@Override
+	public double getMountedYOffset() {
+		return 1.45F;
 	}
 }

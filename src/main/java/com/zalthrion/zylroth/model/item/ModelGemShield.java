@@ -1,0 +1,222 @@
+package com.zalthrion.zylroth.model.item;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+
+/**
+ * Shield3 - Zalthrion
+ * Created using Tabula 4.1.1
+ */
+public class ModelGemShield extends ModelBase {
+    public ModelRenderer ShieldBottomRight;
+    public ModelRenderer ShieldBottomLeft;
+    public ModelRenderer ShieldCenter;
+    public ModelRenderer ShieldCenterRight;
+    public ModelRenderer ShieldCenterLeft;
+    public ModelRenderer ShieldTopRight;
+    public ModelRenderer ShieldTopLeft;
+    public ModelRenderer ShieldTopLeftCorner;
+    public ModelRenderer ShieldTopCornerLeft;
+    public ModelRenderer ShieldTopRightCorner;
+    public ModelRenderer ShieldTopCornerRight;
+    public ModelRenderer ShieldTopCenter;
+    public ModelRenderer BorderBottomLeftCorner;
+    public ModelRenderer BorderBottomCenter;
+    public ModelRenderer BorderBottomRightCorner;
+    public ModelRenderer BorderLeftSide;
+    public ModelRenderer BorderRightSide;
+    public ModelRenderer BorderTopLeftCorner;
+    public ModelRenderer BorderTopRightCorner;
+    public ModelRenderer BorderTopCenter;
+    public ModelRenderer BorderTopLeftConnection;
+    public ModelRenderer HolderBase;
+    public ModelRenderer MainHandler;
+    public ModelRenderer HandlerRightSide;
+    public ModelRenderer HandleLeftSide;
+    public ModelRenderer GemRightCenter;
+    public ModelRenderer GemBottomRightCorner;
+    public ModelRenderer GemBottomLeftCorner;
+    public ModelRenderer GemBottom;
+    public ModelRenderer GemLeftSide;
+    public ModelRenderer GemTopRightCorner;
+    public ModelRenderer GemTopLeftCorner;
+    public ModelRenderer GemTop;
+    public ModelRenderer GemLeftCenter;
+    public ModelRenderer GemTopLeftConnector;
+    public ModelRenderer GemRightSide;
+
+    public ModelGemShield() {
+        this.textureWidth = 128;
+        this.textureHeight = 64;
+        this.ShieldCenterLeft = new ModelRenderer(this, 1, 16);
+        this.ShieldCenterLeft.setRotationPoint(1.55F, 11.7F, -1.1F);
+        this.ShieldCenterLeft.addBox(0.0F, 0.0F, 0.0F, 5, 7, 2, 0.0F);
+        this.BorderBottomCenter = new ModelRenderer(this, 5, 56);
+        this.BorderBottomCenter.setRotationPoint(-2.0F, 22.9F, -1.25F);
+        this.BorderBottomCenter.addBox(0.0F, 0.0F, 0.0F, 4, 1, 2, 0.0F);
+        this.GemBottomRightCorner = new ModelRenderer(this, 25, 55);
+        this.GemBottomRightCorner.setRotationPoint(-1.57F, 12.0F, -1.6F);
+        this.GemBottomRightCorner.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, -0.2F);
+        this.setRotateAngle(GemBottomRightCorner, 0.0F, 0.0F, -0.9302604913129776F);
+        this.BorderTopCenter = new ModelRenderer(this, 14, 4);
+        this.BorderTopCenter.setRotationPoint(-4.8F, 6.4F, -1.25F);
+        this.BorderTopCenter.addBox(0.0F, 0.0F, 0.0F, 9, 1, 1, 0.0F);
+        this.GemTop = new ModelRenderer(this, 35, 50);
+        this.GemTop.setRotationPoint(-1.12F, 9.69F, -1.6F);
+        this.GemTop.addBox(0.0F, 0.0F, 0.0F, 2, 1, 1, -0.2F);
+        this.ShieldCenter = new ModelRenderer(this, 1, 1);
+        this.ShieldCenter.setRotationPoint(-2.0F, 12.0F, -1.1F);
+        this.ShieldCenter.addBox(0.0F, 0.0F, 0.0F, 4, 12, 2, 0.0F);
+        this.ShieldTopRightCorner = new ModelRenderer(this, 50, 5);
+        this.ShieldTopRightCorner.setRotationPoint(-5.06F, 6.4F, -1.1F);
+        this.ShieldTopRightCorner.addBox(-0.2F, 0.0F, 0.0F, 7, 2, 2, 0.0F);
+        this.setRotateAngle(ShieldTopRightCorner, 0.0F, 0.0F, 0.8100073058505682F);
+        this.BorderRightSide = new ModelRenderer(this, 5, 29);
+        this.BorderRightSide.setRotationPoint(-6.48F, 7.52F, -1.25F);
+        this.BorderRightSide.addBox(0.0F, 0.0F, 0.0F, 1, 11, 2, 0.0F);
+        this.ShieldTopLeftCorner = new ModelRenderer(this, 70, 5);
+        this.ShieldTopLeftCorner.setRotationPoint(0.29F, 11.3F, -1.1F);
+        this.ShieldTopLeftCorner.addBox(0.0F, 0.0F, 0.0F, 7, 2, 2, 0.0F);
+        this.setRotateAngle(ShieldTopLeftCorner, 0.0F, 0.0F, -0.8100073058505682F);
+        this.ShieldBottomLeft = new ModelRenderer(this, 77, 17);
+        this.ShieldBottomLeft.setRotationPoint(3.5F, 16.1F, -1.1F);
+        this.ShieldBottomLeft.addBox(0.0F, 0.0F, 0.0F, 4, 7, 2, 0.0F);
+        this.setRotateAngle(ShieldBottomLeft, 0.0F, 0.0F, 0.7086036763096978F);
+        this.ShieldTopLeft = new ModelRenderer(this, 37, 19);
+        this.ShieldTopLeft.setRotationPoint(-0.45F, 7.6F, -1.1F);
+        this.ShieldTopLeft.addBox(0.0F, 0.0F, 0.0F, 7, 5, 2, 0.0F);
+        this.HandleLeftSide = new ModelRenderer(this, 31, 30);
+        this.HandleLeftSide.setRotationPoint(0.8F, 14.0F, 0.7F);
+        this.HandleLeftSide.addBox(0.0F, 0.0F, 0.0F, 1, 1, 2, -0.2F);
+        this.GemTopLeftConnector = new ModelRenderer(this, 54, 50);
+        this.GemTopLeftConnector.setRotationPoint(0.07F, 9.69F, -1.6F);
+        this.GemTopLeftConnector.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, -0.2F);
+        this.ShieldBottomRight = new ModelRenderer(this, 62, 17);
+        this.ShieldBottomRight.setRotationPoint(-6.65F, 18.8F, -1.1F);
+        this.ShieldBottomRight.addBox(0.0F, 0.0F, 0.0F, 4, 7, 2, 0.0F);
+        this.setRotateAngle(ShieldBottomRight, 0.0F, 0.0F, -0.7312929565856241F);
+        this.BorderBottomLeftCorner = new ModelRenderer(this, 5, 45);
+        this.BorderBottomLeftCorner.setRotationPoint(5.7F, 17.87F, -1.25F);
+        this.BorderBottomLeftCorner.addBox(0.0F, 0.0F, 0.0F, 1, 7, 2, 0.0F);
+        this.setRotateAngle(BorderBottomLeftCorner, 0.0F, 0.0F, 0.6911503837897545F);
+        this.ShieldTopCornerRight = new ModelRenderer(this, 44, 11);
+        this.ShieldTopCornerRight.setRotationPoint(-5.2F, 6.25F, -1.1F);
+        this.ShieldTopCornerRight.addBox(0.0F, 0.0F, 0.0F, 5, 2, 2, 0.0F);
+        this.BorderTopLeftCorner = new ModelRenderer(this, 20, 37);
+        this.BorderTopLeftCorner.setRotationPoint(6.45F, 7.52F, -1.25F);
+        this.BorderTopLeftCorner.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
+        this.setRotateAngle(BorderTopLeftCorner, 0.0F, 0.0F, 2.1682225297525557F);
+        this.ShieldTopRight = new ModelRenderer(this, 17, 18);
+        this.ShieldTopRight.setRotationPoint(-6.65F, 7.6F, -1.1F);
+        this.ShieldTopRight.addBox(0.0F, 0.0F, 0.0F, 7, 5, 2, 0.0F);
+        this.ShieldCenterRight = new ModelRenderer(this, 14, 7);
+        this.ShieldCenterRight.setRotationPoint(-6.65F, 11.8F, -1.1F);
+        this.ShieldCenterRight.addBox(0.0F, 0.0F, 0.0F, 5, 7, 2, 0.0F);
+        this.BorderLeftSide = new ModelRenderer(this, 12, 29);
+        this.BorderLeftSide.setRotationPoint(5.47F, 7.52F, -1.25F);
+        this.BorderLeftSide.addBox(0.0F, 0.0F, 0.0F, 1, 11, 2, 0.0F);
+        this.HolderBase = new ModelRenderer(this, 29, 35);
+        this.HolderBase.setRotationPoint(-2.0F, 13.2F, 0.3F);
+        this.HolderBase.addBox(0.0F, 0.0F, 0.0F, 4, 3, 1, 0.0F);
+        this.GemTopLeftCorner = new ModelRenderer(this, 54, 55);
+        this.GemTopLeftCorner.setRotationPoint(0.82F, 11.02F, -1.6F);
+        this.GemTopLeftCorner.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, -0.2F);
+        this.setRotateAngle(GemTopLeftCorner, 0.0F, 0.0F, -2.3150047198452786F);
+        this.GemBottom = new ModelRenderer(this, 27, 50);
+        this.GemBottom.setRotationPoint(-1.0F, 11.52F, -1.6F);
+        this.GemBottom.addBox(0.0F, 0.0F, 0.0F, 2, 1, 1, -0.2F);
+        this.MainHandler = new ModelRenderer(this, 41, 36);
+        this.MainHandler.setRotationPoint(-1.5F, 14.0F, 1.8F);
+        this.MainHandler.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, -0.2F);
+        this.ShieldTopCornerLeft = new ModelRenderer(this, 29, 11);
+        this.ShieldTopCornerLeft.setRotationPoint(0.1F, 6.25F, -1.1F);
+        this.ShieldTopCornerLeft.addBox(0.0F, 0.0F, 0.0F, 5, 2, 2, 0.0F);
+        this.HandlerRightSide = new ModelRenderer(this, 31, 41);
+        this.HandlerRightSide.setRotationPoint(-1.8F, 14.0F, 0.7F);
+        this.HandlerRightSide.addBox(0.0F, 0.0F, 0.0F, 1, 1, 2, -0.2F);
+        this.GemRightSide = new ModelRenderer(this, 30, 54);
+        this.GemRightSide.setRotationPoint(-1.49F, 10.16F, -1.6F);
+        this.GemRightSide.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, -0.2F);
+        this.ShieldTopCenter = new ModelRenderer(this, 40, 5);
+        this.ShieldTopCenter.setRotationPoint(-0.6F, 6.25F, -1.1F);
+        this.ShieldTopCenter.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
+        this.GemTopRightCorner = new ModelRenderer(this, 20, 55);
+        this.GemTopRightCorner.setRotationPoint(-0.17F, 10.23F, -1.6F);
+        this.GemTopRightCorner.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, -0.2F);
+        this.setRotateAngle(GemTopRightCorner, 0.0F, 0.0F, 2.2378611669071296F);
+        this.GemLeftSide = new ModelRenderer(this, 36, 54);
+        this.GemLeftSide.setRotationPoint(0.47F, 10.14F, -1.6F);
+        this.GemLeftSide.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, -0.2F);
+        this.BorderBottomRightCorner = new ModelRenderer(this, 12, 45);
+        this.BorderBottomRightCorner.setRotationPoint(-6.48F, 18.52F, -1.25F);
+        this.BorderBottomRightCorner.addBox(0.0F, 0.0F, 0.0F, 1, 7, 2, 0.0F);
+        this.setRotateAngle(BorderBottomRightCorner, 0.0F, 0.0F, -0.6946410422937431F);
+        this.GemRightCenter = new ModelRenderer(this, 41, 53);
+        this.GemRightCenter.setRotationPoint(-1.0F, 10.0F, -1.4F);
+        this.GemRightCenter.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
+        this.BorderTopRightCorner = new ModelRenderer(this, 20, 31);
+        this.BorderTopRightCorner.setRotationPoint(-5.9F, 8.35F, -1.25F);
+        this.BorderTopRightCorner.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
+        this.setRotateAngle(BorderTopRightCorner, 0.0F, 0.0F, -2.165779068799764F);
+        this.BorderTopLeftConnection = new ModelRenderer(this, 61, 12);
+        this.BorderTopLeftConnection.setRotationPoint(3.8F, 6.4F, -1.25F);
+        this.BorderTopLeftConnection.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.GemLeftCenter = new ModelRenderer(this, 45, 48);
+        this.GemLeftCenter.setRotationPoint(-0.2F, 10.0F, -1.4F);
+        this.GemLeftCenter.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
+        this.GemBottomLeftCorner = new ModelRenderer(this, 48, 55);
+        this.GemBottomLeftCorner.setRotationPoint(0.93F, 11.19F, -1.6F);
+        this.GemBottomLeftCorner.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, -0.2F);
+        this.setRotateAngle(GemBottomLeftCorner, 0.0F, 0.0F, 0.8927359123950995F);
+    }
+
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.ShieldCenterLeft.render(f5);
+        this.BorderBottomCenter.render(f5);
+        this.GemBottomRightCorner.render(f5);
+        this.BorderTopCenter.render(f5);
+        this.GemTop.render(f5);
+        this.ShieldCenter.render(f5);
+        this.ShieldTopRightCorner.render(f5);
+        this.BorderRightSide.render(f5);
+        this.ShieldTopLeftCorner.render(f5);
+        this.ShieldBottomLeft.render(f5);
+        this.ShieldTopLeft.render(f5);
+        this.HandleLeftSide.render(f5);
+        this.GemTopLeftConnector.render(f5);
+        this.ShieldBottomRight.render(f5);
+        this.BorderBottomLeftCorner.render(f5);
+        this.ShieldTopCornerRight.render(f5);
+        this.BorderTopLeftCorner.render(f5);
+        this.ShieldTopRight.render(f5);
+        this.ShieldCenterRight.render(f5);
+        this.BorderLeftSide.render(f5);
+        this.HolderBase.render(f5);
+        this.GemTopLeftCorner.render(f5);
+        this.GemBottom.render(f5);
+        this.MainHandler.render(f5);
+        this.ShieldTopCornerLeft.render(f5);
+        this.HandlerRightSide.render(f5);
+        this.GemRightSide.render(f5);
+        this.ShieldTopCenter.render(f5);
+        this.GemTopRightCorner.render(f5);
+        this.GemLeftSide.render(f5);
+        this.BorderBottomRightCorner.render(f5);
+        this.GemRightCenter.render(f5);
+        this.BorderTopRightCorner.render(f5);
+        this.BorderTopLeftConnection.render(f5);
+        this.GemLeftCenter.render(f5);
+        this.GemBottomLeftCorner.render(f5);
+    }
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
+    }
+}

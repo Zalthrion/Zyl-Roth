@@ -23,6 +23,7 @@ public class EntityDeveloper extends EntityAnimal {
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate() {
 		this.updateArmSwingProgress();
 		float f = this.getBrightness(1.0F);
@@ -37,18 +38,23 @@ public class EntityDeveloper extends EntityAnimal {
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		
 		if (!this.worldObj.isRemote && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
 			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.0D);
+		} else {
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
 		}
 	}
 	
+	@Override
 	protected String getSwimSound() {
 		return "game.hostile.swim";
 	}
 	
+	@Override
 	protected String getSplashSound() {
 		return "game.hostile.swim.splash";
 	}
@@ -57,6 +63,7 @@ public class EntityDeveloper extends EntityAnimal {
 	 * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
 	 * (Animals, Spiders at day, peaceful PigZombies).
 	 */
+	@Override
 	protected Entity findPlayerToAttack() {
 		EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 		return entityplayer != null && this.canEntityBeSeen(entityplayer) ? entityplayer : null;
@@ -65,6 +72,7 @@ public class EntityDeveloper extends EntityAnimal {
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (this.isEntityInvulnerable()) {
 			return false;
@@ -88,6 +96,7 @@ public class EntityDeveloper extends EntityAnimal {
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound() {
 		return "game.hostile.hurt";
 	}
@@ -95,14 +104,17 @@ public class EntityDeveloper extends EntityAnimal {
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound() {
 		return "game.hostile.die";
 	}
 	
+	@Override
 	protected String func_146067_o(int p_146067_1_) {
 		return p_146067_1_ > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
 	}
 	
+	@Override
 	public boolean attackEntityAsMob(Entity p_70652_1_) {
 		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
 		int i = 0;
@@ -116,7 +128,7 @@ public class EntityDeveloper extends EntityAnimal {
 		
 		if (flag) {
 			if (i > 0) {
-				p_70652_1_.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
+				p_70652_1_.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
 				this.motionX *= 0.6D;
 				this.motionZ *= 0.6D;
 			}
@@ -140,6 +152,7 @@ public class EntityDeveloper extends EntityAnimal {
 	/**
 	 * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
 	 */
+	@Override
 	protected void attackEntity(Entity p_70785_1_, float p_70785_2_) {
 		if (this.attackTime <= 0 && p_70785_2_ < 2.0F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY) {
 			this.attackTime = 20;
@@ -151,15 +164,18 @@ public class EntityDeveloper extends EntityAnimal {
 	 * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
 	 * Args: x, y, z
 	 */
+	@Override
 	public float getBlockPathWeight(int p_70783_1_, int p_70783_2_, int p_70783_3_) {
 		return 0.5F - this.worldObj.getLightBrightness(p_70783_1_, p_70783_2_, p_70783_3_);
 	}
 	
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
 	}
 	
+	@Override
 	protected boolean func_146066_aG() {
 		return true;
 	}

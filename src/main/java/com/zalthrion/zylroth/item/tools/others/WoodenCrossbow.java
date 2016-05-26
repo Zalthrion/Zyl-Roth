@@ -1,13 +1,15 @@
-package com.zalthrion.zylroth.item.tools;
+package com.zalthrion.zylroth.item.tools.others;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
@@ -16,36 +18,85 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import com.zalthrion.zylroth.item.tools.ZylrothTool;
 import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTabs;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TenebraeLeafCutter extends Item implements ZylrothTool {
+public class WoodenCrossbow extends Item implements ZylrothTool {
 	
-	private String name = "tenebraeLeafCutter";
+	private String name = "woodenCrossbow";
 	
-	public TenebraeLeafCutter() {
+	public WoodenCrossbow(int i) {
 		super();
+		this.setCreativeTab(ModTabs.ZylRoth);
+		this.setMaxDurability(i);
+		this.setMaxStackSize(1);
 		this.setNames(name);
 	}
 	
-	@Override public float getStrVsBlock(ItemStack stack, Block block) {
-		return block.getMaterial() != Material.leaves ? (super.getStrVsBlock(stack, block)) : 15.0F;
+	@Override public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		
+		if (!this.isBroken(stack)) {        
+			if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow)) {
+				
+				EntityArrow entityarrow = new EntityArrow(world, player, 0.7F);
+				
+				entityarrow.setDamage(entityarrow.getDamage() + 3.5D);
+				world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + 0.5F);
+				
+	            int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, stack);
+
+	            if (k > 0)
+	            {
+	                entityarrow.setDamage(entityarrow.getDamage() + (double)k * 0.5D + 0.5D);
+	            }
+
+	            int l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, stack);
+
+	            if (l > 0)
+	            {
+	                entityarrow.setKnockbackStrength(l);
+	            }
+
+	            if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, stack) > 0)
+	            {
+	                entityarrow.setFire(100);
+	            }
+	            	            	            
+				if (!world.isRemote) {
+					world.spawnEntityInWorld(entityarrow);
+				}
+				
+				player.inventory.consumeInventoryItem(Items.arrow);
+				
+				stack.damageItem(1, player);
+			}	
+		}
+		
+		if (this.isBroken(stack) && world.isRemote) {
+			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		}
+		
+		return stack;
+		
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebraeDurability;
+		return stack.getMetadata() >= 2499;
 	}
 	
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (this.isBroken(stack)) {
+			
 			if (player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
-			}		
+			}
 			
 			return true;
 		}
@@ -64,11 +115,10 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		if (!isBroken(stack))
 			return false;
-		World world = player.worldObj;
 		
+		World world = player.worldObj;
 		if (world.isRemote)
 			player.addChatMessage(new ChatComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
-		
 		return true;
 	}
 	

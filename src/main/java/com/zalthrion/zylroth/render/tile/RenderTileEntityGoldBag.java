@@ -1,16 +1,16 @@
 package com.zalthrion.zylroth.render.tile;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.model.tile.ModelGoldBag;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.tile.TileEntityGoldBag;
+
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderTileEntityGoldBag extends TileEntitySpecialRenderer {
 	private static final ResourceLocation goldBag = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/blocks/goldBag.png");

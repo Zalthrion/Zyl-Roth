@@ -68,6 +68,10 @@ public class ModelGoldBag extends ModelBase {
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         this.shape1.render(f5);
     }
+    
+    public void render(float f5) { 
+        this.shape1.render(f5);
+    }
 
     /**
      * This is a helper function from Tabula to set the rotation of model parts

@@ -28,21 +28,22 @@ public class TenebraeOre extends BlockBase {
 	public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
 		super.randomDisplayTick(par1World, x, y, z, par5Random);
 		
-		double d0 = (double) ((float) x + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F);
-		double d1 = (double) ((float) y + 0.4F);
-		double d2 = (double) ((float) z + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F);
+		double d0 = x + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F;
+		double d1 = y + 0.4F;
+		double d2 = z + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F;
 		double d3 = 0.0D;
 		double d4 = 0.0D;
 		double d5 = 0.0D;
 		par1World.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
 	}
 	
+	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune) {
-		return ModItems.tenebraeChunk;
+		return ModItems.tenebraeOre;
 	}
 	
+	@Override
 	public int quantityDropped(Random rand) {
 		return 2 + rand.nextInt(3);
 	}
-	
 }

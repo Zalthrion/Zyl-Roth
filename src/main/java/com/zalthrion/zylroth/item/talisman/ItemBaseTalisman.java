@@ -2,6 +2,12 @@ package com.zalthrion.zylroth.item.talisman;
 
 import java.util.List;
 
+import com.zalthrion.zylroth.item.ItemBase;
+import com.zalthrion.zylroth.utility.TooltipHelper;
+import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -11,13 +17,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-
-import com.zalthrion.zylroth.item.ItemBase;
-import com.zalthrion.zylroth.utility.TooltipHelper;
-import com.zalthrion.zylroth.world.dimension.SpecialTeleporter;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBaseTalisman extends ItemBase {
 	private String dimension = "NULL";

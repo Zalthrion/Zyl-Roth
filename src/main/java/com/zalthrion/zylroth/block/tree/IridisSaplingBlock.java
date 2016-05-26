@@ -3,6 +3,13 @@ package com.zalthrion.zylroth.block.tree;
 import java.util.List;
 import java.util.Random;
 
+import com.zalthrion.zylroth.lib.ModBlocks;
+import com.zalthrion.zylroth.lib.ModTabs;
+import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.world.gen.structures.TreeGenerator;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -18,17 +25,9 @@ import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.zalthrion.zylroth.lib.ModBlocks;
-import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.Reference;
-import com.zalthrion.zylroth.world.gen.structures.TreeGenerator;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class IridisSaplingBlock extends BlockBush implements IGrowable {
 	
-	public static final String[] sapling_names = new String[] {"autumnTreeSapling"};
+	public static final String[] sapling_names = new String[] {"autumnTreeSapling", "sakuraTreeSapling"};
 	private static final IIcon[] icon = new IIcon[sapling_names.length];
 	
 	public IridisSaplingBlock() {
@@ -84,9 +83,10 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 		
 		switch (l) {
 			case 0:
-				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.iridisLeafBlock, 0, 1, false);
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.iridisLeafBlock, 0, 0, false);
 				break;
 			case 1:
+				object = new TreeGenerator(true, 4, Blocks.log, ModBlocks.iridisLeafBlock, 0, 1, false);
 				break;
 			case 2:
 				break;
@@ -144,7 +144,9 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		list.add(new ItemStack(item, 1, 0));
+		for (int i = 0; i < sapling_names.length; i ++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 	
 	@Override @SideOnly(Side.CLIENT)
@@ -161,7 +163,7 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 	
 	@Override
 	public boolean shouldFertilize(World worldIn, Random random, int x, int y, int z) {
-		return (double) worldIn.rand.nextFloat() < 0.45D;
+		return worldIn.rand.nextFloat() < 0.45D;
 	}
 	
 	@Override

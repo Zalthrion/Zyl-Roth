@@ -2,15 +2,15 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
+import com.zalthrion.zylroth.block.BlockBase;
+import com.zalthrion.zylroth.lib.ModItems;
+import com.zalthrion.zylroth.lib.ModTabs;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
 import net.minecraft.world.IBlockAccess;
-
-import com.zalthrion.zylroth.block.BlockBase;
-import com.zalthrion.zylroth.lib.ModItems;
-import com.zalthrion.zylroth.lib.ModTabs;
 
 public class EndiriteOre extends BlockBase {
 	
@@ -26,10 +26,12 @@ public class EndiriteOre extends BlockBase {
 		this.setCreativeTab(ModTabs.ZylRoth);
 	}
 	
+	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune) {
-		return ModItems.endiriteChunk;
+		return ModItems.endiriteOre;
 	}
 	
+	@Override
 	public int quantityDropped(Random rand) {
 		return 2 + rand.nextInt(4);
 	}	

@@ -1,17 +1,53 @@
 package com.zalthrion.zylroth.lib;
 
-import net.minecraft.block.Block;
-
-import com.zalthrion.zylroth.block.*;
-import com.zalthrion.zylroth.block.machine.*;
-import com.zalthrion.zylroth.block.ore.*;
-import com.zalthrion.zylroth.block.spawner.*;
-import com.zalthrion.zylroth.block.tree.*;
-import com.zalthrion.zylroth.itemblock.*;
-import com.zalthrion.zylroth.itemblock.tree.*;
-import com.zalthrion.zylroth.tile.*;
+import com.zalthrion.zylroth.block.AshBlock;
+import com.zalthrion.zylroth.block.Benzenn;
+import com.zalthrion.zylroth.block.BenzennStatue;
+import com.zalthrion.zylroth.block.ChiseledTenebrae;
+import com.zalthrion.zylroth.block.EmpoweredTenebraeCore;
+import com.zalthrion.zylroth.block.GoldBag;
+import com.zalthrion.zylroth.block.InfusedTenebrae;
+import com.zalthrion.zylroth.block.Lamp;
+import com.zalthrion.zylroth.block.TenebraeBlock;
+import com.zalthrion.zylroth.block.TenebraeCore;
+import com.zalthrion.zylroth.block.VoidPlanks;
+import com.zalthrion.zylroth.block.VoidStone;
+import com.zalthrion.zylroth.block.machine.InfuserMachine;
+import com.zalthrion.zylroth.block.machine.InfuserType;
+import com.zalthrion.zylroth.block.ore.EndiriteOre;
+import com.zalthrion.zylroth.block.ore.InferniumOre;
+import com.zalthrion.zylroth.block.ore.TenebraeOre;
+import com.zalthrion.zylroth.block.ore.VoidiumOre;
+import com.zalthrion.zylroth.block.spawner.SpawnerVoidDragon;
+import com.zalthrion.zylroth.block.tree.IridisLeafBlock;
+import com.zalthrion.zylroth.block.tree.IridisSaplingBlock;
+import com.zalthrion.zylroth.block.tree.KyrulLeafBlock;
+import com.zalthrion.zylroth.block.tree.KyrulLogBlock;
+import com.zalthrion.zylroth.block.tree.KyrulSaplingBlock;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
+import com.zalthrion.zylroth.block.tree.RainbowLeafBlock_2;
+import com.zalthrion.zylroth.block.tree.RainbowSaplingBlock;
+import com.zalthrion.zylroth.itemblock.BeaconBaseItemBlock;
+import com.zalthrion.zylroth.itemblock.CoreItemBlock;
+import com.zalthrion.zylroth.itemblock.HeadItemBlock;
+import com.zalthrion.zylroth.itemblock.TenebraeItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.IridisLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.IridisSaplingItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.KyrulLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.KyrulLogItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.KyrulSaplingItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowLeaf2ItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowLeafItemBlock;
+import com.zalthrion.zylroth.itemblock.tree.RainbowSaplingItemBlock;
+import com.zalthrion.zylroth.tile.TileEntityBenzenn;
+import com.zalthrion.zylroth.tile.TileEntityBenzennStatue;
+import com.zalthrion.zylroth.tile.TileEntityGoldBag;
+import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityLamp;
+import com.zalthrion.zylroth.tile.TileEntitySpawnerVoidDragon;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 
 public final class ModBlocks {
 	
@@ -39,10 +75,17 @@ public final class ModBlocks {
 	public static Block iridisLeafBlock = new IridisLeafBlock();
 	public static Block iridisSaplingBlock = new IridisSaplingBlock();
 	public static Block kyrulLogBlock = new KyrulLogBlock();
+	public static Block kyrulLeafBlock = new KyrulLeafBlock();
+	public static Block kyrulSaplingBlock = new KyrulSaplingBlock();
 	
 	/* Others */
 	public static Block ashBlock = new AshBlock();
 	public static Block goldBag = new GoldBag();
+	public static Block benzenn = new Benzenn();
+	public static Block benzennStatue = new BenzennStatue();
+	public static Block lamp = new Lamp();
+	public static Block voidStone = new VoidStone();
+	public static Block voidPlanks = new VoidPlanks();
 	
 	/* Spawners */
 	public static Block spawner_VoidDragon = new SpawnerVoidDragon();
@@ -78,12 +121,19 @@ public final class ModBlocks {
 		ModRegistry.addRegister(30, rainbowLeafBlock_2, RainbowLeaf2ItemBlock.class, "rainbowLeafBlock_2");
 		ModRegistry.addRegister(32, rainbowSaplingBlockZL, RainbowSaplingItemBlock.class, "rainbowSaplingBlockZL");
 		ModRegistry.addRegister(33, kyrulLogBlock, KyrulLogItemBlock.class, "kyrulLogBlock");
+		ModRegistry.addRegister(75, kyrulLeafBlock, KyrulLeafItemBlock.class, "kyrulLeafBlock");
+		ModRegistry.addRegister(76, kyrulSaplingBlock, KyrulSaplingItemBlock.class, "kyrulSaplingBlock");
 		ModRegistry.addRegister(41, iridisLeafBlock, IridisLeafItemBlock.class, "iridisLeafBlock");
 		ModRegistry.addRegister(42, iridisSaplingBlock, IridisSaplingItemBlock.class, "iridisSaplingBlock");
 		
 		/* Others */
 		ModRegistry.addRegister(34, ashBlock, "ashBlock");
 		ModRegistry.addRegister(40, goldBag, "goldBag");
+		ModRegistry.addRegister(72, benzenn, "benzenn");
+		ModRegistry.addRegister(73, benzennStatue, "benzennStatue");
+		ModRegistry.addRegister(77, lamp, "lamp");
+		ModRegistry.addRegister(74, voidStone, "voidStone");
+		ModRegistry.addRegister(77, voidPlanks, "voidPlanks");
 		
 		/* Spawners */
 		ModRegistry.addRegister(35, spawner_VoidDragon, "spawnerVoidDragon");
@@ -98,5 +148,9 @@ public final class ModBlocks {
 		/* Tile Entities */
 		GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "Infuser");
+		GameRegistry.registerTileEntity(TileEntityGoldBag.class, "goldBag");
+		GameRegistry.registerTileEntity(TileEntityBenzenn.class, "benzenn");
+		GameRegistry.registerTileEntity(TileEntityBenzennStatue.class, "benzennStatue");
+		GameRegistry.registerTileEntity(TileEntityLamp.class, "lamp");
 	}
 }

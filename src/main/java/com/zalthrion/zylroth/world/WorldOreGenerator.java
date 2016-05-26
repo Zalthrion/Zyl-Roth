@@ -2,16 +2,15 @@ package com.zalthrion.zylroth.world;
 
 import java.util.Random;
 
+import com.zalthrion.zylroth.handler.ConfigurationHandler;
+import com.zalthrion.zylroth.lib.ModBlocks;
+
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-
-import com.zalthrion.zylroth.handler.ConfigurationHandler;
-import com.zalthrion.zylroth.lib.ModBlocks;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldOreGenerator implements IWorldGenerator {
 	
@@ -38,7 +37,7 @@ public class WorldOreGenerator implements IWorldGenerator {
 	}
 	
 	private void GenerateKyrul(Random random, int x, int z, World world) {
-		this.addOreSpawn(ModBlocks.voidiumOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.stone);
+		this.addOreSpawn(ModBlocks.voidiumOre, world, random, x, z, 2, 6, 7, 0, 32, ModBlocks.voidStone);
 	}
 	
 	private void GenerateIridis(Random random, int x, int z, World world) {

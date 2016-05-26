@@ -10,6 +10,7 @@ import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
 import com.zalthrion.zylroth.entity.EntityStag;
 import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
+import com.zalthrion.zylroth.entity.EntityTuskarr;
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.entity.EntityUnicorn;
@@ -23,6 +24,8 @@ import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.entity.projectile.RepulsorBolt;
+import com.zalthrion.zylroth.entity.projectile.RepulsorCannonBolt;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -95,6 +98,10 @@ public class ModEntity {
 				
 		registerEntity(EntityVoidDragon.class, "voidDragon", true, 0x00000, 0xCCCCFF);
 		
+		/** Others */
+		
+		registerEntity(EntityTuskarr.class, "tuskarr", true, 0x0000, 0xCCCCFF);
+		
 		/** Mounts */
 		
 		registerEntity(MountDeathcharger.class, "Deathcharger", false, 0, 0);
@@ -112,6 +119,11 @@ public class ModEntity {
 		registerEntity(EntityZalthrion.class, "Zalthrion", true, 0x202020, 0x663300);
 		
 		registerEntity(EntitySixOneThree.class, "Six-One-Three", true, 0x000000, 0x00CCCC);
+		
+		/** Projectiles */
+		
+		registerEntity(RepulsorBolt.class, "repulsorBolt", false, 0, 0);
+		registerEntity(RepulsorCannonBolt.class, "repulsorCannonBolt", false, 0, 0);
 		
 	}
 }

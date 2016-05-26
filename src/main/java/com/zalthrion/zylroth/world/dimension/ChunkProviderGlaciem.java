@@ -9,6 +9,10 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
+import com.zalthrion.zylroth.world.gen.map.MapGenIceCavesGlaciem;
+import com.zalthrion.zylroth.world.gen.map.MapGenIceRavineGlaciem;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -31,11 +35,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-
-import com.zalthrion.zylroth.world.gen.map.MapGenIceCavesGlaciem;
-import com.zalthrion.zylroth.world.gen.map.MapGenIceRavineGlaciem;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderGlaciem implements IChunkProvider {
 	
@@ -100,7 +99,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		
 		for (int j = -2; j <= 2; ++ j) {
 			for (int k = -2; k <= 2; ++ k) {
-				float f = 10.0F / MathHelper.sqrt_float((float) (j * j + k * k) + 0.2F);
+				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				this.parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 		}
@@ -190,7 +189,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 			return;
 		
 		double d0 = 0.03125D;
-		this.packedIceNoise = this.field_147430_m.func_151599_a(this.packedIceNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.packedIceNoise = this.field_147430_m.func_151599_a(this.packedIceNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int k = 0; k < 16; ++ k) {
 			for (int l = 0; l < 16; ++ l) {
@@ -201,6 +200,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	}
 	
 	/** loads or generates the chunk at the chunk location specified */
+	@Override
 	public Chunk loadChunk(int p_73158_1_, int p_73158_2_) {
 		return this.provideChunk(p_73158_1_, p_73158_2_);
 	}
@@ -208,9 +208,10 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	/** Will return back a chunk, if it doesn't exist and its not a MP client it
 	 * will generates all the blocks for the specified chunk from the map seed
 	 * and chunk seed */
+	@Override
 	public Chunk provideChunk(int x, int z) {
 		
-		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+		this.rand.setSeed(x * 341873128712L + z * 132897987541L);
 		
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
@@ -222,7 +223,6 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		this.ravineGenerator.generate(this, this.worldObj, x + 200, z + 200, ablock);
 		
 		if (this.mapFeaturesEnabled) {
-			
 		}
 		
 		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, x, z);
@@ -306,14 +306,14 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 				}
 				
 				++ i1;
-				double d13 = (double) f1;
-				double d14 = (double) f;
+				double d13 = f1;
+				double d14 = f;
 				d13 += d12 * 0.2D;
 				d13 = d13 * 8.5D / 8.0D;
 				double d5 = 8.5D + d13 * 4.0D;
 				
 				for (int j2 = 0; j2 < 33; ++ j2) {
-					double d6 = ((double) j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
+					double d6 = (j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
 					
 					if (d6 < 0.0D) {
 						d6 *= 4.0D;
@@ -325,7 +325,7 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
 					
 					if (j2 > 29) {
-						double d11 = (double) ((float) (j2 - 29) / 3.0F);
+						double d11 = (j2 - 29) / 3.0F;
 						d10 = d10 * (1.0D - d11) + -10.0D * d11;
 					}
 					
@@ -337,11 +337,13 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	}
 	
 	/** Checks to see if a chunk exists at x, y */
+	@Override
 	public boolean chunkExists(int p_73149_1_, int p_73149_2_) {
 		return true;
 	}
 	
 	/** Populates chunk with ores etc etc */
+	@Override
 	public void populate(IChunkProvider chunkProvider, int x, int z) {
 		
 		BlockFalling.fallInstantly = true;
@@ -360,7 +362,6 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(chunkProvider, worldObj, rand, x, z, flag));
 		
 		if (this.mapFeaturesEnabled) {
-			
 		}
 		
 		int k1;
@@ -401,49 +402,57 @@ public class ChunkProviderGlaciem implements IChunkProvider {
 	/** Two modes of operation: if passed true, save all Chunks in one go. If
 	 * passed false, save up to two chunks. Return true if all chunks have been
 	 * saved. */
+	@Override
 	public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_) {
 		return true;
 	}
 	
 	/** Save extra data not associated with any Chunk. Not saved during autosave,
 	 * only during world unload. Currently unimplemented. */
+	@Override
 	public void saveExtraData() {}
 	
 	/** Unloads chunks that are marked to be unloaded. This is not guaranteed to
 	 * unload every such chunk. */
+	@Override
 	public boolean unloadQueuedChunks() {
 		return false;
 	}
 	
 	/** Returns if the IChunkProvider supports saving. */
+	@Override
 	public boolean canSave() {
 		return true;
 	}
 	
 	/** Converts the instance data to a readable string. */
+	@Override
 	public String makeString() {
 		return "GlaciemRandomLevelSource";
 	}
 	
 	/** Returns a list of creatures of the specified type that can spawn at the
 	 * given location. */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType creaturetype, int par2, int par3, int par4) {
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(par2, par4);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creaturetype);
 	}
 	
+	@Override
 	public ChunkPosition findClosestStructure(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
 		return null;
 	}
 	
+	@Override
 	public int getLoadedChunkCount() {
 		return 0;
 	}
 	
+	@Override
 	public void recreateStructures(int p_82695_1_, int p_82695_2_) {
 		if (this.mapFeaturesEnabled) {
-			
 		}
 	}
 }

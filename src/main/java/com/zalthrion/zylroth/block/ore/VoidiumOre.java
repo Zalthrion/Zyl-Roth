@@ -28,21 +28,22 @@ public class VoidiumOre extends BlockBase {
 	public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
 		super.randomDisplayTick(par1World, x, y, z, par5Random);
 		
-		double d0 = (double) ((float) x + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F);
-		double d1 = (double) ((float) y + 1.1F);
-		double d2 = (double) ((float) z + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F);
+		double d0 = x + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F;
+		double d1 = y + 1.1F;
+		double d2 = z + (1.5F + par5Random.nextFloat() * 12.0F) / 16.0F;
 		double d3 = -0.1F;
 		double d4 = 0.2F;
 		double d5 = 1.0F;
 		par1World.spawnParticle("reddust", d0, d1, d2, d3, d4, d5);
 	}
 	
+	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune) {
 		return ModItems.tenebraeChunk;
 	}
 	
+	@Override
 	public int quantityDropped(Random rand) {
 		return 2 + rand.nextInt(4);
 	}
-	
 }

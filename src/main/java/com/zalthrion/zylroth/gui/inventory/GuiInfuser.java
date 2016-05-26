@@ -1,15 +1,15 @@
 package com.zalthrion.zylroth.gui.inventory;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.container.ContainerInfuser;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 public class GuiInfuser extends GuiContainer {
 	private static final ResourceLocation infuserGuiTexture = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/gui/InfuserGui.png");
@@ -41,7 +41,7 @@ public class GuiInfuser extends GuiContainer {
 			int i1 = this.tileInfuser.getBurnTimeRemainingScaled(14);
 			this.drawTexturedModalRect(guiX + 17, guiY + 66 - i1, 176, 7 + (14 - i1), 14, i1 + 1);
 			i1 = this.tileInfuser.getCookProgressScaled(24);
-			this.drawTexturedModalRect(guiX + 75, guiY + 47, 177, 0, i1, 7);
+			this.drawTexturedModalRect(guiX + 75, guiY + 46, 177, 0, i1, 7);
 		}
 	}
 }

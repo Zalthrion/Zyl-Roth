@@ -3,12 +3,14 @@ package com.zalthrion.zylroth.world;
 import java.util.Random;
 
 import com.zalthrion.zylroth.lib.ModBiomes;
-import com.zalthrion.zylroth.world.gen.structures.*;
+import com.zalthrion.zylroth.world.gen.structures.DragonNest;
+import com.zalthrion.zylroth.world.gen.structures.IcePillar;
+import com.zalthrion.zylroth.world.gen.structures.PackedIcePillar;
 
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldStructureGenerator implements IWorldGenerator {
 	
@@ -55,7 +57,7 @@ public class WorldStructureGenerator implements IWorldGenerator {
 		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
 		
 		if (biomegenbase == ModBiomes.VoidMountains) {
-			for (int k = 0; k < 1; k ++) {
+			if (random.nextInt(100) < 50) {
 				int Xcoord = x + random.nextInt(16);
 				int Ycoord = random.nextInt(90);
 				int Zcoord = z + random.nextInt(16);
@@ -66,17 +68,21 @@ public class WorldStructureGenerator implements IWorldGenerator {
 	
 	private void GenerateIridis(Random random, int x, int z, World world) {
 		
-		/* BiomeGenBase biomegenbase =
-		 * world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16); if
-		 * (biomegenbase == ModBiomes.RainbowForest) { for (int i = 0; i < 1; i
-		 * ++) { int Xcoord = x + random.nextInt(16); int Zcoord = z +
-		 * random.nextInt(16); int Ycoord = world.getHeightValue(Xcoord,
-		 * Zcoord); new RainbowBlueTree(true).generate(world, random, Xcoord,
-		 * Ycoord, Zcoord); new RainbowRedTree(true).generate(world, random,
-		 * Xcoord, Ycoord, Zcoord); new RainbowPurpleTree(true).generate(world,
-		 * random, Xcoord, Ycoord, Zcoord); new
-		 * RainbowYellowTree(true).generate(world, random, Xcoord, Ycoord,
-		 * Zcoord); } } */
+/*		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
+		
+		if (biomegenbase == ModBiomes.DryDesert) {
+			if (random.nextInt(100) < 50) {
+				int Xcoord = x + random.nextInt(16);
+				int Ycoord = random.nextInt(90);
+				int Zcoord = z + random.nextInt(16);
+								
+				if (random.nextInt(100) < 75) {
+				new RegularWell().generate(world, random, Xcoord, Ycoord, Zcoord);
+				} else {
+					new TreasureWell().generate(world, random, Xcoord, Ycoord, Zcoord);
+				}
+			} else {}
+		}*/
 	}
 	
 	private void GenerateGlaciem(Random random, int x, int z, World world) {
@@ -84,7 +90,7 @@ public class WorldStructureGenerator implements IWorldGenerator {
 		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(x + 16, z + 16);
 		
 		if (biomegenbase == ModBiomes.FrozenWastes) {
-			for (int i = 0; i < 5; i ++) {
+			for (int i = 0; i < 2; i ++) {
 				int Xcoord = x + random.nextInt(16);
 				int Ycoord = random.nextInt(90);
 				int Zcoord = z + random.nextInt(16);
@@ -94,14 +100,23 @@ public class WorldStructureGenerator implements IWorldGenerator {
 		}
 		
 		if (biomegenbase == ModBiomes.FrozenWastes) {
-			for (int i = 0; i < 5; i ++) {
+			for (int i = 0; i < 2; i ++) {
 				int Xcoord = x + random.nextInt(16);
 				int Ycoord = random.nextInt(90);
-				int Zcoord = +random.nextInt(16);
+				int Zcoord = z + random.nextInt(16);
 				
 				new PackedIcePillar().generate(world, random, Xcoord, Ycoord, Zcoord);
 			}
 		}
+		
+/*		if (biomegenbase == ModBiomes.SnowPlateau) {
+			if (random.nextInt(100) < 1) {
+				int Xcoord = x + random.nextInt(16);
+				int Ycoord = random.nextInt(90);
+				int Zcoord = z + random.nextInt(16);
+				
+				new BenzennHut().generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
+		}*/
 	}
-	
 }

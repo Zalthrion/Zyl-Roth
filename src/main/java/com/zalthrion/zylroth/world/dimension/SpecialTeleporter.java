@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.world.dimension;
 
+import com.zalthrion.zylroth.utility.BlockPos;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
@@ -9,8 +11,6 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
-
-import com.zalthrion.zylroth.utility.BlockPos;
 
 public class SpecialTeleporter extends Teleporter {
 	protected final WorldServer worldServer;
@@ -55,8 +55,7 @@ public class SpecialTeleporter extends Teleporter {
 					while (y > 30 && flag) {
 						if (entity.worldObj.getBlock(xPos, y, zPos).getMaterial().blocksMovement() && entity.worldObj.isAirBlock(xPos, y + 1, zPos) && entity.worldObj.isAirBlock(xPos, y + 2, zPos)) {
 							flag = false;
-						}
-						else {
+						} else {
 							-- y;
 						}
 					}
@@ -93,9 +92,9 @@ public class SpecialTeleporter extends Teleporter {
 				this.setBlock(entity.worldObj, center.south(2), Blocks.stone);
 				this.setBlock(entity.worldObj, center.south(2).east(), Blocks.stone);
 			}
-			((EntityPlayer) entity).setPositionAndUpdate((double) xPos + 0.5D, y + 1, (double) zPos + 0.5D);
+			((EntityPlayer) entity).setPositionAndUpdate(xPos + 0.5D, y + 1, zPos + 0.5D);
 		} else {
-			entity.setPosition((double) xPos + 0.5D, y + 1, (double) zPos + 0.5D);
+			entity.setPosition(xPos + 0.5D, y + 1, zPos + 0.5D);
 		}
 	}
 	
@@ -104,7 +103,8 @@ public class SpecialTeleporter extends Teleporter {
 		return true;
 	}
 	
-	@Override public void removeStalePortalLocations(long par1) {}
+	@Override
+	public void removeStalePortalLocations(long par1) {}
 	
 	void setBlock(World world, BlockPos pos, Block block) {
 		world.setBlock(pos.getX(), pos.getY(), pos.getZ(), block);

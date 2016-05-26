@@ -12,6 +12,7 @@ import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
 import com.zalthrion.zylroth.entity.EntityStag;
 import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
+import com.zalthrion.zylroth.entity.EntityTuskarr;
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.entity.EntityUnicorn;
@@ -25,9 +26,12 @@ import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.entity.projectile.RepulsorBolt;
+import com.zalthrion.zylroth.entity.projectile.RepulsorCannonBolt;
 import com.zalthrion.zylroth.event.KeyInputEvent;
 import com.zalthrion.zylroth.handler.KeyHandler;
 import com.zalthrion.zylroth.lib.ModArmors;
+import com.zalthrion.zylroth.lib.ModBlocks;
 import com.zalthrion.zylroth.lib.ModTools;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.model.entity.ModelBadger;
@@ -40,6 +44,7 @@ import com.zalthrion.zylroth.model.entity.ModelSkeletalHorse;
 import com.zalthrion.zylroth.model.entity.ModelSpecialBiped;
 import com.zalthrion.zylroth.model.entity.ModelStag;
 import com.zalthrion.zylroth.model.entity.ModelTenebraeGolem;
+import com.zalthrion.zylroth.model.entity.ModelTuskarr;
 import com.zalthrion.zylroth.model.entity.ModelUndead;
 import com.zalthrion.zylroth.model.entity.ModelUndead2;
 import com.zalthrion.zylroth.model.entity.ModelUnicorn;
@@ -48,6 +53,7 @@ import com.zalthrion.zylroth.model.entity.mount.ModelPlaguedHorse;
 import com.zalthrion.zylroth.model.entity.mount.ModelSavageBadger;
 import com.zalthrion.zylroth.model.entity.mount.ModelSwiftUnicorn;
 import com.zalthrion.zylroth.model.entity.mount.ModelWarTortoise;
+import com.zalthrion.zylroth.model.projectile.ModelRepulsorBolt;
 import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.render.BlockTESRRenderer;
 import com.zalthrion.zylroth.render.entity.RenderBadger;
@@ -60,6 +66,7 @@ import com.zalthrion.zylroth.render.entity.RenderSkeletalHorse;
 import com.zalthrion.zylroth.render.entity.RenderStag;
 import com.zalthrion.zylroth.render.entity.RenderTenebraeGuardian;
 import com.zalthrion.zylroth.render.entity.RenderTenebraeProtector;
+import com.zalthrion.zylroth.render.entity.RenderTuskarr;
 import com.zalthrion.zylroth.render.entity.RenderUndeadMinion;
 import com.zalthrion.zylroth.render.entity.RenderUndeadWarrior;
 import com.zalthrion.zylroth.render.entity.RenderUnicorn;
@@ -72,11 +79,25 @@ import com.zalthrion.zylroth.render.entity.mount.RenderPlaguedHorse;
 import com.zalthrion.zylroth.render.entity.mount.RenderSavageBadger;
 import com.zalthrion.zylroth.render.entity.mount.RenderSwiftUnicorn;
 import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
+import com.zalthrion.zylroth.render.item.RenderRepulsorCannon;
+import com.zalthrion.zylroth.render.item.RenderVoidiriteShield;
 import com.zalthrion.zylroth.render.item.RenderWoodenCrossbow;
+import com.zalthrion.zylroth.render.projectile.RenderRepulsorBolt;
+import com.zalthrion.zylroth.render.projectile.RenderRepulsorCannonBolt;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityBenzenn;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityBenzennStatue;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityGoldBag;
 import com.zalthrion.zylroth.render.tile.RenderTileEntityInfuser;
+import com.zalthrion.zylroth.render.tile.RenderTileEntityLamp;
+import com.zalthrion.zylroth.render.tile.item.RenderBenzenn;
+import com.zalthrion.zylroth.render.tile.item.RenderBenzennStatue;
+import com.zalthrion.zylroth.render.tile.item.RenderGoldBag;
+import com.zalthrion.zylroth.render.tile.item.RenderLamp;
+import com.zalthrion.zylroth.tile.TileEntityBenzenn;
+import com.zalthrion.zylroth.tile.TileEntityBenzennStatue;
 import com.zalthrion.zylroth.tile.TileEntityGoldBag;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
+import com.zalthrion.zylroth.tile.TileEntityLamp;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -111,7 +132,7 @@ public class ClientProxy extends CommonProxy {
 		
 		/** Animals */
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(new ModelBird(), shadowSize, shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBird.class, new RenderBird(new ModelBird(), shadowSize));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityRainbowPig.class, new RenderRainbowPig(new ModelRainbowPig(), new ModelRainbowPig(), shadowSize));
 		
@@ -143,6 +164,8 @@ public class ClientProxy extends CommonProxy {
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityStag.class, new RenderStag(new ModelStag(), shadowSize));
 		
+		RenderingRegistry.registerEntityRenderingHandler(EntityTuskarr.class, new RenderTuskarr(new ModelTuskarr(), shadowSize));
+		
 		/** Mounts */
 		
 		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new RenderDeathcharger(new ModelDeathcharger(), shadowSize));
@@ -160,6 +183,11 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityZalthrion.class, new RenderZalthrion(new ModelBiped(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySixOneThree.class, new RenderSixOneThree(new ModelSpecialBiped(), shadowSize));
 		
+		/** Projectiles */
+		
+		RenderingRegistry.registerEntityRenderingHandler(RepulsorBolt.class, new RenderRepulsorBolt(new ModelRepulsorBolt()));
+		RenderingRegistry.registerEntityRenderingHandler(RepulsorCannonBolt.class, new RenderRepulsorCannonBolt(new ModelRepulsorBolt()));
+		
 		/** Void Lord Armor */
 		
 		ModelVoidLordArmor voidLordArmor = new ModelVoidLordArmor();
@@ -173,6 +201,13 @@ public class ClientProxy extends CommonProxy {
 		/** Item Rendering */
 		
 		MinecraftForgeClient.registerItemRenderer(ModTools.woodenCrossbow, new RenderWoodenCrossbow());
+		MinecraftForgeClient.registerItemRenderer(ModTools.repulsorCannon, new RenderRepulsorCannon());
+		MinecraftForgeClient.registerItemRenderer(ModTools.voidiriteShield, new RenderVoidiriteShield());
+		
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.benzenn), new RenderBenzenn());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.benzennStatue), new RenderBenzennStatue());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.goldBag), new RenderGoldBag());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.lamp), new RenderLamp());
 	}
 	
 	@Override public void registerBlocks() {
@@ -180,7 +215,13 @@ public class ClientProxy extends CommonProxy {
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfuser.class, new RenderTileEntityInfuser());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldBag.class, new RenderTileEntityGoldBag());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBenzenn.class, new RenderTileEntityBenzenn());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBenzennStatue.class, new RenderTileEntityBenzennStatue());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLamp.class, new RenderTileEntityLamp());
+		
 		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.blockInfuserRI));
-		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.goldBag));
+//		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.goldBag));
+/*		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.benzenn));
+		RenderingRegistry.registerBlockHandler(new BlockTESRRenderer(RenderIDs.benzennStatue));*/
 	}
 }

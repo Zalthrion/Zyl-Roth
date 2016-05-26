@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class IridisSaplingItemBlock extends ItemBlockWithMetadata {
 	
-	private final static String[] subNames = {"autumnTreeSapling"};
+	private final static String[] subNames = {"autumnTreeSapling", "sakuraTreeSapling"};
 	
 	public IridisSaplingItemBlock(Block id) {
 		super(id, id);

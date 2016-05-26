@@ -20,8 +20,8 @@ import net.minecraft.world.IBlockAccess;
 
 public class IridisLeafBlock extends BlockLeaves {
 	
-	public static final String[][] leaf_names = new String[][] { {"autumnTreeLeaves"}, {"autumnTreeLeaves_opaque"}};
-	public static final String[] leaf_types = new String[] {"autumnTree"};
+	public static final String[][] leaf_names = new String[][] { {"autumnTreeLeaves", "sakuraTreeLeaves"}, {"autumnTreeLeaves_opaque", "sakuraTreeLeaves_opaque"}};
+	public static final String[] leaf_types = new String[] {"autumnTree", "sakuraTree"};
 	protected IIcon[][] icon = new IIcon[2][];
 	
 	public IridisLeafBlock() {
@@ -36,7 +36,7 @@ public class IridisLeafBlock extends BlockLeaves {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
-		return this.icon[this.field_150127_b][0];
+		return (meta & 3) == 1 ? this.icon[this.field_150127_b][1] : ((meta & 3) == 2 ? this.icon[this.field_150127_b][2] : this.icon[this.field_150127_b][0]);
 	}
 	
 	@Override

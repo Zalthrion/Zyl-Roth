@@ -1,12 +1,13 @@
 package com.zalthrion.zylroth.lib;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.common.util.EnumHelper;
-
+import com.zalthrion.zylroth.item.armor.EmeraldArmor;
 import com.zalthrion.zylroth.item.armor.RainbowGlasses;
 import com.zalthrion.zylroth.item.armor.TenebraeArmor;
 import com.zalthrion.zylroth.item.armor.VoidLordArmor;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraftforge.common.util.EnumHelper;
 
 public final class ModArmors {
 	
@@ -24,11 +25,18 @@ public final class ModArmors {
 	public static Item VoidLord_Leggings;
 	public static Item VoidLord_Boots;
 	
+	/* Emerald Armor Set */
+	public static Item Emerald_Helmet;
+	public static Item Emerald_Chestplate;
+	public static Item Emerald_Leggings;
+	public static Item Emerald_Boots;
+	
 	public static Item rainbowGlasses = new RainbowGlasses();
 	
 	public static void init() {
 		TenebraeArmor();
 		VoidLordArmor();
+		EmeraldArmor();
 		ModRegistry.addRegister(8, rainbowGlasses, "rainbowGlasses");
 	}
 	
@@ -46,5 +54,13 @@ public final class ModArmors {
 		ModRegistry.addRegister(5, VoidLord_Chestplate = new VoidLordArmor(VoidLord, "voidlord", 1).setUnlocalizedName("voidlordChestplate"), "voidlord_chestplate");
 		ModRegistry.addRegister(6, VoidLord_Leggings = new VoidLordArmor(VoidLord, "voidlord", 2).setUnlocalizedName("voidlordLeggings"), "voidlord_leggings");
 		ModRegistry.addRegister(7, VoidLord_Boots = new VoidLordArmor(VoidLord, "voidlord", 3).setUnlocalizedName("voidlordBoots"), "voidlord_boots");
+	}
+	
+	public static void EmeraldArmor() {
+		ArmorMaterial Emerald = EnumHelper.addArmorMaterial("Emerald", 42, new int[] {3, 8, 6, 3}, 16);
+		ModRegistry.addRegister(4, Emerald_Helmet = new EmeraldArmor(Emerald, "emerald", 0).setUnlocalizedName("emeraldHelmet"), "emerald_helmet");
+		ModRegistry.addRegister(5, Emerald_Chestplate = new EmeraldArmor(Emerald, "emerald", 1).setUnlocalizedName("emeraldChestplate"), "emerald_chestplate");
+		ModRegistry.addRegister(6, Emerald_Leggings = new EmeraldArmor(Emerald, "emerald", 2).setUnlocalizedName("emeraldLeggings"), "emerald_leggings");
+		ModRegistry.addRegister(7, Emerald_Boots = new EmeraldArmor(Emerald, "emerald", 3).setUnlocalizedName("emeraldBoots"), "emerald_boots");
 	}
 }

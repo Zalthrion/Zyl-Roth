@@ -2,7 +2,6 @@ package com.zalthrion.zylroth.block;
 
 import com.zalthrion.zylroth.block.machine.BlockBaseContainer;
 import com.zalthrion.zylroth.lib.ModTabs;
-import com.zalthrion.zylroth.reference.RenderIDs;
 import com.zalthrion.zylroth.tile.TileEntityGoldBag;
 import com.zalthrion.zylroth.utility.EnumFacingUtil;
 
@@ -45,7 +44,7 @@ public class GoldBag extends BlockBaseContainer {
 	
 	@Override
 	public int getRenderType() {
-		return RenderIDs.goldBag;
+		return -1;
 	}
 	
 	@Override

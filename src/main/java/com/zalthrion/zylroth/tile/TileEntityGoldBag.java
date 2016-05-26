@@ -3,6 +3,9 @@ package com.zalthrion.zylroth.tile;
 import com.zalthrion.zylroth.utility.EnumFacingUtil;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
@@ -30,5 +33,18 @@ public class TileEntityGoldBag extends TileEntity {
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setShort("Facing", (short) EnumFacingUtil.toInt(this.facing));
+	}
+	
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound tag = new NBTTagCompound();
+		this.writeToNBT(tag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, tag);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+		this.readFromNBT(packet.getNbtCompound());
+		if (this.getWorld().isRemote) this.getWorld().markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

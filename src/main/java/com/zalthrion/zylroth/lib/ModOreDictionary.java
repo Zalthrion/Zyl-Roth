@@ -37,5 +37,9 @@ public final class ModOreDictionary {
 		/* Voidirite */
 		OreDictionary.registerOre("ingotVoidirite", ModItems.voidiriteIngot);
 		
+		/* Others */
+		OreDictionary.registerOre("stone", ModBlocks.voidStone);
+		OreDictionary.registerOre("logWood", ModBlocks.kyrulLogBlock);
+		OreDictionary.registerOre("plankWood", ModBlocks.voidPlanks);
 	}
 }

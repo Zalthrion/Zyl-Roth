@@ -2,12 +2,12 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-
 import com.zalthrion.zylroth.block.BlockBase;
 import com.zalthrion.zylroth.lib.ModItems;
 import com.zalthrion.zylroth.lib.ModTabs;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 
 public class InferniumOre extends BlockBase {
 	
@@ -23,11 +23,12 @@ public class InferniumOre extends BlockBase {
 		this.setCreativeTab(ModTabs.ZylRoth);
 	}
 	
+	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune) {
 		return ModItems.rawInfernium;
 	}
 	
-	public int quantityDroppedWithBonus(int fortune, Random random) {
+/*	public int quantityDroppedWithBonus(int fortune, Random random) {
 		if (fortune > 0) {
 			int j = random.nextInt(fortune + 2) - 1;
 			
@@ -41,6 +42,10 @@ public class InferniumOre extends BlockBase {
 		else {
 			return quantityDropped(random);
 		}
-	}
+	}*/
 	
+	@Override
+	public int quantityDropped(Random rand) {
+		return 2 + rand.nextInt(3);
+	}
 }

@@ -1,22 +1,21 @@
 package com.zalthrion.zylroth.render.tile;
 
+import org.lwjgl.opengl.GL11;
+
+import com.zalthrion.zylroth.model.tile.ModelInfuser;
+import com.zalthrion.zylroth.tile.TileEntityInfuser;
+
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import com.zalthrion.zylroth.model.tile.ModelInfuser;
-import com.zalthrion.zylroth.reference.Reference;
-import com.zalthrion.zylroth.tile.TileEntityInfuser;
-
 public class RenderTileEntityInfuser extends TileEntitySpecialRenderer {
-	private static final ResourceLocation infuserTexture = new ResourceLocation(Reference.MOD_ID + ":" + "/textures/blocks/infuserMachine.png");
-	private static final ResourceLocation infuserActiveTexture = new ResourceLocation(Reference.MOD_ID + ":" + "/textures/blocks/infuserMachineActive.png");
-	private static final ResourceLocation oreInfuserTexture = new ResourceLocation(Reference.MOD_ID + ":" + "/textures/blocks/oreInfuserMachine.png");
-	private static final ResourceLocation oreInfuserActiveTexture = new ResourceLocation(Reference.MOD_ID + ":" + "/textures/blocks/oreInfuserMachineActive.png");
+	private static final ResourceLocation infuserTexture = new ResourceLocation("zylroth:textures/blocks/infuserMachine.png");
+	private static final ResourceLocation infuserActiveTexture = new ResourceLocation("zylroth:textures/blocks/infuserMachineActive.png");
+	private static final ResourceLocation oreInfuserTexture = new ResourceLocation("zylroth:textures/blocks/oreInfuserMachine.png");
+	private static final ResourceLocation oreInfuserActiveTexture = new ResourceLocation("zylroth:textures/blocks/oreInfuserMachineActive.png");
 	
 	private final ModelInfuser model;
 	

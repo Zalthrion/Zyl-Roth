@@ -1,8 +1,8 @@
 package com.zalthrion.zylroth.block;
 
-import net.minecraft.block.material.Material;
-
 import com.zalthrion.zylroth.lib.ModTabs;
+
+import net.minecraft.block.material.Material;
 
 public class AshBlock extends BlockBase {
 	
@@ -15,5 +15,4 @@ public class AshBlock extends BlockBase {
 		this.setStepSound(soundTypeSand);
 		this.setCreativeTab(ModTabs.ZylRoth);
 	}
-	
 }

@@ -6,10 +6,10 @@ itemGroup.Zyl'Roth=Zyl'Roth
 
 #Tooltips
 
-tooltip.zylroth:shift=\n- Hold Shift for more info -
+tooltip.zylroth:shift=- Hold Shift for more info -
 
 tooltip.zylroth:beacon=Can be used for Beacon bases
-tooltip.zylroth:core=A powerful artifact with immense power running inside it.
+tooltip.zylroth:core=A powerful artifact with power emanating from it.
 tooltip.zylroth:head=A block chiseled to look like a head.
 
 tooltip.zylroth:generic_tool_info=Sneak + Right click while holding to use normally.
@@ -23,10 +23,15 @@ tooltip.zylroth:tenebrae_generic=You can feel a dark essence surrounding it.
 tooltip.zylroth:tenebrae_armor=Made of an ancient dark ore rumored to be better than Diamond.
 tooltip.zylroth:tenebrae_armor_stats=\nDefense Level: Diamond \nDurability: 42 \nEnchantability: 16
 
-tooltip.zylroth:tenebrae_sword_lore=It seems to be attracting dark energy while being held.
+tooltip.zylroth:tenebrae_sword_lore=It seems to be attracting dark energy as you hold it.
 tooltip.zylroth:tenebrae_sword_stats=\nDamage Level: Above Diamond \nDurability: 2250 \nEnchantability: 15
 tooltip.zylroth:tenebrae_tool_lore=A tool made of an ancient dark ore.
 tooltip.zylroth:tenebrae_tool_stats=\nHarvest Level: Diamond \nDurability: 2250 \nEnchantability: 15
+
+tooltip.zylroth:voidium_sword_lore=Forged with the essence of both \nThe Void and The Nether it tortures the souls of it's foes \nwith each slice.
+tooltip.zylroth:voidirite_sword_lore=It is told that it sends \nthe dead souls of it's foes to a place with only eternal suffering.
+
+tooltip.zylroth:tenebraeCore=A powerful artifact with dark essence surrounding it.
 
 tooltip.zylroth:creative_generic=It glows from the power held within it.
 
@@ -74,7 +79,6 @@ tile.zylroth:inferniumOre.name=Infernium Ore
 tile.zylroth:endiriteOre.name=Endirite Ore
 tile.zylroth:voidiumOre.name=Voidium Ore
 
-
 #Blocks
 
 tile.zylroth:ashBlock.name=Ash Block
@@ -87,6 +91,8 @@ tile.zylroth:oreInfuserMachine.name=Ore Infuser
 tile.zylroth:oreInfuserMachineActive.name=Ore Infuser [Active]
 tile.zylroth:tenebraeBlock.name=Tenebrae Block
 tile.zylroth:tenebraeCore.name=Tenebrae Core
+tile.zylroth:voidPlanks.name=Void Planks
+tile.zylroth:voidStone.name=Void Stone
 
 tile.zylroth:rainbowRedLeaves.name=Rainbow Red Leaves
 tile.zylroth:rainbowOrangeLeaves.name=Rainbow Orange Leaves
@@ -101,6 +107,18 @@ tile.zylroth:rainbowYellowSapling.name=Rainbow Yellow Sapling
 tile.zylroth:rainbowGreenSapling.name=Rainbow Green Sapling
 tile.zylroth:rainbowBlueSapling.name=Rainbow Blue Sapling
 tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
+
+tile.zylroth:autumnTreeLeaves.name=Autumn Tree Leaves
+tile.zylroth:autumnTreeSapling.name=Autumn Tree Sapling
+
+tile.zylroth:voidWood.name=Void Wood
+tile.zylroth:voidTreeLeaves.name=Void Tree Leaves
+tile.zylroth:voidTreeSapling.name=Void Tree Sapling
+
+tile.zylroth:goldBag.name=Gold Bag
+
+tile.zylroth:benzenn.name=Benzenn Statue
+tile.zylroth:benzennStatue.name=Benzenn Statue (Pedestal)
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
@@ -128,11 +146,11 @@ item.zylroth:voidiumChunk.name=Voidium Chunk
 item.zylroth:voidiumIOre.name=Voidium Ore
 item.zylroth:voidiumIngot.name=Voidium Ingot
 
+item.zylroth:voidiriteIngot.name=Voidirite Ingot
 
 #Items
 
-item.zylroth:unstableTenebraeCore.name=Unstable Tenebrae Core
-
+item.zylroth:celestialCore.name=Celestial Core
 item.zylroth:darkShard.name=Dark Shard
 item.zylroth:soulEssence.name=Soul Essence
 item.zylroth:cursedSoulEssence.name=Cursed Soul Essence
@@ -151,17 +169,21 @@ item.zylroth:Summoning-Crystal_SC_WarTortoise.name=(Summoning Crystal) War Torto
 item.zylroth:Summoning-Crystal_SC_SavageBadger.name=(Summoning Crystal) Savage Badger
 item.zylroth:Summoning-Crystal_SC_SwiftUnicorn.name=(Summoning Crystal) Swift Unicorn
 
-
 #Entity
 
+entity.Zylroth.badger.name=Badger
 entity.Zylroth.bird.name=Bird
+entity.Zylroth.boar.name=Boar
+entity.Zylroth.deer.name=Deer
 entity.Zylroth.tenebraeGuardian.name=Tenebrae Guardian
-entity.Zylroth.voidLord.name=Void Lord Zakuun
+entity.Zylroth.voidLord.name=Void Lord Zerun
 entity.Zylroth.rainbowPig.name=Rainbow Pig
 entity.Zylroth.skeletalHorse.name=Skeletal Horse
+entity.Zylroth.stag.name=Stag
 entity.Zylroth.tenebraeProtector.name=Tenebrae Protector
 entity.Zylroth.undeadMinion.name=Undead Minion
 entity.Zylroth.undeadWarrior.name=Undead Warrior
+entity.Zylroth.unicorn.name=Unicorn
 entity.Zylroth.voidDragon.name=Void Dragon
 
 entity.Zylroth:Deathcharger.name=Deathcharger
@@ -169,6 +191,9 @@ entity.Zylroth:Plagued_Horse.name=Plagued Horse
 entity.Zylroth:WarTortoise.name=War Tortoise
 entity.Zylroth:SavageBadger.name=Savage Badger
 entity.Zylroth:SwiftUnicorn.name=Swift Unicorn
+
+entity.Zylroth.Six-One-Three.name=Six-One-Three
+entity.Zylroth.Zalthrion.name=Zalthrion
 
 
 #Armors
@@ -178,10 +203,12 @@ item.zylroth:tenebraeChestplate.name=Tenebrae Chestplate
 item.zylroth:tenebraeLeggings.name=Tenebrae Leggings
 item.zylroth:tenebraeBoots.name=Tenebrae Boots
 
-item.zylroth:voidLordHelmet.name=Void Lord Helmet
-item.zylroth:voidLordChestplate.name=Void Lord Chestplate
-item.zylroth:voidLordLeggings.name=Void Lord Leggings
-item.zylroth:voidLordBoots.name=Void Lord Boots
+item.zylroth:voidlordHelmet.name=Void Lord Helmet
+item.zylroth:voidlordChestplate.name=Void Lord Chestplate
+item.zylroth:voidlordLeggings.name=Void Lord Leggings
+item.zylroth:voidlordBoots.name=Void Lord Boots
+
+item.zylroth:rainbowGlasses.name=Rainbow Glasses
 
 
 #Tools
@@ -199,4 +226,8 @@ item.zylroth:tenebraeShovel.name=Tenebrae Shovel
 item.zylroth:tenebraeHoe.name=Tenebrae Hoe
 item.zylroth:tenebraeLeafCutter.name=Tenebrae Leaf Cutter
 
+item.zylroth:voidiumSword.name=Voidium Sword
+item.zylroth:voidiriteSword.name=Voidirite Sword
+
+item.zylroth:repulsorCannon.name=Repulsor Cannon
 item.zylroth:woodenCrossbow.name=Wooden Crossbow

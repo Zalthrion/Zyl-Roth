@@ -46,9 +46,10 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 	
 	@Override
 	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
-		return color = 0xDB8018;
+		return color = 0x4DAD0C;
 	}
 	
+	@Override
 	public int getSkyColorByTemp(float par1) {
 		return 0x3CA7B5;
 	}

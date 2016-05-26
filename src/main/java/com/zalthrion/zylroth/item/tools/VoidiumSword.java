@@ -171,7 +171,6 @@ public class VoidiumSword extends ItemSword implements ZylrothTool {
 			list.add(StatCollector.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		} else {
 			list.addAll(TooltipHelper.addAll("voidium_sword_lore"));
-			list.addAll(TooltipHelper.addAll("voidium_generic"));
 			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				list.addAll(TooltipHelper.addAll("voidium_sword_stats"));
 			} else {

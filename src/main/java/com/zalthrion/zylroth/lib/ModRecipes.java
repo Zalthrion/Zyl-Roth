@@ -23,9 +23,7 @@ public final class ModRecipes {
 	
 	public static void registerSmeltingRecipes() {
 		
-		GameRegistry.addSmelting(ModBlocks.tenebraeOre, new ItemStack(ModItems.tenebraeChunk), 0.5F);
-		
-		GameRegistry.addSmelting(ModItems.tenebraeOre, new ItemStack(ModItems.tenebraeIngot), 0.1F);
+//		GameRegistry.addSmelting(ModBlocks.tenebraeOre, new ItemStack(ModItems.tenebraeChunk), 0.5F);
 		
 	}
 	
@@ -37,10 +35,17 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeCore), "RTR", "TBT", "RTR", 'R', Blocks.redstone_block, 'T', ModItems.tenebraeIngot, 'B', ModBlocks.tenebraeBlock);
 		
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.empoweredTenebraeCore), "C", "B", 'C', ModItems.celestialCore, 'B', ModBlocks.tenebraeCore);
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tenebraeBlock), "III", "III", "III", 'I', ModItems.tenebraeIngot);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.voidGem), "NVN", "VDV", "NVN", 'V', ModItems.voidEssence, 'D', Items.diamond);
 		
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.benzenn), "NSN", "SCS", "CCC", 'S', Blocks.stone_slab, 'C', Blocks.cobblestone);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.benzennStatue), "NBN", "NSN", 'S', Blocks.stone_slab, 'B', ModBlocks.benzenn);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.celestialCore), "RDR", "DED", "RDR", 'R', Blocks.redstone_block, 'D', Items.diamond, 'E', Items.ender_pearl);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.infuser_Idle), "RTR", "ICI", "RTR", 'R', Blocks.redstone_block, 'I', Blocks.iron_block, 'T', ModBlocks.tenebraeBlock, 'C', ModItems.celestialCore);
 		
@@ -54,12 +59,23 @@ public final class ModRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.tenebraeBlock, 1), new ItemStack(ModBlocks.chiseledTenebrae));
 		
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.voidPlanks, 4), new ItemStack(ModBlocks.kyrulLogBlock, 1));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.planks, 1, 1), new ItemStack(ModBlocks.voidPlanks));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(ModBlocks.voidStone));
+		
 		if (ConfigurationHandler.getKyrulEnabled())
 			GameRegistry.addShapelessRecipe(new ItemStack(ModItems.voidTalisman, 1), new ItemStack(ModItems.goldTalisman), new ItemStack(ModItems.voidGem));
-		
 	}
 	
 	public static void registerArmorRecipes() {
+		
+		/* Emerald Armor */
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Emerald_Helmet), "III", "IEI", 'I', Items.emerald);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Emerald_Chestplate), "IEI", "III", "III", 'I', Items.emerald);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Emerald_Leggings), "III", "IEI", "IEI", 'I', Items.emerald);
+		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Emerald_Boots), "IEI", "IEI", 'I', Items.emerald);
 		
 		/* Tenebrae Armor */
 		GameRegistry.addShapedRecipe(new ItemStack(ModArmors.Tenebrae_Helmet), "III", "IEI", 'I', ModItems.tenebraeIngot);
@@ -85,7 +101,8 @@ public final class ModRecipes {
 	public static void registerInfusionRecipes() {
 		
 		/* Real Fuel Items */
-		InfusionFuels.registerFuel(new ItemStack(ModItems.tenebraeOre), 200);
+//		InfusionFuels.registerFuel(new ItemStack(ModItems.tenebraeOre), 200);
+		InfusionFuels.registerFuel(new ItemStack(Items.redstone), 200);
 		
 		/* Real Recipes */
 		InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(ModBlocks.endiriteOre), new ItemStack(Blocks.end_stone), new ItemStack(ModItems.tenebraeOre), new ItemStack(Items.ender_pearl));

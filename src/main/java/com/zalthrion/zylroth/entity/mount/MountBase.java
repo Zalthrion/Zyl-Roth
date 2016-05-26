@@ -2,6 +2,8 @@ package com.zalthrion.zylroth.entity.mount;
 
 import java.util.Iterator;
 
+import com.zalthrion.zylroth.handler.MountData;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,19 +16,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.handler.MountData;
-
 public class MountBase extends EntityTameable {
 	
 	public boolean isSummoned = false;
 	
 	public boolean canDespawn;
-	
-	protected Entity entity;
-	
-	protected EntityPlayer player;
-	
-	protected EntityTameable tameableMount;
 	
 	protected NBTTagCompound tagCompound;
 	
@@ -43,24 +37,6 @@ public class MountBase extends EntityTameable {
 	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
 		return this.isSummoned;
-	}
-	
-	/** Entity check */
-	public boolean isEntity(Entity entity) {
-		
-		if (entity instanceof Entity) {
-			entity = this.entity;
-		}
-		
-		if (entity instanceof EntityPlayer) {
-			entity = this.player;
-		}
-		
-		if (entity instanceof EntityTameable) {
-			entity = this.tameableMount;
-		}
-		
-		return this.isEntity(entity);
 	}
 	
 	/** Gives the horse special attributes */
