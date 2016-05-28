@@ -1,13 +1,11 @@
 package com.zalthrion.zylroth.entity.projectile;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class RepulsorCannonBolt extends EntityArrow {
+public class RepulsorCannonBolt extends EntityThrowable {
 	private float explosionRadius = 1.0F;
 	
 	public RepulsorCannonBolt(World par1World) {
@@ -23,20 +21,16 @@ public class RepulsorCannonBolt extends EntityArrow {
 		super(par1World, par2, par4, par6);
 	}
 	
-/*	@Override protected float getGravityVelocity() {
+	@Override protected float getGravityVelocity() {
 		return 0.02F;
-	}*/
+	}
 	
-	@Override protected void onHit(RayTraceResult raytraceResultIn) {
+	@Override protected void onImpact(RayTraceResult raytraceResultIn) {
 		if (!this.worldObj.isRemote) {
 			boolean flag = this.worldObj.getGameRules().getBoolean("mobGriefing");
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, this.explosionRadius, flag);
 			
 			this.setDead();
 		}
-	}
-	
-	@Override protected ItemStack getArrowStack() {
-		return new ItemStack(Items.ARROW);
 	}
 }
