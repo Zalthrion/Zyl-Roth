@@ -46,7 +46,7 @@ public class InfuserMachine extends BlockContainerBase {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
 		this.setNames(isActive ? (type.isNormal() ? "infuserMachineActive" : "oreInfuserMachineActive") : (type.isNormal() ? "infuserMachine" : "oreInfuserMachine"));
-		this.setParticleBlockState(type.isNormal() ? BlockInit.tenebraeCore.getDefaultState() : Blocks.quartz_block.getDefaultState());
+		this.setParticleBlockState(type.isNormal() ? BlockInit.tenebraeCore.getDefaultState() : Blocks.QUARTZ_BLOCK.getDefaultState());
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
 		

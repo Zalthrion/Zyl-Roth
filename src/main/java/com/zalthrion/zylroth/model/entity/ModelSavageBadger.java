@@ -9,17 +9,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityFancyBadger;
 
-/**
- * Badger - Zalthrion
- * Created using Tabula 4.1.1
- */
-//TODO Check all mappings, reorganize methods
+/** Badger - Zalthrion Created using Tabula 4.1.1 */
+// TODO Check all mappings, reorganize methods
 @SideOnly(Side.CLIENT) public class ModelSavageBadger extends ModelBase {
+	
 	public ModelRenderer Body;
 	public ModelRenderer BottomLeftLeg;
 	public ModelRenderer BottomRightLeg;
-	public ModelRenderer TopLeftLeg;
-	public ModelRenderer TopRightLeg;
+	public ModelRenderer FrontLeftLeg;
+	public ModelRenderer FrontRightLeg;
 	public ModelRenderer Tail;
 	public ModelRenderer TopHatBase;
 	public ModelRenderer Head;
@@ -49,15 +47,15 @@ import com.zalthrion.zylroth.entity.EntityFancyBadger;
 		this.BottomLeftLeg = new ModelRenderer(this, 30, 20);
 		this.BottomLeftLeg.setRotationPoint(0.6F, 20.0F, 2.4F);
 		this.BottomLeftLeg.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
-		this.TopRightLeg = new ModelRenderer(this, 30, 20);
-		this.TopRightLeg.setRotationPoint(-3.6F, 20.0F, -4.4F);
-		this.TopRightLeg.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
+		this.FrontRightLeg = new ModelRenderer(this, 30, 20);
+		this.FrontRightLeg.setRotationPoint(-3.6F, 20.0F, -4.4F);
+		this.FrontRightLeg.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
 		this.LeftEar = new ModelRenderer(this, 47, 20);
 		this.LeftEar.setRotationPoint(3.7F, -0.6F, 2.0F);
 		this.LeftEar.addBox(0.0F, 0.0F, 0.0F, 2, 2, 1, 0.0F);
-		this.TopLeftLeg = new ModelRenderer(this, 30, 20);
-		this.TopLeftLeg.setRotationPoint(0.6F, 20.0F, -4.4F);
-		this.TopLeftLeg.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
+		this.FrontLeftLeg = new ModelRenderer(this, 30, 20);
+		this.FrontLeftLeg.setRotationPoint(0.6F, 20.0F, -4.4F);
+		this.FrontLeftLeg.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
 		this.Mouth = new ModelRenderer(this, 45, 12);
 		this.Mouth.setRotationPoint(0.5F, 1.5F, -2.0F);
 		this.Mouth.addBox(0.0F, 0.0F, 0.0F, 4, 3, 2, 0.0F);
@@ -125,8 +123,7 @@ import com.zalthrion.zylroth.entity.EntityFancyBadger;
 		
 	}
 	
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	@Override public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		
@@ -134,9 +131,9 @@ import com.zalthrion.zylroth.entity.EntityFancyBadger;
 		this.Tail.render(f5);
 		this.Body.render(f5);
 		this.BottomLeftLeg.render(f5);
-		this.TopRightLeg.render(f5);
+		this.FrontRightLeg.render(f5);
 		this.BottomRightLeg.render(f5);
-		this.TopLeftLeg.render(f5);
+		this.FrontLeftLeg.render(f5);
 		
 		this.SaddleBase.render(f5);
 		
@@ -146,23 +143,18 @@ import com.zalthrion.zylroth.entity.EntityFancyBadger;
 		
 	}
 	
-	/**
-	 * This is a helper function from Tabula to set the rotation of model parts
-	 */
+	/** This is a helper function from Tabula to set the rotation of model parts */
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
 	
-	@Override
-	public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-		
+	@Override public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
 		this.Tail.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * -0.5F;
-		
-		this.TopLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
+		this.FrontLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
 		this.BottomLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
-		this.TopRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
+		this.FrontRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.4F * p_78087_2_;
 		this.BottomRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_;
 	}
 }

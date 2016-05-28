@@ -16,7 +16,7 @@ import com.zalthrion.zylroth.reference.Reference;
 @SideOnly(Side.CLIENT)
 public class RenderWarTortoise extends RenderLiving<MountWarTortoise> {
 	
-	private static final ResourceLocation pigTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Rainbow_Pig.png");
+	private static final ResourceLocation pigTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/mounts/Rainbow_Pig.png");
 	
 	public ModelBase modelBase;
 	

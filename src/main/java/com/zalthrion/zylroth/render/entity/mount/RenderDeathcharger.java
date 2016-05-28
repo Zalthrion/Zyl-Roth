@@ -4,12 +4,10 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.entity.passive.HorseArmorType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,22 +30,6 @@ public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 		super(manager, new ModelHorse(), 0.5F);
 	}
 	
-	/** Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime */
-	@Override protected void preRenderCallback(MountDeathcharger p_77041_1_, float p_77041_2_) {
-		float f1 = 1.0F;
-		HorseArmorType type = p_77041_1_.getType();
-		
-		if (type == HorseArmorType.DONKEY) {
-			f1 *= 0.87F;
-		} else if (type == HorseArmorType.MULE) {
-			f1 *= 0.92F;
-		}
-		
-		GlStateManager.scale(f1, f1, f1);
-		super.preRenderCallback(p_77041_1_, p_77041_2_);
-	}
-	
 	/** Renders the model in RenderLiving */
 	@Override protected void renderModel(MountDeathcharger p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		if (p_77036_1_.isInvisible()) {
@@ -61,7 +43,7 @@ public class RenderDeathcharger extends RenderLiving<MountDeathcharger> {
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(MountDeathcharger p_110775_1_) {
-		if (!p_110775_1_.func_110239_cn()) {
+		if (!p_110775_1_.hasLayeredTextures()) {
 			switch (p_110775_1_.getType()) {
 				case HORSE:
 				default:

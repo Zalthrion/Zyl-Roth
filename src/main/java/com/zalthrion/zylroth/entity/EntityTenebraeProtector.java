@@ -90,11 +90,11 @@ public class EntityTenebraeProtector extends EntityMob {
 		
 		if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D && this.rand.nextInt(5) == 0) {
 			int i = MathHelper.floor_double(this.posX);
-			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.getYOffset());
+			int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - this.getYOffset());
 			int k = MathHelper.floor_double(this.posZ);
 			
 			if (!this.worldObj.isAirBlock(new BlockPos(i, j, k))) {
-				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(this.worldObj.getBlockState(new BlockPos(i, j, k))));
+				this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + (this.rand.nextFloat() - 0.5D) * this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + (this.rand.nextFloat() - 0.5D) * this.width, 4.0D * (this.rand.nextFloat() - 0.5D), 0.5D, (this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(this.worldObj.getBlockState(new BlockPos(i, j, k))));
 			}
 		}
 	}
@@ -103,13 +103,13 @@ public class EntityTenebraeProtector extends EntityMob {
 	public boolean attackEntityAsMob(Entity p_70652_1_) {
 		this.attackTimer = 10;
 		this.worldObj.setEntityState(this, (byte) 4);
-		boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (7 + this.rand.nextInt(15)));
+		boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), 7 + this.rand.nextInt(15));
 		
 		if (flag) {
 			p_70652_1_.motionY += 0.4000000059604645D;
 		}
 		
-		this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Irongolem throw?
+		this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
 		return flag;
 	}
 	
@@ -118,7 +118,7 @@ public class EntityTenebraeProtector extends EntityMob {
 	public void handleStatusUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
-			this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Irongolem throw?
+			this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
 		} else {
 			super.handleStatusUpdate(par1);
 		}
@@ -131,22 +131,22 @@ public class EntityTenebraeProtector extends EntityMob {
 	
 	@Override
 	protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_irongolem_hurt;
+		return SoundEvents.ENTITY_IRONGOLEM_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_irongolem_death;
+		return SoundEvents.ENTITY_IRONGOLEM_DEATH;
 	}
 	
 	@Override
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound(SoundEvents.entity_irongolem_step, 1.0F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 1.0F);
 	}
 	
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		this.dropItem(ItemInit.unstableTenebraeCore, 1);
+		this.dropItem(ItemInit.celestialCore, 1);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + par2 * 2);
 		

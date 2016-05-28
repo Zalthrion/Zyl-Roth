@@ -1,9 +1,9 @@
 package com.zalthrion.zylroth.world.biome;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
-public class BiomeGenColdOcean extends BiomeGenBase {
+public class BiomeGenColdOcean extends Biome {
 	public BiomeGenColdOcean(BiomeProperties properties) {
 		super(properties);
 		
@@ -12,7 +12,7 @@ public class BiomeGenColdOcean extends BiomeGenBase {
 		this.spawnableCaveCreatureList.clear();
 		
 		this.topBlock = ICE;
-		this.fillerBlock = Blocks.packed_ice.getDefaultState();
+		this.fillerBlock = Blocks.PACKED_ICE.getDefaultState();
 	}
 	
 	@Override public int getModdedBiomeFoliageColor(int original) {
@@ -27,7 +27,7 @@ public class BiomeGenColdOcean extends BiomeGenBase {
 		return 0x3CA7B5;
 	}
 	
-	@Override public BiomeGenBase.TempCategory getTempCategory() {
-		return BiomeGenBase.TempCategory.OCEAN;
+	@Override public Biome.TempCategory getTempCategory() {
+		return Biome.TempCategory.OCEAN;
 	}
 }

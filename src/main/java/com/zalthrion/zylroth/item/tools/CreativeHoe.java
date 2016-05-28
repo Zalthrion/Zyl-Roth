@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.item.tools;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -66,16 +66,16 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 		
 		Block block = worldIn.getBlockState(pos).getBlock();
 		
-		if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.grass || block == Blocks.dirt) && !(this.isBroken(stack))) {
-			Block block1 = Blocks.farmland;
-			worldIn.playSound(playerIn, pos, SoundEvents.item_hoe_till, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT) && !(this.isBroken(stack))) {
+			Block block1 = Blocks.FARMLAND;
+			worldIn.playSound(playerIn, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			
 			if (worldIn.isRemote) return EnumActionResult.SUCCESS;
 			for (int ix = -1; ix < 2; ++ ix) {
 				for (int iz = -1; iz < 2; ++ iz) {
 					
-					boolean isAGrass = worldIn.getBlockState(pos.add(ix, 0, iz)) == Blocks.grass;
-					boolean isADirt = worldIn.getBlockState(pos.add(ix, 0, iz)) == Blocks.dirt;
+					boolean isAGrass = worldIn.getBlockState(pos.add(ix, 0, iz)) == Blocks.GRASS;
+					boolean isADirt = worldIn.getBlockState(pos.add(ix, 0, iz)) == Blocks.DIRT;
 					
 					if (isADirt || isAGrass && !(playerIn.isSneaking())) {
 						worldIn.setBlockState(pos.add(ix, 0, iz), block1.getDefaultState());
@@ -84,8 +84,8 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 				}
 			}
 			
-			boolean isGrass = worldIn.getBlockState(pos).getBlock() == Blocks.grass;
-			boolean isDirt = worldIn.getBlockState(pos).getBlock() == Blocks.dirt;
+			boolean isGrass = worldIn.getBlockState(pos).getBlock() == Blocks.GRASS;
+			boolean isDirt = worldIn.getBlockState(pos).getBlock() == Blocks.DIRT;
 			
 			if (isDirt || isGrass && playerIn.isSneaking()) {
 				worldIn.setBlockState(pos, block1.getDefaultState());
@@ -101,7 +101,7 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));

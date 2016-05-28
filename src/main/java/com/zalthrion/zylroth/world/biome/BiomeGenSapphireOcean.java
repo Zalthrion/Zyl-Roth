@@ -1,9 +1,9 @@
 package com.zalthrion.zylroth.world.biome;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
-public class BiomeGenSapphireOcean extends BiomeGenBase {
+public class BiomeGenSapphireOcean extends Biome {
 	public BiomeGenSapphireOcean(BiomeProperties properties) {
 		super(properties);
 		
@@ -11,8 +11,8 @@ public class BiomeGenSapphireOcean extends BiomeGenBase {
 		this.spawnableMonsterList.clear();
 		this.spawnableCaveCreatureList.clear();
 		
-		this.topBlock = Blocks.grass.getDefaultState();
-		this.fillerBlock = Blocks.dirt.getDefaultState();
+		this.topBlock = Blocks.GRASS.getDefaultState();
+		this.fillerBlock = Blocks.DIRT.getDefaultState();
 	}
 
 	@Override public int getModdedBiomeFoliageColor(int original) {
@@ -27,7 +27,7 @@ public class BiomeGenSapphireOcean extends BiomeGenBase {
 		return 0x3CA7B5;
 	}
 	
-	@Override public BiomeGenBase.TempCategory getTempCategory() {
-		return BiomeGenBase.TempCategory.OCEAN;
+	@Override public Biome.TempCategory getTempCategory() {
+		return Biome.TempCategory.OCEAN;
 	}
 }

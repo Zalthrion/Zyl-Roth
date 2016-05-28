@@ -2,13 +2,13 @@ package com.zalthrion.zylroth.base;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -18,12 +18,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 import com.zalthrion.zylroth.utility.ZylrothTeleporter;
 
-public class ItemBaseTalisman extends ItemBase {
+public class ItemTalismanBase extends ItemBase {
 	private String dimension = "NULL";
 	
 	/* Constructors */
 	
-	public ItemBaseTalisman() {
+	public ItemTalismanBase() {
 		super();
 	}
 	
@@ -56,26 +56,26 @@ public class ItemBaseTalisman extends ItemBase {
 	public void handleDimensionTeleport(boolean condition, int dimensionID, ItemStack stack, World world, EntityPlayer player) {
 		if (player.isSneaking() && !player.isInWater() && !player.isOnLadder()) {
 			if (player.dimension == 0) {
-				if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindOverworld(stack, player);
-				if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.translateToLocal("msg.zylroth:spawnpoint.set")));
+				if (!world.isRemote) ((ItemTalismanBase) stack.getItem()).bindOverworld(stack, player);
+				if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.format("msg.zylroth:spawnpoint.set")));
 			} else if (player.dimension == dimensionID) {
-				if (!world.isRemote) ((ItemBaseTalisman) stack.getItem()).bindDimension(stack, player);
-				if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.translateToLocal("msg.zylroth:spawnpoint.set")));
+				if (!world.isRemote) ((ItemTalismanBase) stack.getItem()).bindDimension(stack, player);
+				if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.format("msg.zylroth:spawnpoint.set")));
 			}
 		} else {
 			if (condition) {
 				if (player.dimension == 1) {
-					if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.translateToLocal("msg.zylroth:invaliddimension")));
+					if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.format("msg.zylroth:invaliddimension")));
 					return;
 				} else {
 					if (player.dimension == 0) {
 						if (!isOverworldBound(stack)) {
-							if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.translateToLocal("msg.zylroth:spawnpoint.warn")));
+							if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.format("msg.zylroth:spawnpoint.warn")));
 							return;
 						}
 					} else if (player.dimension == dimensionID) {
 						if (!isDimensionBound(stack)) {
-							if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.translateToLocal("msg.zylroth:spawnpoint.warn")));
+							if (world.isRemote) player.addChatMessage(new TextComponentString(I18n.format("msg.zylroth:spawnpoint.warn")));
 							return;
 						}
 					}
@@ -127,12 +127,12 @@ public class ItemBaseTalisman extends ItemBase {
 			tooltip.addAll(TooltipHelper.addAll("spawnpoint.set"));
 		} else {
 			int[] overworldBindPoint = getOverworldBind(stack);
-			tooltip.add(I18n.translateToLocalFormatted("tooltip.zylroth:spawnpoint.overworld", overworldBindPoint[0] + ", " + overworldBindPoint[1] + ", " + overworldBindPoint[2]));
+			tooltip.add(I18n.format("tooltip.zylroth:spawnpoint.overworld", overworldBindPoint[0] + ", " + overworldBindPoint[1] + ", " + overworldBindPoint[2]));
 			if (!isDimensionBound(stack)) {
-				tooltip.add(I18n.translateToLocalFormatted("tooltip.zylroth:spawnpoint.dimension", I18n.translateToLocal("general.zylroth:dimension." + this.dimension.toLowerCase()), I18n.translateToLocal("general.zylroth:unavailable")));
+				tooltip.add(I18n.format("tooltip.zylroth:spawnpoint.dimension", I18n.format("general.zylroth:dimension." + this.dimension.toLowerCase()), I18n.format("general.zylroth:unavailable")));
 			} else {
 				int[] dimensionBind = getDimensionBind(stack);
-				tooltip.add(I18n.translateToLocalFormatted("tooltip.zylroth:spawnpoint.dimension", I18n.translateToLocal("general.zylroth:dimension." + this.dimension.toLowerCase()), dimensionBind[0] + ", " + dimensionBind[1] + ", " + dimensionBind[2]));
+				tooltip.add(I18n.format("tooltip.zylroth:spawnpoint.dimension", I18n.format("general.zylroth:dimension." + this.dimension.toLowerCase()), dimensionBind[0] + ", " + dimensionBind[1] + ", " + dimensionBind[2]));
 			}
 		}
 	}

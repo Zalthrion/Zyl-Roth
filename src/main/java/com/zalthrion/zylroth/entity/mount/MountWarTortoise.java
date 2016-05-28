@@ -41,18 +41,22 @@ public class MountWarTortoise extends MountBase {
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_pig_ambient;
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_pig_hurt;
+		return SoundEvents.ENTITY_PIG_HURT;
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_pig_death;
+		return SoundEvents.ENTITY_PIG_DEATH;
+	}
+	
+	@Override public double getMountedYOffset() {
+		return 1.45F;
 	}
 	
 	@Override protected void playStepSound(BlockPos pos, Block blockIn) {
-		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 }

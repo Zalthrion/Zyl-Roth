@@ -15,23 +15,20 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
@@ -40,7 +37,11 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import com.zalthrion.zylroth.lib.ModInit.BiomeInit;
+import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.world.mapstructures.DragonNest;
+import com.zalthrion.zylroth.world.mapstructures.KyrulLakeGenerator;
+import com.zalthrion.zylroth.world.mapstructures.MapGenVoidCavesKyrul;
+import com.zalthrion.zylroth.world.mapstructures.MapGenVoidRavineKyrul;
 
 //TODO Rewrite this referring to vanilla overworld ChunkGenerator
 public class ChunkGeneratorKyrul implements IChunkGenerator {
@@ -65,7 +66,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 	private MapGenBase caveGenerator;
 	private MapGenMineshaft mineshaftGenerator;
 	private MapGenBase ravineGenerator;
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 	double[] ngo3Octaves;
 	double[] ngo1Octaves;
 	double[] ngo2Octaves;
@@ -73,11 +74,11 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 	private int dragonSpawnerChance = 10;
 	
 	public ChunkGeneratorKyrul(World world, long seed, boolean mapFeatures, String param5) {
-		this.fluidBlock = Blocks.water;
+		this.fluidBlock = Blocks.WATER;
 		this.stoneNoise = new double[256];
-		this.caveGenerator = new MapGenCaves();
+		this.caveGenerator = new MapGenVoidCavesKyrul();
 		this.mineshaftGenerator = new MapGenMineshaft();
-		this.ravineGenerator = new MapGenRavine();
+		this.ravineGenerator = new MapGenVoidRavineKyrul();
 		{
 			caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, EventType.CAVE);
 			mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, EventType.MINESHAFT);
@@ -99,14 +100,14 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 		
 		for (int j = -2; j <= 2; j ++) {
 			for (int k = -2; k <= 2; k ++) {
-				float f = 10.0F / MathHelper.sqrt_float((float) (j * j + k * k) + 0.2F);
+				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				this.parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 		}
 		
 		if (param5 != null) {
-			this.settings = ChunkProviderSettings.Factory.jsonToFactory(param5).func_177864_b();
-			this.fluidBlock = this.settings.useLavaOceans ? Blocks.lava : Blocks.water;
+			this.settings = ChunkProviderSettings.Factory.jsonToFactory(param5).build();
+			this.fluidBlock = this.settings.useLavaOceans ? Blocks.LAVA : Blocks.WATER;
 		}
 		
 		ContextOverworld ctx = new ContextOverworld(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
@@ -159,7 +160,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 							
 							for (int j3 = 0; j3 < 4; j3 ++) {
 								if ((d16 += d15) > 0) {
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, Blocks.stone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, BlockInit.voidStone.getDefaultState());
 								} else if (k2 * 8 + l2 < this.settings.seaLevel) {
 									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, this.fluidBlock.getDefaultState());
 								}
@@ -179,15 +180,15 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 		}
 	}
 	
-	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, BiomeGenBase[] biomes) {
+	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, Biome[] biomes) {
 		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.worldObj)) return;
 		
 		double d0 = 0.03125D;
-		this.stoneNoise = this.noiseGen4.func_151599_a(this.stoneNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.stoneNoise = this.noiseGen4.getRegion(this.stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int k = 0; k < 16; k ++) {
 			for (int l = 0; l < 16; l ++) {
-				BiomeGenBase bgb = biomes[l + k * 16];
+				Biome bgb = biomes[l + k * 16];
 				bgb.genTerrainBlocks(this.worldObj, this.rand, primer, x * 16 + k, z * 16 + l, this.stoneNoise[l + k * 16]);
 			}
 		}
@@ -197,7 +198,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		this.setBlocksInChunk(chunkX, chunkZ, primer);
-		this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 		this.replaceBlocksForBiome(chunkX, chunkZ, primer, this.biomesForGeneration);
 		if (this.settings.useCaves) this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 		if (this.settings.useRavines) this.ravineGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
@@ -206,7 +207,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 		byte[] abyte = chunk.getBiomeArray();
 		
 		for (int k = 0; k < abyte.length; k ++) {
-			abyte[k] = (byte) BiomeGenBase.getIdForBiome(this.biomesForGeneration[k]);
+			abyte[k] = (byte) Biome.getIdForBiome(this.biomesForGeneration[k]);
 		}
 		
 		chunk.generateSkylightMap();
@@ -229,11 +230,11 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 				float f3 = 0.0F;
 				float f4 = 0.0F;
 				byte b0 = 2;
-				BiomeGenBase bgb = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
+				Biome bgb = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
 				
 				for (int l1 = -b0; l1 <= b0; l1 ++) {
 					for (int i2 = -b0; i2 < b0; i2 ++) {
-						BiomeGenBase bgb1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
+						Biome bgb1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
 						float f5 = this.settings.biomeDepthOffSet + bgb1.getBaseHeight() * this.settings.biomeDepthWeight;
 						float f6 = this.settings.biomeScaleOffset + bgb1.getHeightVariation() * this.settings.biomeScaleWeight;
 						
@@ -284,8 +285,8 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 				}
 				
 				i1 ++;
-				double d8 = (double) f3;
-				double d9 = (double) f2;
+				double d8 = f3;
+				double d9 = f2;
 				d8 += d7 * 0.2D;
 				d8 = d8 * (double) this.settings.baseSize / 8.0D;
 				double d0 = (double) this.settings.baseSize + d8 * 4.0D;
@@ -303,7 +304,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 					double d5 = MathHelper.denormalizeClamp(d2, d3, d4) - d1;
 					
 					if (j2 > 29) {
-						double d6 = (double) ((float) (j2 - 29) / 3.0F);
+						double d6 = (j2 - 29) / 3.0F;
 						d5 = d5 * (1.0D - d6) + -10.0D * d6;
 					}
 					
@@ -319,27 +320,27 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 		int xPos = chunkX * 16;
 		int zPos = chunkZ * 16;
 		BlockPos blockpos = new BlockPos(xPos, 0, zPos);
-		BiomeGenBase bgb = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+		Biome bgb = this.worldObj.getBiome(blockpos.add(16, 0, 16));
 		this.rand.setSeed(this.worldObj.getSeed());
 		long i1 = this.rand.nextLong() / 2L * 2L + 1L;
 		long j1 = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed((long) chunkX * i1 + (long) chunkZ * j1 ^ this.worldObj.getSeed());
 		boolean flag = false;
-		ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(chunkX, chunkZ);
+		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
 		
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, worldObj, rand, chunkX, chunkZ, flag));
 		
-		if (this.settings.useMineShafts) this.mineshaftGenerator.generateStructure(this.worldObj, this.rand, chunkcoordintpair);
+		if (this.settings.useMineShafts) this.mineshaftGenerator.generateStructure(this.worldObj, this.rand, chunkPos);
 		
 		int k1;
 		int l1;
 		int i2;
 		
-		if (bgb != Biomes.desert && bgb != Biomes.desertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0 && TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAKE)) {
+		if (bgb != Biomes.DESERT && bgb != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0 && TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAKE)) {
 			k1 = this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(256);
 			i2 = this.rand.nextInt(16) + 8;
-			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
+			(new KyrulLakeGenerator(Blocks.WATER)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
 		}
 		
 		if (TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAVA) && !flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes) {
@@ -348,7 +349,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 			i2 = this.rand.nextInt(16) + 8;
 			
 			if (l1 < 63 || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0) {
-				(new WorldGenLakes(Blocks.lava)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
+				(new KyrulLakeGenerator(Blocks.LAVA)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
 			}
 		}
 		
@@ -375,11 +376,11 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 				BlockPos blockpos2 = blockpos1.down();
 				
 				if (this.worldObj.canBlockFreezeWater(blockpos2)) {
-					this.worldObj.setBlockState(blockpos2, Blocks.ice.getDefaultState(), 2);
+					this.worldObj.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
 				}
 				
 				if (this.worldObj.canSnowAt(blockpos1, true)) {
-					this.worldObj.setBlockState(blockpos1, Blocks.snow_layer.getDefaultState(), 2);
+					this.worldObj.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
 				}
 			}
 		}
@@ -390,7 +391,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 			int yPos = -1;
 			for (int i = 256; i > 0; i --) {
 				Block blockInPlace = this.worldObj.getBlockState(new BlockPos(blockpos.getX() + k1, i, blockpos.getZ() + i2)).getBlock();
-				if (blockInPlace != Blocks.air) {
+				if (blockInPlace != Blocks.AIR) {
 					yPos = i + 1;
 					break;
 				}
@@ -403,8 +404,8 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 		BlockFalling.fallInstantly = false;
 	}
 	
-	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
+	@Override public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+		Biome biomegenbase = this.worldObj.getBiome(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creatureType);
 	}
 	

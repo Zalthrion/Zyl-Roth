@@ -2,9 +2,9 @@
 {
   "modid": "Zylroth",
   "name": "Zyl'roth",
-  "description": "A new opportunity of exploring different worlds",
+  "description": "Explore the secrets of this world and others, are you ready for the challenge?",
   "version": "1.0.0",
-  "mcversion": "1.8.9",
+  "mcversion": "1.9.4",
   "url": "",
   "updateUrl": "",
   "authors": ["Zalthrion"],

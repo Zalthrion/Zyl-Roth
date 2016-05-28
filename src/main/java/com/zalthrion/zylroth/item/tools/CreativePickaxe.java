@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +16,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -58,7 +58,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else if (stack.getMetadata() <= 12233 && !(worldIn.isRemote) && (!player.isSneaking())) {
 			Material material = worldIn.getBlockState(pos).getMaterial();
-			boolean valid = (material == Material.rock || material == Material.ice || material == Material.packedIce || material == Material.clay);
+			boolean valid = (material == Material.ROCK || material == Material.ICE || material == Material.PACKED_ICE || material == Material.CLAY);
 			
 			if (valid) {
 				boolean hasShovel = false;
@@ -82,8 +82,8 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 						for (int iz = -1; iz < 2; ++ iz) {
 							
 							Material neighbourMaterial = worldIn.getBlockState(pos.add(ix, iy, iz)).getMaterial();
-							boolean neighbourValid = (neighbourMaterial == Material.rock || neighbourMaterial == Material.ice || neighbourMaterial == Material.packedIce || neighbourMaterial == Material.clay);
-							boolean neighbourValidShovel = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
+							boolean neighbourValid = (neighbourMaterial == Material.ROCK || neighbourMaterial == Material.ICE || neighbourMaterial == Material.PACKED_ICE || neighbourMaterial == Material.CLAY);
+							boolean neighbourValidShovel = (neighbourMaterial == Material.CRAFTED_SNOW || neighbourMaterial == Material.GRASS || neighbourMaterial == Material.GROUND || neighbourMaterial == Material.SAND || neighbourMaterial == Material.SNOW);
 							
 							if (neighbourValid) {
 								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
@@ -102,7 +102,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	}
 	
 	@Override public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (worldIn.getBlockState(pos).getBlock() != Blocks.snow_layer) {
+		if (worldIn.getBlockState(pos).getBlock() != Blocks.SNOW_LAYER) {
 			if (facing == EnumFacing.DOWN) pos = pos.down();
 			if (facing == EnumFacing.UP) pos = pos.up();
 			if (facing == EnumFacing.NORTH) pos = pos.north();
@@ -123,7 +123,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));

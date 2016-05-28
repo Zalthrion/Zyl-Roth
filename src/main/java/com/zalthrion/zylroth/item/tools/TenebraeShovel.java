@@ -2,6 +2,7 @@ package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +10,6 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -36,7 +36,7 @@ public class TenebraeShovel extends ItemSpade implements ZylrothTool {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));

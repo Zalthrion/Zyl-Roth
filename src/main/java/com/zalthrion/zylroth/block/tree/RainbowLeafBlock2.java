@@ -71,11 +71,11 @@ public class RainbowLeafBlock2 extends BlockLeaves {
 	
 	// TODO Check mappings
 	@Override protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
-		if (worldIn.rand.nextInt(chance) == 0) spawnAsEntity(worldIn, pos, new ItemStack(Items.golden_apple));
+		if (worldIn.rand.nextInt(chance) == 0) spawnAsEntity(worldIn, pos, new ItemStack(Items.GOLDEN_APPLE));
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public BlockRenderLayer getBlockLayer() {
-		return Blocks.leaves.getBlockLayer();
+		return Blocks.LEAVES.getBlockLayer();
 	}
 	
 	// TODO Check mappings
@@ -118,7 +118,7 @@ public class RainbowLeafBlock2 extends BlockLeaves {
 	
 	// TODO Check mappings
 	@Override public boolean isOpaqueCube(IBlockState state) {
-		return Blocks.leaves.isOpaqueCube(Blocks.leaves.getDefaultState());
+		return Blocks.LEAVES.isOpaqueCube(Blocks.LEAVES.getDefaultState());
 	}
 	
 	// TODO Check mappings

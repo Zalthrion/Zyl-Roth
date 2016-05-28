@@ -1,9 +1,9 @@
 package com.zalthrion.zylroth.world.biome;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
-public class BiomeGenJadePlains extends BiomeGenBase {
+public class BiomeGenJadePlains extends Biome {
 	public BiomeGenJadePlains(BiomeProperties properties) {
 		super(properties);
 		
@@ -15,17 +15,17 @@ public class BiomeGenJadePlains extends BiomeGenBase {
 		this.theBiomeDecorator.treesPerChunk = -999;
 		this.theBiomeDecorator.grassPerChunk = 8;
 		
-		this.topBlock = Blocks.grass.getDefaultState();
-		this.fillerBlock = Blocks.dirt.getDefaultState();
+		this.topBlock = Blocks.GRASS.getDefaultState();
+		this.fillerBlock = Blocks.DIRT.getDefaultState();
 		
-		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
-		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
-		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
-		this.addFlower(Blocks.red_flower.getDefaultState(), 3);
-		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
-		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
-		this.addFlower(Blocks.red_flower.getDefaultState(), 20);
-		this.addFlower(Blocks.yellow_flower.getDefaultState(), 30);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 3);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 3);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 3);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 3);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 20);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 20);
+		this.addFlower(Blocks.RED_FLOWER.getDefaultState(), 20);
+		this.addFlower(Blocks.YELLOW_FLOWER.getDefaultState(), 30);
 	}
 	
 	@Override public int getModdedBiomeFoliageColor(int original) {

@@ -9,6 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -29,7 +29,7 @@ public class EmpoweredTenebraeCore extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
 	public EmpoweredTenebraeCore() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab();
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(3.0F);
@@ -41,9 +41,9 @@ public class EmpoweredTenebraeCore extends BlockBase {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "core"));
+			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "core"));
 		} else {
-			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		}
 	}
 	

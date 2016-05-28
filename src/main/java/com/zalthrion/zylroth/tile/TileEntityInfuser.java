@@ -89,7 +89,7 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 		}
 	}
 	
-	@Override public void writeToNBT(NBTTagCompound compound) {
+	@Override public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setString("Facing", this.facing.getName2());
 		compound.setBoolean("Normal", this.type.isNormal());
@@ -112,6 +112,8 @@ public class TileEntityInfuser extends TileEntity implements IInventory, ITickab
 		if (this.hasCustomName()) {
 			compound.setString("CustomName", this.infuserCustomName);
 		}
+		
+		return compound;
 	}
 	
 	/* IWorldNameable */

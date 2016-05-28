@@ -15,7 +15,7 @@ import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
 public class VoidiumOre extends BlockBase {
 	public VoidiumOre() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 3);
@@ -35,9 +35,9 @@ public class VoidiumOre extends BlockBase {
 	@Override public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		super.randomDisplayTick(stateIn, worldIn, pos, rand);
 		
-		double d0 = (double) ((float) pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
-		double d1 = (double) ((float) pos.getY() + 1.1F);
-		double d2 = (double) ((float) pos.getZ() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
+		double d0 = pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F;
+		double d1 = pos.getY() + 1.1F;
+		double d2 = pos.getZ() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F;
 		worldIn.spawnParticle(EnumParticleTypes.REDSTONE, d0, d1, d2, -0.1, 0.2, 1);
 	}
 }

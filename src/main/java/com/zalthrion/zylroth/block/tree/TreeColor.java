@@ -4,12 +4,12 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.util.IStringSerializable;
 
 public enum TreeColor implements IStringSerializable {
-	RED(0, "red", MapColor.redColor),
-	ORANGE(1, "orange", MapColor.adobeColor),
-	YELLOW(2, "yellow", MapColor.yellowColor),
-	GREEN(3, "green", MapColor.greenColor),
-	BLUE(4, "blue", MapColor.blueColor),
-	PURPLE(5, "purple", MapColor.purpleColor);
+	RED(0, "red", MapColor.RED),
+	ORANGE(1, "orange", MapColor.ADOBE),
+	YELLOW(2, "yellow", MapColor.YELLOW),
+	GREEN(3, "green", MapColor.GREEN),
+	BLUE(4, "blue", MapColor.BLUE),
+	PURPLE(5, "purple", MapColor.PURPLE);
 	
 	private static final TreeColor[] META_LOOKUP = new TreeColor[values().length];
 	private int meta;

@@ -10,7 +10,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -29,10 +28,6 @@ public class MountBase extends EntityHorse {
 	public boolean canDespawn;
 	
 	private static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityHorse.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-	
-	protected Entity entity;
-	protected EntityPlayer player;
-	protected EntityTameable tameableMount;
 	
 	protected NBTTagCompound tagCompound;
 	
@@ -62,24 +57,6 @@ public class MountBase extends EntityHorse {
 	/** Checks if the entity summoned is alive. */
 	public boolean isSummonAlive() {
 		return this.isSummoned;
-	}
-	
-	/** Entity check */
-	public boolean isEntity(Entity entity) {
-		
-		if (entity instanceof Entity) {
-			entity = this.entity;
-		}
-		
-		if (entity instanceof EntityPlayer) {
-			entity = this.player;
-		}
-		
-		if (entity instanceof EntityTameable) {
-			entity = this.tameableMount;
-		}
-		
-		return this.isEntity(entity);
 	}
 	
 	/** Gives the horse special attributes */

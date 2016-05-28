@@ -32,7 +32,7 @@ public class EntityDeer extends EntityTameable {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.75D));
 		this.tasks.addTask(3, new EntityAIMateAnimals(this, 1.0D));
-		this.tasks.addTask(4, new EntityAITempt(this, 0.6D, Items.carrot, true));
+		this.tasks.addTask(4, new EntityAITempt(this, 0.6D, Items.CARROT, true));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(6, new EntityAIAvoidEntity<EntityPlayer>(this, EntityPlayer.class, 16.0F, 0.8D, 1.45D));
 		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
@@ -49,7 +49,7 @@ public class EntityDeer extends EntityTameable {
 		return riding != null && !this.isChild();
 	}
 	
-	@Override public void updateAITick() {
+	@Override public void updateAITasks() {
 		if (this.getMoveHelper().isUpdating()) {
 			double mv = this.getMoveHelper().getSpeed();
 			
@@ -72,7 +72,7 @@ public class EntityDeer extends EntityTameable {
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		if (super.processInteract(player, hand, stack)) {
 			return true;
-		} else if (!this.isChild() && stack != null && stack.getItem() == Items.carrot && player.getDistanceSqToEntity(this) < 9.0D && !this.isTamed() && player.isSneaking()) {
+		} else if (!this.isChild() && stack != null && stack.getItem() == Items.CARROT && player.getDistanceSqToEntity(this) < 9.0D && !this.isTamed() && player.isSneaking()) {
 			if (!this.worldObj.isRemote) {
 				if (!player.capabilities.isCreativeMode) {
 					-- stack.stackSize;
@@ -97,7 +97,7 @@ public class EntityDeer extends EntityTameable {
 	}
 	
 	@Override protected Item getDropItem() {
-		return this.isBurning() ? Items.cooked_beef : Items.beef;
+		return this.isBurning() ? Items.COOKED_BEEF : Items.BEEF;
 	}
 	
 	@Override protected void dropFewItems(boolean check, int p2) {
@@ -105,9 +105,9 @@ public class EntityDeer extends EntityTameable {
 		
 		for (int k = 0; k < j; ++ k) {
 			if (this.isBurning()) {
-				this.dropItem(Items.cooked_beef, 1);
+				this.dropItem(Items.COOKED_BEEF, 1);
 			} else {
-				this.dropItem(Items.beef, 1);
+				this.dropItem(Items.BEEF, 1);
 			}
 		}
 	}
@@ -131,7 +131,7 @@ public class EntityDeer extends EntityTameable {
 	}
 	
 	@Override public boolean isBreedingItem(ItemStack stack) {
-		return stack != null && stack.getItem() == Items.wheat;
+		return stack != null && stack.getItem() == Items.WHEAT;
 	}
 	
 	@Override public double getMountedYOffset() {

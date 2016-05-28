@@ -2,7 +2,7 @@ package com.zalthrion.zylroth.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.HorseArmorType;
+import net.minecraft.entity.passive.HorseType;
 import net.minecraft.world.World;
 
 public class EntityUnicorn extends EntityHorse {
@@ -24,8 +24,8 @@ public class EntityUnicorn extends EntityHorse {
 		return 1;
 	}
 	
-	@Override public HorseArmorType getType() {
-		return HorseArmorType.HORSE;
+	@Override public HorseType getType() {
+		return HorseType.HORSE;
 	}
 	
 	@Override public boolean shouldDismountInWater(Entity rider) {

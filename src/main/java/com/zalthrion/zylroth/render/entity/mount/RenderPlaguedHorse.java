@@ -43,7 +43,7 @@ public class RenderPlaguedHorse extends RenderLiving<MountPlaguedHorse> {
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(MountPlaguedHorse p_110775_1_) {
-		if (!p_110775_1_.func_110239_cn()) {
+		if (!p_110775_1_.hasLayeredTextures()) {
 			switch (p_110775_1_.getType()) {
 				case HORSE:
 				default:

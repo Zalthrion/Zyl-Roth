@@ -4,7 +4,8 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.util.IStringSerializable;
 
 public enum IridisTreeType implements IStringSerializable {
-	AUTUMN(0, "autumn", MapColor.redColor);
+	AUTUMN(0, "autumn", MapColor.RED),
+	SAKURA(1, "sakura", MapColor.ADOBE); // TODO Check this
 	
 	private static final IridisTreeType[] META_LOOKUP = new IridisTreeType[values().length];
 	private int meta;

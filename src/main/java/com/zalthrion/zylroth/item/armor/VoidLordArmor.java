@@ -11,14 +11,14 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
 
-import com.zalthrion.zylroth.base.ItemBaseArmor;
+import com.zalthrion.zylroth.base.ItemArmorBase;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.proxy.ClientProxy;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 // TODO Check all mappings, reorganize methods, etc.
-public class VoidLordArmor extends ItemBaseArmor {
+public class VoidLordArmor extends ItemArmorBase {
 	private String textureName;
 	
 	public VoidLordArmor(ArmorMaterial armorMaterial, String textureName, EntityEquipmentSlot type) {

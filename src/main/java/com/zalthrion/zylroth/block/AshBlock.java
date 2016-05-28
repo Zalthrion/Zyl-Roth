@@ -7,7 +7,7 @@ import com.zalthrion.zylroth.base.BlockBase;
 
 public class AshBlock extends BlockBase {
 	public AshBlock() {
-		super(Material.sand);
+		super(Material.SAND);
 		this.setCreativeTab();
 		this.setHardness(0.5F);
 		this.setNames("ashBlock");

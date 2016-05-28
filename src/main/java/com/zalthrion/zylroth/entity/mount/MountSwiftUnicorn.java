@@ -1,6 +1,6 @@
 package com.zalthrion.zylroth.entity.mount;
 
-import net.minecraft.entity.passive.HorseArmorType;
+import net.minecraft.entity.passive.HorseType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,7 +38,7 @@ public class MountSwiftUnicorn extends MountBaseHorse {
 		return true;
 	}
 	
-	@Override public HorseArmorType getType() {
-		return HorseArmorType.HORSE;
+	@Override public HorseType getType() {
+		return HorseType.HORSE;
 	}
 }

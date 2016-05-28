@@ -6,6 +6,7 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -26,7 +26,7 @@ import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class CreativeAxe extends ItemTool implements ZylrothTool {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin, Blocks.melon_block, Blocks.ladder, Blocks.wooden_button, Blocks.wooden_pressure_plate});
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE});
 	
 	public CreativeAxe(ToolMaterial material) {
 		super(material, EFFECTIVE_ON);
@@ -44,7 +44,7 @@ public class CreativeAxe extends ItemTool implements ZylrothTool {
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
-				player.addChatMessage(new TextComponentTranslation(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool")));
+				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 			}
 			return true;
 		}
@@ -54,7 +54,7 @@ public class CreativeAxe extends ItemTool implements ZylrothTool {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));
@@ -86,7 +86,7 @@ public class CreativeAxe extends ItemTool implements ZylrothTool {
 	
 	@Override public float getStrVsBlock(ItemStack stack, IBlockState state) {
 		Material material = state.getMaterial();
-		return material != Material.wood && material != Material.plants && material != Material.vine ? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
 	}
 	
 	@Override public String getUnlocalizedName() {

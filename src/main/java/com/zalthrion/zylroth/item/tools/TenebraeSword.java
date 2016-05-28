@@ -3,6 +3,7 @@ package com.zalthrion.zylroth.item.tools;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -71,9 +71,9 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 			 			}*/
 			
 			for (int countparticles = 0; countparticles <= 100; ++ countparticles) {
-				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
-				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 1.1F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 0.1F);
-				world.spawnParticle(EnumParticleTypes.PORTAL, (double) player.posX - 0.0F, (double) player.posY - 0.5F, (double) player.posZ - 0.0F, (double) ((float) rand.nextFloat() - 0.5F), (double) ((float) rand.nextFloat() - 0.1F), (double) ((float) rand.nextFloat()) - 1.1F);
+				world.spawnParticle(EnumParticleTypes.PORTAL, player.posX, player.posY - 0.5F, player.posZ, rand.nextFloat() - 0.1F, rand.nextFloat() - 0.1F, rand.nextFloat() - 0.1F);
+				world.spawnParticle(EnumParticleTypes.PORTAL, player.posX, player.posY - 0.5F, player.posZ, rand.nextFloat() - 1.1F, rand.nextFloat() - 0.1F, rand.nextFloat() - 0.1F);
+				world.spawnParticle(EnumParticleTypes.PORTAL, player.posX, player.posY - 0.5F, player.posZ, rand.nextFloat() - 0.5F, rand.nextFloat() - 0.1F, rand.nextFloat() - 1.1F);
 			}
 		}
 		
@@ -81,7 +81,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	}
 	
 	@Override public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (worldIn.getBlockState(pos).getBlock() != Blocks.snow_layer) {
+		if (worldIn.getBlockState(pos).getBlock() != Blocks.SNOW_LAYER) {
 			if (facing == EnumFacing.DOWN) pos = pos.down();
 			if (facing == EnumFacing.UP) pos = pos.up();
 			if (facing == EnumFacing.SOUTH) pos = pos.south();
@@ -103,7 +103,7 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_sword"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_sword_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));

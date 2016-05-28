@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class ItemBaseArmor extends ItemArmor {
-	public ItemBaseArmor(ArmorMaterial armorMaterial, String textureName, EntityEquipmentSlot type) {
+public class ItemArmorBase extends ItemArmor {
+	public ItemArmorBase(ArmorMaterial armorMaterial, String textureName, EntityEquipmentSlot type) {
 		super(armorMaterial, 0, type);
 		this.setCreativeTab(ZylrothTab.zylRoth);
 		this.setMaxStackSize(1);

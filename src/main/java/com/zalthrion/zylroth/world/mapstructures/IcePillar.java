@@ -162,10 +162,10 @@ public class IcePillar extends WorldGenerator {
 	
 	boolean locationIsValidSpawn(World world, int floorPos, BlockPos pos) {
 		Block block = world.getBlockState(pos).getBlock();
-		if(!(block == Blocks.air) || !(block.isReplaceable(world, pos))) return false;
+		if(!(block == Blocks.AIR) || !(block.isReplaceable(world, pos))) return false;
 		if (pos.getY() == floorPos) {
 			Block blockUnder = world.getBlockState(pos.down()).getBlock();
-			if (blockUnder == Blocks.air) return false;
+			if (blockUnder == Blocks.AIR) return false;
 		}
 		return true;
 	}
@@ -190,7 +190,7 @@ public class IcePillar extends WorldGenerator {
 	
 	void setIce(World world, BlockPos[] pos) {
 		for (BlockPos aPos : pos) {
-			world.setBlockState(aPos, this.isPacked ? Blocks.packed_ice.getDefaultState() : Blocks.ice.getDefaultState());
+			world.setBlockState(aPos, this.isPacked ? Blocks.PACKED_ICE.getDefaultState() : Blocks.ICE.getDefaultState());
 		}
 	}
 	

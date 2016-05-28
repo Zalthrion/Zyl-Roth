@@ -39,7 +39,7 @@ public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
 	@Override protected void rotateCorpse(EntityUndeadWarrior par1EntityUndeadWarrior, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityUndeadWarrior, par2, par3, par4);
 		
-		if ((double) par1EntityUndeadWarrior.limbSwingAmount >= 0.01D) {
+		if (par1EntityUndeadWarrior.limbSwingAmount >= 0.01D) {
 			float f3 = 13.0F;
 			float f4 = par1EntityUndeadWarrior.limbSwing - par1EntityUndeadWarrior.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);

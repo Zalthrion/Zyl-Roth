@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.entity.passive.HorseArmorType;
+import net.minecraft.entity.passive.HorseType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,11 +36,11 @@ public class RenderSkeletalHorse extends RenderLiving<EntitySkeletalHorse> {
 	 * the model is rendered. Args: entityLiving, partialTickTime */
 	@Override protected void preRenderCallback(EntitySkeletalHorse p_77041_1_, float p_77041_2_) {
 		float f1 = 1.0F;
-		HorseArmorType type = p_77041_1_.getType();
+		HorseType type = p_77041_1_.getType();
 		
-		if (type == HorseArmorType.DONKEY) {
+		if (type == HorseType.DONKEY) {
 			f1 *= 0.87F;
-		} else if (type == HorseArmorType.MULE) {
+		} else if (type == HorseType.MULE) {
 			f1 *= 0.92F;
 		}
 		
@@ -61,7 +61,7 @@ public class RenderSkeletalHorse extends RenderLiving<EntitySkeletalHorse> {
 	/** Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(EntitySkeletalHorse p_110775_1_) {
-		if (!p_110775_1_.func_110239_cn()) {
+		if (!p_110775_1_.hasLayeredTextures()) {
 			switch (p_110775_1_.getType()) {
 				case HORSE:
 				default:

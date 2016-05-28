@@ -79,7 +79,7 @@ public class EntityUndeadMinion extends EntityMob {
 				}
 				
 				if (!player.worldObj.isRemote && !hasArmor) {
-					this.playSound(SoundEvents.entity_blaze_hurt, 0.3F, 1.0F);
+					this.playSound(SoundEvents.ENTITY_BLAZE_HURT, 0.3F, 1.0F);
 				}
 			}
 		}
@@ -88,15 +88,15 @@ public class EntityUndeadMinion extends EntityMob {
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_skeleton_ambient;
+		return SoundEvents.ENTITY_SKELETON_AMBIENT;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_skeleton_hurt;
+		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_skeleton_death;
+		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class EntityUndeadMinion extends EntityMob {
 			entityundeadminion.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), (IEntityLivingData) null);
 			
 			this.worldObj.spawnEntityInWorld(entityundeadminion);
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this.posX, this.posY, this.posZ), 0);
+			this.worldObj.playEvent((EntityPlayer) null, 1016, new BlockPos(this.posX, this.posY, this.posZ), 0);
 		}
 	}
 	

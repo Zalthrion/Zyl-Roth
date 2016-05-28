@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -69,11 +69,11 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 			
 			Material material = worldIn.getBlockState(pos).getMaterial();
 			
-			boolean isStone = blockIn == Blocks.stone;
-			boolean isCobblestone = blockIn == Blocks.cobblestone;
-			boolean isStoneBrick = blockIn == Blocks.stonebrick;
-			boolean isSandstone = blockIn == Blocks.sandstone;
-			boolean isNetherrack = blockIn == Blocks.netherrack;
+			boolean isStone = blockIn == Blocks.STONE;
+			boolean isCobblestone = blockIn == Blocks.COBBLESTONE;
+			boolean isStoneBrick = blockIn == Blocks.STONEBRICK;
+			boolean isSandstone = blockIn == Blocks.SANDSTONE;
+			boolean isNetherrack = blockIn == Blocks.NETHERRACK;
 			
 			if (isCobblestone || isStone || isStoneBrick || isSandstone || isNetherrack) {
 				for (int ix = -1; ix < 2; ++ ix) {
@@ -82,13 +82,13 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 							
 							Material neighbourMaterial = worldIn.getBlockState(pos.add(ix, 0, iz)).getMaterial();
 							Block neighbourBlock = worldIn.getBlockState(pos.add(ix, iy, iz)).getBlock();
-							boolean isAStone = neighbourBlock == Blocks.stone;
-							boolean isACobblestone = neighbourBlock == Blocks.cobblestone;
-							boolean isAStoneBrick = neighbourBlock == Blocks.stonebrick;
-							boolean isASandstone = neighbourBlock == Blocks.sandstone;
-							boolean isANetherrack = neighbourBlock == Blocks.netherrack;
+							boolean isAStone = neighbourBlock == Blocks.STONE;
+							boolean isACobblestone = neighbourBlock == Blocks.COBBLESTONE;
+							boolean isAStoneBrick = neighbourBlock == Blocks.STONEBRICK;
+							boolean isASandstone = neighbourBlock == Blocks.SANDSTONE;
+							boolean isANetherrack = neighbourBlock == Blocks.NETHERRACK;
 							
-							boolean neighbourValid_Shovel = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
+							boolean neighbourValid_Shovel = (neighbourMaterial == Material.CRAFTED_SNOW || neighbourMaterial == Material.GRASS || neighbourMaterial == Material.GROUND || neighbourMaterial == Material.SAND || neighbourMaterial == Material.SNOW);
 							
 							if (isACobblestone || isAStone || isAStoneBrick || isASandstone || isANetherrack) {
 								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
@@ -114,7 +114,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (worldIn.getBlockState(pos).getBlock() != Blocks.snow_layer) {
+		if (worldIn.getBlockState(pos).getBlock() != Blocks.SNOW_LAYER) {
 			if (facing == EnumFacing.DOWN) pos = pos.down();
 			if (facing == EnumFacing.UP) pos = pos.up();
 			if (facing == EnumFacing.SOUTH) pos = pos.south();
@@ -135,7 +135,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));

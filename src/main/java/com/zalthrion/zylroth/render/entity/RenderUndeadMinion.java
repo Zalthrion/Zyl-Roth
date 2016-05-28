@@ -39,7 +39,7 @@ public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
 	@Override protected void rotateCorpse(EntityUndeadMinion par1EntityUndeadMinion, float par2, float par3, float par4) {
 		super.rotateCorpse(par1EntityUndeadMinion, par2, par3, par4);
 		
-		if ((double) par1EntityUndeadMinion.limbSwingAmount >= 0.01D) {
+		if (par1EntityUndeadMinion.limbSwingAmount >= 0.01D) {
 			float f3 = 13.0F;
 			float f4 = par1EntityUndeadMinion.limbSwing - par1EntityUndeadMinion.limbSwingAmount * (1.0F - par4) + 6.0F;
 			float f5 = (Math.abs(f4 % f3 - f3 * 0.5F) - f3 * 0.25F) / (f3 * 0.25F);

@@ -1,7 +1,8 @@
-package com.zalthrion.zylroth.item.tools;
+package com.zalthrion.zylroth.item.tools.others;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,11 +21,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import com.zalthrion.zylroth.item.tools.ZylrothTool;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
 import com.zalthrion.zylroth.reference.Reference;
@@ -44,36 +45,36 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 	
 	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		if (!this.isBroken(stack)) {        
-			boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.infinity, stack) > 0;
+			boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 			ItemStack itemstack = this.getArrowStack(player);
 			
 			if (itemstack != null || flag) {
-				if (itemstack == null) itemstack = new ItemStack(Items.arrow);
+				if (itemstack == null) itemstack = new ItemStack(Items.ARROW);
 				float f = 1.0F;
 				boolean flag1 = flag && itemstack.getItem() instanceof ItemArrow;
 				if (!world.isRemote) {
-					ItemArrow itemarrow = (ItemArrow)((ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.arrow));
+					ItemArrow itemarrow = (ItemArrow)((ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW));
 					EntityArrow entityarrow = itemarrow.createArrow(world, itemstack, player);
-					entityarrow.func_184547_a(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+					entityarrow.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 					entityarrow.setDamage(entityarrow.getDamage() + 3.5D);
 					entityarrow.setIsCritical(true);
-					int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.power, stack);
+					int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 					if (j > 0) {
 						entityarrow.setDamage(entityarrow.getDamage() + (double) j * 0.5D + 0.5D);
 					}
-					int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.punch, stack);
+					int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
 					if (k > 0) {
 						entityarrow.setKnockbackStrength(k);
 					}
-					if (EnchantmentHelper.getEnchantmentLevel(Enchantments.flame, stack) > 0) {
+					if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
 						entityarrow.setFire(100);
 					}
 					stack.damageItem(1, player);
-					if (flag1) entityarrow.canBePickedUp = EntityArrow.PickupStatus.CREATIVE_ONLY;
+					if (flag1) entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
 					world.spawnEntityInWorld(entityarrow);
 				}
 				
-				world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.entity_arrow_shoot, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+				world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 				if (!flag1) {
 					itemstack.stackSize --;
 					if (itemstack.stackSize == 0) {
@@ -148,7 +149,7 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));

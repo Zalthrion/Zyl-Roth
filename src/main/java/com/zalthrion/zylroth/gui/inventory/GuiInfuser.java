@@ -42,7 +42,7 @@ public class GuiInfuser extends GuiContainer {
 		}
 		
 		int l = this.getCookProgressScaled(24);
-		this.drawTexturedModalRect(guiX + 75, guiY + 47, 177, 0, l, 7);
+		this.drawTexturedModalRect(guiX + 75, guiY + 46, 177, 0, l, 7);
 	}
 	
 	private int getCookProgressScaled(int pixels) {

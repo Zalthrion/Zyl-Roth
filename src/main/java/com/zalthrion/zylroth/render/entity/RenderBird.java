@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.render.entity;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -14,34 +15,24 @@ import com.zalthrion.zylroth.reference.Reference;
 public class RenderBird extends RenderLiving<EntityBird> {
 	private static final ResourceLocation birdTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Bird.png");
 	
-	private int renderedBirdSize;
+	public ModelBase modelBase;
 	
 	public RenderBird(RenderManager renderManager) {
 		super(renderManager, new ModelBird(), 0.5F);
-		this.renderedBirdSize = ((ModelBird) this.mainModel).getBirdSize();
 	}
 	
-	@Override protected void preRenderCallback(EntityBird par1EntityLivingBase, float par2) {
-		GlStateManager.scale(0.35F, 0.35F, 0.35F);
-	}
-	
-	@Override protected void renderLivingAt(EntityBird par1EntityBird, double par2, double par4, double par6) {
-		super.renderLivingAt(par1EntityBird, par2, par4, par6);
+	@Override protected void renderLivingAt(EntityBird bird, double par2, double par4, double par6) {
+		super.renderLivingAt(bird, par2, par4, par6);
+		
+		if (bird.isChild()) {
+			GlStateManager.scale(0.25F, 0.25F, 0.25F);
+		} else {
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+		}
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityBird par1Entity) {
 		return birdTexture;
-	}
-	
-	@Override public void doRender(EntityBird par1EntityBird, double par2, double par4, double par6, float par8, float par9) {
-		int i = ((ModelBird) this.mainModel).getBirdSize();
-		
-		if (i != this.renderedBirdSize) {
-			this.renderedBirdSize = i;
-			this.mainModel = new ModelBird();
-		}
-		
-		super.doRender(par1EntityBird, par2, par4, par6, par8, par9);
 	}
 	
 	public static class Factory implements IRenderFactory<EntityBird> {

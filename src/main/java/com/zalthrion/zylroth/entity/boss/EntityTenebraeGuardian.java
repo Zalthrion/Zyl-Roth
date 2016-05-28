@@ -67,13 +67,13 @@ public class EntityTenebraeGuardian extends EntityMob {
 		this.dataManager.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
 	}
 	
-	@Override public void setBossVisibleTo(EntityPlayerMP player) {
-		super.setBossVisibleTo(player);
+	@Override public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
 		this.bossInfo.addPlayer(player);
 	}
 	
-	@Override public void setBossNonVisibleTo(EntityPlayerMP player) {
-		super.setBossNonVisibleTo(player);
+	@Override public void removeTrackingPlayer(EntityPlayerMP player) {
+		super.removeTrackingPlayer(player);
 		this.bossInfo.removePlayer(player);
 	}
 	
@@ -149,7 +149,7 @@ public class EntityTenebraeGuardian extends EntityMob {
 			}
 		}
 		
-		this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Golem throw?
+		this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
 		return flag;
 	}
 	
@@ -158,7 +158,7 @@ public class EntityTenebraeGuardian extends EntityMob {
 	public void handleStatusUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
-			this.playSound(SoundEvents.entity_irongolem_attack, 1.0F, 1.0F); // TODO Golem throw?
+			this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
 		} else {
 			super.handleStatusUpdate(par1);
 		}
@@ -171,22 +171,22 @@ public class EntityTenebraeGuardian extends EntityMob {
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_wither_ambient;
+		return SoundEvents.ENTITY_WITCH_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_zombie_attack_iron_door; // TODO Zombie metal?
+		return SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_irongolem_death;
+		return SoundEvents.ENTITY_IRONGOLEM_DEATH;
 	}
 	
 	@Override
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound(SoundEvents.entity_irongolem_step, 1.0F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 1.0F);
 	}
 	
 	@Override

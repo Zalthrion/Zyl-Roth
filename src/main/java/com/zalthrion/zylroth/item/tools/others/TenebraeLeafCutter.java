@@ -1,9 +1,10 @@
-package com.zalthrion.zylroth.item.tools;
+package com.zalthrion.zylroth.item.tools.others;
 
 import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,11 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import com.zalthrion.zylroth.item.tools.ZylrothTool;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
 import com.zalthrion.zylroth.reference.Reference;
@@ -32,7 +33,7 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	}
 	
 	@Override public float getStrVsBlock(ItemStack stack, IBlockState state) {
-		return state.getMaterial() != Material.leaves ? (super.getStrVsBlock(stack, state)) : 15.0F;
+		return state.getMaterial() != Material.LEAVES ? (super.getStrVsBlock(stack, state)) : 15.0F;
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
@@ -72,7 +73,7 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("tenebrae_tool_lore"));
 			list.addAll(TooltipHelper.addAll("tenebrae_generic"));

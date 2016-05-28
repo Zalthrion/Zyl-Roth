@@ -79,7 +79,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 		int k = this.ringBufferIndex - par1 * 1 - 1 & 63;
 		double[] adouble = new double[3];
 		double d0 = this.ringBuffer[j][0];
-		double d1 = MathHelper.wrapAngleTo180_double(this.ringBuffer[k][0] - d0);
+		double d1 = MathHelper.wrapDegrees(this.ringBuffer[k][0] - d0);
 		adouble[0] = d0 + d1 * par2;
 		d0 = this.ringBuffer[j][1];
 		d1 = this.ringBuffer[k][1] - d0;
@@ -97,7 +97,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 			f = MathHelper.cos(this.animTime * (float) Math.PI * 2.0F);
 			f1 = MathHelper.cos(this.prevAnimTime * (float) Math.PI * 2.0F);
 			
-			if (f1 <= -0.3F && f >= -0.3F) this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.entity_enderdragon_flap, this.getSoundCategory(), 5.0F, 0.8F + this.rand.nextFloat() * 0.3F, false);
+			if (f1 <= -0.3F && f >= -0.3F) this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, this.getSoundCategory(), 5.0F, 0.8F + this.rand.nextFloat() * 0.3F, false);
 		}
 		
 		this.prevAnimTime = this.animTime;
@@ -114,7 +114,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 			
 			this.animTime += f;
 			
-			this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw);
+			this.rotationYaw = MathHelper.wrapDegrees(this.rotationYaw);
 			
 			if (ringBufferIndex < 0) for (int i = 0; i < ringBuffer.length; ++ i) {
 				this.ringBuffer[i][0] = this.rotationYaw;
@@ -136,9 +136,9 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 					d3 = posX + (interpTargetX - posX) / newPosRotationIncrements;
 					d0 = posY + (interpTargetY - posY) / newPosRotationIncrements;
 					d1 = posZ + (interpTargetZ - posZ) / newPosRotationIncrements;
-					d2 = MathHelper.wrapAngleTo180_double(interpTargetYaw - rotationYaw);
+					d2 = MathHelper.wrapDegrees(interpTargetYaw - rotationYaw);
 					rotationYaw = (float) (rotationYaw + d2 / newPosRotationIncrements);
-					rotationPitch = (float)((double)this.rotationPitch + (this.newPosX - (double)this.rotationPitch) / (double)this.newPosRotationIncrements);
+					rotationPitch = (float)((double)this.rotationPitch + (this.interpTargetPitch - (double)this.rotationPitch) / (double)this.newPosRotationIncrements);
 					-- newPosRotationIncrements;
 					setPosition(d3, d0, d1);
 					setRotation(rotationYaw, rotationPitch);
@@ -175,9 +175,9 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 				if (d0 > f3) d0 = f3;
 				
 				motionY += d0 * 0.10000000149011612D;
-				rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
+				rotationYaw = MathHelper.wrapDegrees(rotationYaw);
 				double d8 = 180.0D - Math.atan2(d3, d1) * 180.0D / Math.PI;
-				double d9 = MathHelper.wrapAngleTo180_double(d8 - rotationYaw);
+				double d9 = MathHelper.wrapDegrees(d8 - rotationYaw);
 				
 				if (d9 > 50.0D) d9 = 50.0D;
 				
@@ -199,7 +199,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 				rotationYaw += randomYawVelocity * 0.1F;
 				float f6 = (float) (2.0D / (d10 + 1.0D));
 				float f7 = 0.06F;
-				moveFlying(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
+				// moveFlying(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6))); // TODO Find this
 				
 				moveEntity(motionX, motionY, motionZ);
 				
@@ -303,7 +303,7 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 	}
 	
 	private float simplifyAngle(double par1) {
-		return (float) MathHelper.wrapAngleTo180_double(par1);
+		return (float) MathHelper.wrapDegrees(par1);
 	}
 	
 	@Override
@@ -348,11 +348,11 @@ public class EntityVoidDragon extends EntityMob implements IEntityMultiPart, IMo
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_enderdragon_growl;
+		return SoundEvents.ENTITY_ENDERDRAGON_GROWL;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_enderdragon_hurt;
+		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}
 	
 	@Override protected float getSoundVolume() {

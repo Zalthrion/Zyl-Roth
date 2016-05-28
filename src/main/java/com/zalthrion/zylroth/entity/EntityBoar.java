@@ -25,8 +25,8 @@ public class EntityBoar extends EntityHostileAnimal {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.2D, false));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, Items.potato, false));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, Items.baked_potato, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, Items.POTATO, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, Items.BAKED_POTATO, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -52,22 +52,22 @@ public class EntityBoar extends EntityHostileAnimal {
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_pig_ambient;
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_pig_hurt;
+		return SoundEvents.ENTITY_PIG_HURT;
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_pig_death;
+		return SoundEvents.ENTITY_PIG_DEATH;
 	}
 	
 	protected void playStepSound(int x, int y, int z, Block blockIn) {
-		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 	
 	@Override public boolean isBreedingItem(ItemStack p_70877_1_) {
-		return p_70877_1_ != null && p_70877_1_.getItem() == Items.potato;
+		return p_70877_1_ != null && p_70877_1_.getItem() == Items.POTATO;
 	}
 }

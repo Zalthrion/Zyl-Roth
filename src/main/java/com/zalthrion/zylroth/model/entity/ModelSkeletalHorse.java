@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.HorseArmorType;
+import net.minecraft.entity.passive.HorseType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -204,14 +204,14 @@ import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
 	
 	/** Sets the models various rotation angles then renders the model. */
 	@Override
-	public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
-		EntitySkeletalHorse entityhorse = (EntitySkeletalHorse) p_78088_1_;
-		HorseArmorType i = entityhorse.getType();
+	public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
+		EntitySkeletalHorse entityhorse = (EntitySkeletalHorse) entity;
+		HorseType horseType = entityhorse.getType();
 		float f6 = entityhorse.getGrassEatingAmount(0.0F);
 		boolean flag = entityhorse.isAdultHorse();
 		boolean flag1 = flag && entityhorse.isHorseSaddled();
 		boolean flag2 = flag && entityhorse.isChested();
-		boolean flag3 = i == HorseArmorType.DONKEY || i == HorseArmorType.MULE;
+		boolean flag3 = horseType == HorseType.DONKEY || horseType == HorseType.MULE;
 		float f7 = entityhorse.getHorseSize();
 		boolean flag4 = entityhorse.isBeingRidden();
 		
@@ -350,7 +350,7 @@ import com.zalthrion.zylroth.entity.EntitySkeletalHorse;
 		float f9 = entityhorse.getRearingAmount(p_78086_4_);
 		float f10 = 1.0F - f9;
 		float f11 = entityhorse.getMouthOpennessAngle(p_78086_4_);
-		boolean flag = entityhorse.field_110278_bp != 0;
+		boolean flag = entityhorse.tailCounter != 0;
 		boolean flag1 = entityhorse.isHorseSaddled();
 		boolean flag2 = entityhorse.isBeingRidden();
 		float f12 = (float) p_78086_1_.ticksExisted + p_78086_4_;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +12,6 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -54,7 +54,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 		} else if (stack.getMetadata() <= 2233 && !(worldIn.isRemote) && !(player.isSneaking())) {
 			
 			Material material = worldIn.getBlockState(pos).getMaterial();
-			boolean valid = (material == Material.craftedSnow || material == Material.grass || material == Material.ground || material == Material.sand || material == Material.snow);
+			boolean valid = (material == Material.CRAFTED_SNOW || material == Material.GRASS || material == Material.GROUND || material == Material.SAND || material == Material.SNOW);
 			
 			if (valid) {
 				for (int ix = -1; ix < 2; ++ ix) {
@@ -62,7 +62,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 						for (int iz = -1; iz < 2; ++ iz) {
 							
 							Material neighbourMaterial = worldIn.getBlockState(pos.add(ix, iy, iz)).getMaterial();
-							boolean neighbourValid = (neighbourMaterial == Material.craftedSnow || neighbourMaterial == Material.grass || neighbourMaterial == Material.ground || neighbourMaterial == Material.sand || neighbourMaterial == Material.snow);
+							boolean neighbourValid = (neighbourMaterial == Material.CRAFTED_SNOW || neighbourMaterial == Material.GRASS || neighbourMaterial == Material.GROUND || neighbourMaterial == Material.SAND || neighbourMaterial == Material.SNOW);
 							
 							if (neighbourValid) {
 								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
@@ -80,7 +80,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
-			list.add(I18n.translateToLocal("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
 			list.addAll(TooltipHelper.addAll("creative_tool_lore"));
 			list.addAll(TooltipHelper.addAll("creative_generic"));

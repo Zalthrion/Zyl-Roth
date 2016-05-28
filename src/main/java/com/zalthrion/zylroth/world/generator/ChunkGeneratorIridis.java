@@ -19,7 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -57,7 +57,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 	private double[] stoneNoise;
 	private MapGenBase caveGenerator;
 	private MapGenBase ravineGenerator;
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 	double[] ngo3Octaves;
 	double[] ngo1Octaves;
 	double[] ngo2Octaves;
@@ -65,7 +65,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 	int[][] field_73219_j = new int[32][32];
 	
 	public ChunkGeneratorIridis(World world, long seed, String param5) {
-		this.fluidBlock = Blocks.water;
+		this.fluidBlock = Blocks.WATER;
 		this.stoneNoise = new double[256];
 		this.caveGenerator = new MapGenCaves();
 		this.ravineGenerator = new MapGenRavine();
@@ -98,8 +98,8 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		}
 		
 		if (param5 != null) {
-			this.settings = ChunkProviderSettings.Factory.jsonToFactory(param5).func_177864_b();
-			this.fluidBlock = this.settings.useLavaOceans ? Blocks.lava : Blocks.water;
+			this.settings = ChunkProviderSettings.Factory.jsonToFactory(param5).build();
+			this.fluidBlock = this.settings.useLavaOceans ? Blocks.LAVA : Blocks.WATER;
 		}
 		
 		ContextOverworld ctx = new ContextOverworld(noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise);
@@ -152,7 +152,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 							
 							for (int j3 = 0; j3 < 4; j3 ++) {
 								if ((d16 += d15) > 0) {
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, Blocks.stone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, Blocks.STONE.getDefaultState());
 								} else if (k2 * 8 + l2 < this.settings.seaLevel) {
 									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, this.fluidBlock.getDefaultState());
 								}
@@ -172,15 +172,15 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		}
 	}
 	
-	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, BiomeGenBase[] biomes) {
+	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, Biome[] biomes) {
 		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.worldObj)) return;
 		
 		double d0 = 0.03125D;
-		this.stoneNoise = this.noiseGen4.func_151599_a(this.stoneNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.stoneNoise = this.noiseGen4.getRegion(this.stoneNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int k = 0; k < 16; k ++) {
 			for (int l = 0; l < 16; l ++) {
-				BiomeGenBase bgb = biomes[l + k * 16];
+				Biome bgb = biomes[l + k * 16];
 				bgb.genTerrainBlocks(this.worldObj, this.rand, primer, x * 16 + k, z * 16 + l, this.stoneNoise[l + k * 16]);
 			}
 		}
@@ -190,7 +190,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		this.setBlocksInChunk(x, z, primer);
-		this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.replaceBlocksForBiome(x, z, primer, this.biomesForGeneration);
 		if (this.settings.useCaves) this.caveGenerator.generate(this.worldObj, x, z, primer);
 		if (this.settings.useRavines) this.ravineGenerator.generate(this.worldObj, x, z, primer);
@@ -199,7 +199,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		byte[] abyte = chunk.getBiomeArray();
 		
 		for (int k = 0; k < abyte.length; k ++) {
-			abyte[k] = (byte) BiomeGenBase.getIdForBiome(this.biomesForGeneration[k]);
+			abyte[k] = (byte) Biome.getIdForBiome(this.biomesForGeneration[k]);
 		}
 		
 		chunk.generateSkylightMap();
@@ -222,11 +222,11 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 				float f3 = 0.0F;
 				float f4 = 0.0F;
 				byte b0 = 2;
-				BiomeGenBase bgb = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
+				Biome bgb = this.biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
 				
 				for (int l1 = -b0; l1 <= b0; l1 ++) {
 					for (int i2 = -b0; i2 < b0; i2 ++) {
-						BiomeGenBase bgb1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
+						Biome bgb1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
 						float f5 = this.settings.biomeDepthOffSet + bgb1.getBaseHeight() * this.settings.biomeDepthWeight;
 						float f6 = this.settings.biomeScaleOffset + bgb1.getHeightVariation() * this.settings.biomeScaleWeight;
 						
@@ -312,7 +312,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		int xPos = chunkX * 16;
 		int zPos = chunkZ * 16;
 		BlockPos blockpos = new BlockPos(xPos, 0, zPos);
-		BiomeGenBase bgb = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+		Biome bgb = this.worldObj.getBiome(blockpos.add(16, 0, 16));
 		this.rand.setSeed(this.worldObj.getSeed());
 		long i1 = this.rand.nextLong() / 2L * 2L + 1L;
 		long j1 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -325,11 +325,11 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		int l1;
 		int i2;
 		
-		if (bgb != Biomes.desert && bgb != Biomes.desertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0 && TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAKE)) {
+		if (bgb != Biomes.DESERT && bgb != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0 && TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAKE)) {
 			k1 = this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(256);
 			i2 = this.rand.nextInt(16) + 8;
-			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
+			(new WorldGenLakes(Blocks.WATER)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
 		}
 		
 		if (TerrainGen.populate(this, worldObj, rand, chunkX, chunkZ, flag, LAVA) && !flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes) {
@@ -338,7 +338,7 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 			i2 = this.rand.nextInt(16) + 8;
 			
 			if (l1 < 63 || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0) {
-				(new WorldGenLakes(Blocks.lava)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
+				(new WorldGenLakes(Blocks.LAVA)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
 			}
 		}
 		
@@ -365,11 +365,11 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 				BlockPos blockpos2 = blockpos1.down();
 				
 				if (this.worldObj.canBlockFreezeWater(blockpos2)) {
-					this.worldObj.setBlockState(blockpos2, Blocks.ice.getDefaultState(), 2);
+					this.worldObj.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
 				}
 				
 				if (this.worldObj.canSnowAt(blockpos1, true)) {
-					this.worldObj.setBlockState(blockpos1, Blocks.snow_layer.getDefaultState(), 2);
+					this.worldObj.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
 				}
 			}
 		}
@@ -383,8 +383,8 @@ public class ChunkGeneratorIridis implements IChunkGenerator {
 		return false;
 	}
 	
-	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
+	@Override public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+		Biome biomegenbase = this.worldObj.getBiome(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creatureType);
 	}
 	

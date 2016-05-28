@@ -6,10 +6,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import com.zalthrion.zylroth.base.ItemBaseTalisman;
+import com.zalthrion.zylroth.base.ItemTalismanBase;
 import com.zalthrion.zylroth.handler.ConfigurationHandler;
 
-public class AutumnTalisman extends ItemBaseTalisman {
+public class AutumnTalisman extends ItemTalismanBase {
 	public AutumnTalisman() {
 		super();
 		this.setNames("autumnTalisman");

@@ -17,7 +17,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -54,7 +54,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 	private double[] packedIceNoise = new double[256];
 	private MapGenBase caveGenerator = new MapGenIceCavesGlaciem();
 	private MapGenBase ravineGenerator = new MapGenIceRavineGlaciem();
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 	double[] noiseGen1Octaves;
 	double[] noiseGen2Octaves;
 	double[] noiseGen3Octaves;
@@ -86,7 +86,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		
 		for (int j = -2; j <= 2; ++ j) {
 			for (int k = -2; k <= 2; ++ k) {
-				float f = 10.0F / MathHelper.sqrt_float((float) (j * j + k * k) + 0.2F);
+				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				this.parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 		}
@@ -141,11 +141,11 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 							
 							for (int l2 = 0; l2 < 4; l2 ++) {
 								if ((lvt_45_1_ += d16) > 0.0D) {
-									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.packed_ice.getDefaultState());
+									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.PACKED_ICE.getDefaultState());
 								} else if (i2 * 8 + j2 < 63) {
-									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.water.getDefaultState());
+									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.WATER.getDefaultState());
 								} else {
-									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.air.getDefaultState());
+									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.AIR.getDefaultState());
 								}
 							}
 							
@@ -163,14 +163,14 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		}
 	}
 	
-	public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, BiomeGenBase[] biomesIn) {
+	public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn) {
 		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.worldObj)) return;
 		double d0 = 0.03125D;
-		this.packedIceNoise = this.noiseGen4.func_151599_a(this.packedIceNoise, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.packedIceNoise = this.noiseGen4.getRegion(this.packedIceNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		
 		for (int i = 0; i < 16; i ++) {
 			for (int j = 0; j < 16; j ++) {
-				BiomeGenBase biomegenbase = biomesIn[j + i * 16];
+				Biome biomegenbase = biomesIn[j + i * 16];
 				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, primer, x * 16 + i, z * 16 + j, this.packedIceNoise[j + i * 16]);
 			}
 		}
@@ -180,7 +180,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		this.setBlocksInChunk(x, z, chunkprimer);
-		this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 		this.caveGenerator.generate(this.worldObj, x, z, chunkprimer);
 		this.ravineGenerator.generate(this.worldObj, x, z, chunkprimer);
@@ -189,7 +189,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		byte[] abyte = chunk.getBiomeArray();
 		
 		for (int i = 0; i < abyte.length; i ++) {
-			abyte[i] = (byte) BiomeGenBase.getIdForBiome(this.biomesForGeneration[i]);
+			abyte[i] = (byte) Biome.getIdForBiome(this.biomesForGeneration[i]);
 		}
 		
 		chunk.generateSkylightMap();
@@ -215,11 +215,11 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 				float f3 = 0.0F;
 				float f4 = 0.0F;
 				int i1 = 2;
-				BiomeGenBase biomegenbase = this.biomesForGeneration[k + 2 + (l + 2) * 10];
+				Biome biomegenbase = this.biomesForGeneration[k + 2 + (l + 2) * 10];
 				
 				for (int j1 = -i1; j1 <= i1; j1 ++) {
 					for (int k1 = -i1; k1 <= i1; k1 ++) {
-						BiomeGenBase biomegenbase1 = this.biomesForGeneration[k + j1 + 2 + (l + k1 + 2) * 10];
+						Biome biomegenbase1 = this.biomesForGeneration[k + j1 + 2 + (l + k1 + 2) * 10];
 						float f5 = biomegenbase1.getBaseHeight();
 						float f6 = biomegenbase1.getHeightVariation();
 						
@@ -270,14 +270,14 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 				}
 				
 				j ++;
-				double d8 = (double) f3;
-				double d9 = (double) f2;
+				double d8 = f3;
+				double d9 = f2;
 				d8 = d8 + d7 * 0.2D;
 				d8 = d8 * 8.5D / 8.0D;
 				double d0 = 8.5D + d8 * 4.0D;
 				
 				for (int l1 = 0; l1 < 33; l1 ++) {
-					double d1 = ((double) l1 - d0) * 12.0D * 128.0D / 256.0D / d9;
+					double d1 = (l1 - d0) * 12.0D * 128.0D / 256.0D / d9;
 					
 					if (d1 < 0.0D) {
 						d1 *= 4.0D;
@@ -289,7 +289,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 					double d5 = MathHelper.denormalizeClamp(d2, d3, d4) - d1;
 					
 					if (l1 > 29) {
-						double d6 = (double) ((float) (l1 - 29) / 3.0F);
+						double d6 = (l1 - 29) / 3.0F;
 						d5 = d5 * (1.0D - d6) + -10.0D * d6;
 					}
 					
@@ -306,11 +306,11 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		int k = x * 16;
 		int l = z * 16;
 		BlockPos blockpos = new BlockPos(k, 0, l);
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+		Biome biomegenbase = this.worldObj.getBiome(blockpos.add(16, 0, 16));
 		this.rand.setSeed(this.worldObj.getSeed());
 		long i1 = this.rand.nextLong() / 2L * 2L + 1L;
 		long j1 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed((long) x * i1 + (long) z * j1 ^ this.worldObj.getSeed());
+		this.rand.setSeed(x * i1 + z * j1 ^ this.worldObj.getSeed());
 		boolean flag = false;
 		
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, worldObj, rand, x, z, flag));
@@ -319,11 +319,11 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		int l1;
 		int i2;
 		
-		if (biomegenbase != Biomes.desert && biomegenbase != Biomes.desertHills && !flag && this.rand.nextInt(4) == 0 && TerrainGen.populate(this, worldObj, rand, x, z, flag, LAKE)) {
+		if (biomegenbase != Biomes.DESERT && biomegenbase != Biomes.DESERT_HILLS && !flag && this.rand.nextInt(4) == 0 && TerrainGen.populate(this, worldObj, rand, x, z, flag, LAKE)) {
 			k1 = this.rand.nextInt(16) + 8;
 			l1 = this.rand.nextInt(256);
 			i2 = this.rand.nextInt(16) + 8;
-			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
+			(new WorldGenLakes(Blocks.WATER)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
 		}
 		
 		biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(k, 64, l));
@@ -344,11 +344,11 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 				BlockPos blockpos2 = blockpos1.down();
 				
 				if (this.worldObj.canBlockFreezeWater(blockpos2)) {
-					this.worldObj.setBlockState(blockpos2, Blocks.ice.getDefaultState(), 2);
+					this.worldObj.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
 				}
 				
 				if (this.worldObj.canSnowAt(blockpos1, true)) {
-					this.worldObj.setBlockState(blockpos1, Blocks.snow_layer.getDefaultState(), 2);
+					this.worldObj.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
 				}
 			}
 		}
@@ -360,7 +360,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 				int yPos = -1;
 				for (int i = 256; i > 0; i --) {
 					Block blockInPlace = this.worldObj.getBlockState(new BlockPos(blockpos.getX() + k1, i, blockpos.getZ() + i2)).getBlock();
-					if (blockInPlace != Blocks.air) {
+					if (blockInPlace != Blocks.AIR) {
 						yPos = i + 1;
 						break;
 					}
@@ -373,7 +373,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 				int yPos = -1;
 				for (int i = 256; i > 0; i --) {
 					Block blockInPlace = this.worldObj.getBlockState(new BlockPos(blockpos.getX() + k1, i, blockpos.getZ() + i2)).getBlock();
-					if (blockInPlace != Blocks.air) {
+					if (blockInPlace != Blocks.AIR) {
 						yPos = i + 1;
 						break;
 					}
@@ -392,8 +392,8 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 		return false;
 	}
 	
-	@Override public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
+	@Override public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+		Biome biomegenbase = this.worldObj.getBiome(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(creatureType);
 	}
 

@@ -12,7 +12,7 @@ import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
 public class InferniumOre extends BlockBase {
 	public InferniumOre() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
@@ -25,7 +25,7 @@ public class InferniumOre extends BlockBase {
 		return ItemInit.rawInfernium;
 	}
 	
-	@Override public int quantityDroppedWithBonus(int fortune, Random random) {
+/*	@Override public int quantityDroppedWithBonus(int fortune, Random random) {
 		if (fortune > 0) {
 			int j = random.nextInt(fortune + 2) - 1;
 			if (j < 0) j = 0;
@@ -33,5 +33,9 @@ public class InferniumOre extends BlockBase {
 		}
 		
 		return this.quantityDropped(random);
+	}*/
+	
+	@Override public int quantityDropped(Random rand) {
+		return 2 + rand.nextInt(3);
 	}
 }

@@ -85,7 +85,7 @@ public class EntityVoidLordBoss extends EntityMob {
 					if (player.inventory.armorInventory[i] != null) hasArmor = false;
 				}
 				
-				if (!player.worldObj.isRemote && !hasArmor) this.playSound(SoundEvents.entity_blaze_hurt, 0.5F, 1.0F);
+				if (!player.worldObj.isRemote && !hasArmor) this.playSound(SoundEvents.ENTITY_BLAZE_HURT, 0.5F, 1.0F);
 			}
 			
 			int i = this.worldObj.getDifficulty().getDifficultyId();
@@ -115,7 +115,7 @@ public class EntityVoidLordBoss extends EntityMob {
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_blaze_ambient;
+		return SoundEvents.ENTITY_BLAZE_AMBIENT;
 	}
 	
 	@Override public EnumCreatureAttribute getCreatureAttribute() {
@@ -123,11 +123,11 @@ public class EntityVoidLordBoss extends EntityMob {
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_wither_death;
+		return SoundEvents.ENTITY_WITHER_DEATH;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_wither_hurt;
+		return SoundEvents.ENTITY_WITHER_HURT;
 	}
 	
 	@Override public void onKillEntity(EntityLivingBase entityLivingIn) {
@@ -142,7 +142,7 @@ public class EntityVoidLordBoss extends EntityMob {
 			entityundeadminion.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), (IEntityLivingData) null);
 			
 			this.worldObj.spawnEntityInWorld(entityundeadminion);
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this.posX, this.posY, this.posZ), 0);
+			this.worldObj.playEvent((EntityPlayer) null, 1016, new BlockPos(this), 0);
 		}
 	}
 	
@@ -158,7 +158,7 @@ public class EntityVoidLordBoss extends EntityMob {
 			z = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 			BlockPos pos = new BlockPos(x, y, z);
 			
-			if (this.worldObj.getBlockState(pos).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(this.worldObj, pos)) this.worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
+			if (this.worldObj.getBlockState(pos).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(this.worldObj, pos)) this.worldObj.setBlockState(pos, Blocks.FIRE.getDefaultState());
 		}
 		
 		super.onLivingUpdate();

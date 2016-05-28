@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.HorseArmorType;
+import net.minecraft.entity.passive.HorseType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -226,12 +226,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	 */
 	@Override public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
 		EntityHorse entityhorse = (EntityHorse) p_78088_1_;
-		HorseArmorType horsearmortype = entityhorse.getType();
+		HorseType horseType = entityhorse.getType();
 		float f6 = entityhorse.getGrassEatingAmount(0.0F);
 		boolean flag = entityhorse.isAdultHorse();
 		boolean flag1 = flag && entityhorse.isHorseSaddled();
 		boolean flag2 = flag && entityhorse.isChested();
-		boolean flag3 = horsearmortype.hasMuleEars();
+		boolean flag3 = horseType.hasMuleEars();
 		float f7 = entityhorse.getHorseSize();
 		boolean flag4 = entityhorse.isBeingRidden();
 		
@@ -377,7 +377,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 		float f9 = entityhorse.getRearingAmount(p_78086_4_);
 		float f10 = 1.0F - f9;
 		float f11 = entityhorse.getMouthOpennessAngle(p_78086_4_);
-		boolean flag = entityhorse.field_110278_bp != 0;
+		boolean flag = entityhorse.tailCounter != 0;
 		boolean flag1 = entityhorse.isHorseSaddled();
 		boolean flag2 = entityhorse.isBeingRidden();
 		float f12 = (float) p_78086_1_.ticksExisted + p_78086_4_;

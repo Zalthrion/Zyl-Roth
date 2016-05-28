@@ -1,5 +1,6 @@
 package com.zalthrion.zylroth.block.tree;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockBush;
@@ -10,7 +11,10 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -18,6 +22,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
@@ -49,7 +55,10 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 		
 		switch (l) {
 			case 0:
-				object = new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState(), false);
+				object = new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState(), false);
+				break;
+			case 1:
+				object = new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState().withProperty(IridisLeafBlock.LEAF_TYPE, IridisTreeType.SAKURA), false);
 				break;
 			default:
 				break;
@@ -99,7 +108,7 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 	
 	// TODO Check mappings
 	@Override public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return (double) worldIn.rand.nextFloat() < 0.45D;
+		return worldIn.rand.nextFloat() < 0.45F;
 	}
 	
 	@Override protected BlockStateContainer createBlockState() {
@@ -124,6 +133,12 @@ public class IridisSaplingBlock extends BlockBush implements IGrowable {
 	
 	@Override public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(SAPLING_TYPE, IridisTreeType.byMetadata(meta & 7)).withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
+	}
+	
+	@Override @SideOnly(Side.CLIENT) public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+		for (int i = 0; i < IridisTreeType.values().length; i ++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 	
 	@Override public String getUnlocalizedName() {

@@ -56,7 +56,7 @@ public class IridisLeafBlock extends BlockLeaves {
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public BlockRenderLayer getBlockLayer() {
-		return Blocks.leaves.getBlockLayer();
+		return Blocks.LEAVES.getBlockLayer();
 	}
 	
 	// TODO Check mappings
@@ -88,7 +88,7 @@ public class IridisLeafBlock extends BlockLeaves {
 	}
 	
 	@Override public boolean isOpaqueCube(IBlockState state) {
-		return Blocks.leaves.isOpaqueCube(Blocks.leaves.getDefaultState());
+		return Blocks.LEAVES.isOpaqueCube(Blocks.LEAVES.getDefaultState());
 	}
 	
 	@Override public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {

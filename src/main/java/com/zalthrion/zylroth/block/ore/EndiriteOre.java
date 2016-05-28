@@ -16,7 +16,7 @@ import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
 public class EndiriteOre extends BlockBase {
 	public EndiriteOre() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
@@ -31,7 +31,7 @@ public class EndiriteOre extends BlockBase {
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemInit.endiriteChunk;
+		return ItemInit.endiriteIOre;
 	}
 
 	@Override public int quantityDropped(Random random) {

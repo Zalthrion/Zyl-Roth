@@ -12,13 +12,13 @@ import net.minecraft.world.World;
 public class TorchPlacer {
 	private static ItemStack getTorchStack(EntityPlayer player) {
 		if (player.inventory.offHandInventory[0] != null) {
-			if (player.inventory.offHandInventory[0].getItem() == Item.getItemFromBlock(Blocks.torch)) {
+			if (player.inventory.offHandInventory[0].getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
 				return player.inventory.offHandInventory[0];
 			}
 		}
 		for (int i = 0; i < player.inventory.mainInventory.length; i ++) {
 			if (player.inventory.getStackInSlot(i) != null) {
-				if (player.inventory.getStackInSlot(i).getItem() == Item.getItemFromBlock(Blocks.torch)) {
+				if (player.inventory.getStackInSlot(i).getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
 					return player.inventory.getStackInSlot(i);
 				}
 			}
@@ -28,13 +28,13 @@ public class TorchPlacer {
 	
 	private static void clearEmptyStacks(EntityPlayer player) {
 		if (player.inventory.offHandInventory[0] != null) {
-			if (player.inventory.offHandInventory[0].getItem() == Item.getItemFromBlock(Blocks.torch)) {
+			if (player.inventory.offHandInventory[0].getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
 				if (player.inventory.offHandInventory[0].stackSize <= 0) player.inventory.offHandInventory[0] = null;
 			}
 		}
 		for (int i = 0; i < player.inventory.mainInventory.length; i ++) {
 			if (player.inventory.getStackInSlot(i) != null) {
-				if (player.inventory.getStackInSlot(i).getItem() == Item.getItemFromBlock(Blocks.torch)) {
+				if (player.inventory.getStackInSlot(i).getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
 					if (player.inventory.getStackInSlot(i).stackSize <= 0) player.inventory.removeStackFromSlot(i);
 				}
 			}
@@ -45,9 +45,9 @@ public class TorchPlacer {
 		if (player.canPlayerEdit(pos, facing, stack)) {
 			ItemStack torch = getTorchStack(player);
 			if (torch == null && !player.capabilities.isCreativeMode) return;
-			if (torch == null) torch = new ItemStack(Blocks.torch);
-			if (!world.isRemote && Blocks.torch.canPlaceBlockAt(world, pos)) {
-				world.setBlockState(pos, Blocks.torch.getDefaultState());
+			if (torch == null) torch = new ItemStack(Blocks.TORCH);
+			if (!world.isRemote && Blocks.TORCH.canPlaceBlockAt(world, pos)) {
+				world.setBlockState(pos, Blocks.TORCH.getDefaultState());
 				torch.stackSize --;
 				if (torch.stackSize <= 0) clearEmptyStacks(player);
 			}

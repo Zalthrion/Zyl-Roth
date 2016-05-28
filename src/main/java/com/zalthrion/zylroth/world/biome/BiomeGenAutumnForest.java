@@ -3,14 +3,14 @@ package com.zalthrion.zylroth.world.biome;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.zalthrion.zylroth.entity.EntityBadger;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 
-public class BiomeGenAutumnForest extends BiomeGenBase {
+public class BiomeGenAutumnForest extends Biome {
 	public BiomeGenAutumnForest(BiomeProperties properties) {
 		super(properties);
 		
@@ -21,18 +21,18 @@ public class BiomeGenAutumnForest extends BiomeGenBase {
 		this.theBiomeDecorator.treesPerChunk = 10;
 		this.theBiomeDecorator.grassPerChunk = 2;
 		
-		this.topBlock = Blocks.grass.getDefaultState();
-		this.fillerBlock = Blocks.dirt.getDefaultState();
+		this.topBlock = Blocks.GRASS.getDefaultState();
+		this.fillerBlock = Blocks.DIRT.getDefaultState();
 		
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBadger.class, 1, 1, 1));
+		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityBadger.class, 1, 1, 1));
 	}
 	
 	@Override public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
-		return new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState(), false);
+		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState(), false);
 	}
 	
 	@Override public int getModdedBiomeFoliageColor(int original) {
-		return 0xDB8018;
+		return 0x4DAD0C;
 	}
 	
 	@Override public int getModdedBiomeGrassColor(int original) {

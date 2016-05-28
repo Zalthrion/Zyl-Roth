@@ -36,8 +36,8 @@ public class EntityFancyBadger extends EntityAnimal {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot_on_a_stick, false));
-		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
+		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.CARROT_ON_A_STICK, false));
+		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.CARROT, false));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
 	}
@@ -54,24 +54,24 @@ public class EntityFancyBadger extends EntityAnimal {
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
-		return SoundEvents.entity_pig_ambient;
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_pig_hurt;
+		return SoundEvents.ENTITY_PIG_HURT;
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_pig_death;
+		return SoundEvents.ENTITY_PIG_DEATH;
 	}
 	
 	@Override
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 	
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
-		if (stack != null && stack.getItem() == Items.carrot && player.isSneaking()) {
+		if (stack != null && stack.getItem() == Items.CARROT && player.isSneaking()) {
 			if (!this.worldObj.isRemote) {
 				EntityBadger entitybadger = new EntityBadger(this.worldObj);
 				entitybadger.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -100,7 +100,7 @@ public class EntityFancyBadger extends EntityAnimal {
 	}
 	
 	@Override protected Item getDropItem() {
-		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
+		return this.isBurning() ? Items.COOKED_PORKCHOP : Items.PORKCHOP;
 	}
 	
 	@Override protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
@@ -108,10 +108,10 @@ public class EntityFancyBadger extends EntityAnimal {
 		
 		for (int k = 0; k < j; ++ k) {
 			if (this.isBurning()) {
-				this.dropItem(Items.cooked_porkchop, 1);
+				this.dropItem(Items.COOKED_PORKCHOP, 1);
 			}
 			else {
-				this.dropItem(Items.porkchop, 1);
+				this.dropItem(Items.PORKCHOP, 1);
 			}
 		}
 	}
@@ -120,7 +120,7 @@ public class EntityFancyBadger extends EntityAnimal {
 		super.fall(distance, damageMultiplier);
 		
 		if (distance > 5.0F && this.getControllingPassenger() instanceof EntityPlayer) {
-			((EntityPlayer) this.getControllingPassenger()).addStat(AchievementList.flyPig);
+			((EntityPlayer) this.getControllingPassenger()).addStat(AchievementList.FLY_PIG);
 		}
 	}
 	
@@ -129,6 +129,6 @@ public class EntityFancyBadger extends EntityAnimal {
 	}
 	
 	@Override public boolean isBreedingItem(ItemStack stack) {
-		return stack != null && stack.getItem() == Items.wheat;
+		return stack != null && stack.getItem() == Items.WHEAT;
 	}
 }

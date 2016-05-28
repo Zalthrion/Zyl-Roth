@@ -5,23 +5,24 @@ import java.util.List;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.base.BlockBase;
+import com.zalthrion.zylroth.entity.EntityTenebraeProtector;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class ChiseledTenebrae extends BlockBase {
 	public ChiseledTenebrae() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
@@ -32,9 +33,9 @@ public class ChiseledTenebrae extends BlockBase {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "head"));
+			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "head"));
 		} else {
-			tooltip.add(I18n.translateToLocal("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
 		}
 	}
 	
@@ -60,7 +61,7 @@ public class ChiseledTenebrae extends BlockBase {
 					worldIn.setBlockToAir(pos.down().south());
 				}
 				
-				EntityZombie golem = new EntityZombie(worldIn); // TODO EntityTenebraeGuardian
+				EntityTenebraeGuardian golem = new EntityTenebraeGuardian(worldIn);
 				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				worldIn.spawnEntityInWorld(golem);
 				
@@ -89,8 +90,8 @@ public class ChiseledTenebrae extends BlockBase {
 					worldIn.setBlockToAir(pos.down().south());
 				}
 				
-				EntityZombie golem = new EntityZombie(worldIn); // TODO EntityTenebraeProtector
-				// golem.setPlayerCreated(true);
+				EntityTenebraeProtector golem = new EntityTenebraeProtector(worldIn);
+				golem.setPlayerCreated(true);
 				golem.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY() - 1.95D, (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
 				worldIn.spawnEntityInWorld(golem);
 				

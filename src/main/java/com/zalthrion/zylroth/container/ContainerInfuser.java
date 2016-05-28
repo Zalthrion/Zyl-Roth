@@ -2,7 +2,7 @@ package com.zalthrion.zylroth.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -43,27 +43,27 @@ public class ContainerInfuser extends ContainerBase {
 		}
 	}
 	
-	@Override public void onCraftGuiOpened(ICrafting listener) {
-		super.onCraftGuiOpened(listener);
+	@Override public void addListener(IContainerListener listener) {
+		super.addListener(listener);
 		listener.sendAllWindowProperties(this, this.tileInfuser);
 	}
 	
 	@Override public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 		
-		for (int i = 0; i < this.crafters.size(); i ++) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+		for (int i = 0; i < this.listeners.size(); i ++) {
+			IContainerListener listener = (IContainerListener) this.listeners.get(i);
 			
 			if (this.lastBurnTime != this.tileInfuser.getField(0)) {
-				icrafting.sendProgressBarUpdate(this, 0, this.tileInfuser.getField(0));
+				listener.sendProgressBarUpdate(this, 0, this.tileInfuser.getField(0));
 			}
 			
 			if (this.lastInfusionTime != this.tileInfuser.getField(2)) {
-				icrafting.sendProgressBarUpdate(this, 2, this.tileInfuser.getField(2));
+				listener.sendProgressBarUpdate(this, 2, this.tileInfuser.getField(2));
 			}
 			
 			if (this.lastTotalInfusionTime != this.tileInfuser.getField(3)) {
-				icrafting.sendProgressBarUpdate(this, 3, this.tileInfuser.getField(3));
+				listener.sendProgressBarUpdate(this, 3, this.tileInfuser.getField(3));
 			}
 		}
 		

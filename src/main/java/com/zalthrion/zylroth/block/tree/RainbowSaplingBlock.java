@@ -52,7 +52,7 @@ public class RainbowSaplingBlock extends BlockBush implements IGrowable {
 		int j1 = 0;
 		boolean flag = false;
 		
-		IBlockState leafState = Blocks.air.getDefaultState();
+		IBlockState leafState = Blocks.AIR.getDefaultState();
 		switch (l) {
 			case 0:
 				leafState = BlockInit.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.RED);
@@ -73,7 +73,7 @@ public class RainbowSaplingBlock extends BlockBush implements IGrowable {
 				leafState = BlockInit.rainbowLeafBlock2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.PURPLE);
 				break;
 		}
-		Object object = new WorldGenTrees(true, 4, Blocks.log.getDefaultState(), leafState, false);
+		Object object = new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), leafState, false);
 		
 		if (flag) {
 			worldIn.setBlockToAir(pos.add(i1, 0, j1));

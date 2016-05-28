@@ -15,7 +15,7 @@ import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
 public class TenebraeOre extends BlockBase {
 	public TenebraeOre() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab();
 		this.setHardness(3.0F);
 		this.setHarvestLevel("pickaxe", 2);
@@ -25,7 +25,7 @@ public class TenebraeOre extends BlockBase {
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemInit.tenebraeChunk;
+		return ItemInit.tenebraeIOre;
 	}
 	
 	@Override public int quantityDropped(Random random) {
@@ -35,9 +35,9 @@ public class TenebraeOre extends BlockBase {
 	@Override public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		super.randomDisplayTick(stateIn, worldIn, pos, rand);
 		
-		double d0 = (double) ((float) pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
-		double d1 = (double) ((float) pos.getY() + 0.4F);
-		double d2 = (double) ((float) pos.getZ() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F);
+		double d0 = pos.getX() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F;
+		double d1 = pos.getY() + 0.4F;
+		double d2 = pos.getZ() + (1.5F + rand.nextFloat() * 12.0F) / 16.0F;
 		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0, 0, 0);
 	}
 }

@@ -16,10 +16,10 @@ public class DragonNest extends WorldGenerator {
 	
 	boolean locationIsValidSpawn(World world, int floorPos, BlockPos pos) { 
 		Block block = world.getBlockState(pos).getBlock();
-		if (!(block == Blocks.air) || !(block.isReplaceable(world, pos))) return false;
+		if (!(block == Blocks.AIR) || !(block.isReplaceable(world, pos))) return false;
 		if (pos.getY() == floorPos) {
 			Block blockUnder = world.getBlockState(pos.down()).getBlock();
-			if (blockUnder == Blocks.air) return false;
+			if (blockUnder == Blocks.AIR) return false;
 		}
 		return true;
 	}
@@ -52,8 +52,8 @@ public class DragonNest extends WorldGenerator {
 		if (!locationIsValidSpawn(world, pos.add(-3, 0, -3), pos.add(3, 4, 3))) return false;
 		
 		setBlocksRandomly(world, rand, new IBlockState[] {
-				Blocks.stone.getDefaultState(),
-				Blocks.cobblestone.getDefaultState()
+				Blocks.STONE.getDefaultState(),
+				Blocks.COBBLESTONE.getDefaultState()
 		}, new BlockPos[] {
 				/* Layer 1 */
 				pos.north(3).west(2),
@@ -131,7 +131,7 @@ public class DragonNest extends WorldGenerator {
 		});
 		
 		world.setBlockState(pos.up(2), BlockInit.spawnerVoidDragon.getDefaultState());
-		world.setBlockState(pos.up(3), Blocks.gravel.getDefaultState());
+		world.setBlockState(pos.up(3), Blocks.GRAVEL.getDefaultState());
 		
 		return true;
 	}

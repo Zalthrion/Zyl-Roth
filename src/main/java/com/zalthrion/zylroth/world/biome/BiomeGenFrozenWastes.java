@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
-public class BiomeGenFrozenWastes extends BiomeGenBase {
+public class BiomeGenFrozenWastes extends Biome {
 	public BiomeGenFrozenWastes(BiomeProperties properties) {
 		super(properties);
 		
@@ -39,7 +39,7 @@ public class BiomeGenFrozenWastes extends BiomeGenBase {
 		return 0x3CA7B5;
 	}
 	
-	@Override public BiomeGenBase.TempCategory getTempCategory() {
-		return BiomeGenBase.TempCategory.COLD;
+	@Override public Biome.TempCategory getTempCategory() {
+		return Biome.TempCategory.COLD;
 	}
 }

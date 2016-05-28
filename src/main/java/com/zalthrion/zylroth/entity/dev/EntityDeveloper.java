@@ -39,7 +39,7 @@ public class EntityDeveloper extends EntityAnimal {
 		
 		if (flag) {
 			if (i > 0) {
-				entityIn.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
+				entityIn.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
 				this.motionX *= 0.6D;
 				this.motionZ *= 0.6D;
 			}
@@ -92,23 +92,23 @@ public class EntityDeveloper extends EntityAnimal {
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_hostile_death;
+		return SoundEvents.ENTITY_HOSTILE_DEATH;
 	}
 	
 	@Override protected SoundEvent getFallSound(int heightIn) {
-		return heightIn > 4 ? SoundEvents.entity_hostile_big_fall : SoundEvents.entity_hostile_small_fall;
+		return heightIn > 4 ? SoundEvents.ENTITY_HOSTILE_BIG_FALL : SoundEvents.ENTITY_HOSTILE_BIG_FALL;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_hostile_hurt;
+		return SoundEvents.ENTITY_HOSTILE_HURT;
 	}
 	
 	@Override protected SoundEvent getSplashSound() {
-		return SoundEvents.entity_hostile_splash;
+		return SoundEvents.ENTITY_HOSTILE_SPLASH;
 	}
 
 	@Override protected SoundEvent getSwimSound() {
-		return SoundEvents.entity_hostile_swim;
+		return SoundEvents.ENTITY_HOSTILE_SWIM;
 	}
 	
 	@Override public void onLivingUpdate() {

@@ -52,7 +52,7 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 	}
 	
 	@Override public float getBlockPathWeight(BlockPos pos) {
-		return this.worldObj.getBlockState(pos.down()).getBlock() == Blocks.grass ? 10.0F : this.worldObj.getLightBrightness(pos) - 0.5F;
+		return this.worldObj.getBlockState(pos.down()).getBlock() == Blocks.GRASS ? 10.0F : this.worldObj.getLightBrightness(pos) - 0.5F;
 	}
 	
 	@Override public void writeEntityToNBT(NBTTagCompound tagCompound) {
@@ -86,7 +86,7 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 	}
 	
 	@Override public boolean isBreedingItem(ItemStack stack) {
-		return stack == null ? false : stack.getItem() == Items.wheat;
+		return stack == null ? false : stack.getItem() == Items.WHEAT;
 	}
 	
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
@@ -99,7 +99,7 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 			
 			if (this.isChild() && this.isBreedingItem(stack)) {
 				this.consumeItemFromStack(player, stack);
-				this.func_175501_a((int) ((float) (-this.getGrowingAge() / 20) * 0.1F), true);
+				this.ageUp((int) ((float) (-this.getGrowingAge() / 20) * 0.1F), true);
 				return true;
 			}
 		}
@@ -153,23 +153,23 @@ public class EntityHostileAnimal extends EntityAnimal implements IMob {
 	}
 	
 	@Override protected SoundEvent getSwimSound() {
-		return SoundEvents.entity_hostile_swim;
+		return SoundEvents.ENTITY_HOSTILE_SWIM;
 	}
 	
 	@Override protected SoundEvent getSplashSound() {
-		return SoundEvents.entity_hostile_splash;
+		return SoundEvents.ENTITY_HOSTILE_SPLASH;
 	}
 	
 	@Override protected SoundEvent getHurtSound() {
-		return SoundEvents.entity_hostile_hurt;
+		return SoundEvents.ENTITY_HOSTILE_HURT;
 	}
 	
 	@Override protected SoundEvent getDeathSound() {
-		return SoundEvents.entity_hostile_death;
+		return SoundEvents.ENTITY_HOSTILE_DEATH;
 	}
 	
 	@Override protected SoundEvent getFallSound(int heightIn) {
-		return heightIn > 4 ? SoundEvents.entity_hostile_big_fall : SoundEvents.entity_hostile_small_fall;
+		return heightIn > 4 ? SoundEvents.ENTITY_HOSTILE_BIG_FALL : SoundEvents.ENTITY_HOSTILE_SMALL_FALL;
 	}
 	
 	@Override public boolean attackEntityAsMob(Entity entityIn) {

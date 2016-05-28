@@ -21,6 +21,8 @@ import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
 import com.zalthrion.zylroth.entity.mount.MountSwiftUnicorn;
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.entity.projectile.RepulsorBolt;
+import com.zalthrion.zylroth.entity.projectile.RepulsorCannonBolt;
 import com.zalthrion.zylroth.event.KeyInputEventListener;
 import com.zalthrion.zylroth.item.block.RainbowLeafItemBlock;
 import com.zalthrion.zylroth.item.block.RainbowSaplingItemBlock;
@@ -83,6 +85,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnicorn.class, new RenderUnicorn.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStag.class, new RenderStag.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTuskarr.class, new RenderTuskarr.Factory());
 		/* Mounts */
 		RenderingRegistry.registerEntityRenderingHandler(MountDeathcharger.class, new RenderDeathcharger.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(MountPlaguedHorse.class, new RenderPlaguedHorse.Factory());
@@ -92,6 +95,9 @@ public class ClientProxy extends CommonProxy {
 		/* Developers */
 		RenderingRegistry.registerEntityRenderingHandler(EntityZalthrion.class, new RenderZalthrion.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySixOneThree.class, new RenderSixOneThree.Factory());
+		/* Projectiles */
+		RenderingRegistry.registerEntityRenderingHandler(RepulsorBolt.class, new RenderRepulsorBolt.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(RepulsorCannonBolt.class, new RenderRepulsorCannonBolt.Factory());
 	}
 	
 	public void registerItemModels() {
@@ -140,7 +146,7 @@ public class ClientProxy extends CommonProxy {
 		ModelHelper.registerItem(ItemInit.tenebraeIOre);
 		ModelHelper.registerItem(ItemInit.tenebraeIngot);
 		ModelHelper.registerItem(ItemInit.tenebraeChunk);
-		ModelHelper.registerItem(ItemInit.unstableTenebraeCore);
+		ModelHelper.registerItem(ItemInit.celestialCore);
 		/* Infernium */
 		ModelHelper.registerItem(ItemInit.rawInfernium);
 		ModelHelper.registerItem(ItemInit.inferniumIngot);
