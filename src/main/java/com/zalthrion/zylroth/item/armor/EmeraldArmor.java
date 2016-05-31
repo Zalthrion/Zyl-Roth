@@ -13,6 +13,7 @@ import org.lwjgl.input.Keyboard;
 import com.zalthrion.zylroth.base.ItemArmorBase;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.StringHelper;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class EmeraldArmor extends ItemArmorBase {
@@ -23,7 +24,7 @@ public class EmeraldArmor extends ItemArmorBase {
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setNames("emeraldArmor" + type.getName());
+		this.setNames("emeraldArmor" + StringHelper.capitalizeFirstLetter(type.getName()));
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {

@@ -1,5 +1,5 @@
 {
-    "parent": "zylroth:block/tree/sakuraSapling",
+    "parent": "zylroth:block/voidPlanks",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

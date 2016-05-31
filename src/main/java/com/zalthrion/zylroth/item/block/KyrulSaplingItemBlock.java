@@ -20,7 +20,7 @@ public class KyrulSaplingItemBlock extends ItemBlock {
 	public static String[] getVariants() {
 		ArrayList<String> variants = new ArrayList<String>();
 		for (String variant : subNames) {
-			variants.add(variant.replace("Sapling", "").toLowerCase() + "_sapling");
+			variants.add(variant.replace("Sapling", "") + "_sapling");
 		}
 		return variants.toArray(new String[] {});
 	}

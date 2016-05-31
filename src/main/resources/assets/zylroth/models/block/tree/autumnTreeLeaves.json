@@ -1,6 +1,6 @@
 {
     "parent": "block/leaves",
     "textures": {
-        "all": "zylroth:blocks/tree/autumnLeaves"
+        "all": "zylroth:blocks/tree/autumnTreeLeaves"
     }
 }

@@ -15,6 +15,7 @@ import com.zalthrion.zylroth.base.ItemArmorBase;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.proxy.ClientProxy;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.StringHelper;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 // TODO Check all mappings, reorganize methods, etc.
@@ -24,7 +25,7 @@ public class VoidLordArmor extends ItemArmorBase {
 	public VoidLordArmor(ArmorMaterial armorMaterial, String textureName, EntityEquipmentSlot type) {
 		super(armorMaterial, textureName, type);
 		this.textureName = textureName;
-		this.setNames("voidLordArmor" + type.getName());
+		this.setNames("voidLordArmor" + StringHelper.capitalizeFirstLetter(type.getName()));
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {

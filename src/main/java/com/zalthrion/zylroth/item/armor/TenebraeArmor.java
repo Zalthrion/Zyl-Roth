@@ -13,6 +13,7 @@ import com.zalthrion.zylroth.base.ItemArmorBase;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.utility.StringHelper;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 //TODO Check all mappings, reorganize methods, etc.
@@ -24,7 +25,7 @@ public class TenebraeArmor extends ItemArmorBase {
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setNames("tenebraeArmor" + type.getName());
+		this.setNames("tenebraeArmor" + StringHelper.capitalizeFirstLetter(type.getName()));
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {

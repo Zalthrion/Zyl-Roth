@@ -1,5 +1,5 @@
 {
-    "parent": "zylroth:block/tree/autumnSapling",
+    "parent": "zylroth:block/tree/autumnTreeLeaves",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

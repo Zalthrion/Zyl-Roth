@@ -15,49 +15,71 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class CustomItemModelFactory implements IBakedModel {
+public class CustomItemModelFactory implements IBakedModel
+{
 	private IBakedModel baseModel;
+	
 	private MachineOverride override = new MachineOverride();
 	
-	public CustomItemModelFactory(IBakedModel base) {
-		this.baseModel = base;
+	public CustomItemModelFactory(IBakedModel base)
+	{
+		baseModel = base;
 	}
 	
-	@Override public ItemOverrideList getOverrides() {
-		return this.override;
+	@Override
+	public ItemOverrideList getOverrides()
+	{
+		return override;
 	}
 	
-	@Override public List<BakedQuad> getQuads(IBlockState state, EnumFacing facing, long rand) {
+	@Override
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing facing, long rand) 
+	{
 		throw new UnsupportedOperationException();
 	}
-	
-	@Override public boolean isAmbientOcclusion() {
+
+	@Override
+	public boolean isAmbientOcclusion() 
+	{
 		throw new UnsupportedOperationException();
 	}
-	
-	@Override public boolean isGui3d() {
+
+	@Override
+	public boolean isGui3d() 
+	{
 		return baseModel.isGui3d();
 	}
-	
-	@Override public boolean isBuiltInRenderer() {
+
+	@Override
+	public boolean isBuiltInRenderer() 
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public TextureAtlasSprite getParticleTexture() 
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ItemCameraTransforms getItemCameraTransforms() 
+	{
 		throw new UnsupportedOperationException();
 	}
 	
-	@Override public TextureAtlasSprite getParticleTexture() {
-		throw new UnsupportedOperationException();
-	}
-	
-	@Override public ItemCameraTransforms getItemCameraTransforms() {
-		throw new UnsupportedOperationException();
-	}
-	
-	private class MachineOverride extends ItemOverrideList {
-		public MachineOverride() {
-			super(new ArrayList<ItemOverride>()); // Mekanism code is Lists.newArrayList() but that seems to error here.
+    private class MachineOverride extends ItemOverrideList 
+    {
+		public MachineOverride() 
+		{
+			super(new ArrayList<ItemOverride>());
+			// super(Lists.newArrayList());
 		}
-		
-		@Override public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
-			return new BakedCustomItemModel(baseModel, stack);
-		}
+
+	    @Override
+	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) 
+	    {
+	    	return new BakedCustomItemModel(baseModel, stack);
+	    }
 	}
 }

@@ -112,7 +112,7 @@ public class ModInit {
 		"goldTalisman", "voidTalisman", "autumnTalisman", "iceTalisman", "darkShard", "soulEssence", "cursedSoulEssence", "voidGem", "voidEssence", "tenebraeSword",
 		"tenebraePickaxe", "tenebraeAxe", "tenebraeShovel", "tenebraeHoe", "creativeSword", "creativePickaxe", "creativeAxe", "creativeShovel", "creativeHoe",
 		"voidiumSword", "voidiriteSword", "repulsorCannon", "voidiriteShield", "tenebraeLeafCutter", "woodenCrossbow", "iridisLeafBlockIB", "iridisSaplingBlockIB", "rainbowLeafBlockIB",
-		"rainbowLeafBlock2IB", "rainbowSaplingBlockIB", "kyrulSaplingBlockIB", "benzenn", "benzennStatue", "lamp", "voidStone", "voidPlanks" };
+		"rainbowLeafBlock2IB", "rainbowSaplingBlockIB", "kyrulSaplingBlockIB", "benzenn", "benzennStatue", "lamp", "kyrulLogBlock", "voidStone", "voidPlanks" };
 	
 	public static class BiomeInit {
 		public static final Biome DREAD_WASTES = new BiomeGenDreadWastes(new BiomeProperties("Dread Wastes").setBaseHeight(0.2F).setWaterColor(14953751).setRainDisabled());
@@ -225,6 +225,7 @@ public class ModInit {
 			ModRegistry.addRegister(BENZENN, "benzenn");
 			ModRegistry.addRegister(BENZENN_STATUE, "benzennStatue");
 			ModRegistry.addRegister(LAMP, "lamp");
+			ModRegistry.addRegister(KYRUL_LOG_BLOCK, "kyrulLogBlock");
 			ModRegistry.addRegister(VOID_STONE, "voidStone");
 			ModRegistry.addRegister(VOID_PLANKS, "voidPlanks");
 			

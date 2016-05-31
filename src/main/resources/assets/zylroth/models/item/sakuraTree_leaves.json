@@ -1,5 +1,5 @@
 {
-    "parent": "zylroth:block/tree/sakuraLeaves",
+    "parent": "zylroth:block/tree/sakuraTreeLeaves",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

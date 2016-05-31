@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -45,6 +44,7 @@ import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.reference.Reference;
+import com.zalthrion.zylroth.render.ZylrothRenderer;
 import com.zalthrion.zylroth.render.entity.*;
 import com.zalthrion.zylroth.render.entity.dev.RenderSixOneThree;
 import com.zalthrion.zylroth.render.entity.dev.RenderZalthrion;
@@ -60,14 +60,14 @@ public class ClientProxy extends CommonProxy {
 	public static final HashMap<Item, ModelBiped> armorModels = new HashMap<Item, ModelBiped>();
 	public static Map<String, ModelResourceLocation> itemResources = new HashMap<String, ModelResourceLocation>();
 	
-	public static final String[] CUSTOM_RENDERS = new String[] {
-		"woodenCrossbow"
-	};
+	public static final String[] CUSTOM_RENDERS = new String[] {"woodenCrossbow"};
 	
 	@Override public void preInit() {
 		super.preInit();
+		ZylrothRenderer.init();
 		MinecraftForge.EVENT_BUS.register(this);
 		this.registerEntityRenderers();
+		this.registerSpecialItemRenderers();
 	}
 	
 	@Override public void init() {
@@ -75,7 +75,6 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new KeyInputEventListener());
 		this.registerArmorModels();
 		this.registerItemModels();
-		this.registerSpecialItemRenderers();
 	}
 	
 	@Override public void postInit() {
@@ -215,14 +214,21 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	private void registerSpecialItemRenderers() {
-		ModelLoader.setCustomModelResourceLocation(ItemInit.WOODEN_CROSSBOW, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "woodenCrossbow", "inventory"));
+		registerItem(ItemInit.WOODEN_CROSSBOW);
+	}
+	
+	private void registerItem(Item item) {
+		ZylrothRenderer.registerItemRender(item);
 	}
 	
 	@SubscribeEvent public void onModelBake(ModelBakeEvent event) throws IOException {
 		for (String s : CUSTOM_RENDERS) {
 			ModelResourceLocation model = new ModelResourceLocation(Reference.RESOURCE_PREFIX + s, "inventory");
 			Object obj = event.getModelRegistry().getObject(model);
-			if (obj instanceof IBakedModel) event.getModelRegistry().putObject(model, new CustomItemModelFactory((IBakedModel) obj));
+			
+			if (obj instanceof IBakedModel) {
+				event.getModelRegistry().putObject(model, new CustomItemModelFactory((IBakedModel) obj));
+			}
 		}
 	}
 }

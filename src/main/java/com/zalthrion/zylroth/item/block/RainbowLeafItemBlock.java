@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import com.zalthrion.zylroth.utility.LogHelper;
+
 public class RainbowLeafItemBlock extends ItemBlock {
 	private final static String[] subNames = {"rainbowRedLeaves", "rainbowOrangeLeaves", "rainbowYellowLeaves", "rainbowGreenLeaves", "rainbowBlueLeaves", "rainbowPurpleLeaves"};
 	
@@ -21,8 +23,9 @@ public class RainbowLeafItemBlock extends ItemBlock {
 		ArrayList<String> variants = new ArrayList<String>();
 		for (int i = (blockType == 0 ? 0 : 4); i < (blockType == 0 ? Math.min(subNames.length, 4) : Math.min(subNames.length, 8)); i ++) {
 			String variant = subNames[i];
-			variants.add(variant.replace("Leaves", "").toLowerCase() + "_leaves");
+			variants.add(variant.replace("rainbow", "").replace("Leaves", "").toLowerCase() + "_leaves");
 		}
+		for (String s : variants) LogHelper.warn("Variant: " + s);
 		return variants.toArray(new String[] {});
 	}
 	

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class IridisSaplingItemBlock extends ItemBlock {
-	private final static String[] subNames = {"autumnTreeSapling", "sakuraSapling"};
+	private final static String[] subNames = {"autumnTreeSapling", "sakuraTreeSapling"};
 	
 	public IridisSaplingItemBlock(Block block) {
 		super(block);
@@ -20,7 +20,7 @@ public class IridisSaplingItemBlock extends ItemBlock {
 	public static String[] getVariants() {
 		ArrayList<String> variants = new ArrayList<String>();
 		for (String variant : subNames) {
-			variants.add(variant.replace("Sapling", "").toLowerCase() + "_sapling");
+			variants.add(variant.replace("Sapling", "") + "_sapling");
 		}
 		return variants.toArray(new String[] {});
 	}
