@@ -16,14 +16,14 @@ public class CelestiumBoltSound extends MovingSound {
 	protected float pitch;
 	
 	public CelestiumBoltSound() {
-		super(SoundInit.repulsorCannonMine, SoundCategory.PLAYERS);
+		super(SoundInit.REPULSOR_CANNON_MINE, SoundCategory.PLAYERS);
 		this.repeat = true;
 		this.volume = 0.8F;
 		this.pitch = 1.0F;
 	}
 	
 	public CelestiumBoltSound(RepulsorBolt boltEntity) {
-		super(SoundInit.repulsorCannonMine, SoundCategory.PLAYERS);
+		super(SoundInit.REPULSOR_CANNON_MINE, SoundCategory.PLAYERS);
 		volume = 0.8F;
 		pitch = 1.0F;
 		bolt = boltEntity;

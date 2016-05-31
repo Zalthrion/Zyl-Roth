@@ -2,6 +2,8 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +13,9 @@ import com.zalthrion.zylroth.base.BlockBase;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
 public class InferniumOre extends BlockBase {
+	
+	/* Constructors */
+	
 	public InferniumOre() {
 		super(Material.ROCK);
 		this.setCreativeTab();
@@ -21,19 +26,11 @@ public class InferniumOre extends BlockBase {
 		this.setSoundType(SoundType.STONE);
 	}
 	
-	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemInit.rawInfernium;
-	}
+	/* Overridden */
 	
-/*	@Override public int quantityDroppedWithBonus(int fortune, Random random) {
-		if (fortune > 0) {
-			int j = random.nextInt(fortune + 2) - 1;
-			if (j < 0) j = 0;
-			return this.quantityDropped(random) * (j + 1);
-		}
-		
-		return this.quantityDropped(random);
-	}*/
+	@Override @Nullable public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return ItemInit.RAW_INFERNIUM;
+	}
 	
 	@Override public int quantityDropped(Random rand) {
 		return 2 + rand.nextInt(3);

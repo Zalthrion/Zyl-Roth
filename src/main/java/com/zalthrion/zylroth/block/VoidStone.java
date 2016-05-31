@@ -6,12 +6,13 @@ import net.minecraft.block.material.Material;
 import com.zalthrion.zylroth.base.BlockBase;
 
 public class VoidStone extends BlockBase {
-	private String name = "voidStone";
+	
+	/* Constructors */
 	
 	public VoidStone() {
 		super(Material.ROCK);
 		this.setCreativeTab();
-		this.setNames(name);
+		this.setNames("voidStone");
 		this.setHardness(1.5F);
 		this.setResistance(10.0F);
 		this.setSoundType(SoundType.STONE);

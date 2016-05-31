@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class BlockContainerBase extends BlockContainer {
@@ -50,13 +51,14 @@ public class BlockContainerBase extends BlockContainer {
 	}
 	
 	public BlockContainerBase setCreativeTab() {
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		return this;
 	}
 	
-	public void setNames(String name) {
+	public BlockContainerBase setNames(String name) {
 		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
+		return this;
 	}
 	
 	public BlockContainerBase setParticleBlockState(IBlockState state) {
@@ -122,6 +124,6 @@ public class BlockContainerBase extends BlockContainer {
 	}
 	
 	@Override public String getUnlocalizedName() {
-		return String.format("tile.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		return String.format("tile.%s%s", Reference.RESOURCE_PREFIX, this.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 }

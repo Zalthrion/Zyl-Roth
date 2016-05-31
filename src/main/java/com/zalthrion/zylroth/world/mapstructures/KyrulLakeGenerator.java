@@ -109,7 +109,7 @@ public class KyrulLakeGenerator extends WorldGenerator {
 							boolean flag1 = !aboolean[(j2 * 16 + k3) * 8 + k4] && (j2 < 15 && aboolean[((j2 + 1) * 16 + k3) * 8 + k4] || j2 > 0 && aboolean[((j2 - 1) * 16 + k3) * 8 + k4] || k3 < 15 && aboolean[(j2 * 16 + k3 + 1) * 8 + k4] || k3 > 0 && aboolean[(j2 * 16 + (k3 - 1)) * 8 + k4] || k4 < 7 && aboolean[(j2 * 16 + k3) * 8 + k4 + 1] || k4 > 0 && aboolean[(j2 * 16 + k3) * 8 + (k4 - 1)]);
 							
 							if (flag1 && (k4 < 4 || rand.nextInt(2) != 0) && worldIn.getBlockState(position.add(j2, k4, k3)).getMaterial().isSolid()) {
-								worldIn.setBlockState(position.add(j2, k4, k3), BlockInit.voidStone.getDefaultState(), 2);
+								worldIn.setBlockState(position.add(j2, k4, k3), BlockInit.VOID_STONE.getDefaultState(), 2);
 							}
 						}
 					}

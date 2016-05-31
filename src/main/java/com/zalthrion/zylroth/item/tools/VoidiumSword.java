@@ -141,7 +141,7 @@ public class VoidiumSword extends ItemSword implements ZylrothTool {
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		
-		return stack.getItem() == ItemInit.voidiumIngot;
+		return stack.getItem() == ItemInit.VOIDIUM_INGOT;
 	}
 	
 	@Override public String getUnlocalizedName() {

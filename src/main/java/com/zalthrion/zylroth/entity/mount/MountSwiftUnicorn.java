@@ -24,7 +24,7 @@ public class MountSwiftUnicorn extends MountBaseHorse {
 	public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		if (stack != null && stack.getItem() == ItemInit.SC_SwiftUnicorn && player.isSneaking() && persistentData.hasKey("ownsMountSwiftUnicorn") && this.getControllingPassenger() == null) {
+		if (stack != null && stack.getItem() == ItemInit.SC_SWIFT_UNICORN && player.isSneaking() && persistentData.hasKey("ownsMountSwiftUnicorn") && this.getControllingPassenger() == null) {
 			this.setDead();
 			persistentData.removeTag("ownsMountSwiftUnicorn");
 		}

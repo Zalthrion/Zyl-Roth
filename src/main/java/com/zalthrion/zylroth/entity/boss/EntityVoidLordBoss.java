@@ -111,7 +111,7 @@ public class EntityVoidLordBoss extends EntityMob {
 	
 	@Override protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
 		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + lootingModifier * 2);
-		for (int def = 0; def < amount; ++ def) this.entityDropItem(new ItemStack(ItemInit.darkShard, 1, 6), 0F);
+		for (int def = 0; def < amount; ++ def) this.entityDropItem(new ItemStack(ItemInit.DARK_SHARD, 1, 6), 0F);
 	}
 	
 	@Override protected SoundEvent getAmbientSound() {
@@ -165,10 +165,10 @@ public class EntityVoidLordBoss extends EntityMob {
 	}
 	
 	@Override protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemInit.voidLordHelmet));
-		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemInit.voidLordChestplate));
-		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemInit.voidLordLeggings));
-		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemInit.voidLordBoots));
-		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ItemInit.tenebraeSword));
+		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemInit.VOID_LORD_HELMET));
+		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemInit.VOID_LORD_CHESTPLATE));
+		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemInit.VOID_LORD_LEGGINGS));
+		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemInit.VOID_LORD_BOOTS));
+		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ItemInit.TENEBRAE_SWORD));
 	}
 }

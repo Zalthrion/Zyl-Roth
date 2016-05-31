@@ -2,6 +2,8 @@ package com.zalthrion.zylroth.block.ore;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +16,9 @@ import com.zalthrion.zylroth.base.BlockBase;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 
 public class TenebraeOre extends BlockBase {
+	
+	/* Constructors */
+	
 	public TenebraeOre() {
 		super(Material.ROCK);
 		this.setCreativeTab();
@@ -24,8 +29,10 @@ public class TenebraeOre extends BlockBase {
 		this.setSoundType(SoundType.STONE);
 	}
 	
-	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemInit.tenebraeIOre;
+	/* Overridden */
+	
+	@Override @Nullable public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return ItemInit.TENEBRAE_ORE_ITEM;
 	}
 	
 	@Override public int quantityDropped(Random random) {

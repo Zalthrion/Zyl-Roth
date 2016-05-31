@@ -25,7 +25,7 @@ public class MapGenVoidRavineKyrul extends MapGenRavine {
 		IBlockState top = isExceptionBiome(biome) ? Blocks.GRASS.getDefaultState() : biome.topBlock;
 		IBlockState filler = isExceptionBiome(biome) ? Blocks.DIRT.getDefaultState() : biome.fillerBlock;
 		
-		if (state.getBlock() == BlockInit.voidStone || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock()) {
+		if (state.getBlock() == BlockInit.VOID_STONE || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock()) {
 			if (y - 1 < 10) {
 				data.setBlockState(x, y, z, FLOWING_LAVA);
 			} else {

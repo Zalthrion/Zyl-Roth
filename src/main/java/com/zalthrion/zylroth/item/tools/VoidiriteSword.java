@@ -138,7 +138,7 @@ public class VoidiriteSword extends ItemSword implements ZylrothTool {
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public String getUnlocalizedName() {

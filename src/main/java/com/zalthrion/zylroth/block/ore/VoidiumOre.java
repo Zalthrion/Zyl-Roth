@@ -25,7 +25,7 @@ public class VoidiumOre extends BlockBase {
 	}
 	
 	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemInit.voidiumChunk;
+		return ItemInit.VOIDIUM_CHUNK;
 	}
 	
 	@Override public int quantityDropped(Random random) {

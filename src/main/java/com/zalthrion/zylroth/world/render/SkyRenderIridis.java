@@ -88,7 +88,7 @@ public class SkyRenderIridis extends IRenderHandler {
 		
 		boolean renderRainbow = false;
 		if (mc.thePlayer.inventory.armorInventory[3] != null) {
-			if (mc.thePlayer.inventory.armorInventory[3].getItem() == ItemInit.rainbowGlasses) {
+			if (mc.thePlayer.inventory.armorInventory[3].getItem() == ItemInit.RAINBOW_GLASSES) {
 				renderRainbow = true;
 			}
 		}

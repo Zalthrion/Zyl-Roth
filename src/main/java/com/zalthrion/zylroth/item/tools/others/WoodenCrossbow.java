@@ -18,6 +18,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -32,15 +33,13 @@ import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class WoodenCrossbow extends Item implements ZylrothTool {
-	
-	private String name = "woodenCrossbow";
-	
 	public WoodenCrossbow(int i) {
 		super();
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setMaxDamage(i);
 		this.setMaxStackSize(1);
-		this.setUnlocalizedName(name);
+		this.setRegistryName(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "woodenCrossbow"));
+		this.setUnlocalizedName("woodenCrossbow");
 	}
 	
 	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
@@ -163,7 +162,7 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 	
 	@Override
 	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override

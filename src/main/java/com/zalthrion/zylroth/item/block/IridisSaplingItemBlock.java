@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class IridisSaplingItemBlock extends ItemBlock {
-	private final static String[] subNames = {"autumnTreeSapling"};
+	private final static String[] subNames = {"autumnTreeSapling", "sakuraSapling"};
 	
 	public IridisSaplingItemBlock(Block block) {
 		super(block);
@@ -32,6 +32,6 @@ public class IridisSaplingItemBlock extends ItemBlock {
 	}
 	
 	@Override public String getUnlocalizedName(ItemStack stack) {
-		return stack.getItemDamage() <= subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
+		return stack.getItemDamage() < subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
 	}
 }

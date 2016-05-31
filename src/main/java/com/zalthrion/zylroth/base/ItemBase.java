@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class ItemBase extends Item {
@@ -12,7 +13,6 @@ public class ItemBase extends Item {
 	
 	public ItemBase() {
 		super();
-		this.setCreativeTab(ZylrothTab.zylRoth);
 		this.setMaxStackSize(64);
 		this.setNoRepair();
 	}
@@ -23,18 +23,24 @@ public class ItemBase extends Item {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 	}
 	
-	public void setNames(String name) {
+	public ItemBase setCreativeTab() {
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
+		return this;
+	}
+	
+	public ItemBase setNames(String name) {
 		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
+		return this;
 	}
 	
 	/* Overridden */
 	
 	@Override public String getUnlocalizedName() {
-		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, this.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	
 	@Override public String getUnlocalizedName(ItemStack itemStack) {
-		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, this.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 }

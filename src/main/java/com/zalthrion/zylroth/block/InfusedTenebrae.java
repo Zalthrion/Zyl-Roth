@@ -14,6 +14,9 @@ import com.zalthrion.zylroth.base.BlockBase;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class InfusedTenebrae extends BlockBase {
+	
+	/* Constructors */
+	
 	public InfusedTenebrae() {
 		super(Material.ROCK);
 		this.setCreativeTab();
@@ -23,6 +26,8 @@ public class InfusedTenebrae extends BlockBase {
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
 	}
+	
+	/* Overridden */
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {

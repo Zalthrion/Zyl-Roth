@@ -19,9 +19,9 @@ public class RainbowLeafItemBlock extends ItemBlock {
 	
 	public static String[] getVariants(int blockType) {
 		ArrayList<String> variants = new ArrayList<String>();
-		for (int i = (blockType == 0 ? 0 : 4); i < (blockType == 0 ? 4 : 6); i ++) {
+		for (int i = (blockType == 0 ? 0 : 4); i < (blockType == 0 ? Math.min(subNames.length, 4) : Math.min(subNames.length, 8)); i ++) {
 			String variant = subNames[i];
-			variants.add(variant.replace("rainbow", "").replace("Leaves", "").toLowerCase() + "_leaves");
+			variants.add(variant.replace("Leaves", "").toLowerCase() + "_leaves");
 		}
 		return variants.toArray(new String[] {});
 	}
@@ -33,6 +33,6 @@ public class RainbowLeafItemBlock extends ItemBlock {
 	}
 	
 	@Override public String getUnlocalizedName(ItemStack stack) {
-		return stack.getItemDamage() <= subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
+		return stack.getItemDamage() < subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
 	}
 }

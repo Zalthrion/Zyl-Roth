@@ -23,7 +23,7 @@ public class MountPlaguedHorse extends MountBaseHorse {
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		if (stack != null && stack.getItem() == ItemInit.SC_PlaguedHorse && player.isSneaking() && persistentData.hasKey("ownsMountPlaguedHorse") && this.getControllingPassenger() == null) {
+		if (stack != null && stack.getItem() == ItemInit.SC_PLAGUED_HORSE && player.isSneaking() && persistentData.hasKey("ownsMountPlaguedHorse") && this.getControllingPassenger() == null) {
 			this.setDead();
 			persistentData.removeTag("ownsMountPlaguedHorse");
 		}

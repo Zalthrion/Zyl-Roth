@@ -20,6 +20,8 @@ public class BenzennStatue extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	protected static final AxisAlignedBB BENZENN_AABB = new AxisAlignedBB(-0.5, 0, -0.5, 1.5, 1.8, 1.5);
 	
+	/* Constructors */
+	
 	public BenzennStatue() {
 		super(Material.IRON);
 		this.setCreativeTab();
@@ -30,6 +32,16 @@ public class BenzennStatue extends BlockBase {
 		this.setSoundType(SoundType.METAL);
 	}
 	
+	/* Overridden */
+	
+	@Override public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return BENZENN_AABB;
+	}
+	
+	@Override public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
 	@Override public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
@@ -38,19 +50,11 @@ public class BenzennStatue extends BlockBase {
 		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
 	}
 	
-	@Override public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-	
 	@Override public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
 	}
 	
 	@Override public IBlockState withRotation(IBlockState state, Rotation rot) {
 		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
-	}
-	
-	@Override public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return BENZENN_AABB;
 	}
 }

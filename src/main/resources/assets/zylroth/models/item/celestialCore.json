@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "zylroth:items/unstableTenebraeCore"
+        "layer0": "zylroth:items/celestialCore"
     },
     "display": {
         "thirdperson": {

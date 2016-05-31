@@ -21,7 +21,7 @@ public class MountSavageBadger extends MountBase {
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		if (stack != null && stack.getItem() == ItemInit.SC_SavageBadger && player.isSneaking() && persistentData.hasKey("ownsMountSavageBadger") && this.getControllingPassenger() == null && this.isOwner(player)) {
+		if (stack != null && stack.getItem() == ItemInit.SC_SAVAGE_BADGER && player.isSneaking() && persistentData.hasKey("ownsMountSavageBadger") && this.getControllingPassenger() == null && this.isOwner(player)) {
 			this.setDead();
 			persistentData.removeTag("ownsMountSavageBadger");
 		}

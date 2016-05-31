@@ -2,6 +2,8 @@ package com.zalthrion.zylroth.block.tile;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -30,13 +32,14 @@ import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.tile.TileEntityInfuser;
 
-// TODO Organize methods alphabetically
 public class InfuserMachine extends BlockContainerBase {
 	private InfuserType type;
 	private static boolean keepInventory;
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	public static final PropertyEnum<InfuserType> INFUSER_TYPE = PropertyEnum.<InfuserType>create("type", InfuserType.class);
+	
+	/* Constructors */
 	
 	public InfuserMachine(boolean isActive, InfuserType type) {
 		super();
@@ -46,7 +49,7 @@ public class InfuserMachine extends BlockContainerBase {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setLightLevel(isActive ? 0.9F : 0.2F);
 		this.setNames(isActive ? (type.isNormal() ? "infuserMachineActive" : "oreInfuserMachineActive") : (type.isNormal() ? "infuserMachine" : "oreInfuserMachine"));
-		this.setParticleBlockState(type.isNormal() ? BlockInit.tenebraeCore.getDefaultState() : Blocks.QUARTZ_BLOCK.getDefaultState());
+		this.setParticleBlockState(type.isNormal() ? BlockInit.TENEBRAE_CORE.getDefaultState() : Blocks.QUARTZ_BLOCK.getDefaultState());
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
 		
@@ -61,17 +64,17 @@ public class InfuserMachine extends BlockContainerBase {
 		keepInventory = true;
 		
 		if (active && type.isNormal()) {
-			world.setBlockState(pos, BlockInit.infuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
-			world.setBlockState(pos, BlockInit.infuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.INFUSER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.INFUSER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
 		} else if (!active && type.isNormal()) {
-			world.setBlockState(pos, BlockInit.infuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
-			world.setBlockState(pos, BlockInit.infuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.INFUSER_IDLE.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.INFUSER_IDLE.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
 		} else if (active && !type.isNormal()) {
-			world.setBlockState(pos, BlockInit.oreInfuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
-			world.setBlockState(pos, BlockInit.oreInfuser.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.ORE_INFUSER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.ORE_INFUSER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
 		} else if (!active && !type.isNormal()) {
-			world.setBlockState(pos, BlockInit.oreInfuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
-			world.setBlockState(pos, BlockInit.oreInfuserIdle.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.ORE_INFUSER_IDLE.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
+			world.setBlockState(pos, BlockInit.ORE_INFUSER_IDLE.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(INFUSER_TYPE, type), 3);
 		}
 
         keepInventory = false;
@@ -83,34 +86,6 @@ public class InfuserMachine extends BlockContainerBase {
 	}
 	
 	/* Overridden */
-	
-	@Override public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityInfuser(this.type);
-	}
-	
-	@Override public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (worldIn.isRemote) return true;
-		TileEntityInfuser tei = (TileEntityInfuser) worldIn.getTileEntity(pos);
-		if ((tei == null) || playerIn.isSneaking()) return false;
-		playerIn.openGui(Zylroth.instance, Reference.GuiIDs.INFUSER, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return true;
-	}
-	
-	@Override public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(state.getValue(INFUSER_TYPE).isNormal() ? BlockInit.infuserIdle : BlockInit.oreInfuserIdle);
-	}
-	
-	@Override public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(state.getValue(INFUSER_TYPE).isNormal() ? BlockInit.infuserIdle : BlockInit.oreInfuserIdle);
-	}
-	
-	@Override public boolean hasComparatorInputOverride(IBlockState state) {
-		return true;
-	}
-	
-	@Override public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
-		return Container.calcRedstoneFromInventory((IInventory) worldIn.getTileEntity(pos));
-	}
 	
 	@Override public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		  if (!keepInventory) {
@@ -141,12 +116,59 @@ public class InfuserMachine extends BlockContainerBase {
 		  super.breakBlock(worldIn, pos, state);
 	}
 	
+	@Override protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { FACING, INFUSER_TYPE });
+	}
+	
+	@Override public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityInfuser(this.type);
+	}
+	
+	@Override public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+		return Container.calcRedstoneFromInventory((IInventory) worldIn.getTileEntity(pos));
+	}
+	
+	@Override @Nullable public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(state.getValue(INFUSER_TYPE).isNormal() ? BlockInit.INFUSER_IDLE : BlockInit.ORE_INFUSER_IDLE);
+	}
+	
+	@Override public int getMetaFromState(IBlockState state) {
+		int i = 0;
+		i = i | ((EnumFacing) state.getValue(FACING)).getIndex();
+		if (!((InfuserType) state.getValue(INFUSER_TYPE)).isNormal()) {
+			i |= 8;
+		}
+		return i;
+	}
+	
+	@Override public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(state.getValue(INFUSER_TYPE).isNormal() ? BlockInit.INFUSER_IDLE : BlockInit.ORE_INFUSER_IDLE);
+	}
+	
+	@Override public IBlockState getStateFromMeta(int meta) {
+		int i = meta & 7;
+		EnumFacing facing = (i > 3) ? EnumFacing.NORTH : EnumFacing.getFront(i);
+		return this.getDefaultState().withProperty(FACING, facing).withProperty(INFUSER_TYPE, ((meta & 8) > 0) ? InfuserType.ORE : InfuserType.NORMAL);
+	}
+	
+	@Override public boolean hasComparatorInputOverride(IBlockState state) {
+		return true;
+	}
+	
+	@Override public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (worldIn.isRemote) return true;
+		TileEntityInfuser tei = (TileEntityInfuser) worldIn.getTileEntity(pos);
+		if ((tei == null) || playerIn.isSneaking()) return false;
+		playerIn.openGui(Zylroth.instance, Reference.GuiIDs.INFUSER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		return true;
+	}
+	
 	@Override public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(INFUSER_TYPE, this.type).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 	
 	@Override public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		worldIn.setBlockState(pos, state.withProperty(INFUSER_TYPE, this.type).withProperty(FACING, placer.getHorizontalFacing().getOpposite())); // TODO See if this is needed
+		worldIn.setBlockState(pos, state.withProperty(INFUSER_TYPE, this.type).withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
 		
 		if (!stack.hasDisplayName()) return;
 		TileEntity te = worldIn.getTileEntity(pos);
@@ -179,24 +201,5 @@ public class InfuserMachine extends BlockContainerBase {
 				}
 			}
 		}
-	}
-	
-	@Override public IBlockState getStateFromMeta(int meta) {
-		int i = meta & 7;
-		EnumFacing facing = (i > 3) ? EnumFacing.NORTH : EnumFacing.getFront(i);
-		return this.getDefaultState().withProperty(FACING, facing).withProperty(INFUSER_TYPE, ((meta & 8) > 0) ? InfuserType.ORE : InfuserType.NORMAL);
-	}
-	
-	@Override public int getMetaFromState(IBlockState state) {
-		int i = 0;
-		i = i | ((EnumFacing) state.getValue(FACING)).getIndex();
-		if (!((InfuserType) state.getValue(INFUSER_TYPE)).isNormal()) {
-			i |= 8;
-		}
-		return i;
-	}
-	
-	@Override protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { FACING, INFUSER_TYPE });
 	}
 }

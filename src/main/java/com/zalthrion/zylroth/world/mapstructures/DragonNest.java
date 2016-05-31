@@ -130,7 +130,7 @@ public class DragonNest extends WorldGenerator {
 				pos.south().up(2)
 		});
 		
-		world.setBlockState(pos.up(2), BlockInit.spawnerVoidDragon.getDefaultState());
+		world.setBlockState(pos.up(2), BlockInit.SPAWNER_VOID_DRAGON.getDefaultState());
 		world.setBlockState(pos.up(3), Blocks.GRAVEL.getDefaultState());
 		
 		return true;

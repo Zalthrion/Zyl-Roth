@@ -16,6 +16,9 @@ import com.zalthrion.zylroth.base.BlockBase;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class TenebraeBlock extends BlockBase {
+	
+	/* Constructors */
+	
 	public TenebraeBlock() {
 		super(Material.ROCK);
 		this.setCreativeTab();
@@ -25,6 +28,8 @@ public class TenebraeBlock extends BlockBase {
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
 	}
+	
+	/* Overridden */
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "beacon"));

@@ -28,7 +28,7 @@ public class BiomeGenAutumnForest extends Biome {
 	}
 	
 	@Override public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
-		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState(), false);
+		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.IRIDIS_LEAF_BLOCK.getDefaultState(), false);
 	}
 	
 	@Override public int getModdedBiomeFoliageColor(int original) {

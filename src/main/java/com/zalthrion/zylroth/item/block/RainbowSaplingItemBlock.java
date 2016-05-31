@@ -32,6 +32,6 @@ public class RainbowSaplingItemBlock extends ItemBlock {
 	}
 	
 	@Override public String getUnlocalizedName(ItemStack stack) {
-		return stack.getItemDamage() <= subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
+		return stack.getItemDamage() < subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
 	}
 }

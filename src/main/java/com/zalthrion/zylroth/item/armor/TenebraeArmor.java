@@ -23,12 +23,12 @@ public class TenebraeArmor extends ItemArmorBase {
 		super(armorMaterial, textureName, type);
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setNames("tenebraeArmor" + type.getName());
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {

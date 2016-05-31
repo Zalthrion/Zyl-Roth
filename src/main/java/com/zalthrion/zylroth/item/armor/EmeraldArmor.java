@@ -22,7 +22,7 @@ public class EmeraldArmor extends ItemArmorBase {
 		super(armorMaterial, textureName, type);
 		this.textureName = textureName;
 		this.setMaxStackSize(1);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setNames("emeraldArmor" + type.getName());
 	}
 	

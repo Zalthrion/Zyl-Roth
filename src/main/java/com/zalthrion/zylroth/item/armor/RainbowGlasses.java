@@ -10,7 +10,7 @@ import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 //TODO Check all mappings, reorganize methods, etc.
 public class RainbowGlasses extends ItemArmorBase {
 	public RainbowGlasses() {
-		super(ItemInit.glasses, "", EntityEquipmentSlot.HEAD);
+		super(ItemInit.GLASSES_ARMOR, "", EntityEquipmentSlot.HEAD);
 		this.setNames("rainbowGlasses");
 	}
 	

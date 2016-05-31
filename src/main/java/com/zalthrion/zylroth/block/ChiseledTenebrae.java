@@ -21,6 +21,9 @@ import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class ChiseledTenebrae extends BlockBase {
+	
+	/* Constructors */
+	
 	public ChiseledTenebrae() {
 		super(Material.ROCK);
 		this.setCreativeTab();
@@ -30,6 +33,8 @@ public class ChiseledTenebrae extends BlockBase {
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
 	}
+	
+	/* Overridden */
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
@@ -44,9 +49,9 @@ public class ChiseledTenebrae extends BlockBase {
 		
 		// Boss
 		
-		if (worldIn.getBlockState(pos.down()).getBlock() == BlockInit.empoweredTenebraeCore && worldIn.getBlockState(pos.down(2)).getBlock() == BlockInit.infusedTenebrae) {
-			boolean flag = worldIn.getBlockState(pos.down().west()).getBlock() == BlockInit.infusedTenebrae && worldIn.getBlockState(pos.down().east()).getBlock() == BlockInit.infusedTenebrae;
-			boolean flag1 = worldIn.getBlockState(pos.down().north()).getBlock() == BlockInit.infusedTenebrae && worldIn.getBlockState(pos.down().south()).getBlock() == BlockInit.infusedTenebrae;
+		if (worldIn.getBlockState(pos.down()).getBlock() == BlockInit.EMPOWERED_TENEBRAE_CORE && worldIn.getBlockState(pos.down(2)).getBlock() == BlockInit.INFUSED_TENEBRAE) {
+			boolean flag = worldIn.getBlockState(pos.down().west()).getBlock() == BlockInit.INFUSED_TENEBRAE && worldIn.getBlockState(pos.down().east()).getBlock() == BlockInit.INFUSED_TENEBRAE;
+			boolean flag1 = worldIn.getBlockState(pos.down().north()).getBlock() == BlockInit.INFUSED_TENEBRAE && worldIn.getBlockState(pos.down().south()).getBlock() == BlockInit.INFUSED_TENEBRAE;
 			
 			if (flag || flag1) {
 				worldIn.setBlockToAir(pos);
@@ -73,9 +78,9 @@ public class ChiseledTenebrae extends BlockBase {
 		
 		// Non-Boss "Golem Guardian"
 		
-		if (worldIn.getBlockState(pos.down()).getBlock() == BlockInit.tenebraeCore && worldIn.getBlockState(pos.down(2)).getBlock() == BlockInit.tenebraeBlock) {
-			boolean flag = worldIn.getBlockState(pos.west().down()).getBlock() == BlockInit.tenebraeBlock && worldIn.getBlockState(pos.east().down()).getBlock() == BlockInit.tenebraeBlock;
-			boolean flag1 = worldIn.getBlockState(pos.down().north()).getBlock() == BlockInit.tenebraeBlock && worldIn.getBlockState(pos.down().south()).getBlock() == BlockInit.tenebraeBlock;
+		if (worldIn.getBlockState(pos.down()).getBlock() == BlockInit.TENEBRAE_CORE && worldIn.getBlockState(pos.down(2)).getBlock() == BlockInit.TENEBRAE_BLOCK) {
+			boolean flag = worldIn.getBlockState(pos.west().down()).getBlock() == BlockInit.TENEBRAE_BLOCK && worldIn.getBlockState(pos.east().down()).getBlock() == BlockInit.TENEBRAE_BLOCK;
+			boolean flag1 = worldIn.getBlockState(pos.down().north()).getBlock() == BlockInit.TENEBRAE_BLOCK && worldIn.getBlockState(pos.down().south()).getBlock() == BlockInit.TENEBRAE_BLOCK;
 			
 			if (flag || flag1) {
 				worldIn.setBlockToAir(pos);

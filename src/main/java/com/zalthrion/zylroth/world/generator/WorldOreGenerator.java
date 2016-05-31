@@ -27,23 +27,23 @@ public class WorldOreGenerator implements IWorldGenerator {
 	}
 	
 	private void generateOverworld(Random random, int x, int z, World world) {
-		this.addOreSpawn(BlockInit.tenebraeOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.STONE);
+		this.addOreSpawn(BlockInit.TENEBRAE_ORE, world, random, x, z, 2, 6, 7, 0, 32, Blocks.STONE);
 	}
 	
 	private void generateNether(Random random, int x, int z, World world) {
-		this.addOreSpawn(BlockInit.inferniumOre, world, random, x, z, 2, 6, 20, 0, 128, Blocks.NETHERRACK);
+		this.addOreSpawn(BlockInit.INFERNIUM_ORE, world, random, x, z, 2, 6, 20, 0, 128, Blocks.NETHERRACK);
 	}
 	
 	private void generateEnd(Random random, int x, int z, World world) {
-		this.addOreSpawn(BlockInit.endiriteOre, world, random, x, z, 2, 6, 20, 0, 75, Blocks.END_STONE);
+		this.addOreSpawn(BlockInit.ENDIRITE_ORE, world, random, x, z, 2, 6, 20, 0, 75, Blocks.END_STONE);
 	}
 	
 	private void generateKyrul(Random random, int x, int z, World world) {
-		this.addOreSpawn(BlockInit.voidiumOre, world, random, x, z, 2, 6, 7, 0, 32, BlockInit.voidStone);
+		this.addOreSpawn(BlockInit.VOIDIUM_ORE, world, random, x, z, 2, 6, 7, 0, 32, BlockInit.VOID_STONE);
 	}
 	
 	private void generateIridis(Random random, int x, int z, World world) {
-		this.addOreSpawn(BlockInit.tenebraeOre, world, random, x, z, 2, 6, 7, 0, 32, Blocks.STONE);
+		this.addOreSpawn(BlockInit.TENEBRAE_ORE, world, random, x, z, 2, 6, 7, 0, 32, Blocks.STONE);
 	}
 	
 	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY, Block spawnBlock) {

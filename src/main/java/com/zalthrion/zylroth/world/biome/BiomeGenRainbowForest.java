@@ -38,22 +38,22 @@ public class BiomeGenRainbowForest extends Biome {
 		IBlockState leafState = Blocks.AIR.getDefaultState();
 		switch (i) {
 			case 0:
-				leafState = BlockInit.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.RED);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.RED);
 				break;
 			case 1:
-				leafState = BlockInit.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.ORANGE);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.ORANGE);
 				break;
 			case 2:
-				leafState = BlockInit.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.YELLOW);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.YELLOW);
 				break;
 			case 3:
-				leafState = BlockInit.rainbowLeafBlock.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.GREEN);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.GREEN);
 				break;
 			case 4:
-				leafState = BlockInit.rainbowLeafBlock2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.BLUE);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.BLUE);
 				break;
 			case 5:
-				leafState = BlockInit.rainbowLeafBlock2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.PURPLE);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.PURPLE);
 				break;
 		}
 		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), leafState, false);

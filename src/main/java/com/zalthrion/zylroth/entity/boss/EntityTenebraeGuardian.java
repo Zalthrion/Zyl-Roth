@@ -191,13 +191,13 @@ public class EntityTenebraeGuardian extends EntityMob {
 	
 	@Override
 	protected void dropFewItems(boolean hit, int loot) {
-		this.dropItem(ItemInit.voidGem, 1);
-		this.dropItem(ItemInit.voidEssence, 4);
+		this.dropItem(ItemInit.VOID_GEM, 1);
+		this.dropItem(ItemInit.VOID_ESSENCE, 4);
 		
 		int amount = this.rand.nextInt(4) + 2 + this.rand.nextInt(1 + loot * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ItemInit.tenebraeIOre, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ItemInit.TENEBRAE_ORE_ITEM, 1, 6), 0f);
 		}
 	}
 	

@@ -30,7 +30,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	public CreativePickaxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setUnlocalizedName(name);
 	}
 	
@@ -66,7 +66,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 				for (int slot = 0; slot < player.inventory.getSizeInventory(); slot ++) {
 					ItemStack aStack = player.inventory.getStackInSlot(slot);
 					if (aStack != null) {
-						if (aStack.getItem() == ItemInit.creativeShovel) {
+						if (aStack.getItem() == ItemInit.CREATIVE_SHOVEL) {
 							ZylrothTool shovel = (ZylrothTool) aStack.getItem();
 							if (!shovel.isBroken(aStack)) {
 								hasShovel = true;
@@ -136,7 +136,7 @@ public class CreativePickaxe extends ItemPickaxe implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {

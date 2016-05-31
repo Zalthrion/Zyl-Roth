@@ -6,13 +6,14 @@ import net.minecraft.block.material.Material;
 import com.zalthrion.zylroth.base.BlockBase;
 
 public class VoidPlanks extends BlockBase {
-	private String name = "voidPlanks";
+	
+	/* Constructors */
 	
 	public VoidPlanks() {
 		super(Material.WOOD);
 		this.setCreativeTab();
 		this.setHardness(2.0F);
-		this.setNames(name);
+		this.setNames("voidPlanks");
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.WOOD);
 	}

@@ -1,38 +1,32 @@
 package com.zalthrion.zylroth.item.tools;
 
 import java.util.List;
-import java.util.Set;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
-import com.google.common.collect.Sets;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
-public class TenebraeAxe extends ItemTool implements ZylrothTool {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE});
-	
+public class TenebraeAxe extends ItemAxe implements ZylrothTool {
 	private String name = "tenebraeAxe";
 	
 	public TenebraeAxe(ToolMaterial material) {
-		super(material, EFFECTIVE_ON);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		super(material, 6.0F, 3.0F);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setUnlocalizedName(name);
         this.damageVsEntity = 6.0F;
         this.attackSpeed = 3.0F;
@@ -83,7 +77,7 @@ public class TenebraeAxe extends ItemTool implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public float getStrVsBlock(ItemStack stack, IBlockState state) {

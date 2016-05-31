@@ -28,6 +28,8 @@ import com.zalthrion.zylroth.reference.Reference;
 public class EmpoweredTenebraeCore extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
+	/* Constructors */
+	
 	public EmpoweredTenebraeCore() {
 		super(Material.ROCK);
 		this.setCreativeTab();
@@ -38,6 +40,8 @@ public class EmpoweredTenebraeCore extends BlockBase {
 		this.setResistance(5.0F);
 		this.setSoundType(SoundType.METAL);
 	}
+	
+	/* Overridden */
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {

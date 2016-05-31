@@ -13,8 +13,8 @@ public class FuelHandler implements IFuelHandler {
 	private HashMap<Item, Integer> fuelMap = new HashMap<Item, Integer>() {
 		private static final long serialVersionUID = 1L;
 		{
-			put(ItemInit.soulEssence, 6400);
-			put(ItemInit.cursedSoulEssence, 6400);
+			put(ItemInit.SOUL_ESSENCE, 6400);
+			put(ItemInit.CURSED_SOUL_ESSENCE, 6400);
 		}
 	};
 	

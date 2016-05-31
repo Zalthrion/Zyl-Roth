@@ -85,4 +85,8 @@ public class ModRegistry {
 			}
 		}
 	}
+	
+	public static ResourceLocation createRegistryNameFor(String name) {
+		return new ResourceLocation(Reference.MOD_ID.toLowerCase(), name);
+	}
 }

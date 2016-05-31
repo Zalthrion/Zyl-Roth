@@ -27,8 +27,8 @@ public class BiomeGenAshBarrens extends Biome {
 		this.theBiomeDecorator.treesPerChunk = -999;
 		this.theBiomeDecorator.grassPerChunk = 8;
 		
-		this.topBlock = BlockInit.ashBlock.getDefaultState();
-		this.fillerBlock = BlockInit.ashBlock.getDefaultState();
+		this.topBlock = BlockInit.ASH_BLOCK.getDefaultState();
+		this.fillerBlock = BlockInit.ASH_BLOCK.getDefaultState();
 	}
 	
 	@Override public int getModdedBiomeFoliageColor(int original) {
@@ -61,11 +61,11 @@ public class BiomeGenAshBarrens extends Biome {
 				
 				if (iblockstate2.getMaterial() == Material.AIR) {
 					j = -1;
-				} else if (iblockstate2.getBlock() == BlockInit.voidStone) {
+				} else if (iblockstate2.getBlock() == BlockInit.VOID_STONE) {
 					if (j == -1) {
 						if (k <= 0) {
 							iblockstate = AIR;
-							iblockstate1 = BlockInit.voidStone.getDefaultState();
+							iblockstate1 = BlockInit.VOID_STONE.getDefaultState();
 						} else if (j1 >= i - 4 && j1 <= i + 1) {
 							iblockstate = this.topBlock;
 							iblockstate1 = this.fillerBlock;
@@ -85,7 +85,7 @@ public class BiomeGenAshBarrens extends Biome {
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
 						} else if (j1 < i - 7 - k) {
 							iblockstate = AIR;
-							iblockstate1 = BlockInit.voidStone.getDefaultState();
+							iblockstate1 = BlockInit.VOID_STONE.getDefaultState();
 							chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
 						} else {
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);

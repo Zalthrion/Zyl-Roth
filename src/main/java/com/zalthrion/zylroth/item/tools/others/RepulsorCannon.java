@@ -34,7 +34,7 @@ public class RepulsorCannon extends Item implements ZylrothTool {
 	
 	public RepulsorCannon(int i) {
 		super();
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setMaxDamage(i);
 		this.setMaxStackSize(1);
 		this.setNames("repulsorCannon");
@@ -54,7 +54,7 @@ public class RepulsorCannon extends Item implements ZylrothTool {
 		EntityPlayer player = (EntityPlayer) entityLiving;
 		if (!this.isBroken(stack)) {
 			if (player.capabilities.isCreativeMode || player.inventory.clearMatchingItems(Items.REDSTONE, 0, 1, null) > 0) {
-				worldIn.playSound(null, player.getPosition(), SoundInit.repulsorCannonShoot, SoundCategory.PLAYERS, 0.5F, 0F);
+				worldIn.playSound(null, player.getPosition(), SoundInit.REPULSOR_CANNON_SHOOT, SoundCategory.PLAYERS, 0.5F, 0F);
 				stack.damageItem(1, player);
 				if (!worldIn.isRemote) {
 					worldIn.spawnEntityInWorld(new RepulsorCannonBolt(worldIn, player));
@@ -105,7 +105,7 @@ public class RepulsorCannon extends Item implements ZylrothTool {
 	
 	@Override public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		if (!isBroken(stack)) {
-			player.worldObj.playSound(null, player.getPosition(), SoundInit.repulsorCannonMine, SoundCategory.PLAYERS, 1.0F, 1.0F);
+			player.worldObj.playSound(null, player.getPosition(), SoundInit.REPULSOR_CANNON_MINE, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			return false;
 		}
 		
@@ -129,7 +129,7 @@ public class RepulsorCannon extends Item implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public String getUnlocalizedName() {

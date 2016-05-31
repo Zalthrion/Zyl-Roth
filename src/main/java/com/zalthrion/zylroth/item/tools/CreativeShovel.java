@@ -26,7 +26,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	
 	public CreativeShovel(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setUnlocalizedName(name);
 	}
 	
@@ -93,7 +93,7 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {

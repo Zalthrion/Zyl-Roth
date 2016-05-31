@@ -34,9 +34,7 @@ import com.zalthrion.zylroth.reference.Reference;
 	
 	public static void registerBlock(Block block, IStateMapper mapper, String[] registryNames, int[] registryMetas) {
 		registerItemInternal(Item.getItemFromBlock(block), registryNames, registryMetas);
-		LogHelper.warn("A" + block == null);
 		if (block == null) return;
-		LogHelper.warn("B" + Item.getItemFromBlock(block) == null);
 		if (Item.getItemFromBlock(block) == null) return;
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(block), generateVariants(registryNames));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(block, mapper);

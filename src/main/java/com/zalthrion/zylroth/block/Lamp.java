@@ -17,6 +17,8 @@ import com.zalthrion.zylroth.base.BlockBase;
 public class Lamp extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
+	/* Constructors */
+	
 	public Lamp() {
 		super(Material.IRON);
 		this.setHardness(1.0F);
@@ -25,6 +27,12 @@ public class Lamp extends BlockBase {
 		this.setSoundType(SoundType.METAL);
 		this.setNames("lamp");
 		this.setCreativeTab();
+	}
+	
+	/* Overridden */
+	
+	@Override public boolean isOpaqueCube(IBlockState state) {
+		return false;
 	}
 	
 	@Override public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -41,9 +49,5 @@ public class Lamp extends BlockBase {
 	
 	@Override public IBlockState withRotation(IBlockState state, Rotation rot) {
 		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
-	}
-	
-	@Override public boolean isOpaqueCube(IBlockState state) {
-		return false;
 	}
 }

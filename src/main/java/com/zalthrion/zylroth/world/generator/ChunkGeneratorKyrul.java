@@ -160,7 +160,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 							
 							for (int j3 = 0; j3 < 4; j3 ++) {
 								if ((d16 += d15) > 0) {
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, BlockInit.voidStone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, BlockInit.VOID_STONE.getDefaultState());
 								} else if (k2 * 8 + l2 < this.settings.seaLevel) {
 									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, this.fluidBlock.getDefaultState());
 								}
@@ -385,7 +385,7 @@ public class ChunkGeneratorKyrul implements IChunkGenerator {
 			}
 		}
 		
-		if (bgb == BiomeInit.voidMountains && this.rand.nextInt(this.dragonSpawnerChance) == 0) {
+		if (bgb == BiomeInit.VOID_MOUNTAINS && this.rand.nextInt(this.dragonSpawnerChance) == 0) {
 			k1 = this.rand.nextInt(16) + 8;
 			i2 = this.rand.nextInt(16) + 8;
 			int yPos = -1;

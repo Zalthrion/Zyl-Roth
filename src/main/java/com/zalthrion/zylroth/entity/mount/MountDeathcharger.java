@@ -23,7 +23,7 @@ public class MountDeathcharger extends MountBaseHorse {
 	@Override public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
 		NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		
-		if (stack != null && stack.getItem() == ItemInit.SC_Deathcharger && player.isSneaking() && persistentData.hasKey("ownsMountDeathcharger") && this.getControllingPassenger() == null && this.isOwner(player)) {
+		if (stack != null && stack.getItem() == ItemInit.SC_DEATHCHARGER && player.isSneaking() && persistentData.hasKey("ownsMountDeathcharger") && this.getControllingPassenger() == null && this.isOwner(player)) {
 			this.setDead();
 			persistentData.removeTag("ownsMountDeathcharger");
 		}

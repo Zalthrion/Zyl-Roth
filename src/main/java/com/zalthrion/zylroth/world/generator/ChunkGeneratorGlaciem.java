@@ -353,7 +353,7 @@ public class ChunkGeneratorGlaciem implements IChunkGenerator {
 			}
 		}
 		
-		if (biomegenbase == BiomeInit.frozenWastes) {
+		if (biomegenbase == BiomeInit.FROZEN_WASTES) {
 			if (this.rand.nextInt(icePillarChance) == 0) {
 				k1 = this.rand.nextInt(16) + 8;
 				i2 = this.rand.nextInt(16) + 8;

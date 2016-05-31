@@ -39,7 +39,7 @@ public class BiomeGenHauntedForest extends Biome {
 	}
 	
 	@Override public WorldGenAbstractTree genBigTreeChance(Random rand) {
-		return new WorldGenTrees(true, 4, BlockInit.kyrulLogBlock.getDefaultState(), BlockInit.kyrulLeafBlock.getDefaultState(), false);
+		return new WorldGenTrees(true, 4, BlockInit.KYRUL_LOG_BLOCK.getDefaultState(), BlockInit.KYRUL_LEAF_BLOCK.getDefaultState(), false);
 	}
 	
 	@Override public int getModdedBiomeFoliageColor(int original) {
@@ -72,11 +72,11 @@ public class BiomeGenHauntedForest extends Biome {
 				
 				if (iblockstate2.getMaterial() == Material.AIR) {
 					j = -1;
-				} else if (iblockstate2.getBlock() == BlockInit.voidStone) {
+				} else if (iblockstate2.getBlock() == BlockInit.VOID_STONE) {
 					if (j == -1) {
 						if (k <= 0) {
 							iblockstate = AIR;
-							iblockstate1 = BlockInit.voidStone.getDefaultState();
+							iblockstate1 = BlockInit.VOID_STONE.getDefaultState();
 						} else if (j1 >= i - 4 && j1 <= i + 1) {
 							iblockstate = this.topBlock;
 							iblockstate1 = this.fillerBlock;
@@ -96,7 +96,7 @@ public class BiomeGenHauntedForest extends Biome {
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
 						} else if (j1 < i - 7 - k) {
 							iblockstate = AIR;
-							iblockstate1 = BlockInit.voidStone.getDefaultState();
+							iblockstate1 = BlockInit.VOID_STONE.getDefaultState();
 							chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
 						} else {
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);

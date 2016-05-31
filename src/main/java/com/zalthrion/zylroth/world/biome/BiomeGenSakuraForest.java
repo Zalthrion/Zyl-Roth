@@ -27,7 +27,7 @@ public class BiomeGenSakuraForest extends Biome {
 	}
 	
 	@Override public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
-		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.iridisLeafBlock.getDefaultState().withProperty(IridisLeafBlock.LEAF_TYPE, IridisTreeType.SAKURA), false);
+		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.IRIDIS_LEAF_BLOCK.getDefaultState().withProperty(IridisLeafBlock.LEAF_TYPE, IridisTreeType.SAKURA), false);
 	}
 	
 	@Override public int getModdedBiomeGrassColor(int original) {

@@ -6,6 +6,9 @@ import net.minecraft.block.material.Material;
 import com.zalthrion.zylroth.base.BlockBase;
 
 public class AshBlock extends BlockBase {
+	
+	/* Constructors */
+	
 	public AshBlock() {
 		super(Material.SAND);
 		this.setCreativeTab();

@@ -28,7 +28,7 @@ public class VoidLordArmor extends ItemArmorBase {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {

@@ -94,8 +94,6 @@ tile.zylroth:tenebraeCore.name=Tenebrae Core
 tile.zylroth:voidPlanks.name=Void Planks
 tile.zylroth:voidStone.name=Void Stone
 
-tile.zylroth:autumnTreeLeaves.name=Autumn Tree Leaves
-
 tile.zylroth:rainbowRedLeaves.name=Rainbow Red Leaves
 tile.zylroth:rainbowOrangeLeaves.name=Rainbow Orange Leaves
 tile.zylroth:rainbowYellowLeaves.name=Rainbow Yellow Leaves
@@ -112,6 +110,8 @@ tile.zylroth:rainbowPurpleSapling.name=Rainbow Purple Sapling
 
 tile.zylroth:autumnTreeLeaves.name=Autumn Tree Leaves
 tile.zylroth:autumnTreeSapling.name=Autumn Tree Sapling
+tile.zylroth:sakuraLeaves.name=Sakura Leaves
+tile.zylroth:sakuraSapling.name=Sakura Sapling
 
 tile.zylroth:voidWood.name=Void Wood
 tile.zylroth:voidTreeLeaves.name=Void Tree Leaves
@@ -121,6 +121,8 @@ tile.zylroth:goldBag.name=Gold Bag
 
 tile.zylroth:benzenn.name=Benzenn Statue
 tile.zylroth:benzennStatue.name=Benzenn Statue (Pedestal)
+
+tile.zylroth:lamp.name=Lamp
 
 tile.zylroth:spawnerVoidDragon.name=Spawner [Void Dragon]
 
@@ -206,10 +208,15 @@ item.zylroth:tenebraeChestplate.name=Tenebrae Chestplate
 item.zylroth:tenebraeLeggings.name=Tenebrae Leggings
 item.zylroth:tenebraeBoots.name=Tenebrae Boots
 
-item.zylroth:voidlordHelmet.name=Void Lord Helmet
-item.zylroth:voidlordChestplate.name=Void Lord Chestplate
-item.zylroth:voidlordLeggings.name=Void Lord Leggings
-item.zylroth:voidlordBoots.name=Void Lord Boots
+item.zylroth:voidLordHelmet.name=Void Lord Helmet
+item.zylroth:voidLordChestplate.name=Void Lord Chestplate
+item.zylroth:voidLordLeggings.name=Void Lord Leggings
+item.zylroth:voidLordBoots.name=Void Lord Boots
+
+item.zylroth:emeraldHelmet.name=Emerald Helmet
+item.zylroth:emeraldChestplate.name=Emerald Chestplate
+item.zylroth:emeraldLeggings.name=Emerald Leggings
+item.zylroth:emeraldBoots.name=Emerald Boots
 
 item.zylroth:rainbowGlasses.name=Rainbow Glasses
 

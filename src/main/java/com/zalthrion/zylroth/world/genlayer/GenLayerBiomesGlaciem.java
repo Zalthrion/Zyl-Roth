@@ -8,7 +8,7 @@ import com.zalthrion.zylroth.lib.ModInit.BiomeInit;
 
 // TODO Check mappings, constructors, etc.
 public class GenLayerBiomesGlaciem extends GenLayer {
-	protected Biome[] allowedBiomes = {BiomeInit.frozenSea, BiomeInit.coldOcean, BiomeInit.frozenWastes, BiomeInit.snowPlateau};
+	protected Biome[] allowedBiomes = {BiomeInit.FROZEN_SEA, BiomeInit.COLD_OCEAN, BiomeInit.FROZEN_WASTES, BiomeInit.SNOW_PLATEAU};
 	
 	public GenLayerBiomesGlaciem(long seed) {
 		super(seed);

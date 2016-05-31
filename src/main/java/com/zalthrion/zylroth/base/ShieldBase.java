@@ -7,19 +7,40 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class ShieldBase extends Item {
+	
+	/* Constructors */
+	
 	public ShieldBase() {
 		super();
-		this.setCreativeTab(ZylrothTab.zylRoth);
 		this.setMaxStackSize(64);
 		this.setNoRepair();
 	}
+	
+	/* Custom Methods */
+	
+	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
+		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+	
+	protected ShieldBase setCreativeTab() {
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
+		return this;
+	}
+	
+	protected ShieldBase setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
+		return this;
+	}
+	
+	/* Overridden */
 	
 	@Override public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BLOCK;
@@ -27,11 +48,6 @@ public class ShieldBase extends Item {
 	
 	@Override public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 72000;
-	}
-	
-	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		playerIn.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStackIn);
 	}
 	
 	@Override public String getUnlocalizedName() {
@@ -42,12 +58,8 @@ public class ShieldBase extends Item {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, this.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		playerIn.setActiveHand(hand);
+		return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStackIn);
 	}
 }

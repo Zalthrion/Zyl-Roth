@@ -50,10 +50,10 @@ public class EntityUndeadWarrior extends EntityMob {
 	}
 	
 	@Override protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemInit.tenebraeChestplate));
-		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemInit.tenebraeLeggings));
-		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemInit.tenebraeBoots));
-		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ItemInit.tenebraeSword));
+		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemInit.TENEBRAE_CHESTPLATE));
+		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemInit.TENEBRAE_LEGGINGS));
+		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemInit.TENEBRAE_BOOTS));
+		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ItemInit.TENEBRAE_SWORD));
 	}
 	
 	@Override protected void applyEntityAttributes() {
@@ -147,7 +147,7 @@ public class EntityUndeadWarrior extends EntityMob {
 		int amount = this.rand.nextInt(3) + 2 + this.rand.nextInt(1 + par2 * 2);
 		
 		for (int def = 0; def < amount; ++ def) {
-			this.entityDropItem(new ItemStack(ItemInit.darkShard, 1, 6), 0f);
+			this.entityDropItem(new ItemStack(ItemInit.DARK_SHARD, 1, 6), 0f);
 		}
 		
 	}

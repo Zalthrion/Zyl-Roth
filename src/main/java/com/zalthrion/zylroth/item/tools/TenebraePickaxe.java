@@ -28,7 +28,7 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	public TenebraePickaxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setUnlocalizedName(name);
 	}
 	
@@ -72,7 +72,7 @@ public class TenebraePickaxe extends ItemPickaxe implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {

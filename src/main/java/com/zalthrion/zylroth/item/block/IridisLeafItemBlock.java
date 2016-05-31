@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class IridisLeafItemBlock extends ItemBlock {
-	private final static String[] subNames = {"autumnTreeLeaves"};
+	private final static String[] subNames = {"autumnTreeLeaves", "sakuraLeaves"};
 	
 	public IridisLeafItemBlock(Block block) {
 		super(block);
@@ -19,7 +19,7 @@ public class IridisLeafItemBlock extends ItemBlock {
 	
 	public static String[] getVariants(int blockType) {
 		ArrayList<String> variants = new ArrayList<String>();
-		for (int i = (blockType == 0 ? 0 : 4); i < (blockType == 0 ? 4 : 6); i ++) {
+		for (int i = (blockType == 0 ? 0 : 4); i < (blockType == 0 ? Math.min(subNames.length, 4) : Math.min(subNames.length, 8)); i ++) {
 			String variant = subNames[i];
 			variants.add(variant.replace("Leaves", "").toLowerCase() + "_leaves");
 		}
@@ -33,6 +33,6 @@ public class IridisLeafItemBlock extends ItemBlock {
 	}
 	
 	@Override public String getUnlocalizedName(ItemStack stack) {
-		return stack.getItemDamage() <= subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
+		return stack.getItemDamage() < subNames.length ? "tile.zylroth:" + subNames[stack.getItemDamage()] : "general.zylroth:unavailable";
 	}
 }

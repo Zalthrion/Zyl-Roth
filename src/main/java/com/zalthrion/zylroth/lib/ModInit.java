@@ -44,7 +44,11 @@ import com.zalthrion.zylroth.block.tree.KyrulSaplingBlock;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock2;
 import com.zalthrion.zylroth.block.tree.RainbowSaplingBlock;
-import com.zalthrion.zylroth.entity.EntityFancyBadger;
+import com.zalthrion.zylroth.entity.*;
+import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
+import com.zalthrion.zylroth.entity.boss.EntityVoidLordBoss;
+import com.zalthrion.zylroth.entity.dev.EntitySixOneThree;
+import com.zalthrion.zylroth.entity.dev.EntityZalthrion;
 import com.zalthrion.zylroth.entity.mount.MountDeathcharger;
 import com.zalthrion.zylroth.entity.mount.MountPlaguedHorse;
 import com.zalthrion.zylroth.entity.mount.MountSavageBadger;
@@ -111,133 +115,133 @@ public class ModInit {
 		"rainbowLeafBlock2IB", "rainbowSaplingBlockIB", "kyrulSaplingBlockIB", "benzenn", "benzennStatue", "lamp", "voidStone", "voidPlanks" };
 	
 	public static class BiomeInit {
-		public static Biome dreadWastes = new BiomeGenDreadWastes(new BiomeProperties("Dread Wastes").setBaseHeight(0.2F).setWaterColor(14953751).setRainDisabled());
-		public static Biome hauntedForest = new BiomeGenHauntedForest(new BiomeProperties("Haunted Forest").setBaseHeight(0.1F).setHeightVariation(0.1F).setWaterColor(14953751).setRainDisabled());
-		public static Biome ashBarrens = new BiomeGenAshBarrens(new BiomeProperties("Ash Barrens").setWaterColor(14953751).setRainDisabled());
-		public static Biome voidMountains = new BiomeGenVoidMountains(new BiomeProperties("Void Mountains").setBaseHeight(1.5F).setHeightVariation(-1.475F).setWaterColor(14953751).setRainDisabled());
+		public static final Biome DREAD_WASTES = new BiomeGenDreadWastes(new BiomeProperties("Dread Wastes").setBaseHeight(0.2F).setWaterColor(14953751).setRainDisabled());
+		public static final Biome HAUNTED_FOREST = new BiomeGenHauntedForest(new BiomeProperties("Haunted Forest").setBaseHeight(0.1F).setHeightVariation(0.1F).setWaterColor(14953751).setRainDisabled());
+		public static final Biome ASH_BARRENS = new BiomeGenAshBarrens(new BiomeProperties("Ash Barrens").setWaterColor(14953751).setRainDisabled());
+		public static final Biome VOID_MOUNTAINS = new BiomeGenVoidMountains(new BiomeProperties("Void Mountains").setBaseHeight(1.5F).setHeightVariation(-1.475F).setWaterColor(14953751).setRainDisabled());
 		
-		public static Biome jadePlains = new BiomeGenJadePlains(new BiomeProperties("Jade Plains").setBaseHeight(0.125F).setHeightVariation(-0.75F).setWaterColor(3721952));
-		public static Biome autumnForest = new BiomeGenAutumnForest(new BiomeProperties("Autumn Forest").setBaseHeight(0.2F).setWaterColor(14953751));
-		public static Biome sapphireOcean = new BiomeGenSapphireOcean(new BiomeProperties("Sapphire Ocean").setBaseHeight(-1.0F).setHeightVariation(1.1F).setWaterColor(3721952));
-		public static Biome rainbowForest = new BiomeGenRainbowForest(new BiomeProperties("Rainbow Forest").setBaseHeight(0.2F).setHeightVariation(0.1F).setWaterColor(3721952));
-		public static Biome snowMountains = new BiomeGenSnowMountains(new BiomeProperties("Snow Mountains").setBaseHeight(1.0F).setHeightVariation(-0.5F).setRainDisabled().setSnowEnabled().setTemperature(0.0F).setWaterColor(3721952));
-		public static Biome stoneQuarry = new BiomeGenStoneQuarry(new BiomeProperties("Stone Quarry").setBaseHeight(1.0F).setHeightVariation(-0.5F).setWaterColor(3721952));
-		public static Biome dryDesert = new BiomeGenDryDesert(new BiomeProperties("Dry Desert").setWaterColor(3721952));
-		public static Biome sakuraForest = new BiomeGenSakuraForest(new BiomeProperties("Sakura Forest").setBaseHeight(0.2F).setHeightVariation(0.0F).setWaterColor(3721952));
+		public static final Biome JADE_PLAINS = new BiomeGenJadePlains(new BiomeProperties("Jade Plains").setBaseHeight(0.125F).setHeightVariation(-0.75F).setWaterColor(3721952));
+		public static final Biome AUTUMN_FOREST = new BiomeGenAutumnForest(new BiomeProperties("Autumn Forest").setBaseHeight(0.2F).setWaterColor(14953751));
+		public static final Biome SAPPHIRE_OCEAN = new BiomeGenSapphireOcean(new BiomeProperties("Sapphire Ocean").setBaseHeight(-1.0F).setHeightVariation(1.1F).setWaterColor(3721952));
+		public static final Biome RAINBOW_FOREST = new BiomeGenRainbowForest(new BiomeProperties("Rainbow Forest").setBaseHeight(0.2F).setHeightVariation(0.1F).setWaterColor(3721952));
+		public static final Biome SNOW_MOUNTAINS = new BiomeGenSnowMountains(new BiomeProperties("Snow Mountains").setBaseHeight(1.0F).setHeightVariation(-0.5F).setRainDisabled().setSnowEnabled().setTemperature(0.0F).setWaterColor(3721952));
+		public static final Biome STONE_QUARRY = new BiomeGenStoneQuarry(new BiomeProperties("Stone Quarry").setBaseHeight(1.0F).setHeightVariation(-0.5F).setWaterColor(3721952));
+		public static final Biome DRY_DESERT = new BiomeGenDryDesert(new BiomeProperties("Dry Desert").setWaterColor(3721952));
+		public static final Biome SAKURA_FOREST = new BiomeGenSakuraForest(new BiomeProperties("Sakura Forest").setBaseHeight(0.2F).setHeightVariation(0.0F).setWaterColor(3721952));
 		
-		public static Biome frozenSea = new BiomeGenFrozenSea(new BiomeProperties("Frozen Sea").setBaseHeight(-1.0F).setHeightVariation(1.1F).setWaterColor(3975093).setRainDisabled().setSnowEnabled().setTemperature(0.0F));
-		public static Biome coldOcean = new BiomeGenColdOcean(new BiomeProperties("Cold Ocean").setBaseHeight(-1.0F).setHeightVariation(1.1F).setWaterColor(3721952).setRainDisabled().setSnowEnabled().setTemperature(0.3F));
-		public static Biome frozenWastes = new BiomeGenFrozenWastes(new BiomeProperties("Frozen Wastes").setBaseHeight(0.125F).setHeightVariation(-0.75F).setWaterColor(3721952).setRainDisabled().setSnowEnabled().setTemperature(0.0F));
-		public static Biome snowPlateau = new BiomeGenSnowPlateau(new BiomeProperties("Snow Plateau").setBaseHeight(1.5F).setHeightVariation(1.475F).setRainDisabled().setSnowEnabled().setTemperature(0.0F).setWaterColor(3721952));
+		public static final Biome FROZEN_SEA = new BiomeGenFrozenSea(new BiomeProperties("Frozen Sea").setBaseHeight(-1.0F).setHeightVariation(1.1F).setWaterColor(3975093).setRainDisabled().setSnowEnabled().setTemperature(0.0F));
+		public static final Biome COLD_OCEAN = new BiomeGenColdOcean(new BiomeProperties("Cold Ocean").setBaseHeight(-1.0F).setHeightVariation(1.1F).setWaterColor(3721952).setRainDisabled().setSnowEnabled().setTemperature(0.3F));
+		public static final Biome FROZEN_WASTES = new BiomeGenFrozenWastes(new BiomeProperties("Frozen Wastes").setBaseHeight(0.125F).setHeightVariation(-0.75F).setWaterColor(3721952).setRainDisabled().setSnowEnabled().setTemperature(0.0F));
+		public static final Biome SNOW_PLATEAU = new BiomeGenSnowPlateau(new BiomeProperties("Snow Plateau").setBaseHeight(1.5F).setHeightVariation(1.475F).setRainDisabled().setSnowEnabled().setTemperature(0.0F).setWaterColor(3721952));
 		
 		public static void preInit() {
-			BiomeDictionary.registerBiomeType(dreadWastes, Type.PLAINS);
-			BiomeDictionary.registerBiomeType(hauntedForest, Type.FOREST, Type.SPOOKY);
-			BiomeDictionary.registerBiomeType(ashBarrens, Type.DRY);
-			BiomeDictionary.registerBiomeType(voidMountains, Type.HILLS);
+			BiomeDictionary.registerBiomeType(DREAD_WASTES, Type.PLAINS);
+			BiomeDictionary.registerBiomeType(HAUNTED_FOREST, Type.FOREST, Type.SPOOKY);
+			BiomeDictionary.registerBiomeType(ASH_BARRENS, Type.DRY);
+			BiomeDictionary.registerBiomeType(VOID_MOUNTAINS, Type.HILLS);
 			
-			BiomeDictionary.registerBiomeType(jadePlains, Type.PLAINS);
-			BiomeDictionary.registerBiomeType(autumnForest, Type.FOREST);
-			BiomeDictionary.registerBiomeType(sapphireOcean, Type.OCEAN);
-			BiomeDictionary.registerBiomeType(rainbowForest, Type.MAGICAL, Type.FOREST);
-			BiomeDictionary.registerBiomeType(snowMountains, Type.COLD, Type.SNOWY);
-			BiomeDictionary.registerBiomeType(stoneQuarry, Type.MOUNTAIN);
-			BiomeDictionary.registerBiomeType(dryDesert, Type.HOT, Type.SANDY, Type.DRY);
-			BiomeDictionary.registerBiomeType(sakuraForest, Type.FOREST, Type.MAGICAL);
+			BiomeDictionary.registerBiomeType(JADE_PLAINS, Type.PLAINS);
+			BiomeDictionary.registerBiomeType(AUTUMN_FOREST, Type.FOREST);
+			BiomeDictionary.registerBiomeType(SAPPHIRE_OCEAN, Type.OCEAN);
+			BiomeDictionary.registerBiomeType(RAINBOW_FOREST, Type.MAGICAL, Type.FOREST);
+			BiomeDictionary.registerBiomeType(SNOW_MOUNTAINS, Type.COLD, Type.SNOWY);
+			BiomeDictionary.registerBiomeType(STONE_QUARRY, Type.MOUNTAIN);
+			BiomeDictionary.registerBiomeType(DRY_DESERT, Type.HOT, Type.SANDY, Type.DRY);
+			BiomeDictionary.registerBiomeType(SAKURA_FOREST, Type.FOREST, Type.MAGICAL);
 			
-			BiomeDictionary.registerBiomeType(frozenSea, Type.COLD, Type.OCEAN, Type.SNOWY);
-			BiomeDictionary.registerBiomeType(coldOcean, Type.OCEAN);
-			BiomeDictionary.registerBiomeType(frozenWastes, Type.COLD, Type.PLAINS, Type.SNOWY);
-			BiomeDictionary.registerBiomeType(snowPlateau, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
+			BiomeDictionary.registerBiomeType(FROZEN_SEA, Type.COLD, Type.OCEAN, Type.SNOWY);
+			BiomeDictionary.registerBiomeType(COLD_OCEAN, Type.OCEAN);
+			BiomeDictionary.registerBiomeType(FROZEN_WASTES, Type.COLD, Type.PLAINS, Type.SNOWY);
+			BiomeDictionary.registerBiomeType(SNOW_PLATEAU, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
 		}
 	}
 	
 	public static class BlockInit {
-		public static final Block ashBlock = new AshBlock();
-		public static final Block chiseledTenebrae = new ChiseledTenebrae();
-		public static final Block empoweredTenebraeCore = new EmpoweredTenebraeCore();
-		public static final Block infusedTenebrae = new InfusedTenebrae();
-		public static final Block tenebraeBlock = new TenebraeBlock();
-		public static final Block tenebraeCore = new TenebraeCore();
+		public static final Block ASH_BLOCK = new AshBlock();
+		public static final Block CHISELED_TENEBRAE = new ChiseledTenebrae();
+		public static final Block EMPOWERED_TENEBRAE_CORE = new EmpoweredTenebraeCore();
+		public static final Block INFUSED_TENEBRAE = new InfusedTenebrae();
+		public static final Block TENEBRAE_BLOCK = new TenebraeBlock();
+		public static final Block TENEBRAE_CORE = new TenebraeCore();
 		
-		public static final Block endiriteOre = new EndiriteOre();
-		public static final Block inferniumOre = new InferniumOre();
-		public static final Block tenebraeOre = new TenebraeOre();
-		public static final Block voidiumOre = new VoidiumOre();
+		public static final Block ENDIRITE_ORE = new EndiriteOre();
+		public static final Block INFERNIUM_ORE = new InferniumOre();
+		public static final Block TENEBRAE_ORE = new TenebraeOre();
+		public static final Block VOIDIUM_ORE = new VoidiumOre();
 
-		public static final Block spawnerVoidDragon = new SpawnerVoidDragon();
+		public static final Block SPAWNER_VOID_DRAGON = new SpawnerVoidDragon();
 		
-		public static final Block goldBag = new GoldBag();
-		public static final Block infuserIdle = new InfuserMachine(false, InfuserType.NORMAL);
-		public static final Block infuser = new InfuserMachine(true, InfuserType.NORMAL);
-		public static final Block oreInfuserIdle = new InfuserMachine(false, InfuserType.ORE);
-		public static final Block oreInfuser = new InfuserMachine(true, InfuserType.ORE);
-		public static final Block benzenn = new Benzenn();
-		public static final Block benzennStatue = new BenzennStatue();
-		public static final Block lamp = new Lamp();
-		public static final Block voidStone = new VoidStone();
-		public static final Block voidPlanks = new VoidPlanks();
+		public static final Block GOLD_BAG = new GoldBag();
+		public static final Block INFUSER_IDLE = new InfuserMachine(false, InfuserType.NORMAL);
+		public static final Block INFUSER = new InfuserMachine(true, InfuserType.NORMAL);
+		public static final Block ORE_INFUSER_IDLE = new InfuserMachine(false, InfuserType.ORE);
+		public static final Block ORE_INFUSER = new InfuserMachine(true, InfuserType.ORE);
+		public static final Block BENZENN = new Benzenn();
+		public static final Block BENZENN_STATUE = new BenzennStatue();
+		public static final Block LAMP = new Lamp();
+		public static final Block VOID_STONE = new VoidStone();
+		public static final Block VOID_PLANKS = new VoidPlanks();
 		
-		public static final Block iridisLeafBlock = new IridisLeafBlock();
-		public static final Block iridisSaplingBlock = new IridisSaplingBlock();
-		public static final Block rainbowLeafBlock = new RainbowLeafBlock();
-		public static final Block rainbowLeafBlock2 = new RainbowLeafBlock2();
-		public static final Block rainbowSaplingBlock = new RainbowSaplingBlock();
-		public static final Block kyrulLogBlock = new KyrulLogBlock().setUnlocalizedName("kyrulLogBlock").setRegistryName("kyrulLogBlock");
-		public static final Block kyrulLeafBlock = new KyrulLeafBlock();
-		public static final Block kyrulSaplingBlock = new KyrulSaplingBlock();
+		public static final Block IRIDIS_LEAF_BLOCK = new IridisLeafBlock();
+		public static final Block IRIDIS_SAPLING_BLOCK = new IridisSaplingBlock();
+		public static final Block RAINBOW_LEAF_BLOCK = new RainbowLeafBlock();
+		public static final Block RAINBOW_LEAF_BLOCK_2 = new RainbowLeafBlock2();
+		public static final Block RAINBOW_SAPLING_BLOCK = new RainbowSaplingBlock();
+		public static final Block KYRUL_LOG_BLOCK = new KyrulLogBlock();
+		public static final Block KYRUL_LEAF_BLOCK = new KyrulLeafBlock();
+		public static final Block KYRUL_SAPLING_BLOCK = new KyrulSaplingBlock();
 		
-		public static final ItemBlock iridisLeafBlockIB = new IridisLeafItemBlock(BlockInit.iridisLeafBlock);
-		public static final ItemBlock iridisSaplingBlockIB = new IridisSaplingItemBlock(BlockInit.iridisSaplingBlock);
-		public static final ItemBlock rainbowLeafBlockIB = new RainbowLeafItemBlock(BlockInit.rainbowLeafBlock);
-		public static final ItemBlock rainbowLeafBlock2IB = new RainbowLeafItemBlock(BlockInit.rainbowLeafBlock2);
-		public static final ItemBlock rainbowSaplingBlockIB = new RainbowSaplingItemBlock(BlockInit.rainbowSaplingBlock);
-		public static final ItemBlock kyrulLeafBlockIB = new KyrulLeafItemBlock(BlockInit.kyrulLeafBlock);
-		public static final ItemBlock kyrulSaplingBlockIB = new KyrulSaplingItemBlock(BlockInit.kyrulSaplingBlock);
+		public static final ItemBlock IRIDIS_LEAF_ITEMBLOCK = new IridisLeafItemBlock(BlockInit.IRIDIS_LEAF_BLOCK);
+		public static final ItemBlock IRIDIS_SAPLING_ITEMBLOCK = new IridisSaplingItemBlock(BlockInit.IRIDIS_SAPLING_BLOCK);
+		public static final ItemBlock RAINBOW_LEAF_ITEMBLOCK = new RainbowLeafItemBlock(BlockInit.RAINBOW_LEAF_BLOCK);
+		public static final ItemBlock RAINBOW_LEAF_ITEMBLOCK_2 = new RainbowLeafItemBlock(BlockInit.RAINBOW_LEAF_BLOCK_2);
+		public static final ItemBlock RAINBOW_SAPLING_ITEMBLOCK = new RainbowSaplingItemBlock(BlockInit.RAINBOW_SAPLING_BLOCK);
+		public static final ItemBlock KYRUL_LEAF_ITEMBLOCK = new KyrulLeafItemBlock(BlockInit.KYRUL_LEAF_BLOCK);
+		public static final ItemBlock KYRUL_SAPLING_ITEMBLOCK = new KyrulSaplingItemBlock(BlockInit.KYRUL_SAPLING_BLOCK);
 		
 		public static void preInit() {
 			GameRegistry.registerTileEntity(TileEntitySpawnerVoidDragon.class, "spawnerVoidDragon");
 			GameRegistry.registerTileEntity(TileEntityInfuser.class, "infuser");
 			
-			ModRegistry.addRegister(ashBlock, "ashBlock");
-			ModRegistry.addRegister(chiseledTenebrae, "chiseledTenebrae");
-			ModRegistry.addRegister(empoweredTenebraeCore, "empoweredTenebraeCore");
-			ModRegistry.addRegister(infusedTenebrae, "infusedTenebrae");
-			ModRegistry.addRegister(tenebraeBlock, "tenebraeBlock");
-			ModRegistry.addRegister(tenebraeCore, "tenebraeCore");
+			ModRegistry.addRegister(ASH_BLOCK, "ashBlock");
+			ModRegistry.addRegister(CHISELED_TENEBRAE, "chiseledTenebrae");
+			ModRegistry.addRegister(EMPOWERED_TENEBRAE_CORE, "empoweredTenebraeCore");
+			ModRegistry.addRegister(INFUSED_TENEBRAE, "infusedTenebrae");
+			ModRegistry.addRegister(TENEBRAE_BLOCK, "tenebraeBlock");
+			ModRegistry.addRegister(TENEBRAE_CORE, "tenebraeCore");
 			
-			ModRegistry.addRegister(endiriteOre, "endiriteOre");
-			ModRegistry.addRegister(inferniumOre, "inferniumOre");
-			ModRegistry.addRegister(tenebraeOre, "tenebraeOre");
-			ModRegistry.addRegister(voidiumOre, "voidiumOre");
+			ModRegistry.addRegister(ENDIRITE_ORE, "endiriteOre");
+			ModRegistry.addRegister(INFERNIUM_ORE, "inferniumOre");
+			ModRegistry.addRegister(TENEBRAE_ORE, "tenebraeOre");
+			ModRegistry.addRegister(VOIDIUM_ORE, "voidiumOre");
 			
-			ModRegistry.addRegister(spawnerVoidDragon, "spawnerVoidDragon");
+			ModRegistry.addRegister(SPAWNER_VOID_DRAGON, "spawnerVoidDragon");
 			
-			ModRegistry.addRegister(goldBag, "goldBag");
-			ModRegistry.addRegister(infuserIdle, "infuserIdle");
-			ModRegistry.addRegister(infuser, "infuser");
-			ModRegistry.addRegister(oreInfuserIdle, "oreInfuserIdle");
-			ModRegistry.addRegister(oreInfuser, "oreInfuser");
-			ModRegistry.addRegister(benzenn, "benzenn");
-			ModRegistry.addRegister(benzennStatue, "benzennStatue");
-			ModRegistry.addRegister(lamp, "lamp");
-			ModRegistry.addRegister(voidStone, "voidStone");
-			ModRegistry.addRegister(voidPlanks, "voidPlanks");
+			ModRegistry.addRegister(GOLD_BAG, "goldBag");
+			ModRegistry.addRegister(INFUSER_IDLE, "infuserIdle");
+			ModRegistry.addRegister(INFUSER, "infuser");
+			ModRegistry.addRegister(ORE_INFUSER_IDLE, "oreInfuserIdle");
+			ModRegistry.addRegister(ORE_INFUSER, "oreInfuser");
+			ModRegistry.addRegister(BENZENN, "benzenn");
+			ModRegistry.addRegister(BENZENN_STATUE, "benzennStatue");
+			ModRegistry.addRegister(LAMP, "lamp");
+			ModRegistry.addRegister(VOID_STONE, "voidStone");
+			ModRegistry.addRegister(VOID_PLANKS, "voidPlanks");
 			
-			ModRegistry.addRegister(iridisLeafBlock, iridisLeafBlockIB, "iridisLeafBlock");
-			ModRegistry.addRegister(iridisSaplingBlock, iridisSaplingBlockIB, "iridisSaplingBlock");
-			ModRegistry.addRegister(rainbowLeafBlock, rainbowLeafBlockIB, "rainbowLeafBlock");
-			ModRegistry.addRegister(rainbowLeafBlock2, rainbowLeafBlock2IB, "rainbowLeafBlock2");
-			ModRegistry.addRegister(rainbowSaplingBlock, rainbowSaplingBlockIB, "rainbowSaplingBlock");
-			ModRegistry.addRegister(kyrulLeafBlock, kyrulLeafBlockIB, "kyrulLeafBlock");
-			ModRegistry.addRegister(kyrulSaplingBlock, kyrulSaplingBlockIB, "kyrulSaplingBlock");
+			ModRegistry.addRegister(IRIDIS_LEAF_BLOCK, IRIDIS_LEAF_ITEMBLOCK, "iridisLeafBlock");
+			ModRegistry.addRegister(IRIDIS_SAPLING_BLOCK, IRIDIS_SAPLING_ITEMBLOCK, "iridisSaplingBlock");
+			ModRegistry.addRegister(RAINBOW_LEAF_BLOCK, RAINBOW_LEAF_ITEMBLOCK, "rainbowLeafBlock");
+			ModRegistry.addRegister(RAINBOW_LEAF_BLOCK_2, RAINBOW_LEAF_ITEMBLOCK_2, "rainbowLeafBlock2");
+			ModRegistry.addRegister(RAINBOW_SAPLING_BLOCK, RAINBOW_SAPLING_ITEMBLOCK, "rainbowSaplingBlock");
+			ModRegistry.addRegister(KYRUL_LEAF_BLOCK, KYRUL_LEAF_ITEMBLOCK, "kyrulLeafBlock");
+			ModRegistry.addRegister(KYRUL_SAPLING_BLOCK, KYRUL_SAPLING_ITEMBLOCK, "kyrulSaplingBlock");
 		}
 	}
 	
 	public static class DimensionInit {
-		public static DimensionType GLACIEM = DimensionType.register("Glaciem", "_glaciem", ConfigurationHandler.getGlaciemId(), WorldProviderGlaciem.class, false);
-		public static DimensionType IRIDIS = DimensionType.register("Iridis", "_iridis", ConfigurationHandler.getIridisId(), WorldProviderIridis.class, false);
-		public static DimensionType KYRUL = DimensionType.register("Kyrul", "_kyrul", ConfigurationHandler.getKyrulId(), WorldProviderKyrul.class, false);
+		public static final DimensionType GLACIEM = DimensionType.register("Glaciem", "_glaciem", ConfigurationHandler.getGlaciemId(), WorldProviderGlaciem.class, false);
+		public static final DimensionType IRIDIS = DimensionType.register("Iridis", "_iridis", ConfigurationHandler.getIridisId(), WorldProviderIridis.class, false);
+		public static final DimensionType KYRUL = DimensionType.register("Kyrul", "_kyrul", ConfigurationHandler.getKyrulId(), WorldProviderKyrul.class, false);
 		
 		public static void preInit() {
 			if (ConfigurationHandler.getGlaciemEnabled()) DimensionManager.registerDimension(ConfigurationHandler.getGlaciemId(), GLACIEM);
@@ -266,32 +270,32 @@ public class ModInit {
 			if (spawnProb > 0) EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.CREATURE, biomes);
 		}
 
-		public static void init() {
+		public static void preInit() {
 			
 			// Animals
 			
-			// registerEntity(EntityBird.class, "bird", true, 0xeaeae9, 0xc99a03); // TODO Duplicate stat ID error
-			// registerEntity(EntityRainbowPig.class, "rainbowPig", true, 0xFF9999, 0x9933FF);
-			// registerEntity(EntityBadger.class, "badger", true, 0x202020, 0xE0E0E0);
+			registerEntity(EntityBird.class, "bird", true, 0xeaeae9, 0xc99a03);
+			registerEntity(EntityRainbowPig.class, "rainbowPig", true, 0xFF9999, 0x9933FF);
+			registerEntity(EntityBadger.class, "badger", true, 0x202020, 0xE0E0E0);
 			registerEntity(EntityFancyBadger.class, "fancyBadger", false, 0, 0);
-			// registerEntity(EntityBoar.class, "boar", true, 0x663300, 0xFFFFFF);
-			// registerEntity(EntityUnicorn.class, "unicorn", true, 0xE0E0E0, 0xC0C0C0);
-			// registerEntity(EntityDeer.class, "deer", true, 0xFF9933, 0xE0E0E0);
-			// registerEntity(EntityStag.class, "stag", true, 0xFF8000, 0xE0E0E0);
+			registerEntity(EntityBoar.class, "boar", true, 0x663300, 0xFFFFFF);
+			registerEntity(EntityUnicorn.class, "unicorn", true, 0xE0E0E0, 0xC0C0C0);
+			registerEntity(EntityDeer.class, "deer", true, 0xFF9933, 0xE0E0E0);
+			registerEntity(EntityStag.class, "stag", true, 0xFF8000, 0xE0E0E0);
 			
 			// Mobs
 
-			// registerEntity(EntityTenebraeGuardian.class, "tenebraeGuardian", true, 0x190033, 0x660000);
-			// registerEntity(EntitySkeletalHorse.class, "skeletalHorse", true, 0xE0E0E0, 0xC0C0C0);
-			// registerEntity(EntityVoidLordBoss.class, "voidLord", true, 0x404040, 0xC0C0C0);
-			// registerEntity(EntityTenebraeProtector.class, "tenebraeProtector", true, 0x190033, 0x000033);
-			// registerEntity(EntityUndeadMinion.class, "undeadMinion", true, 0xA0A0A0, 0x808080);
-			// registerEntity(EntityUndeadWarrior.class, "undeadWarrior", true, 0x808080, 0xFFFFFF);
-			// registerEntity(EntityVoidDragon.class, "voidDragon", true, 0x000000, 0xCCCCFF);
+			registerEntity(EntityTenebraeGuardian.class, "tenebraeGuardian", true, 0x190033, 0x660000);
+			registerEntity(EntitySkeletalHorse.class, "skeletalHorse", true, 0xE0E0E0, 0xC0C0C0);
+			registerEntity(EntityVoidLordBoss.class, "voidLord", true, 0x404040, 0xC0C0C0);
+			registerEntity(EntityTenebraeProtector.class, "tenebraeProtector", true, 0x190033, 0x000033);
+			registerEntity(EntityUndeadMinion.class, "undeadMinion", true, 0xA0A0A0, 0x808080);
+			registerEntity(EntityUndeadWarrior.class, "undeadWarrior", true, 0x808080, 0xFFFFFF);
+			registerEntity(EntityVoidDragon.class, "voidDragon", true, 0x000000, 0xCCCCFF);
 			
 			// Others
 			
-			// registerEntity(EntityTuskarr.class, "tuskarr", true, 0x000000, 0xCCCCFF);
+			registerEntity(EntityTuskarr.class, "tuskarr", true, 0x000000, 0xCCCCFF);
 			
 			// Mounts
 			
@@ -303,8 +307,8 @@ public class ModInit {
 			
 			// Developers
 			
-			// registerEntity(EntityZalthrion.class, "Zalthrion", true, 0x202020, 0x663300);
-			// registerEntity(EntitySixOneThree.class, "Six-One-Three", true, 0x000000, 0x00CCCC);
+			registerEntity(EntityZalthrion.class, "Zalthrion", true, 0x202020, 0x663300);
+			registerEntity(EntitySixOneThree.class, "Six-One-Three", true, 0x000000, 0x00CCCC);
 			
 			// Projectiles
 			
@@ -315,176 +319,176 @@ public class ModInit {
 	
 	public static class ItemInit {
 		/* Armors */
-		public static final ArmorMaterial tenebrae = EnumHelper.addArmorMaterial("Tenebrae", "Tenebrae", 42, new int[] {3, 8, 6, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
-		public static final ArmorMaterial voidLord = EnumHelper.addArmorMaterial("VoidLord", "VoidLord", 42, new int[] {3, 8, 6, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
-		public static final ArmorMaterial emerald = EnumHelper.addArmorMaterial("Emerald", "Emerald", 42, new int[] {3, 8, 6, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
-		public static final ArmorMaterial glasses = EnumHelper.addArmorMaterial("Glasses", "Glasses", 0, new int[] {0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
-		public static final Item tenebraeHelmet = new TenebraeArmor(tenebrae, "tenebrae", EntityEquipmentSlot.HEAD).setUnlocalizedName("tenebraeHelmet");
-		public static final Item tenebraeChestplate = new TenebraeArmor(tenebrae, "tenebrae", EntityEquipmentSlot.CHEST).setUnlocalizedName("tenebraeChestplate");
-		public static final Item tenebraeLeggings = new TenebraeArmor(tenebrae, "tenebrae", EntityEquipmentSlot.LEGS).setUnlocalizedName("tenebraeLeggings");
-		public static final Item tenebraeBoots = new TenebraeArmor(tenebrae, "tenebrae", EntityEquipmentSlot.FEET).setUnlocalizedName("tenebraeBoots");
-		public static final Item voidLordHelmet = new VoidLordArmor(voidLord, "voidlord", EntityEquipmentSlot.HEAD).setUnlocalizedName("voidLordHelmet");
-		public static final Item voidLordChestplate = new VoidLordArmor(voidLord, "voidlord", EntityEquipmentSlot.CHEST).setUnlocalizedName("voidLordChestplate");
-		public static final Item voidLordLeggings = new VoidLordArmor(voidLord, "voidlord", EntityEquipmentSlot.LEGS).setUnlocalizedName("voidLordLeggings");
-		public static final Item voidLordBoots = new VoidLordArmor(voidLord, "voidlord", EntityEquipmentSlot.FEET).setUnlocalizedName("voidLordBoots");
-		public static final Item emeraldHelmet = new EmeraldArmor(emerald, "emerald", EntityEquipmentSlot.HEAD).setUnlocalizedName("emeraldHelmet");
-		public static final Item emeraldChestplate = new EmeraldArmor(emerald, "emerald", EntityEquipmentSlot.CHEST).setUnlocalizedName("emeraldChestplate");
-		public static final Item emeraldLeggings = new EmeraldArmor(emerald, "emerald", EntityEquipmentSlot.LEGS).setUnlocalizedName("emeraldLeggings");
-		public static final Item emeraldBoots = new EmeraldArmor(emerald, "emerald", EntityEquipmentSlot.FEET).setUnlocalizedName("emeraldBoots");
-		public static final Item rainbowGlasses = new RainbowGlasses();
+		public static final ArmorMaterial TENEBRAE_ARMOR = EnumHelper.addArmorMaterial("Tenebrae", "Tenebrae", 42, new int[] {3, 8, 6, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
+		public static final ArmorMaterial VOID_LORD_ARMOR = EnumHelper.addArmorMaterial("VoidLord", "VoidLord", 42, new int[] {3, 8, 6, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
+		public static final ArmorMaterial EMERALD_ARMOR = EnumHelper.addArmorMaterial("Emerald", "Emerald", 42, new int[] {3, 8, 6, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
+		public static final ArmorMaterial GLASSES_ARMOR = EnumHelper.addArmorMaterial("Glasses", "Glasses", 0, new int[] {0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F);
+		public static final Item TENEBRAE_HELMET = new TenebraeArmor(TENEBRAE_ARMOR, "tenebrae", EntityEquipmentSlot.HEAD).setUnlocalizedName("tenebraeHelmet");
+		public static final Item TENEBRAE_CHESTPLATE = new TenebraeArmor(TENEBRAE_ARMOR, "tenebrae", EntityEquipmentSlot.CHEST).setUnlocalizedName("tenebraeChestplate");
+		public static final Item TENEBRAE_LEGGINGS = new TenebraeArmor(TENEBRAE_ARMOR, "tenebrae", EntityEquipmentSlot.LEGS).setUnlocalizedName("tenebraeLeggings");
+		public static final Item TENEBRAE_BOOTS = new TenebraeArmor(TENEBRAE_ARMOR, "tenebrae", EntityEquipmentSlot.FEET).setUnlocalizedName("tenebraeBoots");
+		public static final Item VOID_LORD_HELMET = new VoidLordArmor(VOID_LORD_ARMOR, "voidlord", EntityEquipmentSlot.HEAD).setUnlocalizedName("voidLordHelmet");
+		public static final Item VOID_LORD_CHESTPLATE = new VoidLordArmor(VOID_LORD_ARMOR, "voidlord", EntityEquipmentSlot.CHEST).setUnlocalizedName("voidLordChestplate");
+		public static final Item VOID_LORD_LEGGINGS = new VoidLordArmor(VOID_LORD_ARMOR, "voidlord", EntityEquipmentSlot.LEGS).setUnlocalizedName("voidLordLeggings");
+		public static final Item VOID_LORD_BOOTS = new VoidLordArmor(VOID_LORD_ARMOR, "voidlord", EntityEquipmentSlot.FEET).setUnlocalizedName("voidLordBoots");
+		public static final Item EMERALD_HELMET = new EmeraldArmor(EMERALD_ARMOR, "emerald", EntityEquipmentSlot.HEAD).setUnlocalizedName("emeraldHelmet");
+		public static final Item EMERALD_CHESTPLATE = new EmeraldArmor(EMERALD_ARMOR, "emerald", EntityEquipmentSlot.CHEST).setUnlocalizedName("emeraldChestplate");
+		public static final Item EMERALD_LEGGINGS = new EmeraldArmor(EMERALD_ARMOR, "emerald", EntityEquipmentSlot.LEGS).setUnlocalizedName("emeraldLeggings");
+		public static final Item EMERALD_BOOTS = new EmeraldArmor(EMERALD_ARMOR, "emerald", EntityEquipmentSlot.FEET).setUnlocalizedName("emeraldBoots");
+		public static final Item RAINBOW_GLASSES = new RainbowGlasses();
 		/* General Items */
-		public static final Item tenebraeChunk = new TenebraeChunk();
-		public static final Item tenebraeIOre = new TenebraeIOre();
-		public static final Item tenebraeIngot = new TenebraeIngot();
-		public static final Item rawInfernium = new RawInfernium();
-		public static final Item inferniumIngot = new InferniumIngot();
-		public static final Item endiriteChunk = new EndiriteChunk();
-		public static final Item endiriteIOre = new EndiriteIOre();
-		public static final Item endiriteIngot = new EndiriteIngot();
-		public static final Item tenebriumIngot = new TenebriumIngot();
-		public static final Item voidiumChunk = new VoidiumChunk();
-		public static final Item voidiumIOre = new VoidiumIOre();
-		public static final Item voidiumIngot = new VoidiumIngot();
-		public static final Item voidiriteIngot = new VoidiriteIngot();
-		public static final Item celestialCore = new CelestialCore();
-		public static final Item Empty_SC = new EmptySC();
-		public static final Item SC_Deathcharger = new SCDeathcharger();
-		public static final Item SC_PlaguedHorse = new SCPlaguedHorse();
-		public static final Item SC_WarTortoise = new SCWarTortoise();
-		public static final Item SC_SavageBadger = new SCSavageBadger();
-		public static final Item SC_SwiftUnicorn = new SCSwiftUnicorn();
-		public static final Item goldTalisman = new GoldTalisman();
-		public static final Item voidTalisman = new VoidTalisman();
-		public static final Item autumnTalisman = new AutumnTalisman();
-		public static final Item iceTalisman = new IceTalisman();
-		public static final Item darkShard = new DarkShard();
-		public static final Item soulEssence = new SoulEssence();
-		public static final Item cursedSoulEssence = new CursedSoulEssence();
-		public static final Item voidGem = new VoidGem();
-		public static final Item voidEssence = new VoidEssence();
+		public static final Item TENEBRAE_CHUNK = new TenebraeChunk();
+		public static final Item TENEBRAE_ORE_ITEM = new TenebraeIOre();
+		public static final Item TENEBRAE_INGOT = new TenebraeIngot();
+		public static final Item RAW_INFERNIUM = new RawInfernium();
+		public static final Item INFERIUM_INGOT = new InferniumIngot();
+		public static final Item ENDIRITE_CHUNK = new EndiriteChunk();
+		public static final Item ENDIRITE_ORE_ITEM = new EndiriteIOre();
+		public static final Item ENDIRITE_INGOT = new EndiriteIngot();
+		public static final Item TENEBRIUM_INGOT = new TenebriumIngot();
+		public static final Item VOIDIUM_CHUNK = new VoidiumChunk();
+		public static final Item VOIDIUM_ORE_ITEM = new VoidiumIOre();
+		public static final Item VOIDIUM_INGOT = new VoidiumIngot();
+		public static final Item VOIDIRITE_INGOT = new VoidiriteIngot();
+		public static final Item CELESTIAL_CORE = new CelestialCore();
+		public static final Item EMPTY_SC = new EmptySC();
+		public static final Item SC_DEATHCHARGER = new SCDeathcharger();
+		public static final Item SC_PLAGUED_HORSE = new SCPlaguedHorse();
+		public static final Item SC_WAR_TORTOISE = new SCWarTortoise();
+		public static final Item SC_SAVAGE_BADGER = new SCSavageBadger();
+		public static final Item SC_SWIFT_UNICORN = new SCSwiftUnicorn();
+		public static final Item GOLD_TALISMAN = new GoldTalisman();
+		public static final Item VOID_TALISMAN = new VoidTalisman();
+		public static final Item AUTUMN_TALISMAN = new AutumnTalisman();
+		public static final Item ICE_TALISMAN = new IceTalisman();
+		public static final Item DARK_SHARD = new DarkShard();
+		public static final Item SOUL_ESSENCE = new SoulEssence();
+		public static final Item CURSED_SOUL_ESSENCE = new CursedSoulEssence();
+		public static final Item VOID_GEM = new VoidGem();
+		public static final Item VOID_ESSENCE = new VoidEssence();
 		/* Tools */
-		private static final ToolMaterial creativeSwordMaterial = EnumHelper.addToolMaterial("CreativeSword", 3, 12250, 10, 996, 50);
-		private static final ToolMaterial creativeDamageTools = EnumHelper.addToolMaterial("creativeDamageTools", 3, 12250, 10, 500.0F, 50);
-		private static final ToolMaterial creativeTools = EnumHelper.addToolMaterial("creativeTools", 3, 12250, 10, 250.0F, 50);
-		private static final ToolMaterial tenebraeDamageTools = EnumHelper.addToolMaterial("tenebraeDamageTools", 3, 2250, 10, 6.5F, 15);
-		private static final ToolMaterial tenebraeTools = EnumHelper.addToolMaterial("tenebraeTools", 3, 2250, 10, 4.5F, 15);
-		private static final ToolMaterial voidiumDamageTools = EnumHelper.addToolMaterial("VoidiumDamageTools", 3, 4250, 10, 8.5F, 16);
-		private static final ToolMaterial voidiriteDamageTools = EnumHelper.addToolMaterial("VoidiriteDamageTools", 3, 5250, 10, 11.0F, 17);
-		public static final Item tenebraeSword = new TenebraeSword(tenebraeDamageTools);
-		public static final Item tenebraePickaxe = new TenebraePickaxe(tenebraeDamageTools);
-		public static final Item tenebraeAxe = new TenebraeAxe(tenebraeDamageTools);
-		public static final Item tenebraeShovel = new TenebraeShovel(tenebraeTools);
-		public static final Item tenebraeHoe = new TenebraeHoe(tenebraeTools);
-		public static final Item creativeSword = new CreativeSword(creativeSwordMaterial);
-		public static final Item creativePickaxe = new CreativePickaxe(creativeDamageTools);
-		public static final Item creativeAxe = new CreativeAxe(creativeDamageTools);
-		public static final Item creativeShovel = new CreativeShovel(creativeTools);
-		public static final Item creativeHoe = new CreativeHoe(creativeTools);
-		public static final Item tenebraeLeafCutter = new TenebraeLeafCutter();
-		public static final Item woodenCrossbow = new WoodenCrossbow(2500);
-		public static final Item voidiumSword = new VoidiumSword(voidiumDamageTools);
-		public static final Item voidiriteSword = new VoidiriteSword(voidiriteDamageTools);
-		public static final Item repulsorCannon = new RepulsorCannon(5500);
-		public static final Item voidiriteShield = new VoidiriteShield();
+		private static final ToolMaterial CREATIVE_SWORD_MATERIAL = EnumHelper.addToolMaterial("CreativeSword", 3, 12250, 10, 996, 50);
+		private static final ToolMaterial CREATIVE_DAMAGE_TOOLS = EnumHelper.addToolMaterial("creativeDamageTools", 3, 12250, 10, 500.0F, 50);
+		private static final ToolMaterial CREATIVE_TOOLS = EnumHelper.addToolMaterial("creativeTools", 3, 12250, 10, 250.0F, 50);
+		private static final ToolMaterial TENEBRAE_DAMAGE_TOOLS = EnumHelper.addToolMaterial("tenebraeDamageTools", 3, 2250, 10, 6.5F, 15);
+		private static final ToolMaterial TENEBRAE_TOOLS = EnumHelper.addToolMaterial("tenebraeTools", 3, 2250, 10, 4.5F, 15);
+		private static final ToolMaterial VOIDIUM_DAMAGE_TOOLS = EnumHelper.addToolMaterial("VoidiumDamageTools", 3, 4250, 10, 8.5F, 16);
+		private static final ToolMaterial VOIDIRITE_DAMAGE_TOOLS = EnumHelper.addToolMaterial("VoidiriteDamageTools", 3, 5250, 10, 11.0F, 17);
+		public static final Item TENEBRAE_SWORD = new TenebraeSword(TENEBRAE_DAMAGE_TOOLS);
+		public static final Item TENEBRAE_PICKAXE = new TenebraePickaxe(TENEBRAE_DAMAGE_TOOLS);
+		public static final Item TENEBRAE_AXE = new TenebraeAxe(TENEBRAE_DAMAGE_TOOLS);
+		public static final Item TENEBRAE_SHOVEL = new TenebraeShovel(TENEBRAE_TOOLS);
+		public static final Item TENEBRAE_HOE = new TenebraeHoe(TENEBRAE_TOOLS);
+		public static final Item CREATIVE_SWORD = new CreativeSword(CREATIVE_SWORD_MATERIAL);
+		public static final Item CREATIVE_PICKAXE = new CreativePickaxe(CREATIVE_DAMAGE_TOOLS);
+		public static final Item CREATIVE_AXE = new CreativeAxe(CREATIVE_DAMAGE_TOOLS);
+		public static final Item CREATIVE_SHOVEL = new CreativeShovel(CREATIVE_TOOLS);
+		public static final Item CREATIVE_HOE = new CreativeHoe(CREATIVE_TOOLS);
+		public static final Item TENEBRAE_LEAF_CUTTER = new TenebraeLeafCutter();
+		public static final Item WOODEN_CROSSBOW = new WoodenCrossbow(2500);
+		public static final Item VOIDIUM_SWORD = new VoidiumSword(VOIDIUM_DAMAGE_TOOLS);
+		public static final Item VOIDIRITE_SWORD = new VoidiriteSword(VOIDIRITE_DAMAGE_TOOLS);
+		public static final Item REPULSOR_CANNON = new RepulsorCannon(5500);
+		public static final Item VOIDIRITE_SHIELD = new VoidiriteShield();
 		
 		public static void preInit() {
 			/* Armors */
-			ModRegistry.addRegister(tenebraeHelmet, "tenebraeHelmet");
-			ModRegistry.addRegister(tenebraeChestplate, "tenebraeChestplate");
-			ModRegistry.addRegister(tenebraeLeggings, "tenebraeLeggings");
-			ModRegistry.addRegister(tenebraeBoots, "tenebraeBoots");
-			ModRegistry.addRegister(voidLordHelmet, "voidLordHelmet");
-			ModRegistry.addRegister(voidLordChestplate, "voidLordChestplate");
-			ModRegistry.addRegister(voidLordLeggings, "voidLordLeggings");
-			ModRegistry.addRegister(voidLordBoots, "voidLordBoots");
-			ModRegistry.addRegister(emeraldHelmet, "emeraldHelmet");
-			ModRegistry.addRegister(emeraldChestplate, "emeraldChestplate");
-			ModRegistry.addRegister(emeraldLeggings, "emeraldLeggings");
-			ModRegistry.addRegister(emeraldBoots, "emeraldBoots");
-			ModRegistry.addRegister(rainbowGlasses, "rainbowGlasses");
+			ModRegistry.addRegister(TENEBRAE_HELMET, "tenebraeHelmet");
+			ModRegistry.addRegister(TENEBRAE_CHESTPLATE, "tenebraeChestplate");
+			ModRegistry.addRegister(TENEBRAE_LEGGINGS, "tenebraeLeggings");
+			ModRegistry.addRegister(TENEBRAE_BOOTS, "tenebraeBoots");
+			ModRegistry.addRegister(VOID_LORD_HELMET, "voidLordHelmet");
+			ModRegistry.addRegister(VOID_LORD_CHESTPLATE, "voidLordChestplate");
+			ModRegistry.addRegister(VOID_LORD_LEGGINGS, "voidLordLeggings");
+			ModRegistry.addRegister(VOID_LORD_BOOTS, "voidLordBoots");
+			ModRegistry.addRegister(EMERALD_HELMET, "emeraldHelmet");
+			ModRegistry.addRegister(EMERALD_CHESTPLATE, "emeraldChestplate");
+			ModRegistry.addRegister(EMERALD_LEGGINGS, "emeraldLeggings");
+			ModRegistry.addRegister(EMERALD_BOOTS, "emeraldBoots");
+			ModRegistry.addRegister(RAINBOW_GLASSES, "rainbowGlasses");
 			/* General Items */
-			ModRegistry.addRegister(tenebraeChunk, "tenebraeChunk");
-			ModRegistry.addRegister(tenebraeIOre, "tenebraeIOre");
-			ModRegistry.addRegister(tenebraeIngot, "tenebraeIngot");
-			ModRegistry.addRegister(rawInfernium, "rawInfernium");
-			ModRegistry.addRegister(inferniumIngot, "inferniumIngot");
-			ModRegistry.addRegister(endiriteChunk, "endiriteChunk");
-			ModRegistry.addRegister(endiriteIOre, "endiriteIOre");
-			ModRegistry.addRegister(endiriteIngot, "endiriteIngot");
-			ModRegistry.addRegister(tenebriumIngot, "tenebriumIngot");
-			ModRegistry.addRegister(voidiumChunk, "voidiumChunk");
-			ModRegistry.addRegister(voidiumIOre, "voidiumIOre");
-			ModRegistry.addRegister(voidiumIngot, "voidiumIngot");
-			ModRegistry.addRegister(voidiriteIngot, "voidiriteIngot");
-			ModRegistry.addRegister(celestialCore, "celestialCore");
-			ModRegistry.addRegister(Empty_SC, "emptySC");
-			ModRegistry.addRegister(SC_Deathcharger, "SC_Deathcharger");
-			ModRegistry.addRegister(SC_PlaguedHorse, "SC_PlaguedHorse");
-			ModRegistry.addRegister(SC_WarTortoise, "SC_WarTortoise");
-			ModRegistry.addRegister(SC_SavageBadger, "SC_SavageBadger");
-			ModRegistry.addRegister(SC_SwiftUnicorn, "SC_SwiftUnicorn");
-			ModRegistry.addRegister(goldTalisman, "goldTalisman");
-			ModRegistry.addRegister(voidTalisman, "voidTalisman");
-			ModRegistry.addRegister(autumnTalisman, "autumnTalisman");
-			ModRegistry.addRegister(iceTalisman, "iceTalisman");
-			ModRegistry.addRegister(darkShard, "darkShard");
-			ModRegistry.addRegister(soulEssence, "soulEssence");
-			ModRegistry.addRegister(cursedSoulEssence, "cursedSoulEssence");
-			ModRegistry.addRegister(voidGem, "voidGem");
-			ModRegistry.addRegister(voidEssence, "voidEssence");
+			ModRegistry.addRegister(TENEBRAE_CHUNK, "tenebraeChunk");
+			ModRegistry.addRegister(TENEBRAE_ORE_ITEM, "tenebraeIOre");
+			ModRegistry.addRegister(TENEBRAE_INGOT, "tenebraeIngot");
+			ModRegistry.addRegister(RAW_INFERNIUM, "rawInfernium");
+			ModRegistry.addRegister(INFERIUM_INGOT, "inferniumIngot");
+			ModRegistry.addRegister(ENDIRITE_CHUNK, "endiriteChunk");
+			ModRegistry.addRegister(ENDIRITE_ORE_ITEM, "endiriteIOre");
+			ModRegistry.addRegister(ENDIRITE_INGOT, "endiriteIngot");
+			ModRegistry.addRegister(TENEBRIUM_INGOT, "tenebriumIngot");
+			ModRegistry.addRegister(VOIDIUM_CHUNK, "voidiumChunk");
+			ModRegistry.addRegister(VOIDIUM_ORE_ITEM, "voidiumIOre");
+			ModRegistry.addRegister(VOIDIUM_INGOT, "voidiumIngot");
+			ModRegistry.addRegister(VOIDIRITE_INGOT, "voidiriteIngot");
+			ModRegistry.addRegister(CELESTIAL_CORE, "celestialCore");
+			ModRegistry.addRegister(EMPTY_SC, "emptySC");
+			ModRegistry.addRegister(SC_DEATHCHARGER, "SC_Deathcharger");
+			ModRegistry.addRegister(SC_PLAGUED_HORSE, "SC_PlaguedHorse");
+			ModRegistry.addRegister(SC_WAR_TORTOISE, "SC_WarTortoise");
+			ModRegistry.addRegister(SC_SAVAGE_BADGER, "SC_SavageBadger");
+			ModRegistry.addRegister(SC_SWIFT_UNICORN, "SC_SwiftUnicorn");
+			ModRegistry.addRegister(GOLD_TALISMAN, "goldTalisman");
+			ModRegistry.addRegister(VOID_TALISMAN, "voidTalisman");
+			ModRegistry.addRegister(AUTUMN_TALISMAN, "autumnTalisman");
+			ModRegistry.addRegister(ICE_TALISMAN, "iceTalisman");
+			ModRegistry.addRegister(DARK_SHARD, "darkShard");
+			ModRegistry.addRegister(SOUL_ESSENCE, "soulEssence");
+			ModRegistry.addRegister(CURSED_SOUL_ESSENCE, "cursedSoulEssence");
+			ModRegistry.addRegister(VOID_GEM, "voidGem");
+			ModRegistry.addRegister(VOID_ESSENCE, "voidEssence");
 			/* Tools */
-			ModRegistry.addRegister(tenebraePickaxe, "tenebraePickaxe");
-			ModRegistry.addRegister(tenebraeShovel, "tenebraeShovel");
-			ModRegistry.addRegister(tenebraeSword, "tenebraeSword");
-			ModRegistry.addRegister(tenebraeAxe, "tenebraeAxe");
-			ModRegistry.addRegister(tenebraeHoe, "tenebraeHoe");
-			ModRegistry.addRegister(tenebraeLeafCutter, "tenebraeLeafCutter");
-			ModRegistry.addRegister(creativePickaxe, "creativePickaxe");
-			ModRegistry.addRegister(creativeShovel, "creativeShovel");
-			ModRegistry.addRegister(creativeSword, "creativeSword");
-			ModRegistry.addRegister(creativeAxe, "creativeAxe");
-			ModRegistry.addRegister(creativeHoe, "creativeHoe");
-			ModRegistry.addRegister(woodenCrossbow, "woodenCrossbow");
-			ModRegistry.addRegister(voidiumSword, "voidiumSword");
-			ModRegistry.addRegister(voidiriteSword, "voidiriteSword");
-			ModRegistry.addRegister(repulsorCannon, "repulsorCannon");
-			ModRegistry.addRegister(voidiriteShield, "voidiriteShield");
+			ModRegistry.addRegister(TENEBRAE_PICKAXE, "tenebraePickaxe");
+			ModRegistry.addRegister(TENEBRAE_SHOVEL, "tenebraeShovel");
+			ModRegistry.addRegister(TENEBRAE_SWORD, "tenebraeSword");
+			ModRegistry.addRegister(TENEBRAE_AXE, "tenebraeAxe");
+			ModRegistry.addRegister(TENEBRAE_HOE, "tenebraeHoe");
+			ModRegistry.addRegister(TENEBRAE_LEAF_CUTTER, "tenebraeLeafCutter");
+			ModRegistry.addRegister(CREATIVE_PICKAXE, "creativePickaxe");
+			ModRegistry.addRegister(CREATIVE_SHOVEL, "creativeShovel");
+			ModRegistry.addRegister(CREATIVE_SWORD, "creativeSword");
+			ModRegistry.addRegister(CREATIVE_AXE, "creativeAxe");
+			ModRegistry.addRegister(CREATIVE_HOE, "creativeHoe");
+			ModRegistry.addRegister(WOODEN_CROSSBOW, "woodenCrossbow");
+			ModRegistry.addRegister(VOIDIUM_SWORD, "voidiumSword");
+			ModRegistry.addRegister(VOIDIRITE_SWORD, "voidiriteSword");
+			ModRegistry.addRegister(REPULSOR_CANNON, "repulsorCannon");
+			ModRegistry.addRegister(VOIDIRITE_SHIELD, "voidiriteShield");
 		}
 	}
 	
 	public static class OreDictionaryInit {
 		public static void init() {
 			/* Tenebrae */
-			OreDictionary.registerOre("oreTenebrae", BlockInit.tenebraeOre);
-			OreDictionary.registerOre("iOreTenebrae", ItemInit.tenebraeIOre);
-			OreDictionary.registerOre("ingotTenebrae", ItemInit.tenebraeIngot);
-			OreDictionary.registerOre("blockTenebrae", BlockInit.tenebraeBlock);
+			OreDictionary.registerOre("oreTenebrae", BlockInit.TENEBRAE_ORE);
+			OreDictionary.registerOre("iOreTenebrae", ItemInit.TENEBRAE_ORE_ITEM);
+			OreDictionary.registerOre("ingotTenebrae", ItemInit.TENEBRAE_INGOT);
+			OreDictionary.registerOre("blockTenebrae", BlockInit.TENEBRAE_BLOCK);
 			
 			/*Infernium */
-			OreDictionary.registerOre("oreInfernium", BlockInit.inferniumOre);
-			OreDictionary.registerOre("iOreInfernium", ItemInit.rawInfernium);
-			OreDictionary.registerOre("ingotInfernium", ItemInit.inferniumIngot);
+			OreDictionary.registerOre("oreInfernium", BlockInit.INFERNIUM_ORE);
+			OreDictionary.registerOre("iOreInfernium", ItemInit.RAW_INFERNIUM);
+			OreDictionary.registerOre("ingotInfernium", ItemInit.INFERIUM_INGOT);
 			
 			/* Tenebrium */
-			OreDictionary.registerOre("ingotTenebrium", ItemInit.tenebriumIngot);
+			OreDictionary.registerOre("ingotTenebrium", ItemInit.TENEBRIUM_INGOT);
 			
 			/* Endirite */
-			OreDictionary.registerOre("oreEndirite", BlockInit.endiriteOre);
-			OreDictionary.registerOre("iOreEndirite", ItemInit.endiriteIOre);
-			OreDictionary.registerOre("ingotEndirite", ItemInit.endiriteIngot);
+			OreDictionary.registerOre("oreEndirite", BlockInit.ENDIRITE_ORE);
+			OreDictionary.registerOre("iOreEndirite", ItemInit.ENDIRITE_ORE_ITEM);
+			OreDictionary.registerOre("ingotEndirite", ItemInit.ENDIRITE_INGOT);
 			
 			/* Voidium */
-			OreDictionary.registerOre("oreVoidium", BlockInit.voidiumOre);
-			OreDictionary.registerOre("iOreVoidium", ItemInit.voidiumIOre);
-			OreDictionary.registerOre("ingotVoidium", ItemInit.voidiumIngot);
+			OreDictionary.registerOre("oreVoidium", BlockInit.VOIDIUM_ORE);
+			OreDictionary.registerOre("iOreVoidium", ItemInit.VOIDIUM_ORE_ITEM);
+			OreDictionary.registerOre("ingotVoidium", ItemInit.VOIDIUM_INGOT);
 			
 			/* Voidirite */
-			OreDictionary.registerOre("ingotVoidirite", ItemInit.voidiriteIngot);
+			OreDictionary.registerOre("ingotVoidirite", ItemInit.VOIDIRITE_INGOT);
 			
 			/* Others */
-			OreDictionary.registerOre("stone", BlockInit.voidStone);
-			OreDictionary.registerOre("logWood", BlockInit.kyrulLogBlock);
-			OreDictionary.registerOre("plankWood", BlockInit.voidPlanks);
+			OreDictionary.registerOre("stone", BlockInit.VOID_STONE);
+			OreDictionary.registerOre("logWood", BlockInit.KYRUL_LOG_BLOCK);
+			OreDictionary.registerOre("plankWood", BlockInit.VOID_PLANKS);
 		}
 	}
 	
@@ -503,54 +507,54 @@ public class ModInit {
 		}
 		
 		public static void registerShapedRecipes() {
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.goldTalisman), "GEG", "EDE", "GEG", 'E', Items.ENDER_PEARL, 'G', Items.GOLD_INGOT, 'D', Items.DIAMOND);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeIOre), "CC", "CC", 'C', ItemInit.tenebraeChunk);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.endiriteIOre), "CC", "CC", 'C', ItemInit.endiriteChunk);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.voidiumIOre), "CC", "CC", 'C', ItemInit.voidiumChunk);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.chiseledTenebrae), "IRI", "RBR", "IRI", 'I', Items.IRON_INGOT, 'R', ItemInit.tenebraeChunk, 'B', BlockInit.tenebraeBlock);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.tenebraeCore), "RTR", "TBT", "RTR", 'R', Blocks.REDSTONE_BLOCK, 'T', ItemInit.tenebraeIngot, 'B', BlockInit.tenebraeBlock);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.empoweredTenebraeCore), "C", "B", 'C', ItemInit.celestialCore, 'B', BlockInit.tenebraeCore);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.tenebraeBlock), "III", "III", "III", 'I', ItemInit.tenebraeIngot);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.voidGem), "NVN", "VDV", "NVN", 'V', ItemInit.voidEssence, 'D', Items.DIAMOND);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.benzenn), "NSN", "SCS", "CCC", 'S', Blocks.STONE_SLAB, 'C', Blocks.COBBLESTONE);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.benzennStatue), "NBN", "NSN", 'S', Blocks.STONE_SLAB, 'B', BlockInit.benzenn);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.celestialCore), "RDR", "DED", "RDR", 'R', Blocks.REDSTONE_BLOCK, 'D', Items.DIAMOND, 'E', Items.ENDER_PEARL);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.infuserIdle), "RTR", "ICI", "RTR", 'R', Blocks.REDSTONE_BLOCK, 'I', Blocks.IRON_BLOCK, 'T', BlockInit.tenebraeBlock, 'C', ItemInit.celestialCore);
-			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.oreInfuserIdle), "IRI", "RER", "IRI", 'R', Blocks.REDSTONE_BLOCK, 'I', Blocks.IRON_BLOCK, 'E', Items.ENDER_PEARL);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.GOLD_TALISMAN), "GEG", "EDE", "GEG", 'E', Items.ENDER_PEARL, 'G', Items.GOLD_INGOT, 'D', Items.DIAMOND);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_ORE_ITEM), "CC", "CC", 'C', ItemInit.TENEBRAE_CHUNK);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.ENDIRITE_ORE_ITEM), "CC", "CC", 'C', ItemInit.ENDIRITE_CHUNK);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.VOIDIUM_ORE_ITEM), "CC", "CC", 'C', ItemInit.VOIDIUM_CHUNK);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.CHISELED_TENEBRAE), "IRI", "RBR", "IRI", 'I', Items.IRON_INGOT, 'R', ItemInit.TENEBRAE_CHUNK, 'B', BlockInit.TENEBRAE_BLOCK);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.TENEBRAE_CORE), "RTR", "TBT", "RTR", 'R', Blocks.REDSTONE_BLOCK, 'T', ItemInit.TENEBRAE_INGOT, 'B', BlockInit.TENEBRAE_BLOCK);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.EMPOWERED_TENEBRAE_CORE), "C", "B", 'C', ItemInit.CELESTIAL_CORE, 'B', BlockInit.TENEBRAE_CORE);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.TENEBRAE_BLOCK), "III", "III", "III", 'I', ItemInit.TENEBRAE_INGOT);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.VOID_GEM), "NVN", "VDV", "NVN", 'V', ItemInit.VOID_ESSENCE, 'D', Items.DIAMOND);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.BENZENN), "NSN", "SCS", "CCC", 'S', Blocks.STONE_SLAB, 'C', Blocks.COBBLESTONE);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.BENZENN_STATUE), "NBN", "NSN", 'S', Blocks.STONE_SLAB, 'B', BlockInit.BENZENN);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.CELESTIAL_CORE), "RDR", "DED", "RDR", 'R', Blocks.REDSTONE_BLOCK, 'D', Items.DIAMOND, 'E', Items.ENDER_PEARL);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.INFUSER_IDLE), "RTR", "ICI", "RTR", 'R', Blocks.REDSTONE_BLOCK, 'I', Blocks.IRON_BLOCK, 'T', BlockInit.TENEBRAE_BLOCK, 'C', ItemInit.CELESTIAL_CORE);
+			GameRegistry.addShapedRecipe(new ItemStack(BlockInit.ORE_INFUSER_IDLE), "IRI", "RER", "IRI", 'R', Blocks.REDSTONE_BLOCK, 'I', Blocks.IRON_BLOCK, 'E', Items.ENDER_PEARL);
 		}
 		
 		public static void registerShapelessRecipes() {
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemInit.tenebraeIngot, 9), new ItemStack(BlockInit.tenebraeBlock));
-			GameRegistry.addShapelessRecipe(new ItemStack(BlockInit.tenebraeBlock, 1), new ItemStack(BlockInit.chiseledTenebrae));
-			GameRegistry.addShapelessRecipe(new ItemStack(BlockInit.voidPlanks, 4), new ItemStack(BlockInit.kyrulLogBlock, 1));
-			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.PLANKS, 1, 1), new ItemStack(BlockInit.voidPlanks));
-			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(BlockInit.voidStone));
-			if (ConfigurationHandler.getKyrulEnabled()) GameRegistry.addShapelessRecipe(new ItemStack(ItemInit.voidTalisman, 1), new ItemStack(ItemInit.goldTalisman), new ItemStack(ItemInit.voidGem));
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemInit.TENEBRAE_INGOT, 9), new ItemStack(BlockInit.TENEBRAE_BLOCK));
+			GameRegistry.addShapelessRecipe(new ItemStack(BlockInit.TENEBRAE_BLOCK, 1), new ItemStack(BlockInit.CHISELED_TENEBRAE));
+			GameRegistry.addShapelessRecipe(new ItemStack(BlockInit.VOID_PLANKS, 4), new ItemStack(BlockInit.KYRUL_LOG_BLOCK, 1));
+			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.PLANKS, 1, 1), new ItemStack(BlockInit.VOID_PLANKS));
+			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(BlockInit.VOID_STONE));
+			if (ConfigurationHandler.getKyrulEnabled()) GameRegistry.addShapelessRecipe(new ItemStack(ItemInit.VOID_TALISMAN, 1), new ItemStack(ItemInit.GOLD_TALISMAN), new ItemStack(ItemInit.VOID_GEM));
 		}
 		
 		public static void registerArmorRecipes() {
 			/* Emerald Armor */
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.emeraldHelmet), "III", "IEI", 'I', Items.EMERALD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.emeraldChestplate), "IEI", "III", "III", 'I', Items.EMERALD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.emeraldLeggings), "III", "IEI", "IEI", 'I', Items.EMERALD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.emeraldBoots), "IEI", "IEI", 'I', Items.EMERALD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.EMERALD_HELMET), "III", "IEI", 'I', Items.EMERALD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.EMERALD_CHESTPLATE), "IEI", "III", "III", 'I', Items.EMERALD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.EMERALD_LEGGINGS), "III", "IEI", "IEI", 'I', Items.EMERALD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.EMERALD_BOOTS), "IEI", "IEI", 'I', Items.EMERALD);
 			
 			/* Tenebrae Armor */
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeHelmet), "III", "IEI", 'I', ItemInit.tenebraeIngot);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeChestplate), "IEI", "III", "III", 'I', ItemInit.tenebraeIngot);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeLeggings), "III", "IEI", "IEI", 'I', ItemInit.tenebraeIngot);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeBoots), "IEI", "IEI", 'I', ItemInit.tenebraeIngot);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_HELMET), "III", "IEI", 'I', ItemInit.TENEBRAE_INGOT);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_CHESTPLATE), "IEI", "III", "III", 'I', ItemInit.TENEBRAE_INGOT);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_LEGGINGS), "III", "IEI", "IEI", 'I', ItemInit.TENEBRAE_INGOT);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_BOOTS), "IEI", "IEI", 'I', ItemInit.TENEBRAE_INGOT);
 		}
 		
 		public static void registerToolRecipes() {
 			/* Tenebrae Tools */
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeSword), "NTN", "OTO", "NBN", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraePickaxe), "TTT", "NBN", "NON", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeAxe), "TTN", "TBN", "NON", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeAxe), "NTT", "NBT", "NON", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeShovel), "NTN", "NBN", "NON", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeHoe), "TTN", "NBN", "NON", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
-			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.tenebraeHoe), "NTT", "NBN", "NON", 'T', ItemInit.tenebraeIngot, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_SWORD), "NTN", "OTO", "NBN", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_PICKAXE), "TTT", "NBN", "NON", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_AXE), "TTN", "TBN", "NON", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_AXE), "NTT", "NBT", "NON", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_SHOVEL), "NTN", "NBN", "NON", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_HOE), "TTN", "NBN", "NON", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
+			GameRegistry.addShapedRecipe(new ItemStack(ItemInit.TENEBRAE_HOE), "NTT", "NBN", "NON", 'T', ItemInit.TENEBRAE_INGOT, 'O', Blocks.OBSIDIAN, 'B', Items.BLAZE_ROD);
 		}
 		
 		public static void registerInfusionRecipes() {
@@ -559,37 +563,37 @@ public class ModInit {
 			InfusionFuels.registerFuel(new ItemStack(Items.REDSTONE), 200);
 			
 			/* Real Recipes */
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(BlockInit.endiriteOre), new ItemStack(Blocks.END_STONE), new ItemStack(ItemInit.tenebraeIOre), new ItemStack(Items.ENDER_PEARL));
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(BlockInit.infusedTenebrae), new ItemStack(BlockInit.tenebraeBlock), new ItemStack(Items.DIAMOND), new ItemStack(Items.ENDER_PEARL));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(BlockInit.ENDIRITE_ORE), new ItemStack(Blocks.END_STONE), new ItemStack(ItemInit.TENEBRAE_ORE_ITEM), new ItemStack(Items.ENDER_PEARL));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.NORMAL, 1F, 100, new ItemStack(BlockInit.INFUSED_TENEBRAE), new ItemStack(BlockInit.TENEBRAE_BLOCK), new ItemStack(Items.DIAMOND), new ItemStack(Items.ENDER_PEARL));
 			
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.tenebriumIngot), new ItemStack(ItemInit.tenebraeIngot), new ItemStack(Items.IRON_INGOT), new ItemStack(ItemInit.inferniumIngot));
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.voidiriteIngot), new ItemStack(ItemInit.voidiumIngot), new ItemStack(Items.IRON_INGOT), new ItemStack(ItemInit.inferniumIngot));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.TENEBRIUM_INGOT), new ItemStack(ItemInit.TENEBRAE_INGOT), new ItemStack(Items.IRON_INGOT), new ItemStack(ItemInit.INFERIUM_INGOT));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.VOIDIRITE_INGOT), new ItemStack(ItemInit.VOIDIUM_INGOT), new ItemStack(Items.IRON_INGOT), new ItemStack(ItemInit.INFERIUM_INGOT));
 		
 			/* Temporal Recipes (Ore Smelter) */
 			
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.tenebraeIngot), new ItemStack(ItemInit.tenebraeIOre), new ItemStack(ItemInit.tenebraeIOre), new ItemStack(ItemInit.tenebraeIOre));
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.inferniumIngot), new ItemStack(ItemInit.rawInfernium), new ItemStack(ItemInit.rawInfernium), new ItemStack(ItemInit.rawInfernium));
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.endiriteIngot), new ItemStack(ItemInit.endiriteIOre), new ItemStack(ItemInit.endiriteIOre), new ItemStack(ItemInit.endiriteIOre));
-			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.voidiumIngot), new ItemStack(ItemInit.voidiumIOre), new ItemStack(ItemInit.voidiumIOre), new ItemStack(ItemInit.voidiumIOre));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.TENEBRAE_INGOT), new ItemStack(ItemInit.TENEBRAE_ORE_ITEM), new ItemStack(ItemInit.TENEBRAE_ORE_ITEM), new ItemStack(ItemInit.TENEBRAE_ORE_ITEM));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.INFERIUM_INGOT), new ItemStack(ItemInit.RAW_INFERNIUM), new ItemStack(ItemInit.RAW_INFERNIUM), new ItemStack(ItemInit.RAW_INFERNIUM));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.ENDIRITE_INGOT), new ItemStack(ItemInit.ENDIRITE_ORE_ITEM), new ItemStack(ItemInit.ENDIRITE_ORE_ITEM), new ItemStack(ItemInit.ENDIRITE_ORE_ITEM));
+			InfusionRecipeHandler.instance().addInfusion(InfuserType.ORE, 1F, 100, new ItemStack(ItemInit.VOIDIUM_INGOT), new ItemStack(ItemInit.VOIDIUM_ORE_ITEM), new ItemStack(ItemInit.VOIDIUM_ORE_ITEM), new ItemStack(ItemInit.VOIDIUM_ORE_ITEM));
 		}
 	}
 	
 	public static class SoundInit {
-		public static final ResourceLocation repulsorCannonMineRL = new ResourceLocation(Reference.MOD_ID.toLowerCase() + "sounds.weapon.repulsorCannon.mine");
-		public static final ResourceLocation repulsorCannonShootRL = new ResourceLocation(Reference.MOD_ID.toLowerCase() + "sounds.weapon.repulsorCannon.shoot");
-		public static final SoundEvent repulsorCannonMine = new SoundEvent(repulsorCannonMineRL);
-		public static final SoundEvent repulsorCannonShoot = new SoundEvent(repulsorCannonShootRL);
+		public static final ResourceLocation REPULSOR_CANNON_MINE_RL = new ResourceLocation(Reference.MOD_ID.toLowerCase(), "sounds.weapon.repulsorCannon.mine");
+		public static final ResourceLocation REPULSOR_CANNON_SHOOT_RL = new ResourceLocation(Reference.MOD_ID.toLowerCase(), "sounds.weapon.repulsorCannon.shoot");
+		public static final SoundEvent REPULSOR_CANNON_MINE = new SoundEvent(REPULSOR_CANNON_MINE_RL);
+		public static final SoundEvent REPULSOR_CANNON_SHOOT = new SoundEvent(REPULSOR_CANNON_SHOOT_RL);
 		
 		public static void preInit() {
-			SoundEvent.REGISTRY.register(SoundEvent.REGISTRY.getKeys().size() + 1, repulsorCannonMineRL, repulsorCannonMine);
-			SoundEvent.REGISTRY.register(SoundEvent.REGISTRY.getKeys().size() + 1, repulsorCannonShootRL, repulsorCannonShoot);
+			SoundEvent.REGISTRY.register(SoundEvent.REGISTRY.getKeys().size() + 1, REPULSOR_CANNON_MINE_RL, REPULSOR_CANNON_MINE);
+			SoundEvent.REGISTRY.register(SoundEvent.REGISTRY.getKeys().size() + 1, REPULSOR_CANNON_SHOOT_RL, REPULSOR_CANNON_SHOOT);
 		}
 	}
 	
 	public static class ZylrothTab {
-		public static CreativeTabs zylRoth = new CreativeTabs("Zyl'Roth") {
+		public static final CreativeTabs ZYLROTH = new CreativeTabs("Zyl'Roth") {
 			@Override public Item getTabIconItem() {
-				return ItemInit.celestialCore; 
+				return ItemInit.CELESTIAL_CORE; 
 			}
 		};
 	}
@@ -598,6 +602,7 @@ public class ModInit {
 		BlockInit.preInit();
 		ItemInit.preInit();
 		ModRegistry.sortThenRegister(sortOrder);
+		EntityInit.preInit();
 		DimensionInit.preInit();
 		PacketHandler.preInit();
 		KeyHandler.preInit();
@@ -605,7 +610,6 @@ public class ModInit {
 	}
 	
 	public static void init() {
-		EntityInit.init();
 		OreDictionaryInit.init();
 		RecipeInit.init();
 	}

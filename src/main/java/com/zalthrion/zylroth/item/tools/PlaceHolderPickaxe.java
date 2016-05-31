@@ -35,7 +35,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	
 	public PlaceHolderPickaxe(ToolMaterial material) {
 		super(material);
-		this.setCreativeTab(ZylrothTab.zylRoth);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setUnlocalizedName(name);
 	}
 	
@@ -97,7 +97,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 							
 							else if (isACobblestone || isAStone || isAStoneBrick || isASandstone || isANetherrack || neighbourValid_Shovel) {
 								
-								ItemStack shovel = new ItemStack(ItemInit.creativeShovel);
+								ItemStack shovel = new ItemStack(ItemInit.CREATIVE_SHOVEL);
 								
 								worldIn.destroyBlock(pos.add(ix, iy, iz), true);
 								stack.damageItem(1, player);
@@ -148,7 +148,7 @@ public class PlaceHolderPickaxe extends ItemPickaxe implements ZylrothTool {
 	}
 	
 	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
-		return stack.getItem() == ItemInit.tenebraeIngot;
+		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
 	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
