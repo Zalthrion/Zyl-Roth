@@ -5,6 +5,7 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class RawInfernium extends ItemBase {
 	public RawInfernium() {
 		super();
+		this.setCreativeTab();
 		this.setNames("rawInfernium");
 	}
 }

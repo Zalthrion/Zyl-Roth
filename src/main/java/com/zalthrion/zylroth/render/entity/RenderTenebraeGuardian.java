@@ -12,14 +12,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.boss.EntityTenebraeGuardian;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelEmpoweredTenebraeGolem;
-import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
 public class RenderTenebraeGuardian extends RenderLiving<EntityTenebraeGuardian> {
 	
 	//  private static final ResourceLocation explosion = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/EmpoweredTenebraeGolem_exploding.png");
-	private static final ResourceLocation etGolemTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Empowered_Tenebrae_Golem.png");
 	
 	/** Empowered Tenebrae Golem's Model. */
 	@SuppressWarnings("unused")
@@ -32,7 +31,7 @@ public class RenderTenebraeGuardian extends RenderLiving<EntityTenebraeGuardian>
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityTenebraeGuardian par1EntityEmpoweredTenebraeGolem) {
-		return etGolemTextures;
+		return ResourceLocationInit.ENTITY_EMPOWERED_TENEBRAE_GOLEM;
 	}
 	
 	/** Rotates Empowered Tenebrae Golem corpse. */

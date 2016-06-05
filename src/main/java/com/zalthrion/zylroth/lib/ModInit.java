@@ -25,6 +25,8 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.zalthrion.zylroth.Zylroth;
@@ -579,21 +581,42 @@ public class ModInit {
 		}
 	}
 	
+	public static class ResourceLocationInit {
+		/* Sounds */
+		public static final ResourceLocation REPULSOR_CANNON_MINE = new ResourceLocation(Reference.LOWER_MOD_ID, "repulsorCannonMine");
+		public static final ResourceLocation REPULSOR_CANNON_SHOOT = new ResourceLocation(Reference.LOWER_MOD_ID, "repulsorCannonShoot");
+		/* Textures */
+		/* Entities */
+		public static final ResourceLocation ENTITY_BADGER = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Badger.png");
+		public static final ResourceLocation ENTITY_BIRD = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Bird.png");
+		public static final ResourceLocation ENTITY_EMPOWERED_TENEBRAE_GOLEM = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Empowered_Tenebrae_Golem.png");
+		public static final ResourceLocation ENTITY_RAINBOW_PIG = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Rainbow_Pig.png");
+		public static final ResourceLocation ENTITY_TENEBRAE_GOLEM = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Tenebrae_Golem.png");
+		public static final ResourceLocation ENTITY_TUSKARR = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Tuskarr.png");
+		public static final ResourceLocation ENTITY_VOID_DRAGON = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/VoidDragon.png");
+		public static final ResourceLocation ENTITY_VOID_DRAGON_EXPLOSION = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/VoidDragon_exploding.png");
+		public static final ResourceLocation ENTITY_VOID_DRAGON_EYES = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/VoidDragon_eyes.png");
+		public static final ResourceLocation ENTITY_WAR_TORTOISE = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/mounts/WarTortoise.png");
+		public static final ResourceLocation PROJECTILE_REPULSOR_BOLT = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/projectiles/RepulsorBolt.png");
+		public static final ResourceLocation TEXTURE_UNDEAD_UNIT = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Undead_Unit.png");
+		public static final ResourceLocation TEXTURE_UNDEAD_UNIT_2 = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/entities/Undead_Unit_2.png");
+		/* Items */
+		public static final ResourceLocation WOODEN_CROSSBOW = new ResourceLocation(Reference.LOWER_MOD_ID, "textures/items/woodenCrossbow.png");
+	}
+	
 	public static class SoundInit {
-		public static final ResourceLocation REPULSOR_CANNON_MINE_RL = new ResourceLocation(Reference.MOD_ID.toLowerCase(), "sounds.weapon.repulsorCannon.mine");
-		public static final ResourceLocation REPULSOR_CANNON_SHOOT_RL = new ResourceLocation(Reference.MOD_ID.toLowerCase(), "sounds.weapon.repulsorCannon.shoot");
-		public static final SoundEvent REPULSOR_CANNON_MINE = new SoundEvent(REPULSOR_CANNON_MINE_RL);
-		public static final SoundEvent REPULSOR_CANNON_SHOOT = new SoundEvent(REPULSOR_CANNON_SHOOT_RL);
+		public static final SoundEvent REPULSOR_CANNON_MINE = new SoundEvent(ResourceLocationInit.REPULSOR_CANNON_MINE);
+		public static final SoundEvent REPULSOR_CANNON_SHOOT = new SoundEvent(ResourceLocationInit.REPULSOR_CANNON_SHOOT);
 		
 		public static void preInit() {
-			SoundEvent.REGISTRY.register(SoundEvent.REGISTRY.getKeys().size() + 1, REPULSOR_CANNON_MINE_RL, REPULSOR_CANNON_MINE);
-			SoundEvent.REGISTRY.register(SoundEvent.REGISTRY.getKeys().size() + 1, REPULSOR_CANNON_SHOOT_RL, REPULSOR_CANNON_SHOOT);
+			GameRegistry.register(REPULSOR_CANNON_MINE, ResourceLocationInit.REPULSOR_CANNON_MINE);
+			GameRegistry.register(REPULSOR_CANNON_SHOOT, ResourceLocationInit.REPULSOR_CANNON_SHOOT);
 		}
 	}
 	
 	public static class ZylrothTab {
 		public static final CreativeTabs ZYLROTH = new CreativeTabs("Zyl'Roth") {
-			@Override public Item getTabIconItem() {
+			@Override @SideOnly(Side.CLIENT) public Item getTabIconItem() {
 				return ItemInit.CELESTIAL_CORE; 
 			}
 		};

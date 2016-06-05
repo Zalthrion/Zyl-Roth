@@ -12,6 +12,7 @@ import com.zalthrion.zylroth.handler.ConfigurationHandler;
 public class IceTalisman extends ItemTalismanBase {
 	public IceTalisman() {
 		super();
+		this.setCreativeTab();
 		this.setNames("iceTalisman");
 		this.setMaxStackSize(1);
 		this.setDimensionName("Glaciem");

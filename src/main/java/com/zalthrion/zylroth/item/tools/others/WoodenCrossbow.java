@@ -38,7 +38,7 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setMaxDamage(i);
 		this.setMaxStackSize(1);
-		this.setRegistryName(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "woodenCrossbow"));
+		this.setRegistryName(new ResourceLocation(Reference.LOWER_MOD_ID, "woodenCrossbow"));
 		this.setUnlocalizedName("woodenCrossbow");
 	}
 	

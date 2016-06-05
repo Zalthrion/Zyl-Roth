@@ -15,16 +15,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.zalthrion.zylroth.entity.EntityVoidDragon;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelVoidDragon;
-import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT)
 public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 	private float scale = 0.5F;
-	
-	private static final ResourceLocation explosionTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_exploding.png");
-	private static final ResourceLocation eyesTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon_eyes.png");
-	private static final ResourceLocation dragonTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/VoidDragon.png");
 	
 	/** An instance of the dragon model in RenderDragon */
 	protected ModelVoidDragon modelDragon;
@@ -66,7 +62,7 @@ public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 			GlStateManager.enableAlpha();
 			GlStateManager.alphaFunc(GL11.GL_GREATER, f6);
 			GlStateManager.color(0.0F, 0.0F, 0.0F, 0.9F);
-			bindTexture(explosionTexture);
+			bindTexture(ResourceLocationInit.ENTITY_VOID_DRAGON_EXPLOSION);
 			mainModel.render(dragon, par2, par3, par4, par5, par6, par7);
 			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
 			GlStateManager.depthFunc(GL11.GL_EQUAL);
@@ -98,7 +94,7 @@ public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityVoidDragon dragon) {
-		return dragonTexture;
+		return ResourceLocationInit.ENTITY_VOID_DRAGON;
 	}
 	
 	/** Renders the animation for when an enderdragon dies */
@@ -164,7 +160,7 @@ public class RenderVoidDragon extends RenderLiving<EntityVoidDragon> {
 		if (par2 != 0)
 			return -1;
 		else {
-			bindTexture(eyesTexture);
+			bindTexture(ResourceLocationInit.ENTITY_VOID_DRAGON_EYES);
 			float f1 = 1.0F;
 			GlStateManager.enableBlend();
 			GlStateManager.disableAlpha();

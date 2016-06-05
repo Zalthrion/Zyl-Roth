@@ -12,13 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelUndead;
-import com.zalthrion.zylroth.reference.Reference;
 
-@SideOnly(Side.CLIENT)
-public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
-	private static final ResourceLocation undeadwarriorTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
-	/** Scale of the model to use */
+@SideOnly(Side.CLIENT) public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
 	private float scale = 0.8F;
 	
 	public RenderUndeadWarrior(RenderManager manager) {
@@ -27,13 +24,12 @@ public class RenderUndeadWarrior extends RenderBiped<EntityUndeadWarrior> {
 		this.addLayer(new LayerHeldItem(this));
 	}
 	
-	/** Applies the scale to the transform matrix */
 	@Override protected void preRenderCallback(EntityUndeadWarrior par1EntityUndeadWarrior, float par2) {
 		GlStateManager.scale(scale, scale, scale);
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityUndeadWarrior par1EntityUndeadWarrior) {
-		return undeadwarriorTextures;
+		return ResourceLocationInit.TEXTURE_UNDEAD_UNIT;
 	}
 	
 	@Override protected void rotateCorpse(EntityUndeadWarrior par1EntityUndeadWarrior, float par2, float par3, float par4) {

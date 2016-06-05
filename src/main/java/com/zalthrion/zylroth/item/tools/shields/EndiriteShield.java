@@ -6,9 +6,13 @@ import com.zalthrion.zylroth.base.ShieldBase;
 import com.zalthrion.zylroth.item.tools.ZylrothTool;
 
 public class EndiriteShield extends ShieldBase implements ZylrothTool {
-
-	@Override
-	public boolean isBroken(ItemStack stack) {
+	public EndiriteShield() {
+		super();
+		this.setCreativeTab();
+		this.setNames("endiriteShield");
+	}
+	
+	@Override public boolean isBroken(ItemStack stack) {
 		return false;
 	}
 }

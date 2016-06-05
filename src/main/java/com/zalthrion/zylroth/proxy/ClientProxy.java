@@ -4,16 +4,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.zalthrion.zylroth.block.statemap.StateMapLeaves;
+import com.zalthrion.zylroth.block.statemap.StateMapSapling;
 import com.zalthrion.zylroth.block.tree.IridisLeafBlock;
 import com.zalthrion.zylroth.block.tree.IridisSaplingBlock;
 import com.zalthrion.zylroth.block.tree.KyrulLeafBlock;
@@ -34,17 +37,10 @@ import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
 import com.zalthrion.zylroth.entity.projectile.RepulsorBolt;
 import com.zalthrion.zylroth.entity.projectile.RepulsorCannonBolt;
 import com.zalthrion.zylroth.event.KeyInputEventListener;
-import com.zalthrion.zylroth.item.block.IridisLeafItemBlock;
-import com.zalthrion.zylroth.item.block.IridisSaplingItemBlock;
-import com.zalthrion.zylroth.item.block.KyrulLeafItemBlock;
-import com.zalthrion.zylroth.item.block.KyrulSaplingItemBlock;
-import com.zalthrion.zylroth.item.block.RainbowLeafItemBlock;
-import com.zalthrion.zylroth.item.block.RainbowSaplingItemBlock;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.model.armor.ModelVoidLordArmor;
 import com.zalthrion.zylroth.reference.Reference;
-import com.zalthrion.zylroth.render.ZylrothRenderer;
 import com.zalthrion.zylroth.render.entity.*;
 import com.zalthrion.zylroth.render.entity.dev.RenderSixOneThree;
 import com.zalthrion.zylroth.render.entity.dev.RenderZalthrion;
@@ -54,7 +50,6 @@ import com.zalthrion.zylroth.render.entity.mount.RenderSavageBadger;
 import com.zalthrion.zylroth.render.entity.mount.RenderSwiftUnicorn;
 import com.zalthrion.zylroth.render.entity.mount.RenderWarTortoise;
 import com.zalthrion.zylroth.render.item.CustomItemModelFactory;
-import com.zalthrion.zylroth.utility.ModelHelper;
 
 public class ClientProxy extends CommonProxy {
 	public static final HashMap<Item, ModelBiped> armorModels = new HashMap<Item, ModelBiped>();
@@ -64,17 +59,15 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override public void preInit() {
 		super.preInit();
-		ZylrothRenderer.init();
 		MinecraftForge.EVENT_BUS.register(this);
 		this.registerEntityRenderers();
-		this.registerSpecialItemRenderers();
+		this.registerModels();
 	}
 	
 	@Override public void init() {
 		super.init();
 		MinecraftForge.EVENT_BUS.register(new KeyInputEventListener());
 		this.registerArmorModels();
-		this.registerItemModels();
 	}
 	
 	@Override public void postInit() {
@@ -123,102 +116,158 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(RepulsorCannonBolt.class, new RenderRepulsorCannonBolt.Factory());
 	}
 	
-	public void registerItemModels() {
-		/* Blocks */
-		ModelHelper.registerBlock(BlockInit.TENEBRAE_ORE);
-		ModelHelper.registerBlock(BlockInit.TENEBRAE_BLOCK);
-		ModelHelper.registerBlock(BlockInit.TENEBRAE_CORE);
-		ModelHelper.registerBlock(BlockInit.CHISELED_TENEBRAE);
-		ModelHelper.registerBlock(BlockInit.INFUSED_TENEBRAE);
-		ModelHelper.registerBlock(BlockInit.INFUSER);
-		ModelHelper.registerBlock(BlockInit.INFUSER_IDLE);
-		ModelHelper.registerBlock(BlockInit.ORE_INFUSER);
-		ModelHelper.registerBlock(BlockInit.ORE_INFUSER_IDLE);
-		ModelHelper.registerBlock(BlockInit.ASH_BLOCK);
-		ModelHelper.registerBlock(BlockInit.EMPOWERED_TENEBRAE_CORE);
-		ModelHelper.registerBlock(BlockInit.VOIDIUM_ORE);
-		ModelHelper.registerBlock(BlockInit.INFERNIUM_ORE);
-		ModelHelper.registerBlock(BlockInit.ENDIRITE_ORE);
-		ModelHelper.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, (new StateMap.Builder()).withName(RainbowSaplingBlock.COLOR).withSuffix("_sapling").ignore(RainbowSaplingBlock.STAGE).build(), RainbowSaplingItemBlock.getVariants(), new int[] {0, 1, 2, 3, 4, 5});
-		ModelHelper.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK, (new StateMap.Builder()).withName(RainbowLeafBlock.COLOR).withSuffix("_leaves").ignore(RainbowLeafBlock.CHECK_DECAY).ignore(RainbowLeafBlock.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(0), new int[] {0, 1, 2, 3});
-		ModelHelper.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK_2, (new StateMap.Builder()).withName(RainbowLeafBlock2.COLOR).withSuffix("_leaves").ignore(RainbowLeafBlock2.CHECK_DECAY).ignore(RainbowLeafBlock2.DECAYABLE).build(), RainbowLeafItemBlock.getVariants(1), new int[] {4, 5});
-		ModelHelper.registerBlock(BlockInit.IRIDIS_LEAF_BLOCK, (new StateMap.Builder()).withName(IridisLeafBlock.LEAF_TYPE).withSuffix("_leaves").ignore(IridisLeafBlock.CHECK_DECAY).ignore(IridisLeafBlock.DECAYABLE).build(), IridisLeafItemBlock.getVariants(0), new int[] {0, 1});
-		ModelHelper.registerBlock(BlockInit.IRIDIS_SAPLING_BLOCK, (new StateMap.Builder()).withName(IridisSaplingBlock.SAPLING_TYPE).withSuffix("_sapling").ignore(IridisSaplingBlock.STAGE).build(), IridisSaplingItemBlock.getVariants(), new int[] {0, 1});
-		ModelHelper.registerBlock(BlockInit.KYRUL_LEAF_BLOCK, (new StateMap.Builder()).withName(KyrulLeafBlock.TYPE).withSuffix("_leaves").ignore(KyrulLeafBlock.CHECK_DECAY).ignore(KyrulLeafBlock.DECAYABLE).build(), KyrulLeafItemBlock.getVariants(0), new int[] {0});
-		ModelHelper.registerBlock(BlockInit.KYRUL_SAPLING_BLOCK, (new StateMap.Builder()).withName(KyrulSaplingBlock.TYPE).withSuffix("_sapling").ignore(KyrulSaplingBlock.STAGE).build(), KyrulSaplingItemBlock.getVariants(), new int[] {0});
-		ModelHelper.registerBlock(BlockInit.KYRUL_LOG_BLOCK);
-		ModelHelper.registerBlock(BlockInit.VOID_STONE);
-		ModelHelper.registerBlock(BlockInit.VOID_PLANKS);
+	/**
+	 * Note models not registered here are the INFUSER variants.
+	 */
+	private void registerModels() {
+		/* Quite usual blocks. */
+		this.registerBlock(BlockInit.TENEBRAE_ORE);
+		this.registerBlock(BlockInit.TENEBRAE_CORE);
+		this.registerBlock(BlockInit.TENEBRAE_BLOCK);
+		this.registerBlock(BlockInit.CHISELED_TENEBRAE);
+		this.registerBlock(BlockInit.INFUSED_TENEBRAE);
+		this.registerBlock(BlockInit.ASH_BLOCK);
+		this.registerBlock(BlockInit.EMPOWERED_TENEBRAE_CORE);
+		this.registerBlock(BlockInit.VOIDIUM_ORE);
+		this.registerBlock(BlockInit.INFERNIUM_ORE);
+		this.registerBlock(BlockInit.ENDIRITE_ORE);
+		this.registerBlock(BlockInit.KYRUL_LOG_BLOCK);
+		this.registerBlock(BlockInit.VOID_STONE);
+		this.registerBlock(BlockInit.VOID_PLANKS);
+		/**
+		 * Step 1: State Maps
+		 * Step 2: Set State Maps
+		 * Step 3: Register Blocks
+		 */
+		StateMapLeaves rainbowLeafStateMap = new StateMapLeaves(RainbowLeafBlock.VARIANT, RainbowLeafBlock.CHECK_DECAY, RainbowLeafBlock.DECAYABLE);
+		StateMapLeaves rainbowLeaf2StateMap = new StateMapLeaves(RainbowLeafBlock2.VARIANT, RainbowLeafBlock2.CHECK_DECAY, RainbowLeafBlock2.DECAYABLE);
+		StateMapLeaves iridisLeafStateMap = new StateMapLeaves(IridisLeafBlock.VARIANT, IridisLeafBlock.CHECK_DECAY, IridisLeafBlock.DECAYABLE);
+		StateMapLeaves kyrulLeafStateMap = new StateMapLeaves(KyrulLeafBlock.VARIANT, KyrulLeafBlock.CHECK_DECAY, KyrulLeafBlock.DECAYABLE);
+		StateMapSapling rainbowSaplingStateMap = new StateMapSapling(RainbowSaplingBlock.VARIANT, RainbowSaplingBlock.STAGE);
+		StateMapSapling iridisSaplingStateMap = new StateMapSapling(IridisSaplingBlock.VARIANT, IridisSaplingBlock.STAGE);
+		StateMapSapling kyrulSaplingStateMap = new StateMapSapling(KyrulSaplingBlock.VARIANT, KyrulSaplingBlock.STAGE);
+		
+		ModelLoader.setCustomStateMapper(BlockInit.RAINBOW_LEAF_BLOCK, rainbowLeafStateMap.build());
+		ModelLoader.setCustomStateMapper(BlockInit.RAINBOW_LEAF_BLOCK_2, rainbowLeaf2StateMap.build());
+		ModelLoader.setCustomStateMapper(BlockInit.IRIDIS_LEAF_BLOCK, iridisLeafStateMap.build());
+		ModelLoader.setCustomStateMapper(BlockInit.KYRUL_LEAF_BLOCK, kyrulLeafStateMap.build());
+		ModelLoader.setCustomStateMapper(BlockInit.RAINBOW_SAPLING_BLOCK, rainbowSaplingStateMap.build());
+		ModelLoader.setCustomStateMapper(BlockInit.IRIDIS_SAPLING_BLOCK, iridisSaplingStateMap.build());
+		ModelLoader.setCustomStateMapper(BlockInit.KYRUL_SAPLING_BLOCK, kyrulSaplingStateMap.build());
+		
+		this.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "red_leaves", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK, 1, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "orange_leaves", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK, 2, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "yellow_leaves", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK, 3, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "green_leaves", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK_2, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "blue_leaves", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_LEAF_BLOCK_2, 1, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "purple_leaves", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "red_sapling", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, 1, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "orange_sapling", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, 2, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "yellow_sapling", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, 3, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "green_sapling", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, 4, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "blue_sapling", "inventory"));
+		this.registerBlock(BlockInit.RAINBOW_SAPLING_BLOCK, 5, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "purple_sapling", "inventory"));
+		
+		this.registerBlock(BlockInit.IRIDIS_LEAF_BLOCK, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "autumn_leaves", "inventory"));
+		this.registerBlock(BlockInit.IRIDIS_LEAF_BLOCK, 1, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "sakura_leaves", "inventory"));
+		this.registerBlock(BlockInit.IRIDIS_SAPLING_BLOCK, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "autumn_sapling", "inventory"));
+		this.registerBlock(BlockInit.IRIDIS_SAPLING_BLOCK, 1, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "sakura_sapling", "inventory"));
+		
+		this.registerBlock(BlockInit.KYRUL_LEAF_BLOCK, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "void_leaves", "inventory"));
+		this.registerBlock(BlockInit.KYRUL_SAPLING_BLOCK, 0, new ModelResourceLocation(Reference.RESOURCE_PREFIX + "void_sapling", "inventory"));
+		
 		/* Items */
+		
 		/* Armors */
-		ModelHelper.registerItem(ItemInit.TENEBRAE_HELMET);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_CHESTPLATE);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_LEGGINGS);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_BOOTS);
-		ModelHelper.registerItem(ItemInit.VOID_LORD_HELMET);
-		ModelHelper.registerItem(ItemInit.VOID_LORD_CHESTPLATE);
-		ModelHelper.registerItem(ItemInit.VOID_LORD_LEGGINGS);
-		ModelHelper.registerItem(ItemInit.VOID_LORD_BOOTS);
-		ModelHelper.registerItem(ItemInit.EMERALD_HELMET);
-		ModelHelper.registerItem(ItemInit.EMERALD_CHESTPLATE);
-		ModelHelper.registerItem(ItemInit.EMERALD_LEGGINGS);
-		ModelHelper.registerItem(ItemInit.EMERALD_BOOTS);
-		ModelHelper.registerItem(ItemInit.RAINBOW_GLASSES);
+		this.registerItem(ItemInit.TENEBRAE_HELMET);
+		this.registerItem(ItemInit.TENEBRAE_CHESTPLATE);
+		this.registerItem(ItemInit.TENEBRAE_LEGGINGS);
+		this.registerItem(ItemInit.TENEBRAE_BOOTS);
+		this.registerItem(ItemInit.VOID_LORD_HELMET);
+		this.registerItem(ItemInit.VOID_LORD_CHESTPLATE);
+		this.registerItem(ItemInit.VOID_LORD_LEGGINGS);
+		this.registerItem(ItemInit.VOID_LORD_BOOTS);
+		this.registerItem(ItemInit.EMERALD_HELMET);
+		this.registerItem(ItemInit.EMERALD_CHESTPLATE);
+		this.registerItem(ItemInit.EMERALD_LEGGINGS);
+		this.registerItem(ItemInit.EMERALD_BOOTS);
+		this.registerItem(ItemInit.RAINBOW_GLASSES);
 		/* Tools */
-		ModelHelper.registerItem(ItemInit.CREATIVE_PICKAXE);
-		ModelHelper.registerItem(ItemInit.CREATIVE_SHOVEL);
-		ModelHelper.registerItem(ItemInit.CREATIVE_SWORD);
-		ModelHelper.registerItem(ItemInit.CREATIVE_HOE);
-		ModelHelper.registerItem(ItemInit.CREATIVE_AXE);
+		this.registerItem(ItemInit.CREATIVE_PICKAXE);
+		this.registerItem(ItemInit.CREATIVE_SHOVEL);
+		this.registerItem(ItemInit.CREATIVE_SWORD);
+		this.registerItem(ItemInit.CREATIVE_HOE);
+		this.registerItem(ItemInit.CREATIVE_AXE);
 		
-		ModelHelper.registerItem(ItemInit.TENEBRAE_PICKAXE);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_SHOVEL);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_SWORD);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_HOE);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_AXE);
+		this.registerItem(ItemInit.TENEBRAE_PICKAXE);
+		this.registerItem(ItemInit.TENEBRAE_SHOVEL);
+		this.registerItem(ItemInit.TENEBRAE_SWORD);
+		this.registerItem(ItemInit.TENEBRAE_HOE);
+		this.registerItem(ItemInit.TENEBRAE_AXE);
 		
-		ModelHelper.registerItem(ItemInit.TENEBRAE_LEAF_CUTTER);
+		this.registerItem(ItemInit.VOIDIRITE_SWORD);
+		this.registerItem(ItemInit.VOIDIUM_SWORD);
+		
+		this.registerItem(ItemInit.TENEBRAE_LEAF_CUTTER);
 		/* Tenebrae */
-		ModelHelper.registerItem(ItemInit.TENEBRAE_ORE_ITEM);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_INGOT);
-		ModelHelper.registerItem(ItemInit.TENEBRAE_CHUNK);
-		ModelHelper.registerItem(ItemInit.CELESTIAL_CORE);
+		this.registerItem(ItemInit.TENEBRAE_ORE_ITEM);
+		this.registerItem(ItemInit.TENEBRAE_INGOT);
+		this.registerItem(ItemInit.TENEBRAE_CHUNK);
+		this.registerItem(ItemInit.CELESTIAL_CORE);
 		/* Infernium */
-		ModelHelper.registerItem(ItemInit.RAW_INFERNIUM);
-		ModelHelper.registerItem(ItemInit.INFERIUM_INGOT);
+		this.registerItem(ItemInit.RAW_INFERNIUM);
+		this.registerItem(ItemInit.INFERIUM_INGOT);
 		/* Endirite */
-		ModelHelper.registerItem(ItemInit.ENDIRITE_CHUNK);
-		ModelHelper.registerItem(ItemInit.ENDIRITE_ORE_ITEM);
-		ModelHelper.registerItem(ItemInit.ENDIRITE_INGOT);
+		this.registerItem(ItemInit.ENDIRITE_CHUNK);
+		this.registerItem(ItemInit.ENDIRITE_ORE_ITEM);
+		this.registerItem(ItemInit.ENDIRITE_INGOT);
 		/* Voidium */
-		ModelHelper.registerItem(ItemInit.VOIDIUM_CHUNK);
-		ModelHelper.registerItem(ItemInit.VOIDIUM_ORE_ITEM);
-		ModelHelper.registerItem(ItemInit.VOIDIUM_INGOT);
+		this.registerItem(ItemInit.VOIDIUM_CHUNK);
+		this.registerItem(ItemInit.VOIDIUM_ORE_ITEM);
+		this.registerItem(ItemInit.VOIDIUM_INGOT);
 		/* Mounts */
-		ModelHelper.registerItem(ItemInit.EMPTY_SC);
-		ModelHelper.registerItem(ItemInit.SC_DEATHCHARGER);
-		ModelHelper.registerItem(ItemInit.SC_PLAGUED_HORSE);
-		ModelHelper.registerItem(ItemInit.SC_WAR_TORTOISE);
+		this.registerItem(ItemInit.EMPTY_SC);
+		this.registerItem(ItemInit.SC_DEATHCHARGER);
+		this.registerItem(ItemInit.SC_PLAGUED_HORSE);
+		this.registerItem(ItemInit.SC_WAR_TORTOISE);
 		/* Portals */
-		ModelHelper.registerItem(ItemInit.GOLD_TALISMAN);
-		ModelHelper.registerItem(ItemInit.VOID_TALISMAN);
-		ModelHelper.registerItem(ItemInit.AUTUMN_TALISMAN);
-		ModelHelper.registerItem(ItemInit.ICE_TALISMAN);
+		this.registerItem(ItemInit.GOLD_TALISMAN);
+		this.registerItem(ItemInit.VOID_TALISMAN);
+		this.registerItem(ItemInit.AUTUMN_TALISMAN);
+		this.registerItem(ItemInit.ICE_TALISMAN);
 		/* Others */
-		ModelHelper.registerItem(ItemInit.DARK_SHARD);
-		ModelHelper.registerItem(ItemInit.SOUL_ESSENCE);
-		ModelHelper.registerItem(ItemInit.CURSED_SOUL_ESSENCE);
-		ModelHelper.registerItem(ItemInit.VOID_GEM);
-		ModelHelper.registerItem(ItemInit.VOID_ESSENCE);
-		ModelHelper.registerItem(ItemInit.TENEBRIUM_INGOT);
+		this.registerItem(ItemInit.DARK_SHARD);
+		this.registerItem(ItemInit.SOUL_ESSENCE);
+		this.registerItem(ItemInit.CURSED_SOUL_ESSENCE);
+		this.registerItem(ItemInit.VOID_GEM);
+		this.registerItem(ItemInit.VOID_ESSENCE);
+		this.registerItem(ItemInit.TENEBRIUM_INGOT);
+		/* Specials */
+		this.registerItem(ItemInit.WOODEN_CROSSBOW);
 	}
 	
-	private void registerSpecialItemRenderers() {
-		registerItem(ItemInit.WOODEN_CROSSBOW);
+	private void registerBlock(Block block) {
+		this.registerBlock(block, 0);
+	}
+	
+	private void registerBlock(Block block, int meta) {
+		this.registerBlock(block, meta, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+	}
+	
+	private void registerBlock(Block block, int meta, ModelResourceLocation resource) {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, resource);
 	}
 	
 	private void registerItem(Item item) {
-		ZylrothRenderer.registerItemRender(item);
+		this.registerItem(item, 0);
+	}
+	
+	private void registerItem(Item item, int meta) {
+		this.registerItem(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+	}
+	
+	private void registerItem(Item item, int meta, ModelResourceLocation resource) {
+		ModelLoader.setCustomModelResourceLocation(item, meta, resource);
 	}
 	
 	@SubscribeEvent public void onModelBake(ModelBakeEvent event) throws IOException {

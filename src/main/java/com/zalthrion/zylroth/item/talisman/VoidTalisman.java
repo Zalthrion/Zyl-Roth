@@ -12,13 +12,13 @@ import com.zalthrion.zylroth.handler.ConfigurationHandler;
 public class VoidTalisman extends ItemTalismanBase {
 	public VoidTalisman() {
 		super();
+		this.setCreativeTab();
 		this.setNames("voidTalisman");
 		this.setMaxStackSize(1);
 		this.setDimensionName("Kyrul");
 	}
 	
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		this.handleDimensionTeleport(ConfigurationHandler.getKyrulEnabled(), ConfigurationHandler.getKyrulId(), itemStackIn, worldIn, playerIn);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}

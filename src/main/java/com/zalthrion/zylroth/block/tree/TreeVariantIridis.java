@@ -3,20 +3,16 @@ package com.zalthrion.zylroth.block.tree;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.util.IStringSerializable;
 
-public enum TreeColor implements IStringSerializable {
-	RED(0, "red", MapColor.RED),
-	ORANGE(1, "orange", MapColor.ADOBE),
-	YELLOW(2, "yellow", MapColor.YELLOW),
-	GREEN(3, "green", MapColor.GREEN),
-	BLUE(4, "blue", MapColor.BLUE),
-	PURPLE(5, "purple", MapColor.PURPLE);
+public enum TreeVariantIridis implements IStringSerializable {
+	AUTUMN(0, "autumn", MapColor.RED),
+	SAKURA(1, "sakura", MapColor.ADOBE); // TODO Check this
 	
-	private static final TreeColor[] META_LOOKUP = new TreeColor[values().length];
+	private static final TreeVariantIridis[] META_LOOKUP = new TreeVariantIridis[values().length];
 	private int meta;
 	private String name;
 	private final MapColor mapColor;
 	
-	private TreeColor(int meta, String name, MapColor mapColor) {
+	private TreeVariantIridis(int meta, String name, MapColor mapColor) {
 		this.name = name;
 		this.meta = meta;
 		this.mapColor = mapColor;
@@ -34,7 +30,7 @@ public enum TreeColor implements IStringSerializable {
 		return this.name;
 	}
 	
-	public static TreeColor byMetadata(int meta) {
+	public static TreeVariantIridis byMetadata(int meta) {
 		if (meta < 0 || meta >= META_LOOKUP.length) {
 			meta = 0;
 		}
@@ -47,7 +43,7 @@ public enum TreeColor implements IStringSerializable {
 	}
 	
 	static {
-		for (TreeColor treecolor : values()) {
+		for (TreeVariantIridis treecolor : values()) {
 			META_LOOKUP[treecolor.getMetadata()] = treecolor;
 		}
 	}

@@ -5,6 +5,7 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class TenebraeChunk extends ItemBase {
 	public TenebraeChunk() {
 		super();
+		this.setCreativeTab();
 		this.setNames("tenebraeChunk");
 	}
 }

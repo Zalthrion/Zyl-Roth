@@ -5,13 +5,14 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.projectile.RepulsorBolt;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.projectile.ModelRepulsorBolt;
-import com.zalthrion.zylroth.reference.Reference;
 
-public class RenderRepulsorBolt extends Render<RepulsorBolt> {
-	private static final ResourceLocation projectileTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/projectiles/RepulsorBolt.png");
+@SideOnly(Side.CLIENT) public class RenderRepulsorBolt extends Render<RepulsorBolt> {
 	private ModelRepulsorBolt repulsorBolt = new ModelRepulsorBolt();
 	
 	public RenderRepulsorBolt(RenderManager renderManager) {
@@ -19,7 +20,7 @@ public class RenderRepulsorBolt extends Render<RepulsorBolt> {
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(RepulsorBolt stag) {
-		return projectileTexture;
+		return ResourceLocationInit.PROJECTILE_REPULSOR_BOLT;
 	}
 	
 	@Override public void doRender(RepulsorBolt entity, double x, double y, double z, float entityYaw, float partialTicks) {

@@ -18,6 +18,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
@@ -25,8 +26,7 @@ public class CreativeAxe extends ItemAxe implements ZylrothTool {
 	public CreativeAxe(ToolMaterial material) {
 		super(material, 6.0F, 3.0F);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setRegistryName("creativeAxe");
-		this.setUnlocalizedName("creativeAxe");
+		this.setNames("creativeAxe");
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
@@ -91,5 +91,10 @@ public class CreativeAxe extends ItemAxe implements ZylrothTool {
 	
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+	
+	protected void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

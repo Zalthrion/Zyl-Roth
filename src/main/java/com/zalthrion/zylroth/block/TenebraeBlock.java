@@ -32,12 +32,12 @@ public class TenebraeBlock extends BlockBase {
 	/* Overridden */
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
-		tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "beacon"));
+		tooltip.add(I18n.format(Reference.TOOLTIP_PREFIX + "beacon"));
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "tenebrae"));
+			tooltip.add(I18n.format(Reference.TOOLTIP_PREFIX + "tenebrae"));
 		} else {
-			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+			tooltip.add(I18n.format(Reference.TOOLTIP_PREFIX + "shift"));
 		}
 	}
 	

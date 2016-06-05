@@ -5,6 +5,7 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class CursedSoulEssence extends ItemBase {
 	public CursedSoulEssence() {
 		super();
+		this.setCreativeTab();
 		this.setNames("cursedSoulEssence");
 	}
 }

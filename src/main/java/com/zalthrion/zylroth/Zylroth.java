@@ -26,6 +26,8 @@ public class Zylroth {
 	@CapabilityInject(MountData.class) public static final Capability<MountData> MOUNT_CAP = null;
 	
 	@Mod.EventHandler public void preInit(FMLPreInitializationEvent event) {
+		System.setProperty("forge.verboseMissingModelLogging", "true");
+		System.setProperty("forge.verboseMissingModelLoggingCount", "1000"); // TODO Remove these
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
 		CapabilityManager.INSTANCE.register(MountData.class, new MountCapability.Storage(), MountCapability.DefaultMountData.class);

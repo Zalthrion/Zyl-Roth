@@ -23,17 +23,15 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class TenebraeSword extends ItemSword implements ZylrothTool {
-	
-	private String name = "tenebraeSword";
-	
 	public TenebraeSword(ToolMaterial material) {
 		super(material);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setUnlocalizedName(name);
+		this.setNames("tenebraeSword");
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
@@ -152,5 +150,10 @@ public class TenebraeSword extends ItemSword implements ZylrothTool {
 	
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+	
+	protected void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

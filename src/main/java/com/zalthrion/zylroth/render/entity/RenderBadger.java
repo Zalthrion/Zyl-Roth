@@ -1,6 +1,5 @@
 package com.zalthrion.zylroth.render.entity;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -11,19 +10,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityBadger;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelBadger;
-import com.zalthrion.zylroth.reference.Reference;
 
 @SideOnly(Side.CLIENT) public class RenderBadger extends RenderLiving<EntityBadger> {
-	private static final ResourceLocation badgerTexture = new ResourceLocation(Reference.RESOURCE_PREFIX + "textures/entities/Badger.png");
-	public ModelBase modelBase;
-	
 	public RenderBadger(RenderManager manager) {
 		super(manager, new ModelBadger(), 0.5F);
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityBadger badger) {
-		return badgerTexture;
+		return ResourceLocationInit.ENTITY_BADGER;
 	}
 	
 	@Override protected void renderLivingAt(EntityBadger entity, double p_77039_2_, double p_77039_4_, double p_77039_6_) {

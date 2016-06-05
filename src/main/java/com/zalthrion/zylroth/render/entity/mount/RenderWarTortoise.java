@@ -10,24 +10,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.mount.MountWarTortoise;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.mount.ModelWarTortoise;
-import com.zalthrion.zylroth.reference.Reference;
 
-@SideOnly(Side.CLIENT)
-public class RenderWarTortoise extends RenderLiving<MountWarTortoise> {
-	
-	private static final ResourceLocation pigTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/mounts/Rainbow_Pig.png");
-	
+@SideOnly(Side.CLIENT) public class RenderWarTortoise extends RenderLiving<MountWarTortoise> {
 	public ModelBase modelBase;
 	
 	public RenderWarTortoise(RenderManager manager) {
 		super(manager, new ModelWarTortoise(), 0.5F);
 	}
 	
-	/** Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture. */
 	@Override protected ResourceLocation getEntityTexture(MountWarTortoise p_110775_1_) {
-		return pigTextures;
+		return ResourceLocationInit.ENTITY_WAR_TORTOISE;
 	}
 	
 	public static class Factory implements IRenderFactory<MountWarTortoise> {

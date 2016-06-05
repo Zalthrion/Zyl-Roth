@@ -3,9 +3,6 @@ package com.zalthrion.zylroth.base;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -25,7 +22,6 @@ import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 
 public class BlockLeafBase extends BlockLeaves {
-	private Item itemDropped;
 	private int startMeta;
 	private int endMeta;
 	
@@ -46,11 +42,6 @@ public class BlockLeafBase extends BlockLeaves {
 		return this;
 	}
 	
-	public BlockLeafBase setItemDropped(Item item) {
-		this.itemDropped = item;
-		return this;
-	}
-	
 	public BlockLeafBase setMetaRange(int startMeta, int endMeta) {
 		this.startMeta = startMeta;
 		this.endMeta = endMeta;
@@ -67,10 +58,6 @@ public class BlockLeafBase extends BlockLeaves {
 	
 	@Override @SideOnly(Side.CLIENT) public BlockRenderLayer getBlockLayer() {
 		return Blocks.LEAVES.getBlockLayer();
-	}
-	
-	@Override @Nullable public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return this.itemDropped;
 	}
 	
 	@Override @SideOnly(Side.CLIENT) public void getSubBlocks(Item item, CreativeTabs tabs, List<ItemStack> list) {

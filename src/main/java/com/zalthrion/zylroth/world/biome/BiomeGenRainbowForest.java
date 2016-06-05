@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock;
 import com.zalthrion.zylroth.block.tree.RainbowLeafBlock2;
-import com.zalthrion.zylroth.block.tree.TreeColor;
+import com.zalthrion.zylroth.block.tree.TreeVariantRainbow;
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.entity.EntityUnicorn;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
@@ -38,22 +38,22 @@ public class BiomeGenRainbowForest extends Biome {
 		IBlockState leafState = Blocks.AIR.getDefaultState();
 		switch (i) {
 			case 0:
-				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.RED);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.RED);
 				break;
 			case 1:
-				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.ORANGE);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.ORANGE);
 				break;
 			case 2:
-				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.YELLOW);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.YELLOW);
 				break;
 			case 3:
-				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.GREEN);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.GREEN);
 				break;
 			case 4:
-				leafState = BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.BLUE);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.VARIANT, TreeVariantRainbow.BLUE);
 				break;
 			case 5:
-				leafState = BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.PURPLE);
+				leafState = BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.VARIANT, TreeVariantRainbow.PURPLE);
 				break;
 		}
 		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), leafState, false);

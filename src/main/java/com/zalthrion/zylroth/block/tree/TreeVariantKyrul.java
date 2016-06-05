@@ -3,16 +3,15 @@ package com.zalthrion.zylroth.block.tree;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.util.IStringSerializable;
 
-public enum IridisTreeType implements IStringSerializable {
-	AUTUMN(0, "autumn", MapColor.RED),
-	SAKURA(1, "sakura", MapColor.ADOBE); // TODO Check this
+public enum TreeVariantKyrul implements IStringSerializable {
+	VOID(0, "void", MapColor.PURPLE);
 	
-	private static final IridisTreeType[] META_LOOKUP = new IridisTreeType[values().length];
+	private static final TreeVariantKyrul[] META_LOOKUP = new TreeVariantKyrul[values().length];
 	private int meta;
 	private String name;
 	private final MapColor mapColor;
 	
-	private IridisTreeType(int meta, String name, MapColor mapColor) {
+	private TreeVariantKyrul(int meta, String name, MapColor mapColor) {
 		this.name = name;
 		this.meta = meta;
 		this.mapColor = mapColor;
@@ -30,7 +29,7 @@ public enum IridisTreeType implements IStringSerializable {
 		return this.name;
 	}
 	
-	public static IridisTreeType byMetadata(int meta) {
+	public static TreeVariantKyrul byMetadata(int meta) {
 		if (meta < 0 || meta >= META_LOOKUP.length) {
 			meta = 0;
 		}
@@ -43,7 +42,7 @@ public enum IridisTreeType implements IStringSerializable {
 	}
 	
 	static {
-		for (IridisTreeType treecolor : values()) {
+		for (TreeVariantKyrul treecolor : values()) {
 			META_LOOKUP[treecolor.getMetadata()] = treecolor;
 		}
 	}

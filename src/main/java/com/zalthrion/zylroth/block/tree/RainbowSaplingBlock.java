@@ -12,42 +12,42 @@ import com.zalthrion.zylroth.base.BlockSaplingBase;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 
 public class RainbowSaplingBlock extends BlockSaplingBase {
-	public static final PropertyEnum<TreeColor> COLOR = PropertyEnum.<TreeColor>create("type", TreeColor.class);
+	public static final PropertyEnum<TreeVariantRainbow> VARIANT = PropertyEnum.<TreeVariantRainbow>create("variant", TreeVariantRainbow.class);
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 	
 	public RainbowSaplingBlock() {
 		super();
 		this.setCreativeTab();
 		this.setNames("rainbowSapling");
-		this.setNumSubBlocks(TreeColor.values().length);
+		this.setNumSubBlocks(TreeVariantRainbow.values().length);
 		this.setSoundType(SoundType.PLANT);
 		/* Special */
-		this.addTreeGrowth(0, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.RED));
-		this.addTreeGrowth(1, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.ORANGE));
-		this.addTreeGrowth(2, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.YELLOW));
-		this.addTreeGrowth(3, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.COLOR, TreeColor.GREEN));
-		this.addTreeGrowth(4, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.BLUE));
-		this.addTreeGrowth(5, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.COLOR, TreeColor.PURPLE));
+		this.addTreeGrowth(0, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.RED));
+		this.addTreeGrowth(1, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.ORANGE));
+		this.addTreeGrowth(2, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.YELLOW));
+		this.addTreeGrowth(3, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK.getDefaultState().withProperty(RainbowLeafBlock.VARIANT, TreeVariantRainbow.GREEN));
+		this.addTreeGrowth(4, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.VARIANT, TreeVariantRainbow.BLUE));
+		this.addTreeGrowth(5, Blocks.LOG.getDefaultState(), BlockInit.RAINBOW_LEAF_BLOCK_2.getDefaultState().withProperty(RainbowLeafBlock2.VARIANT, TreeVariantRainbow.PURPLE));
 	}
 	
 	/* Overridden */
 	
 	@Override protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { COLOR, STAGE });
+		return new BlockStateContainer(this, new IProperty[] { VARIANT, STAGE });
 	}
 	
 	@Override public int damageDropped(IBlockState state) {
-		return ((TreeColor) state.getValue(COLOR)).getMetadata();
+		return ((TreeVariantRainbow) state.getValue(VARIANT)).getMetadata();
 	}
 	
 	@Override public int getMetaFromState(IBlockState state) {
         int i = 0;
-        i = i | ((TreeColor) state.getValue(COLOR)).getMetadata();
+        i = i | ((TreeVariantRainbow) state.getValue(VARIANT)).getMetadata();
         i = i | ((Integer) state.getValue(STAGE)).intValue() << 3;
         return i;
 	}
 	
 	@Override public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(COLOR, TreeColor.byMetadata(meta & 7)).withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
+		return this.getDefaultState().withProperty(VARIANT, TreeVariantRainbow.byMetadata(meta & 7)).withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
 	}
 }

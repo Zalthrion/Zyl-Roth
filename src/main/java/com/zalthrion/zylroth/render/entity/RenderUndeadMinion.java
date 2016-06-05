@@ -12,13 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelUndead;
-import com.zalthrion.zylroth.reference.Reference;
 
-@SideOnly(Side.CLIENT)
-public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
-	private static final ResourceLocation undeadminionTextures = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Undead_Unit.png");
-	/** Scale of the model to use */
+@SideOnly(Side.CLIENT) public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
 	private float scale = 0.8F;
 	
 	public RenderUndeadMinion(RenderManager manager) {
@@ -27,13 +24,12 @@ public class RenderUndeadMinion extends RenderBiped<EntityUndeadMinion> {
 		this.addLayer(new LayerHeldItem(this));
 	}
 	
-	/** Applies the scale to the transform matrix */
 	@Override protected void preRenderCallback(EntityUndeadMinion par1EntityUndeadMinion, float par2) {
 		GlStateManager.scale(scale, scale, scale);
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityUndeadMinion par1EntityUndeadMinion) {
-		return undeadminionTextures;
+		return ResourceLocationInit.TEXTURE_UNDEAD_UNIT;
 	}
 	
 	@Override protected void rotateCorpse(EntityUndeadMinion par1EntityUndeadMinion, float par2, float par3, float par4) {

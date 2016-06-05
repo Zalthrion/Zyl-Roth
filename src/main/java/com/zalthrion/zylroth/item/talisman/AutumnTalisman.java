@@ -12,6 +12,7 @@ import com.zalthrion.zylroth.handler.ConfigurationHandler;
 public class AutumnTalisman extends ItemTalismanBase {
 	public AutumnTalisman() {
 		super();
+		this.setCreativeTab();
 		this.setNames("autumnTalisman");
 		this.setDimensionName("Iridis");
 	}

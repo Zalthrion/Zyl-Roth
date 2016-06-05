@@ -6,9 +6,13 @@ import com.zalthrion.zylroth.base.ShieldBase;
 import com.zalthrion.zylroth.item.tools.ZylrothTool;
 
 public class RubyShield extends ShieldBase implements ZylrothTool {
-
-	@Override
-	public boolean isBroken(ItemStack stack) {
+	public RubyShield() {
+		super();
+		this.setCreativeTab();
+		this.setNames("rubyShield");
+	}
+	
+	@Override public boolean isBroken(ItemStack stack) {
 		return false;
 	}
 }

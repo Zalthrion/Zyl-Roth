@@ -6,16 +6,13 @@ import com.zalthrion.zylroth.base.ShieldBase;
 import com.zalthrion.zylroth.item.tools.ZylrothTool;
 
 public class VoidiriteShield extends ShieldBase implements ZylrothTool {
-
-	private String name = "voidiriteShield";
-	
 	public VoidiriteShield() {
 		super();
-		this.setNames(name);
+		this.setCreativeTab();
+		this.setNames("voidiriteShield");
 	}
-
-	@Override
-	public boolean isBroken(ItemStack stack) {
+	
+	@Override public boolean isBroken(ItemStack stack) {
 		return false;
 	}
 }

@@ -15,7 +15,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -23,12 +22,15 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
+import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class VoidiriteSword extends ItemSword implements ZylrothTool {
 	public VoidiriteSword(ToolMaterial material) {
 		super(material);
+		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setNames("voidiriteSword");
 	}
 	
@@ -155,6 +157,6 @@ public class VoidiriteSword extends ItemSword implements ZylrothTool {
 	
 	protected void setNames(String name) {
 		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

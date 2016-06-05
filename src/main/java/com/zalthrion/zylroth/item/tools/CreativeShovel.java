@@ -18,16 +18,15 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class CreativeShovel extends ItemSpade implements ZylrothTool {
-	private String name = "creativeShovel";
-	
 	public CreativeShovel(ToolMaterial material) {
 		super(material);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setUnlocalizedName(name);
+		this.setNames("creativeShovel");
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
@@ -120,5 +119,10 @@ public class CreativeShovel extends ItemSpade implements ZylrothTool {
 	
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+	
+	protected void setNames(String name) {
+		this.setUnlocalizedName(name);
+		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

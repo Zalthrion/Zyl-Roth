@@ -1,18 +1,18 @@
 {
-    "weapon.repulsorCannon.shoot":
+    "repulsorCannonShoot":
     {
         "category": "neutral",
         "sounds":
         [
-            "zylroth:weapon/repulsorCannon/shoot"
+            "zylroth:repulsorCannonShoot"
         ]
     },
-    "weapon.repulsorCannon.mine":
+    "repulsorCannonMine":
     {
         "category": "neutral",
         "sounds":
         [
-            "zylroth:weapon/repulsorCannon/mine"
+            "zylroth:repulsorCannonMine"
         ]
     }
 }

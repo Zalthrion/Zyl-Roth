@@ -5,6 +5,7 @@ import com.zalthrion.zylroth.base.ItemBase;
 public class VoidiumIngot extends ItemBase {
 	public VoidiumIngot() {
 		super();
+		this.setCreativeTab();
 		this.setNames("voidiumIngot");
 	}
 }

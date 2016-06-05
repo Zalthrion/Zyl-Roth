@@ -7,11 +7,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.zalthrion.zylroth.entity.projectile.RepulsorCannonBolt;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.projectile.ModelRepulsorBolt;
-import com.zalthrion.zylroth.reference.Reference;
 
 public class RenderRepulsorCannonBolt extends Render<RepulsorCannonBolt> {
-	private static final ResourceLocation projectileTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/projectiles/RepulsorBolt.png");
 	private final ModelRepulsorBolt repulsorBolt = new ModelRepulsorBolt();
 	
 	public RenderRepulsorCannonBolt(RenderManager renderManager) {
@@ -19,7 +18,7 @@ public class RenderRepulsorCannonBolt extends Render<RepulsorCannonBolt> {
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(RepulsorCannonBolt stag) {
-		return projectileTexture;
+		return ResourceLocationInit.PROJECTILE_REPULSOR_BOLT;
 	}
 	
 	@Override public void doRender(RepulsorCannonBolt entity, double x, double y, double z, float entityYaw, float partialTicks) {

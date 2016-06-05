@@ -45,9 +45,9 @@ public class EmpoweredTenebraeCore extends BlockBase {
 	
 	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "core"));
+			tooltip.add(I18n.format(Reference.TOOLTIP_PREFIX + "core"));
 		} else {
-			tooltip.add(I18n.format("tooltip" + "." + Reference.MOD_ID.toLowerCase() + ":" + "shift"));
+			tooltip.add(I18n.format(Reference.TOOLTIP_PREFIX + "shift"));
 		}
 	}
 	

@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.zalthrion.zylroth.block.tree.IridisLeafBlock;
-import com.zalthrion.zylroth.block.tree.IridisTreeType;
+import com.zalthrion.zylroth.block.tree.TreeVariantIridis;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
 
 public class BiomeGenSakuraForest extends Biome {
@@ -27,7 +27,7 @@ public class BiomeGenSakuraForest extends Biome {
 	}
 	
 	@Override public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
-		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.IRIDIS_LEAF_BLOCK.getDefaultState().withProperty(IridisLeafBlock.LEAF_TYPE, IridisTreeType.SAKURA), false);
+		return new WorldGenTrees(true, 4, Blocks.LOG.getDefaultState(), BlockInit.IRIDIS_LEAF_BLOCK.getDefaultState().withProperty(IridisLeafBlock.VARIANT, TreeVariantIridis.SAKURA), false);
 	}
 	
 	@Override public int getModdedBiomeGrassColor(int original) {

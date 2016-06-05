@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.container;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,7 +13,7 @@ public class SlotInfuserFuel extends Slot {
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 	
-	@Override public boolean isItemValid(ItemStack stack) {
+	@Override public boolean isItemValid(@Nullable ItemStack stack) {
 		return InfusionFuels.isFuel(stack);
 	}
 }

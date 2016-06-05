@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.container;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -18,7 +20,7 @@ public class SlotInfuserOutput extends Slot {
 		this.thePlayer = player;
 	}
 	
-	@Override public boolean isItemValid(ItemStack stack) {
+	@Override public boolean isItemValid(@Nullable ItemStack stack) {
 		return false;
 	}
 	

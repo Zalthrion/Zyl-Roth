@@ -9,20 +9,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelRainbowPig;
-import com.zalthrion.zylroth.reference.Reference;
 
-@SideOnly(Side.CLIENT)
-public class RenderRainbowPig extends RenderLiving<EntityRainbowPig> {
-	private static final ResourceLocation pigTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Rainbow_Pig.png");
-	
+@SideOnly(Side.CLIENT) public class RenderRainbowPig extends RenderLiving<EntityRainbowPig> {
 	public RenderRainbowPig(RenderManager renderManager) {
 		super(renderManager, new ModelRainbowPig(), 0.5F);
-        this.addLayer(new LayerRainbowPigSaddle(this));
+		this.addLayer(new LayerRainbowPigSaddle(this));
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityRainbowPig p_110775_1_) {
-		return pigTexture;
+		return ResourceLocationInit.ENTITY_RAINBOW_PIG;
 	}
 	
 	public static class Factory implements IRenderFactory<EntityRainbowPig> {

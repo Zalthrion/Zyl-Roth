@@ -1,5 +1,7 @@
 package com.zalthrion.zylroth.container;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -80,7 +82,7 @@ public class ContainerInfuser extends ContainerBase {
 		return this.tileInfuser.isUseableByPlayer(playerIn);
 	}
 	
-	@Override public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+	@Override @Nullable public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) inventorySlots.get(index);
 		

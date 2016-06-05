@@ -33,10 +33,21 @@ public class ModRegistry {
 			this.key = key;
 		}
 		
-		public IForgeRegistryEntry<?> getObject() { return this.object; }
-		public ItemBlock getItemBlock() { return this.itemBlock; }
-		public String getKey() { return this.key; }
-		public boolean hasItemBlock() { return this.itemBlock != null; }
+		public IForgeRegistryEntry<?> getObject() {
+			return this.object;
+		}
+		
+		public ItemBlock getItemBlock() {
+			return this.itemBlock;
+		}
+		
+		public String getKey() {
+			return this.key;
+		}
+		
+		public boolean hasItemBlock() {
+			return this.itemBlock != null;
+		}
 	}
 	
 	public static void addRegister(Item item, String registryName) {
@@ -87,6 +98,6 @@ public class ModRegistry {
 	}
 	
 	public static ResourceLocation createRegistryNameFor(String name) {
-		return new ResourceLocation(Reference.MOD_ID.toLowerCase(), name);
+		return new ResourceLocation(Reference.LOWER_MOD_ID, name);
 	}
 }

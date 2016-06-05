@@ -9,12 +9,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.zalthrion.zylroth.entity.EntityBird;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.entity.ModelBird;
-import com.zalthrion.zylroth.reference.Reference;
 
 public class RenderBird extends RenderLiving<EntityBird> {
-	private static final ResourceLocation birdTexture = new ResourceLocation(Reference.MOD_ID + ":" + "textures/entities/Bird.png");
-	
 	public ModelBase modelBase;
 	
 	public RenderBird(RenderManager renderManager) {
@@ -32,7 +30,7 @@ public class RenderBird extends RenderLiving<EntityBird> {
 	}
 	
 	@Override protected ResourceLocation getEntityTexture(EntityBird par1Entity) {
-		return birdTexture;
+		return ResourceLocationInit.ENTITY_BIRD;
 	}
 	
 	public static class Factory implements IRenderFactory<EntityBird> {

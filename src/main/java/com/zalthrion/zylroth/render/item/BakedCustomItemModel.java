@@ -22,7 +22,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 
@@ -30,8 +29,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableMap;
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
+import com.zalthrion.zylroth.lib.ModInit.ResourceLocationInit;
 import com.zalthrion.zylroth.model.item.ModelCrossbow;
-import com.zalthrion.zylroth.reference.Reference;
 
 public class BakedCustomItemModel implements IBakedModel, IPerspectiveAwareModel {
 	private IBakedModel baseModel;
@@ -51,21 +50,29 @@ public class BakedCustomItemModel implements IBakedModel, IPerspectiveAwareModel
 	private void doRender(TransformType type) {
 		if (type == TransformType.GUI) {
 			GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);
-		}
-		
-		if (type == TransformType.GUI) {
 			GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
 		}
 		
 		if (stack.getItem() == ItemInit.WOODEN_CROSSBOW) {
-			GlStateManager.pushMatrix();
-			GlStateManager.rotate(180, 0.0F, 0.0F, 1.0F);
-			// GlStateManager.rotate(90, 0.0F, -1.0F, 0.0F);
-			GlStateManager.translate(0F, -0.2F, 0.0F);
-			GlStateManager.scale(1.8, 1.8, 1.8);
-			mc.renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/woodenCrossbow.png"));
-			crossbow.render(0.0625F);
-			GlStateManager.popMatrix();
+			if (type == TransformType.GUI) {
+				GlStateManager.pushMatrix();
+				GlStateManager.scale(1.5F, 1.5F, 1.5F);
+				mc.renderEngine.bindTexture(ResourceLocationInit.WOODEN_CROSSBOW);
+				GlStateManager.rotate(180, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(0.4F, 0.2F, -0.4F);
+				crossbow.render(0.0625F);
+				GlStateManager.popMatrix();
+			} else if (type == TransformType.THIRD_PERSON_LEFT_HAND || type == TransformType.THIRD_PERSON_RIGHT_HAND) {
+				GlStateManager.pushMatrix();
+				GlStateManager.scale(1.55F, 1.55F, 1.55F);
+				mc.renderEngine.bindTexture(ResourceLocationInit.WOODEN_CROSSBOW);
+				GlStateManager.rotate(145F, 1F, 0F, 0F);
+				GlStateManager.rotate(2F, 0F, 1F, 0F);
+				GlStateManager.rotate(-20F, 0F, 0F, 1F);
+				GlStateManager.translate(0.25F, -0.2F, -0.4F);
+				crossbow.render(0.0625F);
+				GlStateManager.popMatrix();
+			}
 		}
 	}
 	
