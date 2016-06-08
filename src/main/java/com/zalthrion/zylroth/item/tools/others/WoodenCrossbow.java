@@ -18,7 +18,6 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -38,12 +37,11 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setMaxDamage(i);
 		this.setMaxStackSize(1);
-		this.setRegistryName(new ResourceLocation(Reference.LOWER_MOD_ID, "woodenCrossbow"));
-		this.setUnlocalizedName("woodenCrossbow");
+		this.setNames(this, "woodenCrossbow");
 	}
 	
 	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-		if (!this.isBroken(stack)) {        
+		if (!this.isBroken(stack)) {
 			boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 			ItemStack itemstack = this.getArrowStack(player);
 			
@@ -52,7 +50,7 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 				float f = 1.0F;
 				boolean flag1 = flag && itemstack.getItem() instanceof ItemArrow;
 				if (!world.isRemote) {
-					ItemArrow itemarrow = (ItemArrow)((ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW));
+					ItemArrow itemarrow = (ItemArrow) ((ItemArrow) (itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW));
 					EntityArrow entityarrow = itemarrow.createArrow(world, itemstack, player);
 					entityarrow.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 					entityarrow.setDamage(entityarrow.getDamage() + 3.5D);
@@ -116,8 +114,7 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		return stack.getMetadata() >= 2499;
 	}
 	
-	@Override
-	public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
+	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
 				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
@@ -127,26 +124,20 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		return false;
 	}
 	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (!(this.isBroken(stack)))
-			stack.damageItem(1, attacker);
+	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (!(this.isBroken(stack))) stack.damageItem(1, attacker);
 		return true;
 	}
 	
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!isBroken(stack))
-			return false;
+	@Override public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		if (!isBroken(stack)) return false;
 		
 		World world = player.worldObj;
-		if (world.isRemote)
-			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		return true;
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
+	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
 			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
@@ -160,22 +151,15 @@ public class WoodenCrossbow extends Item implements ZylrothTool {
 		}
 	}
 	
-	@Override
-	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
+	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
-	@Override
-	public String getUnlocalizedName() {
+	@Override public String getUnlocalizedName() {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack) {
+	@Override public String getUnlocalizedName(ItemStack itemStack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 	}
 }

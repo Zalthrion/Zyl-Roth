@@ -18,7 +18,6 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
-import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
@@ -26,11 +25,11 @@ public class TenebraeAxe extends ItemAxe implements ZylrothTool {
 	public TenebraeAxe(ToolMaterial material) {
 		super(material, 6.0F, 3.0F);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setNames("tenebraeAxe");
+		this.setNames(this, "tenebraeAxe");
 	}
 	
-	@Override public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebraeDurability;
+	@Override public boolean isTenebrae() {
+		return true;
 	}
 	
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
@@ -88,14 +87,5 @@ public class TenebraeAxe extends ItemAxe implements ZylrothTool {
 	
 	@Override public String getUnlocalizedName(ItemStack itemStack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
-		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

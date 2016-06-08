@@ -9,11 +9,11 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import com.zalthrion.zylroth.item.tools.ZylrothTool;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
-import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 
-public class ShieldBase extends Item {
+public class ShieldBase extends Item implements ZylrothTool {
 	
 	/* Constructors */
 	
@@ -25,18 +25,8 @@ public class ShieldBase extends Item {
 	
 	/* Custom Methods */
 	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
 	protected ShieldBase setCreativeTab() {
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		return this;
-	}
-	
-	protected ShieldBase setNames(String name) {
-		this.setUnlocalizedName(name);
-		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 		return this;
 	}
 	

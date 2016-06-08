@@ -37,7 +37,7 @@ public class BiomeProviderIridis extends BiomeProvider {
 		this();
 		
 		GenLayer[] genlayer = GenLayerIridis.makeTheWorld(seed, worldType);
-		genlayer = getModdedBiomeerators(worldType, seed, genlayer);
+		genlayer = getModdedBiomeGenerators(worldType, seed, genlayer);
 		this.genBiomes = genlayer[0];
 		this.biomeIndexLayer = genlayer[1];
 	}

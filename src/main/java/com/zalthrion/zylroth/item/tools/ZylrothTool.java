@@ -1,14 +1,37 @@
 package com.zalthrion.zylroth.item.tools;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.zalthrion.zylroth.lib.ModRegistry;
+
 public interface ZylrothTool {
-	public static final int tenebraeDurability = 2249;
-	public static final int voidiumDurability = 4249;
-	public static final int voidiriteDurability = 5249;
-	public static final int creativeDurability = 12249;
+	public static final int CREATIVE_DURABILITY = 12249;
+	public static final int TENEBRAE_DURABILITY = 2249;
+	public static final int VOIDIRITE_DURABILITY = 5249;
+	public static final int VOIDIUM_DURABILITY = 4249;
 	
-	public boolean isBroken(ItemStack stack);
+	default boolean isBroken(ItemStack stack) {
+		if (this.isCreative()) return stack.getMetadata() >= CREATIVE_DURABILITY;
+		if (this.isTenebrae()) return stack.getMetadata() >= TENEBRAE_DURABILITY;
+		if (this.isVoidirite()) return stack.getMetadata() >= VOIDIRITE_DURABILITY;
+		if (this.isVoidium()) return stack.getMetadata() >= VOIDIUM_DURABILITY;
+		return false;
+	}
+	
+	default boolean isCreative() { return false; }
+	default boolean isTenebrae() { return false; }
+	default boolean isVoidirite() { return false; }
+	default boolean isVoidium() { return false; }
+	
+	default void setNames(Item item, String name) {
+		item.setRegistryName(ModRegistry.createRegistryNameFor(name));
+		item.setUnlocalizedName(name);
+	}
+	
+	default String getUnwrappedUnlocalizedName(String unlocalizedName) {
+		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
 	
 	/*
 	 * THIS GOES IN EVERY TOOL *
@@ -34,10 +57,5 @@ public interface ZylrothTool {
 	@Override public String getUnlocalizedName(ItemStack itemStack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
 	*/
 }

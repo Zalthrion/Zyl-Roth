@@ -26,7 +26,6 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
-import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
@@ -34,11 +33,11 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 	public CreativeHoe(ToolMaterial material) {
 		super(material);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setNames("creativeHoe");
+		this.setNames(this, "creativeHoe");
 	}
 	
-	@Override public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= creativeDurability;
+	@Override public boolean isCreative() {
+		return true;
 	}
 	
 	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
@@ -136,14 +135,5 @@ public class CreativeHoe extends ItemHoe implements ZylrothTool {
 	
 	@Override public String getUnlocalizedName(ItemStack itemStack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
-		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

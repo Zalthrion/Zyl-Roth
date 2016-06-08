@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -37,7 +36,7 @@ public class RepulsorCannon extends Item implements ZylrothTool {
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
 		this.setMaxDamage(i);
 		this.setMaxStackSize(1);
-		this.setNames("repulsorCannon");
+		this.setNames(this, "repulsorCannon");
 	}
 	
 	/* @Override public void onPlayerStoppedUsing(ItemStack stack, World world,
@@ -138,15 +137,6 @@ public class RepulsorCannon extends Item implements ZylrothTool {
 	
 	@Override public String getUnlocalizedName(ItemStack stack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
 	}
 	
 	@Override public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {

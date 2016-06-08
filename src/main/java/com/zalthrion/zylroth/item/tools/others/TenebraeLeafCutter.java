@@ -23,13 +23,10 @@ import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
 public class TenebraeLeafCutter extends Item implements ZylrothTool {
-	
-	private String name = "tenebraeLeafCutter";
-	
 	public TenebraeLeafCutter() {
 		super();
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setUnlocalizedName(name);
+		this.setNames(this, "tenebraeLeafCutter");
 	}
 	
 	@Override public float getStrVsBlock(ItemStack stack, IBlockState state) {
@@ -37,41 +34,34 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 	}
 	
 	@Override public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= tenebraeDurability;
+		return stack.getMetadata() >= TENEBRAE_DURABILITY;
 	}
 	
-	@Override
-	public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
+	@Override public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
 		if (this.isBroken(stack)) {
 			if (player.worldObj.isRemote) {
 				player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
-			}		
+			}
 			return true;
 		}
 		return false;
 	}
 	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (!(this.isBroken(stack)))
-			stack.damageItem(1, attacker);
+	@Override public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (!(this.isBroken(stack))) stack.damageItem(1, attacker);
 		return true;
 	}
 	
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!isBroken(stack))
-			return false;
+	@Override public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		if (!isBroken(stack)) return false;
 		World world = player.worldObj;
 		
-		if (world.isRemote)
-			player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
+		if (world.isRemote) player.addChatMessage(new TextComponentTranslation("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		
 		return true;
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
+	@Override public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
 		if (this.isBroken(stack)) {
 			list.add(I18n.format("msg." + Reference.RESOURCE_PREFIX + "broken_tool"));
 		} else {
@@ -85,22 +75,15 @@ public class TenebraeLeafCutter extends Item implements ZylrothTool {
 		}
 	}
 	
-	@Override
-	public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
+	@Override public boolean getIsRepairable(ItemStack armor, ItemStack stack) {
 		return stack.getItem() == ItemInit.TENEBRAE_INGOT;
 	}
 	
-	@Override
-	public String getUnlocalizedName() {
+	@Override public String getUnlocalizedName() {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack) {
+	@Override public String getUnlocalizedName(ItemStack itemStack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 	}
 }

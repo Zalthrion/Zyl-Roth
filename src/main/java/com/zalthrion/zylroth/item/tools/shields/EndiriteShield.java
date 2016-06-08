@@ -1,18 +1,11 @@
 package com.zalthrion.zylroth.item.tools.shields;
 
-import net.minecraft.item.ItemStack;
-
 import com.zalthrion.zylroth.base.ShieldBase;
-import com.zalthrion.zylroth.item.tools.ZylrothTool;
 
-public class EndiriteShield extends ShieldBase implements ZylrothTool {
+public class EndiriteShield extends ShieldBase {
 	public EndiriteShield() {
 		super();
 		this.setCreativeTab();
-		this.setNames("endiriteShield");
-	}
-	
-	@Override public boolean isBroken(ItemStack stack) {
-		return false;
+		this.setNames(this, "endiriteShield");
 	}
 }

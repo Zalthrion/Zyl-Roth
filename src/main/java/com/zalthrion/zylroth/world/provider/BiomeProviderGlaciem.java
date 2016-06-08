@@ -28,15 +28,14 @@ public class BiomeProviderGlaciem extends BiomeProvider {
 	
 	public BiomeProviderGlaciem() {
 		this.biomeCache = new BiomeCache(this);
-		this.biomesToSpawnIn = Lists.<Biome>newArrayList();
-		this.biomesToSpawnIn.addAll(allowedBiomes);
+		this.biomesToSpawnIn = Lists.newArrayList(allowedBiomes);
 	}
 	
 	public BiomeProviderGlaciem(long seed, WorldType worldType) {
 		this();
 		
 		GenLayer[] genlayer = GenLayerGlaciem.makeTheWorld(seed, worldType);
-		genlayer = getModdedBiomeerators(worldType, seed, genlayer);
+		genlayer = getModdedBiomeGenerators(worldType, seed, genlayer);
 		this.genBiomes = genlayer[0];
 		this.biomeIndexLayer = genlayer[1];
 	}

@@ -23,7 +23,6 @@ import org.lwjgl.input.Keyboard;
 
 import com.zalthrion.zylroth.lib.ModInit.ItemInit;
 import com.zalthrion.zylroth.lib.ModInit.ZylrothTab;
-import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.reference.Reference;
 import com.zalthrion.zylroth.utility.TooltipHelper;
 
@@ -31,11 +30,11 @@ public class VoidiumSword extends ItemSword implements ZylrothTool {
 	public VoidiumSword(ToolMaterial material) {
 		super(material);
 		this.setCreativeTab(ZylrothTab.ZYLROTH);
-		this.setNames("voidiumSword");
+		this.setNames(this, "voidiumSword");
 	}
 	
-	@Override public boolean isBroken(ItemStack stack) {
-		return stack.getMetadata() >= voidiumDurability;
+	@Override public boolean isVoidium() {
+		return true;
 	}
 	
 	@Override public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player) {
@@ -149,14 +148,5 @@ public class VoidiumSword extends ItemSword implements ZylrothTool {
 	
 	@Override public String getUnlocalizedName(ItemStack itemStack) {
 		return String.format("item.%s%s", Reference.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-	}
-	
-	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}
-	
-	protected void setNames(String name) {
-		this.setUnlocalizedName(name);
-		this.setRegistryName(ModRegistry.createRegistryNameFor(name));
 	}
 }

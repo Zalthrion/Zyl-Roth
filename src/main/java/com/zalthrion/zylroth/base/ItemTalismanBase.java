@@ -92,7 +92,7 @@ public class ItemTalismanBase extends ItemBase {
 							} else if (player.dimension == dimensionID && player.getRidingEntity() == null) {
 								int[] bindPos = isOverworldBound(stack) ? getOverworldBind(stack) : new int[] {0, -1, 0};
 								ZylrothTeleporter teleporter = new ZylrothTeleporter(ws, bindPos[0], bindPos[1], bindPos[2]);
-								FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(playerMP, dimensionID, teleporter);
+								FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(playerMP, 0, teleporter);
 								teleporter.adjustPos(player);
 							}
 						}
