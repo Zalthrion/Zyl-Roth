@@ -155,6 +155,25 @@ public class ModInit {
 			BiomeDictionary.registerBiomeType(COLD_OCEAN, Type.OCEAN);
 			BiomeDictionary.registerBiomeType(FROZEN_WASTES, Type.COLD, Type.PLAINS, Type.SNOWY);
 			BiomeDictionary.registerBiomeType(SNOW_PLATEAU, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
+			
+			GameRegistry.register(DREAD_WASTES);
+			GameRegistry.register(HAUNTED_FOREST);
+			GameRegistry.register(ASH_BARRENS);
+			GameRegistry.register(VOID_MOUNTAINS);
+			
+			GameRegistry.register(JADE_PLAINS);
+			GameRegistry.register(AUTUMN_FOREST);
+			GameRegistry.register(SAPPHIRE_OCEAN);
+			GameRegistry.register(RAINBOW_FOREST);
+			GameRegistry.register(SNOW_MOUNTAINS);
+			GameRegistry.register(STONE_QUARRY);
+			GameRegistry.register(DRY_DESERT);
+			GameRegistry.register(SAKURA_FOREST);
+			
+			GameRegistry.register(FROZEN_SEA);
+			GameRegistry.register(COLD_OCEAN);
+			GameRegistry.register(FROZEN_WASTES);
+			GameRegistry.register(SNOW_PLATEAU);
 		}
 	}
 	
@@ -626,6 +645,7 @@ public class ModInit {
 		BlockInit.preInit();
 		ItemInit.preInit();
 		ModRegistry.sortThenRegister(sortOrder);
+		BiomeInit.preInit();
 		EntityInit.preInit();
 		DimensionInit.preInit();
 		PacketHandler.preInit();

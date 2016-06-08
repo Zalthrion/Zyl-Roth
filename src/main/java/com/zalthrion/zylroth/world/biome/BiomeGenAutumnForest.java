@@ -9,10 +9,12 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.zalthrion.zylroth.entity.EntityBadger;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenAutumnForest extends Biome {
 	public BiomeGenAutumnForest(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("autumnForest"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

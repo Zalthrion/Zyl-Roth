@@ -16,10 +16,12 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenHauntedForest extends Biome {
 	public BiomeGenHauntedForest(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("hauntedForest"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

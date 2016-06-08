@@ -11,12 +11,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.world.mapstructures.BenzennHut;
 import com.zalthrion.zylroth.world.mapstructures.IceHouse;
 
 public class BiomeGenSnowPlateau extends Biome {
 	public BiomeGenSnowPlateau(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("snowPlateau"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -50,15 +52,15 @@ public class BiomeGenSnowPlateau extends Biome {
 			int l = pos.getZ() + rand.nextInt(16) + 8;
 			
 			BenzennHut benzennHut = new BenzennHut();
-			benzennHut.generate(worldIn, rand, worldIn.getHeight(new BlockPos(k, 0, l)).up());
+			benzennHut.generate(worldIn, rand, worldIn.getHeight(new BlockPos(k, 0, l)));
 		}
 		
-		if (rand.nextInt(100) < 15) {
+		if (rand.nextInt(100) < 10) {
 			int k = pos.getX() + rand.nextInt(16) + 8;
 			int l = pos.getZ() + rand.nextInt(16) + 8;
 			
 			IceHouse iceHouse = new IceHouse();
-			iceHouse.generate(worldIn, rand, worldIn.getHeight(new BlockPos(k, 0, l)).up());
+			iceHouse.generate(worldIn, rand, worldIn.getHeight(new BlockPos(k, 0, l)));
 		}
 	}
 	

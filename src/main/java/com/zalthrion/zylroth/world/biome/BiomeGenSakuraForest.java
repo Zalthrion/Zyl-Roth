@@ -10,10 +10,12 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import com.zalthrion.zylroth.block.tree.IridisLeafBlock;
 import com.zalthrion.zylroth.block.tree.TreeVariantIridis;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenSakuraForest extends Biome {
 	public BiomeGenSakuraForest(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("sakuraForest"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

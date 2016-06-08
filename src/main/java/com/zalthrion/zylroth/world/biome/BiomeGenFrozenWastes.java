@@ -6,9 +6,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
+import com.zalthrion.zylroth.lib.ModRegistry;
+
 public class BiomeGenFrozenWastes extends Biome {
 	public BiomeGenFrozenWastes(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("frozenWastes"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

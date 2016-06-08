@@ -12,10 +12,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenVoidMountains extends Biome {
 	public BiomeGenVoidMountains(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("voidMountains"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
+import com.zalthrion.zylroth.lib.ModRegistry;
 import com.zalthrion.zylroth.world.mapstructures.DesertHouse;
 import com.zalthrion.zylroth.world.mapstructures.TreasureWell;
 
@@ -14,6 +15,7 @@ public class BiomeGenDryDesert extends Biome {
 	
 	public BiomeGenDryDesert(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("dryDesert"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

@@ -12,10 +12,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenAshBarrens extends Biome {
 	public BiomeGenAshBarrens(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("ashBarrens"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

@@ -3,9 +3,12 @@ package com.zalthrion.zylroth.world.biome;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 
+import com.zalthrion.zylroth.lib.ModRegistry;
+
 public class BiomeGenJadePlains extends Biome {
 	public BiomeGenJadePlains(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("jadePlains"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

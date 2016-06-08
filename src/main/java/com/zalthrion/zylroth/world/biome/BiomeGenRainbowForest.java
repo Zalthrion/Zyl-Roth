@@ -14,10 +14,12 @@ import com.zalthrion.zylroth.block.tree.TreeVariantRainbow;
 import com.zalthrion.zylroth.entity.EntityRainbowPig;
 import com.zalthrion.zylroth.entity.EntityUnicorn;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenRainbowForest extends Biome {
 	public BiomeGenRainbowForest(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("rainbowForest"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

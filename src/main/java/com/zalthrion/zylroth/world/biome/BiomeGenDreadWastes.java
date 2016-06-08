@@ -14,10 +14,12 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import com.zalthrion.zylroth.entity.EntityUndeadMinion;
 import com.zalthrion.zylroth.entity.EntityUndeadWarrior;
 import com.zalthrion.zylroth.lib.ModInit.BlockInit;
+import com.zalthrion.zylroth.lib.ModRegistry;
 
 public class BiomeGenDreadWastes extends Biome {
 	public BiomeGenDreadWastes(BiomeProperties properties) {
 		super(properties);
+		this.setRegistryName(ModRegistry.createRegistryNameFor("dreadWastes"));
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
